@@ -1,10 +1,9 @@
 <template>
   <RouterView />
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
 </template>
 <script >
-  import AOS from "aos/dist/aos"
+import AOS from "aos/dist/aos"
 // import "@/assets/css/style.css"
 // import "@/assets/vendor/bootstrap/css/bootstrap.min.css"
 // import "@/assets/vendor/bootstrap-icons/bootstrap-icons.css"
@@ -26,8 +25,8 @@ import "@/assets/js/main.js"
 
 
 
-  export default {
-    name:'App',
+export default {
+  name: 'App',
   created() {
     AOS.init({
       duration: 1000,
@@ -36,17 +35,17 @@ import "@/assets/js/main.js"
       mirror: false
     });
   },
-  watch: {
-    $route(to, ){
-      const name = to.name.toLowerCase()
-      const title = name === 'formation'
-        ? `${name} (${to.href.split('/')[2].toLowerCase()})`
-        : name
-      document.title = `dnpmecl - ${title}`
+  // watch: {
+  //   $route(to,) {
+  //     const name = to.name.toLowerCase()
+  //     const title = name === 'formation'
+  //       ? `${name} (${to.href.split('/')[2].toLowerCase()})`
+  //       : name
+  //     document.title = `dnpmecl - ${title}`
 
-      window.scrollTo({top: 0, behavior: 'smooth'})
-    }
-  }
+  //     window.scrollTo({ top: 0, behavior: 'smooth' })
+  //   }
+  // }
 }
 
 </script>
