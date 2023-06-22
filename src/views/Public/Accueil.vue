@@ -104,14 +104,6 @@
               <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Femmes salariés</strong> </p>
             </div><!-- End Stats Item -->
-
-            <div class="stats-item d-flex align-items-center">
-            
-              <!-- <count-up :start="0" :end="166" :duration="2" :useEasing="true" /> -->
-              <!-- <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span> -->
-              <p><strong>Femmes </strong> </p>
-            </div><!-- End Stats Item -->
-
           </div>
 
         </div>
@@ -160,11 +152,7 @@
               <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
             </div>
           </div>
-          <!-- End Service Item -->
-
-           
-
-           
+          <!-- End Service Item -->   
         </div>
 
       </div>
