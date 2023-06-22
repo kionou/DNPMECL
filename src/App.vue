@@ -15,7 +15,7 @@ import "aos/dist/aos.css"
 import "@/assets/css/main.css"
 // import "@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
 // import "@/assets/vendor/glightbox/js/glightbox.min.js"
-import "@/assets/vendor/purecounter/purecounter_vanilla.js"
+// import "@/assets/vendor/purecounter/purecounter_vanilla.js"
 // import "@/assets/vendor/swiper/swiper-bundle.min.js"
 //  import  "@/assets/vendor/aos/aos.js"
 

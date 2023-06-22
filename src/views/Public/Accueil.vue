@@ -105,6 +105,13 @@
               <p><strong>Femmes salariés</strong> </p>
             </div><!-- End Stats Item -->
 
+            <div class="stats-item d-flex align-items-center">
+            
+              <!-- <count-up :start="0" :end="166" :duration="2" :useEasing="true" /> -->
+              <!-- <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span> -->
+              <p><strong>Femmes </strong> </p>
+            </div><!-- End Stats Item -->
+
           </div>
 
         </div>
@@ -372,13 +379,16 @@
 <script>
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
-import { ref, onMounted } from 'vue';
-import Vue3Autocounter from 'vue3-autocounter';
+import  "glightbox/dist/css/glightbox.css";
+import  "glightbox/dist/js/glightbox.js";
+import GLightbox from 'glightbox';
+
+
 
 export default {
   name: 'DNPMECLAccueil',
   components: {
-    Vue3Autocounter,
+
   },
   data() {
     return {
@@ -386,11 +396,10 @@ export default {
     };
   },
   mounted() {
-    onMounted(() => {
-      this.$nextTick(() => {
-        this.$glightbox('.glightbox');
-      });
-    });
+    new PureCounter();
+    this.lightbox = GLightbox({ 
+              selector: ".glightbox"
+             });
     const swiper = new Swiper('.swiper-container', {
       speed: 400,
       loop: true,

@@ -9,9 +9,6 @@ import Emploi from '../views/Public/Opportunite/emploi.vue'
 import Connexion from '../views/Public/Connexion.vue'
 
 
-
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,10 +23,7 @@ const router = createRouter({
          { path: '/documents', name: 'documents', component: Documents},
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
-         { path: '/connexion', name: 'connexion', component: Connexion, }
-
-
-
+         { path: '/connexion', name: 'connexion', component: Connexion}
       ]
     },
   ]
