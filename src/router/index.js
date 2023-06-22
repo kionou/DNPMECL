@@ -6,9 +6,10 @@ import Statistique from '../views/Public/Statistique.vue'
 import Documents from '../views/Public/Documentation.vue'
 import Offre from '../views/Public/Opportunite/offre.vue'
 import Emploi from '../views/Public/Opportunite/emploi.vue'
+import Connexion from '../views/Public/Connexion.vue'
 
 
-import Connexion from '../views/Connexion.vue'
+
 
 
 const router = createRouter({
@@ -25,17 +26,12 @@ const router = createRouter({
          { path: '/documents', name: 'documents', component: Documents},
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
+         { path: '/connexion', name: 'connexion', component: Connexion, }
+
 
 
       ]
     },
-    {
-       path: '/connexion',
-      name: 'connexion',
-      component: Connexion,
-    
-    
-    }
   ]
 })
 

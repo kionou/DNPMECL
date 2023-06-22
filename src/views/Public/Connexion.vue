@@ -1,7 +1,7 @@
 <template>
     <div>
-       <Navbar/>
-       <div class="container-fluid vh-100 d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style=" background: url('@/assets/img/about.jpg') ;">
+
+       <div class="container-fluid vh-100 d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" >
         <div class="form-container">
 	<p class="title">connexion</p>
     <p class="text-center">Indiquez votre adresse email et votre mot de passe pour vous connecter</p>
@@ -20,15 +20,12 @@
        
     </div>
 
-    <footer id="footer" class="footer  ">
-        <Footer />
-    </footer>
     </div>
 </template>
 
 <script>
-import Navbar from '../components/loyout/navbar.vue';
-import Footer from '../components/loyout/footer.vue';
+import Navbar from '../../components/loyout/navbar.vue';
+import Footer from '../../components/loyout/footer.vue';
 export default {
     name: 'DNPMECLConnexion',
     components:{
