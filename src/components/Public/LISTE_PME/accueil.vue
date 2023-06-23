@@ -83,9 +83,9 @@
 
                 </div>
                 <div class="boutton">
-                    <a href="#" class="btn"> Detail
+                    <router-link  to="/detail" class="btn"> Detail
                         <span></span>
-                    </a>
+                    </router-link>
                 </div>
 
 

@@ -100,6 +100,7 @@
             </div><!-- End Stats Item -->
 
             <div class="stats-item d-flex align-items-center">
+              <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='2021' :duration='3'  :autoinit='true' @finished='alert(`Counting finished!`)'/> -->
               <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Femmes salariés</strong> </p>
             </div><!-- End Stats Item -->
@@ -182,7 +183,7 @@
                     MPME par secteur d'activité
                   </button>
                 </li>
-                
+
                 <li class="nav-item">
                   <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile1" aria-controls="navs-pills-top-profile1" aria-selected="false">
                     MPME par région
@@ -267,7 +268,7 @@
                   <label for="annee-select">Sélectionner une année :</label>
                   <select id="annee-select" ng-model="anneeChoisie" ng-change="updateFilter()">
                     <option value="Toutes">Toutes</option>
-                    <option ng-repeat="year in yearList" value="{{year}}">{{year}}</option>
+                    <!-- <option ng-repeat="year in yearList" value="{{year}}"> {{year}} </option> -->
                   </select>
 
                   <table class="table">
@@ -342,9 +343,9 @@
         <h2>Nos partenaires</h2>
         
       </div>
-      <div class="container" data-aos="zoom-out">
+      <div class="container swiper-container" data-aos="zoom-out">
 
-        <div class="clients-slider swiper">
+        <!-- <div class="clients-slider swiper"> -->
           
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide"><img src="@/assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
@@ -356,7 +357,9 @@
             <div class="swiper-slide"><img src="@/assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
             <div class="swiper-slide"><img src="@/assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
           </div>
-        </div>
+          <div class="swiper-pagination"></div>
+
+        <!-- </div> -->
 
       </div>
     </section> 
@@ -367,25 +370,70 @@
 </template>
 
 <script>
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+import { ref, onMounted } from 'vue';
+import Vue3Autocounter from 'vue3-autocounter';
+
 export default {
-    name: 'DNPMECLAccueil',
+  name: 'DNPMECLAccueil',
+  components: {
+    Vue3Autocounter,
+  },
+  data() {
+    return {
+      
+    };
+  },
+  mounted() {
+    onMounted(() => {
+      this.$nextTick(() => {
+        this.$glightbox('.glightbox');
+      });
+    });
+    const swiper = new Swiper('.swiper-container', {
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 40
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 60
+        },
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 80
+        },
+        992: {
+          slidesPerView: 6,
+          spaceBetween: 120
+        }
+      }
+    });
+   
+  },
 
-    data() {
-        return {
-            
-        };
-    },
 
-    mounted() {
-        
-    },
 
-    methods: {
-        
-    },
+  methods: {
+    
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
 </style>

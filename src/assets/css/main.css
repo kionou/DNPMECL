@@ -1936,7 +1936,7 @@ section {
   font-family: var(--font-primary);
   font-weight: 500;
   font-size: 15px;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   display: inline-block;
   padding: 18px 40px;
   margin-left: 25px;
@@ -1978,7 +1978,18 @@ section {
 
   .hero .btn-get-started,
   .hero .btn-watch-video {
-    font-size: 14px;
+    font-size: 10px;
+    /* padding: 8px 36px; */
+  }
+}
+
+@media (max-width: 402px) {
+ 
+
+  .hero .btn-get-started,
+  .hero .btn-watch-video {
+    font-size: 9px;
+    padding: 8px 22px;
   }
 }
 
@@ -2099,7 +2110,7 @@ display: none;
 # Blog Posts List
 --------------------------------------------------------------*/
 .blog .posts-list article {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  
   padding: 30px;
   height: 100%;
   border-radius: 10px;
