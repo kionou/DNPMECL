@@ -3,12 +3,16 @@
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </template>
 <script >
-import AOS from "aos/dist/aos"
+  import AOS from "aos/dist/aos"
 // import "@/assets/css/style.css"
+// import "@/assets/vendor/bootstrap/css/bootstrap.min.css"
+// import "@/assets/vendor/bootstrap-icons/bootstrap-icons.css"
 // import "@/assets/vendor/bootstrap/css/bootstrap.min.css"
 // import "@/assets/vendor/bootstrap-icons/bootstrap-icons.css"
 import "@/assets/vendor/aos/aos.css"
 import "aos/dist/aos.css"
+// import "@/assets/vendor/glightbox/css/glightbox.min.css"
+// import "@/assets/vendor/swiper/swiper-bundle.min.css"
 // import "@/assets/vendor/glightbox/css/glightbox.min.css"
 // import "@/assets/vendor/swiper/swiper-bundle.min.css"
 import "@/assets/css/main.css"
@@ -19,9 +23,12 @@ import "@/assets/css/main.css"
 //  import  "@/assets/vendor/aos/aos.js"
 
 // import "@/assets/vendor/isotope-layout/isotope.pkgd.min.js"
+
+// import "@/assets/vendor/isotope-layout/isotope.pkgd.min.js"
 import "@/assets/vendor/php-email-form/validate.js"
 import "@/assets/js/main.js"
 // import "@/assets/js/app.js"
+
 
 
 

@@ -101,6 +101,7 @@
 
             <div class="stats-item d-flex align-items-center">
               <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='2021' :duration='3'  :autoinit='true' @finished='alert(`Counting finished!`)'/> -->
+              <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='2021' :duration='3'  :autoinit='true' @finished='alert(`Counting finished!`)'/> -->
               <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Femmes salariés</strong> </p>
             </div><!-- End Stats Item -->
