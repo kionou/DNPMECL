@@ -35,17 +35,17 @@ export default {
       mirror: false
     });
   },
-  // watch: {
-  //   $route(to,) {
-  //     const name = to.name.toLowerCase()
-  //     const title = name === 'formation'
-  //       ? `${name} (${to.href.split('/')[2].toLowerCase()})`
-  //       : name
-  //     document.title = `dnpmecl - ${title}`
+  watch: {
+    $route(to,) {
+      const name = to.name.toLowerCase()
+      const title = name === 'formation'
+        ? `${name} (${to.href.split('/')[2].toLowerCase()})`
+        : name
+      document.title = `dnpmecl - ${title}`
 
-  //     window.scrollTo({ top: 0, behavior: 'smooth' })
-  //   }
-  // }
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
 }
 
 </script>
