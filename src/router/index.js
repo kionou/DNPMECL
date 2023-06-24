@@ -27,8 +27,8 @@ const router = createRouter({
          { path: '/documents', name: 'documents', component: Documents},
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
-         { path: '/connexion', name: 'connexion', component: Connexion, },
-         { path: '/detail', name: 'connexion', component: Detail, }
+         { path: '/connexion', name: 'connexion', component: Connexion },
+         { path: '/detail', name: 'detail_pme', component: Detail, }
 
 
 

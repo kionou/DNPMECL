@@ -48,7 +48,7 @@
                         <option :value="5.22">5.22</option>
                     </select>
                 </div>
-                <div class="nsl" style="border-right: none" v-else="showFs">
+                <div class="nsl" style="border-right: none" v-else>
                     <i class="bi bi-x-square-fill" @click="
                         control = { name: '', spec: '', speciality: '', promotion: '' }
                         " style="cursor: pointer"></i>
@@ -736,13 +736,6 @@ p {
     color: var(--bg2);
 }
 
-.liste-cards {
-    margin-top: 50px;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5%;
-}
 
 .nsl select {
     width: calc(100% - 50px);

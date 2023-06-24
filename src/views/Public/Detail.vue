@@ -1,7 +1,6 @@
 <template>
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">User Profile /</span> Profile</h4> -->
-
+    <div>
+        <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Header -->
         <div class="row">
             <div class="col-12">
@@ -15,8 +14,7 @@
                                 class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
                         </div>
                         <div class="flex-grow-1 mt-3 mt-sm-5">
-                            <div
-                                class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
+                            <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                                 <div class="user-profile-info">
                                     <h4>Guinea Alumina Corporation</h4>
                                     <ul
@@ -28,9 +26,6 @@
                                     </ul>
                                     <hr>
                                 </div>
-                                <!-- <a href="javascript:void(0)" class="btn btn-primary text-nowrap">
-                            <i class="bx bx-user-check me-1"></i>Connected
-                          </a> -->
                             </div>
                         </div>
                     </div>
@@ -98,10 +93,7 @@
                                                 <span>
                                                     Société par actions simplifiée</span>
                                             </li>
-                                            <!-- <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-detail"></i><span class="fw-semibold mx-2">Languages:</span>
-                                <span>English</span>
-                            </li> -->
+                             
                                         </ul>
                                         <small class="text-muted text-uppercase">Contacts</small>
                                         <ul class="list-unstyled mb-4 mt-3">
@@ -137,28 +129,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!--/ About User -->
-                                <!-- Profile Overview -->
-                                <!-- <div class="card mb-4">
-                    <div class="card-body">
-                        <small class="text-muted text-uppercase">Overview</small>
-                        <ul class="list-unstyled mt-3 mb-0">
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-check"></i><span class="fw-semibold mx-2">Task Compiled:</span>
-                                <span>13.5k</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-customize"></i><span class="fw-semibold mx-2">Projects Compiled:</span>
-                                <span>146</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <i class="bx bx-user"></i><span class="fw-semibold mx-2">Connections:</span>
-                                <span>897</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-                                <!--/ Profile Overview -->
+                              
                             </div>
                             <div class="col-xl-8 col-lg-7 col-md-7">
                                 <!-- Activity Timeline -->
@@ -199,12 +170,10 @@
                                                     </div>
                                                     <p class="mb-2">Numero RCCM: 1DDKN4</p>
                                                     <div class="d-flex flex-wrap">
-                                                        <!-- <div class="avatar me-3">
-                                            <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
-                                        </div> -->
+                                              
                                                         <div>
                                                             <h6 class="mb-0">Autre statut juridique:jdhshsh,jsdj</h6>
-                                                            <!-- <span>CEO of Infibeam</span> -->
+                                                         
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,18 +198,7 @@
                                                     <p class="mb-2">
                                                         450.000.000 GNF
                                                     </p>
-                                                    <!-- <div class="d-flex flex-wrap gap-2">
-                                        <a href="javascript:void(0)" class="me-3">
-                                            <img src="../../assets/img/icons/misc/pdf.png" alt="Document image" width="20"
-                                                class="me-2" />
-                                            <span class="h6">App Guidelines</span>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <img src="../../assets/img/icons/misc/doc.png" alt="Excel image" width="20"
-                                                class="me-2" />
-                                            <span class="h6">Testing Results</span>
-                                        </a>
-                                    </div> -->
+                                              
                                                 </div>
                                             </li>
                                             <li class="timeline-item timeline-item-transparent">
@@ -250,7 +208,7 @@
                                                         <h6 class="mb-0">Documents</h6>
                                                         <!-- <small class="text-muted">6 Day Ago</small> -->
                                                     </div>
-                                                 
+
                                                     <div class="d-flex flex-wrap gap-2">
                                                         <a href="javascript:void(0)" class="me-3">
                                                             <img src="@/assets/misc/pdf.png" alt="Document image" width="20"
@@ -265,25 +223,11 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <!-- <li class="timeline-item timeline-item-transparent">
-                                <span class="timeline-point timeline-point-success"></span>
-                                <div class="timeline-event pb-0">
-                                    <div class="timeline-header mb-1">
-                                        <h6 class="mb-0">Project status updated</h6>
-                                        <small class="text-muted">10 Day Ago</small>
-                                    </div>
-                                    <p class="mb-0">Woocommerce iOS App Completed</p>
-                                </div>
-                            </li>
-                            <li class="timeline-end-indicator">
-                                <i class="bx bx-check-circle"></i>
-                            </li> -->
+
                                         </ul>
                                     </div>
                                 </div>
-                                <!--/ Activity Timeline -->
-
-                                <!--/ Projects table -->
+                               
                             </div>
                         </div>
 
@@ -303,8 +247,8 @@
                                                 <img src="@/assets/img/blog/gac1.jpeg" alt="" class="img-fluid">
                                             </div>
 
-                                  
- 
+
+
 
                                         </article>
                                     </div><!-- End post list item -->
@@ -316,7 +260,7 @@
                                                 <img src="@/assets/img/blog/gac2.jpeg" alt="" class="img-fluid">
                                             </div>
 
-                                            
+
 
                                         </article>
                                     </div><!-- End post list item -->
@@ -328,11 +272,11 @@
                                                 <img src="@/assets/img/blog/gac1.jpeg" alt="" class="img-fluid">
                                             </div>
 
-                                           
+
 
                                         </article>
                                     </div><!-- End post list item -->
- 
+
 
                                 </div><!-- End blog posts list -->
 
@@ -348,48 +292,27 @@
                         </section>
 
                     </div>
-                   
+
                     <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
-
-
-                        <table class="table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Statut juridique</th>
-                                    <th>MPME</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>Entrepreneur individuel</td>
-                                    <td>10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Statut juridique de la société</td>
-                                    <td>10</td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-
+                        <Position />
                     </div>
 
                 </div>
             </div>
         </div>
-        <!--/ User Profile Content -->
+
+    </div>
     </div>
 </template>
 
 <script>
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
+import Position from '../../components/Public/LISTE_PME/position.vue'
 export default {
     name: 'DNPMECLDetail',
     components: {
-        Navbar, Footer
+        Navbar, Footer, Position
     },
 
     data() {
@@ -408,4 +331,6 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" >
+
+</style>

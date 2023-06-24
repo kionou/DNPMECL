@@ -4,6 +4,8 @@ import './assets/demo.css'
 import './assets/core.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
 import 'bootstrap/dist/js/bootstrap.js';
 
 
