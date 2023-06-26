@@ -14,7 +14,7 @@
 			<label for="password">Mot de passe <span class="text-danger">*</span></label>
 			<input type="password" name="password" id="password" placeholder="">
 		</div>
-		<button class="sign">Se conneeecter</button>
+		<button class="sign">Se connecter</button>
 	</form>
 </div>
        
