@@ -2,9 +2,9 @@
     <div>
           <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero">
-    <div class="container position-relative">
-      <div class="row gy-5" data-aos="fade-in">
-        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start" style="margin-bottom:auto">
+    <div class="hero_content">
+      <div class="rowe gy-5" data-aos="fade-in">
+        <div class="hero_content1 col-lg-6 order-2 order-lg-1  text-center text-lg-start" style="margin-bottom:auto">
           <h2>Identifiez votre entreprise</h2>
           <p>Le processus de création d’une société est une étape clé dans la vie d'un entrepreneur.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
@@ -16,7 +16,7 @@
             <span>Guide de création</span></a>
           </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2">
+        <div class=" hero_image col-lg-6 order-1 order-lg-2">
           <img src="@/assets/img/groupe-afro-americains-travaillant-ensemble.jpg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
         </div>
       </div>

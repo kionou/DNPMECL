@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function navbarlinksActive() {
     navbarlinks.forEach(navbarlink => {
+ 
 
       if (!navbarlink.hash) return;
 
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Initiate Pure Counter
    */
-  new PureCounter();
+  // new PureCounter();
 
   /**
    * Clients Slider

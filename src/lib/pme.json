@@ -1,0 +1,195 @@
+[
+    {
+        "id":1,
+        "nom":"YUNUS HOLDING LIMITED",
+        "date_creation":"1980",
+        "code_pme":"29401245",
+        "ville":"Matoto",
+        "region":"Conakry",
+        "prefecture":"Mali",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara Aboubacar",
+        "image":"img/groupe-afro-americains-travaillant-ensemble.jpg"
+    },
+    {
+        "id":2,
+        "nom":"ECO-BETAPE SARL ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":3,
+        "nom":"ETS KARAOUNI HOUSSEIN  ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":4,
+        "nom":"ETS MD (M'MAWA DIANE & FAMILLE)   ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":5,
+        "nom":"ETS TDF MS",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":6,
+        "nom":"GENIE SERVICES TECHNIQUES",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":7,
+        "nom":"GKI SARL (GROUPE KALLAN INTERNATIONAL)",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":8,
+        "nom":"GPAC",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":9,
+        "nom":"GROUPE DA SANG GUINEE ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":10,
+        "nom":"GUINEE MULTI-INDUSTRIE",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":11,
+        "nom":"GUINEE PLAST",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":12,
+        "nom":"HOLPIDI ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":13,
+        "nom":"KEVIN CERAMIC SARL ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    },
+    {
+        "id":14,
+        "nom":"KIA INDUSTRIE ",
+        "date_creation":"1990",
+        "code_pme":"29231245",
+        "ville":"Kaloum",
+        "region":"Conakry",
+        "prefecture":"Pita",
+        "email":"holding@gmail.com",
+        "contact":"(+224) 628 06 13 86",
+        "dirigeant":"Ouattara koffi",
+        "image":"img/1.png"
+    }
+    
+    
+  
+    
+    ]
+
+
+
+
+
+
+    

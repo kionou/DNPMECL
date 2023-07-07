@@ -1,0 +1,167 @@
+[
+    {
+      "id": 1,
+      "nom": "Conakry",
+      "region": "Conakry"
+    },
+    {
+      "id": 2,
+      "nom": "Boffa",
+      "region": "Boké"
+    },
+    {
+      "id": 3,
+      "nom": "Boké",
+      "region": "Boké"
+    },
+    {
+      "id": 4,
+      "nom": "Coyah",
+      "region": "Kindia"
+    },
+    {
+      "id": 5,
+      "nom": "Dubréka",
+      "region": "Kindia"
+    },
+    {
+      "id": 6,
+      "nom": "Fria",
+      "region": "Kindia"
+    },
+    {
+      "id": 7,
+      "nom": "Gaoual",
+      "region": "Boké"
+    },
+    {
+      "id": 8,
+      "nom": "Kindia",
+      "region": "Kindia"
+    },
+    {
+      "id": 9,
+      "nom": "Forécariah",
+      "region": "Kindia"
+    },
+    {
+      "id": 10,
+      "nom": "Kankan",
+      "region": "Kankan"
+    },
+    {
+      "id": 11,
+      "nom": "Kérouané",
+      "region": "Kankan"
+    },
+    {
+      "id": 12,
+      "nom": "Koubia",
+      "region": "Labe"
+    },
+    {
+      "id": 13,
+      "nom": "Labé",
+      "region": "Labe"
+    },
+    {
+      "id": 14,
+      "nom": "Lélouma",
+      "region": "Labe"
+    },
+    {
+      "id": 15,
+      "nom": "Lola",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 16,
+      "nom": "Macenta",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 17,
+      "nom": "Mali",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 18,
+      "nom": "Mamou",
+      "region": "Mamou"
+    },
+    {
+      "id": 19,
+      "nom": "Mandiana",
+      "region": "Kankan"
+    },
+    {
+      "id": 20,
+      "nom": "Nzérékoré",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 21,
+      "nom": "Pita",
+      "region": "Labé"
+    },
+    {
+      "id": 22,
+      "nom": "Siguiri",
+      "region": "Kankan"
+    },
+    {
+      "id": 23,
+      "nom": "Télimélé",
+      "region": "Kindia"
+    },
+    {
+      "id": 24,
+      "nom": "Tougué",
+      "region": "Labé"
+    },
+    {
+      "id": 25,
+      "nom": "Yomou",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 26,
+      "nom": "Dabola",
+      "region": "Mamou"
+    },
+    {
+      "id": 27,
+      "nom": "Dinguiraye",
+      "region": "Farana"
+    },
+    {
+      "id": 28,
+      "nom": "Kissidougou",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 29,
+      "nom": "Gueckedou",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 30,
+      "nom": "Kouroussa",
+      "region": "Kankan"
+    },
+    {
+      "id": 31,
+      "nom": "Guéckédou",
+      "region": "Nzérékoré"
+    },
+    {
+      "id": 32,
+      "nom": "Telimele",
+      "region": "Kindia"
+    },
+    {
+      "id": 33,
+      "nom": "Beyla",
+      "region": "Nzérékoré"
+    }
+  ]

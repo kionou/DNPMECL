@@ -66,7 +66,7 @@
   </template>
   
   <script>
-  import Pagination from '../other/pagination.vue';
+  import Pagination from '../components/Public/other/pagination.vue';
   import { getImage } from '@/lib/getImage';
   import resp from '@/lib/pme.json';
   import regionsData from '@/lib/region.json';
