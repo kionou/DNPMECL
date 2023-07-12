@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="texte">
-            <p class="texte-content">Code APE: <span>{{ pme.code_ape }}</span></p>
+            <p class="texte-content">Code APE: <span>{{ pme.code_pme }}</span></p>
             <p class="texte-content">Ville: <span>{{ pme.ville }}</span></p>
             <p class="texte-content">Email: <span>{{ pme.email }}</span></p>
             <p class="texte-content">Contact: <span>{{ pme.contact }}</span></p>

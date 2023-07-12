@@ -2,13 +2,14 @@
     <div>
       <div class="container">
       <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
+        <div class="col-lg-6 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center flex-column">
             <img src="@/assets/img/armoirie.png" alt="">
-        <h1 style="color: white;">DNMPMECL </h1>
+          <h1 style="color: white; font-size: 27px !important;">DNMPMECL </h1>
+          <p style="color: white;">Direction Nationale Des MPME et du Contenu Local - Guinee.</p>
+
           </a>
-          <p>Direction Nationale Des MPME et du Contenu Local - Guinee.</p>
-          <div class="social-links d-flex mt-4">
+          <div class="social-links d-flex mt-4 justify-content-center">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
             <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -16,7 +17,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
+        <div class="col-lg-3 col-md-12 footer-links">
           <h4>Liens utiles</h4>
           <ul>
             <li><a href="#">Accueil</a></li>
@@ -73,6 +74,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
 </style>

@@ -570,7 +570,7 @@ section {
   }
 
   .mobile-nav-show {
-    color: rgba(255, 255, 255, 0.6);
+    color: #fff;
     font-size: 28px;
     cursor: pointer;
     line-height: 0;
@@ -2676,11 +2676,12 @@ margin-bottom: auto;
 
 .footer .footer-info .logo {
   line-height: 0;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 
 .footer .footer-info .logo img {
-  max-height: 40px;
+  width: 120px;
+  height: 120px;
   margin-right: 6px;
 }
 
@@ -2777,4 +2778,17 @@ margin-bottom: auto;
 
 .footer .credits a {
   color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+
+  .footer .footer-links ul li {
+   
+   justify-content: center;
+   
+  }
+
+  .footer h4 {
+  text-align: center;
+  }
 }
