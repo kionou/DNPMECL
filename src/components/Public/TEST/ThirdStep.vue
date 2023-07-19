@@ -398,6 +398,7 @@ const props = defineProps(['formValues']);
   /* width: 700px; */
   max-width: 1140px;
   margin: 0 auto;
+  margin-top: 60px;
   /* border-radius: 0.75rem; */
   background-color: white;
   padding: 1rem;
