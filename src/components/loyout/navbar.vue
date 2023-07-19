@@ -259,7 +259,15 @@ i span{
 font-size: 12px;
 
 }
-@media (max-width: 1980px) {
+@media (min-width: 1280px) {
+
+  .second{
+  /* border: 1px solid red; */
+  width: 0;
+ 
+}
+}
+@media (max-width: 1280px) {
   .second{
   /* border: 1px solid red; */
   width: 100%;

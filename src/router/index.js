@@ -8,6 +8,9 @@ import Offre from '../views/Public/Opportunite/offre.vue'
 import Emploi from '../views/Public/Opportunite/emploi.vue'
 import Connexion from '../views/Public/Connexion.vue'
 import Detail from '../views/Public/Detail.vue'
+import Formulaire from '../views/Public/formulaire.vue'
+
+
 import Test from '../views/test.vue'
 
 
@@ -30,6 +33,8 @@ const router = createRouter({
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
          { path: '/connexion', name: 'connexion', component: Connexion },
+         { path: '/formulaire', name: 'Formulaire', component: Formulaire },
+
          { path: '/detail', name: 'detail_pme', component: Detail, },
          { path: '/test', name: 'Test', component: Test, }
 
