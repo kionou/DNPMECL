@@ -1,14 +1,14 @@
 import { reactive } from "vue";
 
 export default function useForm() {
-    const values = reactive({
-       'lastname': '',
-       'firstname': '',
-       'age': '',
-       'description': '',
-    });
+  const values = reactive({
+     'Region': '',
+     'Commune': '',
+     'age': '',
+     'description': '',
+  });
 
-    return {
-        values,
-    }
+  return {
+      values,
+  }
 }

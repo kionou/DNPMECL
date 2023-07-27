@@ -72,13 +72,23 @@ import FirstStepVue from '../../components/Public/TEST/FirstStep.vue';
 import SecondStepVue from '../../components/Public/TEST/SecondStep.vue';
 import ThirdStepVue from '../../components/Public/TEST/ThirdStep.vue';
 import FinalStepVue from '../../components/Public/TEST/FinalStep.vue';
-import useForm from '../../composable/form';
+import useForm from '../../composable/form.js';
+import { useVuelidate } from '@vuelidate/core'; // Importez useVuelidate depuis @vuelidate/core
+import { required, email } from '@vuelidate/validators'; // Importez les fonctions de validation depuis @vuelidate/validators
 
 import { ref } from 'vue';
 
-const {
-    values
-} = useForm();
+const { values} = useForm();
+const rules = useVuelidate({
+  props: {
+    formValues: {
+      Region: { required },
+      Commune: { required },
+      // Ajoutez d'autres règles de validation pour les autres champs ici
+    },
+  },
+});
+
 
 const currentStep = ref(0);
 const formSteps = [
@@ -89,6 +99,9 @@ const formSteps = [
 ];
 
 const nextStep = () => {
+    if (rules.value.$pending) {
+    return;
+  }
     currentStep.value++;
 }
 

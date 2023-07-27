@@ -9,6 +9,8 @@ import Emploi from '../views/Public/Opportunite/emploi.vue'
 import Connexion from '../views/Public/Connexion.vue'
 import Detail from '../views/Public/Detail.vue'
 import Formulaire from '../views/Public/formulaire.vue'
+import Singmpme from '../views/Public/SignUserMpme.vue'
+
 
 
 import Test from '../views/test.vue'
@@ -34,6 +36,7 @@ const router = createRouter({
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
          { path: '/connexion', name: 'connexion', component: Connexion },
          { path: '/formulaire', name: 'Formulaire', component: Formulaire },
+         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme },
 
          { path: '/detail', name: 'detail_pme', component: Detail, },
          { path: '/test', name: 'Test', component: Test, }

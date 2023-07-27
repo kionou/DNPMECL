@@ -8,7 +8,7 @@
           <h2>Identifiez votre entreprise</h2>
           <p>Le processus de création d’une société est une étape clé dans la vie d'un entrepreneur.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/formulaire" class="btn-get-started">Idenifier votre entreprise</router-link>
+            <router-link to="/sign_user_mpme" class="btn-get-started">Idenifier votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                

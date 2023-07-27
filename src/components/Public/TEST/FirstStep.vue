@@ -12,17 +12,19 @@
                         <div class="col">
                         <div class="input-groupe">
                             <label for="Region">Region <span class="text-danger">*</span></label>
-                            <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
+                            <select id="utexi_sexe" name="utexi[sexe]" class="form-select"  v-model="props.formValues.Region" >
                                 <option disabled selected >--- Regions ---</option>
                                 <option value="conakry">Conakry</option>
                                 <option value="mali">Mali</option>
                             </select>
                         </div>
                     </div>
+                    <!-- <div v-if="rules.props.formValues.Region.$error" class="error-msg">{{ rules.props.formValues.Region.$errors[0] }}</div> -->
+                    
                     <div class="col">
                         <div class="input-groupe">
                             <label for="Commune">Commune <span class="text-danger">*</span></label>
-                            <input type="text" name="Commune" id="Commune" placeholder="">
+                            <input type="text" name="Commune" id="Commune" placeholder=""  v-model="props.formValues.Commune">
                         </div>
                     </div>
                     <div class="col">
@@ -309,11 +311,20 @@
 </template>
 
 <script setup >
-import Datepicker from 'vue3-datepicker'
-import { ref } from 'vue'
-const picked = ref(new Date())
-
+import  useVuelidate  from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
+// import { ref } from 'vue'
 const props = defineProps(['formValues']);
+// const rules = useVuelidate({
+//   props: {
+//     formValues: {
+//       Region: { required },
+//       Commune: { required },
+//       // Ajoutez d'autres règles de validation pour les autres champs ici
+//     }
+//   }
+// });
+console.log(props.formValues);
 
  
 </script>

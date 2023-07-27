@@ -1,46 +1,54 @@
 <template>
-    <div>
 
-       <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
-        <div class="form-container">
-	<p class="title">connexion</p>
-    <p class="text-center">Indiquez votre adresse email et votre mot de passe pour vous connecter</p>
+    <div>
+   <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
+
+    <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
+  <div class="form-container">
+	<p class="title">Inscription</p>
+    <p class="text-center">Créez votre compte et enregistrez votre entreprise en quelques étapes seulement </p>
 	<form class="form">
 		<div class="input-group">
 			<label for="username">Email <span class="text-danger">*</span></label>
 			<input type="text" name="email" id="username" placeholder="" v-model="email">
 		</div>
-    <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
+        <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
 		<div class="input-group">
-			<label for="password">Mot de passe <span class="text-danger">*</span></label>
-			<input type="password" name="password" id="password" placeholder="" v-model="password">
+			<label for="tel">Numéro WhatsApp <span class="text-danger">*</span></label>
+			<input type="tel" name="numero" id="numero" placeholder="" v-model="numero">
 		</div>
-    <small v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</small>
-		<button class="sign" @click.prevent="submit">Se connecter</button>
+         <small v-if="v$.numero.$error">{{v$.numero.$errors[0].$message}}</small>
+
+		<button class="sign" @click.prevent="submit">S'enregistrer</button>
+   <p class="signin">Vous avez déjà un compte ? <span  v-on:click="toggleModale" >Se connecter</span> </p>
+
 	</form>
-</div>
-       
+    </div>   
     </div>
 
     </div>
+ 
 </template>
 
 <script>
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail } from '@/functions/rules';
+import { require, lgmin, lgmax, ValidEmail , ValidNumeri } from '@/functions/rules';
+import Modal from '../../components/Public/other/modal.vue';
+
 export default {
-    name: 'DNPMECLConnexion',
+    name: 'DNPMECLSignUserMpme',
     components:{
-        Navbar , Footer
+        Navbar , Footer , Modal
     },
 
     data() {
         return {
-          email:'',
-             password:'',
+             email:'',
+             numero:'',
              v$:useVuelidate(), 
+             revele: false
         };
     },
     validations: {
@@ -48,20 +56,25 @@ export default {
                require,
                 ValidEmail
             },
-            password:{
+            numero:{
               require,
-                lgmin:lgmin(6),
-                lgmax:lgmax(12)
+              ValidNumeri,
+              lgmin:lgmin(9),
+              lgmax:lgmax(9),
          
                 
             },
     },
 
-    mounted() {
+   async  mounted() {
+      const response = await fetch("https://mpme-guinee.com/bd/public/api/mpme");
+  const movies = await response.json();
+  console.log(movies);
         
     },
 
     methods: {
+        
       async  submit(){
             // this.v$.$validate()
             this.v$.$touch()
@@ -69,16 +82,24 @@ export default {
                 // this.revele = !this.revele
              let   DataUser={
                     email:this.email,
-                    password:this.password
+                    numero:this.numero
                 }
                 console.log('data user :',DataUser);
               }
-            }
+            },
+            toggleModale: function() {
+             this.revele = !this.revele;
+             if (this.revele) {
+               document.body.classList.add('no-scroll');
+              } else {
+                 document.body.classList.remove('no-scroll');
+                    }
+    }
     },
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="css" >
   small{
     color: #f8001b;
     display: flex;
@@ -94,6 +115,8 @@ export default {
   color: black;
   max-height: 550px;
   box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
+ 
+ 
 }
 
 .title {
@@ -133,25 +156,6 @@ export default {
   border-color: var(--color-primary);
 }
 
-.forgot {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--color-primary);
-  margin: 8px 0 14px 0;
-}
-
-.forgot a,.signup a {
-  color: rgba(243, 244, 246, 1);
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot a:hover, .signup a:hover {
-  text-decoration: underline var(--color-primary);
-}
-
 .sign {
   display: block;
   width: 100%;
@@ -165,11 +169,27 @@ export default {
   margin-top: 50px;
 }
 
-.signup {
+ .signin {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
   text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(156, 163, 175, 1);
+  margin-top: 20px;
 }
+
+
+
+.signin span {
+  color: royalblue;
+}
+
+.signin span:hover {
+  text-decoration: underline royalblue;
+  cursor: pointer;
+}
+
+.no-scroll {
+    overflow: hidden;
+  }
+
 
 </style>
