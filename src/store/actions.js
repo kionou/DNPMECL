@@ -22,10 +22,14 @@ async fetchDataFromAPI({ commit }) {
       console.log(error);
     }
   },
-  async fetchDataFromAPI({ commit }, page) {
+async fetchDataFromAPI({ commit }, page) {
     try {
       const response = await axios.get(`/mpme?page=${page}`, { timeout: 10000 })
       const data = await response.data.data;
+      const respons = await fetch('https://restcountries.com/v3.1/all');
+      const liste = await respons.json();
+      commit('SET_COUNTRY', liste);
+      console.log('kkkkkk',liste);
       console.log('dataaa',data.data);
       console.log('dataaa',data.last_page);
 
@@ -37,5 +41,16 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des données :', error);
     }
   },
+async fetchDataCountries({commit}){
+    try {
+      const response = await fetch('https://restcountries.com/v3.1/all');
+      const liste = await response.json();
+      commit('SET_COUNTRY', liste);
+      console.log('kkkkkk',liste);
+    } catch (error) {
+      console.error('Une erreur est survenue lors de la récupération des données :', error);
+    }
+  
+  }
 
  }

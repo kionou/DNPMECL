@@ -4,7 +4,7 @@
    <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
 
     <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
-  <div class="form-container">
+  <div class="form-container1">
 	<p class="title">Inscription</p>
     <p class="text-center">Créez votre compte et enregistrez votre entreprise en quelques étapes seulement </p>
 	<form class="form">
@@ -122,7 +122,7 @@ export default {
     justify-content: center;
   }
 
-.form-container {
+.form-container1 {
   width: 400px;
   border-radius: 0.75rem;
   background-color: white;

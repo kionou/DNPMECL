@@ -111,6 +111,7 @@ export default {
           this.items = data.data.data;
       
     },
+  
     onPageChanged(page) {
       this.currentPage = page;
       this.fetchData(page);
@@ -154,6 +155,7 @@ export default {
   mounted() {
     // Charger les données de la première page lors du chargement initial du composant
     this.fetchData(this.currentPage);
+  
   },
 };
 </script>

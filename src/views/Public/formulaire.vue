@@ -35,7 +35,7 @@
                       <div class="col">
                           <div class="input-groupe">
                               <label for="ville">Ville <span class="text-danger">*</span></label>
-                              <input type="text" name="Ville" id="ville" placeholder="">
+                              <input type="text" name="Ville" id="ville" placeholder="" v-model="ville">
                           </div>
                           <small v-if="v$.ville.$error">{{v$.ville.$errors[0].$message}}</small>
                       </div>
@@ -59,7 +59,7 @@
                       <div class="col">
                           <div class="input-groupe">
                               <label for="Localisation">Localisation <span class="text-danger">*</span></label>
-                              <input type="text" name="Localisation" id="Localisation" placeholder="" v-model="location">
+                              <input type="text" name="Localisation" id="localisation" placeholder="" v-model="localisation">
                           </div>
                           <small v-if="v$.localisation.$error">{{v$.localisation.$errors[0].$message}}</small>
                           
@@ -173,7 +173,11 @@
                       <div class="col">
                           <div class="input-groupe">
                               <label for="AnneeCreation">Année de Creation <span class="text-danger">*</span></label>
-                              <input type="text" name="AnneeCreation" id="AnneeCreation" placeholder="" v-model="an_creation">
+                              <select id="utexi_sexe" name="utexi[sexe]" class="form-select" v-model="an_creation">
+                                  <option disabled selected >--- Date ---</option>
+                                  <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+                              </select>
+                              
                           </div>
                           <small v-if="v$.an_creation.$error">{{v$.an_creation.$errors[0].$message}}</small>
                       </div>
@@ -181,7 +185,11 @@
                       <div class="col">
                           <div class="input-groupe">
                               <label for="AnneeEntreeActivite">Année Entrée Activité <span class="text-danger">*</span></label>
-                              <input type="text" name="AnneeEntreeActivite" id="AnneeEntreeActivite" placeholder="" v-model="an_entre_acti">
+                              <select id="utexi_sexe" name="utexi[sexe]" class="form-select"  v-model="an_entre_acti">
+                                  <option disabled selected >--- Date ---</option>
+                                  <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+                              </select>
+                            
                              
                           </div>
                           <small v-if="v$.an_entre_acti.$error">{{v$.an_entre_acti.$errors[0].$message}}</small>
@@ -226,7 +234,11 @@
                       <div class="col">
                           <div class="input-groupe">
                               <label for="AnneeProduction1">Année Production 1 <span class="text-danger">*</span></label>
-                              <input type="text" name="AnneeProduction1" id="AnneeProduction1" placeholder="" v-model="an_prod_1">
+                              <select id="utexi_sexe" name="utexi[sexe]" class="form-select"  v-model="an_prod_1">
+                                  <option disabled selected >--- Date ---</option>
+                                  <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+                              </select>
+                             
                           </div>
                           <small v-if="v$.an_prod_1.$error">{{v$.an_prod_1.$errors[0].$message}}</small>
                       </div>
@@ -294,6 +306,10 @@
                           <div class="col">
                           <div class="input-groupe">
                               <label for="NationaliteGroupe">Nationalité Groupe <span class="text-danger">*</span></label>
+                              <select id="utexi_sexe" name="utexi[sexe]" class="form-select"  v-model="an_prod_1">
+                                  <option disabled selected >--- Nationnalite ---</option>
+                                  <option v-for="country in countrie" :key="country.id" :value="year">{{ year }}</option>
+                              </select>
                               <input type="text" name="NationaliteGroupe" id="NationaliteGroupe" placeholder="" v-model="nationalite_groupe">
                           </div>
                           <small v-if="v$.nationalite_groupe.$error">{{v$.nationalite_groupe.$errors[0].$message}}</small>
@@ -384,9 +400,10 @@
       return {
       //  etape 1
       region: "", // Propriété pour stocker la valeur sélectionnée dans la liste déroulante de région
-      commune: "", // Propriété pour stocker la valeur entrée dans le champ de commune
+      commune: "",
+      ville:"", // Propriété pour stocker la valeur entrée dans le champ de commune
       sous_prefecture: "", // Propriété pour stocker la valeur sélectionnée dans la liste déroulante de sous-prefecture
-      location: "", // Propriété pour stocker la valeur entrée dans le champ de localisation
+      localisation: "", // Propriété pour stocker la valeur entrée dans le champ de localisation
       sigle_mpme: "", // Propriété pour stocker la valeur entrée dans le champ de SigleMpme
       nom: "", // Propriété pour stocker la valeur entrée dans le champ de nom
       quartier: "", // Propriété pour stocker la valeur sélectionnée dans la liste déroulante de quartier
@@ -421,13 +438,17 @@
         connect: '',
         currentStep: 1, // Étape actuelle, commence à 1
         totalSteps: 3, // Nombre total d'étapes dans le formulaire
+        years: [],
+        countrie:'',
+        selectedYear: null,
       };
     },
     validations: {
           region: { require } , // Exemple de validation pour la région (obligatoire)
-          commune: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour la commune (obligatoire)
+          commune: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  },
+          ville:{require , lgmin:lgmin(3) , lgmax:lgmax(20)},
           sous_prefecture: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour la sous-prefecture (obligatoire)
-          location: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour la localisation (obligatoire)
+          localisation: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour la localisation (obligatoire)
           sigle_mpme: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour le SigleMpme (obligatoire)
           nom: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour le nom (obligatoire)
           quartier: { require , lgmin:lgmin(3) , lgmax:lgmax(20)  }, // Exemple de validation pour le quartier (obligatoire)
@@ -461,7 +482,43 @@
       nextStep() {
         this.v$.$touch()
         // Effectuez les validations spécifiques à l'étape actuelle ici
-        if (this.currentStep === 1 && (this.v$.email.$error || this.v$.prenom.$error || this.v$.nom.$error)) {
+        if (this.currentStep === 1 && 
+         (
+        this.v$.region.$error ||
+        this.v$.commune.$error ||
+        this.v$.ville.$error ||
+        this.v$.sous_prefecture.$error ||
+        this.v$.localisation.$error ||
+        this.v$.sigle_mpme.$error ||
+        this.v$.nom.$error ||
+        this.v$.quartier.$error ||
+        this.v$.rue.$error ||
+        this.v$.boite_postale.$error ||
+        this.v$.tel_what.$error ||
+        this.v$.tel_second.$error ||
+        this.v$.email.$error ||
+        this.v$.url.$error  ||
+        this.v$.an_creation.$error ||
+        this.v$.an_entre_acti.$error ||
+        this.v$.code_st_juriq.$error ||
+        this.v$.autr_st_juriq.$error ||
+        this.v$.prin_sect_acti.$error ||
+        this.v$.list_sous_sect_act.$error ||
+        this.v$.an_prod_1.$error ||
+        this.v$.pers_per_femm.$error ||
+        this.v$.pers_per_homm.$error ||
+        this.v$.pers_temp_femm.$error ||
+        this.v$.pers_temp_homm.$error ||
+        this.v$.ch_aff_1.$error ||
+        this.v$.ch_aff_2.$error ||
+        this.v$.grpe_fililale.$error ||
+        this.v$.nationalite_groupe.$error ||
+        this.v$.capital_social.$error ||
+        this.v$.nbre_rccm.$error ||
+        this.v$.nbre_nif.$error
+      )
+        
+        ) {
           return; // Arrêtez l'avancement si la validation échoue pour l'étape 1
         }
   
@@ -497,7 +554,32 @@
         // Revenez à l'étape initiale
         this.currentStep = 1;
       },
+      async fetchDataCountries(){
+    try {
+      const response = await fetch('https://restcountries.com/v3.1/all');
+      const liste = await response.json();
+      this.countrie = liste
+      console.log('kkkkkk',liste);
+    } catch (error) {
+      console.error('Une erreur est survenue lors de la récupération des données :', error);
+    }
+  
+  },
     },
+    mounted() {
+      // Récupérez l'année en cours
+      const currentYear = new Date().getFullYear();
+      
+      // Générez la liste des années de 1960 à l'année en cours
+      for (let year = 1960; year <= currentYear; year++) {
+        this.years.push(year);
+      }
+      
+      // Définissez l'année actuelle comme valeur par défaut du champ de sélection
+      this.selectedYear = currentYear;
+      this.fetchDataCountries()
+    },
+
   };
   </script>
   

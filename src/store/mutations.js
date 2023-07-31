@@ -8,9 +8,9 @@ export default {
   SET_LAST_PAGE(state, lastPage) {
     state.lastPage = lastPage;
   },
-  // SET_ALLMARCHE(state, data) {
-  //   state.marcheAll = data;
-  // },
+  SET_COUNTRY(state, data) {
+    state.countrieAll = data;
+  },
   // SET_ALLPRIX(state, data) {
   //   state.prixAll = data;
   // },

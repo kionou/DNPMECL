@@ -1,7 +1,7 @@
 export default{
     getmpme:[],
     lastPage: 1,
-    // marcheAll:[],
+    getcountrie:[],
     // prixAll:[],
     // prix_moyAll:[],
     // produitAll:[],
