@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import store from './store'
 
 // import Chartkick from 'vue-chartkick';
 // import Chart from 'chart.js';
@@ -21,6 +22,7 @@ import router from './router'
 
 const app = createApp(App)
 
+app.use(store);
 app.use(VueChartkick)
 app.use(router)
 app.mount('#app')

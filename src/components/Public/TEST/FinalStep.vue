@@ -1,33 +1,113 @@
 <template>
-    <div class="max-w-sm w-full lg:max-w-full lg:flex">
-        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('@/assets/img/10.png')" title="Woman holding a mug">
-        </div>
-        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-          <div class="mb-8">
-            <p class="text-sm text-gray-600 flex items-center">
-              <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-              </svg>
-              Members only
-            </p>
-            <div class="text-gray-900 font-bold text-xl mb-2">Vous êtes inscrit!</div>
-            <p class="text-gray-700 text-base" v-text="props.formValues.description"></p>
-          </div>
-          <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full mr-4" src="@/assets/img/10.png" alt="Avatar of Jonathan Reinink">
-            <div class="text-sm">
-              <p class="text-gray-900 leading-none">
-                <strong v-text="props.formValues.firstname"></strong>
-                <strong v-text="props.formValues.lastname"></strong>
-                </p>
-              <p class="text-gray-600" v-text="props.formValues.age + ' ans'"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    
-    <script setup>
-        const props = defineProps(['formValues']);
-    </script>
-    
+  <div>
+    <!-- Affichage des données ici -->
+    <ul class="data-list">
+      <li v-for="item in items" :key="item.id" class="data-item">{{ item.NomMpme }}</li>
+    </ul>
+
+    <!-- Pagination -->
+    <Pagination :currentPage="currentPage" :totalPages="lastPage" @page-changed="onPageChanged" />
+  </div>
+</template>
+
+<script>
+import Pagination from '../other/pagination.vue';
+
+
+export default {
+  components: {
+    Pagination,
+  },
+  data() {
+    return {
+      items: [],
+      currentPage: 1,
+      lastPage: 1,
+    };
+  },
+  computed: {
+    itemsPerPage() {
+      return 10; // Vous pouvez ajuster le nombre d'éléments affichés par page ici
+    },
+  },
+  methods: {
+    fetchData(page) {
+      const apiUrl = `https://mpme-guinee.com/bd/public/api/mpme?page=${page}`;
+      const proxyUrl = 'https://cors-proxy.fringe.zone/';
+      fetch(proxyUrl + apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          this.lastPage = data.data.last_page;
+          this.items = data.data.data;
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    },
+    onPageChanged(page) {
+      this.currentPage = page;
+      this.fetchData(page);
+    },
+  },
+  mounted() {
+    // Charger les données de la première page lors du chargement initial du composant
+    this.fetchData(this.currentPage);
+  },
+};
+</script>
+
+
+
+
+<style scoped>
+.pagination-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.data-list {
+  list-style: none;
+  padding: 0;
+  max-width: 500px;
+    margin: 0 auto;
+}
+
+.data-item {
+  margin-bottom: 5px;
+  padding: 8px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.prev-button,
+.next-button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.prev-button:disabled,
+.next-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 14px;
+}
+</style>

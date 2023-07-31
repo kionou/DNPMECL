@@ -36,6 +36,7 @@ import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidEmail , ValidNumeri } from '@/functions/rules';
 import Modal from '../../components/Public/other/modal.vue';
+import axios from 'axios'
 
 export default {
     name: 'DNPMECLSignUserMpme',
@@ -48,7 +49,8 @@ export default {
              email:'',
              numero:'',
              v$:useVuelidate(), 
-             revele: false
+             revele: false,
+             users:[]
         };
     },
     validations: {
@@ -67,16 +69,14 @@ export default {
     },
 
    async  mounted() {
-      const response = await fetch("https://mpme-guinee.com/bd/public/api/mpme");
-  const movies = await response.json();
-  console.log(movies);
+    this.fetchUsers();
         
     },
 
     methods: {
         
       async  submit(){
-            // this.v$.$validate()
+            //  this.v$.$validate()
             this.v$.$touch()
             if (this.v$.$errors.length == 0 ) {
                 // this.revele = !this.revele
@@ -94,7 +94,22 @@ export default {
               } else {
                  document.body.classList.remove('no-scroll');
                     }
-    }
+    },
+    async fetchUsers() {
+      try {
+        // Utilisation de l'URL relative avec "/api" qui sera redirigée par le proxy
+        const response = await fetch('http://localhost:5000');
+        console.log('response',response);
+        if (response.ok) {
+          const data = await response.json();
+          this.users = data;
+        } else {
+          console.error('Impossible de récupérer les utilisateurs.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des utilisateurs :', error);
+      }
+    },
     },
 };
 </script>

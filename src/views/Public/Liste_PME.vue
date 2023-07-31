@@ -6,6 +6,7 @@
 
 <script>
 import Accueil from '../../components/Public/LISTE_PME/accueil.vue';
+
 export default {
     name: 'DNPMECLListePME',
     components:{
@@ -20,11 +21,11 @@ export default {
     },
 
     mounted() {
-        
+  
     },
 
     methods: {
-        
+ 
     },
 };
 </script>

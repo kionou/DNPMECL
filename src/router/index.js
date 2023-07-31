@@ -10,10 +10,12 @@ import Connexion from '../views/Public/Connexion.vue'
 import Detail from '../views/Public/Detail.vue'
 import Formulaire from '../views/Public/formulaire.vue'
 import Singmpme from '../views/Public/SignUserMpme.vue'
+import Test from '../views/Public/test2.vue'
 
 
 
-import Test from '../views/test.vue'
+
+// import Test from '../views/test.vue'
 
 
 
@@ -40,6 +42,7 @@ const router = createRouter({
 
          { path: '/detail', name: 'detail_pme', component: Detail, },
          { path: '/test', name: 'Test', component: Test, }
+         
 
 
 

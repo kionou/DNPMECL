@@ -1,88 +1,86 @@
-
 <template>
-  <div class="container_content" data-aos="fade-up">
-    <div class="section-header">
-      <h2>LISTE DES PME</h2>
-    </div>
-    <div class="bar_search">
-      <div class="liste-searcher">
-        <div class="nsl">
-          <i class="bi bi-search"></i>
-          <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name" @input="filterByName" />
-        </div>
-        <div class="nsl">
-          <i class="bi bi-funnel-fill"></i>
-          <select name="speciality" v-model="control.spec" @change="filterData">
-            <option value="" selected="true">Filtre</option>
-            <option value="region">Régions</option>
-            <option value="prefecture">Préfectures</option>
-          </select>
-        </div>
-        <div class="nsl" style="border-right: none" v-if="control.spec === 'region' || control.spec === 'prefecture'">
-          <i class="bi bi-filter"></i>
-          <select name="speciality" v-if="control.spec === 'region'" v-model="control.speciality" @change="filterData">
-            <option value="" selected="true">Choisir une région</option>
-            <option v-for="region in regions" :value="region.id" :key="region.id">{{ region.nom }}</option>
-          </select>
-          <select name="speciality" v-else-if="control.spec === 'prefecture'" v-model="control.speciality" @change="filterData">
-            <option value="" selected="true">Choisir une préfecture</option>
-            <option v-for="prefecture in prefectures" :value="prefecture.id" :key="prefecture.id">{{ prefecture.nom }}</option>
-          </select>
-        </div>
-        <div class="nsl" style="border-right: none" v-else>
-          <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
-          <input type="text" placeholder="Aucun filtre sélectionné" disabled />
+    <div class="container_content" data-aos="fade-up">
+      <div class="section-header">
+        <h2>LISTE DES PME</h2>
+      </div>
+      <div class="bar_search">
+        <div class="liste-searcher">
+          <div class="nsl">
+            <i class="bi bi-search"></i>
+            <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name" @input="filterByName" />
+          </div>
+          <div class="nsl">
+            <i class="bi bi-funnel-fill"></i>
+            <select name="speciality" v-model="control.spec" @change="filterData">
+              <option value="" selected="true">Filtre</option>
+              <option value="region">Régions</option>
+              <option value="prefecture">Préfectures</option>
+            </select>
+          </div>
+          <div class="nsl" style="border-right: none" v-if="control.spec === 'region' || control.spec === 'prefecture'">
+            <i class="bi bi-filter"></i>
+            <select name="speciality" v-if="control.spec === 'region'" v-model="control.speciality" @change="filterData">
+              <option value="" selected="true">Choisir une région</option>
+              <option v-for="region in regions" :value="region.id" :key="region.id">{{ region.nom }}</option>
+            </select>
+            <select name="speciality" v-else-if="control.spec === 'prefecture'" v-model="control.speciality" @change="filterData">
+              <option value="" selected="true">Choisir une préfecture</option>
+              <option v-for="prefecture in prefectures" :value="prefecture.id" :key="prefecture.id">{{ prefecture.nom }}</option>
+            </select>
+          </div>
+          <div class="nsl" style="border-right: none" v-else>
+            <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
+            <input type="text" placeholder="Aucun filtre sélectionné" disabled />
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="100">
-      <div class="task" v-for="pme in items" :key="pme.id">
   
-        <div class="tag">
-          <div class="image">
-            <img src="@/assets/img/1.png" alt="">
+      <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="100">
+        <div class="task" v-for="pme in paginatedData" :key="pme.id">
+          <div class="tag">
+            <div class="image">
+              <img src="@/assets/img/1.png" alt="">
+            </div>
+            <div class="texte">
+              <p class="para">{{ pme.NomMpme }}</p>
+              <p class="texte-content">Creation: <span>{{ pme.AnneeCreation }}</span></p>
+              <p class="texte-content">Dirigeant: <span>{{ pme.PrenomDirigeant }} {{ pme.NomDirigeant }}</span></p>
+            </div>
           </div>
           <div class="texte">
-            <p class="para">{{ pme.NomMpme }}</p>
-            <p class="texte-content">Creation: <span>{{ pme.AnneeCreation }}</span></p>
-            <p class="texte-content">Dirigeant: <span>{{ pme.PrenomDirigeant }} {{ pme.NomDirigeant }}</span></p>
+            <p class="texte-content">Code APE: <span>{{ pme.code_pme }}</span></p>
+            <p class="texte-content">Ville: <span>{{ pme.Ville }}</span></p>
+            <p class="texte-content">Email: <span>{{ pme.AdresseEmail }}</span></p>
+            <p class="texte-content">Contact: <span> (+224) {{ pme.NumeroWhatsApp }}</span></p>
+          </div>
+          <div class="boutton">
+            <a href="/detail" class="btn">Detail<span></span></a>
           </div>
         </div>
-        <div class="texte">
-          <p class="texte-content">Code APE: <span>{{ pme.code_pme }}</span></p>
-          <p class="texte-content">Ville: <span>{{ pme.Ville }}</span></p>
-          <p class="texte-content">Email: <span>{{ pme.AdresseEmail }}</span></p>
-          <p class="texte-content">Contact: <span> (+224) {{ pme.NumeroWhatsApp }}</span></p>
-        </div>
-        <div class="boutton">
-          <a href="/detail" class="btn">Detail<span></span></a>
-        </div>
+      </div>
+  
+      <div class="container_pagination">
+        <pagination :current-page="currentPage" :total-pages="totalPages" @update-page="onUpdatePage"></pagination>
+        
       </div>
     </div>
-
-    <div class="container_pagination">
-      <Pagination :currentPage="currentPage" :totalPages="lastPage" @page-changed="onPageChanged" />
-      
-    </div>
-  </div>
-</template>
-
-<script>
-import Pagination from '../other/pagination.vue';
-import { getImage } from '@/lib/getImage';
+  </template>
+  
+  <script>
+  import Pagination from '../other/pagination.vue';
+  import { getImage } from '@/lib/getImage';
   import regionsData from '@/lib/region.json';
   import prefecturesData from '@/lib/prefecture.json';
   import axios from '@/lib/axiosConfig.js'
-
-
-export default {
-  components: {
-    Pagination,
-  },
-  data() {
-    return {
-      control: {
+  
+  export default {
+    name: 'MpmeListe',
+    components: {
+      Pagination
+    },
+    data() {
+      return {
+        control: {
           name: '',
           spec: '',
           speciality: '',
@@ -92,30 +90,36 @@ export default {
         prefectures: prefecturesData,
         pmes: [],
         filteredPmes: [],
-      items: [],
-      currentPage: 1,
-      lastPage: 1,
-    };
-  },
-  computed: {
-    itemsPerPage() {
-      return 10; // Vous pouvez ajuster le nombre d'éléments affichés par page ici
+        currentPage: 1,
+        pageSize: 15,
+      };
     },
+    methods: {
+      async getMpmeData() {
+    try {
+      const response = await axios.get('/mpme', {
+        params: {
+          page: this.currentPage,
+          pageSize: this.pageSize
+        }
+      });
+      const mpmeData = response.data;
+      this.totalPages = Math.ceil(response.data.total / this.pageSize);
+      console.log(mpmeData.data.data);
+      return mpmeData.data.data;
+    } catch (error) {
+      console.error('Une erreur est survenue lors de la récupération des données MPME :', error);
+      return [];
+    }
   },
-  methods: {
-  async   fetchData(page) {
-      const response =  await   axios.get(`/mpme?page=${page}`)
-      const data = response.data
-      console.log('eeee',data);
-          this.lastPage = data.data.last_page;
-          this.items = data.data.data;
+      onUpdatePage(page) {
       
-    },
-    onPageChanged(page) {
-      this.currentPage = page;
-      this.fetchData(page);
-    },
-    filterByName() {
+        this.currentPage = page;
+    this.getMpmeData().then(() => {
+      this.filteredPmes = [...this.pmes];
+    });
+      },
+      filterByName() {
         const searchValue = this.control.name.toLowerCase();
         this.filteredPmes = this.pmes.filter(pme => pme.nom.toLowerCase().includes(searchValue));
       },
@@ -150,72 +154,37 @@ export default {
       getImage(path) {
         return getImage(path);
       }
-  },
-  mounted() {
-    // Charger les données de la première page lors du chargement initial du composant
-    this.fetchData(this.currentPage);
-  },
-};
-</script>
-
-
-
-
-<style scoped>
-.pagination-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-}
-
-.data-list {
-  list-style: none;
-  padding: 0;
-  max-width: 500px;
-    margin: 0 auto;
-}
-
-.data-item {
-  margin-bottom: 5px;
-  padding: 8px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.pagination-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.prev-button,
-.next-button {
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.prev-button:disabled,
-.next-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.page-info {
-  font-size: 14px;
-}
-
-
-
-.container_content {
+    },
+   async mounted() {
+      try {
+      this.pmes = await this.getMpmeData();
+      this.filteredPmes = [...this.pmes];
+    } catch (error) {
+      // Handle error if the promise rejects
+      console.error('Error fetching MPME data:', error);
+    }
+    //  this.pmes = this.getMpmeData()
+    //   // this.pmes = resp;
+    //   this.filteredPmes = [...this.pmes];
+    },
+    computed: {
+      totalItems() {
+        return this.filteredPmes.length;
+      },
+      totalPages() {
+        return Math.ceil(this.totalItems / this.pageSize);
+      },
+      paginatedData() {
+        const startIndex = (this.currentPage - 1) * this.pageSize;
+        const endIndex = startIndex + this.pageSize;
+        return this.filteredPmes.slice(startIndex, endIndex);
+      }
+    }
+  };
+  </script>
+  
+  <style lang="css" scoped>
+  .container_content {
     max-width: 1140px;
     margin: 0 auto;
     /* border: 1px solid red; */
@@ -254,8 +223,8 @@ export default {
     box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
     margin: 0 10px 10px 0;
     border: 3px dashed transparent;
-    width: 330px;
-    height: 280px;
+    width: 300px;
+    height: 259px;
   }
   
   
@@ -486,4 +455,5 @@ export default {
     width: 207.5px;
   }
   }
-</style>
+  </style>
+  

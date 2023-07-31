@@ -1,93 +1,68 @@
 <template>
-    <div class="pagination">
+  <div class="pagination">
     <ul>
-      <li @click="updatePage(1)" :class="{ disabled: currentPage === 1 }">
-        <i class="bi bi-chevron-double-left"></i>
+      <li id="btn" @click="goToPage(currentPage - 1)" :class="{ disabled: currentPage === 1 }">Précédent</li>
+      <li @click="goToPage(1)" :class="{ active: currentPage === 1 }">1</li>
+      <li v-if="currentPage > 4 && totalPages > 6">...</li>
+      <li v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="{ active: currentPage === page }">
+        {{ page }}
       </li>
-      <li @click="updatePage(currentPage - 1)" :class="{ disabled: currentPage === 1 }">
-        <i class="bi bi-chevron-left"></i>
-      </li>
-      <li v-for="page in visiblePages" :key="page" @click="updatePage(page)" :class="{ active: page === currentPage }">
-        {{ page !== '...' ? page : '...' }}
-      </li>
-      <li @click="updatePage(currentPage + 1)" :class="{ disabled: currentPage === totalPages }">
-        <i class="bi bi-chevron-right"></i>
-      </li>
-      <li @click="updatePage(totalPages)" :class="{ disabled: currentPage === totalPages }">
-        <i class="bi bi-chevron-double-right"></i>
-      </li>
+      <li v-if="currentPage < totalPages - 3 && totalPages > 6">...</li>
+      <li @click="goToPage(totalPages)" :class="{ active: currentPage === totalPages }">{{ totalPages }}</li>
+      <li id="btn" @click="goToPage(currentPage + 1)" :class="{ disabled: currentPage === totalPages }">Suivant</li>
     </ul>
   </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'Pagination',
-    props: {
-      currentPage: {
-        type: Number,
-        required: true
-      },
-      totalPages: {
-        type: Number,
-        required: true
-      }
+</template>
+
+<script>
+export default {
+  props: {
+    currentPage: {
+      type: Number,
+      required: true,
     },
-    methods: {
-      updatePage(page) {
-        if (page >= 1 && page <= this.totalPages) {
-          this.$emit('update-page', page);
-        }
-      }
+    totalPages: {
+      type: Number,
+      required: true,
     },
-    computed: {
+  },
+  computed: {
     visiblePages() {
-      const threshold = 5; // Nombre de pages avant d'afficher les points de suspension
-      const maxVisiblePages = threshold * 2 + 1; // Nombre total de pages visibles
-      const totalPages = this.totalPages;
-
-      if (totalPages <= maxVisiblePages) {
-        return Array.from({ length: totalPages }, (_, i) => i + 1);
+      if (this.totalPages <= 6) {
+        return Array.from({ length: this.totalPages - 1 }, (_, i) => i + 2);
       } else {
-        let visibleRangeStart = Math.max(1, this.currentPage - threshold);
-        let visibleRangeEnd = Math.min(totalPages, this.currentPage + threshold);
+        const currentPage = this.currentPage;
+        let startPage = currentPage - 2;
+        let endPage = currentPage + 2;
 
-        // Vérifier si les points de suspension sont nécessaires à gauche
-        const leftEllipsis = visibleRangeStart > 1;
-
-        // Vérifier si les points de suspension sont nécessaires à droite
-        const rightEllipsis = visibleRangeEnd < totalPages;
-
-        // Si les points de suspension sont nécessaires, ajuster la plage visible
-        if (leftEllipsis && !rightEllipsis) {
-          visibleRangeStart = Math.max(1, visibleRangeEnd - maxVisiblePages + 1);
-        } else if (!leftEllipsis && rightEllipsis) {
-          visibleRangeEnd = Math.min(totalPages, visibleRangeStart + maxVisiblePages - 1);
+        if (startPage < 2) {
+          startPage = 2;
+          endPage = startPage + 4;
         }
 
-        // Générer la plage de pages visibles
-        const visiblePages = Array.from(
-          { length: visibleRangeEnd - visibleRangeStart + 1 },
-          (_, i) => i + visibleRangeStart
-        );
-
-        // Ajouter les points de suspension si nécessaire
-        if (leftEllipsis) {
-          visiblePages.unshift('...');
-        }
-        if (rightEllipsis) {
-          visiblePages.push('...');
+        if (endPage > this.totalPages - 1) {
+          endPage = this.totalPages - 1;
+          startPage = endPage - 4;
         }
 
-        return visiblePages;
+        return Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage);
       }
-    }
-  }
-  };
-  </script>
-  
-  <style lang="css" scoped>
-  .pagination {
+    },
+  },
+  methods: {
+    goToPage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.$emit('page-changed', page);
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+
+
+.pagination {
   display: flex;
   justify-content: center;
 }
@@ -122,5 +97,16 @@ li.disabled {
 i {
   vertical-align: middle;
 }
+
+#btn{
+background-color: var(--color-secondary);
+color: #333;
+
+}
+#btn:hover{
+
+  background-color: #fff;
+color: var(--color-secondary);
+border: 1px solid var(--color-secondary);
+}
 </style>
-  
