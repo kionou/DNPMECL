@@ -41,7 +41,7 @@
   
         <div class="tag">
           <div class="image">
-            <img src="@/assets/img/1.png" alt="">
+            <img src="@/assets/img/flags.png" alt="">
           </div>
           <div class="texte">
             <p class="para">{{ pme.NomMpme }}</p>
@@ -56,7 +56,7 @@
           <p class="texte-content">Contact: <span> (+224) {{ pme.NumeroWhatsApp }}</span></p>
         </div>
         <div class="boutton">
-          <a href="/detail" class="btn">Detail<span></span></a>
+          <p  @click="$router.push({ path: `/liste_pme/mpme/${ pme.CodeMpme }`,  })" class="btn">Detail<span></span></p>
         </div>
       </div>
     </div>

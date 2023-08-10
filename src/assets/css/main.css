@@ -35,6 +35,7 @@
 body {
   font-family: var(--font-default);
   color: var(--color-default);
+  /* font-size: 20px !important; */
 }
 
 a {
@@ -337,7 +338,8 @@ section {
 /*--------------------------------------------------------------
 # Desktop Navigation
 --------------------------------------------------------------*/
-@media (min-width: 1280px) {
+
+@media (min-width: 1281px) {
   .navbar {
     padding: 0;
   }

@@ -1,11 +1,11 @@
 <template>
     <div>
-      <div class="container">
+      <div class="container" style="font-size: 16px;">
       <div class="row gy-4">
         <div class="col-lg-6 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center flex-column">
             <img src="@/assets/img/armoirie.png" alt="">
-          <h1 style="color: white; font-size: 27px !important;">DNMPMECL </h1>
+          <h1 class="my-4" style="color: white; font-size: 27px !important; ;">DNMPMECL </h1>
           <p style="color: white;">Direction Nationale Des MPME et du Contenu Local - Guinee.</p>
 
           </a>

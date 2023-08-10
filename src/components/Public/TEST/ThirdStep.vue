@@ -118,138 +118,131 @@
               <!-- debut infos genral -->
               <div class="content">
                   <p class="titre">INFORMATIONS SUR LES PARTENARIATS ET BESIONS</p>
-                  <div class="row mb-3 mt-3 content-group" >
-                      <div class="col">
-                      <div class="input-groupe">
-                          <label for="ExistanceActionnaire">Existance Actionnaire <span class="text-danger">*</span></label>
-                          <input type="text" name="ExistanceActionnaire" id="ExistanceActionnaire" placeholder="">
-                          
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="ExistanceConseilAdministration">Existance Conseil Administration <span class="text-danger">*</span></label>
-                          <input type="text" name="ExistanceConseilAdministration" id="ExistanceConseilAdministration" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="ExistancePartenariat">Existance Partenariat <span class="text-danger">*</span></label>
-                          <input type="text" name="ExistancePartenariat" id="ExistancePartenariat" placeholder="">
-                      </div>
-                  </div>
-                 
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                 
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="PartenariatTechnique">Partenariat Technique<span class="text-danger">*</span></label>
-                          <input type="text" name="PartenariatTechnique" id="PartenariatTechnique" placeholder="">
-                         
-                      </div>
-                  </div>
-                
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="PartenariatFinancier">Partenariat Financier <span class="text-danger">*</span></label>
-                          <input type="text" name="PartenariatFinancier" id="PartenariatFinancier" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="PartenariatCommercial">Partenariat Commercial <span class="text-danger">*</span></label>
-                          <input type="text" name="PartenariatCommercial" id="PartenariatCommercial" placeholder="">
-                      </div>
-                  </div>
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="PartenariatAutre">Partenariat Autre <span class="text-danger">*</span></label>
-                          <input type="text" name="PartenariatAutre" id="PartenariatAutre" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="AutrePartenariat">Autre Partenariat <span class="text-danger">*</span></label>
-                          <input type="text" name="AutrePartenariat" id="AutrePartenariat" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="BesoinPartenaire">Besoin Partenaire <span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                      </div>
-                  </div>
-               
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                   
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="BesoinPartenaireTechnique">Besoin Partenaire Technique<span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                          
-                      </div>
-                  </div>
-                  
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="BesoinPartenaireFinancier">Besoin Partenaire Financier <span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                      </div>
-                  </div>
-                  
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="BesoinPartenaireCommercial">Besoin Partenaire Commercial <span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                      </div>
-                  </div>
-          
-                
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="BesoinPartenaireAutre">Besoin Partenaire Autre <span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="AutreBesoinPartenaire">Autre Besoin Partenaire <span class="text-danger">*</span></label>
-                          <select id="utexi_sexe" name="utexi[sexe]" class="form-select">
-                              <option disabled selected >--- CHOIX ---</option>
-                              <option value="conakry">NON</option>
-                              <option value="mali">OUI</option>
-                          </select>
-                      </div>
-                  </div>
-                 
-               
-              </div>
+                  <div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="ExistanceActionnaire">Existance Actionnaire <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.existanceActionnaire"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="ExistanceConseilAdministration">Existance Conseil Administration <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.existanceConseilAdministration"  color="secondary" :options="choix" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="ExistancePartenariat">Existance Partenariat <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.existancePartenariat"  color="secondary" :options="choix" />
+    </div>
+  </div>
+</div>
+<div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="PartenariatTechnique">Partenariat Technique<span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.partenariatTechnique"  color="secondary" :options="choix" />
+
+
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="PartenariatFinancier">Partenariat Financier <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.partenariatFinancier"  color="secondary" :options="choix" />
+
+    
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="PartenariatCommercial">Partenariat Commercial <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.partenariatCommercial"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+</div>
+<div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="PartenariatAutre">Partenariat Autre <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.partenariatAutre"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="AutrePartenariat">Autre Partenariat <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.autrePartenariat"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="BesoinPartenaire">Besoin Partenaire <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.besoinPartenaire"  color="secondary" :options="choix" />
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="BesoinPartenaireTechnique">Besoin Partenaire Technique<span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.besoinPartenaireTechnique"  color="secondary" :options="choix" />
+     
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="input-groupe">
+      <label for="BesoinPartenaireFinancier">Besoin Partenaire Financier <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.besoinPartenaireFinancier"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="input-groupe">
+      <label for="BesoinPartenaireCommercial">Besoin Partenaire Commercial <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.besoinPartenaireCommercial"  color="secondary" :options="choix" />
+
+     
+    </div>
+  </div>
+</div>
+
+
+    <!-- Groupe 3 -->
+    
+<div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="BesoinPartenaireAutre">Besoin Partenaire Autre <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.besoinPartenaireAutre"  color="secondary" :options="choix" />
+
+    
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-groupe">
+      <label for="AutreBesoinPartenaire">Autre Besoin Partenaire <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.autreBesoinPartenaire"  color="secondary" :options="choix" />
+
+      
+    </div>
+  </div>
+</div>
+
               
              
               </div>
@@ -259,59 +252,71 @@
 
               <div class="content">
                   <p class="titre">INFORMATIONS SUR LE REPONDANT</p>
-                  <div class="row mb-3 mt-3 content-group" >
-                      <div class="col">
-                      <div class="input-groupe">
-                          <label for="TitreRepondant">Titre Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="TitreRepondant" id="TitreRepondant" placeholder="">
-                      </div>
-                  </div>
-                      <div class="col">
-                      <div class="input-groupe">
-                          <label for="NomRepondant">Nom Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="NomRepondant" id="NomRepondant" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="FonctionRepondant">Fonction Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="FonctionRepondant" id="FonctionRepondant" placeholder="">
-                         
-                      </div>
-                  </div>
-                
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="AdresseRepondant">Adresse Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="AdresseRepondant" id="AdresseRepondant" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="VilleRepondant">Ville Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="VilleRepondant" id="VilleRepondant" placeholder="">
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="TelephoneWhatsAppRepondant">Telephone WhatsApp Repondant <span class="text-danger">*</span></label>
-                          <input type="text" name="TelephoneWhatsAppRepondant" id="TelephoneWhatsAppRepondant" placeholder="">
-                      </div>
-                  </div>
-               
-              </div>
-              <div class="row mb-3 mt-3 content-group" >
-                   
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="Contacter">Contacter <span class="text-danger">*</span></label>
-                          <input type="text" name="Contacter" id="Contacter" placeholder="">
-                          
-                      </div>
-                  </div>
-              </div>
+     <div class="row mb-3 mt-3 content-group">
+      <div class="col">
+        <div class="input-groupe">
+          <label for="TitreRepondant">Titre Repondant <span class="text-danger">*</span></label>
+      <MazSelect v-model="props.formValues.titreRepondant"  color="secondary" :options="titre" />
+
+        
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="input-groupe">
+          <label for="NomRepondant">Nom Repondant <span class="text-danger">*</span></label>
+          <input v-model="props.formValues.nomRepondant" type="text" name="NomRepondant" id="NomRepondant" placeholder="">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="input-groupe">
+          <label for="FonctionRepondant">Fonction Repondant <span class="text-danger">*</span></label>
+          <input v-model="props.formValues.fonctionRepondant" type="text" name="FonctionRepondant" id="FonctionRepondant" placeholder="">
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 mt-3 content-group">
+      <div class="col">
+        <div class="input-groupe">
+          <label for="AdresseRepondant">Adresse du Repondant<span class="text-danger">*</span></label>
+          <input v-model="props.formValues.adresseRepondant" type="text" name="AdresseRepondant" id="AdresseRepondant" placeholder="">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="input-groupe">
+          <label for="VilleRepondant">Ville du Repondant <span class="text-danger">*</span></label>
+          <input v-model="props.formValues.villeRepondant" type="text" name="VilleRepondant" id="VilleRepondant" placeholder="">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="input-groupe">
+          <label for="TelephoneWhatsAppRepondant">Téléphone WhatsApp du Repondant <span class="text-danger">*</span></label>
+          <MazPhoneNumberInput v-model="props.formValues.telephoneWhatsAppRepondant" show-code-on-list color="secondary" defaultCountryCode="GN"
+                  :ignored-countries="['AC']"   @update="results = $event" :success="results?.isValid" />
+
+       
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 mt-3 content-group">
+      <div class="col">
+        <div class="input-groupe">
+          <label for="Contacter">Contacter<span class="text-danger">*</span></label>
+          <MazSelect v-model="props.formValues.contacter"  color="secondary" :options="choix" />
+         
+        </div>
+      </div>
+
+    
+    </div>
+
+  
+
+
              
               </div>
               <!-- fin infos entreprise -->
@@ -319,58 +324,52 @@
                 <!-- debut infos activite -->
                 <div class="content">
                   <p class="titre">INFORMATIONS GEOGRAPHIQUES</p>
-                  <div class="row mb-3 mt-3 content-group" >
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="LienGoogleMapMpme">Lien Google Map Mpme <span class="text-danger">*</span></label>
-                          <input type="text" name="LienGoogleMapMpme" id="LienGoogleMapMpme" placeholder="">
+                  <div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LienGoogleMapMpme">Lien Google Map Mpme <span class="text-danger">*</span></label>
+      <input v-model="props.formValues.lienGoogleMapMpme" type="text" name="LienGoogleMapMpme" id="LienGoogleMapMpme" placeholder="">
+    </div>
+  </div>
 
-                      </div>
-                  </div>
-                
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="LatitudeMpme">Latitude Mpme<span class="text-danger">*</span></label>
-                          <input type="text" name="LatitudeMpme" id="LatitudeMpme" placeholder="">
-                         
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="LongitudeMpme">Longitude Mpme<span class="text-danger">*</span></label>
-                          <input type="text" name="LongitudeMpme" id="LongitudeMpme" placeholder="">
-                         
-                      </div>
-                  </div>
-               
-            
-                 </div>
-                 <div class="row mb-3 mt-3 content-group" >
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="AltitudeMpme">Altitude Mpme <span class="text-danger">*</span></label>
-                          <input type="text" name="AltitudeMpme" id="AltitudeMpme" placeholder="">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LatitudeMpme">Latitude Mpme<span class="text-danger">*</span></label>
+      <input v-model="props.formValues.latitudeMpme" type="text" name="LatitudeMpme" id="LatitudeMpme" placeholder="">
+    </div>
+  </div>
+  
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LongitudeMpme">Longitude Mpme<span class="text-danger">*</span></label>
+      <input v-model="props.formValues.longitudeMpme" type="text" name="LongitudeMpme" id="LongitudeMpme" placeholder="">
+    </div>
+  </div>
+</div>
 
-                      </div>
-                  </div>
-                
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="PrecisionGPSMpme">Precision GPS Mpme<span class="text-danger">*</span></label>
-                          <input type="text" name="PrecisionGPSMpme" id="PrecisionGPSMpme" placeholder="">
-                         
-                      </div>
-                  </div>
-                  <div class="col">
-                      <div class="input-groupe">
-                          <label for="OrigineDonnees">Origine Donnees<span class="text-danger">*</span></label>
-                          <input type="text" name="OrigineDonnees" id="OrigineDonnees" placeholder="">
-                         
-                      </div>
-                  </div>
-               
-            
-                 </div>
+<div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="AltitudeMpme">Altitude Mpme <span class="text-danger">*</span></label>
+      <input v-model="props.formValues.altitudeMpme" type="text" name="AltitudeMpme" id="AltitudeMpme" placeholder="">
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="input-groupe">
+      <label for="PrecisionGPSMpme">Precision GPS Mpme<span class="text-danger">*</span></label>
+      <input v-model="props.formValues.precisionGPSMpme" type="text" name="PrecisionGPSMpme" id="PrecisionGPSMpme" placeholder="">
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="input-groupe">
+      <label for="OrigineDonnees">Origine Donnees<span class="text-danger">*</span></label>
+      <input v-model="props.formValues.origineDonnees" type="text" name="OrigineDonnees" id="OrigineDonnees" placeholder="">
+    </div>
+  </div>
+</div>
+
                 
              
               </div>
@@ -384,12 +383,23 @@
 </template>
 
 <script setup >
-import Datepicker from 'vue3-datepicker'
-import { ref } from 'vue'
-const picked = ref(new Date())
+
+import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
+
 
 const props = defineProps(['formValues']);
+const choix = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+   
+  ]
+  const titre = [
+  { label: 'Monsieur', value: 'M' },
+  { label: 'Madame', value: 'Mme' },
+  { label: 'Mademoiselle', value: 'Mlle' },
 
+
+]
 
 </script>
 
@@ -398,7 +408,6 @@ const props = defineProps(['formValues']);
   /* width: 700px; */
   max-width: 1140px;
   margin: 0 auto;
-  margin-top: 60px;
   /* border-radius: 0.75rem; */
   background-color: white;
   padding: 1rem;
@@ -448,8 +457,8 @@ border-radius: 6px;
 
 .input-groupe input , .form-select  , textarea{
   width: 100%;
-  border-radius: 0.375rem !important;
-  border: 1px solid rgba(55, 65, 81, 1);
+  border-radius: 0.5rem !important;
+  border: 2px solid #e5e7eb;
   outline: 0;
   padding: 14px;
   color: rgb(3, 3, 5);

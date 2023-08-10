@@ -17,40 +17,47 @@ async fetchDataFromAPI({ commit }) {
 
      
       commit('SET_ALLMPME', mpmeData)
+
+
     
     } catch (error) {
       console.log(error);
     }
   },
-async fetchDataFromAPI({ commit }, page) {
+
+
+  fetchCountries: async ({ commit }) => {
     try {
-      const response = await axios.get(`/mpme?page=${page}`, { timeout: 10000 })
-      const data = await response.data.data;
-      const respons = await fetch('https://restcountries.com/v3.1/all');
-      const liste = await respons.json();
-      commit('SET_COUNTRY', liste);
-      console.log('kkkkkk',liste);
-      console.log('dataaa',data.data);
-      console.log('dataaa',data.last_page);
-
-
-      // Appeler la mutation pour mettre à jour l'état avec les données récupérées
-      commit('SET_ALLMPME', data.data);
-      commit('SET_LAST_PAGE', data.last_page);
+      const response = await axios.get('https://restcountries.com/v3.1/all');
+      const countries = response.data;
+      console.log('countries',countries);
+      const sortedCountries = countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+      const options = sortedCountries.map((country) => ({
+        label: country.name.common,
+        flag: country.flags.png,
+        value: country.name.common,
+      }));
+      commit('SET_COUNTRY_OPTIONS', options); // Appeler la mutation pour mettre à jour la liste des pays
     } catch (error) {
-      console.error('Erreur lors de la récupération des données :', error);
+      console.error('Erreur lors de la récupération des données des pays:', error);
     }
   },
-async fetchDataCountries({commit}){
+  async fetchRegionOptions({ commit }) {
     try {
-      const response = await fetch('https://restcountries.com/v3.1/all');
-      const liste = await response.json();
-      commit('SET_COUNTRY', liste);
-      console.log('kkkkkk',liste);
+      const response = await axios.get('/regions');
+      console.log('response.data2', response.data.data.data); // Remplacez l'URL par l'URL de votre API
+      const regionsFromAPI = response.data.data.data;
+
+      // Formater les données de l'API en options pour MazSelect
+      const options = regionsFromAPI.map(region => ({
+        label: region.NomRegion        ,
+        value: region.NomRegion
+      }));
+      
+      commit('SET_REGION_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
-      console.error('Une erreur est survenue lors de la récupération des données :', error);
+      console.error('Erreur lors de la récupération des régions:', error);
     }
-  
-  }
+  },
 
  }

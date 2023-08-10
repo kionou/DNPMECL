@@ -1,179 +1,172 @@
 <template>
-    <!-- <div class="container"> -->
-        <div class=" row">
-            <div class="col-xl-4 col-lg-5 col-md-5">
-                <!-- About User -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <!-- <small class="text-muted text-uppercase">About</small> -->
-                        <ul class="list-unstyled mb-4 mt-3">
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-user"></i><span class="fw-semibold mx-2">Dirigeant:</span>
-                                <span>John Doe</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-check"></i><span class="fw-semibold mx-2">réation:</span>
-                                <span>
-                                    01/01/1954</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-star"></i><span class="fw-semibold mx-2"> 01/01/1954:</span>
-                                <span>
-                                    Construction de véhicules automobiles</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-flag"></i><span class="fw-semibold mx-2">Forme
-                                    juridique:</span>
-                                <span>
-                                    Société par actions simplifiée</span>
-                            </li>
+    <div class="row">
+        <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
+            <div class=" bg-white rounded-lg  ">
 
-                        </ul>
-                        <small class="text-muted text-uppercase">Contacts</small>
-                        <ul class="list-unstyled mb-4 mt-3">
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-phone"></i><span class="fw-semibold mx-2">Contact:</span>
-                                <span>(123) 456-7890</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-chat"></i><span class="fw-semibold mx-2">Skype:</span>
-                                <span>john.doe</span>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bx-envelope"></i><span class="fw-semibold mx-2">Email:</span>
-                                <span>john.doe@example.com</span>
-                            </li>
-                        </ul>
-                        <small class="text-muted text-uppercase">Equipe</small>
-                        <ul class="list-unstyled mt-3 mb-0">
-                            <li class="d-flex align-items-center mb-3">
-                                <i class="bx bxl-github text-primary me-2"></i>
-                                <div class="d-flex flex-wrap">
-                                    <span class="fw-semibold me-2">Nombres employés hommes</span><span>126
-                                    </span>
+                <div class="">
+                    <div class="overflow-hidden bg-white   border-b border-gray-200 rounded-lg  ">
+
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Région</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.Region }}</dd>
                                 </div>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <i class="bx bxl-react text-info me-2"></i>
-                                <div class="d-flex flex-wrap">
-                                    <span class="fw-semibold me-2">Nombres employés femmes</span><span>98
-                                    </span>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Préfecture</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.AnneeCreation
+                                    }}</dd>
                                 </div>
-                            </li>
-                        </ul>
+
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Sous-préfecture</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Sousprefecture }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Commune</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{
+                                        data.Commune }}</dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Ville</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Ville }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Quartier</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.Quartier }}</dd>
+                                </div>
+
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Rue</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{
+                                        data.Rue }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6  ">
+                                    <dt class="text-sm font-medium text-gray-500">Localisation</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.Localisation
+                                    }}</dd>
+                                </div>
+
+
+                            </dl>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
 
-            <div class="col-xl-8 col-lg-7 col-md-7">
-                <!-- Activity Timeline -->
-
-
-                <div class="maps_container">
-    <div class="map-wrap">
-                        <a href="https://www.maptiler.com" class="watermark">
-                            <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
-                        </a>
-                        <div class="map" ref="mapContainer"></div>
-
-                    </div>
-
-                   
-                </div>
-
-            </div>
-      
-
-        
+           
         </div>
+        <div class="col-xl-7 col-lg-7 col-md-7">
 
-    <!-- </div> -->
+            <div class="maps_container">
+                <div class="map-wrap">
+                    <a href="https://www.maptiler.com" class="watermark">
+                        <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
+                    </a>
+                    <div class="map" ref="mapContainer"></div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-
 import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl';
-import { shallowRef, onMounted, onUnmounted, markRaw } from 'vue';
+import { shallowRef, onMounted, onUnmounted, markRaw, ref } from 'vue';
+import { inject } from 'vue';
 
 export default {
-    name: 'CPtMagasin',
-    components: {
+  name: 'CPtMagasin',
+  props: ['data'],
+  components: {},
+  data() {
+    return {
+      show: false,
+      magasins: '',
+      marker: '',
+      isFullScreen: false,
+    };
+  },
+  setup(props) {
+    const mapContainer = shallowRef(null);
+    const map = shallowRef(null);
+    const markers = shallowRef([]);
+    const myPropValue = ref(props.data);
+    const data = inject('data');
 
-    },
+    onMounted(async () => {
+      console.log('rrr',data);
+      const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
+      const initialState = { lng: -11.283844999999985, lat: 9.934886500000001, zoom: 5.5 };
 
-    data() {
-        return {
-            show: false,
-            magasins: '',
-            marker: '',
-            isFullScreen: false,
-        };
-    },
+      map.value = markRaw(
+        new Map({
+          container: mapContainer.value,
+          style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
+          center: [initialState.lng, initialState.lat],
+          zoom: initialState.zoom,
+        })
+      );
+      map.value.addControl(new NavigationControl(), 'top-right');
+      console.log('rrrss', myPropValue.value.LatitudeMpme);
 
-    setup() {
-        const mapContainer = shallowRef(null);
-        const map = shallowRef(null);
-        const markers = shallowRef([]);
-        onMounted(async () => {
-            const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
-            const initialState = { lng: 11.52, lat: 3.91, zoom: 9 };
+      const newMarker = new Marker({ color: '#FF0000' })
+        .setLngLat([myPropValue.value.LongitudeMpme, myPropValue.value.LatitudeMpme])
+        .addTo(map.value);
 
-            map.value = markRaw(new Map({
-                container: mapContainer.value,
-                style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
-                center: [initialState.lng, initialState.lat],
-                zoom: initialState.zoom
-            }));
-            map.value.addControl(new NavigationControl(), 'top-right');
+      const popupContent = `
+                <div>
+                    <h3> Nom:  ${myPropValue.value.NomMpme}</h3>
+                    <p> <h4>Description:</h4> ${myPropValue.value.LongitudeMpme.description}</p>
+                </div>
+                `;
+      newMarker.setPopup(new Popup().setHTML(popupContent));
 
-            // const response = await axiosClient.get('/magasin');
-            // markers.value = response.data;
+      // Gestionnaire d'événement pour le clic sur le marqueur
+      newMarker.getElement().addEventListener('click', () => {
+        map.value.flyTo({
+          center: [myPropValue.value.LongitudeMpme, myPropValue.value.LatitudeMpme],
+          zoom: 10, // Niveau de zoom souhaité
+        });
+      });
+    }),
 
-            // markers.value.forEach(marker => {
-            //     marker.show = false;
-            //     const newMarker = new Marker({ color: "#FF0000" })
-            //         .setLngLat([marker.longitude, marker.latitude])
-            //         .addTo(map.value);
+    onUnmounted(() => {
+      map.value?.remove();
+    });
 
-            //     const popupContent =
-            //      `
-            //     <div>
-
-            //         <h3> ${('magasin.sous_titre')}  ${marker.nom}</h3>
-            //         <p> <h4>Description:</h4> ${marker.description}</p>
-
-            //     </div>
-            //     `;
-            //     newMarker.setPopup(new Popup().setHTML(popupContent));
-            // });
-        }),
-
-            onUnmounted(() => {
-                map.value?.remove();
-            })
-
-
-
-        return {
-            map, mapContainer, markers
-        };
-    },
-    methods: {
-
-
-
-    }
-}
+    return {
+      map,
+      mapContainer,
+      markers,
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style lang="css"  scoped >
-
 .maps_container {
     width: 100%;
     height: 450px;
     padding: 10px;
 }
+
 .map-wrap {
     position: relative;
     width: 100%;
@@ -205,9 +198,5 @@ export default {
     border: none !important;
     right: 4px !important;
 }
-
-
-
-
 
 </style>

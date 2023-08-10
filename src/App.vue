@@ -54,7 +54,10 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('fetchDataFromAPI')
+    // this.$store.dispatch('fetchDataFromAPI')
+    // this.$store.dispatch('fetchCountries')
+
+   
   },
 }
 

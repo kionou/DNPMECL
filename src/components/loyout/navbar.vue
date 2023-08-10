@@ -28,6 +28,8 @@
               <ul  class="dropdown-menu">
                 <li><router-link to="/opportunites/appel_offre">Appel Offre</router-link></li>
                 <li><router-link to="/opportunites/appel_emploi">Appel Emploi</router-link></li>
+                <li><router-link to="/formulaire">Formulaire</router-link></li>
+
               </ul>
             </li>
 

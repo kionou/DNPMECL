@@ -5,16 +5,22 @@
     <div v-on:click="toggleModale" class="btn-modale btn btn-danger">X</div>
     <div class="form-container">
 	<p class="title">
-    <img src="@/assets/img/success.png" alt="">
   </p>
     <p class="text-center"> 
-      Félicitations ! Votre compte a été créé avec succès. Veuillez vous connecter pour commencer
-       à utiliser notre plateforme. Bienvenue parmi nous !
+        Veuillez sélectionner un canal pour recevoir votre code d'authentification.
       
     </p>
+    <div class="btn_sign">
+		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification', })">SMS</button>
+
+
+		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification', })">E-MAIL</button>
+
+
+
+    </div>
 	
         
-		<button class="sign" @click="$router.push({ path: '/login_user_mpme', })">Se connecter</button>
 	
     </div> 
   </div>
@@ -88,12 +94,15 @@
 }
 
 .form-container {
-  width: 510px;
+  width: 360px;
+  height: 250px;
   border-radius: 0.75rem;
   background-color: white;
-  padding: 2rem;
+  padding: 1rem;
   color: black;
-  /* max-height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
   z-index: 100;
 
@@ -146,15 +155,22 @@
 
 .sign {
   display: block;
-  width: 100%;
+  width: 100px;
   background-color: var(--color-secondary);
   padding: 0.75rem;
   text-align: center;
   color: black;
   border: none;
-  border-radius: 0.375rem;
+  border-radius: 0.2rem;
   font-weight: 600;
-  margin-top: 50px;
+  margin-top: 0px !important;
+}
+.sign:hover{
+
+border: 1px solid var(--color-secondary);
+color: var(--color-secondary);
+background-color: white;
+
 }
 
 .btn-modale {
@@ -162,12 +178,13 @@
   top: 10px;
   right: 10px;
 }
+.btn_sign{
+/* border: 1px solid red; */
+margin-top: 43px;
+width: 100%;
+display: flex;
+justify-content: space-around;
 
-.sign:hover{
-
-border: 1px solid var(--color-secondary);
-color: var(--color-secondary);
-background-color: white;
 
 }
  

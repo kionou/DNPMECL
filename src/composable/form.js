@@ -1,14 +1,108 @@
 import { reactive } from "vue";
 
 export default function useForm() {
-  const values = reactive({
-     'Region': '',
-     'Commune': '',
-     'age': '',
-     'description': '',
-  });
+    const values = reactive({
+      region: "",
+      commune: "",
+      ville: "",
+      sous_prefecture: "",
+      localisation: "",
+      sigle_mpme: "",
+      nom: "",
+      quartier: "",
+      rue: "",
 
-  return {
-      values,
-  }
+      boite_postale: "",
+      tel_what: "",
+      tel_second: "",
+      email: "",
+      url: "",
+      an_creation: "",
+      an_entre_acti: "",
+      code_st_juriq: "",
+      autr_st_juriq: "",
+      prin_sect_acti: "",
+      list_sous_sect_act: "",
+
+      an_prod_1: "",
+      pers_per_femm: "",
+      pers_per_homm: "",
+      pers_temp_femm: "",
+      pers_temp_homm: "",
+      ch_aff_1: "",
+      ch_aff_2: "",
+      part_chiffre_affaire_exprtation:"",
+      grpe_fililale: "",
+      nationalite_groupe: "",
+      capital_social: "",
+      nbre_rccm: "",
+      nbre_nif: "",
+
+      // etapes 2
+
+   
+      mpmeBourse: '',
+      nomBourse: '',
+      receptionPrix: '',
+      principalPrix: '',
+      anneePrixPrincipal: '',
+      titreDirigeant: '',
+      nomDirigeant: '',
+      prenomDirigeant: '',
+      sexeDirigeant: '',
+      paysDirigeant: '',
+      anneeNaissanceDirigeant: '',
+      dirigeantProprietaire: '',
+
+      titreProprietaire: '',
+      nomProprietaire: '',
+      prenomProprietaire: '',
+      sexeProprietaire: '',
+      paysProprietaire: '',
+      anneeNaissanceProprietaire: '',
+      appartenanceReseauProfessionnel: '',
+      nomReseauProfessionnel: '',
+      financementFondPropre: '',
+      financementCreditBancaire: '',
+      financementPartenaireExterieurs: '',
+      financementAutre: '',
+
+      autreFinancement: '',
+      descriptionReseau: '',
+      difficultesRencontrees: '',
+      suggestionsProposees: '',
+
+      // etapes 3
+      existanceActionnaire: '',
+      existanceConseilAdministration: '',
+      existancePartenariat: '',
+      partenariatTechnique: '',
+      partenariatFinancier: '',
+      partenariatCommercial: '',
+      partenariatAutre: '',
+      autrePartenariat: '',
+      besoinPartenaire: '',
+      besoinPartenaireTechnique: '',
+      besoinPartenaireFinancier: '',
+      besoinPartenaireCommercial: '',
+      besoinPartenaireAutre: '',
+      autreBesoinPartenaire: '',
+      titreRepondant: '', 
+      nomRepondant: '', 
+      fonctionRepondant: '',
+      adresseRepondant:'',
+      villeRepondant:'',
+      telephoneWhatsAppRepondant:'',
+      contacter:'',
+      lienGoogleMapMpme: '',
+      latitudeMpme: '', 
+      longitudeMpme: '',
+      altitudeMpme: '',
+      precisionGPSMpme: '',
+      origineDonnees: '',
+    });
+
+    return {
+        values,
+    }
 }

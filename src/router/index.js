@@ -10,6 +10,8 @@ import Connexion from '../views/Public/Connexion.vue'
 import Detail from '../views/Public/Detail.vue'
 import Formulaire from '../views/Public/formulaire.vue'
 import Singmpme from '../views/Public/SignUserMpme.vue'
+import Loginmpme from '../views/Public/login_user_mpme.vue'
+import Verification from '../views/Public/Verification_code.vue'
 import Test from '../views/Public/test2.vue'
 
 
@@ -39,8 +41,10 @@ const router = createRouter({
          { path: '/connexion', name: 'connexion', component: Connexion },
          { path: '/formulaire', name: 'Formulaire', component: Formulaire },
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme },
+         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme },
 
-         { path: '/detail', name: 'detail_pme', component: Detail, },
+         { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
+         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification},
          { path: '/test', name: 'Test', component: Test, }
          
 
