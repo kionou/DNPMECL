@@ -41,10 +41,10 @@ const router = createRouter({
          { path: '/connexion', name: 'connexion', component: Connexion },
          { path: '/formulaire', name: 'Formulaire', component: Formulaire },
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme },
-         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme },
+         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , props:true },
 
          { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
-         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification},
+         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification , props:true },
          { path: '/test', name: 'Test', component: Test, }
          
 

@@ -2,13 +2,16 @@
 <template>
 
   <div>
- <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
+ <Modal :revele="revele" :data="data" :toggleModale="toggleModale" @redirectWithProps="redirectWithProps"></Modal>
 
   <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
 <div class="form-container1">
 <p class="title">Connexion</p>
-  <p class="text-center">Accédez à votre espace utilisateur</p>
+  <p class="text-center mb-0">Accédez à votre espace utilisateur</p>
+  <small class="text-center">{{error}}</small>
+
 <form class="form">
+    
   <div class="input-group">
     <label for="username">Email <span class="text-danger">*</span></label>
     <input type="text" name="email" id="username" placeholder="" v-model="email">
@@ -16,9 +19,9 @@
       <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
   <div class="input-group">
     <label for="tel">Mot de passe  <span class="text-danger">*</span></label>
-    <input type="password" name="password" id="password" placeholder="" v-model="numero">
+    <input type="password" name="password" id="password" placeholder="" v-model="password">
   </div>
-       <small v-if="v$.numero.$error">{{v$.numero.$errors[0].$message}}</small>
+       <small v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</small>
 
   <button class="sign" @click.prevent="submit">Se connecter</button>
  <p class="signin">Vous n'avez pas de compte ? <span @click="$router.push({ path: '/sign_user_mpme',  })" >Créer un compte</span> </p>
@@ -37,7 +40,8 @@ import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidEmail , ValidNumeri } from '@/functions/rules';
 import Modal from '../../components/Public/other/modal_demande.vue';
-import axios from 'axios'
+import axios from '@/lib/axiosConfig.js'
+import { provide } from 'vue';
 
 export default {
   name: 'DNPMECLSignUserMpme',
@@ -48,7 +52,9 @@ export default {
   data() {
       return {
            email:'',
-           numero:'',
+           password:'',
+           error:'',
+           data:'',
            v$:useVuelidate(), 
            revele: false,
            users:[]
@@ -59,10 +65,9 @@ export default {
              require,
               ValidEmail
           },
-          numero:{
+          password:{
             require,
-            ValidNumeri,
-            lgmin:lgmin(9),
+            lgmin:lgmin(2),
             lgmax:lgmax(9),
        
               
@@ -70,19 +75,45 @@ export default {
   },
 
  async  mounted() {
+  document.body.classList.add('scroll');
+
 
       
   },
 
   methods: {
+   
       
     async  submit(){
-      this.revele = !this.revele;
+
+      let DataUser = {
+        email:this.email,
+        password:this.password
+      }
+      console.log("eeeee",DataUser);
+
+      try {
+      const response = await axios.post('/login' , DataUser);
+      console.log('response.login', response.data); 
+      if (response.data.statut === "error") {
+            console.log("error");
+          } else {
+            console.log('ok', response.data.data);
+            provide('DataUser', response.data.data);
+            this.data = response.data.data
+            this.revele = !this.revele;
            if (this.revele) {
              document.body.classList.add('no-scroll');
             } else {
-               document.body.classList.remove('no-scroll');
+               document.body.classList.add('scroll');
              }
+          }
+      
+    } catch (error) {
+       return this.error = "L'authentification a échoué"
+      console.error('Erreur postlogin:', error);
+    }
+     
           //  this.v$.$validate()
           // this.v$.$touch()
           // if (this.v$.$errors.length == 0 ) {
@@ -197,6 +228,10 @@ cursor: pointer;
 
 .no-scroll {
   overflow: hidden;
+}
+
+.scroll {
+  overflow: auto;
 }
 
 .sign:hover{

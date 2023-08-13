@@ -8,9 +8,10 @@
 	<form class="form">
 		<div class="input-group">
 			<label for="username">Email <span class="text-danger">*</span></label>
-      <MazInput type="tel" v-model="verification"  color="secondary" placeholder="XXXXXX"   />
+      <MazInput type="tel" v-model="code"  color="secondary" placeholder="XXXX"   />
 		</div>
-    <small v-if="v$.verification.$error">{{v$.verification.$errors[0].$message}}</small>
+    <small v-if="v$.code.$error">{{v$.code.$errors[0].$message}}</small>
+   
 		
 		<button class="sign" @click.prevent="submit">Se connecter</button>
 	</form>
@@ -24,49 +25,69 @@
 <script>
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
+import axios from '@/lib/axiosConfig.js'
 import useVuelidate from '@vuelidate/core';
+import { mapGetters } from 'vuex';
 import { require, lgmin, lgmax,ValidNumeri } from '@/functions/rules';
 export default {
     name: 'DNPMECLConnexion',
     components:{
-        Navbar , Footer
-    },
+        Navbar , Footer },
+        computed: {
+    ...mapGetters(['getUser']),
+    datauser() {
+      return this.getUser;
+    }
+  },
+       
 
     data() {
         return {
-          email:'',
+          code:'',
           verification:'',
-             v$:useVuelidate(), 
+          v$:useVuelidate(), 
         };
     },
     validations: {
             
-            verification:{
+            code:{
               require,
               ValidNumeri,
-                lgmin:lgmin(6),
-                lgmax:lgmax(6),
-                
-         
-                
+                lgmin:lgmin(4),
+                lgmax:lgmax(4),
+                   
             },
     },
 
     mounted() {
+      console.log("data",this.datauser);
+      // console.log(this.datauser);
         
     },
 
     methods: {
       async  submit(){
-            // this.v$.$validate()
+        
             this.v$.$touch()
             if (this.v$.$errors.length == 0 ) {
-                // this.revele = !this.revele
-             let   DataUser={
-                    email:this.verification,
+
+               let   DataUser={
+                    email:0,
+                    value:this.datauser.user.Whatsapp,
+                    code:this.code
                   
                 }
                 console.log('data user :',DataUser);
+                try {
+      const response = await axios.post('/mpme/verification-otp', DataUser);
+      console.log('response.Code', response); 
+      // this.$router.push('/login_user_mpme/verification' , );
+      
+      
+    } catch (error) {
+      
+      console.error('Erreur postlogin:', error);
+    }
               }
             }
     },

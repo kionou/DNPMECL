@@ -11,12 +11,10 @@
       
     </p>
     <div class="btn_sign">
-		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification', })">SMS</button>
+		<button class="sign" @click="hamdleSubmitsms">SMS</button>
 
 
-		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification', })">E-MAIL</button>
-
-
+		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification',})">E-MAIL</button>
 
     </div>
 	
@@ -27,39 +25,53 @@
   </template>
   
   <script>
-  import useVuelidate from '@vuelidate/core';
-  import { require, lgmin, lgmax } from '@/functions/rules';
+import axios from '@/lib/axiosConfig.js'
+import { mapActions } from 'vuex';
+
+ 
   export default {
       name:'ComponentModal',
-      props: ["revele", "toggleModale"],
+      props: ["revele", "toggleModale" , "data"],
+    
+
       data() {
         return {
-             numero:'',
-             v$:useVuelidate(),
+
         }
       },
-      validations: {
-        numero:{
-               require,
-               lgmin:lgmin(12),
-              lgmax:lgmax(15),
-
-            },
-      },
+     
            
       methods: {
-        async  submit(){
-          // this.$router.push('/formulaire');
-            // this.v$.$touch()
-            // if (this.v$.$errors.length == 0 ) { 
-            //  let   DataUser={
-            //         numero:this.numero
-            //     }
-            //     console.log('data user :',DataUser);
-            //   }
+        async  hamdleSubmitsms(){
+          const datauser = this.data
+      
+          let CodeUser ={
+          email:0,
+          value:this.data.user.Whatsapp
+          
+          }
+          console.log("eee",CodeUser);
+          try {
+      const response = await axios.post('/mpme/send-otp', CodeUser);
+      console.log('response.Code', response); 
+      console.log("try",datauser);
+      this.$store.dispatch('setUser', this.data)
+
+      this.$router.push({ name: 'Verification' });
+      
+      
+    } catch (error) {
+       return this.error = "L'authentification a échoué"
+      console.error('Erreur postlogin:', error);
+    }
+         
             },
        
         
+      },
+
+      mounted() {
+      
       },
   
   }

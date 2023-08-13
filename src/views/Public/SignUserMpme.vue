@@ -1,5 +1,5 @@
 <template>
-    <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
+  <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
 
   <div>
     <div class="container-fluid  d-flex justify-content-center align-items-center general" data-aos="zoom-out"
@@ -7,21 +7,26 @@
       <div class="form-container">
         <p class="title">Inscription</p>
         <p class="text-center">Créez votre compte et enregistrez votre entreprise en quelques étapes seulement </p>
+        <small class="text-center">{{error}}</small>
         <form class="form">
           <div class="row mb-3 mt-3 content-group">
             <div class="col">
               <div class="input-groupe">
                 <label for="email">Adresse Email<span class="text-danger">*</span></label>
-                <input type="email" name="email" id="email" placeholder="">
+                <input type="email" name="email" id="email" placeholder="" v-model="email">
               </div>
+              <small v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</small>
+
             </div>
             <div class="col">
               <div class="input-groupe">
-                <label for="number">Numéro Téléphonique <span class="text-danger">*</span></label>
+                <label for="tel">Numéro Téléphonique <span class="text-danger">*</span></label>
                 <MazPhoneNumberInput v-model="phoneNumber" show-code-on-list color="secondary" defaultCountryCode="GN"
                   :ignored-countries="['AC']" @update="results = $event" :success="results?.isValid" />
 
               </div>
+              <small v-if="v$.phoneNumber.$error">{{ v$.phoneNumber.$errors[0].$message }}</small>
+
             </div>
           </div>
           <div class="row mb-3 mt-3 content-group">
@@ -30,20 +35,41 @@
                 <label for="password">Mot de passe <span class="text-danger">*</span></label>
                 <MazInput v-model="password" type="password" color="secondary" />
               </div>
+              <small v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</small>
+
             </div>
             <div class="col">
               <div class="input-groupe">
                 <label for="password">Confirmé le Mot de passe <span class="text-danger">*</span></label>
                 <MazInput v-model="confirmer_password" type="password" color="secondary" />
               </div>
+              <small v-if="v$.confirmer_password.$error">{{ v$.confirmer_password.$errors[0].$message }}</small>
+              <small v-if="!validatePasswordsMatch()" class="text-danger">Les mots de passe ne correspondent pas.</small>
+
+            </div>
+          </div>
+          <div class="row mb-3 mt-3 content-group">
+            <div class="col">
+              <div class="input-groupe">
+                <label for="nom">Nom <span class="text-danger">*</span></label>
+                <input type="text" name="nom" id="nom" placeholder="" v-model="nom">
+              </div>
+              <small v-if="v$.nom.$error">{{ v$.nom.$errors[0].$message }}</small>
+
+            </div>
+            <div class="col">
+              <div class="input-groupe">
+                <label for="prenom">Prenom <span class="text-danger">*</span></label>
+                <input type="text" name="prenom" id="prenom" placeholder="" v-model="prenom">
+              </div>
+              <small v-if="v$.prenom.$error">{{ v$.prenom.$errors[0].$message }}</small>
             </div>
           </div>
           <div class="row mb-3 mt-3 content-group">
             <div class="col">
               <div class="input-groupe">
                 <label for="nationnalite">Pays Dirigeant<span class="text-danger">*</span></label>
-                <MazSelect  v-model="selectedCountry" :options="sortedCountryOptions"
-                  v-slot="{ option }" search color="secondary">
+                <MazSelect v-model="pays" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary">
                   <div class="flex items-center"
                     style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
                     <MazAvatar size="0.8rem" :src="option.flag" />
@@ -53,42 +79,34 @@
                   </div>
                 </MazSelect>
               </div>
+              <small v-if="v$.pays.$error">{{ v$.pays.$errors[0].$message }}</small>
             </div>
             <div class="col">
               <div class="input-groupe">
                 <label for="region">Région <span class="text-danger">*</span></label>
                 <MazSelect v-model="region" color="secondary" :options="regionOptions" />
               </div>
+              <small v-if="v$.region.$error">{{ v$.region.$errors[0].$message }}</small>
+
             </div>
           </div>
           <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="prefecture">Préfecture <span class="text-danger">*</span></label>
-                <input type="text" name="prefecture" id="prefecture" placeholder="">
-              </div>
-            </div>
             <div class="col">
               <div class="input-groupe">
                 <label for="sous_prefecture">Sous-préfecture <span class="text-danger">*</span></label>
-                <input type="text" name="sous_prefecture" id="sous_prefecture" placeholder="">
+                <MazSelect v-model="sous_prefecture" color="secondary" :options="sous_prefectureOptions" />
               </div>
-            </div>
-          </div>
-          <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="secteur_activite">Secteur d'activité <span class="text-danger">*</span></label>
-                <input type="text" name="secteur_activite" id="secteur_activite" placeholder="">
-              </div>
+              <small v-if="v$.sous_prefecture.$error">{{ v$.sous_prefecture.$errors[0].$message }}</small>
             </div>
             <div class="col">
               <div class="input-groupe">
-                <label for="sous_secteur_activite">Liste Sous Secteur d'activite <span class="text-danger">*</span></label>
-                <input type="text" name="sous_secteur_activite" id="sous_secteur_activite" placeholder="">
+                <label for="prenom">Liste des Sous Secteur Activités <span class="text-danger">*</span></label>
+                <input type="text" name="sous_secteur" id="sous_secteur" placeholder="" v-model="preferencesInput">
               </div>
+              <small v-if="v$.preferencesInput.$error">{{ v$.preferencesInput.$errors[0].$message }}</small>
             </div>
           </div>
+
           <div class="btn">
             <button class="sign" @click.prevent="submit">S'enregistrer</button>
             <p class="signin">Vous avez déjà un compte ? <span @click="$router.push({ path: '/login_user_mpme', })">Se
@@ -104,102 +122,161 @@
 </template>
 
 <script>
-import Navbar from '../../components/loyout/navbar.vue';
-import Footer from '../../components/loyout/footer.vue';
-import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail, ValidNumeri } from '@/functions/rules';
+;
+
 import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
 import Modal from '../../components/Public/other/modal.vue'
-import { mapGetters, mapActions } from 'vuex';
+import useVuelidate from '@vuelidate/core';
+      
+import { require, lgmin, lgmax   } from '@/functions/rules';
 
 import axios from '@/lib/axiosConfig.js'
 
 export default {
   name: 'DNPMECLSignUserMpme',
   components: {
-    Navbar, Footer, MazPhoneNumberInput,Modal
-  }, computed: {
-  
-  },
-
+     MazPhoneNumberInput, Modal
+  }, 
 
   data() {
     return {
       email: '',
-      numero: '',
       phoneNumber: '',
       password: '',
       confirmer_password: '',
+      nom: '',
+      prenom: '',
+      pays: '',
       region: '',
+      sous_secteur: '',
+      sous_prefecture: '',
+      preferencesInput: '',
+      preferences: [],
+      error:'',
       regionOptions: [],
-      selectedCountry:'',
+      prefectureOptions: [],
+      sous_prefectureOptions: [],
       sortedCountryOptions: [],
-      v$: useVuelidate(),
+     v$:useVuelidate(), 
       results: null,
       revele: false,
-      users: []
     };
   },
   validations: {
     email: {
-      require,
-      ValidEmail
+      require,   
     },
-    numero: {
+    phoneNumber: {
       require,
-      ValidNumeri,
-      lgmin: lgmin(9),
-      lgmax: lgmax(9),
-
-
     },
+    password: {
+      require,
+      lgmin: lgmin(8),
+      lgmax: lgmax(20),
+    },
+    confirmer_password: {
+      require,
+      lgmin: lgmin(8),
+      lgmax: lgmax(20),
+    },
+    nom: {
+      require,
+      lgmin: lgmin(2),
+      lgmax: lgmax(20),
+    },
+    prenom: {
+      require,
+      lgmin: lgmin(2),
+      lgmax: lgmax(20),
+    },
+    pays: {
+      require,
+    },
+    region: {
+      require,
+    },
+    sous_prefecture: {
+      require,
+    },
+    preferencesInput: {
+      require,
+    },
+ 
   },
 
   async mounted() {
     this.fetchCountryOptions();
-    this.fetchRegionOptions()
-  
+    this.fetchRegionOptions();
+    this.fetchPrefectureOptions(),
+    this.fetchSousPrefectureOptions()
   },
 
   methods: {
-   
-    async submit() {
-      console.log('data user :', this.phoneNumber);
-      console.log('data user :', this.results);
-      console.log('data user :', this.region);
-      // this.revele = !this.revele
-      this.revele = !this.revele;
-             if (this.revele) {
-               document.body.classList.add('no-scroll');
-              } else {
-                 document.body.classList.remove('no-scroll');
-                    }
+    validatePasswordsMatch() {
+      return this.password === this.confirmer_password;
+    },
 
-      //  this.v$.$validate()
-      this.v$.$touch()
-      if (this.v$.$errors.length == 0) {
-        let DataUser = {
-          email: this.email,
-          numero: this.numero
+    async submit() {
+        const newPreferences = this.preferencesInput.split(',');
+        this.preferences.push(...newPreferences);
+        this.v$.$touch()
+        this.error = ''
+ if (this.v$.$errors.length == 0 ) {
+          let DataMpme = {
+          Region: this.region,
+          Sousprefecture: this.sous_prefecture,
+          Nom: this.nom,
+          Prenoms: this.prenom,
+          NumeroWhatsApp: this.phoneNumber,
+          ListeSousSecteurActivite: this.preferences,
+          PaysDirigeant: this.pays,
+          AdresseEmail: this.email,
+          password: this.password,
+          password_confirmation: this.confirmer_password,
         }
-      }
+        console.log('eeedata', DataMpme);
+          try {
+          const response = await axios.post('/register/mpme', DataMpme);
+          console.log('response.sousprefecture', response);
+          if (response.data.message.email) {
+            console.log('response',response.data.message.email);
+            return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
+            
+          } else {
+            this.revele = !this.revele;
+          if (this.revele) {
+            document.body.classList.add('no-scroll');
+          } else {
+            document.body.classList.add('scroll');
+          }
+          }
+          
+        } catch (error) {
+          console.error('Erreur post:', error);
+        }
+}else{
+  console.log('pas bon' , this.v$.$errors );
+
+  this.preferences = [];
+
+}
     },
-  
-    toggleModale: function() {
-             this.revele = !this.revele;
-             if (this.revele) {
-               document.body.classList.add('no-scroll');
-              } else {
-                 document.body.classList.remove('no-scroll');
-                    }
-    },
+
+    // toggleModale: function () {
+    //   this.revele = !this.revele;
+    //   if (this.revele) {
+    //     document.body.classList.add('no-scroll');
+    //   } else {
+    //     document.body.classList.remove('no-scroll');
+    //   }
+    // },
     onPhoneNumberUpdate(updatedResult) {
       this.results = updatedResult;
     },
     async fetchCountryOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
         await this.$store.dispatch('fetchCountries');
-        const options =JSON.parse(JSON.stringify(this.$store.getters['getCountryOptions'])) ; // Accéder aux options des pays via le getter
+        const options = JSON.parse(JSON.stringify(this.$store.getters['getCountryOptions'])); // Accéder aux options des pays via le getter
         console.log('Options des pays:', options);
         this.sortedCountryOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
@@ -209,13 +286,34 @@ export default {
     async fetchRegionOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
         await this.$store.dispatch('fetchRegionOptions');
-        const options =JSON.parse(JSON.stringify(this.$store.getters['getRegionOptions'])) ; // Accéder aux options des pays via le getter
+        const options = JSON.parse(JSON.stringify(this.$store.getters['getRegionOptions'])); // Accéder aux options des pays via le getter
         console.log('Options desregions:', options);
         this.regionOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
         console.error('Erreur lors de la récupération des options des pays :', error);
       }
-    }
+    },
+    async fetchPrefectureOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        await this.$store.dispatch('fetchPrefectureOptions');
+        const options = JSON.parse(JSON.stringify(this.$store.getters['getprefectureOptions'])); // Accéder aux options des pays via le getter
+        console.log('Options des Prefecture:', options);
+        this.prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des prefecture :', error);
+      }
+    },
+
+    async fetchSousPrefectureOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        await this.$store.dispatch('fetchSous_PrefectureOptions');
+        const options = JSON.parse(JSON.stringify(this.$store.getters['getSousprefectureOptions'])); // Accéder aux options des pays via le getter
+        console.log('Options des sous Prefecture:', options);
+        this.sous_prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+      }
+    },
 
   },
 };
@@ -228,10 +326,12 @@ small {
   align-items: center;
   justify-content: center;
 }
-.general{
 
-padding: 60px;
+.general {
+
+  padding: 60px;
 }
+
 .form-container {
   width: 100%;
   max-width: 1140px;
@@ -253,8 +353,6 @@ padding: 60px;
   padding: 10px;
   border-radius: 6px;
 }
-
-
 
 .title {
   text-align: center;
@@ -360,6 +458,13 @@ textarea {
   text-decoration: underline royalblue;
   cursor: pointer;
 }
+.no-scroll {
+  overflow: hidden;
+
+}
+.scroll{
+  overflow: auto;
+}
 
 @media screen and (max-width: 768px) {
 
@@ -372,36 +477,34 @@ textarea {
   .content-group {
     display: flex;
     flex-direction: column;
-
-
-
   }
 
 
 }
 
 @media screen and (max-width: 550px) {
-  .general{
+  .general {
 
-padding: 15px 10px;
-}
+    padding: 15px 10px;
+  }
+
   .sign {
 
-  width: 200px;
-  
-}
-.signin{
-font-size: 12px;
+    width: 200px;
+
+  }
+
+  .signin {
+    font-size: 12px;
+
+  }
 
 }
 
-}
+.sign:hover {
 
-.sign:hover{
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+  background-color: white;
 
-border: 1px solid var(--color-secondary);
-color: var(--color-secondary);
-background-color: white;
-
-}
-</style>
+}</style>

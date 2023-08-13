@@ -21,36 +21,19 @@
   </template>
   
   <script>
-  import useVuelidate from '@vuelidate/core';
-  import { require, lgmin, lgmax } from '@/functions/rules';
+
   export default {
       name:'ComponentModal',
       props: ["revele", "toggleModale"],
       data() {
         return {
-             numero:'',
-             v$:useVuelidate(),
         }
       },
-      validations: {
-        numero:{
-               require,
-               lgmin:lgmin(12),
-              lgmax:lgmax(15),
-
-            },
-      },
+    
            
       methods: {
         async  submit(){
-          // this.$router.push('/formulaire');
-            // this.v$.$touch()
-            // if (this.v$.$errors.length == 0 ) { 
-            //  let   DataUser={
-            //         numero:this.numero
-            //     }
-            //     console.log('data user :',DataUser);
-            //   }
+         
             },
        
         

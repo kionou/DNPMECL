@@ -97,7 +97,6 @@ export default {
   data() {
     return {
       show: false,
-      magasins: '',
       marker: '',
       isFullScreen: false,
     };
@@ -122,6 +121,7 @@ export default {
           zoom: initialState.zoom,
         })
       );
+    
       map.value.addControl(new NavigationControl(), 'top-right');
       console.log('rrrss', myPropValue.value.LatitudeMpme);
 
@@ -130,8 +130,8 @@ export default {
         .addTo(map.value);
 
       const popupContent = `
-                <div>
-                    <h3> Nom:  ${myPropValue.value.NomMpme}</h3>
+                <div >
+                    <p> Nom:  ${myPropValue.value.NomMpme}</p>
                     <p> <h4>Description:</h4> ${myPropValue.value.LongitudeMpme.description}</p>
                 </div>
                 `;
@@ -190,6 +190,7 @@ export default {
 .mapboxgl-popup,
 .maplibregl-popup {
     top: -26px !important;
+    max-width: 280px !important;
 
 }
 
@@ -198,5 +199,6 @@ export default {
     border: none !important;
     right: 4px !important;
 }
+
 
 </style>

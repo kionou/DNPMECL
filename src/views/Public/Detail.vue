@@ -60,7 +60,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages1"
-                                aria-selected="false">
+                                aria-selected="false" @click="reloadChild">
                                 Positon
                             </button>
                         </li>
@@ -71,67 +71,10 @@
 
                             <div class="row">
                                 <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
-                                    <!-- About User -->
-                                    <!-- <div class="card mb-4">
-                                    <div class="card-body">
-                                      
-                                        <ul class="list-unstyled mb-4 mt-3">
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-user"></i><span class="fw-semibold mx-2">Dirigeant:</span>
-                                                <span>{{ data.NomDirigeant }} {{ data.PrenomDirigeant }}</span>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-check"></i><span class="fw-semibold mx-2">Création:</span>
-                                                <span>{{ data.AnneeCreation }}</span>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-star"></i><span class="fw-semibold mx-2"> 01/01/1954:</span>
-                                                <span>
-                                                    Construction de véhicules automobiles</span>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-flag"></i><span class="fw-semibold mx-2">Forme  juridique:</span>
-                                                <span>{{ data.CodeStatutJuridique }}</span>
-                                            </li>
-                             
-                                        </ul>
-                                        <small class="text-muted text-uppercase">Contacts</small>
-                                        <ul class="list-unstyled mb-4 mt-3">
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-phone"></i><span class="fw-semibold mx-2">Contact:</span>
-                                                <span>(+224) {{ data.NumeroWhatsApp }}</span>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-chat"></i><span class="fw-semibold mx-2">Site Web :</span>
-                                                <span>{{ data.SiteWeb }}</span>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bx-envelope"></i><span class="fw-semibold mx-2">Email:</span>
-                                                <span>{{ data.AdresseEmail }}</span>
-                                            </li>
-                                        </ul>
-                                        <small class="text-muted text-uppercase">Equipe</small>
-                                        <ul class="list-unstyled mt-3 mb-0">
-                                            <li class="d-flex align-items-center mb-3">
-                                                <i class="bx bxl-github text-primary me-2"></i>
-                                                <div class="d-flex flex-wrap">
-                                                    <span class="fw-semibold me-2">Nombres employés hommes</span><span>{{ data.PersonnelPermanentHomme }}</span>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex align-items-center">
-                                                <i class="bx bxl-react text-info me-2"></i>
-                                                <div class="d-flex flex-wrap">
-                                                    <span class="fw-semibold me-2">Nombres employés femmes</span><span> {{ data.PersonnelPermanentFemme }} </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-
                                     <div class=" bg-white rounded-lg  ">
                                        
                                         <div class="">
-                                            <div class="overflow-hidden bg-white   border-b border-gray-200 rounded-lg  ">
+                                            <div class="overflow-hidden bg-white border-b border-gray-200 rounded-lg">
                                                
                                                 <div class="border-t border-gray-200">
                                                     <dl>
@@ -265,14 +208,18 @@
                                                     <span class="timeline-point timeline-point-warning"></span>
                                                     <div class="timeline-event">
                                                         <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Numéro NIF: {{ data.NumeroNif }}</h6>
-                                                            <!-- <small class="text-muted">Today</small> -->
+                                                            
+                                                        <p class="mb-2 text-sm font-medium text-gray-500">Numéro NIF: <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.NumeroNif }}</span></p>
+
+                                                            
                                                         </div>
-                                                        <p class="mb-2">Numero RCCM: {{ data.NumeroRccm }}</p>
+                                                        <p class="mb-2 text-sm font-medium text-gray-500">Numero RCCM: <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.NumeroRccm }}</span></p>
                                                         <div class="d-flex flex-wrap">
 
                                                             <div>
-                                                                <h6 class="mb-0">Autre statut juridique:jdhshsh,jsdj</h6>
+                                                        <p class="mb-2 text-sm font-medium text-gray-500">Autre statut juridique <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.AutreStatutJuridique }}</span></p>
+
+                                                                
 
                                                             </div>
                                                         </div>
@@ -282,22 +229,21 @@
                                                     <span class="timeline-point timeline-point-info"></span>
                                                     <div class="timeline-event">
                                                         <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Sous secteur d'activité</h6>
+                                                            <h6 class="mb-0 text-sm font-medium text-gray-500">Sous secteur d'activité</h6>
                                                             <!-- <small class="text-muted">2 Day Ago</small> -->
                                                         </div>
-                                                        <p class="mb-0">Sous secteur1,sous secteur2</p>
+                                                        <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.ListeSousSecteurActivite }}</span>
                                                     </div>
                                                 </li>
                                                 <li class="timeline-item timeline-item-transparent">
                                                     <span class="timeline-point timeline-point-primary"></span>
                                                     <div class="timeline-event">
                                                         <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Chiffres d'affaire</h6>
-                                                            <!-- <small class="text-muted">6 Day Ago</small> -->
+                                                            <h6 class="mb-0 text-sm font-medium text-gray-500">Chiffres d'affaire</h6>
+                                                           
                                                         </div>
-                                                        <p class="mb-2">
-                                                            450.000.000 GNF
-                                                        </p>
+                                                        <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.ChiffreAffaire1 }}</span>
+
 
                                                     </div>
                                                 </li>
@@ -394,7 +340,91 @@
                     </div>
 
                     <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
-                        <Position :data="data"/>
+                        <Position :data="data"  :key="childKey"/>
+                        <!-- <div class="row">
+        <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
+            <div class=" bg-white rounded-lg  ">
+
+                <div class="">
+                    <div class="overflow-hidden bg-white   border-b border-gray-200 rounded-lg  ">
+
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Région</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.Region }}</dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Préfecture</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.AnneeCreation
+                                    }}</dd>
+                                </div>
+
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Sous-préfecture</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Sousprefecture }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Commune</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{
+                                        data.Commune }}</dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Ville</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Ville }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Quartier</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.Quartier }}</dd>
+                                </div>
+
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Rue</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{
+                                        data.Rue }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6  ">
+                                    <dt class="text-sm font-medium text-gray-500">Localisation</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.Localisation
+                                    }}</dd>
+                                </div>
+
+
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+           
+        </div>
+        <div class="col-xl-7 col-lg-7 col-md-7">
+
+            <div class="maps_container" >
+                <div class="map-wrap">
+                    <a href="https://www.maptiler.com" class="watermark">
+                        <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
+                    </a>
+                    <div class="map" ref="mapContainer"></div>
+
+                </div>
+
+
+            </div>
+        </div>
+                        </div>  -->
                     </div>
 
                 </div>
@@ -405,40 +435,92 @@
 </div></template>
 
 <script>
-import Navbar from '../../components/loyout/navbar.vue';
-import Footer from '../../components/loyout/footer.vue';
 import axios from '@/lib/axiosConfig.js'
+import mapboxgl from 'maplibre-gl'; // Ajoutez cette ligne
+import { NavigationControl, Marker, Popup } from 'maplibre-gl';
+import { shallowRef, onMounted, onUnmounted, markRaw, ref } from 'vue';
 import Position from '../../components/Public/LISTE_PME/position.vue'
-import { provide } from 'vue'
+
 export default {
     name: 'DNPMECLDetail',
-    components: {
-        Navbar, Footer, Position
-    },
+    components: { Position },
     props: ['id'],
+    setup() {
+    // const mapContainer = shallowRef(null);
+    // const map = shallowRef(null);
+    // const markers = shallowRef([]);
+
+    // onUnmounted(() => {
+    //   map.value?.remove();
+    // });
+
+    // return {
+    //   map,
+    //   mapContainer,
+    //   markers,
+ 
+    // };
+  },
 
     data() {
         return {
-            data: ''
+            data: '',
+         isFullScreen: false,
+         childKey: 0,
         };
     },
 
     mounted() {
-        console.log('idddd', this.id);
+
         this.fetchData()
     },
 
     methods: {
+      async  reloadChild() {
+      this.childKey += 1; // Changez la clé pour recharger le composant enfant
+    },
         async fetchData() {
             const response = await axios.get(`/mpme/${this.id}`)
             const data = response.data.data
             console.log('eeee', data);
             this.data = data
-            provide('data', data);
+    //         const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
+    //   const initialState = { lng: -11.283844999999985, lat: 9.934886500000001, zoom: 5.5 };
+    //   this.showMap = true;
+    //   this.map = markRaw(
+    //     new mapboxgl.Map({
+    //       container: this.mapContainer,
+    //       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
+    //       center: [initialState.lng, initialState.lat],
+    //       zoom: initialState.zoom,
+    //     })
+    //   );
+   
+    //   this.map.addControl(new NavigationControl(), 'top-right');
+
+    //   const newMarker = new Marker({ color: '#FF0000' })
+    //     .setLngLat([data.LongitudeMpme, data.LatitudeMpme])
+    //     .addTo(this.map);
+    //     const popupContent = `
+    //     <div>
+    //       <h3> Nom: ${data.NomMpme}</h3>
+    //       <p> <h4>Description:</h4> ${data.description}</p>
+    //     </div>`;
+    //   newMarker.setPopup(new Popup().setHTML(popupContent));
+
+    //   newMarker.getElement().addEventListener('click', () => {
+    //     this.map.flyTo({
+    //       center: [data.LongitudeMpme, data.LatitudeMpme],
+    //       zoom: 10,
+    //     });
+    //   });
 
         },
     },
 };
 </script>
 
-<style lang="css" ></style>
+
+<style lang="css" scoped >
+
+</style>

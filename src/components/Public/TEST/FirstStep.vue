@@ -33,12 +33,8 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="Sousprefecture">Sous-Prefecture <span class="text-danger">*</span></label>
-                <select id="utexi_sexe" name="utexi[sexe]" class="form-select" v-model="props.formValues.sous_prefecture">
-                  <option disabled selected>--- Sous-prefecture ---</option>
-                  <option value="tiro">Tiro</option>
-                  <option value="albadariah">Albadariah</option>
-                  <option value="banama">Banama</option>
-                </select>
+                <MazSelect v-model="props.formValues.sous_prefecture" color="secondary" :options="sous_prefectureOptions" />
+               
               </div>
             </div>
             <div class="col">
@@ -74,11 +70,8 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="Quartier">Quartier <span class="text-danger">*</span></label>
-                <select id="utexi_sexe" name="utexi[sexe]" class="form-select" v-model="props.formValues.quartier">
-                  <option disabled selected>--- Quartiers ---</option>
-                  <option value="conakry">Quartier1</option>
-                  <option value="mali">Quartier2</option>
-                </select>
+                  <MazSelect v-model="props.formValues.quartier" color="secondary" :options="QuartierOptions" />
+                  
               </div>
             </div>
           </div>
@@ -152,9 +145,8 @@
             </div>
             <div class="col">
               <div class="input-groupe">
-                <label for="CodeStatutJuridique">Code Statut Juridique <span class="text-danger">*</span></label>
-                <input type="text" name="CodeStatutJuridique" id="CodeStatutJuridique" placeholder=""
-                  v-model="props.formValues.code_st_juriq">
+                <label for="CodeStatutJuridique">Code Statut Juridique <span class="text-danger">*</span></label>  
+                  <MazSelect v-model="props.formValues.code_st_juriq"  color="secondary" :options="StatutJuridiqueOptions" />
               </div>
             </div>
           </div>
@@ -170,16 +162,14 @@
               <div class="input-groupe">
                 <label for="PrincipalSecteurActivite">Principal Secteur Activite <span
                     class="text-danger">*</span></label>
-                <input type="text" name="PrincipalSecteurActivite" id="PrincipalSecteurActivite" placeholder=""
-                  v-model="props.formValues.prin_sect_acti">
+                  <MazSelect v-model="props.formValues.prin_sect_acti" color="secondary" :options="SecteurActiviteOptions" />
               </div>
             </div>
             <div class="col">
               <div class="input-groupe">
                 <label for="ListeSousSecteurActivite">Liste Sous Secteur Activite <span
                     class="text-danger">*</span></label>
-                <input type="text" name="ListeSousSecteurActivite" id="ListeSousSecteurActivite" placeholder=""
-                  v-model="props.formValues.list_sous_sect_act">
+                  <MazSelect v-model="props.formValues.list_sous_sect_act" color="secondary" :options="SousSecteurActiviteOptions" />
               </div>
             </div>
           </div>
@@ -264,8 +254,17 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="NationaliteGroupe">Nationalité Groupe <span class="text-danger">*</span></label>
-                <input type="text" name="NationaliteGroupe" id="NationaliteGroupe" placeholder=""
-                  v-model="props.formValues.nationalite_groupe">
+                <!-- <input type="text" name="NationaliteGroupe" id="NationaliteGroupe" placeholder=""
+                  v-model="props.formValues.nationalite_groupe"> -->
+                  <MazSelect v-model="props.formValues.nationalite_groupe" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary">
+                  <div class="flex items-center"
+                    style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
+                    <MazAvatar size="0.8rem" :src="option.flag" />
+                    <strong>
+                      {{ option.label }}
+                    </strong>
+                  </div>
+                </MazSelect>
               </div>
             </div>
             <div class="col">
@@ -310,6 +309,12 @@ import { useStore } from 'vuex';
 const regionOptions = ref([]);
 const years = ref([]);
 const sortedCountryOptions = ref([])
+const prefectureOptions = ref([])
+const QuartierOptions = ref([]) 
+const sous_prefectureOptions = ref([]) 
+const SecteurActiviteOptions = ref([])
+const SousSecteurActiviteOptions = ref([])
+const StatutJuridiqueOptions = ref([])
 const currentYear = new Date().getFullYear();
 for (let year = 1960; year <= currentYear; year++) {
   years.value.push(year);
@@ -329,22 +334,92 @@ const fetchRegionOptions = async () => {
   }
 };
 
- const fetchCountryOptions= async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+ const fetchCountryOptions = async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
          const store = useStore();
         await store.dispatch('fetchCountries');
-        const options =JSON.parse(JSON.stringify(this.$store.getters['getCountryOptions'])) ; // Accéder aux options des pays via le getter
+        const options =JSON.parse(JSON.stringify(store.getters['getCountryOptions'])) ; // Accéder aux options des pays via le getter
         console.log('Options des pays:', options);
         sortedCountryOptions.value = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
         console.error('Erreur lors de la récupération des options des pays :', error);
       }
     };
+    const  fetchSousPrefectureOptions= async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        const store = useStore();
+        await store.dispatch('fetchSous_PrefectureOptions');
+        const options = JSON.parse(JSON.stringify(store.getters['getSousprefectureOptions'])); // Accéder aux options des pays via le getter
+        console.log('Options des sous Prefecture:', options);
+        sous_prefectureOptions.value = options; // Affecter les options à votre propriété sortedCountryOptions
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+      }
+    };
+    const  fetchPrefectureOptions= async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        const store = useStore();
+        await store.dispatch('fetchPrefectureOptions');
+        const options = JSON.parse(JSON.stringify(store.getters['getprefectureOptions'])); // Accéder aux options des pays via le getter
+        console.log('Options des Prefecture:', options);
+        prefectureOptions.value = options; // Affecter les options à votre propriété sortedCountryOptions
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des prefecture :', error);
+      }
+    };
+    const  fetchQuartierOptions= async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        const store = useStore();
+        await store.dispatch('fetchQuartierOptions');
+        const options = JSON.parse(JSON.stringify(store.getters['getQuartierOptions'])); // Accéder aux options des pays via le getter
+        console.log('Options des Quartier:', options);
+        QuartierOptions.value = options; // Affecter les options à votre propriété sortedCountryOptions
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des prefecture :', error);
+      }
+    };
+    const fetchSecteurActiviteOptions = async () => {
+  try {
+    const store = useStore();
+    await store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
+    const options = JSON.parse(JSON.stringify(store.getters['getsecteurActiviteOptions']));
+    SecteurActiviteOptions.value = options;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error);
+  }
+};
+const fetchSousSecteurActiviteOptions = async () => {
+  try {
+    const store = useStore();
+    await store.dispatch('fetchSousSecteurOptions'); // Action spécifique aux sous-secteurs d'activité
+    const options = JSON.parse(JSON.stringify(store.getters['getSousSecteurOptions']));
+    SousSecteurActiviteOptions.value = options;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des sous-secteurs d\'activité:', error);
+  }
+};
+const fetchStatutJuridiqueOptions = async () => {
+  try {
+    const store = useStore();
+    await store.dispatch('fetchStatutJuridiqueOptions'); // Action spécifique aux statuts juridiques
+    const options = JSON.parse(JSON.stringify(store.getters['getStatutJuridiqueOptions']));
+    StatutJuridiqueOptions.value = options;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des statuts juridiques:', error);
+  }
+};
+
   const results = ref()
 
 onMounted(() => {
   fetchRegionOptions();
   fetchCountryOptions();
+  fetchSousPrefectureOptions();
+  fetchPrefectureOptions();
+  fetchQuartierOptions();
+  fetchSecteurActiviteOptions();
+  fetchSousSecteurActiviteOptions();
+  fetchStatutJuridiqueOptions();
 });
 </script>
 

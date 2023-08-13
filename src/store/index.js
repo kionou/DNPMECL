@@ -4,7 +4,7 @@ import state from './state'
 import getters from './getters'
 import  mutations from './mutations.js'
 import  actions from './actions.js'
-// import countries from './countries'
+ import countries from './countries'
 
 
 const store = createStore({
@@ -12,9 +12,9 @@ const store = createStore({
   getters,
   mutations,
   actions,
-  // modules: {
-  //   countries, // Utilisez le nom correct du module ici
-  // },
+  modules: {
+    countries, // Utilisez le nom correct du module ici
+  },
 })
 
 export default store;

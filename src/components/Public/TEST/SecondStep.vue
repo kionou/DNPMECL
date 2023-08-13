@@ -12,14 +12,15 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="MpmeBourse">Mpme Bourse <span class="text-danger">*</span></label>
-                <MazSelect v-model="props.formValues.mpmeBourse" color="secondary" :options="choix" />
-
+                <MazSelect v-model="props.formValues.mpmeBourse" color="secondary" :options="choix"  />
+                
               </div>
             </div>
-            <div class="col">
+            <div class="col" v-if="props.formValues.mpmeBourse === 'oui'" >
               <div class="input-groupe">
                 <label for="NomBourse">Nom Bourse <span class="text-danger">*</span></label>
-                <input type="text" name="NomBourse" id="NomBourse" placeholder="" v-model="props.formValues.nomBourse">
+                <MazSelect v-model="props.formValues.nomBourse" color="secondary" :options="BourseOptions" />
+               
               </div>
             </div>
             <div class="col">
@@ -31,14 +32,14 @@
             </div>
           </div>
           <div class="row mb-3 mt-3 content-group">
-            <div class="col">
+            <div class="col" v-if="props.formValues.receptionPrix === 'oui'">
               <div class="input-groupe">
                 <label for="PrincipalPrix">Principal Prix<span class="text-danger">*</span></label>
                 <input type="text" name="PrincipalPrix" id="PrincipalPrix" placeholder=""
                   v-model="props.formValues.principalPrix">
               </div>
             </div>
-            <div class="col">
+            <div class="col" v-if="props.formValues.receptionPrix === 'oui'">
               <div class="input-groupe">
                 <label for="AnneePrixPrincipal">Année Prix Principal <span class="text-danger">*</span></label>
                 <MazSelect v-model="props.formValues.anneePrixPrincipal" color="secondary" :options="yearOptions" />
@@ -183,7 +184,7 @@
 
               </div>
             </div>
-            <div class="col">
+            <div class="col"  v-if="props.formValues.appartenanceReseauProfessionnel === 'oui'">
               <div class="input-groupe">
                 <label for="NomReseauProfessionnel">Nom Reseau Professionnel <span class="text-danger">*</span></label>
                 <input type="text" name="NomReseauProfessionnel" id="NomReseauProfessionnel" placeholder=""
@@ -233,7 +234,7 @@
                   v-model="props.formValues.autreFinancement">
               </div>
             </div>
-            <div class="col">
+            <div class="col" v-if="props.formValues.appartenanceReseauProfessionnel === 'oui'">
               <div class="input-groupe">
                 <label for="DescriptionReseau">Description du Reseau <span class="text-danger">*</span></label>
                 <textarea name="DescriptionReseau" id="DescriptionReseau" cols="80" rows="3"
@@ -284,6 +285,7 @@ import { useStore } from 'vuex';
 const selectedCountry = ref()
 const sortedCountryOptions= ref([]) 
 const years = ref([]);
+const BourseOptions = ref([])
 const currentYear = new Date().getFullYear();
 for (let year = 1960; year <= currentYear; year++) {
   years.value.push(year);
@@ -306,8 +308,8 @@ const titre = [
   { label: 'Madame', value: 'Mme' },
   { label: 'Mademoiselle', value: 'Mlle' },
 
-
 ]
+
 const fetchCountryOptions= async () => { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
          const store = useStore();
@@ -319,9 +321,23 @@ const fetchCountryOptions= async () => { // Renommez la méthode pour refléter 
         console.error('Erreur lors de la récupération des options des pays :', error);
       }
     };
+    const fetchBourseOptions = async () => {
+  try {
+    const store = useStore();
+    await store.dispatch('fetchBourseOptions'); // Action spécifique aux bourses
+    const options = JSON.parse(JSON.stringify(store.getters['getBourseOptions']));
+    console.log('Options bourse:', options);
+    BourseOptions.value = options;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des bourses:', error);
+  }
+};
     onMounted(() => {
  
   fetchCountryOptions();
+  fetchBourseOptions();
+ 
+
 });
 
 </script>

@@ -1,4 +1,4 @@
-import { helpers, required,email , minLength ,minValue , maxLength ,maxValue ,numeric,sameAs} from "@vuelidate/validators";
+import { helpers, required, email , minLength ,minValue , maxLength ,maxValue ,numeric,sameAs} from "@vuelidate/validators";
 
 
 
