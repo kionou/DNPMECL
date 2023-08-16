@@ -38,10 +38,12 @@
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail , ValidNumeri } from '@/functions/rules';
+import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
 import Modal from '../../components/Public/other/modal_demande.vue';
 import axios from '@/lib/axiosConfig.js'
-import { provide } from 'vue';
+import { mapActions } from 'vuex';
+
+
 
 export default {
   name: 'DNPMECLSignUserMpme',
@@ -83,7 +85,7 @@ export default {
 
   methods: {
    
-      
+    ...mapActions('user', ['setLoggedInUser']),
     async  submit(){
 
       let DataUser = {
@@ -99,7 +101,8 @@ export default {
             console.log("error");
           } else {
             console.log('ok', response.data.data);
-            provide('DataUser', response.data.data);
+            const userData = response.data.data;
+           this.setLoggedInUser(userData);
             this.data = response.data.data
             this.revele = !this.revele;
            if (this.revele) {
@@ -111,7 +114,6 @@ export default {
       
     } catch (error) {
        return this.error = "L'authentification a échoué"
-      console.error('Erreur postlogin:', error);
     }
      
           //  this.v$.$validate()

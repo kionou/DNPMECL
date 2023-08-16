@@ -1,16 +1,34 @@
 <template>
   <div>
     <!-- ======= Header ======= -->
+    <div class="general">
+     <div class="navbar-2">
+      <div class="nav-item dropdown">
+        <div  class="nav-link dropdown-toggle  compte-users"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="profile">
+            <i class="bi bi-person-fill"></i>
+            <span style="font-size: 15px;">Mon compte</span>
+          </div>
+          <ul class="dropdown-menu menu" aria-labelledby="navbarDropdown" >
+            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-postcard"></i>Mon espace</a></li>
+            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+            
+            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right"></i>Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  
     <section id="topbar" class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-
+          
         </div>
       </div>
     </section>
     <!-- End Top Bar -->
     <header id="header" class="header d-flex align-items-center">
-
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <router-link to="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -40,10 +58,6 @@
           <i class="  bi bi-person-fill-lock"></i>
           <span> Connexion </span>
         </router-link>
-        <!-- <router-link to="#" class="btnCt">
-          <i class="bi bi-telephone-fill"></i>
-          <span> Contact </span>
-        </router-link> -->
       </div>
      
 
@@ -61,6 +75,11 @@
 <script>
 export default {
   name: 'MpmeNavbar',
+    computed: {
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
+  },
 
   data() {
     return {
@@ -69,6 +88,22 @@ export default {
   },
 
   mounted() {
+ console.log("navbarrrr",this.loggedInUser);
+
+    document.querySelectorAll('.dropdown-toggle').forEach(item => {
+  item.addEventListener('click', event => {
+ 
+    if(event.target.classList.contains('dropdown-toggle') ){
+      event.target.classList.toggle('toggle-change');
+    }
+    else if(event.target.parentElement.classList.contains('dropdown-toggle')){
+      event.target.parentElement.classList.toggle('toggle-change');
+    }
+  })
+});
+
+
+
     /**
 * Mobile nav toggle
 */
@@ -219,12 +254,67 @@ export default {
   },
 
   methods: {
+    async profil(){
+      const toggleMenu = document.querySelector(".menu")
+        toggleMenu.classList.toggle('active')
+    
+    
+    },
 
   },
 };
 </script>
 
 <style lang="css" scoped>
+
+.dropdown-toggle::after{
+  display:none;
+
+}
+
+
+.general{
+
+width: 100%;
+height: auto;
+
+}
+.menu{
+inset: auto !important;
+}
+
+.navbar-2 .compte-users {
+  padding: 8px;
+  color: #fff;
+  font-size: 13px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.navbar-2  .compte-users .bi-person-fill {
+  border-radius: 50%;
+  margin-right: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color:#000;
+  border: 1px solid var(--color-primary);
+
+}
+
+.navbar-2 .compte-users .profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+}
 
 
 .btnCt{

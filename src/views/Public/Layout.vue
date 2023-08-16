@@ -1,5 +1,6 @@
 <template>
     <div>
+       
         <Navbar />
         <RouterView />
         <footer id="footer" class="footer  ">
@@ -12,10 +13,11 @@
 <script>
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
+import Mpme from '../../components/loyout/navbarmpme.vue';
 export default {
     name: 'DNPMECLLayout',
     components:{
-        Navbar , Footer
+        Navbar , Footer , Mpme
     },
 
     data() {

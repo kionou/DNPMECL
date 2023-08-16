@@ -8,7 +8,8 @@ export default{
     secteurActiviteOptions: [],
     sousSecteurOptions: [],
     statutJuridiqueOptions: [],
-    bourseOptions: []
+    bourseOptions: [],
+    loggedInMPME: null,
    
 
 }

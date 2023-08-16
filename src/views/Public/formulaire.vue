@@ -78,11 +78,16 @@
   import ThirdStep from '../../components/Public/TEST/ThirdStep.vue';
   import FinalStep from '../../components/Public/TEST/FinalStep.vue';
   import useForm from '../../composable/form.js';
-  
-  import { ref  } from 'vue';
+  import { ref, computed , onMounted  } from 'vue';
+  import { useStore } from 'vuex';
+  import axios from '@/lib/axiosConfig.js'
+ 
+
+
   
   const { values  } = useForm();
   console.log('values',values);
+  const userData = ref(null); 
   
   const currentStep = ref(0);
   const formSteps = [
@@ -99,6 +104,29 @@
     const previousStep = () => {
         currentStep.value--;
     }
+ 
+
+    const  fetchData = async () =>  {
+ 
+        try {
+            const store = useStore();
+    const loggedInUser = computed(() => store.getters['user/loggedInUser']);
+         
+    console.log('Fetching data...');
+    console.log('userId:', loggedInUser.value.user);
+    const userId = loggedInUser.value.user.Entreprises;
+    const response = await axios.get(`/mpme/${userId}`);
+    userData.value = response.data.data; // Stockez les données dans la propriété userData
+    console.log('UserData:', userData.value);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+  }
+
+}
+    onMounted(() => {
+ 
+  fetchData()
+});
   </script>
   
 

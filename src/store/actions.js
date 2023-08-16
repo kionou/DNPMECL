@@ -180,6 +180,17 @@ async fetchDataFromAPI({ commit }) {
     } catch (error) {
       console.error('Erreur lors de la récupération des options de bourses:', error);
     }
-  }
+  },
+  async fetchUserData({ commit }, userId) {
+    try {
+      const response = await axios.get(`/mpme/${userId}`);
+      const userData = response.data.data;
+      console.log('rrrrSSSS', response.data.data);
+
+      commit('SET_LOGGED_IN_MPME', userData);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+    }
+  },
 
  }

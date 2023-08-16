@@ -281,6 +281,8 @@
               </div>
             </div>
           </div>
+
+
           <div class="row mb-3 mt-3 content-group">
            
             <div class="col">
@@ -291,7 +293,6 @@
             </div>
           </div>
 
-
         </div>
         <!-- fin infos activite -->
       </form>
@@ -300,11 +301,13 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps(['formValues']);
-import { ref, onMounted } from 'vue';
+<script setup >
+
+import { ref, onMounted    } from 'vue';
 import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
-import { useStore } from 'vuex';
+import { useStore } from 'vuex'; 
+
+const props = defineProps(['formValues'])
 
 const regionOptions = ref([]);
 const years = ref([]);
@@ -319,6 +322,7 @@ const currentYear = new Date().getFullYear();
 for (let year = 1960; year <= currentYear; year++) {
   years.value.push(year);
 }
+
 
 const yearOptions = years.value.map((year) => ({ label: String(year), value: String(year) }));
 
@@ -420,6 +424,8 @@ onMounted(() => {
   fetchSecteurActiviteOptions();
   fetchSousSecteurActiviteOptions();
   fetchStatutJuridiqueOptions();
+
+  console.log('dataaaa',userData);
 });
 </script>
 

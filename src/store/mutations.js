@@ -30,6 +30,9 @@ export default {
   SET_BOURSE_OPTIONS(state, options) {
     state.bourseOptions = options;
   },
+  SET_LOGGED_IN_MPME(state, userData) {
+    state.loggedInMPME = userData;
+  },
   
 
 }

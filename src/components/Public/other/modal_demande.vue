@@ -13,7 +13,7 @@
     <div class="btn_sign">
 		<button class="sign" @click="hamdleSubmitsms">SMS</button>
 
-
+<!-- {{ loggedInUser }} -->
 		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification',})">E-MAIL</button>
 
     </div>
@@ -26,43 +26,41 @@
   
   <script>
 import axios from '@/lib/axiosConfig.js'
-import { mapActions } from 'vuex';
+
 
  
   export default {
       name:'ComponentModal',
       props: ["revele", "toggleModale" , "data"],
+      computed: {
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
+  },
     
-
       data() {
         return {
 
         }
       },
-     
-           
+          
       methods: {
         async  hamdleSubmitsms(){
-          const datauser = this.data
+          const datauser = this.loggedInUser
       
           let CodeUser ={
           email:0,
-          value:this.data.user.Whatsapp
+           value:this.loggedInUser.user.Whatsapp
           
           }
           console.log("eee",CodeUser);
           try {
-      const response = await axios.post('/mpme/send-otp', CodeUser);
-      console.log('response.Code', response); 
+      // const response = await axios.post('/mpme/send-otp', CodeUser);
+      // console.log('response.Code', response); 
       console.log("try",datauser);
-      this.$store.dispatch('setUser', this.data)
-
-      this.$router.push({ name: 'Verification' });
-      
-      
+       this.$router.push({ name: 'Test' }); 
     } catch (error) {
-       return this.error = "L'authentification a échoué"
-      console.error('Erreur postlogin:', error);
+    
     }
          
             },
@@ -71,7 +69,7 @@ import { mapActions } from 'vuex';
       },
 
       mounted() {
-      
+      console.log('tessst',this.loggedInUser);
       },
   
   }

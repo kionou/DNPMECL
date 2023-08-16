@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
 import LayoutPublic from '../views/Public/Layout.vue'
 import Accueil from '../views/Public/Accueil.vue'
 import Liste from '../views/Public/Liste_PME.vue'
@@ -39,12 +40,12 @@ const router = createRouter({
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
          { path: '/connexion', name: 'connexion', component: Connexion },
-         { path: '/formulaire', name: 'Formulaire', component: Formulaire },
+         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,  },
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme },
-         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , props:true },
+         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , props:true  , beforeEnter: requireNotLoggedIn},
 
          { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
-         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification , props:true },
+         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification , props:true  ,  meta: { requiresAuth: true }, },
          { path: '/test', name: 'Test', component: Test, }
          
 
@@ -54,6 +55,36 @@ const router = createRouter({
       ]
     },
   ]
+})
+function requireNotLoggedIn(to, from, next) {
+  const isLoggedIn = store.getters['user/isLoggedIn'];
+  if (isLoggedIn) {
+    next('/formulaire'); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
+  } else {
+    next();
+  }
+}
+
+function requireLoggedIn(to, from, next, redirectToHome = false) {
+  const isLoggedIn = store.getters['user/isLoggedIn'];
+  if (isLoggedIn) {
+    if (redirectToHome) {
+      next(); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
+    } else {
+      next();
+    }
+  } else {
+    next('/login_user_mpme');
+  }
+}
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.meta.requiresAuth;
+  if (requiresAuth) {
+    requireLoggedIn(to, from, next);
+  } else {
+    next();
+  }
 })
 
 export default router

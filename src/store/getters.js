@@ -8,6 +8,7 @@ export default{
     getsecteurActiviteOptions: (state) => state.secteurActiviteOptions,
     getSousSecteurOptions: (state) => state.sousSecteurOptions,
     getStatutJuridiqueOptions: (state) => state.statutJuridiqueOptions,
-    getBourseOptions: (state) => state.bourseOptions
+    getBourseOptions: (state) => state.bourseOptions,
+    loggedInMPME: (state) => state.loggedInMPME,
 
 }

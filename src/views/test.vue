@@ -1,429 +1,389 @@
 <template>
-    <div class="container_content" data-aos="fade-up">
-      <div class="section-header">
-        <h2>LISTE DES PME</h2>
-      </div>
-      <div class="bar_search">
-        <div class="liste-searcher">
-          <div class="nsl">
-            <i class="bi bi-search"></i>
-            <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name" @input="filterByName" />
-          </div>
-          <div class="nsl">
-            <i class="bi bi-funnel-fill"></i>
-            <select name="speciality" v-model="control.spec" @change="filterData">
-              <option value="" selected="true">Filtre</option>
-              <option value="region">Régions</option>
-              <option value="prefecture">Préfectures</option>
-            </select>
-          </div>
-          <div class="nsl" style="border-right: none" v-if="control.spec === 'region' || control.spec === 'prefecture'">
-            <i class="bi bi-filter"></i>
-            <select name="speciality" v-if="control.spec === 'region'" v-model="control.speciality" @change="filterData">
-              <option value="" selected="true">Choisir une région</option>
-              <option v-for="region in regions" :value="region.id" :key="region.id">{{ region.nom }}</option>
-            </select>
-            <select name="speciality" v-else-if="control.spec === 'prefecture'" v-model="control.speciality" @change="filterData">
-              <option value="" selected="true">Choisir une préfecture</option>
-              <option v-for="prefecture in prefectures" :value="prefecture.id" :key="prefecture.id">{{ prefecture.nom }}</option>
-            </select>
-          </div>
-          <div class="nsl" style="border-right: none" v-else>
-            <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
-            <input type="text" placeholder="Aucun filtre sélectionné" disabled />
-          </div>
-        </div>
-      </div>
-  
-      <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="100">
-        <div class="task" v-for="pme in paginatedData" :key="pme.id">
-          <div class="tag">
-            <div class="image">
-              <img src="@/assets/img/1.png" alt="">
-            </div>
-            <div class="texte">
-              <p class="para">{{ pme.nom }}</p>
-              <p class="texte-content">Creation: <span>{{ pme.date_creation }}</span></p>
-              <p class="texte-content">Dirigeant: <span>{{ pme.dirigeant }}</span></p>
-            </div>
-          </div>
-          <div class="texte">
-            <p class="texte-content">Code APE: <span>{{ pme.code_ape }}</span></p>
-            <p class="texte-content">Ville: <span>{{ pme.ville }}</span></p>
-            <p class="texte-content">Email: <span>{{ pme.email }}</span></p>
-            <p class="texte-content">Contact: <span>{{ pme.contact }}</span></p>
-          </div>
-          <div class="boutton">
-            <a href="/detail" class="btn">Detail<span></span></a>
+  <div class="progress-bar">
+  <div class="progress" :style="{ width: progressBarWidth }"></div>
+</div>
+  <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100">
+    <p class="title">Enregistrez votre PME dès maintenant</p>
+    <p class="text-center">Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en toute simplicité.</p>
+
+    <form class="form">
+      <!-- Étape 1 -->
+      <div v-if="currentStep === 1">
+        <div class="form-container">
+          <p class="titre">INFORMATIONS GENERALES - Étape 1</p>
+
+          <div class="row mb-3 mt-3 content-group" >
+                      <div class="col">
+                      <div class="input-groupe">
+                          <label for="Region">Nom <span class="text-danger">*</span></label>
+                          <input type="text" name="Commune" id="Commune" placeholder="" v-model="nom">
+                          
+                      </div>
+                     
+                  </div>
+                 
+                  <div class="col">
+                      <div class="input-groupe">
+                          <label for="Commune">Sigle <span class="text-danger">*</span></label>
+                          <input type="text" name="Commune" id="Commune" placeholder="" v-model="sigle">
+                      </div>
+                     
+
+                  </div>
+                  <div class="col">
+                      <div class="input-groupe">
+                          <label for="ville">Email <span class="text-danger">*</span></label>
+                          <input type="text" name="Ville" id="ville" placeholder="" v-model="email">
+                      </div>
+                   
+                  </div>
+                 
+              </div>
+
+          <div class="btnForm py-3 flex items-center justify-content-end">
+            <button class="btnLogin" @click.prevent="nextStep">Suivant</button>
           </div>
         </div>
       </div>
-  
-      <div class="container_pagination">
-        <pagination :current-page="currentPage" :total-pages="totalPages" @update-page="onUpdatePage"></pagination>
+
+      <!-- Étape 2 -->
+      <div v-if="currentStep === 2">
+        <div class="form-container">
+          <p class="titre">MOT DE PASSE - Étape 2</p>
+          <div class="row mb-3 mt-3 content-group">
+          
+          <div class="col">
+            <div class="input-groupe">
+              <label for="PersonnelTemporaireFemme">Personnel Temporaire Femme <span
+                  class="text-danger">*</span></label>
+              <input type="text" name="PersonnelTemporaireFemme" id="PersonnelTemporaireFemme" placeholder=""
+                v-model="pers_temp_femm">
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-groupe">
+              <label for="PersonnelTemporaireHomme">Personnel Temporaire Homme <span
+                  class="text-danger">*</span></label>
+              <input type="text" name="PersonnelTemporaireHomme" id="PersonnelTemporaireHomme" placeholder=""
+                v-model="pers_temp_homm">
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-groupe">
+              <label for="ChiffreAffaire1">Chiffre Affaire 1 <span class="text-danger">*</span></label>
+              <input type="text" name="ChiffreAffaire1" id="ChiffreAffaire1" placeholder=""
+                v-model="ch_aff_1">
+            </div>
+          </div>
+        </div>
+
+          <div class="btnForm py-3 flex items-center justify-content-between">
+            <button class="btnLogin" @click.prevent="prevStep">Précédent</button>
+            <button class="btnLogin" @click.prevent="nextStep">Suivant</button>
+          </div>
+        </div>
       </div>
+
+      <!-- Étape 3 -->
+      <div v-if="currentStep === 3">
+        <div class="form-container">
+          <p class="titre">RÉSUMÉ ET SOUMISSION - Étape 3</p>
+
+          <div class="row mb-3 mt-3 content-group">
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LienGoogleMapMpme">Lien Google Map Mpme <span class="text-danger">*</span></label>
+      <input v-model="lienGoogleMapMpme" type="text" name="LienGoogleMapMpme" id="LienGoogleMapMpme" placeholder="">
     </div>
-  </template>
+  </div>
+
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LatitudeMpme">Latitude Mpme<span class="text-danger">*</span></label>
+      <input v-model="latitudeMpme" type="text" name="LatitudeMpme" id="LatitudeMpme" placeholder="">
+    </div>
+  </div>
   
-  <script>
-  import Pagination from '../components/Public/other/pagination.vue';
-  import { getImage } from '@/lib/getImage';
-  import resp from '@/lib/pme.json';
-  import regionsData from '@/lib/region.json';
-  import prefecturesData from '@/lib/prefecture.json';
-  
-  export default {
-    name: 'MpmeListe',
-    components: {
-      Pagination
+  <div class="col">
+    <div class="input-groupe">
+      <label for="LongitudeMpme">Longitude Mpme<span class="text-danger">*</span></label>
+      <input v-model="longitudeMpme" type="text" name="LongitudeMpme" id="LongitudeMpme" placeholder="">
+    </div>
+  </div>
+</div>
+
+          <div class="btnForm py-3 flex items-center justify-content-between">
+            <button class="btnLogin" @click.prevent="prevStep">Précédent</button>
+            <button class="btnLogin" @click.prevent="submit">Connecter</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+import useVuelidate from '@vuelidate/core';
+import { require, lgmin, lgmax, ValidEmail } from '@/functions/rules';
+import axios from '@/lib/axiosConfig.js'
+
+export default {
+  name: 'Componentlogin',
+  computed: {
+   
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
     },
-    data() {
-      return {
-        control: {
-          name: '',
-          spec: '',
-          speciality: '',
-          promotion: '',
-        },
-        regions: regionsData,
-        prefectures: prefecturesData,
-        pmes: [],
-        filteredPmes: [],
-        currentPage: 1,
-        pageSize: 12,
-      };
-    },
-    methods: {
-      onUpdatePage(page) {
-        this.currentPage = page;
-      },
-      filterByName() {
-        const searchValue = this.control.name.toLowerCase();
-        this.filteredPmes = this.pmes.filter(pme => pme.nom.toLowerCase().includes(searchValue));
-      },
-      filterData() {
-        if (this.control.spec === 'region') {
-          const selectedRegion = this.regions.find(region => region.id === this.control.speciality);
-          if (selectedRegion) {
-            this.filteredPmes = this.pmes.filter(pme => pme.region === selectedRegion.nom);
-          } else {
-            this.filteredPmes = [...this.pmes];
-          }
-        } else if (this.control.spec === 'prefecture') {
-          const selectedPrefecture = this.prefectures.find(prefecture => prefecture.id === this.control.speciality);
-          if (selectedPrefecture) {
-            this.filteredPmes = this.pmes.filter(pme => pme.prefecture === selectedPrefecture.nom);
-          } else {
-            this.filteredPmes = [...this.pmes];
-          }
-        } else {
-          this.filteredPmes = [...this.pmes];
-        }
-      },
-      clearFilters() {
-        this.control = {
-          name: '',
-          spec: '',
-          speciality: '',
-          promotion: '',
-        };
-        this.filteredPmes = [...this.pmes];
-      },
-      getImage(path) {
-        return getImage(path);
-      }
-    },
-    mounted() {
-      this.pmes = resp;
-      this.filteredPmes = [...this.pmes];
-    },
-    computed: {
-      totalItems() {
-        return this.filteredPmes.length;
-      },
-      totalPages() {
-        return Math.ceil(this.totalItems / this.pageSize);
-      },
-      paginatedData() {
-        const startIndex = (this.currentPage - 1) * this.pageSize;
-        const endIndex = startIndex + this.pageSize;
-        return this.filteredPmes.slice(startIndex, endIndex);
-      }
+    progressBarWidth() {
+    const stepPercentage = (this.currentStep - 1) / (this.totalSteps - 1) * 100;
+    return `${stepPercentage}%`;
+  },
+
+  },
+  data() {
+    return {
+      v$: useVuelidate(),
+      currentStep: 1,
+      userData:''  ,
+      email:'',
+      nom:'',
+      sigle:''
+    };
+  },
+
+  methods: {
+    createMpmeData() {
+    return {
+      NomMpme: this.nom,
+      SigleMpme: this.sigle,
+      AdresseEmail: this.email
     }
-  };
-  </script>
+  },
+ async   nextStep() {
+  if (this.currentStep === 1) {
+      const mpmeData = this.createMpmeData();
+      console.log('mpmeData',mpmeData);
+      const success = await this.enregistrerMpmeDonnees(mpmeData);
+      console.log('success',success);
+
+      if (success) {
+        this.currentStep++;
+      } else {
+        console.error('Erreur lors de l\'enregistrement des données pour le MPME');
+      }
+
+    } else if (this.currentStep === 2) {
+      this.currentStep++;
+    }
   
-  <style lang="css" scoped>
- .container_content {
-    max-width: 1140px;
-    margin: 0 auto;
-    /* border: 1px solid red; */
-    background: #fff;
 
+    },
+
+    prevStep() {
+      if (this.currentStep > 1) {
+        this.currentStep--;
+      }
+    },
+
+    submit() {
+     
+    },
+    async fetchgetOneMpme() {
+      try {
+      const userId = this.loggedInUser.user.Entreprises;
+    const response = await axios.get(`/mpme/${userId}`);
+   this.userData = response.data.data; 
+   this.email = this.userData.AdresseEmail;
+   this.nom = this.userData.NomMpme;
+   this.sigle = this.userData.SigleMpme;
+
+    console.log('UserData:', this.userData.AdresseEmail);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+      }
+    },
+
+
+
+
+    async enregistrerMpmeDonnees(mpmeData) {
+      try {
+    const userId = this.loggedInUser.user.Entreprises;
+    const response = await axios.put(`/mpme/${userId}`, mpmeData);
+    console.log("responseee",response);
+    
+    if (response.status === 200) {
+      console.log('Données MPME mises à jour avec succès !');
+      return true;
+    } else {
+      console.error('Erreur lors de la mise à jour des données MPME');
+      return false;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des données MPME :', error);
+    return false;
+  }
+  },
+  },
+  mounted() {
+    console.log("data",this.loggedInUser.user.Entreprises);
+    this.fetchgetOneMpme()
+   
+  },
+};
+</script>
+
+<style lang="css" scoped>
+.form-container {
+  /* width: 700px; */
+  max-width: 1140px;
+  margin: 0 auto;
+  /* border-radius: 0.75rem; */
+  background-color: white;
+  padding: 1rem;
+  color: black;
+  /* max-height: 550px; */
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
+  /* border: 1px solid red; */
 }
-.section-header{
-    padding: 40px 0 0 0 !important;
+.form .content{
 
-}
-
-.bar_search {
-
-    width: 100%;
-    /* height: 100px; */
-    /* border: 1px solid red; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.contenu {
-
-    /* border: 1px solid red; */
-    padding: 15px 10px;
-}
-
-.task {
-    position: relative;
-    color: #2e2e2f;
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-    margin: 0 10px 10px 0;
-    border: 3px dashed transparent;
-    width: 300px;
-    height: 259px;
-}
-
-
-.task:hover {
-    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
-    /* border-color: rgba(162, 179, 207, 0.2) !important; */
-    background-color: var(--color-primary);
-    color: white !important;
-}
-
-.task:hover .texte-content {
-    color: white !important;
-}
-
-.task .para {
-    font-size: 15px;
-    font-weight: 700;
-    color: #2e2e2f;
-    width: 190px;
-}
-
-.texte{
-
-margin-top: 10px;
-}
-.texte-content {
-    color: #6f6f6f !important;
-    font-weight: bold;
-    font-size: 13px;
-
-}
-
-.tag {
-    /* border: 1px solid red ; */
-    font-size: 12px;
-
-    /* background-color: #1389eb; */
-    width: 100%;
-    /* height: 100px; */
-    display: flex;
-    align-items: center;
-}
-
-.tag .image {
-    height: 60px;
-    width: 60px;
-    margin-right: 10px;
-}
-
-.tag .image img {
-
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-
-}
-
-.tags {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.options {
-    background: transparent;
-    border: 0;
-    color: #c4cad3;
-    font-size: 17px;
-}
-
-.options svg {
-    fill: #9fa4aa;
-    width: 20px;
-}
-
-.stats {
-    position: relative;
-    width: 100%;
-    color: #9fa4aa;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.stats div {
-    margin-right: 1rem;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-p {
-    margin-bottom: 0 !important;
-}
-
-.stats svg {
-    margin-right: 5px;
-    height: 100%;
-    stroke: #9fa4aa;
-}
-
-.viewer span {
-    height: 30px;
-    width: 30px;
-    background-color: rgb(28, 117, 219);
-    margin-right: -10px;
-    border-radius: 50%;
-    border: 1px solid #fff;
-    display: grid;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    color: #fff;
-    padding: 2px;
-}
-
-.viewer span svg {
-    stroke: #fff;
-}
-
-.boutton {
-
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-
-
-}
-
-.btn {
-    padding: 1em 2em;
-    font-size: 10px;
-    font-weight: 500;
-    color: #000;
-    background-color: var(--color-secondary);
-    border: none;
-    border-radius: 45px;
-    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
-    cursor: pointer;
-    outline: none;
-    bottom: 5px;
-    position: absolute;
-}
-
-.btn:hover {
-    background-color: #fff;
-    border: 1px solid var(--color-secondary);
-
+border: 1px solid var(--color-secondary);
+margin: 10px 0;
+padding: 10px;
+border-radius: 6px;
 }
 
 
 
-.container_pagination {
-    /* border: 1px solid red; */
-    width: auto;
-    text-align: end;
-    /* height: 50px; */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 10px;
-    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-    margin: 5px;
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
 
+.form {
+  margin-top: 1.5rem;
+}
+
+.input-groupe {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.input-groupe label  {
+  display: block;
+  color: rgba(156, 163, 175, 1);
+  margin-bottom: 4px;
+}
+.titre {
+  display: block;
+  color: rgba(156, 163, 175, 1);
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.input-groupe input , .form-select {
+  width: 100%;
+  border-radius: 0.375rem !important;
+  border: 1px solid rgba(55, 65, 81, 1);
+  outline: 0;
+  padding: 14px;
+  color: rgb(3, 3, 5);
+}
+
+.input-groupe input:focus {
+  border-color: var(--color-primary);
+}
+.form-select:focus {
+  border-color: var(--color-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0 rgba(101,113,255,.25);
 }
 
 
-.liste-searcher {
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    border-radius: 6px;
-    height: 60px;
-    background-color: #fff;
-    align-items: center;
-    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
-    /* border: 1px solid red; */
+.signup a:hover {
+  text-decoration: underline var(--color-primary);
 }
 
-.liste-searcher div {
-    text-align: center;
-    font-size: 20px;
-    width: 33%;
-    vertical-align: middle;
-    border-right: 0.5px solid var(--color-primary);
+.sign {
+  display: block;
+  width: 100%;
+  background-color: var(--color-secondary);
+  padding: 0.75rem;
+  text-align: center;
+  color: black;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  margin-top: 50px;
 }
 
-.liste-searcher div :nth-child(2) {
-    background: none;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    margin: 5px;
-    padding: 10px;
-}
-
-.liste-searcher i {
-    color: var(--bg2);
-}
-
-
-.nsl select {
-    width: calc(100% - 50px);
-    font-size: 18px;
-    cursor: pointer;
+.signup {
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(156, 163, 175, 1);
 }
 
 @media screen and (max-width: 768px) {
-  .liste-searcher {
-    flex-direction: column;
-    height: auto;
-    margin: 20px auto;
-    width: 80%;
-  }
 
-  .liste-searcher div {
-    align-items: center;
-    width: 100%;
-    border-bottom: 0.2px solid var(--color-primary);
-    border-right: none;
-  }
-
-  .nsl select {
-    width: 207.5px;
-  }
+  .form-container {
+ 
+      width: 700px;
+max-width: 100%;
 }
-  </style>
-  
+.content-group{
+display: flex;
+flex-direction: column;
+}
+}
+
+.btnForm {
+
+max-width: 1140px;
+margin: 20px auto;
+background-color: white;
+padding: 1rem;
+color: black;
+box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.btnLogin {
+padding: 1em 3em;
+font-size: 12px;
+font-weight: 500;
+color: #000;
+background-color: #F9D310;
+border: none;
+border-radius: 45px;
+
+cursor: pointer;
+outline: none;
+}
+
+.btnLogin:hover {
+background-color: #fff;
+border: 1px solid #F9D310 ;
+
+}
+
+
+
+.progress-bar {
+  background-color: #e0e0e0;
+  height: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.progress {
+  background-color: #F9D310;
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+</style>

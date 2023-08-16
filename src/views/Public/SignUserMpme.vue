@@ -33,9 +33,11 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="password">Mot de passe <span class="text-danger">*</span></label>
-                <MazInput v-model="password" type="password" color="secondary" />
+                <MazInput v-model="password" type="password" color="secondary"  />
               </div>
-              <small v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</small>
+              <small v-if=" passwordTouched || v$.password.$error ">{{ v$.password.$errors[0].$message }}</small>
+             
+
 
             </div>
             <div class="col">
@@ -44,7 +46,8 @@
                 <MazInput v-model="confirmer_password" type="password" color="secondary" />
               </div>
               <small v-if="v$.confirmer_password.$error">{{ v$.confirmer_password.$errors[0].$message }}</small>
-              <small v-if="!validatePasswordsMatch()" class="text-danger">Les mots de passe ne correspondent pas.</small>
+              <small v-if="!validatePasswordsMatch()" >Les mots de passe ne correspondent pas.</small>
+             
 
             </div>
           </div>
@@ -160,7 +163,19 @@ export default {
      v$:useVuelidate(), 
       results: null,
       revele: false,
+      passwordTouched: false,
     };
+    
+  },
+  watch: {
+    password(newValue) {
+      // Si le mot de passe change, mais a déjà été touché, afficher l'erreur
+      if (this.password) {
+        console.log("eeee");
+        // this.v$.$touch();
+        this.v$.$errors.confirmer_password.$errors[0].$message 
+      }
+    },
   },
   validations: {
     email: {
@@ -215,6 +230,7 @@ export default {
     validatePasswordsMatch() {
       return this.password === this.confirmer_password;
     },
+   
 
     async submit() {
         const newPreferences = this.preferencesInput.split(',');
