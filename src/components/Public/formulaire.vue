@@ -1,5 +1,5 @@
 <template>
-    <div class="generastep">
+    <div class="generastep" data-aos="zoom-out" data-aos-delay="100">
         <div class="stepper">
             <div class="stepper-progress">
                 <div class="stepper-progress-bar" :style="'width:' + stepperProgress "></div>
@@ -37,14 +37,15 @@
                                 <div class="input-groupe">
                                     <label for="Region">Region <span class="text-danger">*</span></label>
                                     <MazSelect v-model="region" color="secondary" :options="regionOptions" />
-
                                 </div>
+                                <small v-if="v$.region.$error">{{ v$.region.$errors[0].$message }}</small>
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="Commune">Commune <span class="text-danger">*</span></label>
                                     <input type="text" name="Commune" id="Commune" placeholder="" v-model="commune">
                                 </div>
+                                <small v-if="v$.commune.$error">{{ v$.commune.$errors[0].$message }}</small>
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
@@ -357,6 +358,7 @@
                                     <MazSelect v-model="mpmeBourse" color="secondary" :options="choix" />
 
                                 </div>
+                                 <small v-if="v$.mpmeBourse.$error">{{ v$.mpmeBourse.$errors[0].$message }}</small>
                             </div>
                             <div class="col" v-if="mpmeBourse === 'oui'">
                                 <div class="input-groupe">
@@ -364,6 +366,7 @@
                                     <MazSelect v-model="nomBourse" color="secondary" :options="BourseOptions" />
 
                                 </div>
+                                 <small v-if="v$.nomBourse.$error">{{ v$.nomBourse.$errors[0].$message }}</small>
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
@@ -921,14 +924,16 @@
 
 import axios from '@/lib/axiosConfig.js'
 import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
+import useVuelidate from '@vuelidate/core';     
+import { require, lgmin, lgmax   } from '@/functions/rules';
 
 export default {
     name: 'Componentlogin',
     computed: {
 
-        // loggedInUser() {
-        //     return this.$store.getters['user/loggedInUser'];
-        // },
+        loggedInUser() {
+            return this.$store.getters['user/loggedInUser'];
+        },
         stepperProgress() {
       return ( 100 / 2 ) * ( this.currentStep - 1 ) + '%'
     }
@@ -962,6 +967,7 @@ export default {
                 { label: 'Madame', value: 'Mme' },
                 { label: 'Mademoiselle', value: 'Mlle' },
             ],
+            v$:useVuelidate(), 
 
 
             region: "",
@@ -1062,7 +1068,25 @@ export default {
       origineDonnees: '',
         };
     },
-
+    validations: {
+        step1: {
+        region: {
+          require,
+        },
+        commune: {
+          require,
+        },
+    },
+        step2: {
+           
+    mpmeBourse: {
+          require,
+        },
+    nomBourse: {
+          require,
+        },
+    },
+},
     methods: {
         createMpmeData() {
             return {
@@ -1085,7 +1109,7 @@ export default {
                 CodeStatutJuridique: this.code_st_juriq,
                 AutreStatutJuridique: this.autr_st_juriq,
                 PrincipalSecteurActivite: this.prin_sect_acti,
-                ListeSousSecteurActivite: this.list_sous_sect_act,
+                ListeSousSecteurActivite: ["Elevage"],
                 AnneeProduction1: this.an_prod_1,
                 PersonnelPermanentFemme: this.pers_per_femm,
                 PersonnelPermanentHomme: this.pers_per_homm,
@@ -1103,7 +1127,7 @@ export default {
                 NomBourse: this.nomBourse,
                 RecptionPrix: this.receptionPrix,
                 PrincipalPrix: this.principalPrix,
-                AnneePrixPrincipal: this.anneePrixPrincipal,
+                AnneePrixPrincipal: parseInt(2015),
                 TitreDirigeant: this.titreDirigeant,
                 NomDirigeant: this.nomDirigeant,
                 PrenomDirigeant: this.prenomDirigeant,
@@ -1159,22 +1183,37 @@ export default {
         },
         async nextStep() {
             if (this.currentStep === 1) {
+                // this.v$.$touch()
+                this.v$.$touch(this.validations.step1);
+               if (this.v$.$errors.length == 0 ) {
                 const mpmeData = this.createMpmeData();
-                console.log('mpmeData', mpmeData);
-                this.currentStep++;
-                // const success = await this.enregistrerMpmeDonnees(mpmeData);
-                // console.log('success', success);
-
-                // if (success) {
-                //     this.currentStep++;
-                // } else {
-                //     console.error('Erreur lors de l\'enregistrement des données pour le MPME');
-                // }
-
+                console.log('mpmeData1', mpmeData);
+                const success = await this.enregistrerMpmeDonnees(mpmeData);
+                console.log('success', success);
+                if (success) {
+                    this.currentStep++;
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                        });
+                } else {
+                    console.error('Erreur lors de l\'enregistrement des données pour le MPME');
+                }
+                }
+               
             } else if (this.currentStep === 2) {
-                this.currentStep++;
-                const mpmeData = this.createMpmeData();
-                console.log('mpmeData', mpmeData);
+                this.v$.$touch(this.validations.step2);
+                if (this.v$.$errors.length == 0 ) {
+                
+                
+                }
+                // this.currentStep++;
+                // window.scrollTo({
+                //         top: 0,
+                //         behavior: 'smooth',
+                //         });
+                // const mpmeData = this.createMpmeData();
+                // console.log('mpmeData', mpmeData);
             }
 
 
@@ -1183,6 +1222,10 @@ export default {
         prevStep() {
             if (this.currentStep > 1) {
                 this.currentStep--;
+                window.scrollTo({
+                top: 0,
+                behavior: 'smooth', 
+                });
             }
         },
 
@@ -1192,7 +1235,7 @@ export default {
         },
         async fetchgetOneMpme() {
             try {
-                // const userId = this.loggedInUser.user.Entreprises;
+                //  const userId = this.loggedInUser.user.Entreprises;
                 const userId = 'MPME-1580-2023'
                 const response = await axios.get(`/mpme/${userId}`);
                 this.userData = response.data.data;
@@ -1216,9 +1259,14 @@ export default {
 
         async enregistrerMpmeDonnees(mpmeData) {
             try {
-                const userId = this.loggedInUser.user.Entreprises;
-                const response = await axios.put(`/mpme/${userId}`, mpmeData);
-                console.log("responseee", response);
+                // const userId = this.loggedInUser.user.Entreprises;
+                const userId = 'MPME-1580-2023'
+
+                const response = await axios.put(`/mpme/${userId}`, mpmeData, {
+        headers: {
+          Authorization: `Bearer ${this.loggedInUser.access_token}`,
+        },
+      });
 
                 if (response.status === 200) {
                     console.log('Données MPME mises à jour avec succès !');
@@ -1429,12 +1477,16 @@ export default {
 
 
     mounted() {
-        // console.log("data", this.loggedInUser.user.Entreprises);
+        window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+         console.log("data", this.loggedInUser.access_token);
         this.fetchgetOneMpme(),
-            this.fetchCountryOptions();
+        this.fetchCountryOptions();
         this.fetchRegionOptions();
         this.fetchPrefectureOptions(),
-            this.fetchSousPrefectureOptions()
+        this.fetchSousPrefectureOptions()
         this.fetchQuartierOptions();
         this.fetchSecteurActiviteOptions();
         this.fetchSousSecteurActiviteOptions();

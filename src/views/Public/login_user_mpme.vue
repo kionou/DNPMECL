@@ -185,8 +185,8 @@ margin-bottom: 4px;
 
 .input-group input {
 width: 100%;
-border-radius: 0.375rem !important;
-border: 1px solid rgba(55, 65, 81, 1);
+border-radius: 0.5rem !important;
+  border: 2px solid #e5e7eb;
 outline: 0;
 
 padding: 14px;

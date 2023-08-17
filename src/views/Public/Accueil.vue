@@ -6,7 +6,7 @@
       <div class="rowe gy-5" data-aos="fade-in">
         <div class="hero_content1 col-lg-6 order-2 order-lg-1  text-center text-lg-start" style="margin-bottom:auto">
           <h2>Identifiez votre entreprise</h2>
-          <p>Le processus de création d’une société est une étape clé dans la vie d'un entrepreneur.</p>
+          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME </p>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <router-link to="/sign_user_mpme" class="btn-get-started">Idenifier votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">

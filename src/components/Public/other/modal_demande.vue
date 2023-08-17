@@ -11,7 +11,7 @@
       
     </p>
     <div class="btn_sign">
-		<button class="sign" @click="hamdleSubmitsms">SMS</button>
+		<button class="sign" @click="hamdleSubmitsms">WHATSAPP</button>
 
 <!-- {{ loggedInUser }} -->
 		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification',})">E-MAIL</button>
@@ -55,10 +55,10 @@ import axios from '@/lib/axiosConfig.js'
           }
           console.log("eee",CodeUser);
           try {
-      // const response = await axios.post('/mpme/send-otp', CodeUser);
-      // console.log('response.Code', response); 
+      //  const response = await axios.post('/mpme/send-otp', CodeUser);
+      //  console.log('response.Code', response); 
       console.log("try",datauser);
-       this.$router.push({ name: 'Test' }); 
+       this.$router.push({ name: 'Formulaire' }); 
     } catch (error) {
     
     }
@@ -165,7 +165,7 @@ import axios from '@/lib/axiosConfig.js'
 
 .sign {
   display: block;
-  width: 100px;
+  width: 110px;
   background-color: var(--color-secondary);
   padding: 0.75rem;
   text-align: center;

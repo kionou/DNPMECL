@@ -45,15 +45,14 @@
           </div>
           <div class="texte">
             <p class="para">{{ pme.NomMpme }}</p>
-            <p class="texte-content">Creation: <span>{{ pme.AnneeCreation }}</span></p>
+            <p class="texte-content">Date de Creation: <span>{{ pme.AnneeCreation }}</span></p>
             <p class="texte-content">Dirigeant: <span>{{ pme.PrenomDirigeant }} {{ pme.NomDirigeant }}</span></p>
           </div>
         </div>
         <div class="texte">
-          <p class="texte-content">Code APE: <span>{{ pme.code_pme }}</span></p>
           <p class="texte-content">Ville: <span>{{ pme.Ville }}</span></p>
           <p class="texte-content">Email: <span>{{ pme.AdresseEmail }}</span></p>
-          <p class="texte-content">Contact: <span> (+224) {{ pme.NumeroWhatsApp }}</span></p>
+          <p class="texte-content">Contact: <span> {{ pme.NumeroWhatsApp }}</span></p>
         </div>
         <div class="boutton">
           <p  @click="$router.push({ path: `/liste_pme/mpme/${ pme.CodeMpme }`,  })" class="btn">Detail<span></span></p>
@@ -115,6 +114,10 @@ export default {
     onPageChanged(page) {
       this.currentPage = page;
       this.fetchData(page);
+      window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+    });
     },
     filterByName() {
         const searchValue = this.control.name.toLowerCase();
@@ -164,61 +167,12 @@ export default {
 
 
 <style scoped>
-.pagination-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-}
 
-.data-list {
-  list-style: none;
-  padding: 0;
-  max-width: 500px;
-    margin: 0 auto;
-}
-
-.data-item {
-  margin-bottom: 5px;
-  padding: 8px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.pagination-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.prev-button,
-.next-button {
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.prev-button:disabled,
-.next-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.page-info {
-  font-size: 14px;
-}
 
 
 
 .container_content {
-    max-width: 1140px;
+    /* max-width: 1140px; */
     margin: 0 auto;
     /* border: 1px solid red; */
     background: #fff;
@@ -251,13 +205,13 @@ export default {
     position: relative;
     color: #2e2e2f;
     background-color: #fff;
-    padding: 1rem;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
     margin: 0 10px 10px 0;
     border: 3px dashed transparent;
-    width: 330px;
-    height: 280px;
+    width: 300px;
+    height: 248px;
   }
   
   
@@ -273,10 +227,10 @@ export default {
   }
   
   .task .para {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: #2e2e2f;
-    width: 190px;
+    width: 226px;
   }
   
   .texte{
@@ -302,7 +256,7 @@ export default {
   }
   
   .tag .image {
-    height: 60px;
+    height: 40px;
     width: 60px;
     margin-right: 10px;
   }
@@ -402,7 +356,7 @@ export default {
     /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
     cursor: pointer;
     outline: none;
-    bottom: 5px;
+    bottom: 0px;
     position: absolute;
   }
   

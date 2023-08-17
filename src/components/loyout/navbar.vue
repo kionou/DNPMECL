@@ -1,24 +1,7 @@
 <template>
   <div>
     <!-- ======= Header ======= -->
-    <div class="general">
-     <div class="navbar-2">
-      <div class="nav-item dropdown">
-        <div  class="nav-link dropdown-toggle  compte-users"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <div class="profile">
-            <i class="bi bi-person-fill"></i>
-            <span style="font-size: 15px;">Mon compte</span>
-          </div>
-          <ul class="dropdown-menu menu" aria-labelledby="navbarDropdown" >
-            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-postcard"></i>Mon espace</a></li>
-            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
-            
-            <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right"></i>Déconnexion</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    </div>
+  
   
     <section id="topbar" class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
@@ -27,8 +10,27 @@
         </div>
       </div>
     </section>
-    <!-- End Top Bar -->
-    <header id="header" class="header d-flex align-items-center">
+    <div id="header" class="header">
+      <div class="general" v-if="shouldShowNavbar">
+      
+      <div class="navbar-2">
+       <div class="nav-item dropdown">
+         <div  class="nav-link dropdown-toggle  compte-users"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <div class="profile">
+             <i class="bi bi-person-fill"></i>
+             <span style="font-size: 16px; color: white; font-weight: 700; font-family: fangsong;">Mon compte</span>
+           </div>
+           <ul class="dropdown-menu menu" aria-labelledby="navbarDropdown" >
+             <li><a href="/formulaire" class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard"></i>Mon espace</a></li>             
+             <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right"></i>Déconnexion</a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+     </div>
+
+
+     <header  class=" d-flex align-items-center">
       <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <router-link to="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -59,9 +61,6 @@
           <span> Connexion </span>
         </router-link>
       </div>
-     
-
-
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list">
           <span>Menu</span>
         </i>
@@ -69,15 +68,28 @@
 
       </div>
     </header>
+
+    </div>
+    <!-- End Top Bar -->
+   
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'MpmeNavbar',
-    computed: {
-    loggedInUser() {
-      return this.$store.getters['user/loggedInUser'];
+
+      computed: {
+    ...mapGetters('user', ['isLoggedIn']),
+    shouldShowNavbar() {
+      return this.isLoggedIn && this.$route.path !== '/login_user_mpme/verification';
+    },
+  },
+  
+  watch: {
+    isLoggedIn(newValue) {
+      console.log('User is logged in:', newValue);
     },
   },
 
@@ -124,31 +136,7 @@ export default {
 
     }
 
-
-
-    /**
-     * Hide mobile nav on same-page/hash links
-     */
-    // document.querySelectorAll('#navbar a').forEach(navbarlink => {
-    //   navbarlink.addEventListener('click', (e) => {
-    //     console.log('rrrrzzzzzz', navbarlink);
-    //     if (document.querySelector('.mobile-nav-active')) {
-    //       if (!navbarlink.hash) return;
-    //       let section = document.querySelector(navbarlink.hash);
-    //       console.log('section', section);
-    //       if (!section) return;
-    //       console.log('bonjour', e.target);
-    //       mobileNavToogle();
-
-    //     }
-    //   });
-    // });
-
-
     document.querySelectorAll('#navbar a').forEach(navbarlink => {
-  // if (!navbarlink.hash) return;
-  // let section = document.querySelector(navbarlink.hash);
-  // if (!section) return;
 
   navbarlink.addEventListener('click', (e) => {
     e.preventDefault();
@@ -195,36 +183,9 @@ export default {
   window.addEventListener('load', navbarlinksActive);
   document.addEventListener('scroll', navbarlinksActive);
 
-
-
-  /**
-
-
-    /**
-     * Toggle mobile nav dropdowns
-     */
-    // const navDropdowns = document.querySelectorAll('.navbar .dropdown > a');
-
-    // navDropdowns.forEach(el => {
-    //   el.addEventListener('click', function (event) {
-    //     if (document.querySelector('.mobile-nav-active')) {
-    //       event.preventDefault();
-    //       this.classList.toggle('active');
-    //       this.nextElementSibling.classList.toggle('dropdown-active');
-
-    //       let dropDownIndicator = this.querySelector('.dropdown-indicator');
-    //       dropDownIndicator.classList.toggle('bi-chevron-up');
-    //       dropDownIndicator.classList.toggle('bi-chevron-down');
-    //     }
-    //   })
-    // });
-
-
-
-      /**
-   * Sticky Header on Scroll
-   */
   const selectHeader = document.querySelector('#header');
+  const selectGeneral = document.querySelector('.general');
+
   if (selectHeader) {
     let headerOffset = selectHeader.offsetTop;
     let nextElement = selectHeader.nextElementSibling;
@@ -242,24 +203,15 @@ export default {
     document.addEventListener('scroll', headerFixed);
   }
 
+
+
   /**
    * Navbar links active state on scroll
    */
-
-
-
-
-  
-
   },
 
   methods: {
-    async profil(){
-      const toggleMenu = document.querySelector(".menu")
-        toggleMenu.classList.toggle('active')
-    
-    
-    },
+  
 
   },
 };
@@ -278,6 +230,7 @@ export default {
 width: 100%;
 height: auto;
 
+
 }
 .menu{
 inset: auto !important;
@@ -290,6 +243,7 @@ inset: auto !important;
   position: relative;
   display: flex;
   justify-content: flex-end;
+  background-color: #c8ebc1;
 }
 
 
@@ -305,7 +259,7 @@ inset: auto !important;
   align-items: center;
   background-color: #fff;
   color:#000;
-  border: 1px solid var(--color-primary);
+  /* border: 1px solid var(--color-primary); */
 
 }
 
