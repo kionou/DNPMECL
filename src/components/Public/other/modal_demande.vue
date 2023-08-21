@@ -12,23 +12,14 @@
     </p>
     <div class="btn_sign">
 		<button class="sign" @click="hamdleSubmitsms">WHATSAPP</button>
-
-<!-- {{ loggedInUser }} -->
-		<button class="sign" @click="$router.push({ path: '/login_user_mpme/verification',})">E-MAIL</button>
-
+		<button class="sign" @click="hamdleSubmitemail">E-MAIL</button>
     </div>
-	
-        
-	
     </div> 
   </div>
   </template>
   
   <script>
 import axios from '@/lib/axiosConfig.js'
-
-
- 
   export default {
       name:'ComponentModal',
       props: ["revele", "toggleModale" , "data"],
@@ -45,21 +36,41 @@ import axios from '@/lib/axiosConfig.js'
       },
           
       methods: {
-        async  hamdleSubmitsms(){
+        async  hamdleSubmitemail(){
           const datauser = this.loggedInUser
-      
-          let CodeUser ={
+          let CodeUserEmail ={
+          email:1,
+            value:datauser.user.email
+          // value:'kionoumamadou.00@gmail.com'
+          
+          }
+          console.log("eee",CodeUserEmail);
+          try {
+       const response = await axios.post('/mpme/send-otp', CodeUserEmail);
+       console.log('response.Code', response); 
+      console.log("try",datauser);
+      this.$router.push({ name: 'Verification', query: { channel: 'email' } });
+    } catch (error) {
+    
+    }
+         
+            },
+            async  hamdleSubmitsms(){
+          const datauser = this.loggedInUser
+          let CodeUserWhatsapp ={
           email:0,
            value:this.loggedInUser.user.Whatsapp
           
           }
-          console.log("eee",CodeUser);
+          console.log("eee",CodeUserWhatsapp);
           try {
-      //  const response = await axios.post('/mpme/send-otp', CodeUser);
-      //  console.log('response.Code', response); 
+        const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
+        console.log('response.Code', response); 
       console.log("try",datauser);
-       this.$router.push({ name: 'Formulaire' }); 
+      //  this.$router.push({ name: 'Dossiers' }); 
+        this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
     } catch (error) {
+      console.log(error.message);
     
     }
          

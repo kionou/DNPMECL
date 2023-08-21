@@ -1,13 +1,33 @@
 <template>
-  <div>
+    <div class=" d-flex justify-content-center align-items-center flex-wrap">
+        <div class="btnLogin" @click="this.isOpen = true" > <i class="bi bi-plus-lg"></i> Ajouter</div>
+      <div class="task" v-for="item in userData.photos" :key="item.id" >
+  
+        <div class="tag" >
+          <div class="image">
+            <img :src="item.Photo" alt="" class="glightbox">
+          </div>
+        </div> 
+        <div class="icon">
+    <i class="bi bi-pen"></i>
+  <i class="bi bi-trash"></i>
+  </div>
+    </div>
+
+  
+
+
+
+<MazDialog v-if="isOpen" v-model="isOpen" >
+    <div>
     <div id="uploadArea" class="upload-area">
       <!-- Header -->
       <div class="upload-area__header">
-        <h1 class="upload-area__title">Upload your file</h1>
+        <h1 class="upload-area__title">Téléchargez votre fichier</h1>
         <p class="upload-area__paragraph">
-          File should be an image
+            Le fichier doit être une image
           <strong class="upload-area__tooltip">
-            Like
+            comme
             <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
           </strong>
         </p>
@@ -26,18 +46,19 @@
           <i class="bi bi-file-earmark-image"></i>
         </span>
         <!-- <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p> -->
-        <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+        <span id="loadingText" class="drop-zoon__loading-text">S'il vous plaît, attendez</span>
         <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false" />
         <label for="fileInput" class="drop-zoon__paragraph">
-  <span class="drop-zoon__file-label-text">Click to browse</span>
-</label>
+          <span class="drop-zoon__file-label-text">Cliquez pour parcourir</span>
+        </label>
         <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" @change="handleFileChange" />
+
       </div>
       <!-- End Drop Zoon -->
 
       <!-- File Details -->
       <div id="fileDetails" class="upload-area__file-details file-details">
-        <h3 class="file-details__title">Uploaded File</h3>
+        <h3 class="file-details__title">Fichier téléchargé</h3>
 
         <div id="uploadedFile" class="uploaded-file">
           <div class="uploaded-file__icon-container">
@@ -54,22 +75,76 @@
       <!-- End File Details -->
     </div>
   </div>
+
+    </MazDialog>
+    </div>
 </template>
 
 <script>
+import 'swiper/swiper-bundle.css';
+import  "glightbox/dist/css/glightbox.css";
+import  "glightbox/dist/js/glightbox.js";
+import GLightbox from 'glightbox';
+import MazDialog from 'maz-ui/components/MazDialog'
+import axios from '@/lib/axiosConfig.js'
 export default {
-  name: 'DNPMECLTest',
+    name: 'DNPMECLImage',
+    components: {
+    MazDialog,
+    
+  },
+    computed: {
+   
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
+  },
 
-  data() {
-    return {
-      imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
+    data() {
+        return {
+            isOpen:false,
+            imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
       uploadedFileName: 'Project 1',
       uploadedFileIconText: '',
       uploadedFileCounter: 0,
-    };
-  },
+      isUploading: false,
+      uploadProgress: 0,
+      userData:''
+            
+        };
+    },
 
-  methods: {
+    mounted() {
+        this.lightbox = GLightbox({ 
+              selector: ".glightbox"
+             });
+        console.log("datadossiers", this.loggedInUser);
+        
+        this.fetchgetPhotoMpme()
+    },
+    methods: {
+
+      async fetchgetPhotoMpme() {
+            try {
+                const userId = this.loggedInUser.user.Entreprises;
+                // const userId = 'MPME-1580-2023'
+                const response = await axios.get(`/mpme/photos/${userId}`, {
+         headers: {
+                       Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                    },
+        //              onUploadProgress: (progressEvent) => {
+        // const percentage = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+        // this.uploadedFileCounter = percentage;
+      // },
+            
+          });
+                this.userData = response.data.data;
+              
+                console.log('UserData:', this.userData.photos);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+            }
+        },
     handleDragOver(event) {
     console.log('Drag over');
     event.preventDefault();
@@ -93,19 +168,28 @@ export default {
     console.log('Selected file:', file);
     this.uploadFile(file);
   },
-    uploadFile(file) {
+  async  uploadFile(file) {
       const fileReader = new FileReader();
       const fileType = file.type;
       const fileSize = file.size;
 
       if (this.fileValidate(fileType, fileSize)) {
+        const formData = new FormData();
+       formData.append('photo', file);
+        console.log('tttt', formData);
         try {
-           //  const response = await axios.post('/mpme/photos/MPME-1580-2023', formData, {
-      //    headers: {
-      //   Authorization: `Bearer ${this.loggedInUser.access_token}`,
-      //               },
+          const userId = this.loggedInUser.user.Entreprises;
+            const response = await axios.post(`/mpme/photos/${userId}`, formData, {
+         headers: {
+           Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                    },
+        //              onUploadProgress: (progressEvent) => {
+        // const percentage = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+        // this.uploadedFileCounter = percentage;
+      // },
             
-      //     });
+          });
+          // this.uploadedFileCounter = 100;
           const dropZoon = document.querySelector('#dropZoon');
         const loadingText = document.querySelector('#loadingText');
         const previewImage = document.querySelector('#previewImage');
@@ -120,6 +204,7 @@ export default {
 
         fileReader.addEventListener('load', () => {
           setTimeout(() => {
+            console.log('errrr');
             const uploadArea = document.querySelector('#uploadArea');
             uploadArea.classList.add('upload-area--open');
             loadingText.style.display = 'none';
@@ -131,6 +216,7 @@ export default {
             uploadedFile.classList.add('uploaded-file--open');
             uploadedFileInfo.classList.add('uploaded-file__info--active');
           }, 500);
+          console.log('Réponse de l\'API:', response.data);
 
           previewImage.setAttribute('src', fileReader.result);
           this.uploadedFileName = file.name;
@@ -180,46 +266,168 @@ export default {
 
 <style lang="css" scoped>
 
-/* General Styles */
 
-* {
-  box-sizing: border-box;
+.btnLogin {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    background-color: #F9D310;
+    border: none;
+    border-radius: 45px;
+    position: absolute;
+    z-index: 3;
+    right: 24px;
+    top: -71px;
+    cursor: pointer;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-:root {
-  --clr-white: rgb(255, 255, 255);
-  --clr-black: rgb(0, 0, 0);
-  --clr-light: rgb(245, 248, 255);
-  --clr-light-gray: rgb(196, 195, 196);
-  --clr-blue: rgb(63, 134, 255);
-  --clr-light-blue: rgb(171, 202, 255);
+.btnLogin:hover {
+    background-color: #fff;
+    border: 1px solid #F9D310;
+    color: #F9D310;
+
+}
+@media (max-width: 991px){
+    section {
+    padding: 50px !important;
+}
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--clr-light);
-  color: var(--clr-black);
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.125rem;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+
+
+.container_content {
+    margin: 0 auto;
+    background: #fff;
+  
+  }
+  .section-header{
+    padding: 40px 0 0 0 !important;
+  
+  }
+  
+  .contenu {
+  
+    position: relative;
+    padding: 15px 10px;
+  }
+  
+  .task {
+    position: relative;
+    color: #2e2e2f;
+    background-color: #fff;
+    padding: 10px 0px;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin: 0 10px 10px 0;
+    border: 3px dashed transparent;
+    width: 230px;
+    height: 267px;
+        display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
+        justify-content: space-between;
+  }
+
+
+  
+  .tag .image {
+
+
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  transition: opacity 0.3s ease;
+  vertical-align: middle
+  }
+.tag .image:hover {
+    object-fit: cover;
+    filter: brightness(75%);
+    transition: opacity 0.35s, transform 0.35s;
+    transform: translate3d(-10px, 0, 0);
+}
+  
+  .tag .image img {
+  
+    max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  
+  }
+
+  .icon{
+    /* border:1px solid red ; */
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+        font-size: 25px;
+    padding: 5px;
+   
 }
 
-/* End General Styles */
+.icon .bi{
+/* border: 1px solid blue; */
+padding: 2px;
+ border-radius: 5px;
+ width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.bi-pen{
+color: #fff;
+background-color: #0d6efd;
+
+}
+
+.bi-pen:hover{
+color: #0d6efd;
+background-color: #fff;
+border:1px solid #0d6efd;
+cursor: pointer;
+
+}
+
+.bi-trash{
+color: #fff;
+background-color: #ff3e1dcc;
+
+}
+
+.bi-trash:hover{
+color: #ff3e1dcc;
+background-color: #fff;
+border:1px solid #ff3e1dcc;
+cursor: pointer;
+
+}
+
+
+
+
+
 
 /* Upload Area */
 .upload-area {
   width: 100%;
-  max-width: 25rem;
+  /* max-width: 25rem; */
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 10px 60px rgb(218, 229, 255);
-  border: 2px solid rgb(171, 202, 255);
+  border: 2px solid var(--color-secondary);
   border-radius: 24px;
   padding: 2rem 1.875rem 5rem 1.875rem;
-  margin: 0.625rem;
+  /* margin: 0.625rem; */
   text-align: center;
 }
 
@@ -237,10 +445,6 @@ body {
   }
 }
 
-/* Header */
-.upload-area__header {
-
-}
 
 .upload-area__title {
   font-size: 1.8rem;
@@ -256,7 +460,7 @@ body {
 
 .upload-area__tooltip {
   position: relative;
-  color: rgb(171, 202, 255);
+  color: var(--color-secondary);
   cursor: pointer;
   transition: color 300ms ease-in-out;
 }
@@ -273,7 +477,7 @@ body {
   min-width: max-content;
   background-color: rgb(255, 255, 255);
   color: rgb(63, 134, 255);
-  border: 1px solid rgb(171, 202, 255);
+  border: 1px solid var(--color-secondary);
   padding: 0.625rem 1.25rem;
   font-weight: 500;
   opacity: 0;
@@ -295,7 +499,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px dashed rgb(171, 202, 255);
+  border: 2px dashed var(--color-secondary);
   border-radius: 15px;
   margin-top: 2.1875rem;
   cursor: pointer;
@@ -303,13 +507,13 @@ body {
 }
 
 .upload-area__drop-zoon:hover {
-  border-color: rgb(63, 134, 255);
+  border-color: var(--color-secondary);
 }
 
 .drop-zoon__icon {
   display: flex;
   font-size: 3.75rem;
-  color: rgb(63, 134, 255);
+  color: var(--color-primary);
   transition: opacity 300ms ease-in-out;
 }
 

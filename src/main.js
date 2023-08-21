@@ -7,6 +7,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'maz-ui/css/main.css'
+import '@syncfusion/ej2-vue-dropdowns/styles/material.css'; 
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 import store from './store'
 
 
@@ -34,6 +38,8 @@ app.component('MazPhoneNumberInput', MazPhoneNumberInput)
 app.component('MazSelect', MazSelect)
 app.component('MazAvatar', MazAvatar)
 app.component('MazTextarea', MazTextarea)
+app.component('VueDatePicker', VueDatePicker);
+
 
 
 

@@ -10,28 +10,13 @@
         </div>
       </div>
     </section>
-    <div id="header" class="header">
-      <div class="general" v-if="shouldShowNavbar">
-      
-      <div class="navbar-2">
-       <div class="nav-item dropdown">
-         <div  class="nav-link dropdown-toggle  compte-users"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           <div class="profile">
-             <i class="bi bi-person-fill"></i>
-             <span style="font-size: 16px; color: white; font-weight: 700; font-family: fangsong;">Mon compte</span>
-           </div>
-           <ul class="dropdown-menu menu" aria-labelledby="navbarDropdown" >
-             <li><a href="/formulaire" class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard"></i>Mon espace</a></li>             
-             <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right"></i>Déconnexion</a></li>
-           </ul>
-         </div>
-       </div>
-     </div>
-     </div>
+   
+   
 
 
-     <header  class=" d-flex align-items-center">
-      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+ 
+         <header    id="header" class=" header d-flex align-items-center">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <router-link to="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <img src="@/assets/img/armoirie.png" alt="">
@@ -56,8 +41,25 @@
           </ul>
         </nav>
       <div class="second">
-        <router-link to="/connexion" class="btnCt">
-          <i class="  bi bi-person-fill-lock"></i>
+        <!-- v-if="shouldShowNavbar" -->
+  
+        <div v-if="shouldShowNavbar" >
+                <div class="btnCt "  role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+        <i class="bi bi-person-fill"></i>
+          <span> Mon compte </span>
+          
+       </div>
+                <ul class="dropdown-menu menu"  >
+             <li><router-link to="/mon_espace"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard pt-0"></i>Mon espace</router-link></li>             
+             <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right pt-0"></i>Déconnexion</a></li>
+             
+           </ul>
+               </div>
+     
+      
+     
+        <router-link to="/login_user_mpme" class="btnCt" v-else>
+          <i class=" bi bi-person-fill-lock"></i>
           <span> Connexion </span>
         </router-link>
       </div>
@@ -68,8 +70,6 @@
 
       </div>
     </header>
-
-    </div>
     <!-- End Top Bar -->
    
   </div>
@@ -184,7 +184,7 @@ export default {
   document.addEventListener('scroll', navbarlinksActive);
 
   const selectHeader = document.querySelector('#header');
-  const selectGeneral = document.querySelector('.general');
+
 
   if (selectHeader) {
     let headerOffset = selectHeader.offsetTop;
@@ -224,53 +224,6 @@ export default {
 
 }
 
-
-.general{
-
-width: 100%;
-height: auto;
-
-
-}
-.menu{
-inset: auto !important;
-}
-
-.navbar-2 .compte-users {
-  padding: 8px;
-  color: #fff;
-  font-size: 13px;
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #c8ebc1;
-}
-
-
-.navbar-2  .compte-users .bi-person-fill {
-  border-radius: 50%;
-  margin-right: 6px;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  color:#000;
-  /* border: 1px solid var(--color-primary); */
-
-}
-
-.navbar-2 .compte-users .profile {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-}
-
-
 .btnCt{
     padding: 10px;
     font-size: 14px;
@@ -309,7 +262,7 @@ font-size: 12px;
 
   .second{
   /* border: 1px solid red; */
-  width: 0;
+  width: 104px;
  
 }
 }

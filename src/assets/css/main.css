@@ -296,7 +296,7 @@ padding-bottom: 0 !important;
 .header {
   transition: all 0.5s;
   z-index: 997;
-  /* height: 90px; */
+  height: 90px;
   background-color: var(--color-primary);
 }
 
@@ -307,7 +307,7 @@ padding-bottom: 0 !important;
   left: 0;
   height: 70px;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
-  height: 20%;
+
 }
 
 .header .logo img {

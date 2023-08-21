@@ -13,12 +13,15 @@ import Formulaire from '../views/Public/formulaire.vue'
 import Singmpme from '../views/Public/SignUserMpme.vue'
 import Loginmpme from '../views/Public/login_user_mpme.vue'
 import Verification from '../views/Public/Verification_code.vue'
-import Test from '../views/Public/test2.vue'
+import Espace from '../views/Public/espace.vue'
+import Dossiers from '../views/Public/dossiers.vue'
+
+// import Test from '../views/Public/test2.vue'
 
 
 
 
-// import Test from '../views/test.vue'
+import Test from '../views/test.vue'
 
 
 
@@ -40,12 +43,14 @@ const router = createRouter({
          { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
          { path: '/connexion', name: 'connexion', component: Connexion },
-         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,  },
-         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme },
+         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true }, },
+         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , beforeEnter: requireNotLoggedIn},
          { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , props:true  , beforeEnter: requireNotLoggedIn},
 
          { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
          { path: '/login_user_mpme/verification', name: 'Verification', component: Verification , props:true  ,  meta: { requiresAuth: true }, },
+         { path: '/mon_espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true }, },
+         { path: '/dossiers', name: 'Dossiers', component: Dossiers },
          { path: '/test', name: 'Test', component: Test, }
          
 
@@ -59,7 +64,7 @@ const router = createRouter({
 function requireNotLoggedIn(to, from, next) {
   const isLoggedIn = store.getters['user/isLoggedIn'];
   if (isLoggedIn) {
-    next('/formulaire'); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
+    next('/mon_espace'); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
   } else {
     next();
   }
