@@ -7,9 +7,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'maz-ui/css/main.css'
-import '@syncfusion/ej2-vue-dropdowns/styles/material.css'; 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
 import store from './store'
 
@@ -32,6 +35,11 @@ import router from './router'
 
 const app = createApp(App)
 
+const vuetify = createVuetify({
+    components,
+    directives,
+  })
+
 app.component('MazBtn', MazBtn)
 app.component('MazInput', MazInput)
 app.component('MazPhoneNumberInput', MazPhoneNumberInput)
@@ -45,6 +53,7 @@ app.component('VueDatePicker', VueDatePicker);
 
 app.use(store);
 app.use(VueChartkick)
+app.use(vuetify);
 app.use(router)
 app.mount('#app')
 

@@ -77,7 +77,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="Localisation">Localisation <span class="text-danger">*</span></label>
+                                    <label for="Localisation">Localisation </label>
                                     <input type="text" name="Localisation" id="Localisation" placeholder=""
                                         v-model="step1.localisation">
                                 </div>
@@ -124,7 +124,7 @@
                         <div class="row mb-3 mt-3 content-group">
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="Rue">Rue <span class="text-danger">*</span></label>
+                                    <label for="Rue">Rue </label>
                                     <input type="text" name="Rue" id="Rue" placeholder="" v-model="step1.rue">
                                 </div>
                                 <small v-if="v$.step1.rue.$error">{{ v$.step1.rue.$errors[0].$message }}</small>
@@ -153,8 +153,7 @@
                         <div class="row mb-3 mt-3 content-group">
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="NumeroTelephoneSecondaire">Numéro Téléphone Secondaire <span
-                                            class="text-danger">*</span></label>
+                                    <label for="NumeroTelephoneSecondaire">Numéro Téléphone Secondaire </label>
                                     <MazPhoneNumberInput v-model="step1.tel_second" show-code-on-list color="secondary"
                                         :ignored-countries="['AC']" @update="results = $event"
                                         :success="results?.isValid" />
@@ -173,7 +172,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="SiteWeb">Site Web <span class="text-danger">*</span></label>
+                                    <label for="SiteWeb">Site Web </label>
                                     <input type="url" name="url" id="SiteWeb" placeholder="" v-model="step1.url">
                                 </div>
                                 <small v-if="v$.step1.url.$error">{{ v$.step1.url.$errors[0].$message }}</small>
@@ -216,8 +215,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="CodeStatutJuridique">Code Statut Juridique <span
-                                            class="text-danger">*</span></label>
+                                    <label for="CodeStatutJuridique">Code Statut Juridique</label>
                                     <MazSelect v-model="step1.code_st_juriq" color="secondary"
                                         :options="StatutJuridiqueOptions" />
                                 </div>
@@ -228,8 +226,7 @@
                         <div class="row mb-3 mt-3 content-group">
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="AutreStatutJuridique">Autre Statut Juridique <span
-                                            class="text-danger">*</span></label>
+                                    <label for="AutreStatutJuridique">Autre Statut Juridique</label>
                                     <input type="text" name="AutreStatutJuridique" id="AutreStatutJuridique" placeholder=""
                                         v-model="step1.autr_st_juriq">
                                 </div>
@@ -250,11 +247,9 @@
                                 <div class="input-groupe">
                                     <label for="ListeSousSecteurActivite">Liste Sous Secteur Activite <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step1.list_sous_sect_act" color="secondary"
-                                        :options="SousSecteurActiviteOptions" />
-                                </div>
-                                <small v-if="v$.step1.list_sous_sect_act.$error">{{
-                                    v$.step1.list_sous_sect_act.$errors[0].$message }}</small>
+                                            <v-select v-model="step1.selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint></v-select>
+              </div>
+              <small v-if="v$.step1.selectedSousSecteurs.$error">{{ v$.step1.selectedSousSecteurs.$errors[0].$message }}</small>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 content-group">
@@ -274,8 +269,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="PersonnelPermanentFemme">Personnel Permanent Femme <span
-                                            class="text-danger">*</span></label>
+                                    <label for="PersonnelPermanentFemme">Personnel Permanent Femme </label>
                                     <input type="text" name="PersonnelPermanentFemme" id="PersonnelPermanentFemme"
                                         placeholder="" v-model="step1.pers_per_femm">
                                 </div>
@@ -284,8 +278,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="PersonnelPermanentHomme">Personnel Permanent Homme <span
-                                            class="text-danger">*</span></label>
+                                    <label for="PersonnelPermanentHomme">Personnel Permanent Homme </label>
                                     <input type="text" name="PersonnelPermanentHomme" id="PersonnelPermanentHomme"
                                         placeholder="" v-model="step1.pers_per_homm">
                                 </div>
@@ -299,8 +292,7 @@
 
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="PersonnelTemporaireFemme">Personnel Temporaire Femme <span
-                                            class="text-danger">*</span></label>
+                                    <label for="PersonnelTemporaireFemme">Personnel Temporaire Femme </label>
                                     <input type="text" name="PersonnelTemporaireFemme" id="PersonnelTemporaireFemme"
                                         placeholder="" v-model="step1.pers_temp_femm">
                                 </div>
@@ -309,8 +301,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="PersonnelTemporaireHomme">Personnel Temporaire Homme <span
-                                            class="text-danger">*</span></label>
+                                    <label for="PersonnelTemporaireHomme">Personnel Temporaire Homme </label>
                                     <input type="text" name="PersonnelTemporaireHomme" id="PersonnelTemporaireHomme"
                                         placeholder="" v-model="step1.pers_temp_homm">
                                 </div>
@@ -319,8 +310,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="ChiffreAffaire1">Chiffre Affaire 1 <span
-                                            class="text-danger">*</span></label>
+                                    <label for="ChiffreAffaire1">Chiffre Affaire 1</label>
                                     <input type="text" name="ChiffreAffaire1" id="ChiffreAffaire1" placeholder=""
                                         v-model="step1.ch_aff_1">
                                 </div>
@@ -333,7 +323,7 @@
 
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="ChiffreAffaire2">ChiffreAffaire 2 <span class="text-danger">*</span></label>
+                                    <label for="ChiffreAffaire2">ChiffreAffaire 2</label>
                                     <input type="text" name="ChiffreAffaire2" id="ChiffreAffaire2" placeholder=""
                                         v-model="step1.ch_aff_2">
                                 </div>
@@ -342,8 +332,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="PartChiffreAffaireExprtation">Part Chiffre Affaire Exportation <span
-                                            class="text-danger">*</span></label>
+                                    <label for="PartChiffreAffaireExprtation">Part Chiffre Affaire Exportation </label>
                                     <input type="text" name="PartChiffreAffaireExprtation" id="PartChiffreAffaireExprtation"
                                         placeholder="" v-model="step1.part_chiffre_affaire_exprtation">
                                 </div>
@@ -353,7 +342,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="GroupeFililale">Groupe Fililale <span class="text-danger">*</span></label>
+                                    <label for="GroupeFililale">Groupe Fililale </label>
                                     <input type="text" name="GroupeFililale" id="GroupeFililale" placeholder=""
                                         v-model="step1.grpe_fililale">
                                 </div>
@@ -366,8 +355,7 @@
 
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="NationaliteGroupe">Nationalité Groupe <span
-                                            class="text-danger">*</span></label>
+                                    <label for="NationaliteGroupe">Nationalité Groupe</label>
 
                                     <MazSelect v-model="step1.nationalite_groupe" :options="sortedCountryOptions"
                                         v-slot="{ option }" search color="secondary">
@@ -385,7 +373,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="CapitalSocial">Capital Social <span class="text-danger">*</span></label>
+                                    <label for="CapitalSocial">Capital Social</label>
                                     <input type="text" name="CapitalSocial" id="CapitalSocial" placeholder=""
                                         v-model="step1.capital_social">
                                 </div>
@@ -394,7 +382,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="NumeroRccm">Numéro Rccm <span class="text-danger">*</span></label>
+                                    <label for="NumeroRccm">Numéro Rccm </label>
                                     <input type="text" name="NumeroRccm" id="NumeroRccm" placeholder=""
                                         v-model="step1.nbre_rccm">
                                 </div>
@@ -407,7 +395,7 @@
 
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="NumeroNif">Numero Nif <span class="text-danger">*</span></label>
+                                    <label for="NumeroNif">Numero Nif</label>
                                     <input type="text" name="NumeroNif" id="NumeroNif" placeholder=""
                                         v-model="step1.nbre_nif">
                                 </div>
@@ -422,7 +410,7 @@
 
                 </div>
                 <div class="btnForm py-3 flex items-center justify-content-end">
-                    <button class="btnLogin" @click.prevent="nextStep">Suivant</button>
+                    <button class="btnLogin" :disabled="isButtonDisabled" @click.prevent="nextStep">Suivant</button>
                 </div>
             </div>
 
@@ -544,8 +532,9 @@
 
                                 <label for="AnneeNaissanceDirigeant">Année Naissance Dirigeant <span
                                         class="text-danger">*</span></label>
-                                <input type="text" name="AnneeNaissanceDirigeant" id="AnneeNaissanceDirigeant"
-                                    placeholder="" v-model="step2.anneeNaissanceDirigeant">
+                                <!-- <input type="text" name="AnneeNaissanceDirigeant" id="AnneeNaissanceDirigeant"
+                                    placeholder="" v-model="step2.anneeNaissanceDirigeant"> -->
+                                    <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :enable-time-picker="false" />
                             </div>
                             <small v-if="v$.step2.anneeNaissanceDirigeant.$error">{{
                                 v$.step2.anneeNaissanceDirigeant.$errors[0].$message }}</small>
@@ -622,8 +611,9 @@
                                
                                 <label for="AnneeNaissanceProprietaire">Année Naissance Proprietaire <span
                                         class="text-danger">*</span></label>
-                                <input type="text" name="AnneeNaissanceProprietaire" id="AnneeNaissanceProprietaire"
-                                    placeholder="" v-model="step2.anneeNaissanceProprietaire">
+                                <!-- <input type="text" name="AnneeNaissanceProprietaire" id="AnneeNaissanceProprietaire"
+                                    placeholder="" v-model="step2.anneeNaissanceProprietaire"> -->
+                                    <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :enable-time-picker="false" />
                             </div>
                             <small v-if="v$.step2.anneeNaissanceProprietaire.$error">{{
                                 v$.step2.anneeNaissanceProprietaire.$errors[0].$message }}</small>
@@ -706,8 +696,9 @@
                         <div class="col">
                             <div class="input-groupe"> <label for="AutreFinancement">Autre Financement <span
                                         class="text-danger">*</span></label>
-                                <input type="text" name="AutreFinancement" id="AutreFinancement" placeholder=""
-                                    v-model="step2.autreFinancement">
+                                <!-- <input type="text" name="AutreFinancement" id="AutreFinancement" placeholder=""
+                                    v-model="step2.autreFinancement"> -->
+                                    <MazSelect v-model="step2.autreFinancement" color="secondary" :options="choix" />
                             </div>
                             <small v-if="v$.step2.autreFinancement.$error">{{ v$.step2.autreFinancement.$errors[0].$message
                             }}</small>
@@ -1095,16 +1086,16 @@ export default {
         return {
             currentStep: 1,
             error: '',
-            p: '',
+            isButtonDisabled: false,
             sortedCountryOptions: [],
             regionOptions: [],
             prefectureOptions: [],
             sous_prefectureOptions: [],
             sous_prefectureOptions: [],
             SecteurActiviteOptions: [],
-            SousSecteurActiviteOptions: [],
             StatutJuridiqueOptions: [],
-            BourseOptions: [],
+            BourseOptions: [], // Pour stocker les sous-secteurs sélectionnés
+            SousSecteurActiviteOptions: [],
             years: [],
             yearOptions: [],
             userData: '',
@@ -1145,7 +1136,7 @@ export default {
                 code_st_juriq: "",
                 autr_st_juriq: "",
                 prin_sect_acti: "",
-                list_sous_sect_act: "",
+                selectedSousSecteurs: [],
                 an_prod_1: "",
                 pers_per_femm: "",
                 pers_per_homm: "",
@@ -1240,14 +1231,14 @@ export default {
             commune: { require, },
             ville: { require, },
             sous_prefecture: { require },
-            localisation: { require },
+            localisation: {  },
             sigle_mpme: { require },
             nom: { require },
             quartier: { require },
             rue: {},
             boite_postale: { ValidNumeri },
             tel_what: { require },
-            tel_second: { require },
+            tel_second: { },
             email: { require },
             url: {},
             an_creation: { require },
@@ -1255,7 +1246,7 @@ export default {
             code_st_juriq: {},
             autr_st_juriq: {},
             prin_sect_acti: { require },
-            list_sous_sect_act: { require },
+            selectedSousSecteurs: { require },
             an_prod_1: { require },
             pers_per_femm: { ValidNumeri },
             pers_per_homm: { ValidNumeri },
@@ -1332,7 +1323,7 @@ export default {
                 CodeStatutJuridique: this.step1.code_st_juriq,
                 AutreStatutJuridique: this.step1.autr_st_juriq,
                 PrincipalSecteurActivite: this.step1.prin_sect_acti,
-                ListeSousSecteurActivite: [...this.step1.list_sous_sect_act],
+                ListeSousSecteurActivite: this.step1.selectedSousSecteurs,
                 AnneeProduction1: this.step1.an_prod_1,
                 PersonnelPermanentFemme: this.step1.pers_per_femm,
                 PersonnelPermanentHomme: this.step1.pers_per_homm,
@@ -1351,6 +1342,7 @@ export default {
                 NomBourse: this.step2.nomBourse,
                 RecptionPrix: this.step2.receptionPrix,
                 PrincipalPrix: this.step2.principalPrix,
+                // AnneePrixPrincipal: parseInt(this.step2.anneePrixPrincipal),
                 AnneePrixPrincipal: parseInt(2015),
                 TitreDirigeant: this.step2.titreDirigeant,
                 NomDirigeant: this.step2.nomDirigeant,
@@ -1406,10 +1398,9 @@ export default {
             }
         },
         async nextStep() {
+            this.isButtonDisabled = true;
             if (this.currentStep === 1) {
-                // this.currentStep++;
-                    this.error = ''
-                
+                    this.error = '' 
                 this.v$.step1.$touch()
                 if (this.v$.$errors.length == 0) {
                     const mpmeData = this.createMpmeData();
@@ -1417,16 +1408,19 @@ export default {
                     const success = await this.enregistrerMpmeDonnees(mpmeData);
                     console.log('success', success);
                     if (success) {
+                       
                         this.currentStep++;
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',
                         });
+                        this.isButtonDisabled = false;
                     } else {
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',
                         });
+                        this.isButtonDisabled = false;
                     }
                 } else {
                     console.log('errroor1', this.v$.$errors);
@@ -1434,10 +1428,11 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
-
+                        this.isButtonDisabled = false;
                 }
 
             } else if (this.currentStep === 2) {
+                this.isButtonDisabled = true;
                  this.error = ''
                 window.scrollTo({
                     top: 0,
@@ -1455,12 +1450,14 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
+                        this.isButtonDisabled = false;
                     } else {
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',
                         });
                         console.error('Erreur lors de l\'enregistrement ', error);
+                        this.isButtonDisabled = false;
                     }
                 } else {
 
@@ -1469,6 +1466,7 @@ export default {
                         behavior: 'smooth',
                     });
                     console.log('errroor222', this.v$.$errors);
+                    this.isButtonDisabled = false;
 
                 }
             }
@@ -1544,7 +1542,8 @@ export default {
                     return false;
                 }
             } catch (error) {
-                console.error('Erreur lors de la mise à jour des données MPME guionee :', this.formatValidationErrors(error.response.data.errors));
+                console.error('Erreur lors de la mise à jour des données MPME guionee :', error);
+                this.formatValidationErrors(error.response.data.errors)
                 return false;
             }
         },
@@ -1616,15 +1615,16 @@ export default {
             }
         },
         async fetchSousSecteurActiviteOptions() {
-            try {
-
-                await this.$store.dispatch('fetchSousSecteurOptions'); // Action spécifique aux sous-secteurs d'activité
-                const options = JSON.parse(JSON.stringify(this.$store.getters['getSousSecteurOptions']));
-                this.SousSecteurActiviteOptions = options;
-            } catch (error) {
-                console.error('Erreur lors de la récupération des options des sous-secteurs d\'activité:', error.message);
-            }
-        },
+      try {
+        await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
+        this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
+          console.log('option',option);
+          return option.label;
+        });
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+      }
+    },
         async fetchStatutJuridiqueOptions() {
             try {
 
@@ -1682,7 +1682,7 @@ export default {
             this.step1.code_st_juriq = userData.CodeStatutJuridique;
             this.step1.autr_st_juriq = userData.AutreStatutJuridique;
             this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
-            this.step1.list_sous_sect_act = userData.ListeSousSecteurActivite;
+            this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split('|')
             this.step1.an_prod_1 = userData.AnneeProduction1;
             this.step1.pers_per_femm = userData.PersonnelPermanentFemme;
             this.step1.pers_per_homm = userData.PersonnelPermanentHomme;
@@ -1787,6 +1787,9 @@ export default {
             console.error('Erreur lors du chargement des données:', error);
         }
     },
+    created() {
+    this.fetchSousSecteurActiviteOptions(); // Appeler la méthode pour obtenir les options de l'API lors de la création du composant
+  },
 };
 </script>
   

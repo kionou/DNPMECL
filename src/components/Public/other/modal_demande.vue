@@ -67,7 +67,7 @@ import axios from '@/lib/axiosConfig.js'
         const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
         console.log('response.Code', response); 
       console.log("try",datauser);
-      //  this.$router.push({ name: 'Dossiers' }); 
+      //  this.$router.push({ name: 'Test' }); 
         this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
     } catch (error) {
       console.log(error.message);

@@ -104,9 +104,10 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="prenom">Liste des Sous Secteur Activités <span class="text-danger">*</span></label>
-                <input type="text" name="sous_secteur" id="sous_secteur" placeholder="" v-model="preferencesInput">
+                <!-- <input type="text" name="sous_secteur" id="sous_secteur" placeholder="" v-model="preferencesInput"> -->
+                <v-select v-model="selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint></v-select>
               </div>
-              <small v-if="v$.preferencesInput.$error">{{ v$.preferencesInput.$errors[0].$message }}</small>
+              <small v-if="v$.selectedSousSecteurs.$error">{{ v$.selectedSousSecteurs.$errors[0].$message }}</small>
             </div>
           </div>
 
@@ -153,8 +154,6 @@ export default {
       region: '',
       sous_secteur: '',
       sous_prefecture: '',
-      preferencesInput: '',
-      preferences: [],
       error:'',
       regionOptions: [],
       prefectureOptions: [],
@@ -164,19 +163,12 @@ export default {
       results: null,
       revele: false,
       passwordTouched: false,
+      selectedSousSecteurs: [], // Pour stocker les sous-secteurs sélectionnés
+      SousSecteurActiviteOptions: [],
     };
     
   },
-  watch: {
-    password(newValue) {
-      // Si le mot de passe change, mais a déjà été touché, afficher l'erreur
-      if (this.password) {
-        console.log("eeee");
-        // this.v$.$touch();
-        this.v$.$errors.confirmer_password.$errors[0].$message 
-      }
-    },
-  },
+ 
   validations: {
     email: {
       require,   
@@ -213,7 +205,7 @@ export default {
     sous_prefecture: {
       require,
     },
-    preferencesInput: {
+    selectedSousSecteurs: {
       require,
     },
  
@@ -230,11 +222,20 @@ export default {
     validatePasswordsMatch() {
       return this.password === this.confirmer_password;
     },
-   
+    async fetchSousSecteurActiviteOptions() {
+      try {
+        await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
+        this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
+          console.log('option',option);
+          return option.label;
+        });
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+      }
+    },
 
     async submit() {
-        const newPreferences = this.preferencesInput.split(',');
-        this.preferences.push(...newPreferences);
+       
         this.v$.$touch()
         this.error = ''
  if (this.v$.$errors.length == 0 ) {
@@ -244,7 +245,7 @@ export default {
           Nom: this.nom,
           Prenoms: this.prenom,
           NumeroWhatsApp: this.phoneNumber,
-          ListeSousSecteurActivite: this.preferences,
+          ListeSousSecteurActivite: this.selectedSousSecteurs,
           PaysDirigeant: this.pays,
           AdresseEmail: this.email,
           password: this.password,
@@ -273,7 +274,7 @@ export default {
 }else{
   console.log('pas bon' , this.v$.$errors );
 
-  this.preferences = [];
+
 
 }
     },
@@ -319,6 +320,7 @@ export default {
         console.error('Erreur lors de la récupération des options des prefecture :', error);
       }
     },
+    
 
     async fetchSousPrefectureOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
@@ -331,6 +333,9 @@ export default {
       }
     },
 
+  },
+  created() {
+    this.fetchSousSecteurActiviteOptions(); // Appeler la méthode pour obtenir les options de l'API lors de la création du composant
   },
 };
 </script>

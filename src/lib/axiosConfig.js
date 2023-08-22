@@ -4,10 +4,10 @@ import axios from 'axios';
 // Créez une instance d'Axios avec la configuration souhaitée
 // https://cors-proxy.fringe.zone/
 const axiosInstance = axios.create({
-  baseURL: ' https://cors-proxy.fringe.zone/https://mpme-guinee.com/bd/public/api/',
+  baseURL: 'https://cors-proxy.fringe.zone/https://mpme-guinee.com/bd/public/api/',
   headers: {
-    // 'Content-Type': 'application/json', 
-    'Content-Type': 'multipart/form-data',
+    'Content-Type': 'application/json', 
+    // 'Content-Type': 'multipart/form-data',
     // Type de contenu des requêtes
     // Vous pouvez ajouter d'autres en-têtes ici si nécessaire
   },
