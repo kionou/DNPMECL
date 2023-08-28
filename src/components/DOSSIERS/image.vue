@@ -1,22 +1,28 @@
 <template>
     <div class=" d-flex justify-content-center align-items-center flex-wrap">
         <div class="btnLogin" @click="this.isOpen = true" > <i class="bi bi-plus-lg"></i> Ajouter</div>
-      <div class="task" v-for="item in userData.photos" :key="item.id" >
-  
-        <div class="tag" >
+      <div v-if="resultnone" class="noresul">
+      <span>{{ resultnone }}</span>
+      </div>
+    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="100">
+      <div class="task" v-for="item in userData" :key="item.id">
           <div class="image">
-            <img :src="item.Photo" alt="" class="glightbox">
-          </div>
-        </div> 
-        <div class="icon">
-    <i class="bi bi-pen"></i>
-  <i class="bi bi-trash"></i>
-  </div>
+            <img :src="item.Photo" alt=""> 
+        </div>
+       
+        <div class="sci">
+        <span style="--i:1" >
+         <i class="bi bi-pen" @click="updateupload(item.id , item.Photo)"></i>
+
+        </span>
+        <span style="--i:2" @click="hamdledelete(item.id )">
+         <i class="bi bi-trash"></i>
+        
+        </span>
+       
     </div>
-
-  
-
-
+      </div>
+    </div>
 
 <MazDialog v-if="isOpen" v-model="isOpen" >
     <div>
@@ -77,6 +83,74 @@
   </div>
 
     </MazDialog>
+
+    <MazDialog v-model="isdelete" title="Suppression d'image">
+    <p>
+      Êtes-vous sûr de vouloir supprimer cette image ?
+    </p>
+    <template #footer="{ close }">
+
+        <div class="supp"  @click="close" style="background-color: red; " > Non</div>
+     
+      <div class="supp"  @click="confirmDelete" style="background-color: var(--color-primary);"> Oui</div>
+
+    </template>
+  </MazDialog>
+  <MazDialog v-model="confirmdelete" >
+    <p>
+      Êtes-vous sûr de vouloir supprimer cette image ?
+    </p>
+    <template #footer="{ close }">
+
+        <div class="supp"  @click="close" style="background-color: blue; " > Ok</div>
+     
+      
+
+    </template>
+  </MazDialog>
+
+
+  <MazDialog v-if="updated" v-model="updated" >
+    <div>
+       
+           <div id="uploadArea" class="upload-area">
+             <!-- Header -->
+             <div class="upload-area__header">
+               <h1 class="upload-area__title">Modifiez votre fichier</h1>
+               <p class="upload-area__paragraph">
+                   Le fichier doit être une image
+                 <strong class="upload-area__tooltip">
+                   comme
+                   <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+                 </strong>
+               </p>
+             </div>
+             <!-- End Header -->
+       
+             <!-- Drop Zoon -->
+             <div
+               id="dropZoon"
+               class="upload-area__drop-zoon drop-zoon"
+             
+             >
+             <div class="profile-pic">
+         <label class="-label" for="file">
+           <span class="glyphicon glyphicon-camera"></span>
+           <span>Change Image</span>
+         </label>
+         <input id="file" type="file" @change="loadFile"/>
+         <img :src="updateImageUrl" id="output" width="200" />
+       </div>
+          
+       
+             </div>
+             <!-- End Drop Zoon -->
+       
+            
+           </div>
+  </div>
+
+    </MazDialog>
     </div>
 </template>
 
@@ -102,14 +176,21 @@ export default {
 
     data() {
         return {
-            isOpen:false,
-            imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
+      isOpen:false,
+      isdelete:false,
+      confirmdelete:false,
+      updated:false,
+      imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
       uploadedFileName: 'Project 1',
       uploadedFileIconText: '',
       uploadedFileCounter: 0,
       isUploading: false,
       uploadProgress: 0,
-      userData:''
+      userData:'',
+      resultnone:'',
+      imageToDeleteId: null,
+      updateImageId: null,
+      updateImageUrl: null,
             
         };
     },
@@ -123,7 +204,41 @@ export default {
         this.fetchgetPhotoMpme()
     },
     methods: {
+      hamdledelete(itemId) {
+        console.log(itemId);
+        this.imageToDeleteId = itemId; 
+        this.isdelete = true
+    
+    },
+   async confirmDelete() {
+   console.log( this.imageToDeleteId);
+   this.isdelete = false
+   this.confirmdelete = true
+      try {
+        // Faites une requête pour supprimer l'élément avec l'ID itemId
+        // const response = await axios.delete(`/api/items/${itemId}`);
+        // console.log('Réponse de suppression:', response);
+        
+        // Mettez à jour la liste des éléments après la suppression
+        // this.fetchgetPhotoMpme();
+      } catch (error) {
+        console.error('Erreur lors de la suppression:', error);
+      }
+    
+     
+    },
+    updateupload(id , imageUrl){
 
+      console.log(id , imageUrl);
+      this.updateImageId = id;
+    this.updateImageUrl = imageUrl;
+    this.updated = true
+    },
+    loadFile(event){
+  console.log( event.target.files[0]);
+  var image = document.getElementById("output");
+  image.src = URL.createObjectURL(event.target.files[0]);
+        },
       async fetchgetPhotoMpme() {
             try {
                 const userId = this.loggedInUser.user.Entreprises;
@@ -131,16 +246,22 @@ export default {
                 const response = await axios.get(`/mpme/photos/${userId}`, {
          headers: {
                        Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                      'Content-Type': 'multipart/form-data',
+
                     },
-        //              onUploadProgress: (progressEvent) => {
-        // const percentage = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-        // this.uploadedFileCounter = percentage;
-      // },
+       
             
           });
-                this.userData = response.data.data;
+
+                if(response.data.data.photos.length === 0){
+                  console.log('bonjour')
+                  return this.resultnone = "Vous n'avez pas encore d'image, vous pouvez également en ajouter une !!"
+                }else{
+                  console.log('UserData:',response.data.data.photos); 
+                
+                 return this.userData = response.data.data.photos;
+                }
               
-                console.log('UserData:', this.userData.photos);
             } catch (error) {
                 console.error('Erreur lors de la récupération des options des sous prefecture :', error);
             }
@@ -181,14 +302,13 @@ export default {
           const userId = this.loggedInUser.user.Entreprises;
             const response = await axios.post(`/mpme/photos/${userId}`, formData, {
          headers: {
-           Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                    Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                    'Content-Type': 'multipart/form-data',
                     },
-        //              onUploadProgress: (progressEvent) => {
-        // const percentage = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-        // this.uploadedFileCounter = percentage;
-      // },
+     
             
           });
+          console.log('Réponse de l\'API:', response.data);
           // this.uploadedFileCounter = 100;
           const dropZoon = document.querySelector('#dropZoon');
         const loadingText = document.querySelector('#loadingText');
@@ -203,7 +323,7 @@ export default {
         uploadedFileInfo.classList.remove('uploaded-file__info--active');
 
         fileReader.addEventListener('load', () => {
-          setTimeout(() => {
+          setTimeout(  () => {
             console.log('errrr');
             const uploadArea = document.querySelector('#uploadArea');
             uploadArea.classList.add('upload-area--open');
@@ -216,14 +336,13 @@ export default {
             uploadedFile.classList.add('uploaded-file--open');
             uploadedFileInfo.classList.add('uploaded-file__info--active');
           }, 500);
-          console.log('Réponse de l\'API:', response.data);
-
           previewImage.setAttribute('src', fileReader.result);
           this.uploadedFileName = file.name;
           this.progressMove();
         });
 
         fileReader.readAsDataURL(file);
+        await this.fetchgetPhotoMpme();
         } catch (error) {
             // Une erreur s'est produite, vous pouvez gérer les erreurs ici
       console.error('Erreur lors de l\'envoi du fichier:', error);
@@ -265,7 +384,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.noresul{
+    border: 1px solid #F9D310;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 6px;
+    font-size: 20px;
 
+}
 
 .btnLogin {
     font-size: 15px;
@@ -293,131 +423,184 @@ export default {
     color: #F9D310;
 
 }
+
+
+.supp {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-radius: 45px;
+    z-index: 3;
+    cursor: pointer;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 5px;
+}
+
+.supp:hover {
+    background-color: #fff;
+   
+
+}
 @media (max-width: 991px){
     section {
     padding: 50px !important;
 }
 }
 
-
-
-
-.container_content {
-    margin: 0 auto;
-    background: #fff;
-  
-  }
-  .section-header{
-    padding: 40px 0 0 0 !important;
-  
-  }
-  
   .contenu {
   
-    position: relative;
+    /* border: 1px solid red; */
     padding: 15px 10px;
   }
   
   .task {
     position: relative;
-    color: #2e2e2f;
     background-color: #fff;
-    padding: 10px 0px;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+   border: 1px solid var(--color-secondary);
     margin: 0 10px 10px 0;
-    border: 3px dashed transparent;
-    width: 230px;
-    height: 267px;
-        display: flex;
-   flex-direction: column;
-    justify-content: center;
-    align-items: center;
-        justify-content: space-between;
+    width: 300px;
+    height: 250px; 
   }
+   .image {
 
-
-  
-  .tag .image {
-
-
+     width: 100%;
     height: 100%;
+
+  }
+  .task:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+   .image img {
+  
     width: 100%;
-    cursor: pointer;
-  transition: opacity 0.3s ease;
-  vertical-align: middle
+    height: 100%;
+      object-fit: cover;
+      z-index: 1; 
   }
-.tag .image:hover {
-    object-fit: cover;
-    filter: brightness(75%);
-    transition: opacity 0.35s, transform 0.35s;
-    transform: translate3d(-10px, 0, 0);
-}
-  
-  .tag .image img {
-  
-    max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  
-  }
-
-  .icon{
-    /* border:1px solid red ; */
-    width:100%;
-    display:flex;
+.task .sci {
+  position: absolute;
+  bottom: 10px;
+  left:58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+    width: 63%;
     justify-content: space-around;
-        font-size: 25px;
-    padding: 5px;
-   
+}
+.task .sci span {
+  margin: 0 10px;
+  opacity: 0;
+  transition: 0.5s;
+  font-size: 18px;
+  border-radius:6px;
+  background-color: #fff;
+  z-index: 4;
+ 
 }
 
-.icon .bi{
-/* border: 1px solid blue; */
-padding: 2px;
- border-radius: 5px;
- width: 40px;
-    height: 40px;
+.task:hover .sci span {
+  opacity: 1;
+  transition-delay: calc(0.1s * var(--i));
+  padding: 5px 10px; 
+  cursor: pointer;
+}
+
+ .sci span .bi-pen:hover{
+  color: blue;
+  
+}
+.sci span .bi-trash:hover{
+  color: red;
+  
+}
+  p {
+    margin-bottom: 0 !important;
+  }
+ 
+  
+  .boutton {
+  
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
     justify-content: center;
+    padding-top: 10px;
+  
+  
+  }
+  
+  .btn {
+    padding: 1em 2em;
+    font-size: 10px;
+    font-weight: 500;
+    color: #000;
+    background-color: var(--color-secondary);
+    border: none;
+    border-radius: 45px;
+    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+    cursor: pointer;
+    outline: none;
+    bottom: 0px;
+    position: absolute;
+  }
+  
+  .btn:hover {
+    background-color: #fff;
+    border: 1px solid var(--color-secondary);
+  
+  }
 
+
+  .profile-pic {
+  color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
 }
-
-.bi-pen{
-color: #fff;
-background-color: #0d6efd;
-
+.profile-pic input {
+  display: none;
 }
-
-.bi-pen:hover{
-color: #0d6efd;
-background-color: #fff;
-border:1px solid #0d6efd;
-cursor: pointer;
-
+.profile-pic img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 165px;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+  z-index: 0;
 }
-
-.bi-trash{
-color: #fff;
-background-color: #ff3e1dcc;
-
+.profile-pic .-label {
+  cursor: pointer;
+  height: 165px;
+  width: 230px;
 }
+.profile-pic:hover .-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  color: #fafafa;
+  transition: background-color 0.2s ease-in-out;
 
-.bi-trash:hover{
-color: #ff3e1dcc;
-background-color: #fff;
-border:1px solid #ff3e1dcc;
-cursor: pointer;
-
+  margin-bottom: 0;
 }
-
-
-
-
-
+.profile-pic span {
+  display: inline-flex;
+  padding: 0.2em;
+  height: 2em;
+}
 
 /* Upload Area */
 .upload-area {
@@ -435,15 +618,7 @@ cursor: pointer;
   animation: slidDown 500ms ease-in-out;
 }
 
-@keyframes slidDown {
-  from {
-    height: 28.125rem; /* 450px */
-  }
 
-  to {
-    height: 35rem; /* 560px */
-  }
-}
 
 
 .upload-area__title {
@@ -502,7 +677,7 @@ cursor: pointer;
   border: 2px dashed var(--color-secondary);
   border-radius: 15px;
   margin-top: 2.1875rem;
-  cursor: pointer;
+ 
   transition: border-color 300ms ease-in-out;
 }
 
@@ -573,9 +748,6 @@ cursor: pointer;
 }
 
 /* (drop-zoon--over) Modifier Class */
-.drop-zoon--Uploaded {
-  
-}
 
 .drop-zoon--Uploaded .drop-zoon__icon,
 .drop-zoon--Uploaded .drop-zoon__paragraph {
@@ -722,5 +894,6 @@ cursor: pointer;
 .drop-zoon__file-label-text {
   display: inline-block;
   font-size: 0.9375rem;
+  cursor: pointer;
 }
 </style>

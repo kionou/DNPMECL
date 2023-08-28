@@ -44,7 +44,7 @@
         <!-- v-if="shouldShowNavbar" -->
   
         <div v-if="shouldShowNavbar" >
-                <div class="btnCt "  role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+          <div class="btnCt "  role="button" data-bs-toggle="dropdown" aria-expanded="false" >
         <i class="bi bi-person-fill"></i>
           <span> Mon compte </span>
           
@@ -77,6 +77,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'MpmeNavbar',
 
@@ -97,6 +98,9 @@ export default {
     return {
 
     };
+  },
+  created() {
+    this.$store.dispatch('user/loadLoggedInUser'); // Charger les données du local storage
   },
 
   mounted() {

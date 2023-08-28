@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="mt-auto text-center">
-                                <router-link class="btnLogin" to="#">Tout voir</router-link>
+                                <router-link class="btnLogin" to="/appel_offre">Tout voir</router-link>
                               
                                 </div>
                         </div>
@@ -104,14 +104,14 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>.page-header {
+<style lang="css" scoped>
+.page-header {
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #266486;
-    padding-bottom: 50px;
-    padding-top: 100px;
+    padding: 50px 0;
     background-image: url('@/assets/img/img1.webp'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
@@ -133,7 +133,7 @@ export default {
 .page-header h1 {
     position: relative;
     color: #fff;
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 700;
     padding-top: 1rem;
     margin-bottom: 1rem;
@@ -141,7 +141,7 @@ export default {
 }
 .page-header p {
     max-width: 530px;
-    font-size: 1.375rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #fff;
 }

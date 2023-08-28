@@ -39,8 +39,8 @@ import axios from '@/lib/axiosConfig.js'
         async  hamdleSubmitemail(){
           const datauser = this.loggedInUser
           let CodeUserEmail ={
-          email:1,
-            value:datauser.user.email
+           email:1,
+            value:datauser.email
           // value:'kionoumamadou.00@gmail.com'
           
           }
@@ -59,16 +59,16 @@ import axios from '@/lib/axiosConfig.js'
           const datauser = this.loggedInUser
           let CodeUserWhatsapp ={
           email:0,
-           value:this.loggedInUser.user.Whatsapp
+           value:this.loggedInUser.whatsapp
           
           }
           console.log("eee",CodeUserWhatsapp);
           try {
-        const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
-        console.log('response.Code', response); 
+        // const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
+        // console.log('response.Code', response); 
       console.log("try",datauser);
-      //  this.$router.push({ name: 'Test' }); 
-        this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
+       this.$router.push({ name: 'Espace' }); 
+        // this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
     } catch (error) {
       console.log(error.message);
     
@@ -80,8 +80,10 @@ import axios from '@/lib/axiosConfig.js'
       },
 
       mounted() {
-      console.log('tessst',this.loggedInUser);
+      console.log('tessstrrr',this.loggedInUser);
       },
+   
+
   
   }
   </script>

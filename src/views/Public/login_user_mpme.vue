@@ -2,7 +2,7 @@
 <template>
 
   <div>
- <Modal :revele="revele" :data="data" :toggleModale="toggleModale" @redirectWithProps="redirectWithProps"></Modal>
+ <Modal v-if="modal" :revele="revele" :data="data" :toggleModale="toggleModale" @redirectWithProps="redirectWithProps"></Modal>
 
   <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
 <div class="form-container1">
@@ -19,7 +19,8 @@
       <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
   <div class="input-group">
     <label for="tel">Mot de passe  <span class="text-danger">*</span></label>
-    <input type="password" name="password" id="password" placeholder="" v-model="password">
+    <MazInput v-model="password" type="password" color="secondary"  style="width: 100%;" />
+    <!-- <input type="password" name="password" id="password" placeholder="" v-model="password"> -->
   </div>
        <small v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</small>
 
@@ -59,7 +60,8 @@ export default {
            data:'',
            v$:useVuelidate(), 
            revele: false,
-           users:[]
+           users:[],
+           modal:false
       };
   },
   validations: {
@@ -100,6 +102,7 @@ export default {
       if (response.data.statut === "error") {
             console.log("error");
           } else {
+          this.modal = true
             console.log('ok', response.data.data);
             const userData = response.data.data;
            this.setLoggedInUser(userData);
@@ -179,7 +182,7 @@ line-height: 1.25rem;
 
 .input-group label {
 display: block;
-color: rgba(156, 163, 175, 1);
+color: #000;
 margin-bottom: 4px;
 }
 
@@ -242,6 +245,13 @@ border: 1px solid var(--color-secondary);
 color: var(--color-secondary);
 background-color: white;
 
+}
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: calc(var(--bs-border-width) * -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 100% !important;
 }
 
 </style>

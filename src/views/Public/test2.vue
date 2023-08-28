@@ -1,171 +1,414 @@
-
-
-
 <template>
+    <div>
+       
+<div class="profile-pic">
+  <label class="-label" for="file">
+    <span class="glyphicon glyphicon-camera"></span>
+    <span>Change Image</span>
+  </label>
+  <input id="file" type="file" @change="loadFile"/>
+  <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+</div>
+    </div>
+
+
+    <div id="uploadArea" class="upload-area">
+      <!-- Header -->
+      <div class="upload-area__header">
+        <h1 class="upload-area__title">Modifiez votre fichier</h1>
+        <p class="upload-area__paragraph">
+            Le fichier doit être une image
+          <strong class="upload-area__tooltip">
+            comme
+            <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+          </strong>
+        </p>
+      </div>
+      <!-- End Header -->
+
+      <!-- Drop Zoon -->
+      <div
+        id="dropZoon"
+        class="upload-area__drop-zoon drop-zoon"
+      
+      >
+      <div class="profile-pic">
+  <label class="-label" for="file">
+    <span class="glyphicon glyphicon-camera"></span>
+    <span>Change Image</span>
+  </label>
+  <input id="file" type="file" @change="loadFile"/>
+  <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+</div>
    
-      <nav class="mb-20 flex justify-center">
-      <ol class="flex">
-          <li
-              class="relative w-[150px] text-center text-sm font-light italic
-                  after:content-[''] after:absolute after:left-[50%] after:top-[200%] after:w-5 after:h-5
-                  after:bg-indigo-500 after:rounded-full after:z-50"
-          >
-              Etape 1
-          </li>
-          <li
-              class="relative w-[150px] text-center text-sm font-light italic
-                  before:content-[''] before:absolute before:left-[-50%] before:top-[calc(200%+0.5rem)] before:w-full before:h-1
-                  after:bg-gray-300 before:bg-gray-300
-                  after:content-[''] after:absolute after:left-[50%] after:top-[200%] after:w-5 after:h-5 after:rounded-full after:z-50"
-                  :class="{
-                      'stepFull':
-                      currentStep >= 1 && currentStep <= 3
-                  }"
-          >
-              Etape 2
-          </li>
 
-          <li
-              class="relative w-[150px] text-center text-sm font-light italic
-                  before:content-[''] before:absolute before:left-[-50%] before:top-[calc(200%+0.5rem)] before:w-full before:h-1
-                 after:bg-gray-300 before:bg-gray-300
-                  after:content-[''] after:absolute after:left-[50%] after:top-[200%] after:w-5 after:h-5 after:bg-gray-300 after:rounded-full after:z-50"
-                  :class="{
-                      'stepFull':
-                      currentStep >= 2 && currentStep <= 3
-                  }"
-          >
-              Etape 3
-          </li>
-      </ol>
-  </nav>
+      </div>
+      <!-- End Drop Zoon -->
 
-  <!-- components dynamiques -->
-  <component
-      v-bind:is="formSteps[currentStep]"
-      v-bind:formValues="values"
-  ></component>
-
-  <div
-      class="py-3 flex items-center justify-between"
-       v-if="currentStep >= 0"
-  >
-
-  <div class="btnForm py-3 flex items-center justify-content-between">
-    <button
-          type="submit"
-          class=" btnLogin"
-          v-on:click="previousStep"
-          v-if="currentStep > 0"
-      >
-          Précedent
-      </button>
-
-      <button
-          type="submit"
-          class=" btnLogin "
-          v-on:click="nextStep"
-          v-if="3> currentStep"
-      >
-          Suivant
-      </button>
-  </div>
      
-  </div>
+    </div>
 </template>
 
-<script setup>
-import FirstStep from '../../components/Public/TEST/FirstStep.vue';
-import SecondStep from '../../components/Public/TEST/SecondStep.vue';
-import ThirdStep from '../../components/Public/TEST/ThirdStep.vue';
-import FinalStep from '../../components/Public/TEST/FinalStep.vue';
-import useForm from '../../composable/form.js';
-import { ref, computed , onMounted  } from 'vue';
-import { useStore } from 'vuex';
-import axios from '@/lib/axiosConfig.js'
+<script>
+export default {
+    name: 'DNPMECLTest2',
+    
 
+    data() {
+        return {
+     
+      imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
+      uploadedFileName: 'Project 1',
+      uploadedFileIconText: '',
+      uploadedFileCounter: 0,
+      isUploading: false,
+     
+            
+        };
+    },
 
+    mounted() {
 
+        
+    },
 
-const { values  } = useForm();
-console.log('values',values);
-const userData = ref(null); 
-
-const currentStep = ref(0);
-const formSteps = [
-    FirstStep,
-    SecondStep,
-    ThirdStep,
-    FinalStep,
-];
-
-const nextStep = () => {
-      currentStep.value++;
-  }
-
-  const previousStep = () => {
-      currentStep.value--;
-  }
-
-
-  const  fetchData = async () =>  {
-
-      try {
-          const store = useStore();
-  const loggedInUser = computed(() => store.getters['user/loggedInUser']);
-       
-  console.log('Fetching data...');
-  console.log('userId:', loggedInUser.value.user);
-  const userId = loggedInUser.value.user.Entreprises;
-  const response = await axios.get(`/mpme/${userId}`);
-  userData.value = response.data.data; // Stockez les données dans la propriété userData
-  console.log('UserData:', userData.value);
-} catch (error) {
-  console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
-}
-
-}
-  onMounted(() => {
-
-fetchData()
-});
+    methods: {
+        loadFile(event){
+  console.log( event.target.files[0]);
+        }
+        
+    },
+};
 </script>
 
-
-
 <style lang="css" scoped>
-nav{
-  margin-top: 30px;
 
+.profile-pic {
+  color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.profile-pic input {
+  display: none;
+}
+.profile-pic img {
+  position: absolute;
+  object-fit: cover;
+  width: 165px;
+  height: 165px;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+  z-index: 0;
+}
+.profile-pic .-label {
+  cursor: pointer;
+  height: 165px;
+  width: 165px;
+}
+.profile-pic:hover .-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  color: #fafafa;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 100px;
+  margin-bottom: 0;
+}
+.profile-pic span {
+  display: inline-flex;
+  padding: 0.2em;
+  height: 2em;
 }
 
-.btnForm {
 
-margin:0 10px ;
-background-color: white;
-padding: 1rem;
-color: black;
-box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
-width: 100%;
+
+
+/* Upload Area */
+.upload-area {
+  width: 100%;
+  /* max-width: 25rem; */
+  background-color: rgb(255, 255, 255);
+  border: 2px solid var(--color-secondary);
+  border-radius: 24px;
+  padding: 2rem 1.875rem 5rem 1.875rem;
+  /* margin: 0.625rem; */
+  text-align: center;
 }
 
-.btnLogin {
-padding: 1em 3em;
-font-size: 12px;
-font-weight: 500;
-color: #000;
-background-color: #F9D310;
-border: none;
-border-radius: 45px;
-
-cursor: pointer;
-outline: none;
+.upload-area--open { /* Slid Down Animation */
+  animation: slidDown 500ms ease-in-out;
 }
 
-.btnLogin:hover {
-background-color: #fff;
-border: 1px solid #F9D310 ;
-color: #000
 
+
+
+.upload-area__title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.3125rem;
 }
+
+.upload-area__paragraph {
+  font-size: 0.9375rem;
+  color: rgb(196, 195, 196);
+  margin-top: 0;
+}
+
+.upload-area__tooltip {
+  position: relative;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+}
+
+.upload-area__tooltip:hover {
+  color: var(--clr-blue);
+}
+
+.upload-area__tooltip-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -125%);
+  min-width: max-content;
+  background-color: rgb(255, 255, 255);
+  color: rgb(63, 134, 255);
+  border: 1px solid var(--color-secondary);
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
+  transition: none 300ms ease-in-out;
+  transition-property: opacity, visibility;
+}
+
+.upload-area__tooltip:hover .upload-area__tooltip-data {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drop Zoon */
+.upload-area__drop-zoon {
+  position: relative;
+  height: 11.25rem; /* 180px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed var(--color-secondary);
+  border-radius: 15px;
+  margin-top: 2.1875rem;
+ 
+  transition: border-color 300ms ease-in-out;
+}
+
+.upload-area__drop-zoon:hover {
+  border-color: var(--color-secondary);
+}
+
+
+
+
+.drop-zoon:hover .drop-zoon__icon,
+.drop-zoon:hover .drop-zoon__paragraph {
+  opacity: 0.7;
+}
+
+.drop-zoon__loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  color: rgb(171, 202, 255);
+  z-index: 10;
+}
+
+.drop-zoon__preview-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.3125rem;
+  border-radius: 10px;
+  display: none;
+  z-index: 1000;
+  transition: opacity 300ms ease-in-out;
+}
+
+.drop-zoon:hover .drop-zoon__preview-image {
+  opacity: 0.8;
+}
+
+.drop-zoon__file-input {
+  display: none;
+}
+
+/* (drop-zoon--over) Modifier Class */
+.drop-zoon--over {
+  border-color: rgb(63, 134, 255);
+}
+
+.drop-zoon--over .drop-zoon__icon,
+.drop-zoon--over .drop-zoon__paragraph {
+  opacity: 0.7;
+}
+
+/* (drop-zoon--over) Modifier Class */
+
+.drop-zoon--Uploaded .drop-zoon__icon,
+.drop-zoon--Uploaded .drop-zoon__paragraph {
+  display: none;
+}
+
+/* File Details Area */
+.upload-area__file-details {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  text-align: left;
+  transition: none 500ms ease-in-out;
+  transition-property: opacity, visibility;
+  transition-delay: 500ms;
+}
+
+/* (duploaded-file--open) Modifier Class */
+.file-details--open {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+.file-details__title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgb(196, 195, 196);
+}
+
+/* Uploaded File */
+.uploaded-file {
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: none 500ms ease-in-out;
+  transition-property: visibility, opacity;
+}
+
+/* (duploaded-file--open) Modifier Class */
+.uploaded-file--open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.uploaded-file__icon-container {
+  position: relative;
+  margin-right: 0.3125rem;
+}
+
+.uploaded-file__icon {
+  font-size: 3.4375rem;
+  color: rgb(63, 134, 255);
+}
+
+.uploaded-file__icon-text {
+  position: absolute;
+  top: 1.5625rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+}
+
+.uploaded-file__info {
+  position: relative;
+  top: -0.3125rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.uploaded-file__info::before,
+.uploaded-file__info::after {
+  content: '';
+  position: absolute;
+  bottom: -0.9375rem;
+  width: 0;
+  height: 0.5rem;
+  background-color: #ebf2ff;
+  border-radius: 0.625rem;
+}
+
+.uploaded-file__info::before {
+  width: 100%;
+}
+
+.uploaded-file__info::after {
+  width: 100%;
+  background-color: rgb(63, 134, 255);
+}
+
+/* Progress Animation */
+.uploaded-file__info--active::after {
+  animation: progressMove 800ms ease-in-out;
+  animation-delay: 300ms;
+}
+
+@keyframes progressMove {
+  from {
+    width: 0%;
+    background-color: transparent;
+  }
+
+  to {
+    width: 100%;
+    background-color: rgb(63, 134, 255);
+  }
+}
+
+.uploaded-file__name {
+  width: 100%;
+  max-width: 6.25rem; /* 100px */
+  display: inline-block;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uploaded-file__counter {
+  font-size: 1rem;
+  color: rgb(196, 195, 196);
+}
+
+
+
+.drop-zoon__file-label {
+  cursor: pointer;
+  padding: 1rem;
+  background-color: rgb(63, 134, 255);
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.drop-zoon__file-label:hover {
+  background-color: rgb(43, 114, 215);
+}
+
+.drop-zoon__file-label-text {
+  display: inline-block;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
 </style>

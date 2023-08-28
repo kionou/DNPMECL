@@ -245,7 +245,7 @@ export default {
           Nom: this.nom,
           Prenoms: this.prenom,
           NumeroWhatsApp: this.phoneNumber,
-          ListeSousSecteurActivite: this.selectedSousSecteurs,
+          ListeSousSecteurActivite: JSON.parse(JSON.stringify(this.selectedSousSecteurs)),
           PaysDirigeant: this.pays,
           AdresseEmail: this.email,
           password: this.password,
@@ -394,7 +394,7 @@ small {
 
 .input-groupe label {
   display: block;
-  color: rgba(156, 163, 175, 1);
+  color: #000;
   margin-bottom: 4px;
   margin-left: 7px;
 }

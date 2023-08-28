@@ -69,7 +69,7 @@
                     <div class="tab-content">
                         <div class=" tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
 
-                            <div class="row">
+                            <div class="row ttb">
                                 <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
                                     <div class=" bg-white rounded-lg  ">
                                        
@@ -107,12 +107,12 @@
                                                             class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                             <dt class="text-sm font-medium text-gray-500">Téléphone WhathApp</dt>
                                                             <dd
-                                                                class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> (+224) {{ data.NumeroWhatsApp }}</dd>
+                                                                class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.NumeroWhatsApp }}</dd>
                                                         </div>
 
                                                         <div class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                             <dt class="text-sm font-medium text-gray-500">Téléphone Secondaire</dt>
-                                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> (+224) {{ data.NumeroTelephoneSecondaire }} </dd>
+                                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.NumeroTelephoneSecondaire }} </dd>
                                                         </div>
                                                         <div
                                                             class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6  ">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-7 col-md-7">
+                                <div class="col-xl-7 col-lg-7 my-6 col-md-7">
                                     <!-- Activity Timeline -->
                                     <div class="card card-action mb-4">
                                         <div class="card-header align-items-center">
@@ -232,7 +232,7 @@
                                                             <h6 class="mb-0 text-sm font-medium text-gray-500">Sous secteur d'activité</h6>
                                                             <!-- <small class="text-muted">2 Day Ago</small> -->
                                                         </div>
-                                                        <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.ListeSousSecteurActivite }}</span>
+                                                        <span  class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2" v-for="item in items" :key="item.id"> {{ item}}, </span>
                                                     </div>
                                                 </li>
                                                 <li class="timeline-item timeline-item-transparent">
@@ -324,7 +324,8 @@
                                     </div><!-- End post list item -->
 
 
-                                </div><!-- End blog posts list -->
+                                </div>
+                                <!-- End blog posts list -->
 
                                 <div class="blog-pagination">
                                     <ul class="justify-content-center">
@@ -446,20 +447,7 @@ export default {
     components: { Position },
     props: ['id'],
     setup() {
-    // const mapContainer = shallowRef(null);
-    // const map = shallowRef(null);
-    // const markers = shallowRef([]);
-
-    // onUnmounted(() => {
-    //   map.value?.remove();
-    // });
-
-    // return {
-    //   map,
-    //   mapContainer,
-    //   markers,
- 
-    // };
+   
   },
 
     data() {
@@ -467,6 +455,8 @@ export default {
             data: '',
          isFullScreen: false,
          childKey: 0,
+         sous_secteur:'',
+         items:'',
         };
     },
 
@@ -484,6 +474,8 @@ export default {
             const data = response.data.data
             console.log('eeee', data);
             this.data = data
+            this.items = JSON.parse(this.data.ListeSousSecteurActivite)
+            
     //         const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
     //   const initialState = { lng: -11.283844999999985, lat: 9.934886500000001, zoom: 5.5 };
     //   this.showMap = true;
@@ -522,5 +514,13 @@ export default {
 
 
 <style lang="css" scoped >
+@media (max-width: 1100px) {
+
+    .ttb{
+    
+    flex-direction:column;
+    }
+
+}
 
 </style>

@@ -6,7 +6,7 @@
             </div>
 
             <div class="stepper-item" :class="{ 'current': currentStep == item, 'success': currentStep > item }"
-                v-for="item in 3" :key="item">
+                v-for="item in 4" :key="item">
                 <div class="stepper-item-counter">
                     <img class="icon-success"
                         src="https://www.seekpng.com/png/full/1-10353_check-mark-green-png-green-check-mark-svg.png" alt="">
@@ -25,8 +25,8 @@
         {{ error }} <br>
     </div>
     <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100" style="margin-top:48px">
-        <p class="title">Enregistrez votre PME dès maintenant</p>
-        <p class="text-center">Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en
+        <p class="title" v-if="currentStep !== 4">Enregistrez votre PME dès maintenant</p>
+        <p class="text-center" v-if="currentStep !== 4">Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en
             toute simplicité.</p>
 
         <form class="form">
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="nom">Boîte Postale <span class="text-danger">*</span></label>
+                                    <label for="nom">Boîte Postale </label>
                                     <input type="text" name="BoitePostale" id="BoitePostale" placeholder=""
                                         v-model="step1.boite_postale">
                                 </div>
@@ -249,7 +249,7 @@
                                             class="text-danger">*</span></label>
                                             <v-select v-model="step1.selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint></v-select>
               </div>
-              <small v-if="v$.step1.selectedSousSecteurs.$error">{{ v$.step1.selectedSousSecteurs.$errors[0].$message }}</small>
+                       <small v-if="v$.step1.selectedSousSecteurs.$error">{{ v$.step1.selectedSousSecteurs.$errors[0].$message }}</small>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 content-group">
@@ -431,7 +431,7 @@
                                 <small v-if="v$.step2.mpmeBourse.$error">{{ v$.step2.mpmeBourse.$errors[0].$message
                                 }}</small>
                             </div>
-                            <div class="col" v-if="step2.mpmeBourse === 'oui'">
+                            <div class="col" v-if="step2.mpmeBourse === 'Oui'">
                                 <div class="input-groupe">
                                     <label for="NomBourse">Nom Bourse <span class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.nomBourse" color="secondary" :options="BourseOptions" />
@@ -450,7 +450,7 @@
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 content-group">
-                            <div class="col" v-if="step2.receptionPrix === 'oui'">
+                            <div class="col" v-if="step2.receptionPrix === 'Oui'">
                                 <div class="input-groupe">
                                     <label for="PrincipalPrix">Principal Prix<span class="text-danger">*</span></label>
                                     <input type="text" name="PrincipalPrix" id="PrincipalPrix" placeholder=""
@@ -459,7 +459,7 @@
                                 <small v-if="v$.step2.principalPrix.$error">{{ v$.step2.principalPrix.$errors[0].$message
                                 }}</small>
                             </div>
-                            <div class="col" v-if="step2.receptionPrix === 'oui'">
+                            <div class="col" v-if="step2.receptionPrix === 'Oui'">
                                 <div class="input-groupe">
                                     <label for="AnneePrixPrincipal">Année Prix Principal <span
                                             class="text-danger">*</span></label>
@@ -530,11 +530,11 @@
                         <div class="col">
                             <div class="input-groupe">
 
-                                <label for="AnneeNaissanceDirigeant">Année Naissance Dirigeant <span
-                                        class="text-danger">*</span></label>
+                                <label for="AnneeNaissanceDirigeant">Année Naissance Dirigeant </label>
                                 <!-- <input type="text" name="AnneeNaissanceDirigeant" id="AnneeNaissanceDirigeant"
                                     placeholder="" v-model="step2.anneeNaissanceDirigeant"> -->
-                                    <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :enable-time-picker="false" />
+                                    <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :year-picker="true"
+                                        :year-range="[1900, new Date().getFullYear()]"></VueDatePicker>
                             </div>
                             <small v-if="v$.step2.anneeNaissanceDirigeant.$error">{{
                                 v$.step2.anneeNaissanceDirigeant.$errors[0].$message }}</small>
@@ -613,7 +613,8 @@
                                         class="text-danger">*</span></label>
                                 <!-- <input type="text" name="AnneeNaissanceProprietaire" id="AnneeNaissanceProprietaire"
                                     placeholder="" v-model="step2.anneeNaissanceProprietaire"> -->
-                                    <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :enable-time-picker="false" />
+                                    <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :year-picker="true"
+                                        :year-range="[1900, new Date().getFullYear()]"></VueDatePicker>
                             </div>
                             <small v-if="v$.step2.anneeNaissanceProprietaire.$error">{{
                                 v$.step2.anneeNaissanceProprietaire.$errors[0].$message }}</small>
@@ -640,7 +641,7 @@
                             <small v-if="v$.step2.appartenanceReseauProfessionnel.$error">{{
                                 v$.step2.appartenanceReseauProfessionnel.$errors[0].$message }}</small>
                         </div>
-                        <div class="col" v-if="step2.appartenanceReseauProfessionnel === 'oui'">
+                        <div class="col" v-if="step2.appartenanceReseauProfessionnel === 'Oui'">
                             <div class="input-groupe">
                                 <label for="NomReseauProfessionnel">Nom Reseau Professionnel <span
                                         class="text-danger">*</span></label>
@@ -706,7 +707,7 @@
                     </div>
 
 
-                    <div class="row mb-3 mt-3 content-group" v-if="step2.appartenanceReseauProfessionnel === 'oui'">
+                    <div class="row mb-3 mt-3 content-group" v-if="step2.appartenanceReseauProfessionnel === 'Oui'">
                         <div class="col">
                             <div class="input-groupe">
                                 <label for="DescriptionReseau">Description du Reseau <span
@@ -1056,6 +1057,9 @@
             <button class="btnLogin" @click.prevent="submit">Terminer</button>
         </div>
     </div>
+    <div v-if="currentStep === 4">
+          <Resumer/>
+    </div>
     </form>
 </div>
 </template>
@@ -1068,17 +1072,18 @@ import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import Resumer from './other/resumer.vue';
 
 export default {
     name: 'Componentlogin',
-    components: { VueDatePicker },
+    components: { VueDatePicker , Resumer },
     computed: {
 
         loggedInUser() {
             return this.$store.getters['user/loggedInUser'];
         },
         stepperProgress() {
-            return (100 / 2) * (this.currentStep - 1) + '%'
+            return (100 / 3) * (this.currentStep - 1) + '%'
         }
 
     },
@@ -1100,12 +1105,12 @@ export default {
             yearOptions: [],
             userData: '',
             sexes: [
-                { label: 'Masculin', value: 'masculin' },
-                { label: 'Féminin', value: 'feminin' },
+                { label: 'Masculin', value: 'M' },
+                { label: 'Féminin', value: 'F' },
             ],
             choix: [
-                { label: 'Oui', value: 'oui' },
-                { label: 'Non', value: 'non' },
+                { label: 'Oui', value: 'Oui' },
+                { label: 'Non', value: 'Non' },
             ],
             titre: [
                 { label: 'Monsieur', value: 'M' },
@@ -1263,7 +1268,7 @@ export default {
 
         },
         step2: {
-                mpmeBourse:{require},
+                mpmeBourse:{},
                 nomBourse:{},
                 receptionPrix:{require},
                 principalPrix:{},
@@ -1273,7 +1278,7 @@ export default {
                 prenomDirigeant:{require},
                 sexeDirigeant:{require},
                 paysDirigeant:{require},
-                anneeNaissanceDirigeant:{require},
+                anneeNaissanceDirigeant:{},
                 dirigeantProprietaire:{require},
 
                 titreProprietaire:{require},
@@ -1323,7 +1328,7 @@ export default {
                 CodeStatutJuridique: this.step1.code_st_juriq,
                 AutreStatutJuridique: this.step1.autr_st_juriq,
                 PrincipalSecteurActivite: this.step1.prin_sect_acti,
-                ListeSousSecteurActivite: this.step1.selectedSousSecteurs,
+                ListeSousSecteurActivite: JSON.parse(JSON.stringify(this.step1.selectedSousSecteurs)),
                 AnneeProduction1: this.step1.an_prod_1,
                 PersonnelPermanentFemme: this.step1.pers_per_femm,
                 PersonnelPermanentHomme: this.step1.pers_per_homm,
@@ -1349,7 +1354,8 @@ export default {
                 PrenomDirigeant: this.step2.prenomDirigeant,
                 SexeDirigeant: this.step2.sexeDirigeant,
                 PaysDirigeant: this.step2.paysDirigeant,
-                AnneeNaissanceDirigeant: this.step2.anneeNaissanceDirigeant,
+                // AnneeNaissanceDirigeant: parseInt(this.step2.anneeNaissanceDirigeant),
+                AnneeNaissanceDirigeant:parseInt(),
                 DirigeantProprietaire: this.step2.dirigeantProprietaire,
                 TitreProprietaire: this.step2.titreProprietaire,
                 NomProprietaire: this.step2.nomProprietaire,
@@ -1398,7 +1404,7 @@ export default {
             }
         },
         async nextStep() {
-            this.isButtonDisabled = true;
+            // this.isButtonDisabled = true;
             if (this.currentStep === 1) {
                     this.error = '' 
                 this.v$.step1.$touch()
@@ -1414,7 +1420,7 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
-                        this.isButtonDisabled = false;
+                        // this.isButtonDisabled = false;
                     } else {
                         window.scrollTo({
                             top: 0,
@@ -1493,7 +1499,11 @@ export default {
                 const success = await this.enregistrerMpmeDonnees(mpmeData);
                 console.log('success', success);
                 if (success) {
-
+                    this.currentStep++;
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth',
+                        });
                 } else {
                     console.error('Erreur lors de l\'enregistrement des données pour le MPME');
                 }
@@ -1507,6 +1517,8 @@ export default {
                 this.userData = response.data.data;
                 this.storeUserData(this.userData);
                 console.log('UserData:', this.userData);
+                // console.log('UserData:', this.userData.ListeSousSecteurActivite);
+
             } catch (error) {
                 console.error('Erreur lors de la récupération des options des sous prefecture :', error);
             }
@@ -1531,9 +1543,11 @@ export default {
                 const response = await axios.put(`/mpme/${userId}`, mpmeData, {
                     headers: {
                         Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                           'Content-Type': 'application/json',
                     },
                 });
 
+                console.log('response',response);
                 if (response.status === 200) {
                     console.log('Données MPME mises à jour avec succès !');
                     return true;
@@ -1682,7 +1696,11 @@ export default {
             this.step1.code_st_juriq = userData.CodeStatutJuridique;
             this.step1.autr_st_juriq = userData.AutreStatutJuridique;
             this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
-            this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split('|')
+            if (userData.ListeSousSecteurActivite.includes('|')) {
+                   this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split('|')
+                } else {
+                    this.step1.selectedSousSecteurs = JSON.parse(userData.ListeSousSecteurActivite)
+                }
             this.step1.an_prod_1 = userData.AnneeProduction1;
             this.step1.pers_per_femm = userData.PersonnelPermanentFemme;
             this.step1.pers_per_homm = userData.PersonnelPermanentHomme;
@@ -1848,7 +1866,7 @@ export default {
 
 .input-groupe label {
     display: block;
-    color: rgba(156, 163, 175, 1);
+    color: #000;
     margin-bottom: 4px;
 }
 

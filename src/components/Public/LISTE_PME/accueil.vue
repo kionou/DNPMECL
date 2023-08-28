@@ -94,6 +94,7 @@ export default {
       items: [],
       currentPage: 1,
       lastPage: 1,
+    
     };
   },
   computed: {
@@ -108,6 +109,7 @@ export default {
       console.log('eeee',data);
           this.lastPage = data.data.last_page;
           this.items = data.data.data;
+         
       
     },
   
@@ -275,65 +277,10 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-  
-  .options {
-    background: transparent;
-    border: 0;
-    color: #c4cad3;
-    font-size: 17px;
-  }
-  
-  .options svg {
-    fill: #9fa4aa;
-    width: 20px;
-  }
-  
-  .stats {
-    position: relative;
-    width: 100%;
-    color: #9fa4aa;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .stats div {
-    margin-right: 1rem;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
   p {
     margin-bottom: 0 !important;
   }
-  
-  .stats svg {
-    margin-right: 5px;
-    height: 100%;
-    stroke: #9fa4aa;
-  }
-  
-  .viewer span {
-    height: 30px;
-    width: 30px;
-    background-color: rgb(28, 117, 219);
-    margin-right: -10px;
-    border-radius: 50%;
-    border: 1px solid #fff;
-    display: grid;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    color: #fff;
-    padding: 2px;
-  }
-  
-  .viewer span svg {
-    stroke: #fff;
-  }
+ 
   
   .boutton {
   

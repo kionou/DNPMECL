@@ -40,7 +40,7 @@ const router = createRouter({
          { path: '/liste_pme', name: 'liste_pme', component: Liste},
          { path: '/statistique', name: 'statistique', component: Statistique},
          { path: '/documents', name: 'documents', component: Documents},
-         { path: '/opportunites/appel_offre', name: 'appel_offre', component: Offre},
+         { path: '/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
          { path: '/connexion', name: 'connexion', component: Connexion },
          { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true }, },
@@ -83,9 +83,10 @@ function requireLoggedIn(to, from, next, redirectToHome = false) {
   }
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach( async (to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
   if (requiresAuth) {
+    await store.dispatch('user/loadLoggedInUser');
     requireLoggedIn(to, from, next);
   } else {
     next();

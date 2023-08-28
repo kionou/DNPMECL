@@ -3,6 +3,7 @@
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </template>
 <script >
+import { mapActions } from 'vuex';
   import AOS from "aos/dist/aos"
 // import "@/assets/css/style.css"
 // import "@/assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -54,10 +55,16 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch('fetchDataFromAPI')
-    // this.$store.dispatch('fetchCountries')
+    // Charger les informations utilisateur depuis localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (loggedInUser) {
+      this.setLoggedInUser(loggedInUser);
+    }
 
    
+  },
+  methods: {
+    ...mapActions('user', ['setLoggedInUser']),
   },
 }
 
