@@ -15,40 +15,39 @@
                                 </div>
                                 <div
                                     class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Préfecture</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.AnneeCreation
-                                    }}</dd>
-                                </div>
-
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-gray-500">Sous-préfecture</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                        data.Sousprefecture }} </dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Commune</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{
-                                        data.Commune }}</dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Ville</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                        data.Ville }} </dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Quartier</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.Quartier }}</dd>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.Sousprefecture}}</dd>
                                 </div>
 
                                 <div
                                     class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Commune</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Commune }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Ville</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{
+                                        data.Ville }}</dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Quartier</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                        data.Quartier }} </dd>
+                                </div>
+                                <div
+                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-sm font-medium text-gray-500">Rue</dt>
+                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.Rue }}</dd>
+                                </div>
+
+                                <div
+                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">Boite Postale</dt>
                                     <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{
-                                        data.Rue }} </dd>
+                                        data.BoitePostale }} </dd>
                                 </div>
                                 <div
                                     class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6  ">
@@ -132,7 +131,7 @@ export default {
       const popupContent = `
                 <div >
                     <p> Nom:  ${myPropValue.value.NomMpme}</p>
-                    <p> <h4>Description:</h4> ${myPropValue.value.LongitudeMpme.description}</p>
+                    
                 </div>
                 `;
       newMarker.setPopup(new Popup().setHTML(popupContent));

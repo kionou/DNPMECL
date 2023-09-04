@@ -1,12 +1,13 @@
 <template>
+  <Loading v-if="loading"></Loading>
   <div>
 
     <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out"
       data-aos-delay="100" style="padding: 60px;">
       <div class="form-container">
         <p class="title">connexion</p>
-        <p class="text-center" v-if="selectedChannel === 'E-mail'">Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.user.email) }}</p>
-        <p class="text-center" v-else>Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.user.Whatsapp) }}</p>
+        <p class="text-center" v-if="selectedChannel === 'E-mail'">Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.email) }}</p>
+        <p class="text-center" v-else>Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.whatsapp) }}</p>
         <small>{{ error }}</small>
 
         <form class="form">
@@ -14,9 +15,8 @@
             <MazInput type="tel" v-model="code" color="secondary" placeholder="XXXX" />
           </div>
           <small v-if="v$.code.$error">{{ v$.code.$errors[0].$message }}</small>
-
-
           <button class="sign" @click.prevent="submit">Se connecter</button>
+          <p class="signin" @click="renew"> <span >Renvoyer un nouveau code</span> </p>
         </form>
       </div>
 
@@ -30,12 +30,13 @@ import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
 import axios from '@/lib/axiosConfig.js'
 import useVuelidate from '@vuelidate/core';
+import Loading from '../../components/Public/other/preloader.vue';
 // import { mapGetters } from 'vuex';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 export default {
   name: 'DNPMECLConnexion',
   components: {
-    Navbar, Footer
+    Navbar, Footer , Loading
   },
   computed: {
     selectedChannel() {
@@ -50,10 +51,12 @@ export default {
 
   data() {
     return {
+      loading:false,
       code: '',
       verification: '',
       error: '',
       v$: useVuelidate(),
+
     };
   },
   validations: {
@@ -76,15 +79,16 @@ export default {
   methods: {
 
     async submit() {
+     
       this.error = ''
 
       this.v$.$touch()
       if (this.v$.$errors.length == 0) {
-
+        this.loading = true
         if (this.selectedChannel === 'E-mail') {
           let DataUser = {
           email: 1,
-           value: this.loggedInUser.user.email,
+           value: this.loggedInUser.email,
           // value:'kionoumamadou.00@gmail.com',
           code: this.code
         }
@@ -93,16 +97,18 @@ export default {
             const response = await axios.post('/mpme/verification-otp', DataUser);
             console.log('response.Code', response);
             if (response.data.status === 'error') {
+              this.loading = false
               return this.error = response.data.message
 
             } else {
               console.log('response.Code', response.data);
-
               this.$router.push('/mon_espace');
+              this.loading = false
+
             }
 
           } catch (error) {
-
+            this.loading = false
             console.error('Erreur postlogin:', error);
           }
 
@@ -110,7 +116,7 @@ export default {
 
           let DataUser = {
           email: 0,
-          value: this.loggedInUser.user.Whatsapp,
+          value: this.loggedInUser.whatsapp,
           code: this.code
         }
         console.log('data user :', DataUser);
@@ -118,20 +124,67 @@ export default {
             const response = await axios.post('/mpme/verification-otp', DataUser);
             console.log('response.Code', response);
             if (response.data.status === 'error') {
+              this.loading = false
               return this.error = response.data.message
 
             } else {
               console.log('response.Code', response.data);
-
+              
               this.$router.push('/mon_espace');
+              this.loading = false
             }
 
           } catch (error) {
-
+            this.loading = false
             console.error('Erreur postlogin:', error);
           }
         }
 
+      }
+    },
+
+
+
+    async renew() {
+      console.log('okk' , this.selectedChannel);
+      if (this.selectedChannel === 'E-mail') {
+        const requestData = {
+          email: 1,
+          value: this.loggedInUser.email,
+        };
+
+        try {
+          // Effectuez une demande pour renvoyer un nouveau code par e-mail
+          const response = await axios.post('/mpme/send-otp', requestData);
+          if (response.data.status === 'success') {
+            alert('Un nouveau code a été envoyé à votre e-mail.');
+          } else {
+            // Erreur, affichez un message d'erreur
+            alert('Une erreur s\'est produite lors de l\'envoi du nouveau code.');
+          }
+        } catch (error) {
+          console.error('Erreur lors de la demande de renvoi du code par e-mail :', error);
+        }
+      } else if (this.selectedChannel === 'WhatsApp') {
+        const requestData = {
+          email: 0,
+          value: this.loggedInUser.whatsapp,
+        };
+
+        try {
+          // Effectuez une demande pour renvoyer un nouveau code par WhatsApp
+          const response = await axios.post('/mpme/send-otp', requestData);
+          console.log('response',response);
+          if (response.data.status === 'success') {
+            // Succès, informez l'utilisateur que le nouveau code a été envoyé
+            alert('Un nouveau code a été envoyé à votre numéro WhatsApp.');
+          } else {
+            // Erreur, affichez un message d'erreur
+            alert('Une erreur s\'est produite lors de l\'envoi du nouveau code.');
+          }
+        } catch (error) {
+          console.error('Erreur lors de la demande de renvoi du code par WhatsApp :', error);
+        }
       }
     },
     formatPhoneNumber(number) {
@@ -210,10 +263,19 @@ small {
   margin-top: 50px;
 }
 
-.signup {
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(156, 163, 175, 1);
+.signin {
+color: rgba(88, 87, 87, 0.822);
+font-size: 14px;
+text-align: center;
+margin-top: 20px;
+}
+
+.signin span {
+color: royalblue;
+}
+
+.signin span:hover {
+text-decoration: underline royalblue;
+cursor: pointer;
 }
 </style>

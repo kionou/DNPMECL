@@ -1,6 +1,6 @@
 
 <template>
-
+  <Loading v-if="loading"></Loading>
   <div>
  <Modal v-if="modal" :revele="revele" :data="data" :toggleModale="toggleModale" @redirectWithProps="redirectWithProps"></Modal>
 
@@ -14,15 +14,16 @@
     
   <div class="input-group">
     <label for="username">Email <span class="text-danger">*</span></label>
-    <input type="text" name="email" id="username" placeholder="" v-model="email">
+    <input type="text" name="email" id="username" placeholder="" v-model="step1.email">
   </div>
-      <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
+      <small v-if="v$.step1.email.$error">{{v$.step1.email.$errors[0].$message}}</small>
   <div class="input-group">
     <label for="tel">Mot de passe  <span class="text-danger">*</span></label>
-    <MazInput v-model="password" type="password" color="secondary"  style="width: 100%;" />
+    <MazInput v-model="step1.password" type="password" color="secondary"  style="width: 100%;" />
     <!-- <input type="password" name="password" id="password" placeholder="" v-model="password"> -->
   </div>
-       <small v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</small>
+       <small v-if="v$.step1.password.$error">{{v$.step1.password.$errors[0].$message}}</small>
+       <p class="signin" style="text-align: end; margin: 8px 0 0;" @click="ChangePassword"> <span >Mot de passe oublié ?</span> </p>
 
   <button class="sign" @click.prevent="submit">Se connecter</button>
  <p class="signin">Vous n'avez pas de compte ? <span @click="$router.push({ path: '/sign_user_mpme',  })" >Créer un compte</span> </p>
@@ -30,6 +31,37 @@
 </form>
   </div>   
   </div>
+  
+  <MazDialog v-if="isOpen" v-model="isOpen" width="600px">
+    <h1 class="text-centre">Entrez votre Email</h1>
+    <form class="form">
+    
+    <div class="input-group">
+      <label for="username">Email <span class="text-danger">*</span></label>
+      <input type="text" name="email" id="username" placeholder="" v-model="step2.email">
+    </div>
+        <small v-if="v$.step2.email.$error">{{v$.step2.email.$errors[0].$message}}</small>
+  
+  
+    <button class="sign" @click.prevent="ChangePassword">Valider</button>
+   
+  
+  </form>
+    </MazDialog>
+
+    <MazDialog v-model="responseEmail">
+      <p>
+        Veuillez vérifier votre boîte de réception e-mail et suivre les instructions
+         fournies pour réinitialiser votre mot de passe.
+      </p>
+      <template #footer="{ close }">
+
+        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+
+
+
+      </template>
+    </MazDialog>
 
   </div>
 
@@ -41,7 +73,9 @@ import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
 import Modal from '../../components/Public/other/modal_demande.vue';
-import axios from '@/lib/axiosConfig.js'
+import axios from '@/lib/axiosConfig.js';
+import Loading from '../../components/Public/other/preloader.vue';
+import MazDialog from 'maz-ui/components/MazDialog'
 import { mapActions } from 'vuex';
 
 
@@ -49,33 +83,54 @@ import { mapActions } from 'vuex';
 export default {
   name: 'DNPMECLSignUserMpme',
   components:{
-      Navbar , Footer , Modal
+      Navbar , Footer , Modal , Loading , MazDialog
   },
 
   data() {
       return {
-           email:'',
-           password:'',
+          loading:false,
+          isOpen: false,
+          responseEmail:false,
+          
            error:'',
            data:'',
            v$:useVuelidate(), 
            revele: false,
            users:[],
-           modal:false
+           modal:false,
+           step1:{
+            email:'',
+           password:'',
+          
+          },
+          step2:{
+          password:''
+          
+          
+          }
       };
   },
   validations: {
-           email:{
+
+    step1:{
+    
+      email:{
              require,
               ValidEmail
           },
           password:{
             require,
-            lgmin:lgmin(2),
-            lgmax:lgmax(9),
-       
-              
+            lgmin:lgmin(8),
           },
+    },
+     step2:{
+    
+      email:{
+             require,
+              ValidEmail
+          },
+    }
+          
   },
 
  async  mounted() {
@@ -89,19 +144,24 @@ export default {
    
     ...mapActions('user', ['setLoggedInUser']),
     async  submit(){
-
+         this.error = '',
+         this.v$.step1.$touch()
+          if (this.v$.$errors.length == 0 ) {
+            this.loading = true
+            
       let DataUser = {
-        email:this.email,
-        password:this.password
+        email:this.step1.email,
+        password:this.step1.password
       }
       console.log("eeeee",DataUser);
-
       try {
       const response = await axios.post('/login' , DataUser);
       console.log('response.login', response.data); 
       if (response.data.statut === "error") {
             console.log("error");
+            this.loading = false
           } else {
+          this.loading = false
           this.modal = true
             console.log('ok', response.data.data);
             const userData = response.data.data;
@@ -116,19 +176,13 @@ export default {
           }
       
     } catch (error) {
+      this.loading = false
        return this.error = "L'authentification a échoué"
     }
-     
-          //  this.v$.$validate()
-          // this.v$.$touch()
-          // if (this.v$.$errors.length == 0 ) {
-          //     // this.revele = !this.revele
-          //  let   DataUser={
-          //         email:this.email,
-          //         numero:this.numero
-          //     }
-          //     console.log('data user :',DataUser);
-          //   }
+            }else{
+            
+            
+            }   
           },
           toggleModale: function() {
            this.revele = !this.revele;
@@ -138,6 +192,24 @@ export default {
                document.body.classList.remove('no-scroll');
              }
   },
+  ChangePassword(){
+          this.isOpen = true
+          this.error = '',
+           this.v$.step2.$touch()
+          if (this.v$.$errors.length == 0 ) {
+            console.log('rrr',this.step2.email);
+            this.isOpen = false
+            this.responseEmail = true
+
+
+
+          }else{
+          
+          
+          
+          }
+  
+  }
 
   },
 };
@@ -253,5 +325,25 @@ background-color: white;
     border-bottom-left-radius: 0;
     width: 100% !important;
 }
+
+.supp {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-radius: 45px;
+    z-index: 3;
+    cursor: pointer;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+  }
+
+  
+  
 
 </style>

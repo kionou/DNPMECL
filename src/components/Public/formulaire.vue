@@ -1,4 +1,5 @@
 <template>
+    <Loading v-if="loading"></Loading>
     <div class="generastep" data-aos="zoom-out" data-aos-delay="100">
         <div class="stepper">
             <div class="stepper-progress">
@@ -6,7 +7,7 @@
             </div>
 
             <div class="stepper-item" :class="{ 'current': currentStep == item, 'success': currentStep > item }"
-                v-for="item in 4" :key="item">
+                v-for="item in 3" :key="item">
                 <div class="stepper-item-counter">
                     <img class="icon-success"
                         src="https://www.seekpng.com/png/full/1-10353_check-mark-green-png-green-check-mark-svg.png" alt="">
@@ -25,8 +26,8 @@
         {{ error }} <br>
     </div>
     <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100" style="margin-top:48px">
-        <p class="title" v-if="currentStep !== 4">Enregistrez votre PME dès maintenant</p>
-        <p class="text-center" v-if="currentStep !== 4">Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en
+        <p class="title" >Enregistrez votre PME dès maintenant</p>
+        <p class="text-center" >Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en
             toute simplicité.</p>
 
         <form class="form">
@@ -409,7 +410,7 @@
 
 
                 </div>
-                <div class="btnForm py-3 flex items-center justify-content-end">
+                <div class="btnForm py-3 d-flex items-center justify-content-end">
                     <button class="btnLogin" :disabled="isButtonDisabled" @click.prevent="nextStep">Suivant</button>
                 </div>
             </div>
@@ -463,8 +464,10 @@
                                 <div class="input-groupe">
                                     <label for="AnneePrixPrincipal">Année Prix Principal <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.anneePrixPrincipal" color="secondary"
-                                        :options="yearOptions" />
+                                    <!-- <MazSelect v-model="step2.anneePrixPrincipal" color="secondary"
+                                        :options="yearOptions" /> -->
+                                        <VueDatePicker v-model="step2.anneePrixPrincipal" :year-picker="true"
+                                        :year-range="[1990, new Date().getFullYear()]"></VueDatePicker>
                                 </div>
                                 <small v-if="v$.step2.anneePrixPrincipal.$error">{{
                                     v$.step2.anneePrixPrincipal.$errors[0].$message }}</small>
@@ -534,7 +537,7 @@
                                 <!-- <input type="text" name="AnneeNaissanceDirigeant" id="AnneeNaissanceDirigeant"
                                     placeholder="" v-model="step2.anneeNaissanceDirigeant"> -->
                                     <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :year-picker="true"
-                                        :year-range="[1900, new Date().getFullYear()]"></VueDatePicker>
+                                        :year-range="[1940, new Date().getFullYear()]"></VueDatePicker>
                             </div>
                             <small v-if="v$.step2.anneeNaissanceDirigeant.$error">{{
                                 v$.step2.anneeNaissanceDirigeant.$errors[0].$message }}</small>
@@ -614,7 +617,7 @@
                                 <!-- <input type="text" name="AnneeNaissanceProprietaire" id="AnneeNaissanceProprietaire"
                                     placeholder="" v-model="step2.anneeNaissanceProprietaire"> -->
                                     <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :year-picker="true"
-                                        :year-range="[1900, new Date().getFullYear()]"></VueDatePicker>
+                                        :year-range="[1940, new Date().getFullYear()]"></VueDatePicker>
                             </div>
                             <small v-if="v$.step2.anneeNaissanceProprietaire.$error">{{
                                 v$.step2.anneeNaissanceProprietaire.$errors[0].$message }}</small>
@@ -694,12 +697,12 @@
                     </div>
 
                     <div class="row mb-3 mt-3 content-group">
-                        <div class="col">
+                        <div class="col" v-if="step2.financementAutre === 'Oui'">
                             <div class="input-groupe"> <label for="AutreFinancement">Autre Financement <span
                                         class="text-danger">*</span></label>
-                                <!-- <input type="text" name="AutreFinancement" id="AutreFinancement" placeholder=""
-                                    v-model="step2.autreFinancement"> -->
-                                    <MazSelect v-model="step2.autreFinancement" color="secondary" :options="choix" />
+                                <input type="text" name="AutreFinancement" id="AutreFinancement" placeholder=""
+                                    v-model="step2.autreFinancement">
+                                    <!-- <MazSelect v-model="step2.autreFinancement" color="secondary" :options="choix" /> -->
                             </div>
                             <small v-if="v$.step2.autreFinancement.$error">{{ v$.step2.autreFinancement.$errors[0].$message
                             }}</small>
@@ -757,7 +760,7 @@
 
 
             </div>
-            <div class="btnForm py-3 flex items-center justify-content-between">
+            <div class="btnForm py-3 d-flex items-center justify-content-between">
                 <button class="btnLogin" @click.prevent="prevStep">Précédent</button>
                 <button class="btnLogin" @click.prevent="nextStep">Suivant</button>
             </div>
@@ -832,10 +835,12 @@
 
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" v-if="step3.partenariatAutre === 'Oui'">
                         <div class="input-groupe">
                             <label for="AutrePartenariat">Autre Partenariat <span class="text-danger">*</span></label>
-                            <MazSelect v-model="step3.autrePartenariat" color="secondary" :options="choix" />
+                            <!-- <MazSelect v-model="step3.autrePartenariat" color="secondary" :options="choix" /> -->
+                            <input v-model="step3.autrePartenariat" type="text" name="FonctionRepondant" id="FonctionRepondant" placeholder="">
+
 
 
                         </div>
@@ -894,12 +899,12 @@
 
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" v-if="step3.besoinPartenaireAutre === 'Oui'">
                         <div class="input-groupe">
                             <label for="AutreBesoinPartenaire">Autre Besoin Partenaire <span
                                     class="text-danger">*</span></label>
-                            <MazSelect v-model="step3.autreBesoinPartenaire" color="secondary" :options="choix" />
-
+                            <!-- <MazSelect v-model="step3.autreBesoinPartenaire" color="secondary" :options="choix" /> -->
+                            <input v-model="step3.autreBesoinPartenaire" type="text" name="FonctionRepondant" id="FonctionRepondant" placeholder="">
 
                         </div>
                     </div>
@@ -1052,14 +1057,23 @@
 
         </div>
 
-        <div class="btnForm py-3 flex items-center justify-content-between">
+        <div class="btnForm py-3 d-flex items-center justify-content-between">
             <button class="btnLogin" @click.prevent="prevStep">Précédent</button>
             <button class="btnLogin" @click.prevent="submit">Terminer</button>
         </div>
     </div>
-    <div v-if="currentStep === 4">
-          <Resumer/>
-    </div>
+    <MazDialog v-model="isOpen" noClose>
+        <p>
+         Votre compte a été modifié avec succès. Souhaitez-vous consulter votre profil ?
+      </p>
+      <template #footer>
+
+        <div class="supp"  @click="espace" style="background-color: red; "> Non</div>
+
+        <div class="supp" @click="profil" style="background-color: var(--color-primary);"> Oui</div>
+
+      </template>
+    </MazDialog>
     </form>
 </div>
 </template>
@@ -1072,26 +1086,29 @@ import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import Resumer from './other/resumer.vue';
+import MazDialog from 'maz-ui/components/MazDialog'
+import Loading from './other/preloader.vue';
 
 export default {
     name: 'Componentlogin',
-    components: { VueDatePicker , Resumer },
+    components: { VueDatePicker , MazDialog , Loading},
     computed: {
 
         loggedInUser() {
             return this.$store.getters['user/loggedInUser'];
         },
         stepperProgress() {
-            return (100 / 3) * (this.currentStep - 1) + '%'
+            return (100 / 2) * (this.currentStep - 1) + '%'
         }
 
     },
     data() {
         return {
+            loading:true,
             currentStep: 1,
             error: '',
             isButtonDisabled: false,
+            isOpen: false,
             sortedCountryOptions: [],
             regionOptions: [],
             prefectureOptions: [],
@@ -1114,8 +1131,7 @@ export default {
             ],
             titre: [
                 { label: 'Monsieur', value: 'M' },
-                { label: 'Madame', value: 'Mme' },
-                { label: 'Mademoiselle', value: 'Mlle' },
+                { label: 'Madame', value: 'F' },
             ],
             v$: useVuelidate(),
 
@@ -1294,7 +1310,7 @@ export default {
                 financementPartenaireExterieurs:{require},
                 financementAutre:{require},
 
-                autreFinancement:{require},
+                autreFinancement:{},
                 descriptionReseau:{},
                 difficultesRencontrees:{},
                 suggestionsProposees:{},
@@ -1347,15 +1363,15 @@ export default {
                 NomBourse: this.step2.nomBourse,
                 RecptionPrix: this.step2.receptionPrix,
                 PrincipalPrix: this.step2.principalPrix,
-                // AnneePrixPrincipal: parseInt(this.step2.anneePrixPrincipal),
-                AnneePrixPrincipal: parseInt(2015),
+                 AnneePrixPrincipal: parseInt(this.step2.anneePrixPrincipal),
+                // AnneePrixPrincipal: parseInt(2015),
                 TitreDirigeant: this.step2.titreDirigeant,
                 NomDirigeant: this.step2.nomDirigeant,
                 PrenomDirigeant: this.step2.prenomDirigeant,
                 SexeDirigeant: this.step2.sexeDirigeant,
                 PaysDirigeant: this.step2.paysDirigeant,
-                // AnneeNaissanceDirigeant: parseInt(this.step2.anneeNaissanceDirigeant),
-                AnneeNaissanceDirigeant:parseInt(),
+                 AnneeNaissanceDirigeant: parseInt(this.step2.anneeNaissanceDirigeant).toString(),
+                // AnneeNaissanceDirigeant:parseInt(),
                 DirigeantProprietaire: this.step2.dirigeantProprietaire,
                 TitreProprietaire: this.step2.titreProprietaire,
                 NomProprietaire: this.step2.nomProprietaire,
@@ -1404,7 +1420,7 @@ export default {
             }
         },
         async nextStep() {
-            // this.isButtonDisabled = true;
+            this.loading =true
             if (this.currentStep === 1) {
                     this.error = '' 
                 this.v$.step1.$touch()
@@ -1420,13 +1436,14 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
-                        // this.isButtonDisabled = false;
+                        this.loading =false
                     } else {
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',
                         });
-                        this.isButtonDisabled = false;
+                        this.loading =false
+
                     }
                 } else {
                     console.log('errroor1', this.v$.$errors);
@@ -1434,16 +1451,12 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
-                        this.isButtonDisabled = false;
+                        this.loading =false
+
                 }
 
             } else if (this.currentStep === 2) {
-                this.isButtonDisabled = true;
                  this.error = ''
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                });
                 this.v$.step2.$touch()
                 if (this.v$.$errors.length == 0) {
                     const mpmeData = this.createMpmeData();
@@ -1456,14 +1469,16 @@ export default {
                             top: 0,
                             behavior: 'smooth',
                         });
-                        this.isButtonDisabled = false;
+                        this.loading =false
+
                     } else {
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth',
                         });
                         console.error('Erreur lors de l\'enregistrement ', error);
-                        this.isButtonDisabled = false;
+                        this.loading =false
+                       
                     }
                 } else {
 
@@ -1472,12 +1487,11 @@ export default {
                         behavior: 'smooth',
                     });
                     console.log('errroor222', this.v$.$errors);
-                    this.isButtonDisabled = false;
+                     this.loading =false
+                   
 
                 }
             }
-
-
         },
 
         prevStep() {
@@ -1491,6 +1505,7 @@ export default {
         },
 
         async submit() {
+            this.loading =true
              this.error = ''
             this.v$.step3.$touch()
             if (this.v$.$errors.length == 0) {
@@ -1499,11 +1514,8 @@ export default {
                 const success = await this.enregistrerMpmeDonnees(mpmeData);
                 console.log('success', success);
                 if (success) {
-                    this.currentStep++;
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth',
-                        });
+                    this.isOpen = true
+                    this.loading =false
                 } else {
                     console.error('Erreur lors de l\'enregistrement des données pour le MPME');
                 }
@@ -1511,7 +1523,7 @@ export default {
         },
         async fetchgetOneMpme() {
             try {
-                const userId = this.loggedInUser.user.Entreprises;
+                const userId = this.loggedInUser.id;
                 // const userId = 'MPME-1580-2023'
                 const response = await axios.get(`/mpme/${userId}`);
                 this.userData = response.data.data;
@@ -1537,12 +1549,12 @@ export default {
 
         async enregistrerMpmeDonnees(mpmeData) {
             try {
-                const userId = this.loggedInUser.user.Entreprises;
+                const userId = this.loggedInUser.id;
                 // const userId = 'MPME-1580-2023'
 
                 const response = await axios.put(`/mpme/${userId}`, mpmeData, {
                     headers: {
-                        Authorization: `Bearer ${this.loggedInUser.access_token}`,
+                        Authorization: `Bearer ${this.loggedInUser.token}`,
                            'Content-Type': 'application/json',
                     },
                 });
@@ -1556,9 +1568,18 @@ export default {
                     return false;
                 }
             } catch (error) {
-                console.error('Erreur lors de la mise à jour des données MPME guionee :', error);
-                this.formatValidationErrors(error.response.data.errors)
+                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized.') {
+                console.log('aut',error.response.data === 'Unauthorized.');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
                 return false;
+                }
+              
             }
         },
 
@@ -1602,6 +1623,8 @@ export default {
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getSousprefectureOptions'])); // Accéder aux options des pays via le getter
                 console.log('Options des sous Prefecture:', options);
                 this.sous_prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
+                this.loading =false
+
             } catch (error) {
                 console.error('Erreur lors de la récupération des options des sous prefecture :', error.message);
             }
@@ -1632,7 +1655,6 @@ export default {
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
-          console.log('option',option);
           return option.label;
         });
       } catch (error) {
@@ -1697,9 +1719,12 @@ export default {
             this.step1.autr_st_juriq = userData.AutreStatutJuridique;
             this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
             if (userData.ListeSousSecteurActivite.includes('|')) {
-                   this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split('|')
-                } else {
-                    this.step1.selectedSousSecteurs = JSON.parse(userData.ListeSousSecteurActivite)
+                 this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split('|')
+                } else if(userData.ListeSousSecteurActivite.includes(',')) {
+                 this.step1.selectedSousSecteurs = JSON.parse(userData.ListeSousSecteurActivite)
+                }else{
+                
+                    this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split(' ') 
                 }
             this.step1.an_prod_1 = userData.AnneeProduction1;
             this.step1.pers_per_femm = userData.PersonnelPermanentFemme;
@@ -1772,6 +1797,18 @@ export default {
             this.step3.origineDonnees = userData.OrigineDonnees;
             // ... Lier d'autres propriétés de la même manière
         },
+        espace(){
+            console.log('bbb');
+            this.isOpen = false
+            this.$router.push({ path: '/mon_espace', })
+        
+        },
+        profil(){
+            console.log('bbb');
+            this.isOpen = false
+            this.$router.push({ path: '/profil', })
+        
+        }
 
 
     },
@@ -1785,7 +1822,7 @@ export default {
                 behavior: 'smooth',
             });
 
-            console.log("data", this.loggedInUser.access_token);
+            console.log("data", this.loggedInUser);
 
             await Promise.all([
                 this.fetchgetOneMpme(),
@@ -2098,4 +2135,30 @@ export default {
 
 .stepper-item.current .stepper-item-title {
     color: #818181;
-}</style>
+}
+
+.supp {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 45px;
+  z-index: 3;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.supp:hover {
+  background-color: #fff;
+
+
+}
+
+
+</style>

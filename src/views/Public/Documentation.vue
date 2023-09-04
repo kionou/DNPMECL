@@ -9,19 +9,19 @@
                 <div class="info-item d-flex justify-content-center align-items-center nav-link  active"  role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1" aria-selected="true">
                 <i class="bi bi-file-pdf flex-shrink-0"></i>
                 <div>
-                  <p>info@example.com</p>
+                  <p>Categorie1</p>
                 </div>
               </div>
               <div class="info-item d-flex justify-content-center align-items-center nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home2" aria-controls="navs-pills-top-home2" aria-selected="false">
                 <i class="bi bi-file-pdf flex-shrink-0"></i>
                 <div>
-                  <p>info@example.com</p>
+                  <p>Categorie2</p>
                 </div>
               </div>
               <div class="info-item d-flex justify-content-center align-items-center">
                 <i class="bi bi-file-pdf flex-shrink-0"></i>
                 <div>
-                  <p>info@example.com</p>
+                  <p>Categorie3</p>
                 </div>
               </div>
             </div>
@@ -135,12 +135,37 @@ export default {
         };
     },
 
-    mounted() {
-        
+  async  mounted() {
+    await  this.fetchSousCategoriesData()
+    await  this.fetchCategoriesData()
+
     },
 
     methods: {
-        
+      async fetchSousCategoriesData() {
+  try {
+s
+    await this.$store.dispatch('fetchSousCategoriesData');
+    const sousCategoriesData = JSON.parse(JSON.stringify(this.$store.getters.getSousCategoriesData));
+    console.log('Données des sous-catégories:', sousCategoriesData);
+    this.sousCategoriesData = sousCategoriesData;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données des sous-catégories :', error.message);
+  }
+},
+
+async fetchCategoriesData() {
+  try {
+
+    await this.$store.dispatch('fetchCategoriesData');
+    const categoriesData = JSON.parse(JSON.stringify(this.$store.getters.getCategoriesData));
+    console.log('Données des catégories:', categoriesData);
+    this.categoriesData = categoriesData;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données des catégories :', error.message);
+  }
+},
+
     },
 };
 </script>

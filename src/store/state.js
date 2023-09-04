@@ -1,4 +1,5 @@
 export default{
+    mpmeData: [],
     getmpme:[],
     regionOptions: [],
     countryOptions: [],
@@ -10,6 +11,9 @@ export default{
     statutJuridiqueOptions: [],
     bourseOptions: [],
     loggedInMPME: null,
+    sousdocOptions:[],
+    sousCategoriesData: [],   
+    categoriesData: [],
    
 
 }

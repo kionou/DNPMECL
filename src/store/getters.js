@@ -1,4 +1,5 @@
 export default{
+    getMpmeData: (state) => state.mpmeData,
     getmpme: (state) => state.mpmeAll,
     getRegionOptions: (state) => state.regionOptions,
     getCountryOptions: (state) => state.countryOptions,
@@ -10,5 +11,8 @@ export default{
     getStatutJuridiqueOptions: (state) => state.statutJuridiqueOptions,
     getBourseOptions: (state) => state.bourseOptions,
     loggedInMPME: (state) => state.loggedInMPME,
+    getSousDocOptions: (state) => state.sousdocOptions,
+    getSousCategoriesData: (state) => state.sousCategoriesData,
+    getCategoriesData: (state) => state.categoriesData,
 
 }

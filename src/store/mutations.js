@@ -1,4 +1,7 @@
 export default {
+  SET_MPME_DATA: (state, data) => {
+    state.mpmeData = data;
+  },
  
   SET_ALLMPME(state, data) {
     state.mpmeAll = data;
@@ -33,6 +36,15 @@ export default {
   SET_LOGGED_IN_MPME(state, userData) {
     state.loggedInMPME = userData;
   },
+  SET_SOUS_DOC_OPTIONS(state, options) {
+    state.sousdocOptions = options;
+  },
+  SET_SOUS_CATEGORIES_DATA(state, data) {
+    state.sousCategoriesData = data;
+  },
+  SET_CATEGORIES_DATA(state, data) {
+    state.categoriesData = data;
+  }
   
-
+  
 }

@@ -90,19 +90,18 @@
           <div class="col-lg-6">
 
             <div class="stats-item d-flex align-items-center">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" :data-purecounter-end="totalmpme" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>MPME crées</strong> </p>
             </div><!-- End Stats Item -->
 
             <div class="stats-item d-flex align-items-center">
-              <span data-purecounter-start="0" data-purecounter-end="5210" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" :data-purecounter-end="totalPersonnelPermanent" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Emplois crés</strong>  </p>
             </div><!-- End Stats Item -->
 
             <div class="stats-item d-flex align-items-center">
-              <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='2021' :duration='3'  :autoinit='true' @finished='alert(`Counting finished!`)'/> -->
-              <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='2021' :duration='3'  :autoinit='true' @finished='alert(`Counting finished!`)'/> -->
-              <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
+    
+              <span data-purecounter-start="0" :data-purecounter-end="totalPersonnelPermanentFemme" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Femmes salariés</strong> </p>
             </div><!-- End Stats Item -->
           </div>
@@ -205,26 +204,13 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>Industrie</td>
-                        <td>10</td> 
+                      <tr  v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
+                        <td>{{ secteur.label }}</td>
+            <!-- Utiliser secteurMpmeCounts pour afficher le nombre de MPME par secteur -->
+            <td>{{ secteurMpmeCounts[secteur.label] || 0 }}</td>
                         
                       </tr>
-                      <tr>
-                        <td>Transports et entreposage</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      <tr>
-                        <td>Services marchands</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      <tr>
-                        <td>Commerce</td>
-                        <td>10</td> 
-                        
-                      </tr>
+                     
                     </tbody>
                   </table>
 
@@ -234,27 +220,20 @@
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
                   <table class="table">
                     <thead class="table-light">
+                     
                       <tr>
                         <th>Région</th>
                         <th>MPME</th> 
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>Basse-Guinée</td>
-                        <td>10</td> 
-                        
+                      <tr v-for="(region, index) in regionOptions" :key="index">
+                      
+                        <td>{{ region.label }}</td>
+                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
+                           <td>{{ regionMpmeCounts[region.label] || 0 }}</td>
                       </tr>
-                      <tr>
-                        <td>Moyenne-Guinée</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      <tr>
-                        <td>Haute-Guinée</td>
-                        <td>10</td> 
-                        
-                      </tr>
+                    
                       
                     </tbody>
                   </table>
@@ -269,32 +248,19 @@
 
                   <table class="table">
                     <thead class="table-light">
-                      <tr>
+                      <tr >
                         <th>Statut juridique</th>
                         <th>MPME</th> 
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>Industrie</td>
-                        <td>10</td> 
+                      <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
+                        <td>{{ statut.label }}</td>
+                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
+                           <td>{{ statutJuridiqueMpmeCounts[statut.label] || 0 }}</td>
                         
                       </tr>
-                      <tr>
-                        <td>Transports et entreposage</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      <tr>
-                        <td>Services marchands</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      <tr>
-                        <td>Commerce</td>
-                        <td>10</td> 
-                        
-                      </tr>
+                    
                     </tbody>
                   </table>
 
@@ -304,23 +270,19 @@
 
                   <table class="table">
                     <thead class="table-light">
-                      <tr>
+                      <tr >
                         <th>Statut juridique</th>
                         <th>MPME</th> 
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>Entrepreneur individuel</td>
-                        <td>10</td> 
+                      <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
+                        <td>{{ statut.label }}</td>
+                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
+                           <td>{{ statutJuridiqueMpmeCounts[statut.label] || 0 }}</td>
                         
                       </tr>
-                      <tr>
-                        <td>Statut juridique de la société</td>
-                        <td>10</td> 
-                        
-                      </tr>
-                      
+                    
                     </tbody>
                   </table>
 
@@ -370,7 +332,7 @@ import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 import  "glightbox/dist/css/glightbox.css";
 import  "glightbox/dist/js/glightbox.js";
-import GLightbox from 'glightbox';
+import   GLightbox from 'glightbox';
 
 
 
@@ -381,10 +343,27 @@ export default {
   },
   data() {
     return {
+      totalmpme:'',
+      regionMpmeCounts: {},
+      regionOptions: [], // Pour stocker les données des régions
+    mpmeData: [], // Pour stocker les données des MPME
+    regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
+    SecteurActiviteOptions: [], // Vos options de secteurs d'activité
+      secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
+    statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
+    statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
+    totalPersonnelPermanentFemme: 0,
+      totalPersonnelPermanentHomme: 0,
+      totalPersonnelPermanent: 0,
+
+
       
     };
   },
-  mounted() {
+async  mounted() {
+  //  await this.fetchAllMpmeOptions()
+   await this.fetchRegionOptions()
+  //  this.fetchSecteurActiviteOptions();
     new PureCounter();
     this.lightbox = GLightbox({ 
               selector: ".glightbox"
@@ -427,7 +406,155 @@ export default {
 
 
   methods: {
-    
+
+    async fetchAllMpmeOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
+            try {
+                await this.$store.dispatch('fetchMpmeData');
+                const options = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData'])); // Accéder aux options des pays via le getter
+                console.log('Options des mpme:', options);
+                this.items = options;
+                this.totalmpme = options.length; // Utilisez "length" au lieu de "lenght"
+            } catch (error) {
+                console.error('Erreur lors de la récupération des options mpme :', error.message);
+            }
+        },
+
+        async fetchRegionOptions() {
+    try {
+
+      await this.$store.dispatch('fetchMpmeData');
+      this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
+      this.totalmpme = await this.mpmeData.length;
+
+     await this.mpmeData.forEach(pme => {
+      const personnelFemme =  pme.PersonnelPermanentFemme || 0;
+      const personnelHomme = pme.PersonnelPermanentHomme || 0;
+      this.totalPersonnelPermanent += personnelFemme + personnelHomme;
+      this.totalPersonnelPermanentFemme += pme.PersonnelPermanentFemme || 0;
+      this.totalPersonnelPermanentHomme  += pme.PersonnelPermanentHomme || 0;
+    });
+
+
+    await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
+    this.SecteurActiviteOptions = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
+    console.log('eeee',this.SecteurActiviteOptions );
+
+    await this.$store.dispatch('fetchRegionOptions');
+      this.regionOptions = JSON.parse(JSON.stringify(this.$store.getters['getRegionOptions']));
+      console.log('Options des mpme:', this.regionOptions);
+
+      await this.$store.dispatch('fetchStatutJuridiqueOptions');
+    this.statutJuridiqueOptions = JSON.parse(JSON.stringify(this.$store.getters['getStatutJuridiqueOptions']));
+    console.log('Options des mpmestaurt:', this.statutJuridiqueOptions);
+
+    this.secteurMpmeCounts = {};
+    this.regionMpmeCounts = {};
+    this.statutJuridiqueMpmeCounts = {};
+
+
+    this.mpmeData.forEach(pme => {
+      const secteurActivite = pme.PrincipalSecteurActivite; // Assurez-vous que la propriété qui contient le secteur d'activité est correcte
+      if (secteurActivite) {
+        if (!this.secteurMpmeCounts[secteurActivite]) {
+          this.secteurMpmeCounts[secteurActivite] = 1; // Initialisez le compteur à 1 si le secteur d'activité n'existe pas encore
+        } else {
+          this.secteurMpmeCounts[secteurActivite]++; // Incrémente le compteur si le secteur d'activité existe déjà
+        }
+      }});
+
+     console.log('Compteurs de MPME par secteur d\'activité :', this.secteurMpmeCounts);
+
+
+      this.mpmeData.forEach(pme => {
+        const region = pme.Region; // Assurez-vous que la propriété qui contient la région est correcte
+        if (region) {
+          if (!this.regionMpmeCounts[region]) {
+            this.regionMpmeCounts[region] = 1; // Initialisez le compteur à 1 si la région n'existe pas encore
+          } else {
+            this.regionMpmeCounts[region]++; // Incrémente le compteur si la région existe déjà
+          }
+        }});
+        console.log('Compteurs de MPME par région :', this.regionMpmeCounts);
+        this.mpmeData.forEach(pme => {
+      const statutJuridique = pme.CodeStatutJuridique; // Assurez-vous que la propriété qui contient le statut juridique est correcte
+      if (statutJuridique) {
+        if (!this.statutJuridiqueMpmeCounts[statutJuridique]) {
+          this.statutJuridiqueMpmeCounts[statutJuridique] = 1; // Initialisez le compteur à 1 si le statut juridique n'existe pas encore
+        } else {
+          this.statutJuridiqueMpmeCounts[statutJuridique]++; // Incrémente le compteur si le statut juridique existe déjà
+        }
+      }
+    });
+
+    console.log('Compteurs de PME par statut juridique :', this.statutJuridiqueMpmeCounts);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error.message);
+    }
+  },
+
+  async fetchSecteurActiviteOptions() {
+  try {
+    // Récupérez les données des secteurs d'activité depuis l'API
+    await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
+    this.SecteurActiviteOptions = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
+    console.log('eeee',this.SecteurActiviteOptions );
+    // Récupérez les données des MPME depuis l'API des MPME
+    await this.$store.dispatch('fetchMpmeData');
+    this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
+
+    // Initialisez les compteurs de MPME par secteur d'activité
+    this.secteurMpmeCounts = {};
+
+    // Parcourez les données des MPME et comptez le nombre de MPME par secteur d'activité
+    this.mpmeData.forEach(pme => {
+      const secteurActivite = pme.PrincipalSecteurActivite; // Assurez-vous que la propriété qui contient le secteur d'activité est correcte
+      if (secteurActivite) {
+        if (!this.secteurMpmeCounts[secteurActivite]) {
+          this.secteurMpmeCounts[secteurActivite] = 1; // Initialisez le compteur à 1 si le secteur d'activité n'existe pas encore
+        } else {
+          this.secteurMpmeCounts[secteurActivite]++; // Incrémente le compteur si le secteur d'activité existe déjà
+        }
+      }
+    });
+
+    console.log('Compteurs de MPME par secteur d\'activité :', this.secteurMpmeCounts);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error.message);
+  }
+},
+
+async fetchStatutJuridiqueOptions() {
+  try {
+    // Récupérez les données des statuts juridiques depuis l'API
+    await this.$store.dispatch('fetchStatutJuridiqueOptions');
+    this.statutJuridiqueOptions = JSON.parse(JSON.stringify(this.$store.getters['getStatutJuridiqueOptions']));
+
+    // Récupérez les données des PME depuis l'API des PME
+    await this.$store.dispatch('fetchMpmeData');
+    this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
+
+    // Initialisez les compteurs de PME par statut juridique
+    this.statutJuridiqueMpmeCounts = {};
+
+    // Parcourez les données des PME et comptez le nombre de PME par statut juridique
+    this.mpmeData.forEach(pme => {
+      const statutJuridique = pme.StatutJuridique; // Assurez-vous que la propriété qui contient le statut juridique est correcte
+      if (statutJuridique) {
+        if (!this.statutJuridiqueMpmeCounts[statutJuridique]) {
+          this.statutJuridiqueMpmeCounts[statutJuridique] = 1; // Initialisez le compteur à 1 si le statut juridique n'existe pas encore
+        } else {
+          this.statutJuridiqueMpmeCounts[statutJuridique]++; // Incrémente le compteur si le statut juridique existe déjà
+        }
+      }
+    });
+
+    console.log('Compteurs de PME par statut juridique :', this.statutJuridiqueMpmeCounts);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error.message);
+  }
+},
+
+
   },
 };
 </script>

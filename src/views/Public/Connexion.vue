@@ -3,20 +3,19 @@
 
        <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
         <div class="form-container">
-	<p class="title">connexion</p>
-    <p class="text-center">Indiquez votre adresse email et votre mot de passe pour vous connecter</p>
+	<p class="title">Redéfinir votre mot de passe</p>
 	<form class="form">
 		<div class="input-group">
-			<label for="username">Email <span class="text-danger">*</span></label>
-			<input type="text" name="email" id="username" placeholder="" v-model="email">
-		</div>
-    <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
-		<div class="input-group">
-			<label for="password">Mot de passe <span class="text-danger">*</span></label>
-			<input type="password" name="password" id="password" placeholder="" v-model="password">
+			<label for="username">Nouveau mot de passe <span class="text-danger">*</span></label>
+      <MazInput v-model="password" type="password" color="secondary"  style="width: 100%;" />
 		</div>
     <small v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</small>
-		<button class="sign" @click.prevent="submit">Se connecter</button>
+		<div class="input-group">
+			<label for="password"> Confirmer le nouveau mot de passe <span class="text-danger">*</span></label>
+      <MazInput v-model="confirmer_password" type="password" color="secondary"  style="width: 100%;" />
+		</div>
+    <small v-if="v$.confirmer_password.$error">{{v$.confirmer_password.$errors[0].$message}}</small>
+		<button class="sign" @click.prevent="submit">Réinitialiser</button>
 	</form>
 </div>
        
@@ -38,22 +37,21 @@ export default {
 
     data() {
         return {
-          email:'',
              password:'',
+             confirmer_password:'',
              v$:useVuelidate(), 
         };
     },
     validations: {
-             email:{
-               require,
-                ValidEmail
-            },
+     
             password:{
               require,
-                lgmin:lgmin(6),
-                lgmax:lgmax(12)
-         
-                
+                lgmin:lgmin(8), 
+            },
+            confirmer_password:{
+              require,
+                lgmin:lgmin(8),
+              
             },
     },
 
@@ -63,13 +61,13 @@ export default {
 
     methods: {
       async  submit(){
-            // this.v$.$validate()
+
             this.v$.$touch()
             if (this.v$.$errors.length == 0 ) {
-                // this.revele = !this.revele
+
              let   DataUser={
-                    email:this.email,
-                    password:this.password
+                    password:this.password,
+                    confirmer_password:this.confirmer_password
                 }
                 console.log('data user :',DataUser);
               }
@@ -87,7 +85,7 @@ export default {
   }
 
 .form-container {
-  width: 400px;
+  width: 454px;
   border-radius: 0.75rem;
   background-color: white;
   padding: 2rem;

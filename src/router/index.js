@@ -15,13 +15,15 @@ import Loginmpme from '../views/Public/login_user_mpme.vue'
 import Verification from '../views/Public/Verification_code.vue'
 import Espace from '../views/Public/espace.vue'
 import Dossiers from '../views/Public/dossiers.vue'
+import Profil from '../views/Public/Profil.vue'
+
 
 // import Test from '../views/Public/test2.vue'
 
 
 
 
-import Test from '../views/test.vue'
+import Test from '../views/test3.vue'
 
 
 
@@ -42,55 +44,62 @@ const router = createRouter({
          { path: '/documents', name: 'documents', component: Documents},
          { path: '/appel_offre', name: 'appel_offre', component: Offre},
          { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
-         { path: '/connexion', name: 'connexion', component: Connexion },
-         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true }, },
-         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , beforeEnter: requireNotLoggedIn},
-         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , props:true  , beforeEnter: requireNotLoggedIn},
-
+         { path: '/reinitialiser', name: 'connexion', component: Connexion , },
+         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , },
+         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification  ,  },
+         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , },
          { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
-         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification , props:true  ,  meta: { requiresAuth: true }, },
-         { path: '/mon_espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true }, },
-         { path: '/dossiers', name: 'Dossiers', component: Dossiers },
+
+
+         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true } },
+         { path: '/mon_espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true } },
+         { path: '/dossiers', name: 'Dossiers', component: Dossiers  ,  meta: { requiresAuth: true } },
+         { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
          { path: '/test', name: 'Test', component: Test, }
          
-
-
-
 
       ]
     },
   ]
 })
-function requireNotLoggedIn(to, from, next) {
-  const isLoggedIn = store.getters['user/isLoggedIn'];
-  if (isLoggedIn) {
-    next('/mon_espace'); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
-  } else {
-    next();
-  }
-}
+// function requireNotLoggedIn(to, from, next) {
+//   const isLoggedIn = store.getters['user/isLoggedIn'];
+//   if (isLoggedIn) {
+//     next('/mon_espace'); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
+//   } else {
+//     next();
+//   }
+// }
 
-function requireLoggedIn(to, from, next, redirectToHome = false) {
-  const isLoggedIn = store.getters['user/isLoggedIn'];
-  if (isLoggedIn) {
-    if (redirectToHome) {
-      next(); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
-    } else {
-      next();
-    }
-  } else {
-    next('/login_user_mpme');
-  }
-}
+// function requireLoggedIn(to, from, next, redirectToHome = false) {
+//   const isLoggedIn = store.getters['user/isLoggedIn'];
+//   if (isLoggedIn) {
+//     if (redirectToHome) {
+//       next(); // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next('/login_user_mpme');
+//   }
+// }
 
-router.beforeEach( async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
-  if (requiresAuth) {
-    await store.dispatch('user/loadLoggedInUser');
-    requireLoggedIn(to, from, next);
-  } else {
+  const isLoggedIn = store.getters['user/isLoggedIn'];
+console.log('isLoggedIn',isLoggedIn);
+  if (requiresAuth && !isLoggedIn) {
+    // Si la route nécessite une authentification et l'utilisateur n'est pas connecté,
+    // redirigez-le vers la page de connexion
+    next('/login_user_mpme');
+  } else if ((to.name === 'Singmpme' || to.name === 'Loginmpme') && isLoggedIn) {
+    // Si l'utilisateur est connecté et essaie d'accéder aux pages d'inscription ou de connexion,
+    // redirigez-le vers la page mon_espace
+    next('/mon_espace');
+  }
+  else {
     next();
   }
-})
+});
 
 export default router

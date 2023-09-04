@@ -350,7 +350,7 @@ small {
 
 .general {
 
-  padding: 60px;
+  padding: 20px 60px 60px;
 }
 
 .form-container {

@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="container">
                 <div class="page-header__inner">
-                    <h1 class="display-2">Bienvenue {{ loggedInUser.user.Prenoms }} {{ loggedInUser.user.Nom }}</h1>
+                    <h1 class="display-2">Bienvenue {{ loggedInUser.prenom }} {{ loggedInUser.nom }}</h1>
                     <p>Votre espace personnel vous permet d’effectuer et de faire le suivi de votre entreprise</p>
                 </div>
             </div>
@@ -39,11 +39,7 @@
                                 <div class="row mt-2">
                                     <div class="col-sm-12"><b class="" style="color: var(--color-primary);">Mes dossiers </b>
                                     <p class="py-3 mb-2">Sauvegardez vos documents, images et vidéos ici</p>
-                                    <ul class="ba p-0">
-                                        <li>
-    
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="mt-auto text-center">
@@ -101,6 +97,7 @@ export default {
     methods: {
 
     },
+    
 };
 </script>
 

@@ -25,16 +25,15 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li><router-link to="/">Accueil</router-link></li>
-            <li><router-link to="/liste_pme">Liste PME</router-link></li>
+            <li><router-link to="/liste_pme">Répertoire des MPME</router-link></li>
             <li><router-link to="/statistique">Statistiques</router-link></li>
             <li><router-link to="/documents">Documentation</router-link></li>
             <li class="dropdown">
               <router-link to="#">Opportunités <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
               <ul  class="dropdown-menu">
-                <li><router-link to="/opportunites/appel_offre">Appel Offre</router-link></li>
+              
                 <li><router-link to="/opportunites/appel_emploi">Appel Emploi</router-link></li>
-                <li><router-link to="/formulaire">Formulaire</router-link></li>
-
+           
               </ul>
             </li>
 
@@ -50,14 +49,12 @@
           
        </div>
                 <ul class="dropdown-menu menu"  >
-             <li><router-link to="/mon_espace"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard pt-0"></i>Mon espace</router-link></li>             
-             <li><a class="dropdown-item d-flex justify-content-around" href="#"><i class="bi bi-box-arrow-in-right pt-0"></i>Déconnexion</a></li>
+             <li><router-link to="/mon_espace"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard pt-0"></i>Mon espace</router-link></li>
+             <li><router-link to="/profil"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-building"></i>Mon profil</router-link></li>            
+             <li><span class="dropdown-item d-flex justify-content-around " style="cursor:pointer;" @click="logout" ><i class="bi bi-box-arrow-in-right pt-0"></i>Déconnexion</span></li>
              
            </ul>
                </div>
-     
-      
-     
         <router-link to="/login_user_mpme" class="btnCt" v-else>
           <i class=" bi bi-person-fill-lock"></i>
           <span> Connexion </span>
@@ -78,13 +75,33 @@
 <script>
 import { mapGetters } from 'vuex';
 
+
 export default {
   name: 'MpmeNavbar',
 
-      computed: {
+  //     computed: {
+  //   ...mapGetters('user', ['isLoggedIn']),
+  //   shouldShowNavbar() {
+  //     return this.isLoggedIn && this.$route.path !== '/login_user_mpme' && this.$route.path !== '/login_user_mpme/verification';
+  //   },
+  //   loggedInUser() {
+  //     return this.$store.getters['user/loggedInUser'];
+  //   },
+  // },
+  
+  computed: {
     ...mapGetters('user', ['isLoggedIn']),
-    shouldShowNavbar() {
-      return this.isLoggedIn && this.$route.path !== '/login_user_mpme/verification';
+   shouldShowNavbar() {
+    this.$store.dispatch('user/loadLoggedInUser')
+    
+      return (
+        this.isLoggedIn &&
+        this.$route.path !== '/login_user_mpme' &&
+        this.$route.path !== '/login_user_mpme/verification'
+      );
+    },
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
     },
   },
   
@@ -99,9 +116,7 @@ export default {
 
     };
   },
-  created() {
-    this.$store.dispatch('user/loadLoggedInUser'); // Charger les données du local storage
-  },
+ 
 
   mounted() {
  console.log("navbarrrr",this.loggedInUser);
@@ -216,7 +231,24 @@ export default {
 
   methods: {
   
+    async logout() {
+    try {      
+        // const response = await axios.post('/auth-user-logout' ,{}, {
+        //             headers: {
+        //                     Authorization: `Bearer ${this.loggedInUser.token}`,
+        //                    'Content-Type': 'application/json',
+        //             },
+        //         });
+                // if (response.status === "success") {
+                  
+                        await this.$store.dispatch('user/clearLoggedInUser'); // Appel de l'action pour déconnecter l'utilisateur
+                       this.$router.push('/login_user_mpme'); // Redirection vers la page de connexion
+                // }
 
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion :', error);
+    }
+  }
   },
 };
 </script>

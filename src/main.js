@@ -50,10 +50,11 @@ app.component('VueDatePicker', VueDatePicker);
 
 
 
-
+store.dispatch('user/loadLoggedInUser').then(() => {
 app.use(store);
 app.use(VueChartkick)
 app.use(vuetify);
 app.use(router)
 app.mount('#app')
 
+});

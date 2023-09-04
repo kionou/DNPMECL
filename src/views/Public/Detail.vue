@@ -1,4 +1,5 @@
 <template>
+    <Loading v-if="loading"></Loading>
     <div>
         <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Header -->
@@ -13,7 +14,24 @@
                                 <img src="@/assets/img/prof.png" alt="user image"
                                     class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
                             </div>
-                            <div class="flex-grow-1 mt-3 mt-sm-5">
+                            <div class="name-user">
+                                <div
+                                    class="d-flex  align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
+                                    <div class="user-profile-info text-capitalize">
+                                        <h4 class="text-capitalize">{{ data.NomMpme }}</h4>
+                                        <ul
+                                            class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
+                                            <li class="list-inline-item fw-semibold"><i
+                                                    class="fa-solid fa-location-dot"></i> {{ data.Ville }} {{ data.Localisation }} {{ data.Rue }} </li>
+                                            
+
+                                        </ul>
+                                       
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <!-- <div class="flex-grow-1 mt-3 mt-sm-5">
                                 <div
                                     class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                                     <div class="user-profile-info text-capitalize">
@@ -21,16 +39,14 @@
                                         <ul
                                             class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                                             <li class="list-inline-item fw-semibold"><i
-                                                    class="fa-solid fa-location-dot"></i> 2
-                                                Boulevard De L Europe - 78300 Poissy</li>
-                                            <li class="list-inline-item fw-semibold"><i class="bx bx-map"></i> Vatican City
-                                            </li>
+                                                    class="fa-solid fa-location-dot"></i> {{ data.Ville }} {{ data.Localisation }} {{ data.Rue }}</li>
+                                           
 
                                         </ul>
                                         <hr>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -70,7 +86,7 @@
                         <div class=" tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
 
                             <div class="row ttb">
-                                <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
+                                <div class=" card col-xl-5 col-lg-5 col-md-5 py-2 ttb1">
                                     <div class=" bg-white rounded-lg  ">
                                        
                                         <div class="">
@@ -173,7 +189,7 @@
                         </div>
                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-7 my-6 col-md-7">
+                                <div class="col-xl-7 col-lg-7 my-6 col-md-7 ttb2">
                                     <!-- Activity Timeline -->
                                     <div class="card card-action mb-4">
                                         <div class="card-header align-items-center">
@@ -437,14 +453,13 @@
 
 <script>
 import axios from '@/lib/axiosConfig.js'
-import mapboxgl from 'maplibre-gl'; // Ajoutez cette ligne
-import { NavigationControl, Marker, Popup } from 'maplibre-gl';
-import { shallowRef, onMounted, onUnmounted, markRaw, ref } from 'vue';
+
 import Position from '../../components/Public/LISTE_PME/position.vue'
+import Loading from '../../components/Public/other/preloader.vue';
 
 export default {
     name: 'DNPMECLDetail',
-    components: { Position },
+    components: { Position , Loading },
     props: ['id'],
     setup() {
    
@@ -452,6 +467,7 @@ export default {
 
     data() {
         return {
+            loading:true,
             data: '',
          isFullScreen: false,
          childKey: 0,
@@ -474,38 +490,9 @@ export default {
             const data = response.data.data
             console.log('eeee', data);
             this.data = data
+            this.loading =   false
             this.items = JSON.parse(this.data.ListeSousSecteurActivite)
-            
-    //         const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
-    //   const initialState = { lng: -11.283844999999985, lat: 9.934886500000001, zoom: 5.5 };
-    //   this.showMap = true;
-    //   this.map = markRaw(
-    //     new mapboxgl.Map({
-    //       container: this.mapContainer,
-    //       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
-    //       center: [initialState.lng, initialState.lat],
-    //       zoom: initialState.zoom,
-    //     })
-    //   );
-   
-    //   this.map.addControl(new NavigationControl(), 'top-right');
-
-    //   const newMarker = new Marker({ color: '#FF0000' })
-    //     .setLngLat([data.LongitudeMpme, data.LatitudeMpme])
-    //     .addTo(this.map);
-    //     const popupContent = `
-    //     <div>
-    //       <h3> Nom: ${data.NomMpme}</h3>
-    //       <p> <h4>Description:</h4> ${data.description}</p>
-    //     </div>`;
-    //   newMarker.setPopup(new Popup().setHTML(popupContent));
-
-    //   newMarker.getElement().addEventListener('click', () => {
-    //     this.map.flyTo({
-    //       center: [data.LongitudeMpme, data.LatitudeMpme],
-    //       zoom: 10,
-    //     });
-    //   });
+  
 
         },
     },
@@ -514,11 +501,24 @@ export default {
 
 
 <style lang="css" scoped >
+
+.name-user{
+/* border:1px solid red; */
+width: 100%;
+height: 50px;
+height: auto;
+    margin-top: 34px;
+
+}
 @media (max-width: 1100px) {
 
     .ttb{
     
     flex-direction:column;
+    }
+    .ttb1 , .ttb2{
+    
+    width: 100%;
     }
 
 }

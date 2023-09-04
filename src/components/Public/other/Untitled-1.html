@@ -1,0 +1,151 @@
+<template>
+    
+    <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100" style="margin-top:48px">
+        <form class="form">
+            <!-- Étape 1 -->
+            <div v-if="currentStep === 1">
+                <div class="form-container">
+
+                    <!-- debut infos genral -->
+                    <div class="content">
+                        <p class="titre">INFORMATIONS GENERALE</p>
+                        <div class="row mb-3 mt-3 content-group">
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="Region">Region <span class="text-danger">*</span></label>
+                                    <MazSelect v-model="region" color="secondary" :options="regionOptions" />
+                                </div>
+                                <small v-if="v$.$errors.region">{{ v$.$errors.region[0].$message }}</small>
+                            </div>
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="Commune">Commune <span class="text-danger">*</span></label>
+                                    <input type="text" name="Commune" id="Commune" placeholder="" v-model="commune">
+                                </div>
+                                <small v-if="v$.commune.$error">{{ v$.commune.$errors[0].$message }}</small>
+                            </div>
+                </div>
+                <div class="btnForm py-3 flex items-center justify-content-end">
+                    <button class="btnLogin" @click.prevent="nextStep">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div v-if="currentStep === 2">
+                <div class="form-container">
+
+                    <!-- debut infos genral -->
+                    <div class="content">
+                        <p class="titre">INFORMATIONS SUR LES PRIX ET LES DIRIGEANTS</p>
+                        <div class="row mb-3 mt-3 content-group ">
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="MpmeBourse">Mpme Bourse <span class="text-danger">*</span></label>
+                                    <MazSelect v-model="mpmeBourse" color="secondary" :options="choix" />
+
+                                </div>
+                                 <small v-if="v$.mpmeBourse.$error">{{ v$.mpmeBourse.$errors[0].$message }}</small>
+                                 <small v-if="v$.$errors.region">{{ v$.$errors.region[0].$message }}</small>
+                            </div>
+                            <div class="col" v-if="mpmeBourse === 'oui'">
+                                <div class="input-groupe">
+                                    <label for="NomBourse">Nom Bourse <span class="text-danger">*</span></label>
+                                    <MazSelect v-model="nomBourse" color="secondary" :options="BourseOptions" />
+
+                                </div>
+                                 <small v-if="v$.nomBourse.$error">{{ v$.nomBourse.$errors[0].$message }}</small>
+                            </div>
+                            
+                        </div>      
+        </form>
+    </div>
+</template>
+  
+<script>
+
+import axios from '@/lib/axiosConfig.js'
+import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
+import useVuelidate from '@vuelidate/core';     
+import { require, lgmin, lgmax   } from '@/functions/rules';
+
+export default {
+    name: 'Componentlogin',
+  
+    data() {
+        return {
+            currentStep: 1,
+            v$:useVuelidate(), 
+            region: "",
+            commune: "",
+             // etapes 2
+      mpmeBourse: '',
+      nomBourse: '',
+
+        };
+    },
+    validations: {
+        step1: {
+        region: {
+          require,
+        },
+        commune: {
+          require,
+        },
+    },
+        step2: {
+           
+    mpmeBourse: {
+          require,
+        },
+    nomBourse: {
+          require,
+        },
+    },
+},
+    methods: {
+       
+           
+        },
+        async nextStep() {
+            if (this.currentStep === 1) {
+                // this.v$.$touch()
+                this.v$.$touch(this.validations.step1);
+               if (this.v$.$errors.length == 0 ) {
+                const mpmeData = this.createMpmeData();
+                console.log('mpmeData1', mpmeData);
+                const success = await this.enregistrerMpmeDonnees(mpmeData);
+                console.log('success', success);
+                if (success) {
+                    this.currentStep++;
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                        });
+                } else {
+                    console.error('Erreur lors de l\'enregistrement des données pour le MPME');
+                }
+                }
+               
+            } else if (this.currentStep === 2) {
+                this.v$.$touch(this.validations.step2);
+                if (this.v$.$errors.length == 0 ) {
+                
+                }
+               
+            }
+        },
+
+        prevStep() {
+            if (this.currentStep > 1) {
+                this.currentStep--;
+            }
+        },
+
+        submit() {
+            const mpmeData = this.createMpmeData();
+                console.log('mpmeData', mpmeData);
+        },
+
+};
+</script>
+ 

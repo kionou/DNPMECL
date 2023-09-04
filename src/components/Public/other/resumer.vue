@@ -78,11 +78,11 @@
     </div>
     <div class="col">
       <strong class="contenu">Site Web:</strong>
-      <span>{{ userData.AdresseEmai }}l</span>
+      <span>{{ userData.AdresseEmai }}</span>
     </div>
     <div class="col">
       <strong class="contenu">Année de Création:</strong>
-      <span>{{ userData.AnneeCreation }}.</span>
+      <span>{{ userData.AnneeCreation }}</span>
     </div>
    
   </div>
@@ -109,10 +109,10 @@
     </div>
     <div class="col">
       <strong class="contenu">Liste des Sous-Secteurs d'Activité:</strong>
-      <span >{{ items }}</span>
+      <span >{{ items }} </span>
     </div>
     <div class="col">
-      <strong class="contenu">Année de Production 1:</strong>
+      <strong   class="contenu">Année de Production 1:</strong>
       <span>{{ userData.AnneeProduction1 }}</span>
     </div>
   </div>
@@ -120,7 +120,7 @@
   <div class="row mb-3">
     <div class="col">
       <strong class="contenu">Personnel Permanent Femme:</strong>
-      <span>{{ userData.PersonnelPermanentFemme }}.</span>
+      <span>{{ userData.PersonnelPermanentFemme }}</span>
     </div>
     <div class="col">
       <strong class="contenu">Personnel Permanent Homme:</strong>
@@ -128,7 +128,7 @@
     </div>
     <div class="col">
       <strong class="contenu">Personnel Temporaire Femme:</strong>
-      <span>{{ userData.PersonnelTemporaireFemme }}.</span>
+      <span>{{ userData.PersonnelTemporaireFemme }}</span>
     </div>
   </div>
   
@@ -143,7 +143,7 @@
     </div>
     <div class="col">
       <strong class="contenu">Chiffre d'Affaires 2:</strong>
-      <span>{{ userData.ChiffreAffaire2 }}.</span>
+      <span>{{ userData.ChiffreAffaire2 }}</span>
     </div>
   </div>
   

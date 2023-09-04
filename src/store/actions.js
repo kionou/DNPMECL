@@ -24,6 +24,17 @@ async fetchDataFromAPI({ commit }) {
       console.log(error);
     }
   },
+  async fetchMpmeData({ commit }) {
+    try {
+      const response = await axios.get('/mpme');
+      const data = response.data.data;
+      console.log('Données récupérées de mpme :', data);
+
+      commit('SET_MPME_DATA', data); // Appel de la mutation pour mettre à jour le state
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données de /mpme:', error);
+    }
+  },
 
 
   fetchCountries: async ({ commit }) => {
@@ -155,7 +166,7 @@ async fetchDataFromAPI({ commit }) {
 
       // Formater les données de l'API en options pour MazSelect
       const options = statutJuridiqueFromAPI.map(statutJuridique => ({
-        label: statutJuridique.NomStatutJuridique,
+        label: statutJuridique.SigleStatutJuridique,
         value: statutJuridique.NomStatutJuridique
       }));
 
@@ -181,6 +192,23 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des options de bourses:', error);
     }
   },
+  async fetchSousDocOptions({ commit }) {
+    try {
+      const response = await axios.get('/sous-categories-document'); // Remplacez l'URL par l'URL de votre API
+      console.log('sousdoc', response.data.data.data);
+      const sousdocFromAPI = response.data.data.data;
+
+      // Formater les données de l'API en options pour MazSelect
+      const options = sousdocFromAPI.map(doc => ({
+        label: doc.NomSousCategorie,
+        value: doc.CodeSousCategorie
+      }));
+      
+      commit('SET_SOUS_DOC_OPTIONS', options);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des options de sous doc:', error);
+    }
+  },
   async fetchUserData({ commit }, userId) {
     try {
       const response = await axios.get(`/mpme/${userId}`);
@@ -192,5 +220,30 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
     }
   },
+  
+
+  async fetchCategoriesData({ commit }) {
+    try {
+      const response = await axios.get('/categories-document');
+      const data = response.data; 
+      console.log('SET_CATEGORIES_DATA', data);// Assurez-vous que la structure des données est correcte
+      commit('SET_CATEGORIES_DATA', data);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des catégories de documents :', error);
+    }
+  },
+
+  async fetchSousCategoriesData({ commit }) {
+    try {
+      const response = await axios.get('/sous-categories-document');
+      const data = response.data;
+        console.log('SET_SOUS_CATEGORIES_DATA', data);
+       // Assurez-vous que la structure des données est correcte
+      commit('SET_SOUS_CATEGORIES_DATA', data);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des sous-catégories de documents :', error);
+    }
+  },
+
 
  }

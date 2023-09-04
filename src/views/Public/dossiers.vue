@@ -16,9 +16,9 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-12 col-12 mb-4">
-            <div class="nav-align-top mb-4">
-              <ul class="nav nav-pills mb-3" role="tablist">
+          <div class="col-lg-12 col-12 ">
+            <div class="nav-align-top ">
+              <ul class="nav nav-pills " role="tablist">
                 <li class="nav-item">
                   <button type="button"  class="nav-link  active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1" aria-selected="true">
                    Documents
@@ -42,12 +42,12 @@
               
 
  <div class="tab-pane fade show active  contenu" id="navs-pills-top-home1" role="tabpanel" >
-<Image/>
+  <Document/>
 
  </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
-                  
-                        <p>23456789</p>
+                  <Image/>
+                       
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-messages1" role="tabpanel">
 
@@ -72,7 +72,9 @@
 </template>
 
 <script>
+import Document from '../../components/DOSSIERS/document.vue';
 import Image from '../../components/DOSSIERS/image.vue';
+
 
 
 
@@ -81,7 +83,7 @@ import Image from '../../components/DOSSIERS/image.vue';
 export default {
     name: 'DNPMECLEspace',
     components: {
-        Image
+        Image , Document
     
   },
     computed: {
@@ -137,6 +139,10 @@ export default {
     position: relative;
 }
 
+.fade:not(.show) {
+    display: none;
+    opacity: 0;
+}
 .page-header h1 {
     position: relative;
     color: #fff;

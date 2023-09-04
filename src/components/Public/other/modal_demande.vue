@@ -64,11 +64,11 @@ import axios from '@/lib/axiosConfig.js'
           }
           console.log("eee",CodeUserWhatsapp);
           try {
-        // const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
-        // console.log('response.Code', response); 
+        const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
+        console.log('response.Code', response); 
       console.log("try",datauser);
-       this.$router.push({ name: 'Espace' }); 
-        // this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
+      //  this.$router.push({ name: 'Espace' }); 
+        this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
     } catch (error) {
       console.log(error.message);
     

@@ -1,6 +1,7 @@
 // store/modules/user.js
 import { isTokenExpired } from '@/functions/util.js';
 
+
 const state = {
     loggedInUser: null,
   };
@@ -37,9 +38,11 @@ const state = {
 
      
     },
-    clearLoggedInUser({ commit }) {
-      commit('CLEAR_LOGGED_IN_USER');
+      clearLoggedInUser({ commit }) {
+      
+       commit('CLEAR_LOGGED_IN_USER');
       localStorage.removeItem('loggedInUserData');
+
     },
     loadLoggedInUser({ commit }) {
       const storedUserData =  localStorage.getItem('loggedInUserData');
@@ -48,7 +51,8 @@ const state = {
         console.log('data',data);
         // commit('SET_LOGGED_IN_USER', JSON.parse(storedUserData));
           if (!isTokenExpired(data.tokenExpiration)) {
-        commit('SET_LOGGED_IN_USER', data);
+        commit('SET_LOGGED_IN_USER', JSON.parse(storedUserData));
+        console.log('User data has been set');
       } else {
         // Déconnectez automatiquement l'utilisateur si le token a expiré
         commit('CLEAR_LOGGED_IN_USER');

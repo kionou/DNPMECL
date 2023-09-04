@@ -12,6 +12,7 @@
   --color-primary: #139864;
   --color-secondary: ##F9D310;
 }
+
 body {
   font-family: var(--font-default);
   color: var(--color-default);

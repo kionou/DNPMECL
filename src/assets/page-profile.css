@@ -34,7 +34,7 @@ hr {
 
 @media (max-width: 767.98px) {
   .user-profile-header-banner img {
-    height: 150px;
+    height: 80px;
   }
   .user-profile-header .user-profile-img {
     width: 100px;

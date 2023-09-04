@@ -1,353 +1,426 @@
 <template>
-    <div class=" d-flex justify-content-center align-items-center flex-wrap">
-        <div class="btnLogin" @click="this.isOpen = true" > <i class="bi bi-plus-lg"></i> Ajouter</div>
-      <div v-if="resultnone" class="noresul">
-      <span>{{ resultnone }}</span>
-      </div>
-    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="100">
-      <div class="task" v-for="item in userData" :key="item.id">
-          <div class="image">
-            <img :src="item.Photo" alt=""> 
+  <div class=" d-flex justify-content-center align-items-center flex-wrap" style="position: relative;">
+    
+    <div class="btnLgin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
+    <div v-if="paginatedItems.length === 0" class="noresul">
+      <span> Vous n'avez pas encore d'image, vous pouvez également en ajouter une !! </span>
+    </div>
+    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
+      data-aos-delay="100" v-else>
+      <div class="task" v-for="item in paginatedItems" :key="item.id">
+        <div class="image">
+          <img :src="item.Photo" alt="">
         </div>
-       
+
         <div class="sci">
-        <span style="--i:1" >
-         <i class="bi bi-pen" @click="updateupload(item.id , item.Photo)"></i>
+          <span style="--i:1" v-if="item.StatutPhoto === '1' " class="open">
+            <i class="bi bi-power" @click="updateupload(item.id)"></i>
+           
+          </span>
+          <span style="--i:1" v-else class="close">
+            <i class="bi bi-power" @click="updateupload(item.id)"></i>
+           
+          </span>
+          <span style="--i:2" @click="hamdledelete(item.id)" class="delete">
+            <i class="bi bi-trash"></i>
 
-        </span>
-        <span style="--i:2" @click="hamdledelete(item.id )">
-         <i class="bi bi-trash"></i>
-        
-        </span>
-       
-    </div>
-      </div>
-    </div>
+          </span>
 
-<MazDialog v-if="isOpen" v-model="isOpen" >
-    <div>
-    <div id="uploadArea" class="upload-area">
-      <!-- Header -->
-      <div class="upload-area__header">
-        <h1 class="upload-area__title">Téléchargez votre fichier</h1>
-        <p class="upload-area__paragraph">
-            Le fichier doit être une image
-          <strong class="upload-area__tooltip">
-            comme
-            <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-          </strong>
-        </p>
-      </div>
-      <!-- End Header -->
-
-      <!-- Drop Zoon -->
-      <div
-        id="dropZoon"
-        class="upload-area__drop-zoon drop-zoon"
-        @dragover="handleDragOver"
-        @dragleave="handleDragLeave"
-        @drop="handleDrop"
-      >
-        <span class="drop-zoon__icon">
-          <i class="bi bi-file-earmark-image"></i>
-        </span>
-        <!-- <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p> -->
-        <span id="loadingText" class="drop-zoon__loading-text">S'il vous plaît, attendez</span>
-        <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false" />
-        <label for="fileInput" class="drop-zoon__paragraph">
-          <span class="drop-zoon__file-label-text">Cliquez pour parcourir</span>
-        </label>
-        <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" @change="handleFileChange" />
-
-      </div>
-      <!-- End Drop Zoon -->
-
-      <!-- File Details -->
-      <div id="fileDetails" class="upload-area__file-details file-details">
-        <h3 class="file-details__title">Fichier téléchargé</h3>
-
-        <div id="uploadedFile" class="uploaded-file">
-          <div class="uploaded-file__icon-container">
-            <i class="bi bi-filetype-png"></i>
-            <span class="uploaded-file__icon-text">{{ uploadedFileIconText }}</span>
-          </div>
-
-          <div id="uploadedFileInfo" class="uploaded-file__info">
-            <span class="uploaded-file__name">{{ uploadedFileName }}</span>
-            <span class="uploaded-file__counter">{{ uploadedFileCounter }}%</span>
-          </div>
         </div>
       </div>
-      <!-- End File Details -->
     </div>
-  </div>
+
+    <MazDialog v-if="isOpen" v-model="isOpen">
+      <div>
+        <div id="uploadArea" class="upload-area">
+          <!-- Header -->
+          <div class="upload-area__header">
+            <h1 class="upload-area__title">Téléchargez votre fichier</h1>
+            <p class="upload-area__paragraph">
+              Le fichier doit être une image
+              <strong class="upload-area__tooltip">
+                comme
+                <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+              </strong>
+            </p>
+          </div>
+          <!-- End Header -->
+
+          <!-- Drop Zoon -->
+          <div id="dropZoon" class="upload-area__drop-zoon drop-zoon" @dragover="handleDragOver"
+            @dragleave="handleDragLeave" @drop="handleDrop">
+            <span class="drop-zoon__icon">
+              <i class="bi bi-file-earmark-image"></i>
+            </span>
+            <!-- <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p> -->
+            <span id="loadingText" class="drop-zoon__loading-text">S'il vous plaît, attendez</span>
+            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false" />
+            <label for="fileInput" class="drop-zoon__paragraph">
+              <span class="drop-zoon__file-label-text">Cliquez pour parcourir</span>
+            </label>
+            <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*" @change="handleFileChange" />
+
+          </div>
+          <!-- End Drop Zoon -->
+
+          <!-- File Details -->
+          <div id="fileDetails" class="upload-area__file-details file-details">
+            <h3 class="file-details__title">Fichier téléchargé</h3>
+
+            <div id="uploadedFile" class="uploaded-file">
+              <div class="uploaded-file__icon-container">
+                <i class="bi bi-filetype-png"></i>
+                <span class="uploaded-file__icon-text">{{ uploadedFileIconText }}</span>
+              </div>
+
+              <div id="uploadedFileInfo" class="uploaded-file__info">
+                <span class="uploaded-file__name">{{ uploadedFileName }}</span>
+                <span class="uploaded-file__counter">{{ uploadedFileCounter }}%</span>
+              </div>
+            </div>
+          </div>
+          <!-- End File Details -->
+        </div>
+      </div>
 
     </MazDialog>
 
     <MazDialog v-model="isdelete" title="Suppression d'image">
-    <p>
-      Êtes-vous sûr de vouloir supprimer cette image ?
-    </p>
-    <template #footer="{ close }">
+      <p>
+        Êtes-vous sûr de vouloir supprimer cette image ?
+      </p>
+      <template #footer="{ close }">
 
-        <div class="supp"  @click="close" style="background-color: red; " > Non</div>
-     
-      <div class="supp"  @click="confirmDelete" style="background-color: var(--color-primary);"> Oui</div>
+        <div class="supp" @click="close" style="background-color: red; "> Non</div>
 
-    </template>
-  </MazDialog>
-  <MazDialog v-model="confirmdelete" >
-    <p>
-      Êtes-vous sûr de vouloir supprimer cette image ?
-    </p>
-    <template #footer="{ close }">
+        <div class="supp" @click="confirmDelete" style="background-color: var(--color-primary);"> Oui</div>
 
-        <div class="supp"  @click="close" style="background-color: blue; " > Ok</div>
-     
-      
+      </template>
+    </MazDialog>
+    <MazDialog v-model="confirmdelete">
+      <p>
+        Image supprimer avec succès !!!
+      </p>
+      <template #footer="{ close }">
 
-    </template>
-  </MazDialog>
+        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
 
 
-  <MazDialog v-if="updated" v-model="updated" >
-    <div>
-       
-           <div id="uploadArea" class="upload-area">
-             <!-- Header -->
-             <div class="upload-area__header">
-               <h1 class="upload-area__title">Modifiez votre fichier</h1>
-               <p class="upload-area__paragraph">
-                   Le fichier doit être une image
-                 <strong class="upload-area__tooltip">
-                   comme
-                   <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-                 </strong>
-               </p>
-             </div>
-             <!-- End Header -->
-       
-             <!-- Drop Zoon -->
-             <div
-               id="dropZoon"
-               class="upload-area__drop-zoon drop-zoon"
-             
-             >
-             <div class="profile-pic">
-         <label class="-label" for="file">
-           <span class="glyphicon glyphicon-camera"></span>
-           <span>Change Image</span>
-         </label>
-         <input id="file" type="file" @change="loadFile"/>
-         <img :src="updateImageUrl" id="output" width="200" />
-       </div>
-          
-       
-             </div>
-             <!-- End Drop Zoon -->
-       
-            
-           </div>
-  </div>
+
+      </template>
+    </MazDialog>
+
+
+    <MazDialog v-if="updatedt" v-model="updatedt">
+      <div>
+
+        <div id="uploadArea" class="upload-area">
+          <!-- Header -->
+          <div class="upload-area__header">
+            <h1 class="upload-area__title">Modifiez votre fichier</h1>
+            <p class="upload-area__paragraph">
+              Le fichier doit être une image
+              <strong class="upload-area__tooltip">
+                comme
+                <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+              </strong>
+            </p>
+          </div>
+          <!-- End Header -->
+
+          <!-- Drop Zoon -->
+          <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+            <div class="profile-pic">
+              <label class="-label" for="file">
+                <span class="glyphicon glyphicon-camera"></span>
+                <span>Change Image</span>
+              </label>
+              <input id="file" type="file" @change="loadFile" />
+              <img :src="updateImageUrl" id="output" width="200" />
+            </div>
+
+
+          </div>
+          <!-- End Drop Zoon -->
+
+
+        </div>
+      </div>
 
     </MazDialog>
-    </div>
+
+    <MazDialog v-model="updated">
+      <p>
+        Image  valider merci !!!
+      </p>
+      <template #footer="{ close }">
+
+        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+
+      </template>
+    </MazDialog>
+  </div>
+  <div class="container_pagination">
+    <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
+  </div>
 </template>
 
 <script>
 import 'swiper/swiper-bundle.css';
-import  "glightbox/dist/css/glightbox.css";
-import  "glightbox/dist/js/glightbox.js";
+import "glightbox/dist/css/glightbox.css";
+import "glightbox/dist/js/glightbox.js";
 import GLightbox from 'glightbox';
 import MazDialog from 'maz-ui/components/MazDialog'
 import axios from '@/lib/axiosConfig.js'
+import Pag from '../Public/other/pag.vue';
 export default {
-    name: 'DNPMECLImage',
-    components: {
-    MazDialog,
-    
+  name: 'DNPMECLImage',
+  components: {
+    MazDialog, Pag
+
   },
-    computed: {
-   
+  computed: {
+
     loggedInUser() {
       return this.$store.getters['user/loggedInUser'];
     },
   },
 
-    data() {
-        return {
-      isOpen:false,
-      isdelete:false,
-      confirmdelete:false,
-      updated:false,
+  data() {
+    return {
+      isOpen: false,
+      isdelete: false,
+      confirmdelete: false,
+      updated: false,
       imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
       uploadedFileName: 'Project 1',
       uploadedFileIconText: '',
       uploadedFileCounter: 0,
       isUploading: false,
       uploadProgress: 0,
-      userData:'',
-      resultnone:'',
+      userData: [],
+      resultnone: '',
       imageToDeleteId: null,
       updateImageId: null,
       updateImageUrl: null,
-            
-        };
+      currentPage: 1,
+    itemsPerPage: 10,
+
+    };
+  },
+  computed: {
+    loggedInUser() {
+        return this.$store.getters['user/loggedInUser'];
+      },
+    totalPages() {
+    // return Math.ceil(this.items.length / this.itemsPerPage);
+    return Math.ceil(this.userData.length / this.itemsPerPage);
+  },
+  paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.userData.slice(startIndex, endIndex);
     },
 
-    mounted() {
-        this.lightbox = GLightbox({ 
-              selector: ".glightbox"
-             });
-        console.log("datadossiers", this.loggedInUser);
-        
-        this.fetchgetPhotoMpme()
+  },
+
+ async  mounted() {
+    this.lightbox = GLightbox({
+      selector: ".glightbox"
+    });
+    console.log("datadossiers", this.loggedInUser);
+
+    this.fetchgetPhotoMpme()
+    this.filteredPmes = await this.userData 
+  },
+  methods: {
+    // delete picture
+    hamdledelete(itemId) {
+      console.log(itemId);
+      this.imageToDeleteId = itemId;
+      this.isdelete = true
+
     },
-    methods: {
-      hamdledelete(itemId) {
-        console.log(itemId);
-        this.imageToDeleteId = itemId; 
-        this.isdelete = true
-    
-    },
-   async confirmDelete() {
-   console.log( this.imageToDeleteId);
-   this.isdelete = false
-   this.confirmdelete = true
+    async confirmDelete() {
+      console.log('gggg', this.imageToDeleteId);
+      this.isdelete = false
       try {
         // Faites une requête pour supprimer l'élément avec l'ID itemId
-        // const response = await axios.delete(`/api/items/${itemId}`);
-        // console.log('Réponse de suppression:', response);
-        
-        // Mettez à jour la liste des éléments après la suppression
-        // this.fetchgetPhotoMpme();
+        const response = await axios.delete(`mpme/photos/${this.imageToDeleteId}`, {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+            'Content-Type': 'multipart/form-data',
+
+          },
+
+
+        });
+        console.log('Réponse de suppression:', response);
+        if (response.data.status === 'success') {
+          this.confirmdelete = true
+          this.fetchgetPhotoMpme();
+
+        } else {
+          console.log('error', response.data)
+        }
+
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
       }
-    
-     
-    },
-    updateupload(id , imageUrl){
 
-      console.log(id , imageUrl);
+    },
+    updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+    });
+    },
+
+    // update picture
+ async updateupload(id) {
+
+      console.log(id);
       this.updateImageId = id;
-    this.updateImageUrl = imageUrl;
-    this.updated = true
-    },
-    loadFile(event){
-  console.log( event.target.files[0]);
-  var image = document.getElementById("output");
-  image.src = URL.createObjectURL(event.target.files[0]);
+      try {
+      const response = await axios.put(`/mpme/photos/${this.updateImageId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${this.loggedInUser.token}`,
+          'Content-Type': 'multipart/form-data',
         },
-      async fetchgetPhotoMpme() {
-            try {
-                const userId = this.loggedInUser.user.Entreprises;
-                // const userId = 'MPME-1580-2023'
-                const response = await axios.get(`/mpme/photos/${userId}`, {
-         headers: {
-                       Authorization: `Bearer ${this.loggedInUser.access_token}`,
-                      'Content-Type': 'multipart/form-data',
+        
+      });
+      console.log('Réponse de l\'API:', response);
 
-                    },
-       
+      if (response.data.status === "success") {
+      this.fetchgetPhotoMpme();
+      this.updated = true
+      window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+        
+      } else {
+        
+      }
+
+      } catch (error) {
+      // Une erreur s'est produite, vous pouvez gérer les erreurs ici
+      console.error('Erreur lors de l\'envoi du fichier:', error);
+      }
             
-          });
+    },
 
-                if(response.data.data.photos.length === 0){
-                  console.log('bonjour')
-                  return this.resultnone = "Vous n'avez pas encore d'image, vous pouvez également en ajouter une !!"
-                }else{
-                  console.log('UserData:',response.data.data.photos); 
-                
-                 return this.userData = response.data.data.photos;
-                }
-              
-            } catch (error) {
-                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-            }
-        },
+
+
+    // get allpicture
+    async fetchgetPhotoMpme() {
+      try {
+        const userId = this.loggedInUser.id;
+                // const userId = 'MPME-1580-2023'
+        const response = await axios.get(`/mpme/photos/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+            'Content-Type': 'multipart/form-data',
+
+          },
+
+
+        });
+
+          console.log('UserData:', response.data.data.photos);
+
+          return this.userData = response.data.data.photos;
+    
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+      }
+    },
+
+    // upload picture
     handleDragOver(event) {
-    console.log('Drag over');
-    event.preventDefault();
-    event.target.classList.add('drop-zoon--over');
-  },
-  handleDragLeave(event) {
-    console.log('Drag leave');
-    event.target.classList.remove('drop-zoon--over');
-  },
-  handleDrop(event) {
-    console.log('Drop');
-    event.preventDefault();
-    event.target.classList.remove('drop-zoon--over');
-    const file = event.dataTransfer.files[0];
-    console.log('Dropped file:', file);
-    this.uploadFile(file);
-  },
-  handleFileChange(event) {
-    console.log('File input change');
-    const file = event.target.files[0];
-    console.log('Selected file:', file);
-    this.uploadFile(file);
-  },
-  async  uploadFile(file) {
+      console.log('Drag over');
+      event.preventDefault();
+      event.target.classList.add('drop-zoon--over');
+    },
+    handleDragLeave(event) {
+      console.log('Drag leave');
+      event.target.classList.remove('drop-zoon--over');
+    },
+    handleDrop(event) {
+      console.log('Drop');
+      event.preventDefault();
+      event.target.classList.remove('drop-zoon--over');
+      const file = event.dataTransfer.files[0];
+      console.log('Dropped file:', file);
+      this.uploadFile(file);
+    },
+    handleFileChange(event) {
+      console.log('File input change');
+      const file = event.target.files[0];
+      console.log('Selected file:', file);
+      this.uploadFile(file);
+    },
+    async uploadFile(file) {
       const fileReader = new FileReader();
       const fileType = file.type;
       const fileSize = file.size;
 
       if (this.fileValidate(fileType, fileSize)) {
         const formData = new FormData();
-       formData.append('photo', file);
+        formData.append('photo', file);
         console.log('tttt', formData);
         try {
-          const userId = this.loggedInUser.user.Entreprises;
-            const response = await axios.post(`/mpme/photos/${userId}`, formData, {
-         headers: {
-                    Authorization: `Bearer ${this.loggedInUser.access_token}`,
-                    'Content-Type': 'multipart/form-data',
-                    },
-     
-            
+          const userId = this.loggedInUser.id;
+          const response = await axios.post(`/mpme/photos/${userId}`, formData, {
+            headers: {
+              Authorization: `Bearer ${this.loggedInUser.token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+
+
           });
           console.log('Réponse de l\'API:', response.data);
           // this.uploadedFileCounter = 100;
           const dropZoon = document.querySelector('#dropZoon');
-        const loadingText = document.querySelector('#loadingText');
-        const previewImage = document.querySelector('#previewImage');
-        const uploadedFile = document.querySelector('#uploadedFile');
-        const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+          const loadingText = document.querySelector('#loadingText');
+          const previewImage = document.querySelector('#previewImage');
+          const uploadedFile = document.querySelector('#uploadedFile');
+          const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
 
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = 'block';
-        previewImage.style.display = 'none';
-        uploadedFile.classList.remove('uploaded-file--open');
-        uploadedFileInfo.classList.remove('uploaded-file__info--active');
+          dropZoon.classList.add('drop-zoon--Uploaded');
+          loadingText.style.display = 'block';
+          previewImage.style.display = 'none';
+          uploadedFile.classList.remove('uploaded-file--open');
+          uploadedFileInfo.classList.remove('uploaded-file__info--active');
 
-        fileReader.addEventListener('load', () => {
-          setTimeout(  () => {
-            console.log('errrr');
-            const uploadArea = document.querySelector('#uploadArea');
-            uploadArea.classList.add('upload-area--open');
-            loadingText.style.display = 'none';
-            previewImage.style.display = 'block';
-            const fileDetails = document.querySelector('#fileDetails');
-            const uploadedFile = document.querySelector('#uploadedFile');
-            const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
-            fileDetails.classList.add('file-details--open');
-            uploadedFile.classList.add('uploaded-file--open');
-            uploadedFileInfo.classList.add('uploaded-file__info--active');
-          }, 500);
-          previewImage.setAttribute('src', fileReader.result);
-          this.uploadedFileName = file.name;
-          this.progressMove();
-        });
+          fileReader.addEventListener('load', () => {
+            setTimeout(() => {
+              console.log('errrr');
+              const uploadArea = document.querySelector('#uploadArea');
+              uploadArea.classList.add('upload-area--open');
+              loadingText.style.display = 'none';
+              previewImage.style.display = 'block';
+              const fileDetails = document.querySelector('#fileDetails');
+              const uploadedFile = document.querySelector('#uploadedFile');
+              const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+              fileDetails.classList.add('file-details--open');
+              uploadedFile.classList.add('uploaded-file--open');
+              uploadedFileInfo.classList.add('uploaded-file__info--active');
+            }, 500);
+            previewImage.setAttribute('src', fileReader.result);
+            this.uploadedFileName = file.name;
+            this.progressMove();
+          });
 
-        fileReader.readAsDataURL(file);
-        await this.fetchgetPhotoMpme();
+          fileReader.readAsDataURL(file);
+          await this.fetchgetPhotoMpme();
         } catch (error) {
-            // Une erreur s'est produite, vous pouvez gérer les erreurs ici
-      console.error('Erreur lors de l\'envoi du fichier:', error);
+          // Une erreur s'est produite, vous pouvez gérer les erreurs ici
+          console.error('Erreur lors de l\'envoi du fichier:', error);
         }
-       
+
       }
     },
     progressMove() {
@@ -384,183 +457,203 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.noresul{
-    border: 1px solid #F9D310;
-    max-width: 1140px;
-    margin: 0 auto;
+
+.container_pagination {
+    width: auto;
+    text-align: end;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 50px;
-    border-radius: 6px;
-    font-size: 20px;
+    justify-content: flex-end;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin: 5px;
+  
+  }
+.noresul {
+  border: 1px solid #F9D310;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 6px;
+  font-size: 20px;
 
 }
 
-.btnLogin {
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
-    background-color: #F9D310;
-    border: none;
-    border-radius: 45px;
-    position: absolute;
-    z-index: 3;
-    right: 24px;
-    top: -71px;
-    cursor: pointer;
-    outline: none;
-    width: 100px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btnLgin {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  background-color: #F9D310;
+  border: none;
+  border-radius: 45px;
+  position: absolute;
+  z-index: 3;
+  right: 24px;
+  top: -56px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btnLogin:hover {
-    background-color: #fff;
-    border: 1px solid #F9D310;
-    color: #F9D310;
+.btnLgin:hover {
+  background-color: #fff;
+  border: 1px solid #F9D310;
+  color: #F9D310;
 
 }
 
 
 .supp {
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
-    border: none;
-    border-radius: 45px;
-    z-index: 3;
-    cursor: pointer;
-    outline: none;
-    width: 100px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin:0 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 45px;
+  z-index: 3;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
 }
 
 .supp:hover {
-    background-color: #fff;
-   
+  background-color: #fff;
+
 
 }
-@media (max-width: 991px){
-    section {
+
+@media (max-width: 991px) {
+  section {
     padding: 50px !important;
+  }
 }
+
+.contenu {
+
+  /* border: 1px solid red; */
+  padding: 15px 10px;
 }
 
-  .contenu {
-  
-    /* border: 1px solid red; */
-    padding: 15px 10px;
-  }
-  
-  .task {
-    position: relative;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-   border: 1px solid var(--color-secondary);
-    margin: 0 10px 10px 0;
-    width: 300px;
-    height: 250px; 
-  }
-   .image {
+.task {
+  position: relative;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary);
+  margin: 0 10px 10px 0;
+  width: 300px;
+  height: 250px;
+}
 
-     width: 100%;
-    height: 100%;
+.image {
 
-  }
-  .task:hover {
+  width: 100%;
+  height: 100%;
+
+}
+
+.task:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-   .image img {
-  
-    width: 100%;
-    height: 100%;
-      object-fit: cover;
-      z-index: 1; 
-  }
+.image img {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
 .task .sci {
   position: absolute;
   bottom: 10px;
-  left:58px;
+  left: 58px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-    width: 63%;
-    justify-content: space-around;
+  width: 63%;
+  justify-content: space-around;
 }
+
 .task .sci span {
   margin: 0 10px;
   opacity: 0;
   transition: 0.5s;
   font-size: 18px;
-  border-radius:6px;
-  background-color: #fff;
+  border-radius: 6px;
   z-index: 4;
- 
+
 }
 
 .task:hover .sci span {
   opacity: 1;
   transition-delay: calc(0.1s * var(--i));
-  padding: 5px 10px; 
+  padding: 5px 10px;
   cursor: pointer;
+  color:#fff ;
 }
 
- .sci span .bi-pen:hover{
-  color: blue;
-  
-}
-.sci span .bi-trash:hover{
-  color: red;
-  
-}
-  p {
-    margin-bottom: 0 !important;
-  }
+.open  {
+  background-color:var(--color-primary) ;
  
-  
-  .boutton {
-  
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-  
-  
-  }
-  
-  .btn {
-    padding: 1em 2em;
-    font-size: 10px;
-    font-weight: 500;
-    color: #000;
-    background-color: var(--color-secondary);
-    border: none;
-    border-radius: 45px;
-    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
-    cursor: pointer;
-    outline: none;
-    bottom: 0px;
-    position: absolute;
-  }
-  
-  .btn:hover {
-    background-color: #fff;
-    border: 1px solid var(--color-secondary);
-  
-  }
+}
+.close{
+  background-color:var(--color-secondary) ;
+}
+.delete{
+  background-color:red ;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
 
 
-  .profile-pic {
+.boutton {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+
+
+}
+
+.btn {
+  padding: 1em 2em;
+  font-size: 10px;
+  font-weight: 500;
+  color: #000;
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 45px;
+  /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+  cursor: pointer;
+  outline: none;
+  bottom: 0px;
+  position: absolute;
+}
+
+.btn:hover {
+  background-color: #fff;
+  border: 1px solid var(--color-secondary);
+
+}
+
+
+.profile-pic {
   color: transparent;
   transition: all 0.3s ease;
   display: flex;
@@ -569,9 +662,11 @@ export default {
   position: relative;
   transition: all 0.3s ease;
 }
+
 .profile-pic input {
   display: none;
 }
+
 .profile-pic img {
   position: absolute;
   object-fit: cover;
@@ -580,11 +675,13 @@ export default {
   box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
   z-index: 0;
 }
+
 .profile-pic .-label {
   cursor: pointer;
   height: 165px;
   width: 230px;
 }
+
 .profile-pic:hover .-label {
   display: flex;
   justify-content: center;
@@ -596,6 +693,7 @@ export default {
 
   margin-bottom: 0;
 }
+
 .profile-pic span {
   display: inline-flex;
   padding: 0.2em;
@@ -614,7 +712,8 @@ export default {
   text-align: center;
 }
 
-.upload-area--open { /* Slid Down Animation */
+.upload-area--open {
+  /* Slid Down Animation */
   animation: slidDown 500ms ease-in-out;
 }
 
@@ -669,7 +768,8 @@ export default {
 /* Drop Zoon */
 .upload-area__drop-zoon {
   position: relative;
-  height: 11.25rem; /* 180px */
+  height: 11.25rem;
+  /* 180px */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -677,7 +777,7 @@ export default {
   border: 2px dashed var(--color-secondary);
   border-radius: 15px;
   margin-top: 2.1875rem;
- 
+
   transition: border-color 300ms ease-in-out;
 }
 
@@ -863,7 +963,8 @@ export default {
 
 .uploaded-file__name {
   width: 100%;
-  max-width: 6.25rem; /* 100px */
+  max-width: 6.25rem;
+  /* 100px */
   display: inline-block;
   font-size: 1rem;
   white-space: nowrap;
@@ -896,4 +997,5 @@ export default {
   font-size: 0.9375rem;
   cursor: pointer;
 }
+
 </style>
