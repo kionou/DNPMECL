@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading" style="z-index: 1000;"></Loading>
     <div class=" d-flex justify-content-center align-items-center flex-wrap w-100"  data-aos="fade-up"
         data-aos-delay="100">
         <div class="bar_search">
@@ -20,7 +21,7 @@
     </div>
       <div class="btnLogin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
       <div v-if="sortedDocuments.length === 0" class="noresul">
-        <span>Vous n'avez pas encore de document, vous pouvez également en ajouter une !!</span>
+        <span>Vous n'avez pas encore de document, vous pouvez également en ajouter un !!</span>
       </div>
       <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else>
      
@@ -50,18 +51,24 @@
                            <td> {{ item.SousCategorieDocument }}</td>
                            <td>
                             <div class="sci">
-          <span style="--i:1"  class="open">
+          <span style="--i:1"  class="dow">
             <i class="bi bi-cloud-arrow-down-fill"></i>
            <a :href="item.LienDocument" download>
           </a>
           </span>
-          <span style="--i:1" class="close">
+          <span style="--i:1" class="update">
             <i class="bi bi-pen" @click="updatedoc(item.id)"></i>
            
           </span>
           <span style="--i:2" @click="hamdledeletedoc(item.id)" class="delete">
             <i class="bi bi-trash"></i>
+          </span>
 
+          <span style="--i:1" class="opens" v-if="item.publish === 1">
+            <i class="bi bi-power" @click="publish(item.id , item.publish)"></i>
+          </span>
+          <span style="--i:1" class="open" v-else>
+            <i class="bi bi-power" @click="publish(item.id , item.publish)"></i>
           </span>
 
         </div>
@@ -84,7 +91,7 @@
     <div class="upload-area__header">
       <h1 class="upload-area__title">Téléchargez votre fichier</h1>
       <p class="upload-area__paragraph">
-        Le fichier doit être une image
+        Le fichier doit être un document
         <strong class="upload-area__tooltip">
           comme
           <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
@@ -123,7 +130,7 @@
 
      
 
-      <button class="sign" @click.prevent="submit">Se connecter</button>
+      <button class="sign" @click.prevent="submit">Enregistrer</button>
     </div>
     <!-- End Drop Zoon -->
 
@@ -135,7 +142,7 @@
   
       <MazDialog v-model="msgsuccess" >
         <p>
-         doc enregistrer  avec succès !!!
+          Document enregistré avec succès !!
         </p>
         <template #footer="{ close }">
   
@@ -145,7 +152,7 @@
       </MazDialog>
       <MazDialog v-model="isdeletedoc" title="Suppression d'image">
       <p>
-        Êtes-vous sûr de vouloir supprimer cette image ?
+        Êtes-vous sûr de vouloir supprimer ce document ?
       </p>
       <template #footer="{ close }">
 
@@ -157,7 +164,7 @@
     </MazDialog>
     <MazDialog v-model="confirmdeletedoc">
       <p>
-        Image supprimer avec succès !!!
+        Document supprimé avec succès !!
       </p>
       <template #footer="{ close }">
 
@@ -176,13 +183,6 @@
     <!-- Header -->
     <div class="upload-area__header">
       <h1 class="upload-area__title">Modififiez votre fichier</h1>
-      <!-- <p class="upload-area__paragraph">
-        Le fichier doit être une image
-        <strong class="upload-area__tooltip">
-          comme
-          <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-        </strong>
-      </p> -->
     </div>
     <!-- End Header -->
 
@@ -208,14 +208,6 @@
    
   </div>
   <small v-if="v$.step2.sousdoc.$error">{{v$.sousdoc.$errors[0].$message}}</small>
-<!-- 
-  <div class="input-group">
-    <label for="tel">Telecharger le ficher <span class="text-danger">*</span></label>
-    <input type="file" name="file" id="ficher" placeholder="" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload"> 
-  </div>
-  <small v-if="v$.selectedFile.$error">{{v$.selectedFile.$errors[0].$message}}</small> -->
-
-     
 
       <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
       </form>
@@ -228,6 +220,21 @@
 </div>
   
       </MazDialog>
+
+
+      <MazDialog v-model="publishDoc">
+      <p>
+        {{  publier }}
+      
+      </p>
+      <template #footer="{ close }">
+
+        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+
+
+
+      </template>
+    </MazDialog>
     </div>
       <div class="container_pagination">
     <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
@@ -241,10 +248,11 @@
   import useVuelidate from '@vuelidate/core';
   import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
   import Pag from '../Public/other/pag.vue';
+  import Loading from '../Public/other/preloader.vue';
   export default {
     name: 'DNPMECLImage',
     components: {
-      MazDialog, Pag
+      MazDialog, Pag , Loading
   
     },
     computed: {
@@ -275,7 +283,10 @@
                 name: '',
                 sousdoc: '',
             },
+        
         isOpen: false,
+        loading:true,
+        publishDoc:false,
         msgsuccess: false,
         isdeletedoc: false,
         confirmdeletedoc: false,
@@ -373,6 +384,7 @@
 
     },
     async confirmDeletedoc() {
+      this.loading = true
       console.log('gggg', this.ToDeleteId);
       this.isdeletedoc = false
       try {
@@ -390,12 +402,15 @@
         if (response.data.status === 'success') {
           this.confirmdeletedoc = true
           this.fetchgetDocMpme();
+          this.loading = false
 
         } else {
           console.log('error', response.data)
+          this.loading = false
         }
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
+        this.loading = false
       }
 
     },
@@ -404,11 +419,11 @@
       console.log( this.step1.selectedFile);
     },
   async  submit(){
-    console.log('bonjour');
+    this.loading = true
        this.v$.step1.$touch()
     if (this.v$.$errors.length == 0 ) {
       console.log('bonjour');
-    const formData = new FormData();
+      const formData = new FormData();
       formData.append('document', this.step1.selectedFile);
       formData.append('NomDocument', this.step1.nom);
       formData.append('CodeMpme', this.loggedInUser.id);
@@ -430,12 +445,16 @@
          await this.fetchgetDocMpme()
           this.msgsuccess = true
           this.isOpen = false
+          this.loading = false
+
           
         }else{
           
         }
       } catch (error) {
         console.error('Erreur lors du téléversement :', error);
+        this.loading = false
+
       }    
         }else{
         
@@ -465,7 +484,8 @@
   
       },
       async confirmDelete() {
-        console.log('gggg', this.imageToDeleteId);
+        this.loading = true
+      
         
         try {
           // Faites une requête pour supprimer l'élément avec l'ID itemId
@@ -482,12 +502,18 @@
             this.confirmdelete = true
             this.isdelete = false
             this.fetchgetPhotoMpme();
+          this.loading = false
+
   
           } else {
             console.log('error', response.data)
+          this.loading = false
+
           }
         } catch (error) {
           console.error('Erreur lors de la suppression:', error);
+          this.loading = false
+
         }
       },
   
@@ -506,15 +532,30 @@
             },
 
           });
-            console.log('UserData:', response.data.data.data);
-  
-             this.userData = [...response.data.data.data];
+          console.log('UserData:', response);
+
+          if (response.data.status === 'success') {
+            this.userData = [...response.data.data.data];
              this.originalDocuments = [...response.data.data.data];
               this.filteredDocuments = this.originalDocuments;
+              this.loading = false
+            
+          } 
+          else {
+            
+          }
+  
+           
        
   
         } catch (error) {
           console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+          console.log('aut',error.response.data === 'Unauthorized.');
+
+            if (error.response.data === 'Unauthorized.') {
+                    await this.$store.dispatch('user/clearLoggedInUser'); 
+                    this.$router.push('/login_user_mpme'); 
+            } 
         }
       },
   
@@ -538,8 +579,8 @@ console.log('Document à mettre à jour :', documentToUpdate);
       
       },
     async  hamdleUpdated(){
-      
-      console.log('eeee');
+      this.updated = false
+      this.loading = true
       this.v$.step2.$touch()
     if (this.v$.$errors.length == 0 ) {
       let dataDoc = {
@@ -560,18 +601,24 @@ console.log('Document à mettre à jour :', documentToUpdate);
         console.log('Réponse du téléversement :', response);
         if (response.data.status === 'success') {
          await this.fetchgetDocMpme()
+         this.loading = false
           this.msgsuccess = true
-          this.updated = false
+         
+
           
         }else{
           
         }
       } catch (error) {
         console.error('Erreur lors du téléversement :', error);
+        this.loading = false
+
       }  
     
     }else{
       console.log('error', this.v$.$errors);
+      this.loading = false
+
     }
       
       },
@@ -609,6 +656,53 @@ console.log('Document à mettre à jour :', documentToUpdate);
       behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
     });
     },
+   async publish(id , statut){
+    this.loading = true
+    
+    let statutTraitement;
+  if (statut === 1) {
+    statutTraitement = false;
+  } else if (statut === 0) {
+    statutTraitement = true;
+  } else {
+    // Gérer le cas où la valeur de statut n'est ni 0 ni 1 (vous pouvez ajouter une logique personnalisée ici)
+    statutTraitement = null; // Ou une autre valeur par défaut si nécessaire
+  }
+
+  let dataMpme = {
+    document: id,
+    statut: statutTraitement
+  };
+console.log('dataMpme',dataMpme);
+
+    try {
+        const response = await axios.put('/documents-mpme/publier/publication-de-document-mpme', dataMpme, {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+          
+          }
+        });
+        console.log('Réponse du téléversement :', response);
+        if (response.data.status === 'success') {
+         if (response.data.message === "publier") {
+        this.publier = await 'Votre document a été publié avec succès !'
+         } else {
+           this.publier = await 'Votre document a été retiré de la liste avec succès.'
+          
+         }
+            this.loading = false
+            this.publishDoc = true
+           await this.fetchgetDocMpme()
+
+          
+        }else{
+          
+        }
+      } catch (error) {
+        console.error('Erreur lors du téléversement :', error);
+       
+    }
+    }
     
     },
 
@@ -746,11 +840,11 @@ console.log('Document à mettre à jour :', documentToUpdate);
   
  
 
-.open  {
-  background-color:var(--color-primary) ; 
+.dow  {
+  background-color:#4c4c4c ; 
   position: relative;
 }
-.open a {
+.dow a {
   position: absolute;
     width: 100%;
     left: 0;
@@ -758,15 +852,15 @@ console.log('Document à mettre à jour :', documentToUpdate);
     color: transparent;
 
 }
-.open:hover{
+.dow:hover{
   background-color: #fff; 
-  color:var(--color-primary) ;
-  border:1px solid var(--color-primary);
+  color:#4c4c4c ;
+  border:1px solid #4c4c4c;
 }
-.close{
+.update{
   background-color:rgb(63, 134, 255) ;
 }
-.close:hover{
+.update:hover{
   background-color: #fff; 
   color:rgb(63, 134, 255) ;
   border:1px solid rgb(63, 134, 255);
@@ -780,6 +874,25 @@ console.log('Document à mettre à jour :', documentToUpdate);
   color:red;
   border:1px solid red;
 } 
+
+
+.open{
+  background-color:var(--color-secondary) ;
+}
+.open:hover{
+  background-color: #fff; 
+  color:var(--color-secondary) ;
+  border:1px solid var(--color-secondary);
+}
+
+.opens{
+  background-color:var(--color-primary) ;
+}
+.opens:hover{
+  background-color: #fff; 
+  color:var(--color-primary) ;
+  border:1px solid var(--color-primary);
+}
   p {
     margin-bottom: 0 !important;
   }

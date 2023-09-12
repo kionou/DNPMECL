@@ -26,9 +26,16 @@
         {{ error }} <br>
     </div>
     <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100" style="margin-top:48px">
-        <p class="title" >Enregistrez votre PME dès maintenant</p>
-        <p class="text-center" >Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre PME en
+        <p class="title" >Enregistrez votre MPME dès maintenant</p>
+        <p class="text-center" >Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre MPME en
             toute simplicité.</p>
+            <div class="profil">
+            <!-- <span>Logo Mpme</span> -->
+            <div class="profil1" @click="OpenProfil">
+              <i class="bi bi-camera"></i>
+           </div>
+            </div>
+             
 
         <form class="form">
             <!-- Étape 1 -->
@@ -248,7 +255,8 @@
                                 <div class="input-groupe">
                                     <label for="ListeSousSecteurActivite">Liste Sous Secteur Activite <span
                                             class="text-danger">*</span></label>
-                                            <v-select v-model="step1.selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint></v-select>
+                                            <v-select v-model="step1.selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint item-title="state"
+                  item-value="abbr"></v-select>
               </div>
                        <small v-if="v$.step1.selectedSousSecteurs.$error">{{ v$.step1.selectedSousSecteurs.$errors[0].$message }}</small>
                             </div>
@@ -312,8 +320,10 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="ChiffreAffaire1">Chiffre Affaire 1</label>
-                                    <input type="text" name="ChiffreAffaire1" id="ChiffreAffaire1" placeholder=""
-                                        v-model="step1.ch_aff_1">
+                                    <MazSelect v-model="step1.ch_aff_1" color="secondary"
+                                        :options="ChiffreOptions" />
+                                    <!-- <input type="text" name="ChiffreAffaire1" id="ChiffreAffaire1" placeholder=""
+                                        v-model="step1.ch_aff_1"> -->
                                 </div>
                                 <small v-if="v$.step1.ch_aff_1.$error">{{ v$.step1.ch_aff_1.$errors[0].$message }}</small>
 
@@ -325,8 +335,10 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="ChiffreAffaire2">ChiffreAffaire 2</label>
-                                    <input type="text" name="ChiffreAffaire2" id="ChiffreAffaire2" placeholder=""
-                                        v-model="step1.ch_aff_2">
+                                    <!-- <input type="text" name="ChiffreAffaire2" id="ChiffreAffaire2" placeholder=""
+                                        v-model="step1.ch_aff_2"> -->
+                                        <MazSelect v-model="step1.ch_aff_2" color="secondary"
+                                        :options="ChiffreOptions" />
                                 </div>
                                 <small v-if="v$.step1.ch_aff_2.$error">{{ v$.step1.ch_aff_2.$errors[0].$message }}</small>
 
@@ -409,6 +421,80 @@
                     <!-- fin infos activite -->
 
 
+                     <!-- debut autre input -->
+                     <!-- <div class="content">
+                        <p class="titre">INFORMATIONS AUTRE CHAMPS</p>
+                        <div class="row mb-3 mt-3 content-group">
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="AnneeCreation">Nombre d'employés Guinéens <span class="text-danger">*</span></label>
+                                    <input type="text" name="NbreEmployeGuinne" id="NbreEmployeGuinne" placeholder=""
+                                        v-model="step1.NbreEmployeGuinne">
+
+                                </div>
+                                <small v-if="v$.step1.NbreEmployeGuinne.$error">{{ v$.step1.NbreEmployeGuinne.$errors[0].$message
+                                }}</small>
+
+                            </div>
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="AnneeEntreeActivite">Nombre d'actionnaires Guinéens Femmes<span
+                                            class="text-danger">*</span></label>
+                                            <input type="text" name="NbreActionnaireGuinneF" id="NbreActionnaireGuinneF" placeholder=""
+                                        v-model="step1.NbreActionnaireGuinneF">
+
+                                </div>
+                                <small v-if="v$.step1.NbreActionnaireGuinneF.$error">{{ v$.step1.NbreActionnaireGuinneF.$errors[0].$message
+                                }}</small>
+
+                            </div>
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="CodeStatutJuridique">Nombre d'actionnaires Guinéens Hommes</label>
+                                    <input type="text" name="NbreActionnaireGuinneH" id="NbreActionnaireGuinneH" placeholder=""
+                                        v-model="step1.NbreActionnaireGuinneH">
+                                </div>
+                                <small v-if="v$.step1.NbreActionnaireGuinneH.$error">{{ v$.step1.NbreActionnaireGuinneH.$errors[0].$message
+                                }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mt-3 content-group">
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="NbreActionnaireGuinne">Nombre d'actionnaires Guinéens</label>
+                                    <input type="text" name="NbreActionnaireGuinne" id="NbreActionnaireGuinne" placeholder=""
+                                        v-model="step1.NbreActionnaireGuinne">
+                                </div>
+                                <small v-if="v$.step1.NbreActionnaireGuinne.$error">{{ v$.step1.NbreActionnaireGuinne.$errors[0].$message
+                                }}</small>
+                            </div>
+                            <div class="col">
+                                <div class="input-groupe">
+                                    <label for="PaysSiegeSocial">Pays du Siège Social <span class="text-danger">*</span></label>
+                                    <MazSelect v-model="step1.PaysSiegeSocial" :options="sortedCountryOptions" v-slot="{ option }"
+                                    search color="secondary">
+                                    <div class="flex items-center"
+                                        style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
+                                        <MazAvatar size="0.8rem" :src="option.flag" />
+                                        <strong>
+                                            {{ option.label }}
+                                        </strong>
+                                    </div>
+                                </MazSelect>
+                                   
+                                </div>
+                                <small v-if="v$.step1.PaysSiegeSocial.$error">{{ v$.step1.PaysSiegeSocial.$errors[0].$message
+                                }}</small>
+                            </div>
+                           
+                        </div>
+                        
+
+                    </div> -->
+                    <!-- fin autre input -->
+
+
                 </div>
                 <div class="btnForm py-3 d-flex items-center justify-content-end">
                     <button class="btnLogin" :disabled="isButtonDisabled" @click.prevent="nextStep">Suivant</button>
@@ -426,7 +512,7 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="MpmeBourse">Mpme Bourse <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.mpmeBourse" color="secondary" :options="choix" />
+                                    <MazSelect v-model="step2.mpmeBourse" color="secondary" :options="choix"  @change="handleMpmeBourseChange" />
 
                                 </div>
                                 <small v-if="v$.step2.mpmeBourse.$error">{{ v$.step2.mpmeBourse.$errors[0].$message
@@ -1055,6 +1141,43 @@
             <!-- fin infos activite -->
 
 
+             <!-- debut autre input-->
+             <!-- <div class="content">
+                <p class="titre">INFORMATIONS SUR D'AUTRE INPUT</p>
+                <div class="row mb-3 mt-3 content-group">
+                    <div class="col">
+                        <div class="input-groupe">
+                            <label for="TypeComptabilite">Type Comptabilite <span class="text-danger">*</span></label>
+                            <input v-model="step3.TypeComptabilite" type="text" name="TypeComptabilite"
+                                id="TypeComptabilite" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="input-groupe">
+                            <label for="TypeCarte">Type Carte<span class="text-danger">*</span></label>
+                            <input v-model="step3.TypeCarte" type="text" name="TypeCarte" id="TypeCarte"
+                                placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="input-groupe">
+                            <label for="NumeroCarte">Numero Carte<span class="text-danger">*</span></label>
+                            <input v-model="step3.NumeroCarte" type="text" name="NumeroCarte" id="NumeroCarte"
+                                placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+               
+
+
+
+            </div> -->
+            <!-- fin autre input-->
+
+
         </div>
 
         <div class="btnForm py-3 d-flex items-center justify-content-between">
@@ -1074,6 +1197,56 @@
 
       </template>
     </MazDialog>
+
+    <MazDialog v-if="PostLogo" v-model="PostLogo">
+      <div>
+
+        <div id="uploadArea" class="upload-area">
+          <!-- Header -->
+          {{error}}
+          <div class="upload-area__header">
+            <h1 class="upload-area__title">Téléchargez votre fichier</h1>
+            <p class="upload-area__paragraph">
+              Le fichier doit être une image
+              <strong class="upload-area__tooltip">
+                comme
+                <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+              </strong>
+            </p>
+          </div>
+          <!-- End Header -->
+
+          <!-- Drop Zoon -->
+          <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+            <div class="profile-pic">
+              <label class="-label" for="file">
+                <span class="glyphicon glyphicon-camera"></span>
+                <span>Change Image</span>
+              </label>
+              <input id="file" type="file" @change="loadFile" />
+              <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+            </div>
+
+
+          </div>
+          <!-- End Drop Zoon -->
+
+
+        </div>
+      </div>
+
+    </MazDialog>
+
+    <MazDialog v-model="msgsuccess" >
+        <p>
+         Logo enregistrer  avec succès !!!
+        </p>
+        <template #footer="{ close }">
+  
+          <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+  
+        </template>
+      </MazDialog>
     </form>
 </div>
 </template>
@@ -1088,6 +1261,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import MazDialog from 'maz-ui/components/MazDialog'
 import Loading from './other/preloader.vue';
+import chiffre from '@/lib/chiffre.json';
 
 export default {
     name: 'Componentlogin',
@@ -1105,6 +1279,9 @@ export default {
     data() {
         return {
             loading:true,
+            PostLogo:false,
+            msgsuccess:false,
+            imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
             currentStep: 1,
             error: '',
             isButtonDisabled: false,
@@ -1116,6 +1293,7 @@ export default {
             sous_prefectureOptions: [],
             SecteurActiviteOptions: [],
             StatutJuridiqueOptions: [],
+           ChiffreOptions: chiffre,
             BourseOptions: [], // Pour stocker les sous-secteurs sélectionnés
             SousSecteurActiviteOptions: [],
             years: [],
@@ -1171,6 +1349,12 @@ export default {
                 capital_social: "",
                 nbre_rccm: "",
                 nbre_nif: "",
+
+                // NbreEmployeGuinne:'',
+                // NbreActionnaireGuinneF:'',
+                // NbreActionnaireGuinneH:'',
+                // NbreActionnaireGuinne:'',
+                // PaysSiegeSocial:'',
             },
 
 
@@ -1242,6 +1426,11 @@ export default {
                 altitudeMpme: '',
                 precisionGPSMpme: '',
                 origineDonnees: '',
+
+                // TypeComptabilite:'',
+                // TypeCarte:'',
+                // NumeroCarte:'',
+
             },
 
         };
@@ -1280,7 +1469,13 @@ export default {
             nationalite_groupe: {},
             capital_social: {},
             nbre_rccm: {},
-            nbre_nif: {}
+            nbre_nif: {},
+
+                // NbreEmployeGuinne:{ValidNumeri},
+                // NbreActionnaireGuinneF:{ValidNumeri},
+                // NbreActionnaireGuinneH:{ValidNumeri},
+                // NbreActionnaireGuinne:{ValidNumeri},
+                // PaysSiegeSocial:{},
 
         },
         step2: {
@@ -1359,6 +1554,13 @@ export default {
                 NumeroRccm: this.step1.nbre_rccm,
                 NumeroNif: this.step1.nbre_nif,
 
+                // NbreEmployeGuinne:this.step1.NbreEmployeGuinne,
+                // NbreActionnaireGuinneF:this.step1.NbreActionnaireGuinneF,
+                // NbreActionnaireGuinneH:this.step1.NbreActionnaireGuinneH,
+                // NbreActionnaireGuinne:this.step1.NbreActionnaireGuinne,
+                // PaysSiegeSocial:this.step1.PaysSiegeSocial,
+
+
                 MpmeBourse: this.step2.mpmeBourse,
                 NomBourse: this.step2.nomBourse,
                 RecptionPrix: this.step2.receptionPrix,
@@ -1417,8 +1619,14 @@ export default {
                 AltitudeMpme: this.step3.altitudeMpme,
                 PrecisionGPSMpme: this.step3.precisionGPSMpme,
                 OrigineDonnees: this.step3.origineDonnees,
+
+
+                // TypeComptabilite: this.step3.TypeComptabilite,
+                // TypeCarte: this.step3.TypeCarte,
+                // NumeroCarte: this.step3.NumeroCarte,
             }
         },
+     
         async nextStep() {
             this.loading =true
             if (this.currentStep === 1) {
@@ -1460,6 +1668,18 @@ export default {
                 this.v$.step2.$touch()
                 if (this.v$.$errors.length == 0) {
                     const mpmeData = this.createMpmeData();
+                    const vide = ''; 
+                    if (this.step2.mpmeBourse !== 'Oui') {
+                         mpmeData.NomBourse = vide
+                      }
+                    if (this.step2.appartenanceReseauProfessionnel !== 'Oui') {
+                        mpmeData.NomReseauProfessionnel = vide
+                        mpmeData.DescriptionReseau = vide
+                      }
+                      if (this.step2.receptionPrix !== 'Oui') {
+                        mpmeData.PrincipalPrix = vide
+                         mpmeData.AnneePrixPrincipal = vide
+                    }
                     console.log('mpmeData1', mpmeData);
                     const success = await this.enregistrerMpmeDonnees(mpmeData);
                     console.log('success', success);
@@ -1510,6 +1730,13 @@ export default {
             this.v$.step3.$touch()
             if (this.v$.$errors.length == 0) {
                 const mpmeData = this.createMpmeData();
+                      const vide = ''; 
+                    if ( this.step3.partenariatAutre !== 'Oui') {
+                         mpmeData.AutrePartenariat = vide
+                      }
+                      if (  this.step3.besoinPartenaireAutre !== 'Oui') {
+                         mpmeData.AutreBesoinPartenaire = vide
+                      }
                 console.log('mpmeData1', mpmeData);
                 const success = await this.enregistrerMpmeDonnees(mpmeData);
                 console.log('success', success);
@@ -1655,7 +1882,9 @@ export default {
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
-          return option.label;
+            return  { state: option.label, 
+                     abbr: option.value
+                     }
         });
       } catch (error) {
         console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
@@ -1740,6 +1969,12 @@ export default {
             this.step1.nbre_rccm = userData.NumeroRccm;
             this.step1.nbre_nif = userData.NumeroNif;
 
+                // this.step1.NbreEmployeGuinne = userData.NbreEmployeGuinne;
+                // this.step1.NbreActionnaireGuinneF = userData.NbreActionnaireGuinneF;
+                // this.step1.NbreActionnaireGuinneH = userData.NbreActionnaireGuinneH;
+                // this.step1.NbreActionnaireGuinne = userData.NbreActionnaireGuinne;
+                // this.step1.PaysSiegeSocial = userData.PaysSiegeSocial;
+
             this.step2.mpmeBourse = userData.MpmeBourse;
             this.step2.nomBourse = userData.NomBourse;
             this.step2.receptionPrix = userData.RecptionPrix;
@@ -1795,19 +2030,69 @@ export default {
             this.step3.altitudeMpme = userData.AltitudeMpme;
             this.step3.precisionGPSMpme = userData.PrecisionGPSMpme;
             this.step3.origineDonnees = userData.OrigineDonnees;
+
+            // this.step3.TypeComptabilite = userData.TypeComptabilite;
+            // this.step3.TypeCarte = userData.TypeCarte;
+            // this.step3.NumeroCarte  = userData.NumeroCarte;
             // ... Lier d'autres propriétés de la même manière
         },
-        espace(){
-            console.log('bbb');
+        espace(){        
             this.isOpen = false
             this.$router.push({ path: '/mon_espace', })
         
         },
         profil(){
-            console.log('bbb');
             this.isOpen = false
             this.$router.push({ path: '/profil', })
         
+        },
+        OpenProfil(){
+        this.PostLogo = true
+        
+        },
+     async loadFile(event){
+            this.loading = true
+            console.log( event.target.files[0]);
+            var image = document.getElementById("output");
+           image.src = URL.createObjectURL(event.target.files[0]);
+           const file = event.target.files[0]
+           const formData = new FormData();
+           formData.append('code', this.loggedInUser.id);
+            formData.append('profile', file);
+           console.log('eee',this.loggedInUser.id , file);
+          
+           try {
+                
+            const response = await axios.post('/mpme/changement-de-profile', formData,{
+                  headers: {
+                          Authorization: `Bearer ${this.loggedInUser.token}`,
+                         'Content-Type': 'multipart/form-data',
+            },
+
+
+          });
+               console.log('response',response);
+
+                if (response.data.status === 'success') {
+                    console.log('Données MPME mises à jour avec succès !');
+                    this.msgsuccess = true
+                    this.loading = false
+                    this.PostLogo = false
+                   
+                } else {
+                    this.error = "L'enregistrement a échoué !!!"
+                }
+            } catch (error) {
+                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized.') {
+                console.log('aut',error.response.data === 'Unauthorized.');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                }
+                
+              
+            }
         }
 
 
@@ -1856,11 +2141,48 @@ export default {
     margin: 40px auto;
     padding: 10Px;
     color:red;
-       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
     
+}
 
+.profil1{
+    /* border: 2px solid red; */
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    font-size: 25px;
+    position:absolute;
+    top:-41px;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color:#fff;
 
 }
+
+.profil1:hover{
+    border: 2px solid var(--color-primary);
+    background-color: #fff;
+    color: var(--color-primary);
+    cursor: pointer;
+
+}
+
+.profil{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    margin:0 auto;
+    max-width: 1140px;
+     padding-right: 76px;
+}
+
 .form-container {
     /* width: 700px; */
     max-width: 1140px;
@@ -2156,8 +2478,131 @@ export default {
 
 .supp:hover {
   background-color: #fff;
+}
 
+.profile-pic {
+  color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
 
+.profile-pic input {
+  display: none;
+}
+
+.profile-pic img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 165px;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+  z-index: 0;
+}
+
+.profile-pic .-label {
+  cursor: pointer;
+  height: 165px;
+  width: 230px;
+}
+
+.profile-pic:hover .-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  color: #fafafa;
+  transition: background-color 0.2s ease-in-out;
+
+  margin-bottom: 0;
+}
+
+.profile-pic span {
+  display: inline-flex;
+  padding: 0.2em;
+  height: 2em;
+}
+
+/* Upload Area */
+.upload-area {
+  width: 100%;
+  /* max-width: 25rem; */
+  background-color: rgb(255, 255, 255);
+  border: 2px solid var(--color-secondary);
+  border-radius: 24px;
+  padding: 2rem 1.875rem 5rem 1.875rem;
+  /* margin: 0.625rem; */
+  text-align: center;
+}
+
+.upload-area--open {
+  /* Slid Down Animation */
+  animation: slidDown 500ms ease-in-out;
+}
+
+.upload-area__title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.3125rem;
+}
+
+.upload-area__paragraph {
+  font-size: 0.9375rem;
+  color: rgb(196, 195, 196);
+  margin-top: 0;
+}
+
+.upload-area__tooltip {
+  position: relative;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+}
+
+.upload-area__tooltip:hover {
+  color: var(--clr-blue);
+}
+
+.upload-area__tooltip-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -125%);
+  min-width: max-content;
+  background-color: rgb(255, 255, 255);
+  color: rgb(63, 134, 255);
+  border: 1px solid var(--color-secondary);
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
+  transition: none 300ms ease-in-out;
+  transition-property: opacity, visibility;
+}
+
+.upload-area__tooltip:hover .upload-area__tooltip-data {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drop Zoon */
+.upload-area__drop-zoon {
+  position: relative;
+  height: 11.25rem;
+  /* 180px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed var(--color-secondary);
+  border-radius: 15px;
+  margin-top: 2.1875rem;
+
+  transition: border-color 300ms ease-in-out;
 }
 
 

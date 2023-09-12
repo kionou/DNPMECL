@@ -20,7 +20,7 @@
         <router-link to="/" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <img src="@/assets/img/armoirie.png" alt="">
-          <h1>DNPMECL </h1>
+          <h1>DNPME-CL </h1>
         </router-link>
         <nav id="navbar" class="navbar">
           <ul>
@@ -29,12 +29,7 @@
             <li><router-link to="/statistique">Statistiques</router-link></li>
             <li><router-link to="/documents">Documentation</router-link></li>
             <li class="dropdown">
-              <router-link to="#">Opportunités <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
-              <ul  class="dropdown-menu">
-              
-                <li><router-link to="/opportunites/appel_emploi">Appel Emploi</router-link></li>
-           
-              </ul>
+              <router-link to="/opportunites">Opportunités </router-link>
             </li>
 
           </ul>

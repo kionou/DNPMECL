@@ -6,6 +6,7 @@ import  mutations from './mutations.js'
 import  actions from './actions.js'
 import countries from './countries'
 import userModule from './user';
+import verification from './verification'
 
 
 const store = createStore({
@@ -16,6 +17,7 @@ const store = createStore({
   modules: {
     countries, // Utilisez le nom correct du module ici
     user: userModule,
+    verification
   },
 })
 

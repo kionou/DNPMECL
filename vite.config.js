@@ -21,5 +21,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  optimizeDeps: {
+    include: ['swiper'], // Assurez-vous que "swiper" est inclus ici
   }
 })

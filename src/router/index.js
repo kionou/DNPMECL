@@ -16,6 +16,10 @@ import Verification from '../views/Public/Verification_code.vue'
 import Espace from '../views/Public/espace.vue'
 import Dossiers from '../views/Public/dossiers.vue'
 import Profil from '../views/Public/Profil.vue'
+import DetailOffre from '../views/Public/Opportunite/DetailOffre.vue'
+import DetailOpportunite from '../views/Public/Opportunite/DetailOpportunite.vue'
+
+
 
 
 // import Test from '../views/Public/test2.vue'
@@ -42,8 +46,7 @@ const router = createRouter({
          { path: '/liste_pme', name: 'liste_pme', component: Liste},
          { path: '/statistique', name: 'statistique', component: Statistique},
          { path: '/documents', name: 'documents', component: Documents},
-         { path: '/appel_offre', name: 'appel_offre', component: Offre},
-         { path: '/opportunites/appel_emploi', name: 'appel_emploi', component: Emploi},
+         { path: '/opportunites', name: 'appel_emploi', component: Emploi},
          { path: '/reinitialiser', name: 'connexion', component: Connexion , },
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , },
          { path: '/login_user_mpme/verification', name: 'Verification', component: Verification  ,  },
@@ -55,6 +58,9 @@ const router = createRouter({
          { path: '/mon_espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true } },
          { path: '/dossiers', name: 'Dossiers', component: Dossiers  ,  meta: { requiresAuth: true } },
          { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
+         { path: '/appel_offre', name: 'appel_offre', component: Offre , meta: { requiresAuth: true }},
+         { path: '/offre/:id', name: 'DetailOffre', component: DetailOffre ,   props:true  },
+         { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true ,  meta: { requiresAuth: true } },
          { path: '/test', name: 'Test', component: Test, }
          
 

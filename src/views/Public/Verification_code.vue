@@ -6,8 +6,8 @@
       data-aos-delay="100" style="padding: 60px;">
       <div class="form-container">
         <p class="title">connexion</p>
-        <p class="text-center" v-if="selectedChannel === 'E-mail'">Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.email) }}</p>
-        <p class="text-center" v-else>Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(loggedInUser.whatsapp) }}</p>
+        <p class="text-center" v-if="selectedChannel === 'E-mail'">Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(getVerificationCode.user.email) }}</p>
+        <p class="text-center" v-else>Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(getVerificationCode.user.Whatsapp) }}</p>
         <small>{{ error }}</small>
 
         <form class="form">
@@ -31,21 +31,24 @@ import Footer from '../../components/loyout/footer.vue';
 import axios from '@/lib/axiosConfig.js'
 import useVuelidate from '@vuelidate/core';
 import Loading from '../../components/Public/other/preloader.vue';
-// import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'DNPMECLConnexion',
   components: {
     Navbar, Footer , Loading
   },
   computed: {
+    ...mapGetters(['getVerificationCode']),
     selectedChannel() {
       const channel = this.$route.query.channel;
       return channel === 'email' ? 'E-mail' : (channel === 'whatsapp' ? 'WhatsApp' : 'Canal inconnu');
     },
-    loggedInUser() {
-      return this.$store.getters['user/loggedInUser'];
-    },
+    // loggedInUser() {
+    //   return this.$store.getters['user/loggedInUser'];
+    // },
   },
 
 
@@ -71,12 +74,13 @@ export default {
   },
 
   mounted() {
-    console.log("data", this.loggedInUser);
-    // console.log(this.datauser);
+    // console.log("data", this.loggedInUser);
+    console.log('verification',  this.getVerificationCode);
 
   },
 
   methods: {
+     ...mapActions('user', ['setLoggedInUser']),
 
     async submit() {
      
@@ -87,9 +91,8 @@ export default {
         this.loading = true
         if (this.selectedChannel === 'E-mail') {
           let DataUser = {
-          email: 1,
-           value: this.loggedInUser.email,
-          // value:'kionoumamadou.00@gmail.com',
+          email: true,
+           value: this.getVerificationCode.user.email ,
           code: this.code
         }
         console.log('data user :', DataUser);
@@ -102,6 +105,7 @@ export default {
 
             } else {
               console.log('response.Code', response.data);
+              this.setLoggedInUser(this.getVerificationCode);
               this.$router.push('/mon_espace');
               this.loading = false
 
@@ -115,8 +119,8 @@ export default {
         } else {
 
           let DataUser = {
-          email: 0,
-          value: this.loggedInUser.whatsapp,
+          email: false,
+          value: this.getVerificationCode.user.Whatsapp,
           code: this.code
         }
         console.log('data user :', DataUser);
@@ -129,7 +133,7 @@ export default {
 
             } else {
               console.log('response.Code', response.data);
-              
+              this.setLoggedInUser(this.getVerificationCode);
               this.$router.push('/mon_espace');
               this.loading = false
             }
@@ -150,7 +154,7 @@ export default {
       if (this.selectedChannel === 'E-mail') {
         const requestData = {
           email: 1,
-          value: this.loggedInUser.email,
+          value: this.getVerificationCode.user.email ,
         };
 
         try {
@@ -158,6 +162,7 @@ export default {
           const response = await axios.post('/mpme/send-otp', requestData);
           if (response.data.status === 'success') {
             alert('Un nouveau code a été envoyé à votre e-mail.');
+           
           } else {
             // Erreur, affichez un message d'erreur
             alert('Une erreur s\'est produite lors de l\'envoi du nouveau code.');
@@ -168,7 +173,7 @@ export default {
       } else if (this.selectedChannel === 'WhatsApp') {
         const requestData = {
           email: 0,
-          value: this.loggedInUser.whatsapp,
+          value: this.getVerificationCode.whatsapp,
         };
 
         try {

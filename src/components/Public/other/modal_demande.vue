@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading" style="z-index: 1000;"></Loading>
     <div class="bloc-modale" v-if="revele"  data-aos="zoom-out"
       >
     <div class="overlay" v-on:click="toggleModale"></div>
@@ -6,6 +7,7 @@
     <div class="form-container">
 	<p class="title">
   </p>
+  <small>{{ error }}</small>
     <p class="text-center"> 
         Veuillez sélectionner un canal pour recevoir votre code d'authentification.
       
@@ -20,46 +22,73 @@
   
   <script>
 import axios from '@/lib/axiosConfig.js'
+import Loading from './preloader.vue';
+import { mapGetters } from 'vuex';
   export default {
       name:'ComponentModal',
       props: ["revele", "toggleModale" , "data"],
+      components:{Loading},
       computed: {
-    loggedInUser() {
-      return this.$store.getters['user/loggedInUser'];
-    },
+    // ...mapGetters(['getVerificationCodetUser']),
+    ...mapGetters(['getVerificationCode']),
+
+    // loggedInUser() {
+    //   return this.$store.getters['user/loggedInUser'];
+    // },
+    
   },
     
       data() {
         return {
+          loading:false,
+          error:''
 
         }
+      },
+      mounted() {
+      // console.log('tessstrrr',this.loggedInUser);
+      console.log('verification',  this.getVerificationCode);
       },
           
       methods: {
         async  hamdleSubmitemail(){
-          const datauser = this.loggedInUser
+      
+          this.loading = true
+          const datauser =  this.getVerificationCode
           let CodeUserEmail ={
-           email:1,
-            value:datauser.email
-          // value:'kionoumamadou.00@gmail.com'
-          
+            email:1,
+            value:datauser.user.email 
           }
           console.log("eee",CodeUserEmail);
           try {
        const response = await axios.post('/mpme/send-otp', CodeUserEmail);
        console.log('response.Code', response); 
       console.log("try",datauser);
-      this.$router.push({ name: 'Verification', query: { channel: 'email' } });
+       if (response.data.status === 'error') {
+             this.revele = true
+              
+              return this.error = response.data.message
+
+            } else {
+              console.log('response.Code', response.data);
+              
+              this.$router.push({ name: 'Verification', query: { channel: 'email' } });
+
+              this.loading = false
+            }
+      
     } catch (error) {
     
     }
          
-            },
-            async  hamdleSubmitsms(){
-          const datauser = this.loggedInUser
+      },
+
+ async  hamdleSubmitsms(){
+          this.loading = true 
+          const datauser =  this.getVerificationCode
           let CodeUserWhatsapp ={
           email:0,
-           value:this.loggedInUser.whatsapp
+           value:datauser.user.Whatsapp
           
           }
           console.log("eee",CodeUserWhatsapp);
@@ -67,8 +96,19 @@ import axios from '@/lib/axiosConfig.js'
         const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
         console.log('response.Code', response); 
       console.log("try",datauser);
-      //  this.$router.push({ name: 'Espace' }); 
-        this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
+      if (response.data.status === 'error') {
+              this.loading = false
+              return this.error = response.data.message
+
+            } else {
+              console.log('response.Code', response.data);
+              
+              // this.$router.push({ name: 'Espace' }); 
+              this.$router.push({ name: 'Verification', query: { channel: 'whatsapp' } });
+
+              this.loading = false
+            }
+    
     } catch (error) {
       console.log(error.message);
     
@@ -79,9 +119,7 @@ import axios from '@/lib/axiosConfig.js'
         
       },
 
-      mounted() {
-      console.log('tessstrrr',this.loggedInUser);
-      },
+    
    
 
   
@@ -93,7 +131,15 @@ import axios from '@/lib/axiosConfig.js'
   
   margin: 0;
   }
-  
+  .error{
+    /* border: 1px solid red; */
+    max-width: 1140Px;
+    margin: 40px auto;
+    padding: 10Px;
+    color:red;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    
+}
   .bloc-modale {
   position: fixed;
   top: 0;

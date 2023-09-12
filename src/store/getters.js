@@ -2,6 +2,7 @@ export default{
     getMpmeData: (state) => state.mpmeData,
     getmpme: (state) => state.mpmeAll,
     getRegionOptions: (state) => state.regionOptions,
+    getRegionOptions2: (state) => state.regionOptions2,
     getCountryOptions: (state) => state.countryOptions,
     getprefectureOptions : (state) => state.prefectureOptions,
     getSousprefectureOptions : (state) => state.SousprefectureOptions,

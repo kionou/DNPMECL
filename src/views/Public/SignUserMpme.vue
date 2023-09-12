@@ -97,15 +97,15 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="sous_prefecture">Sous-préfecture <span class="text-danger">*</span></label>
-                <MazSelect v-model="sous_prefecture" color="secondary" :options="sous_prefectureOptions" />
+                <MazSelect v-model="sous_prefecture" color="secondary" :options="sous_prefectureOptions" search />
               </div>
               <small v-if="v$.sous_prefecture.$error">{{ v$.sous_prefecture.$errors[0].$message }}</small>
             </div>
             <div class="col">
               <div class="input-groupe">
                 <label for="prenom">Liste des Sous Secteur Activités <span class="text-danger">*</span></label>
-                <!-- <input type="text" name="sous_secteur" id="sous_secteur" placeholder="" v-model="preferencesInput"> -->
-                <v-select v-model="selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint></v-select>
+                <v-select v-model="selectedSousSecteurs" :items=SousSecteurActiviteOptions multiple persistent-hint  item-title="state"
+                  item-value="abbr" ></v-select>
               </div>
               <small v-if="v$.selectedSousSecteurs.$error">{{ v$.selectedSousSecteurs.$errors[0].$message }}</small>
             </div>
@@ -227,7 +227,9 @@ export default {
         await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
           console.log('option',option);
-          return option.label;
+          return  { state: option.label, 
+                     abbr: option.value
+                     }
         });
       } catch (error) {
         console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);

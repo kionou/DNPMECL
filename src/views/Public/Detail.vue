@@ -272,16 +272,13 @@
                                                         </div>
 
                                                         <div class="d-flex flex-wrap gap-2">
-                                                            <a href="javascript:void(0)" class="me-3">
+                                                            <p v-if="datadoc.length === 0"> Pas de documents pour l'instant !</p>
+                                                            <a   v-else  :href="doc.LienDocument" class="me-3" v-for="doc in datadoc"  :key="doc.id" download>
                                                                 <img src="@/assets/misc/pdf.png" alt="Document image"
                                                                     width="20" class="me-2" />
-                                                                <span class="h6">DOC 1</span>
+                                                                <span class="h6">{{ doc.NomDocument }}</span>
                                                             </a>
-                                                            <a href="javascript:void(0)">
-                                                                <img src="@/assets/misc/doc.png" alt="Excel image"
-                                                                    width="20" class="me-2" />
-                                                                <span class="h6">DOC 2</span>
-                                                            </a>
+                                                           
                                                         </div>
                                                     </div>
                                                 </li>
@@ -297,151 +294,57 @@
 
                         </div>
                         <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
-                            <section id="blog" class="blog">
+                            <!-- <section id="blog" class="blog">
                                 <div class="container" data-aos="fade-up">
 
-                                    <div class="row gy-4 posts-list">
+                                    <div class="posts-list d-flex flex-row flex-wrap">
 
-                                        <div class="col-xl-4 col-md-6">
+                                        <div class="col-xl-4 col-md-6" v-for="img in dataimage" :key="img.id">
                                             <article>
 
                                                 <div class="post-img">
-                                                    <img src="@/assets/img/blog/gac1.jpeg" alt="" class="img-fluid">
+                                                    <img :src="img.Photo" alt="" class="img-fluid" style="border: 1px solid var(--color-secondary) ; border-radius: 10px;">
                                                 </div>
 
 
 
 
                                             </article>
-                                        </div><!-- End post list item -->
-
-                                        <div class="col-xl-4 col-md-6">
-                                            <article>
-
-                                                <div class="post-img">
-                                                    <img src="@/assets/img/blog/gac2.jpeg" alt="" class="img-fluid">
-                                                </div>
-
-
-
-                                            </article>
-                                        </div><!-- End post list item -->
-
-                                        <div class="col-xl-4 col-md-6">
-                                            <article>
-
-                                                <div class="post-img">
-                                                    <img src="@/assets/img/blog/gac1.jpeg" alt="" class="img-fluid">
-                                                </div>
-
-
-
-                                        </article>
-                                    </div><!-- End post list item -->
-
+                                        </div>
 
                                 </div>
-                                <!-- End blog posts list -->
-
-                                <div class="blog-pagination">
-                                    <ul class="justify-content-center">
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                    </ul>
-                                </div><!-- End blog pagination -->
+          
 
                             </div>
-                        </section>
+                        </section> -->
+
+<div class=" d-flex justify-content-center align-items-center flex-wrap" style="position: relative;">
+    
+   
+    <div v-if="paginatedItems.length === 0" class="noresul">
+      <span> Vous n'avez pas encore publier d'image. </span>
+    </div>
+    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
+      data-aos-delay="100" v-else>
+      <div class="task" v-for="item in paginatedItems" :key="item.id">
+        <div class="image">
+          <img :src="item.Photo" alt="">
+        </div>
+
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="container_pagination">
+    <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
+  </div>
 
                     </div>
 
                     <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
                         <Position :data="data"  :key="childKey"/>
-                        <!-- <div class="row">
-        <div class=" card col-xl-5 col-lg-5 col-md-5 py-2">
-            <div class=" bg-white rounded-lg  ">
-
-                <div class="">
-                    <div class="overflow-hidden bg-white   border-b border-gray-200 rounded-lg  ">
-
-                        <div class="border-t border-gray-200">
-                            <dl>
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Région</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.Region }}</dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Préfecture</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.AnneeCreation
-                                    }}</dd>
-                                </div>
-
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Sous-préfecture</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                        data.Sousprefecture }} </dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Commune</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{
-                                        data.Commune }}</dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Ville</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                        data.Ville }} </dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Quartier</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{ data.Quartier }}</dd>
-                                </div>
-
-                                <div
-                                    class="px-4 py-3 bg-gray-50 sm:grid  grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">Rue</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">  {{
-                                        data.Rue }} </dd>
-                                </div>
-                                <div
-                                    class="px-4 py-3 bg-white sm:grid grid align-items-center sm:grid-cols-3 sm:gap-4 sm:px-6  ">
-                                    <dt class="text-sm font-medium text-gray-500">Localisation</dt>
-                                    <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ data.Localisation
-                                    }}</dd>
-                                </div>
-
-
-                            </dl>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
            
-        </div>
-        <div class="col-xl-7 col-lg-7 col-md-7">
-
-            <div class="maps_container" >
-                <div class="map-wrap">
-                    <a href="https://www.maptiler.com" class="watermark">
-                        <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
-                    </a>
-                    <div class="map" ref="mapContainer"></div>
-
-                </div>
-
-
-            </div>
-        </div>
-                        </div>  -->
                     </div>
 
                 </div>
@@ -456,13 +359,24 @@ import axios from '@/lib/axiosConfig.js'
 
 import Position from '../../components/Public/LISTE_PME/position.vue'
 import Loading from '../../components/Public/other/preloader.vue';
+import Pag from '../../components/Public/other/pag.vue';
+
 
 export default {
     name: 'DNPMECLDetail',
-    components: { Position , Loading },
+    components: { Position , Loading   , Pag },
     props: ['id'],
-    setup() {
-   
+    computed: {
+    totalPages() {
+    // return Math.ceil(this.items.length / this.itemsPerPage);
+    return Math.ceil(this.dataimage.length / this.itemsPerPage);
+  },
+  paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.dataimage.slice(startIndex, endIndex);
+    },
+
   },
 
     data() {
@@ -473,12 +387,18 @@ export default {
          childKey: 0,
          sous_secteur:'',
          items:'',
+         datadoc:[],
+         dataimage:[],
+         currentPage: 1,
+    itemsPerPage: 10,
         };
     },
 
-    mounted() {
+  async  mounted() {
 
-        this.fetchData()
+    await  this.fetchData(),
+    await   this.fetchDataDoc(),
+   await this.fetchDataImage()
     },
 
     methods: {
@@ -491,9 +411,30 @@ export default {
             console.log('eeee', data);
             this.data = data
             this.loading =   false
-            this.items = JSON.parse(this.data.ListeSousSecteurActivite)
+            // this.items = JSON.parse(this.data.ListeSousSecteurActivite)
   
 
+        },
+
+        async fetchDataDoc() {
+            const response = await axios.get('/documents-mpme/published')
+            const data = response.data.data.data
+            this.datadoc = data
+            console.log('doc', data);
+            this.datadoc = this.datadoc.filter((doc) => {
+            return doc.CodeMpme === this.id; // Remplacez "userId" par la propriété qui contient l'ID de l'utilisateur dans vos données de documents.
+            });
+        },
+
+        async fetchDataImage() {
+            const response = await axios.get('/mpme/photos/publication-de-photo-mpme')
+            const data = response.data.data.data
+            this.dataimage = data
+            console.log('image', data);
+            this.dataimage = this.dataimage.filter((img) => {
+            return img.CodeMpme === this.id; // Remplacez "userId" par la propriété qui contient l'ID de l'utilisateur dans vos données de documents.
+            });
+            console.log('this.dataimage',this.dataimage);
         },
     },
 };
@@ -521,6 +462,67 @@ height: auto;
     width: 100%;
     }
 
+}
+
+
+.container_pagination {
+    width: auto;
+    text-align: end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin: 5px;
+  
+  }
+
+  .noresul {
+  border: 1px solid #F9D310;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 6px;
+  font-size: 20px;
+
+}
+.contenu {
+
+/* border: 1px solid red; */
+padding: 15px 10px;
+}
+
+.task {
+  position: relative;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-secondary);
+  margin: 0 10px 10px 0;
+  width: 300px;
+  height: 250px;
+}
+
+.image {
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.task:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.image img {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 </style>

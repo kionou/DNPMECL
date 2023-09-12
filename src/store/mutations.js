@@ -6,8 +6,11 @@ export default {
   SET_ALLMPME(state, data) {
     state.mpmeAll = data;
   },
-  SET_REGION_OPTIONS(state, options) {
+  SET_REGION_OPTIONS(state, options ) {
     state.regionOptions = options;
+  },
+  SET_REGION2_OPTIONS(state, options ) {
+    state.regionOptions2 = options;
   },
   SET_COUNTRY_OPTIONS: (state, options) => {
     state.countryOptions = options;

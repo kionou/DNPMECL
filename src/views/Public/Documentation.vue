@@ -6,13 +6,27 @@
         <div class="content">
 
             <div class="doc"  role="tablist">
-                <div class="info-item d-flex justify-content-center align-items-center nav-link  active"  role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1" aria-selected="true">
+
+                <div
+                v-for="(category, index) in categoriesData" :key="index"
+                 class="info-item d-flex justify-content-center align-items-center nav-link  " 
+                 :class="{ active: index === 0 }" 
+                role="tab" 
+                data-bs-toggle="tab" 
+                :data-bs-target="'#navs-pills-top-home' + (index + 1)"
+               :aria-controls="'navs-pills-top-home' + (index + 1)"
+               :aria-selected="index === 0"
+             
+                 >
+
                 <i class="bi bi-file-pdf flex-shrink-0"></i>
                 <div>
-                  <p>Categorie1</p>
+                  <p>{{ category.NomCategorie }}</p>
                 </div>
               </div>
-              <div class="info-item d-flex justify-content-center align-items-center nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home2" aria-controls="navs-pills-top-home2" aria-selected="false">
+
+
+              <!-- <div class="info-item d-flex justify-content-center align-items-center nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home2" aria-controls="navs-pills-top-home2" aria-selected="false">
                 <i class="bi bi-file-pdf flex-shrink-0"></i>
                 <div>
                   <p>Categorie2</p>
@@ -23,12 +37,22 @@
                 <div>
                   <p>Categorie3</p>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="sous_doc">
-                <div class="tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
+                <div
+                
+                  v-for="(sousCategory, index) in sousCategoriesData" :key="index"
+                   class="tab-pane fade"
+                   :class="{ show: index === 0, active: index === 0 }"
+                   :id="'navs-pills-top-home' + (index + 1)"
+                   role="tabpanel"
+                  
+                  >
+
+
                     <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
+                    <p class="pb-0 ">{{ sousCategory.NomSousCategorie }}</p>
                     <div class=" texte2 d-flex align-items-center">
                 <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
                 <div>
@@ -131,6 +155,8 @@ export default {
 
     data() {
         return {
+          sousCategoriesData:[],
+          categoriesData:[]
             
         };
     },
@@ -144,11 +170,11 @@ export default {
     methods: {
       async fetchSousCategoriesData() {
   try {
-s
+
     await this.$store.dispatch('fetchSousCategoriesData');
     const sousCategoriesData = JSON.parse(JSON.stringify(this.$store.getters.getSousCategoriesData));
     console.log('Données des sous-catégories:', sousCategoriesData);
-    this.sousCategoriesData = sousCategoriesData;
+    this.sousCategoriesData = sousCategoriesData.data.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données des sous-catégories :', error.message);
   }
@@ -160,7 +186,7 @@ async fetchCategoriesData() {
     await this.$store.dispatch('fetchCategoriesData');
     const categoriesData = JSON.parse(JSON.stringify(this.$store.getters.getCategoriesData));
     console.log('Données des catégories:', categoriesData);
-    this.categoriesData = categoriesData;
+    this.categoriesData = categoriesData.data.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données des catégories :', error.message);
   }

@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"></Loading>
   <div class=" d-flex justify-content-center align-items-center flex-wrap" style="position: relative;">
     
     <div class="btnLgin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
@@ -99,7 +100,7 @@
     </MazDialog>
     <MazDialog v-model="confirmdelete">
       <p>
-        Image supprimer avec succès !!!
+        Image supprimée avec succès !!
       </p>
       <template #footer="{ close }">
 
@@ -133,7 +134,7 @@
             <div class="profile-pic">
               <label class="-label" for="file">
                 <span class="glyphicon glyphicon-camera"></span>
-                <span>Change Image</span>
+                <span>Changer Image</span>
               </label>
               <input id="file" type="file" @change="loadFile" />
               <img :src="updateImageUrl" id="output" width="200" />
@@ -151,7 +152,7 @@
 
     <MazDialog v-model="updated">
       <p>
-        Image  valider merci !!!
+        {{ publier }}
       </p>
       <template #footer="{ close }">
 
@@ -173,10 +174,11 @@ import GLightbox from 'glightbox';
 import MazDialog from 'maz-ui/components/MazDialog'
 import axios from '@/lib/axiosConfig.js'
 import Pag from '../Public/other/pag.vue';
+import Loading from '../Public/other/preloader.vue';
 export default {
   name: 'DNPMECLImage',
   components: {
-    MazDialog, Pag
+    MazDialog, Pag , Loading
 
   },
   computed: {
@@ -189,9 +191,11 @@ export default {
   data() {
     return {
       isOpen: false,
+      loading:true,
       isdelete: false,
       confirmdelete: false,
       updated: false,
+      publier:'',
       imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
       uploadedFileName: 'Project 1',
       uploadedFileIconText: '',
@@ -236,14 +240,13 @@ export default {
   methods: {
     // delete picture
     hamdledelete(itemId) {
-      console.log(itemId);
       this.imageToDeleteId = itemId;
       this.isdelete = true
 
     },
     async confirmDelete() {
-      console.log('gggg', this.imageToDeleteId);
       this.isdelete = false
+      this.loading = true
       try {
         // Faites une requête pour supprimer l'élément avec l'ID itemId
         const response = await axios.delete(`mpme/photos/${this.imageToDeleteId}`, {
@@ -257,15 +260,21 @@ export default {
         });
         console.log('Réponse de suppression:', response);
         if (response.data.status === 'success') {
-          this.confirmdelete = true
           this.fetchgetPhotoMpme();
+           this.loading = false
+          this.confirmdelete = true
+         
 
         } else {
           console.log('error', response.data)
+          this.loading = false
+
         }
 
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
+        this.loading = false
+
       }
 
     },
@@ -279,8 +288,8 @@ export default {
 
     // update picture
  async updateupload(id) {
+  this.loading = true
 
-      console.log(id);
       this.updateImageId = id;
       try {
       const response = await axios.put(`/mpme/photos/${this.updateImageId}`, {}, {
@@ -293,12 +302,21 @@ export default {
       console.log('Réponse de l\'API:', response);
 
       if (response.data.status === "success") {
-      this.fetchgetPhotoMpme();
+        if (response.data.data.StatutPhoto === true) {
+        this.publier = await 'Votre image a été publiée avec succès !'
+        this.fetchgetPhotoMpme();
+      this.loading = false
       this.updated = true
-      window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                });
+      window.scrollTo({  top: 0, behavior: 'smooth', });
+         } else {
+           this.publier = await 'Votre image a été retirée de la liste avec succès.'
+           this.fetchgetPhotoMpme();
+      this.loading = false
+      this.updated = true
+      window.scrollTo({  top: 0, behavior: 'smooth', });
+          
+         }
+    
         
       } else {
         
@@ -307,6 +325,8 @@ export default {
       } catch (error) {
       // Une erreur s'est produite, vous pouvez gérer les erreurs ici
       console.error('Erreur lors de l\'envoi du fichier:', error);
+      this.loading = false
+
       }
             
     },
@@ -325,12 +345,16 @@ export default {
 
           },
 
-
         });
+        console.log('UserData:', response);
 
-          console.log('UserData:', response.data.data.photos);
+        if (response.data.status === 'success') {
+          this.userData = response.data.data.photos;
+            this.loading = false
+            
+          }
 
-          return this.userData = response.data.data.photos;
+
     
 
       } catch (error) {
@@ -716,9 +740,6 @@ p {
   /* Slid Down Animation */
   animation: slidDown 500ms ease-in-out;
 }
-
-
-
 
 .upload-area__title {
   font-size: 1.8rem;

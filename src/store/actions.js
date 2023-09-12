@@ -56,7 +56,7 @@ async fetchDataFromAPI({ commit }) {
   async fetchRegionOptions({ commit }) {
     try {
       const response = await axios.get('/regions');
-      console.log('response.data2', response.data.data.data); // Remplacez l'URL par l'URL de votre API
+      console.log('response.data2Region', response.data.data.data); // Remplacez l'URL par l'URL de votre API
       const regionsFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -65,7 +65,8 @@ async fetchDataFromAPI({ commit }) {
         value: region.NomRegion
       }));
       
-      commit('SET_REGION_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
+      commit('SET_REGION_OPTIONS', options);
+      commit('SET_REGION2_OPTIONS', regionsFromAPI); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
       console.error('Erreur lors de la récupération des régions:', error);
     }
@@ -150,7 +151,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = sousSecteurFromAPI.map(sousSecteur => ({
         label: sousSecteur.NomSousSecteur,
-        value: sousSecteur.NomSousSecteur
+        value: sousSecteur.CodeSousecteur
       }));
 
       commit('SET_SOUS_SECTEUR_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de sous-secteurs

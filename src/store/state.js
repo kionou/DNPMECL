@@ -2,6 +2,7 @@ export default{
     mpmeData: [],
     getmpme:[],
     regionOptions: [],
+    regionOptions2: [],
     countryOptions: [],
     prefectureOptions: [],
     SousprefectureOptions:[],

@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-{{ ss }}
+
     <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
       data-aos-delay="100">
       <div v-if="filteredPmes.length === 0" class="nulle">
@@ -52,22 +52,34 @@
 
         <div class="tag">
           <div class="image">
-            <img src="@/assets/img/flags.png" alt="">
+            <img  v-if="pme.profile === null" src="@/assets/img/flags.png " alt="">
+            <img v-else :src="pme.profile" alt="">
+            <!-- <img :src="pme.profile ? pme.profile : getImage('img/flags.png')" alt=""> -->
           </div>
           <div class="texte">
             <p class="para">{{ pme.NomMpme }}</p>
+            <!-- <p class="texte-content">Date de Creation: <span>{{ pme.AnneeCreation }}</span></p> -->
+            <!-- <p class="texte-content">Dirigeant: <span>{{ pme.PrenomDirigeant }} {{ pme.NomDirigeant }}</span></p> -->
+          </div>
+        </div>
+          <div class="texte">
+            <!-- <p class="para">{{ pme.NomMpme }}</p> -->
+        
+         
             <p class="texte-content">Date de Creation: <span>{{ pme.AnneeCreation }}</span></p>
             <p class="texte-content">Dirigeant: <span>{{ pme.PrenomDirigeant }} {{ pme.NomDirigeant }}</span></p>
           </div>
-        </div>
+
         <div class="texte">
+          <p class="texte-content">Region: <span>{{ pme.Region }}</span></p>
           <p class="texte-content">Ville: <span>{{ pme.Ville }}</span></p>
           <p class="texte-content">Email: <span>{{ pme.AdresseEmail }}</span></p>
           <p class="texte-content">Contact: <span> {{ pme.NumeroWhatsApp }}</span></p>
         </div>
-        <div class="boutton">
+        <!-- @/assets/img/flags.png -->
+        <!-- <div class="boutton">
           <p @click="$router.push({ path: `/liste_pme/mpme/${pme.CodeMpme}`, })" class="btn">Detail<span></span></p>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="container_pagination">
@@ -77,10 +89,11 @@
 </template>
 
 <script>
-import { getImage } from '@/lib/getImage';
+
 import axios from '@/lib/axiosConfig.js'
 import Pag from '../other/pag.vue';
 import Loading from '../other/preloader.vue';
+import { getImage }  from '@/lib/getImage.js'
 
 export default {
   components: {
@@ -164,6 +177,7 @@ export default {
     }
   },
   methods: {
+    getImage:getImage,
     async fetchData() {
       const response = await axios.get('/mpme')
       const data = response

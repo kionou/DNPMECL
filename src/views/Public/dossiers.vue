@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="container">
                 <div class="page-header__inner">
-                    <h1 class="display-2">Bienvenue kionou mohamed </h1>
+                    <h1 class="display-2">Bienvenue {{ loggedInUser.prenom }} {{ loggedInUser.nom }} </h1>
                     <p>Votre espace personnel vous permet d’effectuer et de faire le suivi de votre entreprise</p>
                 </div>
             </div>
@@ -88,9 +88,9 @@ export default {
   },
     computed: {
    
-    // loggedInUser() {
-    //   return this.$store.getters['user/loggedInUser'];
-    // },
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
   },
 
     data() {
@@ -102,7 +102,7 @@ export default {
 
     mounted() {
      
-        // console.log("dataespace", this.loggedInUser);
+         console.log("dataespace", this.loggedInUser);
 
     },
 

@@ -1,14 +1,54 @@
 <template>
     <div>
           <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero">
+
+          <section id="hero" class="hero" style="padding: 0 !important;">
+      <v-carousel :cycle="true" width="100%"  :show-arrows="false"
+  >
+    <v-carousel-item v-for="(item,i) in items" :key="i"  >
+      <v-img :src="item.src" class="fill-height immg "  cover  max-height="800">
+      </v-img>
+        <v-container fill-height>
+        <div class="hero_content absolute-fill">
+      <div class="rowe gy-5" data-aos="fade-in">
+        <div class="hero_content1   text-center text-lg-start" style="margin-bottom:auto">
+          <h2>Identifiez votre entreprise</h2>
+          <p>Portail officiel de de la Direction Nationale des PME et du Contenu Local dédié à l’enregistrement des micros, petites et moyennes entreprises en Guinée afin de faciliter l’accès 
+            aux informations liées à ces entreprises. </p>
+          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
+          
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <router-link to="/sign_user_mpme" class="btn-get-started">Identifier votre entreprise</router-link>
+            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
+              <i class="bi bi-play-circle" style="color: white; position: relative;">
+               
+            </i>
+            <span>Guide de création</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+       
+      </v-container>
+
+                 
+     
+
+    </v-carousel-item>
+  </v-carousel>
+ 
+  </section>
+  <!-- <section id="hero" class="hero">
     <div class="hero_content">
       <div class="rowe gy-5" data-aos="fade-in">
         <div class="hero_content1 col-lg-6 order-2 order-lg-1  text-center text-lg-start" style="margin-bottom:auto">
           <h2>Identifiez votre entreprise</h2>
-          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME </p>
+          <p>Portail officiel de de la Direction Nationale des PME et du Contenu Local dédié à l’enregistrement des micros, petites et moyennes entreprises en Guinée afin de faciliter l’accès 
+            aux informations liées à ces entreprises. </p>
+          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
+          
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/sign_user_mpme" class="btn-get-started">Idenifier votre entreprise</router-link>
+            <router-link to="/sign_user_mpme" class="btn-get-started">Identifier votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                
@@ -21,7 +61,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End Hero Section -->
 
 
@@ -32,41 +72,64 @@
   <div class="container" data-aos="fade-up">
 
     <div class="section-header">
-      <h2>Présentation de la DNMPMECL</h2>
+      <h2>Présentation de la DNPME-CL</h2>
       <p>
-        Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop
+        La Direction Nationale des Petites et Moyennes Entreprises et du Contenu
+         Local sous tutelle du Ministère du Commerce, de l’Industrie et des PME a
+          pour objectif d’accompagner et de promouvoir les activités des Micros, 
+          Petites et Moyennes Entreprises et de
+         vulgariser la loi portant Contenu Local en République de Guinée. 
 
       </p>
-      <p>
+      <!-- <p>
         Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop
 
-      </p>
+      </p> -->
     </div>
 
-    <div class="row gy-4">
-      <div class="col-lg-6">
-        <h3>Objectifs et stratégies</h3>
-        <img src="@/assets/img/strategie.jpg" class="img-fluid rounded-4 mb-4" alt="">
+    <div class="row gy-4 class3">
+      <div class="col-lg-6 class4">
+        <h3>Notre mission</h3>
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="5000">
+      <img src="@/assets/img/carousel/carousel1.jpg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="@/assets/img/carousel/carousel2.jpg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="@/assets/img/carousel/carousel3.jpg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6  class5" style="margin-top:60px;">
         <div class="content ps-0 ps-lg-5">
           <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+          
           </p>
           <ul>
-            <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-            <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-            <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+            <li><i class="bi bi-check-circle-fill"></i>Promotion des Petites et Moyennes Entreprises ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>Suivi et de la coordination des actions de développement des PME ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>Suivi des politiques visant l’amélioration de l’efficacité des PME ;</li>
+
+            <li><i class="bi bi-check-circle-fill"></i>Elaboration et mise en place d’un cadre institutionnel et règlementaire de création et de financement des PME ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>Encadrement des PME ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>Développement des actions d’aide à la création d’entreprises par les nationaux;</li>
+
+            <li><i class="bi bi-check-circle-fill"></i>Mise en œuvre des actions visant le renforcement de capacités managériales des nationaux chefs d’entreprises, notamment en matière de gestion d’entreprises;</li>
+            <li><i class="bi bi-check-circle-fill"></i>Promouvoir et former sur la loi portant contenu local . </li>
           </ul>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-          </p>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-          </p>
+         
         </div>
       </div>
     </div>
@@ -102,7 +165,7 @@
             <div class="stats-item d-flex align-items-center">
     
               <span data-purecounter-start="0" :data-purecounter-end="totalPersonnelPermanentFemme" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Femmes salariés</strong> </p>
+              <p><strong>Femmes salariées</strong> </p>
             </div><!-- End Stats Item -->
           </div>
 
@@ -118,38 +181,81 @@
 
         <div class="section-header">
           <h2>Etapes de formalisation</h2>
-          <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop</p>
+          <p>Formaliser votre entreprise c’est aussi lui permettre d’accéder aux opportunités
+             en matière d’appel d’offre mais également lui faire bénéficier d’appui
+             techniques et financiers grâce aux différents fonds prévus à cet effet. </p>
+
+        <p class="mt-3" style="font-weight: bolder;">Sélectionner la forme d’entreprise que vous voulez créer !</p>
+             
         </div>
+        <div class="row gy-4 class1" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-4 col-md-4 class2">
             <div class="service-item  position-relative">
-              <div class="icon">
-                <i class="bi bi-activity"></i>
-              </div>
-              <h3>Nesciunt Mete</h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+              
+              <h3>Entreprise individuelle </h3>
+              <p>
+                Une entreprise individuelle est une forme simplifiée d'entreprise. Toute personne de plus de 18 ans peut
+                 créer ce type d'entreprise et devient alors entrepreneur individuel. Ce type d'entreprise est adapté pour 
+                 une activité commerciale, artisanale, industrielle ou libérale.
+              </p>
+             
+            <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=entreprise-individuelle">Procedure de formalisation</a>
+       
             </div>
+          
           </div> 
+          
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-4 col-md-4 class2">
             <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-broadcast"></i>
-              </div>
-              <h3>Eosle Commodi</h3>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+              
+              <h3> Société à Responsabilité limitée SARL </h3>
+              <p> La SARL est une forme juridique de société commerciale à responsabilité limitée 
+                constituée par deux associés au minimum (ou par un seul associé lorsqu’elle prend la
+                 forme d’une SARL unipersonnelle). 
+                En SARL, la responsabilité des associés est limitée au montant de leurs apports.</p>
+                <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=sarl">Procedure de formalisation</a>
+
             </div>
           </div><!-- End Service Item -->
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-4 col-md-4 class2">
             <div class="service-item position-relative">
-              <div class="icon">
-                <i class="bi bi-easel"></i>
-              </div>
-              <h3>Ledo Markt</h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              
+              <h3>Société Anonyme SA </h3>
+              <p> La SA ou société anonyme est une société de capitaux. 
+                Elle rassemble des personnes qui peuvent ne pas se connaître et dont la participation
+                 est fondée sur les capitaux qu'ils ont investis dans l'entreprise.
+                 Elle concerne donc les projets importants.</p>
+                 <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=sa">Procedure de formalisation</a>
+
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 class2">
+            <div class="service-item position-relative">
+              
+              <h3> Groupement d’intérêt économique GIE  </h3>
+              <p>
+                Un "Groupement d'intérêt économique" est une organisation créée entre deux ou plusieurs personnes
+                 physiques ou morales en vue du développement de l'activité de ses membres.
+                </p>
+                <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=gie">Procedure de formalisation</a>
+
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-4 class2">
+            <div class="service-item position-relative">
+              
+              <h3>Succursale </h3>
+              <p>
+
+                Établissement qui dépend d'un siège central, tout en jouissant d'une certaine autonomie.
+              </p>
+              <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=succursale">Procedure de formalisation</a>
+
             </div>
           </div>
           <!-- End Service Item -->   
@@ -164,8 +270,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Quelques résultats</h2>
-          <p>Nulla dolorum nulla nesciunt rerum facere sed ut inventore quam porro nihil id ratione ea sunt quis dolorem dolore earum</p>
+          <h2>Quelques Statistiques</h2>
+          <p> Voici quelques statistiques  réparties par région, statut juridique et secteur d'activité </p>
         </div>
 
         <div class="row gy-4">
@@ -196,7 +302,7 @@
                 <div class="tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
 
 
-                  <table class="table">
+                  <table class="table" style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr>
                         <th>Secteur d'activité</th>
@@ -204,11 +310,16 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr  v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
+                      <!-- <tr  v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
                         <td>{{ secteur.label }}</td>
-            <!-- Utiliser secteurMpmeCounts pour afficher le nombre de MPME par secteur -->
+           
             <td>{{ secteurMpmeCounts[secteur.label] || 0 }}</td>
                         
+                      </tr> -->
+
+                      <tr v-for="(secteur, index) in generateSecteurTable()" :key="index">
+                        <td>{{ secteur.nomSecteur }}</td>
+                        <td>{{ secteur.nombre }}</td>
                       </tr>
                      
                     </tbody>
@@ -218,7 +329,7 @@
 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
-                  <table class="table">
+                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                      
                       <tr>
@@ -229,12 +340,9 @@
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(region, index) in regionOptions" :key="index">
                       
-                        <td>{{ region.label }}</td>
-                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
-                           <td>{{ regionMpmeCounts[region.label] || 0 }}</td>
-                      </tr>
-                    
-                      
+                        <td>{{ region.NomRegion }}</td>
+                           <td>{{ region.mpmes.length || 0 }}</td>
+                      </tr>    
                     </tbody>
                   </table>
 
@@ -246,7 +354,7 @@
                     <!-- <option ng-repeat="year in yearList" value="{{year}}"> {{year}} </option> -->
                   </select>
 
-                  <table class="table">
+                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr >
                         <th>Statut juridique</th>
@@ -268,7 +376,7 @@
                 <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
                   
 
-                  <table class="table">
+                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr >
                         <th>Statut juridique</th>
@@ -296,7 +404,7 @@
     </section>
     <!-- End Our Team Section -->
         <!-- ======= Frequently Asked Questions Section ======= -->
-        <section id="clients" class="clients" style="margin-top: -60px;">
+        <section id="clients" class="clients" >
       <div class="section-header">
         <h2>Nos partenaires</h2>
         
@@ -306,14 +414,12 @@
         <!-- <div class="clients-slider swiper"> -->
           
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="@/assets/img/partenariat/part1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="@/assets/img/partenariat/part2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="@/assets/img/partenariat/part3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="@/assets/img/partenariat/part4.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="@/assets/img/partenariat/part5.png" class="img-fluid" alt=""></div>
+
           </div>
           <div class="swiper-pagination"></div>
 
@@ -334,6 +440,11 @@ import  "glightbox/dist/css/glightbox.css";
 import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
 
+import slide111 from "@/assets/img/slide/slide111.jpg"
+import slide22 from "@/assets/img/slide/slide22.jpg"
+import slide33 from "@/assets/img/slide/slide33.jpg"
+import slide44 from "@/assets/img/slide/slide44.jpg"
+
 
 
 export default {
@@ -343,6 +454,21 @@ export default {
   },
   data() {
     return {
+      items: [
+          {
+            src: slide111,
+          },
+          {
+            src:slide22,
+          },
+          {
+            src:slide33,
+          },
+          {
+            src:slide44,
+          },
+          
+        ],
       totalmpme:'',
       regionMpmeCounts: {},
       regionOptions: [], // Pour stocker les données des régions
@@ -361,16 +487,9 @@ export default {
     };
   },
 async  mounted() {
-  //  await this.fetchAllMpmeOptions()
-   await this.fetchRegionOptions()
-  //  this.fetchSecteurActiviteOptions();
-    new PureCounter();
-    this.lightbox = GLightbox({ 
-              selector: ".glightbox"
-             });
-    const swiper = new Swiper('.swiper-container', {
+  const swiper =await new Swiper('.swiper-container', {
       speed: 400,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 5000,
         disableOnInteraction: false
@@ -395,31 +514,24 @@ async  mounted() {
           spaceBetween: 80
         },
         992: {
-          slidesPerView: 6,
+          slidesPerView: 4,
           spaceBetween: 120
         }
       }
     });
-   
+   await this.fetchRegionOptions()
+    new PureCounter();
+    this.lightbox = GLightbox({ 
+              selector: ".glightbox"
+             });
   },
 
 
 
   methods: {
 
-    async fetchAllMpmeOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
-            try {
-                await this.$store.dispatch('fetchMpmeData');
-                const options = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData'])); // Accéder aux options des pays via le getter
-                console.log('Options des mpme:', options);
-                this.items = options;
-                this.totalmpme = options.length; // Utilisez "length" au lieu de "lenght"
-            } catch (error) {
-                console.error('Erreur lors de la récupération des options mpme :', error.message);
-            }
-        },
 
-        async fetchRegionOptions() {
+async fetchRegionOptions() {
     try {
 
       await this.$store.dispatch('fetchMpmeData');
@@ -440,7 +552,7 @@ async  mounted() {
     console.log('eeee',this.SecteurActiviteOptions );
 
     await this.$store.dispatch('fetchRegionOptions');
-      this.regionOptions = JSON.parse(JSON.stringify(this.$store.getters['getRegionOptions']));
+      this.regionOptions = this.$store.getters['getRegionOptions2'];
       console.log('Options des mpme:', this.regionOptions);
 
       await this.$store.dispatch('fetchStatutJuridiqueOptions');
@@ -448,7 +560,6 @@ async  mounted() {
     console.log('Options des mpmestaurt:', this.statutJuridiqueOptions);
 
     this.secteurMpmeCounts = {};
-    this.regionMpmeCounts = {};
     this.statutJuridiqueMpmeCounts = {};
 
 
@@ -465,16 +576,17 @@ async  mounted() {
      console.log('Compteurs de MPME par secteur d\'activité :', this.secteurMpmeCounts);
 
 
-      this.mpmeData.forEach(pme => {
-        const region = pme.Region; // Assurez-vous que la propriété qui contient la région est correcte
-        if (region) {
-          if (!this.regionMpmeCounts[region]) {
-            this.regionMpmeCounts[region] = 1; // Initialisez le compteur à 1 si la région n'existe pas encore
-          } else {
-            this.regionMpmeCounts[region]++; // Incrémente le compteur si la région existe déjà
-          }
-        }});
-        console.log('Compteurs de MPME par région :', this.regionMpmeCounts);
+      // this.mpmeData.forEach(pme => {
+      //   const region = pme.Region; // Assurez-vous que la propriété qui contient la région est correcte
+      //   if (region) {
+      //     if (!this.regionMpmeCounts[region]) {
+      //       this.regionMpmeCounts[region] = 1; // Initialisez le compteur à 1 si la région n'existe pas encore
+      //     } else {
+      //       this.regionMpmeCounts[region]++; // Incrémente le compteur si la région existe déjà
+      //     }
+      //   }});
+      //   console.log('Compteurs de MPME par région :', this.regionMpmeCounts);
+
         this.mpmeData.forEach(pme => {
       const statutJuridique = pme.CodeStatutJuridique; // Assurez-vous que la propriété qui contient le statut juridique est correcte
       if (statutJuridique) {
@@ -492,67 +604,17 @@ async  mounted() {
     }
   },
 
-  async fetchSecteurActiviteOptions() {
-  try {
-    // Récupérez les données des secteurs d'activité depuis l'API
-    await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
-    this.SecteurActiviteOptions = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
-    console.log('eeee',this.SecteurActiviteOptions );
-    // Récupérez les données des MPME depuis l'API des MPME
-    await this.$store.dispatch('fetchMpmeData');
-    this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
+  generateSecteurTable() {
+    const secteurTable = [];
+    for (const secteur in this.secteurMpmeCounts) {
+      secteurTable.push({
+        nomSecteur: secteur,
+        nombre: this.secteurMpmeCounts[secteur],
+      });
+    }
+    return secteurTable;
+  },
 
-    // Initialisez les compteurs de MPME par secteur d'activité
-    this.secteurMpmeCounts = {};
-
-    // Parcourez les données des MPME et comptez le nombre de MPME par secteur d'activité
-    this.mpmeData.forEach(pme => {
-      const secteurActivite = pme.PrincipalSecteurActivite; // Assurez-vous que la propriété qui contient le secteur d'activité est correcte
-      if (secteurActivite) {
-        if (!this.secteurMpmeCounts[secteurActivite]) {
-          this.secteurMpmeCounts[secteurActivite] = 1; // Initialisez le compteur à 1 si le secteur d'activité n'existe pas encore
-        } else {
-          this.secteurMpmeCounts[secteurActivite]++; // Incrémente le compteur si le secteur d'activité existe déjà
-        }
-      }
-    });
-
-    console.log('Compteurs de MPME par secteur d\'activité :', this.secteurMpmeCounts);
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error.message);
-  }
-},
-
-async fetchStatutJuridiqueOptions() {
-  try {
-    // Récupérez les données des statuts juridiques depuis l'API
-    await this.$store.dispatch('fetchStatutJuridiqueOptions');
-    this.statutJuridiqueOptions = JSON.parse(JSON.stringify(this.$store.getters['getStatutJuridiqueOptions']));
-
-    // Récupérez les données des PME depuis l'API des PME
-    await this.$store.dispatch('fetchMpmeData');
-    this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
-
-    // Initialisez les compteurs de PME par statut juridique
-    this.statutJuridiqueMpmeCounts = {};
-
-    // Parcourez les données des PME et comptez le nombre de PME par statut juridique
-    this.mpmeData.forEach(pme => {
-      const statutJuridique = pme.StatutJuridique; // Assurez-vous que la propriété qui contient le statut juridique est correcte
-      if (statutJuridique) {
-        if (!this.statutJuridiqueMpmeCounts[statutJuridique]) {
-          this.statutJuridiqueMpmeCounts[statutJuridique] = 1; // Initialisez le compteur à 1 si le statut juridique n'existe pas encore
-        } else {
-          this.statutJuridiqueMpmeCounts[statutJuridique]++; // Incrémente le compteur si le statut juridique existe déjà
-        }
-      }
-    });
-
-    console.log('Compteurs de PME par statut juridique :', this.statutJuridiqueMpmeCounts);
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error.message);
-  }
-},
 
 
   },
@@ -560,5 +622,92 @@ async fetchStatutJuridiqueOptions() {
 </script>
 
 <style lang="css" scoped>
+.swiper-slide{
+  width: 200px !important;
+    border: 1px solid var(--color-secondary);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+}
+
+.sign {
+display: block;
+width: 100%;
+background-color: var(--color-secondary);
+padding: 0.75rem;
+text-align: center;
+color: black;
+border: none;
+border-radius: 0.375rem;
+font-weight: 600;
+margin-top: 50px;
+}
+
+@media (min-width: 1400px) {
+.class3{
+
+  align-items: center;
+}
+}
+
+@media (max-width: 1400px) {
+.class3{
+
+  align-items: center;
+  align-content:center;
+
+}
+
+
+.class5{
+
+
+margin-top: 77px;
+}
+}
+
+@media (max-width: 1200px) {
+.class3{
+
+flex-direction: column;
+
+}
+.class4 , .class5{
+
+width: 75%;
+}
+
+
+}
+
+@media (max-width: 1000px) {
+  .class1 , .class2{
+    width: 100%;
+  }
+  .services .service-item {
+    width: 100%;
+  }
+  .services sections-bg{
+  
+  padding:30px 0;
+  }
+
+}
+
+
+.immg  {
+    /* object-fit: cover; */
+    filter: brightness(70%) !important;
+    /* background-color: rgba(0, 0, 0, 0.45) !important; */
+}
+
+.absolute-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 </style>

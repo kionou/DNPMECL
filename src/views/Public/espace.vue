@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-sm-12"><b class="" style="color: var(--color-primary);">Mon profil </b>
-                                        <p class="py-3 mb-2">Gérez tous les profils liés à votre compte</p>
+                                        <p class="py-3 mb-2">Gérez votre profil en toute simplicité</p>
                                         
                                     </div>
                                 </div>
@@ -56,8 +56,8 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-sm-12"><b class="" style="color: var(--color-primary);">Mes Opportunités</b>
-                                    <p class="py-3 mb-3">Soyez informé en temps réel du traitement de vos demandes de
-                                        visa et accédez à toute votre historique</p>
+                                    <p class="py-3 mb-3">Soyez informé en temps réel de l'état de toutes les opportunités liées 
+                                        à vos sous-secteurs d'activité.</p>
                                    
                                 </div>
                             </div>

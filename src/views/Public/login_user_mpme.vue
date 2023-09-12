@@ -38,7 +38,7 @@
     
     <div class="input-group">
       <label for="username">Email <span class="text-danger">*</span></label>
-      <input type="text" name="email" id="username" placeholder="" v-model="step2.email">
+      <input type="email" name="email" id="username" placeholder="" v-model="step2.email">
     </div>
         <small v-if="v$.step2.email.$error">{{v$.step2.email.$errors[0].$message}}</small>
   
@@ -50,17 +50,24 @@
     </MazDialog>
 
     <MazDialog v-model="responseEmail">
+<small>{{ error }}</small> 
       <p>
-        Veuillez vérifier votre boîte de réception e-mail et suivre les instructions
-         fournies pour réinitialiser votre mot de passe.
+        Veuillez entrer le code que nous avons envoyé à votre adresse e-mail pour réinitialiser votre mot de passe.
       </p>
-      <template #footer="{ close }">
-
-        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
-
-
-
-      </template>
+      <form class="form">
+    
+    <div class="input-group">
+      <label for="username">Code de  réinitialisation <span class="text-danger">*</span></label>
+      <input type="tel" name="numero" id="username"  v-model="step3.code" placeholder="XXXX" >
+    </div>
+        <small v-if="v$.step3.code.$error">{{v$.step3.code.$errors[0].$message}}</small>
+  
+  
+    <button class="sign" @click.prevent="HandleCode">Valider</button>
+   
+  
+  </form>
+     
     </MazDialog>
 
   </div>
@@ -71,7 +78,7 @@
 import Navbar from '../../components/loyout/navbar.vue';
 import Footer from '../../components/loyout/footer.vue';
 import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
+import { require, lgmin, lgmax, ValidEmail , ValidNumeri  } from '@/functions/rules';
 import Modal from '../../components/Public/other/modal_demande.vue';
 import axios from '@/lib/axiosConfig.js';
 import Loading from '../../components/Public/other/preloader.vue';
@@ -104,9 +111,10 @@ export default {
           
           },
           step2:{
-          password:''
-          
-          
+            email:null,
+          },
+          step3:{
+            code:null,
           }
       };
   },
@@ -127,22 +135,29 @@ export default {
     
       email:{
              require,
-              ValidEmail
+             ValidEmail
           },
-    }
+    },
+    step3:{
+    
+    code:{
+           require,
+           ValidNumeri,
+           lgmin:lgmin(4),
+           lgmax:lgmax(4),
+        },
+  }
           
   },
 
  async  mounted() {
-  document.body.classList.add('scroll');
-
-
-      
+  document.body.classList.add('scroll');    
   },
 
   methods: {
    
-    ...mapActions('user', ['setLoggedInUser']),
+    // ...mapActions('user', ['setLoggedInUser']),
+    ...mapActions({  saveVerificationCode: 'saveVerificationCode', }),
     async  submit(){
          this.error = '',
          this.v$.step1.$touch()
@@ -165,7 +180,9 @@ export default {
           this.modal = true
             console.log('ok', response.data.data);
             const userData = response.data.data;
-           this.setLoggedInUser(userData);
+          //  this.setLoggedInUser(userData);
+           this.saveVerificationCode(userData);
+
             this.data = response.data.data
             this.revele = !this.revele;
            if (this.revele) {
@@ -192,16 +209,72 @@ export default {
                document.body.classList.remove('no-scroll');
              }
   },
-  ChangePassword(){
+ async ChangePassword(){
           this.isOpen = true
           this.error = '',
            this.v$.step2.$touch()
           if (this.v$.$errors.length == 0 ) {
-            console.log('rrr',this.step2.email);
+            this.loading = true
             this.isOpen = false
-            this.responseEmail = true
+          let CodeUserEmail ={
+            email:1,
+            value:this.step2.email
+          
+          }
+          console.log("eee",CodeUserEmail);
+          try {
+         const response = await axios.post('/mpme/send-otp', CodeUserEmail);
+         
+         console.log('response.Code', response); 
+         if (response.data.status === 'success') {
+         this.loading = false
+         this.responseEmail = true
+         } else {
+          
+         }
+    
+    } catch (error) {
+        console.log('error',error);
+    }
+          }else{
+          
+          
+          
+          }
+  
+  },
+
+async HandleCode(){
+        
+          this.error = '',
+           this.v$.step3.$touch()
+          if (this.v$.$errors.length == 0 ) {
+         this.responseEmail = false
+            this.loading = true
+            let DataUser = {
+           email: true,
+           value: this.step2.email,
+           code: this.step3.code
+        }
+        console.log('data user :', DataUser);
+          try {
+            const response = await axios.post('/mpme/verification-otp', DataUser);
+            if (response.data.status === 'error') {
+              this.loading = false
+              return this.error = response.data.message
+
+            } else {
+              console.log('response.Code', response.data);
+              this.loading = false
+              this.$router.push({ path: '/reinitialiser', })
 
 
+            }
+
+          } catch (error) {
+            this.loading = false
+            console.error('Erreur postlogin:', error);
+          }
 
           }else{
           
@@ -209,7 +282,8 @@ export default {
           
           }
   
-  }
+  },
+
 
   },
 };
