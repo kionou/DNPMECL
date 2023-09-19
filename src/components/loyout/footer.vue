@@ -5,8 +5,8 @@
         <div class="col-lg-6 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center flex-column">
             <img src="@/assets/img/armoirie.png" alt="">
-          <h1 class="my-4" style="color: white; font-size: 27px !important; ;">DNMPMECL </h1>
-          <p style="color: white;">Direction Nationale Des MPME et du Contenu Local - Guinee.</p>
+          <h1 class="my-4" style="color: white; font-size: 27px !important; ;">DNPME-CL</h1>
+          <p style="color: white;">Direction Nationale des PME et du Contenu Local.</p>
 
           </a>
           <div class="social-links d-flex mt-4 justify-content-center">
@@ -20,11 +20,14 @@
         <div class="col-lg-3 col-md-12 footer-links">
           <h4>Liens utiles</h4>
           <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Liste MPME</a></li>
-            <li><a href="#">Statistique</a></li>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Connexion</a></li>
+            <li><router-link to="/">Accueil</router-link></li>
+            <li ><router-link to="#">DNPME-CL </router-link> </li>
+            <li><router-link to="/actualites">Actualités</router-link></li>
+            <li><router-link to="/statistique">Statistiques</router-link></li>
+            <li><router-link to="/formalisation">Formalisation</router-link></li>
+            <li><router-link to="/documents">Réglementation</router-link></li>
+            <li><router-link to="/partenaires">Partenaires</router-link></li>
+            <li ><router-link to="/opportunites">Opportunités </router-link> </li>
           </ul>
         </div>
 
@@ -32,7 +35,7 @@
           <h4>Contact</h4>
           <p>
             Petit Simbaya <br>
-             Secteur Elhadj Younoussa,<br>
+            Près de l'Hôpital Flamboyant,<br>
             Conakry, Guinée <br><br>
             <strong>Phone:</strong> +224 622 33 63 43<br>
             <strong>Email:</strong> infodnMPMEcl@gmail.com<br>
@@ -45,7 +48,7 @@
 
     <div class="container mt-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>DNMPMECL</span></strong>. Tous droits réservés
+        &copy; Copyright <strong><span>DNPME-CL</span></strong>. Tous droits réservés
       </div>
       <div class="credits">
         Développé par <a href="https://cosit-mali.com/">COSIT</a>

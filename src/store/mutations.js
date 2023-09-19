@@ -47,7 +47,19 @@ export default {
   },
   SET_CATEGORIES_DATA(state, data) {
     state.categoriesData = data;
-  }
+  },
+  SET_TOTAL_EMPLOIS_FEMME(state, totalEmploisFemme) {
+    state.totalEmploisFemme = totalEmploisFemme;
+  },
+  SET_TOTAL_MPME(state, totalMpme) {
+    state.totalMpme = totalMpme;
+  },
+  SET_TYPE_CARTES_DATA(state, data) {
+    state.typeCartesData = data;
+  },
+  SET_TYPE_COMPTABILITES_DATA(state, data) {
+    state.typeComptabilitesData = data;
+  },
   
   
 }

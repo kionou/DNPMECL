@@ -11,6 +11,8 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 /* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dai+Banna+SIL:wght@500&display=swap');
 :root {
   --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-primary: "Montserrat", sans-serif;
@@ -45,6 +47,7 @@ a {
 
 a:hover {
   /* color: #00b6a1; */
+  /* color: transparent !important; */
   text-decoration: none;
 }
 
@@ -245,15 +248,57 @@ padding: 0 !important;
 # Header
 --------------------------------------------------------------*/
 .topbar {
-  background: var(--color-secondary);
-  height: 3px;
+  /* background: var(--color-secondary); */
+  height: 80px;
   font-size: 14px;
   transition: all 0.5s;
-  color: #fff;
+  /* color: #fff; */
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topbar1{
+
+/* border: 1px solid red; */
+height: 100%;
+align-items: center;
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 87%;
+}
+.topbar1 img {
+  max-height: 70px;
+  margin-right: 6px;
 }
 
-.topbar .contact-info i {
+.topbar .texte{
+
+/* border: 1px solid red; */
+display: flex;
+flex-direction: column;
+font-family: cursive;
+align-items: center;
+color: var(--color-primary);
+/* width: 198px; */
+}
+.topbar .texte span{
+
+  font-size: 11px;
+  font-family: 'Dai Banna SIL', serif;
+  }
+  
+
+  
+  .topbar .texte h1 {
+    font-size: 20px;
+    margin: 0;
+    letter-spacing: 0.8px;
+    font-family: 'Racing Sans One', cursive;
+  
+  }
+/* .topbar .contact-info i {
   font-style: normal;
   color: #fff;
   line-height: 0;
@@ -263,8 +308,8 @@ padding: 0 !important;
 .topbar .contact-info i span {
   padding-left: 5px;
   color: #fff;
-}
-
+} */
+/* 
 @media (max-width: 575px) {
 
   .topbar .contact-info i a,
@@ -276,9 +321,9 @@ padding: 0 !important;
 .topbar .contact-info i a {
   line-height: 0;
   transition: 0.3s;
-}
+} */
 
-.topbar .contact-info i a:hover {
+/* .topbar .contact-info i a:hover {
   color: #fff;
   text-decoration: underline;
 }
@@ -292,13 +337,16 @@ padding: 0 !important;
 
 .topbar .social-links a:hover {
   color: #fff;
-}
+} */
 
 .header {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
   background-color: var(--color-primary);
+  width: 100%;
+  display: flex;
+    align-items: center;
 }
 
 .header.sticked {
@@ -310,24 +358,40 @@ padding: 0 !important;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
 
 }
+.header .logo{
 
-.header .logo img {
+/* border: 1px solid red; */
+color: white !important;
+display: flex;
+flex-direction: column;
+font-family: 'Racing Sans One', cursive;
+align-items: center;
+width: 198px;
+}
+.header .logo span{
+
+font-size: 7px;
+font-family: var(--font-primary);
+}
+
+/* .header .logo img {
   max-height: 40px;
   margin-right: 6px;
-}
+} */
 
 .header .logo h1 {
   font-size: 20px;
   margin: 0;
-  font-weight: 600;
+  /* font-weight: 600; */
   letter-spacing: 0.8px;
   color: #fff;
-  font-family: var(--font-primary);
+  font-family: 'Racing Sans One', cursive;
+
 }
 
-.header .logo h1 span {
+/* .header .logo h1 span {
   color: #f96f59;
-}
+} */
 
 .sticked-header-offset {
   margin-top: 70px;
@@ -370,7 +434,7 @@ section {
     justify-content: space-between;
     padding: 0 3px;
     font-family: var(--font-secondary);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #fff;
     white-space: nowrap;
@@ -1760,20 +1824,7 @@ section {
   margin-bottom: 0;
 }
 
- .info-item i {
-  font-size: 20px;
-  color: red;
-  float: left;
-  width: 44px;
-  height: 44px;
-  background-color: rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  transition: all 0.3s ease-in-out;
-  margin-right: 15px;
-}
+
 
 
 

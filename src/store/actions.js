@@ -168,7 +168,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = statutJuridiqueFromAPI.map(statutJuridique => ({
         label: statutJuridique.SigleStatutJuridique,
-        value: statutJuridique.NomStatutJuridique
+        value: statutJuridique.SigleStatutJuridique,
       }));
 
       commit('SET_STATUT_JURIDIQUE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de statuts juridiques
@@ -245,6 +245,56 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des sous-catégories de documents :', error);
     }
   },
+  async fetchTotalEmploisFemmeAndTotalMpme({ commit }) {
+    try {
+      const [emploisFemmeResponse, totalMpmeResponse] = await Promise.all([
+        axios.get('/mpme/statistics/total-emplois-salaries-femme'),
+        axios.get('/mpme/statistics/total-mpme'),
+        
+      ]);
+
+      const totalEmploisFemme = emploisFemmeResponse.data.data;
+      const totalMpme = totalMpmeResponse.data.data;
+
+      console.log('totalEmploisFemme:', totalEmploisFemme);
+      console.log('totalMpme:', totalMpme);
+
+      commit('SET_TOTAL_EMPLOIS_FEMME', totalEmploisFemme);
+      commit('SET_TOTAL_MPME', totalMpme);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async fetchTypeCartesData({ commit }) {
+    try {
+      const response = await axios.get('/type-cartes');
+      const data = response.data.data;
+      const options = data.map(doc => ({
+        label: doc,
+        value: doc
+      }));
+      console.log('Type Cartes Data:', options);
+      commit('SET_TYPE_CARTES_DATA', options);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types de cartes :', error);
+    }
+  },
+  
+  async fetchTypeComptabilitesData({ commit }) {
+    try {
+      const response = await axios.get('/type-comptabilites');
+      const data = response.data.data;
+      const options = data.map(doc => ({
+        label: doc,
+        value: doc
+      }));
+      console.log('Type Comptabilités Data:', options);
+      commit('SET_TYPE_COMPTABILITES_DATA', options);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types de comptabilités :', error);
+    }
+  },
+  
 
 
  }

@@ -1,7 +1,7 @@
 <template>
     <div class="container_content">
         <div class="section-header pt-5 ">
-            <h2>LISTE DES DOCUMENTS</h2>    
+            <h2>LISTE DES REGLEMENTATIONS</h2>    
         </div>
         <div class="content">
 
@@ -227,6 +227,21 @@ justify-content: space-around;
     background-color: #fff;
     border: 1px solid var(--color-secondary);
     color: black;
+}
+
+.info-item i {
+  font-size: 20px;
+  color: red;
+  float: left;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+  margin-right: 15px;
 }
 .nav-link.active.info-item i{
     color: red;

@@ -18,16 +18,21 @@ import Dossiers from '../views/Public/dossiers.vue'
 import Profil from '../views/Public/Profil.vue'
 import DetailOffre from '../views/Public/Opportunite/DetailOffre.vue'
 import DetailOpportunite from '../views/Public/Opportunite/DetailOpportunite.vue'
+import Formalisation from '../views/Public/Formalisation.vue'
+import Actulite from '../views/Public/Actualite.vue'
+import Partenaire from '../views/Public/Partenaire/partenaire.vue'
 
 
 
 
-// import Test from '../views/Public/test2.vue'
+
+
+ import Test from '../views/test4.vue'
 
 
 
 
-import Test from '../views/test3.vue'
+// import Test from '../views/test3.vue'
 
 
 
@@ -43,15 +48,24 @@ const router = createRouter({
       component: LayoutPublic,
       children:[
          { path: '/', name: 'accueil', component: Accueil},
-         { path: '/liste_pme', name: 'liste_pme', component: Liste},
+
+         { path: '/actualites', name: 'Actulite', component: Actulite},
          { path: '/statistique', name: 'statistique', component: Statistique},
+         { path: '/formalisation', name: 'Formalisation', component: Formalisation},
          { path: '/documents', name: 'documents', component: Documents},
+         { path: '/partenaires', name: 'Partenaire', component: Partenaire},
          { path: '/opportunites', name: 'appel_emploi', component: Emploi},
-         { path: '/reinitialiser', name: 'connexion', component: Connexion , },
+
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , },
-         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification  ,  },
          { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , },
+         { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true  },
+         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification  ,  },
+         { path: '/reinitialiser', name: 'connexion', component: Connexion , },
+        
+
+         { path: '/liste_pme', name: 'liste_pme', component: Liste},
          { path: '/liste_pme/mpme/:id', name: 'detail_pme', component: Detail, props:true},
+
 
 
          { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true } },
@@ -60,7 +74,9 @@ const router = createRouter({
          { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
          { path: '/appel_offre', name: 'appel_offre', component: Offre , meta: { requiresAuth: true }},
          { path: '/offre/:id', name: 'DetailOffre', component: DetailOffre ,   props:true  },
-         { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true ,  meta: { requiresAuth: true } },
+
+
+         
          { path: '/test', name: 'Test', component: Test, }
          
 

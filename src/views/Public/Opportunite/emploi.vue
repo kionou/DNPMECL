@@ -9,7 +9,7 @@
           <div class="liste-searcher">
               <div class="nsl">
                   <i class="bi bi-search"></i>
-                  <input type="text" role="search" placeholder="rechercher un offre ..."  v-model="control.name" @input="filterByName"/>
+                  <input type="text" role="search" placeholder="rechercher une offre ..."  v-model="control.name" @input="filterByName"/>
               </div>
               <!-- <div class="nsl">
                   <i class="bi bi-funnel-fill"></i>

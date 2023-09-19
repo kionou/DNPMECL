@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="loading" style="z-index: 1000;"></Loading>
+  <Loading v-if="loading" style="z-index: 1100;"></Loading>
     <div class=" d-flex justify-content-center align-items-center flex-wrap w-100"  data-aos="fade-up"
         data-aos-delay="100">
         <div class="bar_search">
@@ -410,7 +410,16 @@
         }
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
-        this.loading = false
+        if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
       }
 
     },
@@ -453,7 +462,16 @@
         }
       } catch (error) {
         console.error('Erreur lors du téléversement :', error);
-        this.loading = false
+        if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
 
       }    
         }else{
@@ -512,7 +530,17 @@
           }
         } catch (error) {
           console.error('Erreur lors de la suppression:', error);
-          this.loading = false
+          console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                }
 
         }
       },
@@ -550,12 +578,17 @@
   
         } catch (error) {
           console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-          console.log('aut',error.response.data === 'Unauthorized.');
-
-            if (error.response.data === 'Unauthorized.') {
-                    await this.$store.dispatch('user/clearLoggedInUser'); 
-                    this.$router.push('/login_user_mpme'); 
-            } 
+          console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                } 
         }
       },
   
@@ -610,8 +643,18 @@ console.log('Document à mettre à jour :', documentToUpdate);
           
         }
       } catch (error) {
-        console.error('Erreur lors du téléversement :', error);
-        this.loading = false
+              console.error('Erreur lors du téléversement :', error);
+              console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                }
 
       }  
     
@@ -700,6 +743,16 @@ console.log('dataMpme',dataMpme);
         }
       } catch (error) {
         console.error('Erreur lors du téléversement :', error);
+        if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
        
     }
     }

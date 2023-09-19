@@ -12,7 +12,7 @@
             <p>{{ offre.description }}</p>
         </div>
         <div class="date">
-            <p >Secteur concerné : <span>{{ sousSecteursLabel }}</span> </p>
+            <p >Secteur concerné : <span>  {{obtenirValeursPourCles(sousSecteursLabel)}}</span> </p>
         </div>
         <div class="date">
             <p >Site Web : <a :href="offre.siteWeb">{{ offre.siteWeb }}</a> </p>
@@ -145,6 +145,19 @@ loggedInUser() {
     },
 
     methods: {
+      obtenirValeursPourCles(sousSecteurs) {
+  if (sousSecteurs && sousSecteurs.includes('|')) {
+    const sousSecteursArray = sousSecteurs.split('|');
+    const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
+    const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+      return option ? option.label : valeur;
+    });
+    return nomsSousSecteurs.sort().join(' , ');
+  } else {
+    const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
+    return option ? option.label : sousSecteurs;
+  }
+},
       async fetchSousSecteurActiviteOptions() {
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); 
@@ -175,12 +188,16 @@ loggedInUser() {
           }  
         } catch (error) {
           console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-          console.log('aut',error.response.data === 'Unauthorized.');
+          if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
 
-            if (error.response.data === 'Unauthorized.') {
-                    await this.$store.dispatch('user/clearLoggedInUser'); 
-                    this.$router.push('/login_user_mpme'); 
-            } 
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                } 
         }
       },
       hamdleSubmit(id){
@@ -229,7 +246,16 @@ loggedInUser() {
         }
       } catch (error) {
         console.error('Erreur lors du téléversement :', error);
-        this.loading = false
+        if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
 
       }    
         }else{

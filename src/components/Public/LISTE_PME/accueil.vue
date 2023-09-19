@@ -18,9 +18,13 @@
             <option value="" selected="true">Filtre</option>
             <option value="region">Régions</option>
             <option value="sousprefecture">Sous-Préfectures</option>
+            <option value="secteuractivite">Secteur d'activité</option>
+            <option value="chiffreaffaire">Chiffre d'affaire</option>
+
+            
           </select>
         </div>
-        <div class="nsl" style="border-right: none" v-if="control.spec === 'region' || control.spec === 'sousprefecture'">
+        <div class="nsl" style="border-right: none" v-if="control.spec === 'region' || control.spec === 'sousprefecture' || control.spec === 'secteuractivite' || control.spec === 'chiffreaffaire'">
           <i class="bi bi-filter"></i>
           <select name="speciality" v-if="control.spec === 'region'" v-model="control.speciality" @change="filterData">
             <option value="" selected="true">Choisir une région</option>
@@ -29,6 +33,14 @@
           <select name="speciality" v-else-if="control.spec === 'sousprefecture'" v-model="control.speciality" @change="filterData">
             <option value="" selected="true">Choisir une sous-préfecture</option>
             <option v-for="sousprefecture in sousprefectures" :value="sousprefecture.label" :key="sousprefecture.value">{{ sousprefecture.label }}</option>
+          </select>
+          <select name="speciality" v-else-if="control.spec === 'secteuractivite'" v-model="control.speciality" @change="filterData">
+            <option value="" selected="true">Choisir un secteur d'activité</option>
+            <option v-for="secteuractivite in SecteurActiviteOptions" :value="secteuractivite.label" :key="secteuractivite.value">{{ secteuractivite.label }}</option>
+          </select>
+          <select name="speciality" v-else-if="control.spec === 'chiffreaffaire'" v-model="control.speciality" @change="filterData">
+            <option value="" selected="true">Choisir un chiffre d'affaire</option>
+            <option v-for="chiffreaffaire in ChiffreOptions" :value="chiffreaffaire.label" :key="chiffreaffaire.value">{{ chiffreaffaire.label }}</option>
           </select>
           <!-- <v-autocomplete   v-else-if="control.spec === 'sousprefecture'" v-model="ss" @input="filterData"
             :items="sousprefectures"
@@ -94,6 +106,7 @@ import axios from '@/lib/axiosConfig.js'
 import Pag from '../other/pag.vue';
 import Loading from '../other/preloader.vue';
 import { getImage }  from '@/lib/getImage.js'
+import chiffre from '@/lib/chiffre.json';
 
 export default {
   components: {
@@ -112,6 +125,8 @@ export default {
       ss:'',
       regions: [],
       sousprefectures: [],
+      SecteurActiviteOptions:[],
+      ChiffreOptions: chiffre,
       pmes: [],
       filteredPmes: [],
       currentPage: 1,
@@ -239,6 +254,16 @@ export default {
         console.error('Erreur lors de la récupération des options des sous prefecture :', error.message);
       }
     },
+    async fetchSecteurActiviteOptions() {
+            try {
+
+                await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
+                const options = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
+                this.SecteurActiviteOptions = options;
+            } catch (error) {
+                console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+            }
+        },
     filterByName() {
       this.currentPage = 1;
       if (this.control.name !== null) {
@@ -267,28 +292,77 @@ export default {
     auto(){
      console.log('Selected Speciality:', this.control.speciality , this.ss);
     },
-    filterData() {
-      console.log('Selected Speciality:', this.control.speciality);
-      if (this.control.spec === 'region' || this.control.spec === 'sousprefecture') {
-        if (this.control.speciality === '') {
-          // Réinitialiser la liste si aucune région ou sous-préfecture n'est sélectionnée
-          this.filteredPmes = [...this.items];
-        } else {
-          // Filtrer par région ou sous-préfecture
-          const filterKey = this.control.spec === 'region' ? 'Region' : 'Sousprefecture';
-          const selectedOption = this.regions.find(option => option.label === this.control.speciality) ||
-            this.sousprefectures.find(option => option.label === this.control.speciality);
-          if (selectedOption) {
-            this.filteredPmes = this.items.filter(pme => pme[filterKey] === selectedOption.label);
-          } else {
-            this.filteredPmes = [];
-          }
+    // filterData() {
+    //   console.log('Selected Speciality:', this.control.speciality);
+    //   if (this.control.spec === 'region' || this.control.spec === 'sousprefecture' || this.control.spec === 'secteuractivite') {
+    //     if (this.control.speciality === '') {
+    //       // Réinitialiser la liste si aucune région ou sous-préfecture n'est sélectionnée
+    //       this.filteredPmes = [...this.items];
+    //     } else {
+    //       // Filtrer par région ou sous-préfecture
+    //       const filterKey = this.control.spec === 'region' ? 'Region' : 'Sousprefecture';
+    //       const selectedOption = this.regions.find(option => option.label === this.control.speciality) ||
+    //         this.sousprefectures.find(option => option.label === this.control.speciality);
+    //       if (selectedOption) {
+    //         this.filteredPmes = this.items.filter(pme => pme[filterKey] === selectedOption.label);
+    //       } else {
+    //         this.filteredPmes = [];
+    //       }
 
-        }
-      } else {
-        this.filteredPmes = [...this.items];
+    //     }
+    //   } else {
+    //     this.filteredPmes = [...this.items];
+    //   }
+    // },
+
+
+
+    filterData() {
+  console.log('Selected Speciality:', this.control.speciality);
+  console.log('Selected Secteur Activite:', this.control.secteurActivite); // Ajout du champ secteurActivite
+
+  if (
+    this.control.spec === 'region' ||
+    this.control.spec === 'sousprefecture' ||
+    this.control.spec === 'secteuractivite'  ||
+    this.control.spec === 'chiffreaffaire'
+  ) {
+    if (this.control.speciality === '') {
+      // Réinitialiser la liste si aucune région, sous-préfecture ou secteur d'activité n'est sélectionné
+      this.filteredPmes = [...this.items];
+    } else {
+      // Filtrer par région, sous-préfecture ou secteur d'activité
+      let filterKey;
+      let selectedOption;
+
+      if (this.control.spec === 'region') {
+        filterKey = 'Region';
+        selectedOption = this.regions.find(option => option.label === this.control.speciality);
+      } else if (this.control.spec === 'sousprefecture') {
+        filterKey = 'Sousprefecture';
+        selectedOption = this.sousprefectures.find(option => option.label === this.control.speciality);
+        console.log('Sousprefecture',selectedOption);
+
+      } else if (this.control.spec === 'secteuractivite') {
+        filterKey = 'PrincipalSecteurActivite'; // Utilisez la clé correcte pour le champ de secteur d'activité
+        selectedOption = this.SecteurActiviteOptions.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
+
+      } else if (this.control.spec === 'chiffreaffaire') {
+        filterKey = 'ChiffreAffaire1'; // Utilisez la clé correcte pour le champ de secteur d'activité
+        selectedOption = this.ChiffreOptions.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
       }
-    },
+
+      if (selectedOption) {
+        this.filteredPmes = this.items.filter(pme => pme[filterKey] === selectedOption.label);
+      } else {
+        this.filteredPmes = [];
+      }
+    }
+  } else {
+    this.filteredPmes = [...this.items];
+  }
+},
+
 
     clearFilters() {
       this.control = {
@@ -313,6 +387,7 @@ export default {
     this.filteredPmes = await this.items
     await this.fetchRegionOptions()
     await this.fetchSousPrefectureOptions()
+    await this.fetchSecteurActiviteOptions()
 
 
   },

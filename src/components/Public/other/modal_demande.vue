@@ -13,7 +13,7 @@
       
     </p>
     <div class="btn_sign">
-		<button class="sign" @click="hamdleSubmitsms">WHATSAPP</button>
+		<button class="sign" @click="hamdleSubmitsms" :disabled="isButtonDisabled"  :class="{ 'disabled-button': isButtonDisabled }" >WHATSAPP</button>
 		<button class="sign" @click="hamdleSubmitemail">E-MAIL</button>
     </div>
     </div> 
@@ -29,19 +29,14 @@ import { mapGetters } from 'vuex';
       props: ["revele", "toggleModale" , "data"],
       components:{Loading},
       computed: {
-    // ...mapGetters(['getVerificationCodetUser']),
-    ...mapGetters(['getVerificationCode']),
-
-    // loggedInUser() {
-    //   return this.$store.getters['user/loggedInUser'];
-    // },
-    
+    ...mapGetters(['getVerificationCode']), 
   },
     
       data() {
         return {
           loading:false,
-          error:''
+          error:'',
+          isButtonDisabled: true,
 
         }
       },
@@ -127,6 +122,13 @@ import { mapGetters } from 'vuex';
   </script>
   
   <style lang="css" scoped>
+
+.disabled-button {
+  background-color: #ccc; 
+  color: #999; /* Couleur de texte grise */
+  cursor: not-allowed; /* Curseur non autorisé */
+
+}
   body{
   
   margin: 0;

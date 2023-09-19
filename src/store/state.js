@@ -15,6 +15,9 @@ export default{
     sousdocOptions:[],
     sousCategoriesData: [],   
     categoriesData: [],
-   
+    totalEmploisFemme: 0,
+    totalMpme: 0,
+    typeCartesData: [], 
+    typeComptabilitesData: [], 
 
 }

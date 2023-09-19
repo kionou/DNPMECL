@@ -12,7 +12,7 @@
           <p>{{ offre.description }}</p>
       </div>
       <div class="date">
-          <p >Secteur concerné : <span>Sante , hygene</span> </p>
+          <p >Secteur concerné : <span>{{ sousSecteursLabel }}</span> </p>
       </div>
       <div class="date">
           <p >Site Web : <a :href="offre.siteWeb">{{ offre.siteWeb }}</a> </p>
@@ -155,11 +155,7 @@ async   mounted() {
       async fetchgetOffreMpme() {
       try {
       //   const userId = this.loggedInUser.id;
-        const response = await axios.get('/offres', {
-          headers: {
-            Authorization: `Bearer ${this.loggedInUser.token}`,
-
-          },});
+        const response = await axios.get('/offres/publique');
           console.log('UserData:', response);
 
         if (response.data.status === 'success') {

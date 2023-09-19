@@ -1,24 +1,24 @@
 [
     {
-      "value": "Moins de 100 Millons GNF",
-      "label": "Moins de 100 Millons GNF"
+      "value": "Moins de 100 Millions GNF",
+      "label": "Moins de 100 Millions GNF"
       
     },
     {
-        "value": "Entre 100 de 200 Millons GNF",
-        "label": "Entre 100 de 200 Millons GNF"
+        "value": "Entre 100 à 200 Millions",
+        "label": "Entre 100 à 200 Millions"
     },
     {
-        "value": "Entre 200 de 1 Millard GNF",
-        "label": "Entre 200 de 1 Millard GNF"
+        "value": "Entre 200 et 1 Milliard GNF",
+        "label": "Entre 200 et 1 Milliard GNF"
     },
     {
-        "value": "Entre 1 de 20 Millards GNF",
-        "label": "Entre 1 de 20 Millards GNF"
+        "value": "Entre 1 et 20 Milliards GNF",
+        "label": "Entre 1 et 20 Milliards GNF"
     },
     {
-        "value": ">20 Millards GNF",
-        "label":">20 Millards GNF"
+        "value": ">20 Milliards",
+        "label": ">20 Milliards"
     }
  
   ]

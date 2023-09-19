@@ -3,10 +3,18 @@
     <!-- ======= Header ======= -->
   
   
-    <section id="topbar" class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          
+    <section id="topbar" class="topbar ">
+      <div class=" topbar1 ">
+        <div class="">
+          <img src="@/assets/img/armoirie.png" alt="">
+        </div>
+        <div class="texte">
+          <h1>REPUBLIQUE DE GUINEE </h1>
+          <span>Ministère du Commerce, de l’Industrie</span>
+          <span>et des Petites et Moyennes Entreprises</span>
+        </div>
+        <div class="">
+          <img src="@/assets/img/ninba1.png" alt="">
         </div>
       </div>
     </section>
@@ -15,22 +23,39 @@
 
 
  
-         <header    id="header" class=" header d-flex align-items-center">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-        <router-link to="/" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <img src="@/assets/img/armoirie.png" alt="">
+         <header    id="header" class=" header">
+        <div class="container-fluid d-flex align-items-center justify-content-between m-0 w-100">
+        <router-link to="/" class="logo ">
+          
           <h1>DNPME-CL </h1>
+          <span>DIRECTION NATIONALE DES PME</span> 
+          <span>ET DU CONTENU LOCAL </span>
         </router-link>
         <nav id="navbar" class="navbar">
           <ul>
             <li><router-link to="/">Accueil</router-link></li>
-            <li><router-link to="/liste_pme">Répertoire des MPME</router-link></li>
-            <li><router-link to="/statistique">Statistiques</router-link></li>
-            <li><router-link to="/documents">Documentation</router-link></li>
             <li class="dropdown">
-              <router-link to="/opportunites">Opportunités </router-link>
-            </li>
+        <router-link to="#">DNPME-CL <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
+        <ul  class="dropdown-menu">
+              <li><router-link to="#">A PROPOS</router-link></li>
+              <li><router-link to="#">MOT DE LA DN</router-link></li>
+              <li><router-link to="#">ORGANIGRAMME</router-link></li>
+              <li><router-link to="#">PHOTOTHEQUE</router-link></li>
+            </ul>
+           </li>
+            <li><router-link to="/actualites">Actualités</router-link></li>
+            <li><router-link to="/statistique">Statistiques</router-link></li>
+            <li><router-link to="/formalisation">Formalisation</router-link></li>
+            <li><router-link to="/documents">Réglementations</router-link></li>
+            <li class="dropdown">
+            <router-link to="#">Partenaires <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
+            <ul  class="dropdown-menu">
+              <li><router-link to="/partenaires">Partenaires</router-link></li>
+              <li><router-link to="#">Demande de Partenariat</router-link></li>
+              <li><router-link to="#">Information sur les MPME</router-link></li>
+            </ul>
+           </li>
+            <li ><router-link to="/opportunites">Opportunités </router-link> </li>
 
           </ul>
         </nav>
@@ -249,6 +274,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
 
 .dropdown-toggle::after{
   display:none;
@@ -294,6 +320,7 @@ font-size: 12px;
   .second{
   /* border: 1px solid red; */
   width: 104px;
+  height: 89px;
  
 }
 }

@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="loading"></Loading>
+  <Loading v-if="loading" style="z-index: 1100;"></Loading>
   <div class=" d-flex justify-content-center align-items-center flex-wrap" style="position: relative;">
     
     <div class="btnLgin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
@@ -273,7 +273,16 @@ export default {
 
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
-        this.loading = false
+        if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
 
       }
 
@@ -323,10 +332,17 @@ export default {
       }
 
       } catch (error) {
-      // Une erreur s'est produite, vous pouvez gérer les erreurs ici
-      console.error('Erreur lors de l\'envoi du fichier:', error);
-      this.loading = false
-
+        console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                }
       }
             
     },
@@ -358,7 +374,17 @@ export default {
     
 
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+        console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                }
       }
     },
 
@@ -373,14 +399,13 @@ export default {
       event.target.classList.remove('drop-zoon--over');
     },
     handleDrop(event) {
-      console.log('Drop');
       event.preventDefault();
       event.target.classList.remove('drop-zoon--over');
       const file = event.dataTransfer.files[0];
-      console.log('Dropped file:', file);
       this.uploadFile(file);
     },
     handleFileChange(event) {
+      this.loading = true
       console.log('File input change');
       const file = event.target.files[0];
       console.log('Selected file:', file);
@@ -407,6 +432,7 @@ export default {
           });
           console.log('Réponse de l\'API:', response.data);
           // this.uploadedFileCounter = 100;
+          this.loading = false
           const dropZoon = document.querySelector('#dropZoon');
           const loadingText = document.querySelector('#loadingText');
           const previewImage = document.querySelector('#previewImage');
@@ -441,8 +467,17 @@ export default {
           fileReader.readAsDataURL(file);
           await this.fetchgetPhotoMpme();
         } catch (error) {
-          // Une erreur s'est produite, vous pouvez gérer les erreurs ici
-          console.error('Erreur lors de l\'envoi du fichier:', error);
+          console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
+                console.log('aut',error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser'); 
+                this.$router.push('/login_user_mpme'); 
+                    
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                this.loading =false
+                return false;
+                }
         }
 
       }

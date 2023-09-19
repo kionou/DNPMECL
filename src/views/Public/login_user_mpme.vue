@@ -155,8 +155,7 @@ export default {
   },
 
   methods: {
-   
-    // ...mapActions('user', ['setLoggedInUser']),
+  
     ...mapActions({  saveVerificationCode: 'saveVerificationCode', }),
     async  submit(){
          this.error = '',
@@ -176,20 +175,25 @@ export default {
             console.log("error");
             this.loading = false
           } else {
-          this.loading = false
-          this.modal = true
-            console.log('ok', response.data.data);
             const userData = response.data.data;
-          //  this.setLoggedInUser(userData);
-           this.saveVerificationCode(userData);
-
-            this.data = response.data.data
+            if (userData.user.Identifiant === null) {
+            this.loading = false
+            this.error = "Compte non autorise merci !"
+              
+            } else {
+            this.loading = false
+            this.modal = true
+            this.saveVerificationCode(userData);
             this.revele = !this.revele;
            if (this.revele) {
              document.body.classList.add('no-scroll');
             } else {
                document.body.classList.add('scroll');
              }
+              
+            }
+        
+           
           }
       
     } catch (error) {

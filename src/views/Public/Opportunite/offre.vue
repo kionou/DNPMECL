@@ -9,7 +9,7 @@
             <div class="liste-searcher">
                 <div class="nsl">
                     <i class="bi bi-search"></i>
-                    <input type="text" role="search" placeholder="rechercher un offre ..."  v-model="control.name" @input="filterByName"/>
+                    <input type="text" role="search" placeholder="rechercher une offre ..."  v-model="control.name" @input="filterByName"/>
                 </div>
                 <!-- <div class="nsl">
                     <i class="bi bi-funnel-fill"></i>
@@ -186,13 +186,23 @@ showFs() {
   
 
     methods: {
-         obtenirValeursPourCles(sousSecteurs){
-            const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
-           console.log('option',option)
+    obtenirValeursPourCles(sousSecteurs) {
+  if (sousSecteurs && sousSecteurs.includes('|')) {
+    const sousSecteursArray = sousSecteurs.split('|');
+    const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
+    const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+      return option ? option.label : valeur;
+    });
 
-      return option ? option.label : sousSecteurs; 
-        
-        },
+    // Reassemblez les noms triés en une seule chaîne avec '|'
+    return nomsSousSecteurs.sort().join(' , ');
+  } else {
+    // Si sousSecteurs ne contient pas '|', recherchez et retournez le nom correspondant
+    const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
+    return option ? option.label : sousSecteurs;
+  }
+},
+
          async fetchSousSecteurActiviteOptions() {
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); 
@@ -214,36 +224,45 @@ showFs() {
         },
 
 
-        async fetchgetOffreMpme() {
-        try {
-          const response = await axios.get('/offres', {
-            headers: {
-              Authorization: `Bearer ${this.loggedInUser.token}`,
-  
-            },});
-          console.log('UserData:', response);
-
-          if (response.data.status === 'success') {
-              this.loading = false
-              console.log('UserData:', response.data.data.data);
-              this.offres = response.data.data.data
-              this.offres = this.offres.filter( offre => {
-             const sousSecteurActiviteOffre = offre.liste_sous_secteurs; 
-           return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
-      });
-             this.filterOffres =  this.offres
-            
-          }  
-        } catch (error) {
-          console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-          console.log('aut',error.response.data === 'Unauthorized.');
-
-            if (error.response.data === 'Unauthorized.') {
-                    await this.$store.dispatch('user/clearLoggedInUser'); 
-                    this.$router.push('/login_user_mpme'); 
-            } 
-        }
+ async fetchgetOffreMpme() {
+  try {
+    const response = await axios.get('/offres', {
+      headers: {
+        Authorization: `Bearer ${this.loggedInUser.token}`,
       },
+    });
+
+    if (response.data.status === 'success') {
+      this.loading = false;
+      this.offres = response.data.data.data;
+      this.offres = this.offres.filter((offre) => {
+       const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
+
+        if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
+          const sousSecteurs = sousSecteurActiviteOffre.split('|');
+            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
+        } else {
+          return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
+        }
+      });
+
+      this.filterOffres = this.offres;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des sous-prefecture :', error);
+    if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/login_user_mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
+                    this.loading = false
+                    return false;
+                }
+  }
+},
+
 
       filterByName() {
     this.currentPage = 1;

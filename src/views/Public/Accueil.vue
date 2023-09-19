@@ -12,18 +12,18 @@
         <div class="hero_content absolute-fill">
       <div class="rowe gy-5" data-aos="fade-in">
         <div class="hero_content1   text-center text-lg-start" style="margin-bottom:auto">
-          <h2>Identifiez votre entreprise</h2>
+          <h2>Enregistrez votre entreprise</h2>
           <p>Portail officiel de de la Direction Nationale des PME et du Contenu Local dédié à l’enregistrement des micros, petites et moyennes entreprises en Guinée afin de faciliter l’accès 
             aux informations liées à ces entreprises. </p>
           <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
           
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/sign_user_mpme" class="btn-get-started">Identifier votre entreprise</router-link>
+            <router-link to="/sign_user_mpme" class="btn-get-started">Enregistrez votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                
             </i>
-            <span>Guide de création</span></a>
+            <span>Guide d'Enregistrement</span></a>
           </div>
         </div>
       </div>
@@ -153,18 +153,18 @@
           <div class="col-lg-6">
 
             <div class="stats-item d-flex align-items-center">
-              <span data-purecounter-start="0" :data-purecounter-end="totalmpme" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" :data-purecounter-end="totalMpme" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>MPME crées</strong> </p>
             </div><!-- End Stats Item -->
 
             <div class="stats-item d-flex align-items-center">
-              <span data-purecounter-start="0" :data-purecounter-end="totalPersonnelPermanent" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" :data-purecounter-end="totalEmplois.emplois" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Emplois crés</strong>  </p>
             </div><!-- End Stats Item -->
 
             <div class="stats-item d-flex align-items-center">
     
-              <span data-purecounter-start="0" :data-purecounter-end="totalPersonnelPermanentFemme" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" :data-purecounter-end="totalEmplois.salaries_femme" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Femmes salariées</strong> </p>
             </div><!-- End Stats Item -->
           </div>
@@ -175,95 +175,7 @@
     </section>
     <!-- End Stats Counter Section -->
 
-     <!-- ======= Our Services Section ======= -->
-     <section id="services" class="services sections-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Etapes de formalisation</h2>
-          <p>Formaliser votre entreprise c’est aussi lui permettre d’accéder aux opportunités
-             en matière d’appel d’offre mais également lui faire bénéficier d’appui
-             techniques et financiers grâce aux différents fonds prévus à cet effet. </p>
-
-        <p class="mt-3" style="font-weight: bolder;">Sélectionner la forme d’entreprise que vous voulez créer !</p>
-             
-        </div>
-        <div class="row gy-4 class1" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-4 col-md-4 class2">
-            <div class="service-item  position-relative">
-              
-              <h3>Entreprise individuelle </h3>
-              <p>
-                Une entreprise individuelle est une forme simplifiée d'entreprise. Toute personne de plus de 18 ans peut
-                 créer ce type d'entreprise et devient alors entrepreneur individuel. Ce type d'entreprise est adapté pour 
-                 une activité commerciale, artisanale, industrielle ou libérale.
-              </p>
-             
-            <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=entreprise-individuelle">Procedure de formalisation</a>
-       
-            </div>
-          
-          </div> 
-          
-
-          <div class="col-lg-4 col-md-4 class2">
-            <div class="service-item position-relative">
-              
-              <h3> Société à Responsabilité limitée SARL </h3>
-              <p> La SARL est une forme juridique de société commerciale à responsabilité limitée 
-                constituée par deux associés au minimum (ou par un seul associé lorsqu’elle prend la
-                 forme d’une SARL unipersonnelle). 
-                En SARL, la responsabilité des associés est limitée au montant de leurs apports.</p>
-                <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=sarl">Procedure de formalisation</a>
-
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-4 class2">
-            <div class="service-item position-relative">
-              
-              <h3>Société Anonyme SA </h3>
-              <p> La SA ou société anonyme est une société de capitaux. 
-                Elle rassemble des personnes qui peuvent ne pas se connaître et dont la participation
-                 est fondée sur les capitaux qu'ils ont investis dans l'entreprise.
-                 Elle concerne donc les projets importants.</p>
-                 <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=sa">Procedure de formalisation</a>
-
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-4 class2">
-            <div class="service-item position-relative">
-              
-              <h3> Groupement d’intérêt économique GIE  </h3>
-              <p>
-                Un "Groupement d'intérêt économique" est une organisation créée entre deux ou plusieurs personnes
-                 physiques ou morales en vue du développement de l'activité de ses membres.
-                </p>
-                <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=gie">Procedure de formalisation</a>
-
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-4 class2">
-            <div class="service-item position-relative">
-              
-              <h3>Succursale </h3>
-              <p>
-
-                Établissement qui dépend d'un siège central, tout en jouissant d'une certaine autonomie.
-              </p>
-              <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=succursale">Procedure de formalisation</a>
-
-            </div>
-          </div>
-          <!-- End Service Item -->   
-        </div>
-
-      </div>
-    </section>
-    <!-- End Our Services Section -->
+  
 
      <!-- ======= Our Team Section ======= -->
      <section id="team" class="team" >
@@ -310,16 +222,9 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <!-- <tr  v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
-                        <td>{{ secteur.label }}</td>
-           
-            <td>{{ secteurMpmeCounts[secteur.label] || 0 }}</td>
-                        
-                      </tr> -->
-
-                      <tr v-for="(secteur, index) in generateSecteurTable()" :key="index">
-                        <td>{{ secteur.nomSecteur }}</td>
-                        <td>{{ secteur.nombre }}</td>
+                      <tr v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
+                        <td>{{ secteur.NomSecteurActivite }}</td>
+                        <td>{{ secteur.mpmes.length || 0 }}</td>
                       </tr>
                      
                     </tbody>
@@ -385,9 +290,9 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
-                        <td>{{ statut.label }}</td>
+                        <td>{{ statut.CodeStatutJuridique }}</td>
                            <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
-                           <td>{{ statutJuridiqueMpmeCounts[statut.label] || 0 }}</td>
+                           <td>{{ statut.mpmes || 0 }}</td>
                         
                       </tr>
                     
@@ -439,6 +344,7 @@ import 'swiper/swiper-bundle.css';
 import  "glightbox/dist/css/glightbox.css";
 import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
+import axios from '@/lib/axiosConfig.js'
 
 import slide111 from "@/assets/img/slide/slide111.jpg"
 import slide22 from "@/assets/img/slide/slide22.jpg"
@@ -469,25 +375,23 @@ export default {
           },
           
         ],
-      totalmpme:'',
-      regionMpmeCounts: {},
-      regionOptions: [], // Pour stocker les données des régions
+      totalMpme:0,
+    regionMpmeCounts: {},
+    regionOptions: [], // Pour stocker les données des régions
     mpmeData: [], // Pour stocker les données des MPME
     regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
     SecteurActiviteOptions: [], // Vos options de secteurs d'activité
-      secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
+    secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
-    totalPersonnelPermanentFemme: 0,
-      totalPersonnelPermanentHomme: 0,
-      totalPersonnelPermanent: 0,
+    totalEmplois:0
 
 
       
     };
   },
 async  mounted() {
-  const swiper =await new Swiper('.swiper-container', {
+  const swiper = await new Swiper('.swiper-container', {
       speed: 400,
       loop: false,
       autoplay: {
@@ -519,16 +423,68 @@ async  mounted() {
         }
       }
     });
-   await this.fetchRegionOptions()
-    new PureCounter();
+  await this.fetchTotalEmploisAndMpmeData()
+  await  new PureCounter();
     this.lightbox = GLightbox({ 
               selector: ".glightbox"
              });
+await this.fetchDataActivite()
+await this.fetchDataRegions() 
+await this.fetchDataJuridique()
+   
   },
 
 
 
   methods: {
+    async fetchTotalEmploisAndMpmeData() {
+  try {
+    await this.$store.dispatch('fetchTotalEmploisFemmeAndTotalMpme');
+    this.totalEmplois = this.$store.getters['getTotalEmploisFemme'];
+    this.totalMpme = this.$store.getters['getTotalMpme'].total;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error.message);
+  }
+},
+async  fetchDataActivite() {
+  try {
+    const response = await axios.get('/secteurs-activites', {params: { with_relation: true}});
+    if (response.data.status === 'success') {
+      console.log('Données de la réponse 1:', response.data.data.data);
+      this.SecteurActiviteOptions = response.data.data.data
+    } else {
+  
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête GET :', error);
+  }
+},
+async  fetchDataRegions() {
+  try {
+    const response = await axios.get('/regions', {params: { with_relation: true}});
+    if (response.data.status === 'success') {
+      console.log('Données de la réponse2 :', response.data.data.data);
+      this.regionOptions = response.data.data.data
+    } else {
+  
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête GET :', error);
+  }
+},
+async  fetchDataJuridique() {
+  try {
+    const response = await axios.get('mpme/statistics/par-statut-juridiques');
+    if (response.data.status === 'success') {
+      console.log('Données de la réponse 3:', response.data.data);
+       this.statutJuridiqueOptions = response.data.data
+    } else {
+  
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête GET :', error);
+  }
+},
 
 
 async fetchRegionOptions() {
@@ -536,15 +492,15 @@ async fetchRegionOptions() {
 
       await this.$store.dispatch('fetchMpmeData');
       this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
-      this.totalmpme = await this.mpmeData.length;
+    
 
-     await this.mpmeData.forEach(pme => {
-      const personnelFemme =  pme.PersonnelPermanentFemme || 0;
-      const personnelHomme = pme.PersonnelPermanentHomme || 0;
-      this.totalPersonnelPermanent += personnelFemme + personnelHomme;
-      this.totalPersonnelPermanentFemme += pme.PersonnelPermanentFemme || 0;
-      this.totalPersonnelPermanentHomme  += pme.PersonnelPermanentHomme || 0;
-    });
+    //  await this.mpmeData.forEach(pme => {
+    //   const personnelFemme =  pme.PersonnelPermanentFemme || 0;
+    //   const personnelHomme = pme.PersonnelPermanentHomme || 0;
+    //   this.totalPersonnelPermanent += personnelFemme + personnelHomme;
+    //   this.totalPersonnelPermanentFemme += pme.PersonnelPermanentFemme || 0;
+    //   this.totalPersonnelPermanentHomme  += pme.PersonnelPermanentHomme || 0;
+    // });
 
 
     await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité

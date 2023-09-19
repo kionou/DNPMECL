@@ -15,5 +15,9 @@ export default{
     getSousDocOptions: (state) => state.sousdocOptions,
     getSousCategoriesData: (state) => state.sousCategoriesData,
     getCategoriesData: (state) => state.categoriesData,
+    getTotalEmploisFemme: (state) => state.totalEmploisFemme,
+    getTotalMpme: (state) => state.totalMpme,
+    getTypeCartesData: (state) => state.typeCartesData,
+    getTypeComptabilitesData: (state) => state.typeComptabilitesData,
 
 }
