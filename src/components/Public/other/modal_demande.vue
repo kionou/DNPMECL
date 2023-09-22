@@ -36,7 +36,7 @@ import { mapGetters } from 'vuex';
         return {
           loading:false,
           error:'',
-          isButtonDisabled: true,
+          isButtonDisabled: false,
 
         }
       },
@@ -59,9 +59,8 @@ import { mapGetters } from 'vuex';
        const response = await axios.post('/mpme/send-otp', CodeUserEmail);
        console.log('response.Code', response); 
       console.log("try",datauser);
-       if (response.data.status === 'error') {
-             this.revele = true
-              
+          if (response.data.status === 'error') {
+             this.revele = true 
               return this.error = response.data.message
 
             } else {
@@ -82,7 +81,7 @@ import { mapGetters } from 'vuex';
           this.loading = true 
           const datauser =  this.getVerificationCode
           let CodeUserWhatsapp ={
-          email:0,
+           email:0,
            value:datauser.user.Whatsapp
           
           }
@@ -90,8 +89,8 @@ import { mapGetters } from 'vuex';
           try {
         const response = await axios.post('/mpme/send-otp', CodeUserWhatsapp);
         console.log('response.Code', response); 
-      console.log("try",datauser);
-      if (response.data.status === 'error') {
+         console.log("try",datauser);
+        if (response.data.status === 'error') {
               this.loading = false
               return this.error = response.data.message
 
@@ -105,8 +104,9 @@ import { mapGetters } from 'vuex';
             }
     
     } catch (error) {
-      console.log(error.message);
-    
+      console.log(error);
+      this.loading = false
+      return this.error = error.response.data.message
     }
          
             },
@@ -174,7 +174,7 @@ import { mapGetters } from 'vuex';
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
   z-index: 100;
 
 }

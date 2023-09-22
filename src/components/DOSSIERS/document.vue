@@ -413,7 +413,7 @@
         if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                     console.log('aut', error.response.data.status === 'error');
                     await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/login_user_mpme');
+                    this.$router.push('/connexion-mpme');
 
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -465,7 +465,7 @@
         if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                     console.log('aut', error.response.data.status === 'error');
                     await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/login_user_mpme');
+                    this.$router.push('/connexion-mpme');
 
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -534,7 +534,7 @@
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
                 console.log('aut',error.response.data.status === 'error');
                 await this.$store.dispatch('user/clearLoggedInUser'); 
-                this.$router.push('/login_user_mpme'); 
+                this.$router.push('/connexion-mpme'); 
                     
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -582,7 +582,7 @@
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
                 console.log('aut',error.response.data.status === 'error');
                 await this.$store.dispatch('user/clearLoggedInUser'); 
-                this.$router.push('/login_user_mpme'); 
+                this.$router.push('/connexion-mpme'); 
                     
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -648,7 +648,7 @@ console.log('Document à mettre à jour :', documentToUpdate);
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error' ) {
                 console.log('aut',error.response.data.status === 'error');
                 await this.$store.dispatch('user/clearLoggedInUser'); 
-                this.$router.push('/login_user_mpme'); 
+                this.$router.push('/connexion-mpme'); 
                     
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -746,7 +746,7 @@ console.log('dataMpme',dataMpme);
         if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                     console.log('aut', error.response.data.status === 'error');
                     await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/login_user_mpme');
+                    this.$router.push('/connexion-mpme');
 
                 } else {
                     this.formatValidationErrors(error.response.data.errors)

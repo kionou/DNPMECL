@@ -10,10 +10,6 @@
         </div>
 
         <section id="team" class="team" >
-     
-
-       
-
         <div class="row gy-4">
 
           <div class="col-lg-12 col-12 ">

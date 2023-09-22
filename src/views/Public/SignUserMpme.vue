@@ -113,7 +113,7 @@
 
           <div class="btn">
             <button class="sign" @click.prevent="submit">S'enregistrer</button>
-            <p class="signin">Vous avez déjà un compte ? <span @click="$router.push({ path: '/login_user_mpme', })">Se
+            <p class="signin">Vous avez déjà un compte ? <span @click="$router.push({ path: '/connexion-mpme', })">Se
                 connecter</span> </p>
           </div>
 
@@ -359,7 +359,7 @@ small {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  /* border-radius: 0.75rem; */
+  border-radius: 0.375rem;
   background-color: white;
   padding: 2rem;
   color: black;
@@ -530,4 +530,5 @@ textarea {
   color: var(--color-secondary);
   background-color: white;
 
-}</style>
+}
+</style>

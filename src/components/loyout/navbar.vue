@@ -37,22 +37,22 @@
             <li class="dropdown">
         <router-link to="#">DNPME-CL <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
         <ul  class="dropdown-menu">
-              <li><router-link to="#">A PROPOS</router-link></li>
-              <li><router-link to="#">MOT DE LA DN</router-link></li>
-              <li><router-link to="#">ORGANIGRAMME</router-link></li>
-              <li><router-link to="#">PHOTOTHEQUE</router-link></li>
+              <li><router-link to="/dnpme/apropos">A PROPOS</router-link></li>
+              <li><router-link to="/dnpme/mot-de-la-dn">MOT DE LA DN</router-link></li>
+              <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li>
+              <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
             </ul>
            </li>
             <li><router-link to="/actualites">Actualités</router-link></li>
             <li><router-link to="/statistique">Statistiques</router-link></li>
             <li><router-link to="/formalisation">Formalisation</router-link></li>
-            <li><router-link to="/documents">Réglementations</router-link></li>
+            <li><router-link to="/reglementations">Réglementations</router-link></li>
             <li class="dropdown">
             <router-link to="#">Partenaires <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
             <ul  class="dropdown-menu">
               <li><router-link to="/partenaires">Partenaires</router-link></li>
-              <li><router-link to="#">Demande de Partenariat</router-link></li>
-              <li><router-link to="#">Information sur les MPME</router-link></li>
+              <li><router-link to="/partenaires/demande">Demande de Partenariat</router-link></li>
+              <li><router-link to="/partenaires/info-mpme">Demande de liste MPME</router-link></li>
             </ul>
            </li>
             <li ><router-link to="/opportunites">Opportunités </router-link> </li>
@@ -69,13 +69,13 @@
           
        </div>
                 <ul class="dropdown-menu menu"  >
-             <li><router-link to="/mon_espace"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard pt-0"></i>Mon espace</router-link></li>
+             <li><router-link to="/mon-espace"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-postcard pt-0"></i>Mon espace</router-link></li>
              <li><router-link to="/profil"  class="dropdown-item d-flex justify-content-around" ><i class="bi bi-building"></i>Mon profil</router-link></li>            
              <li><span class="dropdown-item d-flex justify-content-around " style="cursor:pointer;" @click="logout" ><i class="bi bi-box-arrow-in-right pt-0"></i>Déconnexion</span></li>
              
            </ul>
                </div>
-        <router-link to="/login_user_mpme" class="btnCt" v-else>
+        <router-link to="/connexion-mpme" class="btnCt" v-else>
           <i class=" bi bi-person-fill-lock"></i>
           <span> Connexion </span>
         </router-link>
@@ -116,8 +116,8 @@ export default {
     
       return (
         this.isLoggedIn &&
-        this.$route.path !== '/login_user_mpme' &&
-        this.$route.path !== '/login_user_mpme/verification'
+        this.$route.path !== '/connexion-mpme' &&
+        this.$route.path !== '/connexion-mpme/verification'
       );
     },
     loggedInUser() {
@@ -262,7 +262,7 @@ export default {
                 // if (response.status === "success") {
                   
                         await this.$store.dispatch('user/clearLoggedInUser'); // Appel de l'action pour déconnecter l'utilisateur
-                       this.$router.push('/login_user_mpme'); // Redirection vers la page de connexion
+                       this.$router.push('/connexion-mpme'); // Redirection vers la page de connexion
                 // }
 
     } catch (error) {

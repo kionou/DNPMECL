@@ -1,7 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import store from '../store'
 import LayoutPublic from '../views/Public/Layout.vue'
 import Accueil from '../views/Public/Accueil.vue'
+
+import Apropos from '../views/Public/DNPME-CL/apropos.vue'
+import Mot from '../views/Public/DNPME-CL/mot.vue'
+import Organigramme from '../views/Public/DNPME-CL/organigramme.vue'
+import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
+
 import Liste from '../views/Public/Liste_PME.vue'
 import Statistique from '../views/Public/Statistique.vue'
 import Documents from '../views/Public/Documentation.vue'
@@ -20,24 +27,15 @@ import DetailOffre from '../views/Public/Opportunite/DetailOffre.vue'
 import DetailOpportunite from '../views/Public/Opportunite/DetailOpportunite.vue'
 import Formalisation from '../views/Public/Formalisation.vue'
 import Actulite from '../views/Public/Actualite.vue'
+import ActuliteDetail from '../views/Public/ActualiteDetail.vue'
+
 import Partenaire from '../views/Public/Partenaire/partenaire.vue'
+import DemandePartenanriat from '../views/Public/Partenaire/demandePartenanriat.vue'
+import InfoMpme from '../views/Public/Partenaire/infoMpme.vue'
 
 
-
-
-
-
- import Test from '../views/test4.vue'
-
-
-
-
-// import Test from '../views/test3.vue'
-
-
-
-
-
+//  import Test from '../views/test4.vue'
+import Test from '../views/test3.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,18 +46,29 @@ const router = createRouter({
       component: LayoutPublic,
       children:[
          { path: '/', name: 'accueil', component: Accueil},
+         
+         { path: '/dnpme/apropos', name: 'Apropos', component: Apropos},
+         { path: '/dnpme/mot-de-la-dn', name: 'Mot', component: Mot},
+         { path: '/dnpme/organigramme', name: 'Organigramme', component: Organigramme},
+         { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
+         { path: '/actualites/detail', name: 'ActuliteDetail', component: ActuliteDetail , props:true },
          { path: '/statistique', name: 'statistique', component: Statistique},
          { path: '/formalisation', name: 'Formalisation', component: Formalisation},
-         { path: '/documents', name: 'documents', component: Documents},
+         { path: '/reglementations', name: 'documents', component: Documents},
+
          { path: '/partenaires', name: 'Partenaire', component: Partenaire},
+         { path: '/partenaires/demande', name: 'DemandePartenanriat', component: DemandePartenanriat},
+         { path: '/partenaires/info-mpme', name: 'InfoMpme', component: InfoMpme},
+
          { path: '/opportunites', name: 'appel_emploi', component: Emploi},
+         { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true  },
+
 
          { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , },
-         { path: '/login_user_mpme', name: 'Loginmpme', component: Loginmpme , },
-         { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true  },
-         { path: '/login_user_mpme/verification', name: 'Verification', component: Verification  ,  },
+         { path: '/connexion-mpme', name: 'Loginmpme', component: Loginmpme , },
+         { path: '/connexion-mpme/verification', name: 'Verification', component: Verification  ,  },
          { path: '/reinitialiser', name: 'connexion', component: Connexion , },
         
 
@@ -69,7 +78,7 @@ const router = createRouter({
 
 
          { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true } },
-         { path: '/mon_espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true } },
+         { path: '/mon-espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true } },
          { path: '/dossiers', name: 'Dossiers', component: Dossiers  ,  meta: { requiresAuth: true } },
          { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
          { path: '/appel_offre', name: 'appel_offre', component: Offre , meta: { requiresAuth: true }},
@@ -113,11 +122,11 @@ console.log('isLoggedIn',isLoggedIn);
   if (requiresAuth && !isLoggedIn) {
     // Si la route nécessite une authentification et l'utilisateur n'est pas connecté,
     // redirigez-le vers la page de connexion
-    next('/login_user_mpme');
+    next('/connexion-mpme');
   } else if ((to.name === 'Singmpme' || to.name === 'Loginmpme') && isLoggedIn) {
     // Si l'utilisateur est connecté et essaie d'accéder aux pages d'inscription ou de connexion,
     // redirigez-le vers la page mon_espace
-    next('/mon_espace');
+    next('/mon-espace');
   }
   else {
     next();

@@ -174,7 +174,7 @@ async   mounted() {
 
           if (error.response.data === 'Unauthorized.') {
                   await this.$store.dispatch('user/clearLoggedInUser'); 
-                  this.$router.push('/login_user_mpme'); 
+                  this.$router.push('/connexion-mpme'); 
           } 
       }
     },

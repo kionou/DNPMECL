@@ -7,7 +7,7 @@
       </div>
         <div  class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
           data-aos-delay="100">
-  <div class="box">
+   <div class="box" @click="$router.push({ path: '/actualites/detail', })">
     <div class="box-top">
       <img class="box-image" src="@/assets/img/actualite/1.jpeg" alt="">
       <div class="title-flex">

@@ -60,6 +60,9 @@ export default {
   SET_TYPE_COMPTABILITES_DATA(state, data) {
     state.typeComptabilitesData = data;
   },
+  SET_TYPE_DEMANDE_DATA(state, data) {
+    state.typeDemandesData = data;
+  },
   
   
 }

@@ -19,5 +19,6 @@ export default{
     getTotalMpme: (state) => state.totalMpme,
     getTypeCartesData: (state) => state.typeCartesData,
     getTypeComptabilitesData: (state) => state.typeComptabilitesData,
+    getTypeDemandesData: (state) => state.typeDemandesData,
 
 }

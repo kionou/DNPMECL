@@ -294,6 +294,21 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des types de comptabilités :', error);
     }
   },
+
+  async fetchTypeDemandeData({ commit }) {
+    try {
+      const response = await axios.get('/gestion-des-demandes/liste-types');
+      const data = response.data.data;
+      const options = data.map(demande => ({
+        label: demande,
+        value: demande
+      }));
+      console.log('Type Demande Data:', options);
+      commit('SET_TYPE_DEMANDE_DATA', options);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types de Demande :', error);
+    }
+  },
   
 
 

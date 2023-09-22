@@ -19,5 +19,6 @@ export default{
     totalMpme: 0,
     typeCartesData: [], 
     typeComptabilitesData: [], 
+    typeDemandesData:[],
 
 }

@@ -71,11 +71,29 @@
             </div>
         </div>
     </section>
-</div></template>
+</div>
+<MazDialog v-model="isOpen" noClose>
+                <p>
+                    Votre compte a été modifié avec succès. Souhaitez-vous consulter votre profil ?
+                </p>
+                <template #footer="{ close }">
+
+                    <div class="supp" @click="close" style="background-color: red; "> Non</div>
+
+                    <div class="supp" @click="profil" style="background-color: var(--color-primary);"> Oui</div>
+
+                </template>
+            </MazDialog>
+</template>
 
 <script>
+  import MazDialog from 'maz-ui/components/MazDialog'
 export default {
     name: 'DNPMECLEspace',
+    components: {
+      MazDialog
+  
+    },
     computed: {
    
     loggedInUser() {
@@ -85,6 +103,7 @@ export default {
 
     data() {
         return {
+            isOpen:false
 
         };
     },

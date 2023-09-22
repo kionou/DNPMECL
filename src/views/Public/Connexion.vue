@@ -138,7 +138,7 @@ export default {
               }
             },
             close(){
-              this.$router.push({ path: '/login_user_mpme', })
+              this.$router.push({ path: '/connexion-mpme', })
             
             
             }
@@ -165,6 +165,14 @@ export default {
   box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 500px) {
+
+.container-fluid {
+padding: 20px 10px !important;
+
+
+}
+}
 .title {
   text-align: center;
   font-size: 1.5rem;

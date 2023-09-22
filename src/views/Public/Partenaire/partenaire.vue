@@ -164,7 +164,7 @@ try {
   if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                   console.log('aut', error.response.data.status === 'error');
                   await this.$store.dispatch('user/clearLoggedInUser');
-                  this.$router.push('/login_user_mpme');
+                  this.$router.push('/connexion-mpme');
 
               } else {
                   this.formatValidationErrors(error.response.data.errors)

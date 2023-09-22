@@ -37,8 +37,8 @@
             Petit Simbaya <br>
             Près de l'Hôpital Flamboyant,<br>
             Conakry, Guinée <br><br>
-            <strong>Phone:</strong> +224 622 33 63 43<br>
-            <strong>Email:</strong> infodnMPMEcl@gmail.com<br>
+            <strong>Téléphone:</strong> +224 622 33 63 43<br>
+            <strong>Email:</strong> infodnpmecl@gmail.com<br>
           </p>
 
         </div>

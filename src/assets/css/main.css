@@ -72,9 +72,9 @@ section {
 padding: 0 !important;
 }
 
-.sections-bg {
+/* .sections-bg {
   background-color: #f6f6f6;
-}
+} */
 
 .section-header {
   text-align: center;
@@ -105,7 +105,7 @@ padding: 0 !important;
 
 .section-header p {
   margin-bottom: 0;
-  color: #6f6f6f;
+  /* color: #6f6f6f; */
   font-size: 18px;
 }
 
@@ -298,6 +298,55 @@ color: var(--color-primary);
     font-family: 'Racing Sans One', cursive;
   
   }
+
+  @media (max-width: 768px) {
+
+    .topbar1 img {
+      max-height: 50px;
+    }
+    
+  
+    .topbar .texte span{
+    
+      font-size: 9px;
+      }
+        
+      .topbar .texte h1 {
+        font-size: 17px;
+      
+      }
+  }
+
+  @media (max-width: 450px) {
+
+    .topbar1 img {
+      max-height: 35px;
+    }
+    
+  
+    .topbar .texte span{
+    
+      font-size: 8px;
+      }
+        
+      .topbar .texte h1 {
+        font-size: 12px;
+      
+      }
+
+
+      .header .logo h1 {
+        font-size: 12px;
+   
+      
+      }
+
+      .header .logo span{
+
+        font-size: 5px;
+
+        }
+  }
 /* .topbar .contact-info i {
   font-style: normal;
   color: #fff;
@@ -309,16 +358,10 @@ color: var(--color-primary);
   padding-left: 5px;
   color: #fff;
 } */
-/* 
-@media (max-width: 575px) {
 
-  .topbar .contact-info i a,
-  .topbar .contact-info i span {
-    font-size: 13px;
-  }
-}
 
-.topbar .contact-info i a {
+
+/* .topbar .contact-info i a {
   line-height: 0;
   transition: 0.3s;
 } */
@@ -387,6 +430,24 @@ font-family: var(--font-primary);
   color: #fff;
   font-family: 'Racing Sans One', cursive;
 
+}
+
+@media (max-width: 450px) {
+
+  
+
+
+    .header .logo h1 {
+      font-size: 17px;
+ 
+    
+    }
+
+    .header .logo span{
+
+      font-size: 6px;
+
+      }
 }
 
 /* .header .logo h1 span {
@@ -1011,6 +1072,7 @@ section {
 --------------------------------------------------------------*/
 .services {
   padding: 60px 0;
+  background-color: #fff;
 }
 .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
   background-color: #ffc107;
@@ -1064,7 +1126,7 @@ section {
   font-weight: 700;
   margin: 0 0 20px 0;
   padding-bottom: 8px;
-  font-size: 22px;
+  font-size: 18px;
   position: relative;
   display: inline-block;
   border-bottom: 4px solid #eeeeee;
@@ -1236,7 +1298,8 @@ section {
 }
 
 .portfolio .portfolio-wrap {
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #dee2e6;
   border-radius: 10px;
   height: 100%;
   overflow: hidden;

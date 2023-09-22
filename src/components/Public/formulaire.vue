@@ -1881,7 +1881,7 @@ export default {
 
                 const response = await axios.put(`/mpme/${userId}`, mpmeData, {
                     headers: {
-                        // Authorization: `Bearer ${this.loggedInUser.token}`,
+                         Authorization: `Bearer ${this.loggedInUser.token}`,
                         'Content-Type': 'application/json',
                     },
                 });
@@ -1900,7 +1900,7 @@ export default {
                 if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                     console.log('aut', error.response.data.status === 'error');
                     await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/login_user_mpme');
+                    this.$router.push('/connexion-mpme');
 
                 } else {
                     this.formatValidationErrors(error.response.data.errors)
@@ -2158,7 +2158,7 @@ export default {
         },
         espace() {
             this.isOpen = false
-            this.$router.push({ path: '/mon_espace', })
+            this.$router.push({ path: 'mon-espace', })
 
         },
         profil() {
@@ -2209,7 +2209,7 @@ export default {
                 if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
                     console.log('aut', error.response.data.status === 'error');
                     await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/login_user_mpme');
+                    this.$router.push('/connexion-mpme');
 
                 } else {
                     this.formatValidationErrors(error.response.data.errors)

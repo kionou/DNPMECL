@@ -178,7 +178,7 @@
   
 
      <!-- ======= Our Team Section ======= -->
-     <section id="team" class="team" >
+     <section id="team" class="team" style=" background-color: #f6f6f6; ">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">

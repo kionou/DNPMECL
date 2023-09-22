@@ -106,7 +106,7 @@ export default {
             } else {
               console.log('response.Code', response.data);
               this.setLoggedInUser(this.getVerificationCode);
-              this.$router.push('/mon_espace');
+              this.$router.push('/mon-espace');
               this.loading = false
 
             }
@@ -134,7 +134,7 @@ export default {
             } else {
               console.log('response.Code', response.data);
               this.setLoggedInUser(this.getVerificationCode);
-              this.$router.push('/mon_espace');
+              this.$router.push('/mon-espace');
               this.loading = false
             }
 
@@ -227,7 +227,7 @@ small {
   padding: 2rem;
   color: black;
   max-height: 550px;
-  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 }
 
 .title {

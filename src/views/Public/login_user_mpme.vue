@@ -308,9 +308,18 @@ background-color: white;
 padding: 2rem;
 color: black;
 max-height: 550px;
-box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
+box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 
 
+}
+
+@media (max-width: 500px) {
+
+  .container-fluid {
+padding: 20px 10px !important;
+
+
+}
 }
 
 .title {

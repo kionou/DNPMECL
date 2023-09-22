@@ -14,7 +14,7 @@
     </p>
 	
         
-		<button class="sign" @click="$router.push({ path: '/login_user_mpme', })">Se connecter</button>
+		<button class="sign" @click="$router.push({ path: '/connexion-mpme', })">Se connecter</button>
 	
     </div> 
   </div>
@@ -77,7 +77,7 @@
   padding: 2rem;
   color: black;
   /* max-height: 100%; */
-  box-shadow:0px 2px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
   z-index: 100;
 
 }
