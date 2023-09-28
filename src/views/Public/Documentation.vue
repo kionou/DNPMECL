@@ -1,212 +1,231 @@
 <template>
-    <div class="container_content">
-        <div class="section-header pt-5 ">
-            <h2>LISTE DES REGLEMENTATIONS</h2>    
-        </div>
-        <div class="content">
-
-            <div class="doc"  role="tablist">
-
-                <div
-                v-for="(category, index) in categoriesData" :key="index"
-                 class="info-item d-flex justify-content-center align-items-center nav-link  " 
-                 :class="{ active: index === 0 }" 
-                role="tab" 
-                data-bs-toggle="tab" 
-                :data-bs-target="'#navs-pills-top-home' + (index + 1)"
-               :aria-controls="'navs-pills-top-home' + (index + 1)"
-               :aria-selected="index === 0"
-             
-                 >
-
-                <i class="bi bi-file-pdf flex-shrink-0"></i>
-                <div>
-                  <p>{{ category.NomCategorie }}</p>
-                </div>
-              </div>
-
-
-              <!-- <div class="info-item d-flex justify-content-center align-items-center nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home2" aria-controls="navs-pills-top-home2" aria-selected="false">
-                <i class="bi bi-file-pdf flex-shrink-0"></i>
-                <div>
-                  <p>Categorie2</p>
-                </div>
-              </div>
-              <div class="info-item d-flex justify-content-center align-items-center">
-                <i class="bi bi-file-pdf flex-shrink-0"></i>
-                <div>
-                  <p>Categorie3</p>
-                </div>
-              </div> -->
-            </div>
-            <div class="sous_doc">
-                <div
-                
-                  v-for="(sousCategory, index) in sousCategoriesData" :key="index"
-                   class="tab-pane fade"
-                   :class="{ show: index === 0, active: index === 0 }"
-                   :id="'navs-pills-top-home' + (index + 1)"
-                   role="tabpanel"
-                  
-                  >
-
-
-                    <div class="texte">
-                    <p class="pb-0 ">{{ sousCategory.NomSousCategorie }}</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                </div>
-
-                <div class="tab-pane fade " id="navs-pills-top-home2" role="tabpanel">
-                    <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLAN DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-                <div class="texte">
-                    <p class="pb-0 ">PLANnnnn DE FORMATION DE LA DIRECTION GENERALE DES IMPOTS AU TITRE DE LA GESTION 2021</p>
-                    <div class=" texte2 d-flex align-items-center">
-                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
-                <div>
-                  <p>Télécharger</p>
-                </div>
-              </div>
-                </div>
-              
-                </div>
-
-             
-            
-
-        </div>
- 
-
-        </div>
-        
+  <Loading v-if="loading"></Loading>
+  <div class="container_content">
+    <div class="section-header pt-5">
+      <h2>LISTE DES REGLEMENTATIONS</h2>
     </div>
+    <div class="noresul" v-if="categoriesData.length === 0">Aucun document pour le moment !!!</div>
+
+    <div class="content" v-else>
+
+      <div class="doc">
+
+        <div    v-for="(category, categoryIndex) in categoriesData" :key="categoryIndex">
+        <div
+          @click="toggleCategory(categoryIndex ,category )"
+          class="info-item d-flex justify-content-center align-items-center"
+          :class="{ 'margin-zero': category.show }"
+        >
+          <i class="bi bi-file-pdf flex-shrink-0"></i>
+          <div>
+            <p>{{ category.NomCategorie }}</p>
+          </div>
+          <i :class="category.show ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
+
+        </div>
+        <div class="contenu" v-show="category.show">
+          <div v-if="subDocumentsByCategory(category.CodeCategorie).length === 0" style="text-align: center;
+    font-weight: 700;">Vide</div>
+          <div v-else v-for="(subDocument, subDocIndex) in subDocumentsByCategory(category.CodeCategorie)"
+            :key="subDocIndex"
+            @click="showSubDocument(subDocument)"
+            class="contenu1 nav-link"
+          >
+            {{ subDocument.NomSousCategorie }}
+          </div>
+        </div>
+      </div>
+      </div>
+     
+      <div class="sous_doc">
+        <div v-if="selectedSubDocument">
+          <!-- <p>{{ selectedSubDocument }}</p> -->
+          <div class="noresul" style="border: none !important;"  v-if="paginatedItems.length === 0">Aucun document pour le moment !!!</div>
+          <div v-else class="texte" v-for="(subDoc, subDocIndex) in paginatedItems" :key="subDocIndex">
+                    <p class="pb-0 ">{{ subDoc.NomDocument }}</p>
+                    <div class=" texte2 d-flex align-items-center">
+                <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
+                <div>
+                  <p>
+                    <a :href="subDoc.LienDocument"  download>Télécharger</a>
+
+                  </p>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div v-else class="noresul" style="border: none !important;">
+          <p> Choisissez un type de document</p>
+        </div>
+      </div>
+      
+    </div>
+    <div class="container_pagination">
+  <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
+</div>
+  </div>
 </template>
 
 <script>
+import Documents from '@/lib/doc.json'
+import Loading from '../../components/Public/other/preloader.vue';
+import Pag from '../../components/Public/other/pag.vue';
 export default {
-    name: 'DNPMECLDocumentation',
+  name: 'DNPMECLDocumentation',
+  components:{
+    Loading , Pag
+  },
+  computed: {
 
-    data() {
-        return {
-          sousCategoriesData:[],
-          categoriesData:[]
-            
-        };
+
+totalPages() {
+return Math.ceil(this.filteredDocuments.length / this.itemsPerPage);
+},
+paginatedItems() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.filteredDocuments.slice(startIndex, endIndex);
+},
+},
+
+
+  data() {
+    return {
+      categoriesData: [],
+      loading:true,
+      selectedSubDocument: null,
+      subDocuments:[],
+      filteredDocuments: [],
+      subDocumentsByCategoryMap: {},
+      Documents:Documents,
+      currentPage: 1,
+       itemsPerPage: 5,
+    };
+  },
+
+  methods: {
+    updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
     },
-
-  async  mounted() {
-    await  this.fetchSousCategoriesData()
-    await  this.fetchCategoriesData()
-
+    updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.filteredDocuments.slice(startIndex, endIndex);
     },
+ 
 
-    methods: {
-      async fetchSousCategoriesData() {
+    async fetchCategoriesData() {
+      try {
+        await this.$store.dispatch('fetchCategoriesData');
+        const categoriesData = JSON.parse(JSON.stringify(this.$store.getters.getCategoriesData));
+        console.log('Données des catégories:', categoriesData);
+        this.categoriesData = categoriesData.data.data;
+        this.loading = false
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données des catégories :', error.message);
+      }
+    },
+    async fetchSousCategoriesData() {
   try {
 
     await this.$store.dispatch('fetchSousCategoriesData');
     const sousCategoriesData = JSON.parse(JSON.stringify(this.$store.getters.getSousCategoriesData));
     console.log('Données des sous-catégories:', sousCategoriesData);
-    this.sousCategoriesData = sousCategoriesData.data.data;
+    this.subDocuments = sousCategoriesData.data.data;
+    this.categoriesData.forEach(category => {
+    this.subDocumentsByCategoryMap[category.CodeCategorie] = this.subDocuments.filter(subDoc => subDoc.CodeCategorie === category.CodeCategorie);
+        });
   } catch (error) {
     console.error('Erreur lors de la récupération des données des sous-catégories :', error.message);
   }
 },
 
-async fetchCategoriesData() {
-  try {
-
-    await this.$store.dispatch('fetchCategoriesData');
-    const categoriesData = JSON.parse(JSON.stringify(this.$store.getters.getCategoriesData));
-    console.log('Données des catégories:', categoriesData);
-    this.categoriesData = categoriesData.data.data;
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données des catégories :', error.message);
-  }
+    toggleCategory(categoryIndex, selectedCategory) {
+  console.log('categoryIndex', selectedCategory);
+  this.categoriesData.forEach((category, index) => {
+    if (index === categoryIndex) {
+      category.show = !category.show;
+    } else {
+      category.show = false;
+    }
+  });
 },
 
+    showSubDocument(subDocument) {
+      console.log('subDocument', subDocument);
+      this.selectedSubDocument = subDocument.CodeSousCategorie;
+      this.filteredDocuments = this.Documents.filter(doc => doc.SousCategorieDocument === subDocument.CodeSousCategorie);
+
+
+
     },
+    showSubCategory(subCategory) {
+      this.selectedSubCategory = subCategory;
+    },
+  
+    subDocumentsByCategory(categoryCode) {
+      return this.subDocumentsByCategoryMap[categoryCode] || [];
+    },
+    async fetchPubliqueData() {
+  try {
+    await this.$store.dispatch('fetchPubliqueData');
+    this.Documents = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueData']));
+    console.log('Données du statut publique:',  this.Documents);
+    // Faites ce que vous devez faire avec les données ici
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données du statut publique :', error.message);
+  }
+},
+  
+  },
+async  mounted() {
+  await this.fetchCategoriesData(); 
+  await this.fetchSousCategoriesData()
+  await this.fetchPubliqueData()
+  },
 };
 </script>
 
 <style lang="css" scoped>
+.noresul {
+  border: 1px solid #F9D310;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 6px;
+  font-size: 20px;
+
+}
+
+.container_pagination {
+  width: auto;
+  text-align: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin: 5px;
+
+}
 .container_content{
 
 /* border: 1px solid red; */
 margin: 0 auto;
 max-width: 1140px;
 /* height: 100vh; */
+padding:0 10px 30px;
 
 }
 .section-header{
-    padding: 20px 0 !important;
+  padding: 20px 0 !important;
 
 }
 .content{
@@ -219,17 +238,22 @@ justify-content: space-around;
 
 }
 .fade:not(.show) {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }
 
- .nav-link.active{
-    background-color: #fff;
-    border: 1px solid var(--color-secondary);
-    color: black;
+.nav-link.active{
+  background-color: #eceef14f;
+  border: 1px solid var(--color-secondary);
+  color: black;
 }
+.info-item{
+border-radius:5px 5px 0 0 !important;
+justify-content: space-between !important;
+width: 300px;
 
-.info-item i {
+}
+.info-item .bi-file-pdf {
   font-size: 20px;
   color: red;
   float: left;
@@ -243,76 +267,99 @@ justify-content: space-around;
   transition: all 0.3s ease-in-out;
   margin-right: 15px;
 }
-.nav-link.active.info-item i{
-    color: red;
-    background-color: hsl(240deg 7% 62% / 9%);
+.nav-link.active.info-item i  {
+  color: red;
+  background-color: hsl(240deg 7% 62% / 9%);
 }
 .doc{
-    /* border: 1px solid blue; */
-    /* height: 100px; */
-   width: 30%;
-   display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* border: 1px solid blue; */
+  /* height: 100px; */
+ width: 30%;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
 .sous_doc{
-    border: 1px solid hsl(240deg 7% 62% / 46%);
-    /* height: 100px; */
-    width: 65%;
-    border-radius: 5px;
-    padding: 10px;
+  border: 1px solid hsl(240deg 7% 62% / 46%);
+  /* height: 100px; */
+  width: 65%;
+  border-radius: 5px ;
+  padding: 10px;
 
 }
 .texte{
-    /* border: 1px solid blue; */
-    padding: 10px;
-    margin-bottom: 15px;
-    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  /* border: 1px solid blue; */
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 
 }
 
 .pb-0{
-    font-weight: 900;
-    margin-bottom: 0;
+  font-weight: 900;
+  margin-bottom: 0;
 
 }
 
 .texte2{
-    color: var(--color-primary);
-    cursor: pointer;
-    width: 101px;
+  color: var(--color-primary);
+  cursor: pointer;
+  width: 101px;
 
 }
-.texte2:hover{
+.texte2 a:hover{
 color: var(--color-secondary);
 
 }
 
 .texte2 p{
-    margin-left: 5px;
-    margin-bottom: 0;
+  margin-left: 5px;
+  margin-bottom: 0;
 
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 922px) {
 
-    .content{
-        flex-direction: column;
-    align-items: center;
-    }
-    .doc{
-    
-    width: 70%;
-    margin-bottom: 15px;
-    }
+  .content{
+      flex-direction: column;
+  align-items: center;
+  }
+  .doc{
+  
+  width: 70%;
+  margin-bottom: 15px;
+  }
 
-    .sous_doc{
-    
-    width: 100%;
-    }
+  .sous_doc{
+  
+  width: 100%;
+  }
 
+}
+
+.contenu{
+border:1px solid var(--color-secondary);
+width: 100%;
+border-radius: 0 0 5px 5px;
+border-top: none;
+margin-bottom: 20px;
+padding-top: 10px;
+
+}
+.contenu1{
+    border-bottom: 1px solid var(--color-secondary);
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+.margin-zero {
+margin-bottom: 0 !important;
 }
 </style>
+
+
+

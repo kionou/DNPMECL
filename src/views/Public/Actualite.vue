@@ -7,40 +7,23 @@
       </div>
         <div  class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
           data-aos-delay="100">
-   <div class="box" @click="$router.push({ path: '/actualites/detail', })">
+          <div v-if="paginatedItems.length === 0" class="noresul">
+             <span> Aucune Actualité </span>
+             </div> 
+
+   <div v-else class="box"  v-for="actualite in paginatedItems" :key="actualite.id"  @click="$router.push({ path: `/actualites/${actualite.id}`, })">
     <div class="box-top">
-      <img class="box-image" src="@/assets/img/actualite/1.jpeg" alt="">
+      <img v-if="actualite.images === null" class="box-image" src="@/assets/img/actualite/1.jpeg" alt=""> 
+      <img  v-else class="box-image" :src="updatePicture( actualite.images)" alt=""> 
+
       <div class="title-flex">
-        <small><i class="bi bi-clock"></i> Publié le 20-octobre-2021</small>
-        <h3 class="box-title">DÉPLOIEMENT DE LA 5G, LE MINISTRE AMADOU COULIBALY ÉCHANGE AVEC UN ACTEUR</h3>
+        <small><i class="bi bi-clock"></i> Publié {{datenew (actualite.created_at)}}</small>
+        <h3 class="box-title text-uppercase">{{ actualite.titre }}</h3>
       </div>
     </div>
+  
   </div>
-  <div class="box">
-    <div class="box-top">
-      <img class="box-image" src="@/assets/img/actualite/2.jpg" alt="Girl Eating Pizza">
-      <div class="title-flex">
-        <small><i class="bi bi-clock"></i> Publié le 20-octobre-2021</small>
-        <h3 class="box-title">DÉPLOIEMENT DE LA 5G, LE MINISTRE AMADOU COULIBALY ÉCHANGE AVEC UN ACTEUR</h3>
-      </div>
-    </div>
-  </div>
-  <div class="box">
-    <div class="box-top">
-      <img class="box-image" src="@/assets/img/actualite/3.webp" alt="Girl Eating Pizza">
-      <div class="title-flex">
-        <h3 class="box-title">DÉPLOIEMENT DE LA 5G, LE MINISTRE AMADOU COULIBALY ÉCHANGE AVEC UN ACTEUR</h3>
-      </div>
-    </div>
-  </div>
-  <div class="box">
-    <div class="box-top">
-      <img class="box-image" src="@/assets/img/actualite/4.webp" alt="Girl Eating Pizza">
-      <div class="title-flex">
-        <h3 class="box-title">DÉPLOIEMENT DE LA 5G, LE MINISTRE AMADOU COULIBALY ÉCHANGE AVEC UN ACTEUR</h3>
-      </div>
-    </div>
-  </div>
+
 
 </div>
 <div class="container_pagination">
@@ -53,27 +36,83 @@
 <script>
 import Loading from '../../components/Public/other/preloader.vue';
 import Pag from '../../components/Public/other/pag.vue';
+import Actualites from '@/lib/actualites.json'
+import { format, parseISO } from 'date-fns';
+import { fr } from 'date-fns/locale';
 export default {
     name: 'DNPMECLActualite',
     components: {
  Loading , Pag
 
 },
+computed: {
+
+
+totalPages() {
+return Math.ceil(this.ActualitesOptions.length / this.itemsPerPage);
+},
+paginatedItems() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.ActualitesOptions.slice(startIndex, endIndex);
+},
+},
 
     data() {
         return {
             loading:false,
             currentPage: 1,
-            itemsPerPage: 15,
+            itemsPerPage: 12,
+            ActualitesOptions:[],
         };
     },
 
-    mounted() {
+   async mounted() {
+    console.log('ActualitesOptions',this.ActualitesOptions);
+    
+    
+    await this.fetchActualites()
         
     },
 
     methods: {
-        
+      updatePicture(picture){
+       return picture.split('|')[0]
+        // Object.keys(monObjet).map(key => monObjet[key])
+       
+
+      
+      },
+      datenew(isoDate){
+        const dateObj = parseISO(isoDate);
+     
+       return format(dateObj, 'dd MMMM yyyy HH:mm:ss', { locale: fr });
+     
+      },
+      updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
+    },
+    updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.ActualitesOptions.slice(startIndex, endIndex);
+    },
+  async fetchActualites() {
+  try {
+    await this.$store.dispatch('fetchActualites');
+    const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
+    this.ActualitesOptions = actualites
+    console.log('Actualités récupérées :', actualites);
+
+    // Continuez avec le reste de votre code pour traiter les actualités
+  } catch (error) {
+    console.error('Erreur lors de la récupération des actualités :', error.message);
+  }
+},
     },
 };
 </script>

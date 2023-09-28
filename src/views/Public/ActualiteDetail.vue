@@ -1,7 +1,7 @@
 <template>
     <div>
         <section>
-            <div class="container" style="padding: 20px;">
+            <div class="containerr" style="padding: 20px;">
                 <div class="section-title">
                     <h2>
                         Détails actualités
@@ -17,46 +17,34 @@
                                     Générale des Impôts</h1>
                                 <div class="clearfix"></div>
                             </div>
-                            <!-- single-post-header end   -->
-                            <!-- single-post-media   -->
-                            <div class="single-post-media fl-wrap">
-                                <div class="single-slider-wrap fl-wrap">
-                                    <div class="single-slider fl-wrap">
-                                        <div
-                                            class="swiper-container swiper-initialized swiper-horizontal swiper-pointer-events swiper-autoheight">
-                                            <div class="swiper-wrapper lightgallery" id="swiper-wrapper-81d507774ff78faf"
-                                                aria-live="polite"
-                                                style="cursor: grab; transition-duration: 0ms; transform: translate3d(-826px, 0px, 0px); height: 527px;">
-                                                <div class="swiper-slide hov_zoom swiper-slide-duplicate swiper-slide-duplicate-active swiper-slide-prev"
-                                                    data-swiper-slide-index="0" role="group" aria-label="1 / 1"
-                                                    style="width: 826px;">
-                                                    <img src="../../assets/img/actualite/2.jpg" alt="">
-                                                    <!-- <a href="/app/gestion_du_menu_article/images/all/1.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>                    -->
-                                                </div>
-                                                <!-- swiper-slide   -->
-                                                <div class="swiper-slide hov_zoom swiper-slide-active swiper-slide-duplicate-next swiper-slide-duplicate-prev"
-                                                    data-swiper-slide-index="0" role="group" aria-label="1 / 1"
-                                                    style="width: 826px;">
-                                                    <img src="../../assets/img/actualite/2.jpg" alt="">
-                                                    <!-- <a href="/app/gestion_du_menu_article/images/all/1.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>                    -->
-                                                </div>
-                                                <!-- swiper-slide end   -->
-                                                <div class="swiper-slide hov_zoom swiper-slide-duplicate swiper-slide-duplicate-active swiper-slide-next"
-                                                    data-swiper-slide-index="0" role="group" aria-label="1 / 1"
-                                                    style="width: 826px;">
-                                                    <img src="../../assets/img/actualite/2.jpg" alt="">
-                                                                  
-                                                </div>
-                                            </div>
-                                            <span class="swiper-notification" aria-live="assertive"
-                                                aria-atomic="true">
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            
+                            <div class="class1">
+                            <!-- <img src="@/assets/img/carousel/carousel1.jpg" class="" alt="..."> -->
+                            <div class="container swiper-container" data-aos="zoom-out">   
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide ee" style="width: 100% !important;" >
+              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">    
+            </div>
+
+            <div class="swiper-slide ee" style="width: 100% !important;" >
+             <img  src="@/assets/img/actualite/3.webp" alt="">	    
+            </div>
+
+            <div class="swiper-slide ee" style="width: 100% !important;" >
+             <img  src="@/assets/img/actualite/3.jpg" alt="">	    
+            </div>
+
+
+            <div class="swiper-slide ee" style="width: 100% !important;" >
+             <img  src="@/assets/img/actualite/4.jpg" alt="">	    
+            </div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+      </div>
+            
                             </div>
-                            <!-- single-post-media end   -->
-                            <!-- single-post-content   -->
+
                             <div class="single-post-content fl-wrap">
                                 <div class="clearfix"></div>
                                 <div class="single-post-content_text" id="font_chage">
@@ -133,6 +121,7 @@
                             <!-- single-post-content  end   -->
                         </div>
                     </div>
+
                     <div class="col-md-4">
 
 
@@ -181,8 +170,12 @@
 </template>
 
 <script>
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+import axios from '@/lib/axiosConfig.js'
 export default {
     name: 'DNPMECLActualiteDetail',
+    props:['id'],
 
     data() {
         return {
@@ -190,11 +183,66 @@ export default {
         };
     },
 
-    mounted() {
+  async  mounted() {
+    const swiper = await new Swiper('.swiper-container', {
+      speed: 400,
+      loop: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 40
+        },
+        480: {
+          slidesPerView: 1,
+          spaceBetween: 60
+        },
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 80
+        },
+        992: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        }
+      }
+    });
+        console.log('id',this.id);
+      await this.fecthActualitesDetail()
 
     },
 
     methods: {
+        async fecthActualitesDetail() {
+        
+         try {
+         const response = await axios.get(`/details/actualites/${this.id}`);
+         console.log('response.sousprefecture', response);
+        //  if (response.data.status === 'success') {
+        //    this.loading = false
+        //    this.isOpen = true
+           
+        //  } else {
+        //    this.loading = false
+        
+        //  }
+         
+       } catch (error) {
+         console.error('Erreur post:', error);
+       }
+         
+         
+
+   },
 
     },
 };
@@ -209,13 +257,28 @@ section {
     z-index: 10;
     overflow: hidden;
 }
+.class1{
+    /* height: 357px; */
+    width: 100%;
+    display: flex;
+    padding: 20px;
 
-.container {
-    max-width: 1300px;
-    width: 92%;
+}
+
+.class1 img{
+width: 100%;
+height: 100%;
+
+}
+
+.containerr {
+    /* max-width: 1300px;
+    width: 92%; */
     margin: 0 auto;
     position: relative;
     z-index: 2;
+    border: 1px solid red;
+
 }
 
 .section-title {
@@ -291,4 +354,10 @@ section {
     font-size: 12px;
     font-weight: 400;
     color: #000;
-}</style>
+}
+.swiper-slide{
+width: 100% !important;
+
+}
+
+</style>

@@ -1,13 +1,15 @@
 
 <template>
+   <Loading v-if="loading"></Loading>
     <div>
         <div>
     <div class="container-fluid  d-flex justify-content-center align-items-center general" data-aos="zoom-out"
       data-aos-delay="100">
       <div class="form-container">
         <p class="title">Demande de la liste des MPME</p>
-        <p class="text-center">Prêt à explorer une collaboration ? Remplissez le formulaire ci-dessous 
-          pour démarrer votre demande de partenariat avec nous !"
+        <p class="text-center">
+          Prêt à commencer votre démarche pour obtenir votre liste MPME ? Remplissez le formulaire ci-dessous 
+          pour démarrer le processus avec nous !
         </p>
         <small class="text-center">{{error}}</small>
         <form class="form">
@@ -57,8 +59,9 @@
                 <label for="typedemande">Type de la Demande <span class="text-danger">*</span></label>
                 <MazSelect v-model="typedemande" color="secondary" :options="DemandesOptions"/>
               </div>
-              <small v-if="v$.typedemande.$error">{{ v$.typedemande.$errors[0].$message }}</small>
-              <small v-if="!validateDemandeMatch()" >Le type sélectionné ne convient pas à votre demande</small>
+              <small v-if="v$.typedemande.$error && !validateDemandeMatch()">{{ v$.typedemande.$errors[0].$message }}</small>
+            <small v-else-if="validateDemandeMatch()">Le type sélectionné ne convient pas à votre demande</small>
+           
 
             </div>
             <div class="col">
@@ -78,24 +81,28 @@
                 <MazTextarea v-model="description" name="comment" id="comment" color="secondary" />
               </div>
               <small v-if="v$.description.$error">{{ v$.description.$errors[0].$message }}</small>
-
-            </div>
-          
+            </div>       
           </div>
-        
-
           <div class="btn">
             <button class="sign" @click.prevent="submit">Soumettre</button>
            
           </div>
-
-
         </form>
       </div>
     </div>
 
   </div>
     </div>
+    <MazDialog v-model="isOpen" noClose>
+                <p>
+                  Votre demande de  liste  MPME a été enregistrée avec succès. Vous allez bientôt
+                   recevoir un e-mail contenant les étapes à suivre.
+                </p>
+                <template #footer="{ close }">
+
+                    <div class="supp" @click="close" style="background-color: blue; "> OK</div>
+                </template>
+            </MazDialog>
 </template>
 
 <script>
@@ -103,16 +110,19 @@ import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
 import useVuelidate from '@vuelidate/core';     
 import { require, lgmin,  ValidEmail,   } from '@/functions/rules';
 import axios from '@/lib/axiosConfig.js'
-
+import MazDialog from 'maz-ui/components/MazDialog'
+import Loading from '../../../components/Public/other/preloader.vue';
 
 export default {
     name: 'DNPMECLInfoMpme',
   components: {
-     MazPhoneNumberInput
+     MazPhoneNumberInput , MazDialog , Loading
   }, 
 
   data() {
     return {
+      isOpen:false,
+      loading:false,
       email: '',
       phoneNumber: '',
       structure:'',
@@ -170,8 +180,8 @@ export default {
       this.results = updatedResult;
     },
     validateDemandeMatch() {
-      
-     return this.typedemande === 'Demande de liste mpme' 
+
+     return this.typedemande !== 'Demande de liste mpme' &&  this.typedemande !== ""
     },
     async fetchDemandesOptions() { 
       try {
@@ -186,10 +196,10 @@ export default {
     async fetchSecteurActiviteOptions() {
       try {
         await this.$store.dispatch('fetchSecteurActiviteOptions'); // Remplacez par l'action de votre store
-        this.SecteurActiviteOptions = this.$store.getters['getsecteurActiviteOptions'].map(option => {
-          console.log('option',option);
-          return  { state: option.label, 
-                     abbr: option.value
+        this.SecteurActiviteOptions = this.$store.getters['getsecteurActiviteOptions2'].map(option => {
+          return  { state: option.NomSecteurActivite, 
+                     abbr: option.CodeSecteurActivite
+
                      }
         });
       } catch (error) {
@@ -203,7 +213,7 @@ export default {
         this.v$.$touch()
         this.error = ''
         if (this.v$.$errors.length == 0 ) {
-         
+          this.loading = true
 
             let DataMpme = {
             NomStructure: this.structure,
@@ -212,23 +222,24 @@ export default {
             AdresseEmail: this.email,
             Telephone: this.phoneNumber,
             TypeDemande: this.typedemande,
-            SecteurActivite: JSON.parse(JSON.stringify(this.selectedSecteurs)),
+            SecteurActivite: JSON.parse(JSON.stringify(this.selectedSecteurs)).join('|'),
         }
         console.log('eeedata', DataMpme);
-        //   try {
-        //   const response = await axios.post('/register/mpmess', DataMpme);
-        //   console.log('response.sousprefecture', response);
-        //   if (response.data.message.email) {
-        //     console.log('response',response.data.message.email);
-        //     return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
+          try {
+          const response = await axios.post('/gestion-des-demandes',  DataMpme);
+          console.log('response.sousprefecture', response);
+          if (response.data.status === 'success') {
+            this.loading = false
+            this.isOpen = true
             
-        //   } else {
+          } else {
+            this.loading = false
          
-        //   }
+          }
           
-        // } catch (error) {
-        //   console.error('Erreur post:', error);
-        // }
+        } catch (error) {
+          console.error('Erreur post:', error);
+        }
           
           
           
@@ -252,6 +263,23 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.supp {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-radius: 45px;
+    z-index: 3;
+    cursor: pointer;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
 
 small {
   color: #f8001b;

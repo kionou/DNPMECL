@@ -8,6 +8,7 @@ export default{
     SousprefectureOptions:[],
     QuartierOptions:[],
     secteurActiviteOptions: [],
+    secteurActiviteOptions2: [],
     sousSecteurOptions: [],
     statutJuridiqueOptions: [],
     bourseOptions: [],
@@ -15,10 +16,13 @@ export default{
     sousdocOptions:[],
     sousCategoriesData: [],   
     categoriesData: [],
+    publiqueData: [],
     totalEmploisFemme: 0,
     totalMpme: 0,
     typeCartesData: [], 
     typeComptabilitesData: [], 
     typeDemandesData:[],
+    actualites: [],
+    partenaires: [],
 
 }

@@ -4,16 +4,16 @@
       <div class="row gy-4">
         <div class="col-lg-6 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center flex-column">
-            <img src="@/assets/img/armoirie.png" alt="">
+            <img src="@/assets/img/MADOU.svg" alt="">
           <h1 class="my-4" style="color: white; font-size: 27px !important; ;">DNPME-CL</h1>
           <p style="color: white;">Direction Nationale des PME et du Contenu Local.</p>
 
           </a>
           <div class="social-links d-flex mt-4 justify-content-center">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+           
+            <a href="https://www.facebook.com/dnpme" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.instagram.com/dnpmecl/" class="instagram"><i class="bi bi-instagram"></i></a>
           </div>
         </div>
 

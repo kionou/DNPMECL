@@ -28,14 +28,15 @@ import DetailOpportunite from '../views/Public/Opportunite/DetailOpportunite.vue
 import Formalisation from '../views/Public/Formalisation.vue'
 import Actulite from '../views/Public/Actualite.vue'
 import ActuliteDetail from '../views/Public/ActualiteDetail.vue'
+import Aide from '../views/Public/DemandeAide.vue'
 
 import Partenaire from '../views/Public/Partenaire/partenaire.vue'
 import DemandePartenanriat from '../views/Public/Partenaire/demandePartenanriat.vue'
 import InfoMpme from '../views/Public/Partenaire/infoMpme.vue'
 
 
-//  import Test from '../views/test4.vue'
-import Test from '../views/test3.vue'
+ import Test from '../views/Public/test2.vue'
+// import Test from '../views/test3.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,7 +54,7 @@ const router = createRouter({
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
-         { path: '/actualites/detail', name: 'ActuliteDetail', component: ActuliteDetail , props:true },
+         { path: '/actualites/:id', name: 'ActuliteDetail', component: ActuliteDetail , props:true },
          { path: '/statistique', name: 'statistique', component: Statistique},
          { path: '/formalisation', name: 'Formalisation', component: Formalisation},
          { path: '/reglementations', name: 'documents', component: Documents},
@@ -82,7 +83,9 @@ const router = createRouter({
          { path: '/dossiers', name: 'Dossiers', component: Dossiers  ,  meta: { requiresAuth: true } },
          { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
          { path: '/appel_offre', name: 'appel_offre', component: Offre , meta: { requiresAuth: true }},
-         { path: '/offre/:id', name: 'DetailOffre', component: DetailOffre ,   props:true  },
+         { path: '/offre/:id', name: 'DetailOffre', component: DetailOffre ,  meta: { requiresAuth: true },  props:true  },
+         { path: '/demande-aide', name: 'Aide', component: Aide ,  meta: { requiresAuth: true }},
+
 
 
          

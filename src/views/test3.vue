@@ -2,7 +2,7 @@
   <Loading v-if="loading"></Loading>
   <div class="container_content">
     <div class="section-header pt-5">
-      <h2>LISTE DES DOCUMENTS</h2>
+      <h2>LISTE DES REGLEMENTATIONS</h2>
     </div>
     <div class="noresul" v-if="categoriesData.length === 0">Aucun document pour le moment !!!</div>
 
@@ -39,16 +39,20 @@
      
       <div class="sous_doc">
         <div v-if="selectedSubDocument">
-          <p>{{ selectedSubDocument }}</p>
-          <div class="texte" v-for="(subDoc, subDocIndex) in filteredDocuments" :key="subDocIndex">
+          <!-- <p>{{ selectedSubDocument }}</p> -->
+          <div class="noresul" style="border: none !important;"  v-if="filteredDocuments.length === 0">Aucun document pour le moment !!!</div>
+          <div v-else class="texte" v-for="(subDoc, subDocIndex) in filteredDocuments" :key="subDocIndex">
                     <p class="pb-0 ">{{ subDoc.NomDocument }}</p>
                     <div class=" texte2 d-flex align-items-center">
                 <i class="bi bi-cloud-arrow-down-fill flex-shrink-0"></i>
                 <div>
-                  <p>Télécharger</p>
+                  <p>
+                    <a :href="subDoc.LienDocument"  download>Télécharger</a>
+
+                  </p>
                 </div>
               </div>
-              </div>
+          </div>
         </div>
         <div v-else class="noresul" style="border: none !important;">
           <p> Choisissez un type de document</p>
@@ -134,11 +138,22 @@ export default {
     subDocumentsByCategory(categoryCode) {
       return this.subDocumentsByCategoryMap[categoryCode] || [];
     },
+    async fetchPubliqueData() {
+  try {
+    await this.$store.dispatch('fetchPubliqueData');
+    this.Documents = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueData']));
+    console.log('Données du statut publique:',  this.Documents);
+    // Faites ce que vous devez faire avec les données ici
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données du statut publique :', error.message);
+  }
+},
   
   },
 async  mounted() {
   await this.fetchCategoriesData(); 
   await this.fetchSousCategoriesData()
+  await this.fetchPubliqueData()
   },
 };
 </script>
@@ -250,7 +265,7 @@ width: 300px;
   width: 101px;
 
 }
-.texte2:hover{
+.texte2 a:hover{
 color: var(--color-secondary);
 
 }
@@ -262,7 +277,7 @@ color: var(--color-secondary);
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 922px) {
 
   .content{
       flex-direction: column;

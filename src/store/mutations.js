@@ -27,6 +27,9 @@ export default {
   SET_SECTEUR_ACTIVITE_OPTIONS(state, options) {
     state.secteurActiviteOptions = options;
   },
+  SET_SECTEUR_ACTIVITE2_OPTIONS(state, options) {
+    state.secteurActiviteOptions2 = options;
+  },
   SET_SOUS_SECTEUR_OPTIONS(state, options) {
     state.sousSecteurOptions = options;
   },
@@ -48,6 +51,9 @@ export default {
   SET_CATEGORIES_DATA(state, data) {
     state.categoriesData = data;
   },
+  SET_PUBLIQUE_DATA(state, data) {
+    state.publiqueData = data;
+  },
   SET_TOTAL_EMPLOIS_FEMME(state, totalEmploisFemme) {
     state.totalEmploisFemme = totalEmploisFemme;
   },
@@ -62,6 +68,12 @@ export default {
   },
   SET_TYPE_DEMANDE_DATA(state, data) {
     state.typeDemandesData = data;
+  },
+  SET_ACTUALITES(state, actualites) {
+    state.actualites = actualites;
+  },
+  SET_PARTENAIRES_DATA(state, data) {
+    state.partenaires = data;
   },
   
   

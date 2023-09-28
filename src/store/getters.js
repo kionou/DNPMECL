@@ -8,6 +8,7 @@ export default{
     getSousprefectureOptions : (state) => state.SousprefectureOptions,
     getQuartierOptions : (state) => state.QuartierOptions,
     getsecteurActiviteOptions: (state) => state.secteurActiviteOptions,
+    getsecteurActiviteOptions2: (state) => state.secteurActiviteOptions2,
     getSousSecteurOptions: (state) => state.sousSecteurOptions,
     getStatutJuridiqueOptions: (state) => state.statutJuridiqueOptions,
     getBourseOptions: (state) => state.bourseOptions,
@@ -15,10 +16,15 @@ export default{
     getSousDocOptions: (state) => state.sousdocOptions,
     getSousCategoriesData: (state) => state.sousCategoriesData,
     getCategoriesData: (state) => state.categoriesData,
+    getPubliqueData: (state) => state.publiqueData,
     getTotalEmploisFemme: (state) => state.totalEmploisFemme,
     getTotalMpme: (state) => state.totalMpme,
     getTypeCartesData: (state) => state.typeCartesData,
     getTypeComptabilitesData: (state) => state.typeComptabilitesData,
     getTypeDemandesData: (state) => state.typeDemandesData,
+    getActualites:(state) => state.actualites,
+    getPartenaires:(state)  => state.partenaires,
+      
+
 
 }

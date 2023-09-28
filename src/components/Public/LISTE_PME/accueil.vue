@@ -42,11 +42,7 @@
             <option value="" selected="true">Choisir un chiffre d'affaire</option>
             <option v-for="chiffreaffaire in ChiffreOptions" :value="chiffreaffaire.label" :key="chiffreaffaire.value">{{ chiffreaffaire.label }}</option>
           </select>
-          <!-- <v-autocomplete   v-else-if="control.spec === 'sousprefecture'" v-model="ss" @input="filterData"
-            :items="sousprefectures"
-            variant="outlined"></v-autocomplete> -->
-            <!-- <MazSelect v-else-if="control.spec === 'sousprefecture'" v-model="control.speciality" change="filterData" color="secondary" search
-                                    :options="sousprefectures" /> -->
+          
         </div>
         <div class="nsl" style="border-right: none" v-else>
           <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>

@@ -381,8 +381,8 @@ export default {
 
     data() {
         return {
-            loading:true,
-            data: '',
+         loading:true,
+         data: '',
          isFullScreen: false,
          childKey: 0,
          sous_secteur:'',
@@ -390,7 +390,7 @@ export default {
          datadoc:[],
          dataimage:[],
          currentPage: 1,
-    itemsPerPage: 10,
+         itemsPerPage: 10,
         };
     },
 

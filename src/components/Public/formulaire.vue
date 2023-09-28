@@ -1283,6 +1283,20 @@
 
                 </template>
             </MazDialog>
+            <MazDialog v-model="DemandeAide" noClose>
+                <p>
+                    Besoin d'aide ? <br>
+                    Souhaitez-vous être assisté par la direction pour remplir vos informations ?
+                </p>
+                
+                <template #footer="{ close }">
+
+                    <div class="supp" @click="close" style="background-color: red; "> Non</div>
+
+                    <div class="supp" @click="HamdleAide" style="background-color: var(--color-primary);"> Oui</div>
+
+                </template>
+            </MazDialog>
         </form>
     </div>
 </template>
@@ -1317,6 +1331,7 @@ export default {
             loading: true,
             PostLogo: false,
             msgsuccess: false,
+            DemandeAide:false,
             imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
             currentStep: 1,
             error: '',
@@ -1375,10 +1390,10 @@ export default {
                 prin_sect_acti: "",
                 selectedSousSecteurs: [],
                 an_prod_1: "",
-                pers_per_femm: "",
-                pers_per_homm: "",
-                pers_temp_femm: "",
-                pers_temp_homm: "",
+                pers_per_femm: 0,
+                pers_per_homm: 0,
+                pers_temp_femm: 0,
+                pers_temp_homm: 0,
                 ch_aff_1: "",
                 ch_aff_2: "",
                 part_chiffre_affaire_exprtation: "",
@@ -1388,11 +1403,11 @@ export default {
                 nbre_rccm: "",
                 nbre_nif: "",
 
-                NbreEmployeGuinne: '',
-                NbreActionnaireGuinneF: '',
-                NbreActionnaireGuinneH: '',
-                NbreActionnaireGuinne: '',
-                PaysSiegeSocial: '',
+                NbreEmployeGuinne: 0,
+                NbreActionnaireGuinneF: 0,
+                NbreActionnaireGuinneH: 0,
+                NbreActionnaireGuinne: 0,
+                PaysSiegeSocial: 0,
             },
             // etapes 2
 
@@ -1604,10 +1619,10 @@ export default {
                 PrincipalSecteurActivite: this.step1.prin_sect_acti,
                 ListeSousSecteurActivite: JSON.parse(JSON.stringify(this.step1.selectedSousSecteurs)),
                 AnneeProduction1: this.step1.an_prod_1,
-                PersonnelPermanentFemme: this.step1.pers_per_femm,
-                PersonnelPermanentHomme: this.step1.pers_per_homm,
-                PersonnelTemporaireFemme: this.step1.pers_temp_femm,
-                PersonnelTemporaireHomme: this.step1.pers_temp_homm,
+                PersonnelPermanentFemme: this.step1.pers_per_femm || 0,
+                PersonnelPermanentHomme: this.step1.pers_per_homm || 0,
+                PersonnelTemporaireFemme: this.step1.pers_temp_femm || 0,
+                PersonnelTemporaireHomme: this.step1.pers_temp_homm || 0,
                 ChiffreAffaire1: this.step1.ch_aff_1,
                 ChiffreAffaire2: this.step1.ch_aff_2,
                 PartChiffreAffaireExprtation: this.step1.part_chiffre_affaire_exprtation,
@@ -1617,10 +1632,10 @@ export default {
                 NumeroRccm: this.step1.nbre_rccm,
                 NumeroNif: this.step1.nbre_nif,
 
-                NbreEmploye: this.step1.NbreEmployeGuinne,
-                NbreActionnaireGuinneF: this.step1.NbreActionnaireGuinneF,
-                NbreActionnaireGuinneH: this.step1.NbreActionnaireGuinneH,
-                NbreActionnaire: this.step1.NbreActionnaireGuinne,
+                NbreEmploye: this.step1.NbreEmployeGuinne || 0,
+                NbreActionnaireGuinneF: this.step1.NbreActionnaireGuinneF || 0,
+                NbreActionnaireGuinneH: this.step1.NbreActionnaireGuinneH || 0,
+                NbreActionnaire: this.step1.NbreActionnaireGuinne || 0,
                 PaysSiegeSocial: this.step1.PaysSiegeSocial,
 
 
@@ -2170,6 +2185,10 @@ export default {
             this.PostLogo = true
 
         },
+        HamdleAide() {
+            this.$router.push({ path: '/demande-aide', })
+
+        },
         async loadFile(event) {
             this.loading = true
             console.log(event.target.files[0]);
@@ -2227,11 +2246,13 @@ export default {
 
 
     async mounted() {
+        
         try {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
             });
+                 
 
             console.log("data", this.loggedInUser);
 
@@ -2249,7 +2270,9 @@ export default {
                 this.fetchBourseOptions(),
                 this.fetchCarteAndComptabiliteOptions() 
             ]);
-
+            setTimeout(() => {
+            this.DemandeAide = true;
+        }, 5000);
         } catch (error) {
             console.error('Erreur lors du chargement des données:', error);
         }

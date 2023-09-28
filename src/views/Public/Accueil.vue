@@ -314,22 +314,14 @@
         <h2>Nos partenaires</h2>
         
       </div>
-      <div class="container swiper-container" data-aos="zoom-out">
-
-        <!-- <div class="clients-slider swiper"> -->
-          
+      <div class="container swiper-container" data-aos="zoom-out">   
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="@/assets/img/partenariat/part1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/partenariat/part2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/partenariat/part3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/partenariat/part4.jpg" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="@/assets/img/partenariat/part5.png" class="img-fluid" alt=""></div>
-
+            <div class="swiper-slide" v-for="partenaire in partenairesOptions" :key="partenaire.id">
+              <img v-if="partenaire.logo === null" src="@/assets/img/ninba1.png" class="img-fluid"  alt="">
+				    <img :src="partenaire.logo" alt="" class="img-fluid">
+            </div>
           </div>
           <div class="swiper-pagination"></div>
-
-        <!-- </div> -->
-
       </div>
     </section> 
 
@@ -379,6 +371,7 @@ export default {
     regionMpmeCounts: {},
     regionOptions: [], // Pour stocker les données des régions
     mpmeData: [], // Pour stocker les données des MPME
+    partenairesOptions:[],
     regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
     SecteurActiviteOptions: [], // Vos options de secteurs d'activité
     secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
@@ -391,6 +384,7 @@ export default {
     };
   },
 async  mounted() {
+  await this.fetchPartenaires()
   const swiper = await new Swiper('.swiper-container', {
       speed: 400,
       loop: false,
@@ -437,6 +431,17 @@ await this.fetchDataJuridique()
 
 
   methods: {
+    async fetchPartenaires() {
+  try {
+    await this.$store.dispatch('fetchPartenairesData');
+     this.partenairesOptions = JSON.parse(JSON.stringify(this.$store.getters['getPartenaires']));
+    console.log('Partenaires récupérés :', this.partenairesOptions);
+
+    // Continuez avec le reste de votre code pour traiter les partenaires
+  } catch (error) {
+    console.error('Erreur lors de la récupération des partenaires :', error.message);
+  }
+},
     async fetchTotalEmploisAndMpmeData() {
   try {
     await this.$store.dispatch('fetchTotalEmploisFemmeAndTotalMpme');

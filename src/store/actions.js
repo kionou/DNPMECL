@@ -138,6 +138,8 @@ async fetchDataFromAPI({ commit }) {
       }));
 
       commit('SET_SECTEUR_ACTIVITE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de secteurs d'activité
+      commit('SET_SECTEUR_ACTIVITE2_OPTIONS', secteurActiviteFromAPI); // Appeler la mutation pour mettre à jour les options de secteurs d'activité
+
     } catch (error) {
       console.error('Erreur lors de la récupération des secteurs d\'activité:', error);
     }
@@ -245,6 +247,17 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des sous-catégories de documents :', error);
     }
   },
+  async fetchPubliqueData({ commit }) {
+    try {
+      const response = await axios.get('/documents-administrative/statut/publique');
+      const data = response.data.data;
+      console.log('Données pour /documents-administrative/statut/publique :', data);
+      // Assurez-vous que la structure des données est correcte
+      commit('SET_PUBLIQUE_DATA', data);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données publique :', error);
+    }
+  },
   async fetchTotalEmploisFemmeAndTotalMpme({ commit }) {
     try {
       const [emploisFemmeResponse, totalMpmeResponse] = await Promise.all([
@@ -307,6 +320,30 @@ async fetchDataFromAPI({ commit }) {
       commit('SET_TYPE_DEMANDE_DATA', options);
     } catch (error) {
       console.error('Erreur lors de la récupération des types de Demande :', error);
+    }
+  },
+
+  async fetchActualites({ commit }) {
+    try {
+      const response = await axios.get('/actualites', { params :{statut:true} });
+      const data = response.data.data.data;
+      
+      commit('SET_ACTUALITES', data); // Mutation pour stocker les actualités dans le state
+    } catch (error) {
+      console.error('Erreur lors de la récupération des actualités :', error);
+    }
+  },
+  async fetchPartenairesData({ commit }) {
+    try {
+      const response = await axios.get('/partenaires');
+      const data = response.data.data.data;   
+      // Filtrer les partenaires avec un statut de 1
+      const partenairesFiltres = data.filter(partenaire => partenaire.StatutPartenaire === "1"); 
+      console.log('SET_PARTENAIRES_DATA', partenairesFiltres);
+      // Assurez-vous que la structure des données est correcte
+      commit('SET_PARTENAIRES_DATA', partenairesFiltres);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des partenaires :', error);
     }
   },
   

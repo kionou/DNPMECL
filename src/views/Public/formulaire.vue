@@ -49,6 +49,28 @@ export default {
     },
 
     mounted() {
+        
+  const selectHeader = document.querySelector('.class1');
+
+
+if (selectHeader) {
+  let headerOffset = selectHeader.offsetTop;
+  let nextElement = selectHeader.nextElementSibling;
+  console.log('headerOffset',headerOffset);
+  console.log('headerOffset222',nextElement);
+
+  const headerFixed = () => {
+    if ((headerOffset - window.scrollY) <= 0) {
+      selectHeader.classList.add('sticked');
+      if (nextElement) nextElement.classList.add('sticked-header-offset');
+    } else {
+      selectHeader.classList.remove('sticked');
+      if (nextElement) nextElement.classList.remove('sticked-header-offset');
+    }
+  }
+  window.addEventListener('load', headerFixed);
+  document.addEventListener('scroll', headerFixed);
+}
 
     },
 

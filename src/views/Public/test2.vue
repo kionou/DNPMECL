@@ -1,414 +1,406 @@
 <template>
-    <div>
-       
-<div class="profile-pic">
-  <label class="-label" for="file">
-    <span class="glyphicon glyphicon-camera"></span>
-    <span>Change Image</span>
-  </label>
-  <input id="file" type="file" @change="loadFile"/>
-  <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
-</div>
+  <div>
+      <section>
+          <div class="containerr" style="padding: 20px;">
+              <div class="section-title">
+                  <h2>
+                      Détails actualités
+                  </h2>
+              </div>
+              <div class="row">
+                  <div class="col-md-8 class2">
+                      <div class="main-container fl-wrap fix-container-init">
+                          <!-- single-post-header  -->
+                          <div class="single-post-header fl-wrap">
+                              <div class="clearfix"></div>
+                              <h1 style="font-size: 10px important!;">21ème édition du prix d’excellence de la Direction
+                                  Générale des Impôts</h1>
+                              <div class="clearfix"></div>
+                          </div>
+                          
+                          <div class="class1">
+                          <!-- <img src="@/assets/img/carousel/carousel1.jpg" class="" alt="..."> -->
+                          <div class="container swiper-container" data-aos="zoom-out">   
+        <div class="swiper-wrapper align-items-center">
+          <div class="swiper-slide ee" style="width: 100% !important;" >
+            <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">    
+          </div>
+
+          <div class="swiper-slide ee" style="width: 100% !important;" >
+           <img  src="@/assets/img/actualite/3.webp" alt="">	    
+          </div>
+
+          <div class="swiper-slide ee" style="width: 100% !important;" >
+           <img  src="@/assets/img/actualite/3.jpg" alt="">	    
+          </div>
+
+
+          <div class="swiper-slide ee" style="width: 100% !important;" >
+           <img  src="@/assets/img/actualite/4.jpg" alt="">	    
+          </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
     </div>
+          
+                          </div>
+
+                          <div class="single-post-content fl-wrap">
+                              <div class="clearfix"></div>
+                              <div class="single-post-content_text" id="font_chage">
+                                  <p class="has-drop-cap"> </p>
+                                  <p class="ydpd5fc33faMsoNormal"
+                                      style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
+                                      Dans un contexte de crise économique mondiale due à la pandémie de la Covid-19, la
+                                      guerre russo-ukrainienne et singulièrement, à l’environnement
+                                      sécuritaire difficile de la sous-région ouest-africaine, les problèmes liés au
+                                      financement de l’économie sont réels. Pour le Ministre du Budget
+                                      et du Portefeuille de l’État, devant une telle situation, il n’y a pas lieu de
+                                      chercher d’autres solutions. «Aujourd’hui, plus qu’hier, chaque
+                                      pays doit compter sur ses propres ressources », a affirmé Moussa Sanogo, le mercredi
+                                      19 juillet, à Cocody, à l’occasion de la 21ème&nbsp;édition
+                                      du prix d’excellence de la Direction Générale des Impôts (Dgi). Un appel à une
+                                      mobilisation accrue de ressources internes. Pour y arriver,
+                                      le Ministre a demandé aux lauréats de poursuivre le travail avec la même volonté et
+                                      de&nbsp;partager leurs expériences. Moussa Sanogo a
+                                      félicité le Directeur Général des Impôts, Ouattara&nbsp;Sié Abou, qui a assuré la
+                                      pérennité de ce prix qui participe de la bonne
+                                      gouvernance au sein de l’administration fiscale et constitue un moyen de consolider
+                                      la culture de la performance.
+                                  </p>
+
+                                  <p class="ydpd5fc33faMsoNormal"
+                                      style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
+                                      Ouattara Sié Abou a souligné que la Direction Générale des Impôts s’est engagée dans
+                                      la mise en œuvre d’un programme stratégique
+                                      qui prend en compte tous les axes des missions des agents. « Il s’agit pour la Dgi
+                                      de s’assurer que les recettes fiscales sont
+                                      collectées au bon moment et de la meilleure des manières », a-t-il rassuré. A l’en
+                                      croire, l’administration fiscale a pris de
+                                      nouvelles résolutions pour atteindre des résultats probants. Le prix d’excellence,
+                                      a-t-il indiqué, est le reflet des qualités
+                                      de professionnalisme et d’éthique exigées à tous les agents, et vise à honorer ceux
+                                      d’entre eux qui se sont distingués positivement
+                                      dans l’exécution de leur mission. « Ce prix est à la fois, un puissant facteur de
+                                      saine émulation et un véritable hymne à la
+                                      gloire au travail. Aux lauréats, je salue vos performances mais sachez qu’à partir
+                                      d’aujourd’hui, le plus gros défi reste à
+                                      venir, car le plus difficile n’est pas de gravir la montagne mais d’y demeurer »,
+                                      a-t-il déclaré. Par ailleurs, le DG a rendu
+                                      hommage au parrain de cette 21e&nbsp;édition, Kanvaly Diomandé, en égrenant sa riche
+                                      carrière professionnelle et son parcours
+                                      académique exceptionnel. Selon lui, le président de la Cour des comptes est un
+                                      modèle et une excellence incarnée.
+                                  </p>
+
+                                  <p class="ydpd5fc33faMsoNormal"
+                                      style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
+                                      Kanvaly Diomandé a fait savoir que son choix pour parrainer cette cérémonie n’est
+                                      pas fortuit. Car, a-t-il relevé, la Cour
+                                      des comptes et la Dgi s’impliquent dans l’optimisation des recettes publiques.
+                                  </p>
+
+                                  <p class="ydpd5fc33faMsoNormal"
+                                      style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
+                                      « Il y a une complémentarité entre la Direction Générale des impôts qui collecte les
+                                      impôts et la Cour des comptes,
+                                      une juridiction qui fait un contrôle a posteriori de la bonne utilisation des
+                                      recettes », a précisé le président de
+                                      la Cour des comptes. Avec pour thème « Plan stratégique Dgi 2021-2025, un outil de
+                                      gouvernance inclusive »,
+                                      la 21e&nbsp;édition du prix d’excellence a été raflée par Dibi Serge Désiré,
+                                      Inspecteur des impôts en poste
+                                      au service de gestion du centre des moyennes entreprises du Plateau. Sept autres
+                                      agents et le service d’assiette
+                                      des impôts divers de Yopougon ont été primés au cours de cette cérémonie.
+                                  </p>
+
+                                  <p></p>
+                              </div>
+                          </div>
+                          <!-- single-post-content  end   -->
+                      </div>
+                  </div>
+
+                  <div class="col-md-4 class3">
+                    <div class="contenu">
+                      <div class="image">
+                        <img src="../../assets/img/actualite/2.jpg" alt="">
+                      </div>
+                      <div class="image">
+                        <img src="../../assets/img/actualite/2.jpg" alt="">
+                      </div> <div class="image">
+                        <img src="../../assets/img/actualite/2.jpg" alt="">
+                      </div>
+
+                    </div>
 
 
-    <div id="uploadArea" class="upload-area">
-      <!-- Header -->
-      <div class="upload-area__header">
-        <h1 class="upload-area__title">Modifiez votre fichier</h1>
-        <p class="upload-area__paragraph">
-            Le fichier doit être une image
-          <strong class="upload-area__tooltip">
-            comme
-            <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-          </strong>
-        </p>
-      </div>
-      <!-- End Header -->
+                     
+                     <!-- <div class="sidebar-content fl-wrap fixed-bar">
+                          <div class="box-widget fl-wrap" style="padding: 65px 0 10px ; ">
+                              <div class="box-widget-content">
+                                  <div class="banner-widget fl-wrap">
+                                      <div class="bg-wrap">
+                                          
+                                          <img src="../../assets/img/actualite/2.jpg" alt=""
+                                              style="height:225px; width:100%">
+                                      </div>
+                                     
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="box-widget fl-wrap" style="padding: 65px 0 10px ; ">
+                              <div class="box-widget-content">
+                                  <div class="banner-widget fl-wrap">
+                                      <div class="bg-wrap">
+                                          
+                                          <img src="../../assets/img/actualite/2.jpg" alt=""
+                                              style="height:225px; width:100%">
+                                      </div>
+                                     
+                                  </div>
+                              </div>
+                          </div>
+                      </div> -->
+                  
 
-      <!-- Drop Zoon -->
-      <div
-        id="dropZoon"
-        class="upload-area__drop-zoon drop-zoon"
-      
-      >
-      <div class="profile-pic">
-  <label class="-label" for="file">
-    <span class="glyphicon glyphicon-camera"></span>
-    <span>Change Image</span>
-  </label>
-  <input id="file" type="file" @change="loadFile"/>
-  <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
-</div>
-   
-
-      </div>
-      <!-- End Drop Zoon -->
-
-     
-    </div>
+                  </div>
+              </div>
+              <div class="limit-box fl-wrap"></div>
+          </div>
+      </section>
+  </div>
 </template>
 
 <script>
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+import axios from '@/lib/axiosConfig.js'
 export default {
-    name: 'DNPMECLTest2',
-    
+  name: 'DNPMECLActualiteDetail',
+  // props:['id'],
 
-    data() {
-        return {
-     
-      imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
-      uploadedFileName: 'Project 1',
-      uploadedFileIconText: '',
-      uploadedFileCounter: 0,
-      isUploading: false,
-     
-            
-        };
+  data() {
+      return {
+
+      };
+  },
+
+async  mounted() {
+  const swiper = await new Swiper('.swiper-container', {
+    speed: 400,
+    loop: false,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
     },
-
-    mounted() {
-
-        
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
     },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 40
+      },
+      480: {
+        slidesPerView: 1,
+        spaceBetween: 60
+      },
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 80
+      },
+      992: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      }
+    }
+  });
+      console.log('id',this.id);
+    // await this.fecthActualitesDetail()
 
-    methods: {
-        loadFile(event){
-  console.log( event.target.files[0]);
-        }
-        
-    },
+  },
+
+  methods: {
+      async fecthActualitesDetail() {
+      
+       try {
+       const response = await axios.get(`/details/actualites/${this.id}`);
+       console.log('response.sousprefecture', response);
+      //  if (response.data.status === 'success') {
+      //    this.loading = false
+      //    this.isOpen = true
+         
+      //  } else {
+      //    this.loading = false
+      
+      //  }
+       
+     } catch (error) {
+       console.error('Erreur post:', error);
+     }
+       
+       
+
+ },
+
+  },
 };
 </script>
 
 <style lang="css" scoped>
-
-.profile-pic {
-  color: transparent;
-  transition: all 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.profile-pic input {
-  display: none;
-}
-.profile-pic img {
-  position: absolute;
-  object-fit: cover;
-  width: 165px;
-  height: 165px;
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
-  z-index: 0;
-}
-.profile-pic .-label {
-  cursor: pointer;
-  height: 165px;
-  width: 165px;
-}
-.profile-pic:hover .-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10000;
-  color: #fafafa;
-  transition: background-color 0.2s ease-in-out;
-  border-radius: 100px;
-  margin-bottom: 0;
-}
-.profile-pic span {
-  display: inline-flex;
-  padding: 0.2em;
-  height: 2em;
-}
-
-
-
-
-/* Upload Area */
-.upload-area {
+section {
+  /* float: left; */
   width: 100%;
-  /* max-width: 25rem; */
-  background-color: rgb(255, 255, 255);
-  border: 2px solid var(--color-secondary);
-  border-radius: 24px;
-  padding: 2rem 1.875rem 5rem 1.875rem;
-  /* margin: 0.625rem; */
-  text-align: center;
-}
-
-.upload-area--open { /* Slid Down Animation */
-  animation: slidDown 500ms ease-in-out;
-}
-
-
-
-
-.upload-area__title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 0.3125rem;
-}
-
-.upload-area__paragraph {
-  font-size: 0.9375rem;
-  color: rgb(196, 195, 196);
-  margin-top: 0;
-}
-
-.upload-area__tooltip {
   position: relative;
-  color: var(--color-secondary);
-  cursor: pointer;
-  transition: color 300ms ease-in-out;
-}
-
-.upload-area__tooltip:hover {
-  color: var(--clr-blue);
-}
-
-.upload-area__tooltip-data {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -125%);
-  min-width: max-content;
-  background-color: rgb(255, 255, 255);
-  color: rgb(63, 134, 255);
-  border: 1px solid var(--color-secondary);
-  padding: 0.625rem 1.25rem;
-  font-weight: 500;
-  opacity: 0;
-  visibility: hidden;
-  transition: none 300ms ease-in-out;
-  transition-property: opacity, visibility;
-}
-
-.upload-area__tooltip:hover .upload-area__tooltip-data {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Drop Zoon */
-.upload-area__drop-zoon {
-  position: relative;
-  height: 11.25rem; /* 180px */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 2px dashed var(--color-secondary);
-  border-radius: 15px;
-  margin-top: 2.1875rem;
- 
-  transition: border-color 300ms ease-in-out;
-}
-
-.upload-area__drop-zoon:hover {
-  border-color: var(--color-secondary);
-}
-
-
-
-
-.drop-zoon:hover .drop-zoon__icon,
-.drop-zoon:hover .drop-zoon__paragraph {
-  opacity: 0.7;
-}
-
-.drop-zoon__loading-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  color: rgb(171, 202, 255);
+  /* padding: 70px 0; */
   z-index: 10;
+  overflow: hidden;
 }
 
-.drop-zoon__preview-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+.class2{
+border: 1px solid red;
+
+}
+
+
+.class3{
+
+  border: 1px solid blue;
+
+}
+
+.class3 .contenu{
+
+border: 1px solid yellow;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+
+
+}
+
+.class3 .contenu .image{
+  border: 1px solid red;
+  padding: 5px;
+
+width: 200px;
+height: 200px;
+
+
+}
+.image img{
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 0.3125rem;
-  border-radius: 10px;
-  display: none;
-  z-index: 1000;
-  transition: opacity 300ms ease-in-out;
+
+
+}
+.class1{
+  /* height: 357px; */
+  width: 100%;
+  display: flex;
+  padding: 20px;
+
 }
 
-.drop-zoon:hover .drop-zoon__preview-image {
-  opacity: 0.8;
+.class1 img{
+width: 100%;
+height: 100%;
+
 }
 
-.drop-zoon__file-input {
-  display: none;
+.containerr {
+  /* max-width: 1300px;
+  width: 92%; */
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  border: 1px solid red;
+
 }
 
-/* (drop-zoon--over) Modifier Class */
-.drop-zoon--over {
-  border-color: rgb(63, 134, 255);
+.section-title {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
 }
 
-.drop-zoon--over .drop-zoon__icon,
-.drop-zoon--over .drop-zoon__paragraph {
-  opacity: 0.7;
-}
-
-/* (drop-zoon--over) Modifier Class */
-
-.drop-zoon--Uploaded .drop-zoon__icon,
-.drop-zoon--Uploaded .drop-zoon__paragraph {
-  display: none;
-}
-
-/* File Details Area */
-.upload-area__file-details {
-  height: 0;
-  visibility: hidden;
-  opacity: 0;
-  text-align: left;
-  transition: none 500ms ease-in-out;
-  transition-property: opacity, visibility;
-  transition-delay: 500ms;
-}
-
-/* (duploaded-file--open) Modifier Class */
-.file-details--open {
+.single-slider img, .single-slider-wrap img {
+  width: 100%;
   height: auto;
-  visibility: visible;
-  opacity: 1;
 }
-
-.file-details__title {
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: rgb(196, 195, 196);
-}
-
-/* Uploaded File */
-.uploaded-file {
-  display: flex;
-  align-items: center;
-  padding: 0.625rem 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: none 500ms ease-in-out;
-  transition-property: visibility, opacity;
-}
-
-/* (duploaded-file--open) Modifier Class */
-.uploaded-file--open {
-  visibility: visible;
-  opacity: 1;
-}
-
-.uploaded-file__icon-container {
+.swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
   position: relative;
-  margin-right: 0.3125rem;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  -o-transition-property: transform;
+  transition-property: transform;
+  transition-property: transform,-webkit-transform;
 }
 
-.uploaded-file__icon {
-  font-size: 3.4375rem;
-  color: rgb(63, 134, 255);
+.section-title h2 {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  color: #292929;
+  text-transform: uppercase !important;
+
 }
 
-.uploaded-file__icon-text {
-  position: absolute;
-  top: 1.5625rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: rgb(255, 255, 255);
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
-.uploaded-file__info {
+.fl-wrap {
+  float: left;
+  width: 100%;
   position: relative;
-  top: -0.3125rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 
-.uploaded-file__info::before,
-.uploaded-file__info::after {
-  content: '';
-  position: absolute;
-  bottom: -0.9375rem;
-  width: 0;
-  height: 0.5rem;
-  background-color: #ebf2ff;
-  border-radius: 0.625rem;
+/* .single-post-header {
+  padding: 0 0 30px;
+  border-bottom: 1px solid #eee;
+} */
+
+.single-post-header h1 {
+  font-size: 18px !important;
+  font-weight: 700;
+  text-align: left;
 }
 
-.uploaded-file__info::before {
-  width: 100%;
+.single-post-media {
+  margin-bottom: 20px;
 }
 
-.uploaded-file__info::after {
-  width: 100%;
-  background-color: rgb(63, 134, 255);
-}
-
-/* Progress Animation */
-.uploaded-file__info--active::after {
-  animation: progressMove 800ms ease-in-out;
-  animation-delay: 300ms;
-}
-
-@keyframes progressMove {
-  from {
-    width: 0%;
-    background-color: transparent;
-  }
-
-  to {
-    width: 100%;
-    background-color: rgb(63, 134, 255);
-  }
-}
-
-.uploaded-file__name {
-  width: 100%;
-  max-width: 6.25rem; /* 100px */
-  display: inline-block;
-  font-size: 1rem;
-  white-space: nowrap;
+.swiper-container {
+  margin: 0 auto;
+  position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
 }
 
-.uploaded-file__counter {
-  font-size: 1rem;
-  color: rgb(196, 195, 196);
+.single-post-content_text p {
+  font-size: 12px;
+  font-weight: 400;
+  color: #000;
 }
+.swiper-slide{
+width: 100% !important;
 
-
-
-.drop-zoon__file-label {
-  cursor: pointer;
-  padding: 1rem;
-  background-color: rgb(63, 134, 255);
-  color: white;
-  border-radius: 8px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.drop-zoon__file-label:hover {
-  background-color: rgb(43, 114, 215);
-}
-
-.drop-zoon__file-label-text {
-  display: inline-block;
-  font-size: 0.9375rem;
-  cursor: pointer;
 }
 
 </style>
