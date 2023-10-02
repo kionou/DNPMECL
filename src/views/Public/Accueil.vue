@@ -308,6 +308,88 @@
       </div>
     </section>
     <!-- End Our Team Section -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>TÉMOIGNAGES</h2>
+        </div>
+
+        <div class="container swiper-temoignage" data-aos="fade-up" data-aos-delay="100">
+          <div class=" testimonial">
+
+            <div class="testimonial-wrap">
+              <div class="">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="testimonial-wrap">
+              <div class="">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->  <div class="testimonial-wrap">
+              <div class="">
+                <div class="testimonial-item">
+                  <div class="d-flex align-items-center">
+                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
+                    <div>
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+           
+
+
+          </div>
+          <div class="swiper-pagination2"></div>
+        </div>
+
+      </div>
+    </section>
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="clients" class="clients" >
       <div class="section-header">
@@ -324,6 +406,14 @@
           <div class="swiper-pagination"></div>
       </div>
     </section> 
+
+    <section id="newsletter" class="newsletter">
+      
+      <div class="newsletter-container">
+      <div class="section1"></div>
+      <div class="section2"></div>
+      </div>
+    </section>
 
 </main>
 <!-- End Présentation de la directiion Section -->
@@ -385,6 +475,7 @@ export default {
   },
 async  mounted() {
   await this.fetchPartenaires()
+ 
   const swiper = await new Swiper('.swiper-container', {
       speed: 400,
       loop: false,
@@ -414,6 +505,42 @@ async  mounted() {
         992: {
           slidesPerView: 4,
           spaceBetween: 120
+        }
+      }
+    });
+    const swiper2 = await new Swiper('.swiper-temoignage', {
+      speed: 400,
+      loop: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination2',
+        type: 'bullets',
+        clickable: true
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 10
+        },
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 10
+        },
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 10
+        },
+        992: {
+          slidesPerView: 2,
+          spaceBetween: 30
+        },
+        1400: {
+          slidesPerView: 2,
+          spaceBetween: 10
         }
       }
     });
@@ -584,6 +711,15 @@ async fetchRegionOptions() {
 
 <style lang="css" scoped>
 .swiper-slide{
+  width: 200px !important;
+    border: 1px solid var(--color-secondary);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.swiper-slide2{
   width: 200px !important;
     border: 1px solid var(--color-secondary);
     height: 200px;
