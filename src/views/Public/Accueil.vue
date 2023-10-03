@@ -138,6 +138,131 @@
 </section>
 
  <!-- ======= Clients Section ======= -->
+
+ <section id="main-container" class=" missions-bg main-container">
+    <div class="container">
+      
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6">
+          <div class="ts-pricing-box">
+            <div class="ts-pricing-header" style="background-color: #056839;">
+              <h2 class="ts-pricing-price" style="font-size: 38px;">
+                <strong>Objectifs</strong>
+              </h2>
+            </div><!-- Pricing header -->
+            
+            <div class="accordion accordion-group" id="our-values-accordion">
+                <div class="card">
+                  <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
+                      <h2 class="mb-0">
+                        <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+                            Cliquez ici pour lire
+                        </button>
+                      </h2>
+                  </div>
+                
+                  <div id="collapsefive" class="collapse" aria-labelledby="headingOne" data-parent="#our-values-accordion">
+                      <div class="card-body" style="text-align: left !important;">
+                      
+                          <ul>
+                            <li><span>Soutenir et assister les Petites et Moyennes Entreprises;</span></li>
+                            <li><span>Informer, orienter, conseiller et contribuer à l'émergence et au développement des Petites et Moyennes Entreprises;</span></li>
+                            <li><span>Contribuer à la création de richesses et d'emplois.</span></li>
+                          </ul>
+                     
+                      </div>
+                  </div>
+                </div>  
+            </div>
+          </div><!-- Plan 1 end -->
+        </div><!-- Col end -->
+
+        <div class="col-lg-4 col-md-6">
+          <div class="ts-pricing-box">
+            <div class="ts-pricing-header" style="background-color: #fed517;">
+              <h2 class="ts-pricing-price" style="font-size: 38px; color: #000;">
+                <strong>cibles</strong>
+              </h2>
+            </div><!-- Pricing header -->
+            
+            <div class="accordion accordion-group" id="our-values-accordion">
+                <div class="card">
+                  <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
+                      <h2 class="mb-0">
+                        <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+                            Cliquez ici pour lire
+                        </button>
+                      </h2>
+                  </div>
+                
+                  <div id="collapsesix" class="collapse" aria-labelledby="headingOne" data-parent="#our-values-accordion">
+                      <div class="card-body" style="text-align: left !important;">
+                      
+                          <ul>
+                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
+                            <li><span>Les groupements d'entreprises;</span></li>
+                            <li><span>Les groupements professionnels;</span></li>
+                            <li><span>Les coopératives de production et de transformation;</span></li>
+                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
+                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
+                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
+                          </ul>
+                     
+                      </div>
+                  </div>
+                </div>  
+            </div>
+          </div><!-- Plan 1 end -->
+        </div><!-- Col end -->
+
+        <div class="col-lg-4 col-md-6">
+          <div class="ts-pricing-box">
+            <div class="ts-pricing-header" style="background-color: #db1922;">
+              <h2 class="ts-pricing-price" style="font-size: 38px;">
+                <strong>Perspectives</strong>
+              </h2>
+            </div><!-- Pricing header -->
+            
+            <div class="accordion accordion-group" id="our-values-accordion">
+                <div class="card">
+                  <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
+                      <h2 class="mb-0">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                            Cliquez ici pour lire
+                        </button>
+                      </h2>
+                  </div>
+                
+                  <div  class="accordion-collapse collapse" id="faq-content-1" data-bs-parent="#faqlist">
+                      <div class=" accordion-body" style="text-align: left !important;">
+                      
+                          <ul>
+                            <li><span>Restructurer le cadre juridique et institutionnel pour le rendre plus incitatif et engageant;</span></li>
+                            <li><span>Rechercher et améliorer l'accès au financement par la mise en place d’institutions de financement dotées de mécanismes de garantie;</span></li>
+                            <li><span>Encourager l'initiative des hommes, des femmes, jeunes et moins jeunes, des micros entrepreneurs urbains et ruraux à la création et à l'innovation en partenariat avec les Organisations Non Gouvernementales, associations et autres acteurs de l’écosystème entrepreneurial;</span></li>
+                            <li><span>Faciliter l'accès à l'information, aux conseils et l'accès aux réseaux;</span></li>
+                            <li><span>Renforcer les capacités des acteurs et améliorer la compétitivité des entreprises congolaises;</span></li>
+                            <li><span>•	Valoriser la production locale dans la commande publique et à l'exportation.</span></li>
+                          </ul>
+                     
+                      </div>
+                  </div>
+                </div>  
+            </div>
+          </div><!-- Plan 1 end -->
+        </div><!-- Col end -->
+       
+
+        
+
+        
+
+      </div>
+      <!--/ Content row end -->
+
+    </div><!-- Conatiner end -->
+  </section>
   
 
     <!-- ======= Stats Counter Section ======= -->
@@ -223,8 +348,8 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
-                        <td>{{ secteur.NomSecteurActivite }}</td>
-                        <td>{{ secteur.mpmes.length || 0 }}</td>
+                        <td v-if="secteur.secteur_activite">{{ secteur.secteur_activite.NomSecteurActivite }}</td>
+                        <td v-if="secteur.secteur_activite">{{ secteur.nbre || 0 }}</td>
                       </tr>
                      
                     </tbody>
@@ -245,8 +370,8 @@
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(region, index) in regionOptions" :key="index">
                       
-                        <td>{{ region.NomRegion }}</td>
-                           <td>{{ region.mpmes.length || 0 }}</td>
+                        <td>{{ region.region.NomRegion }}</td>
+                           <td>{{ region.nbre || 0 }}</td>
                       </tr>    
                     </tbody>
                   </table>
@@ -290,7 +415,7 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
-                        <td>{{ statut.CodeStatutJuridique }}</td>
+                        <td>{{ statut.statut_juridique.NomStatutJuridique }}</td>
                            <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
                            <td>{{ statut.mpmes || 0 }}</td>
                         
@@ -308,7 +433,7 @@
       </div>
     </section>
     <!-- End Our Team Section -->
-    <section id="testimonials" class="testimonials">
+    <!-- <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
@@ -338,7 +463,7 @@
                   </p>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
 
             <div class="testimonial-wrap">
               <div class="">
@@ -360,7 +485,7 @@
                   </p>
                 </div>
               </div>
-            </div><!-- End testimonial item -->  <div class="testimonial-wrap">
+            </div> <div class="testimonial-wrap">
               <div class="">
                 <div class="testimonial-item">
                   <div class="d-flex align-items-center">
@@ -380,7 +505,7 @@
                   </p>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
            
 
 
@@ -389,7 +514,7 @@
         </div>
 
       </div>
-    </section>
+    </section> -->
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="clients" class="clients" >
       <div class="section-header">
@@ -407,13 +532,6 @@
       </div>
     </section> 
 
-    <section id="newsletter" class="newsletter">
-      
-      <div class="newsletter-container">
-      <div class="section1"></div>
-      <div class="section2"></div>
-      </div>
-    </section>
 
 </main>
 <!-- End Présentation de la directiion Section -->
@@ -508,42 +626,7 @@ async  mounted() {
         }
       }
     });
-    const swiper2 = await new Swiper('.swiper-temoignage', {
-      speed: 400,
-      loop: false,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false
-      },
-      slidesPerView: 'auto',
-      pagination: {
-        el: '.swiper-pagination2',
-        type: 'bullets',
-        clickable: true
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 2,
-          spaceBetween: 10
-        },
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 10
-        },
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 10
-        },
-        992: {
-          slidesPerView: 2,
-          spaceBetween: 30
-        },
-        1400: {
-          slidesPerView: 2,
-          spaceBetween: 10
-        }
-      }
-    });
+  
   await this.fetchTotalEmploisAndMpmeData()
   await  new PureCounter();
     this.lightbox = GLightbox({ 
@@ -574,6 +657,8 @@ await this.fetchDataJuridique()
     await this.$store.dispatch('fetchTotalEmploisFemmeAndTotalMpme');
     this.totalEmplois = this.$store.getters['getTotalEmploisFemme'];
     this.totalMpme = this.$store.getters['getTotalMpme'].total;
+    console.log('Données de la réponse2233333334444444444 :', this.totalEmplois , this.totalMpme);
+
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error.message);
   }
@@ -719,14 +804,42 @@ async fetchRegionOptions() {
     justify-content: center;
 
 }
-.swiper-slide2{
-  width: 200px !important;
-    border: 1px solid var(--color-secondary);
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.missions-bg {
+    background: #ededed url('@/assets/img/skyscraper.jpg') fixed top center no-repeat;
+}
+.ts-pricing-box {
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+    background: #f9f9f9;
+}
 
+.ts-pricing-box .ts-pricing-header {
+    background: #252525;
+    color: #fff;
+    position: relative;
+    padding: 30px 20px;
+}
+.ts-pricing-box .ts-pricing-price {
+    font-size: 44px;
+    color: #fff;
+    margin: 15px 0 0;
+    display: inline-block;
+    font-family: auto;
+}
+
+.accordion>.card>.card-header {
+    border-radius: 0;
+    margin-bottom: -1px;
+}
+
+.accordion-group .card-header .btn {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 13px 15px;
+    color: #fff;
+    padding-bottom: 10px;
 }
 
 .sign {

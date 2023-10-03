@@ -6,12 +6,13 @@ import Accueil from '../views/Public/Accueil.vue'
 
 import Apropos from '../views/Public/DNPME-CL/apropos.vue'
 import Mot from '../views/Public/DNPME-CL/mot.vue'
+import Documents from '../views/Public/Documentation.vue'
 import Organigramme from '../views/Public/DNPME-CL/organigramme.vue'
 import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
 
+
 import Liste from '../views/Public/Liste_PME.vue'
 import Statistique from '../views/Public/Statistique.vue'
-import Documents from '../views/Public/Documentation.vue'
 import Offre from '../views/Public/Opportunite/offre.vue'
 import Emploi from '../views/Public/Opportunite/emploi.vue'
 import Connexion from '../views/Public/Connexion.vue'
@@ -29,6 +30,7 @@ import Formalisation from '../views/Public/Formalisation.vue'
 import Actulite from '../views/Public/Actualite.vue'
 import ActuliteDetail from '../views/Public/ActualiteDetail.vue'
 import Aide from '../views/Public/DemandeAide.vue'
+import Contact from '../views/Public/Contact.vue'
 
 import Partenaire from '../views/Public/Partenaire/partenaire.vue'
 import DemandePartenanriat from '../views/Public/Partenaire/demandePartenanriat.vue'
@@ -51,13 +53,14 @@ const router = createRouter({
          { path: '/dnpme/apropos', name: 'Apropos', component: Apropos},
          { path: '/dnpme/mot-de-la-dn', name: 'Mot', component: Mot},
          { path: '/dnpme/organigramme', name: 'Organigramme', component: Organigramme},
+         { path: '/dnpme/Reformes-textes-de-lois', name: 'documents', component: Documents},
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
          { path: '/actualites/:id', name: 'ActuliteDetail', component: ActuliteDetail , props:true },
          { path: '/statistique', name: 'statistique', component: Statistique},
          { path: '/formalisation', name: 'Formalisation', component: Formalisation},
-         { path: '/reglementations', name: 'documents', component: Documents},
+         { path: '/contact', name: 'Contact', component: Contact},
 
          { path: '/partenaires', name: 'Partenaire', component: Partenaire},
          { path: '/partenaires/demande', name: 'DemandePartenanriat', component: DemandePartenanriat},

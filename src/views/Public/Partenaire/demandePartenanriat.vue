@@ -348,25 +348,12 @@ textarea {
 .input-groupe textarea:focus {
   border-color: var(--color-primary);
 }
-
-.form-select:focus {
-  border-color: var(--color-primary);
-  outline: 0;
-  box-shadow: 0 0 0 0 rgba(101, 113, 255, .25);
-}
-
-
 .btn {
   display: flex;
   flex-direction: column;
   align-items: center;
 
 }
-
-.signup a:hover {
-  text-decoration: underline var(--color-primary);
-}
-
 .sign {
   display: block;
   width: 300px;
@@ -380,30 +367,6 @@ textarea {
   margin-top: 30px;
 }
 
-.signup {
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(156, 163, 175, 1);
-}
-
-.signin {
-  color: rgba(88, 87, 87, 0.822);
-  font-size: 14px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-
-
-.signin span {
-  color: royalblue;
-}
-
-.signin span:hover {
-  text-decoration: underline royalblue;
-  cursor: pointer;
-}
 .no-scroll {
   overflow: hidden;
 
@@ -415,7 +378,6 @@ textarea {
 @media screen and (max-width: 768px) {
 
   .form-container {
-
     width: 700px;
     max-width: 100%;
   }
@@ -424,7 +386,6 @@ textarea {
     display: flex;
     flex-direction: column;
   }
-
 
 }
 
@@ -437,11 +398,6 @@ textarea {
   .sign {
 
     width: 200px;
-
-  }
-
-  .signin {
-    font-size: 12px;
 
   }
 

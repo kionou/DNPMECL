@@ -40,13 +40,13 @@
               <li><router-link to="/dnpme/apropos">A PROPOS</router-link></li>
               <li><router-link to="/dnpme/mot-de-la-dn">MOT DE LA DN</router-link></li>
               <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li>
+              <li><router-link  class="text-uppercase" to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
             </ul>
            </li>
             <li><router-link to="/actualites">Actualités</router-link></li>
             <li><router-link to="/statistique">Statistiques</router-link></li>
             <li><router-link to="/formalisation">Formalisation</router-link></li>
-            <li><router-link to="/reglementations">Réglementations</router-link></li>
             <li class="dropdown">
             <router-link to="#">Partenaires <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
             <ul  class="dropdown-menu">
@@ -56,6 +56,7 @@
             </ul>
            </li>
             <li ><router-link to="/opportunites">Opportunités </router-link> </li>
+            <li ><router-link to="/contact">Contact </router-link> </li>
 
           </ul>
         </nav>

@@ -210,24 +210,8 @@ padding: 20px 10px !important;
   border-color: var(--color-primary);
 }
 
-.forgot {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--color-primary);
-  margin: 8px 0 14px 0;
-}
 
-.forgot a,.signup a {
-  color: rgba(243, 244, 246, 1);
-  text-decoration: none;
-  font-size: 14px;
-}
 
-.forgot a:hover, .signup a:hover {
-  text-decoration: underline var(--color-primary);
-}
 
 .sign {
   display: block;
@@ -242,12 +226,6 @@ padding: 20px 10px !important;
   margin-top: 50px;
 }
 
-.signup {
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(156, 163, 175, 1);
-}
 
 .supp {
     font-size: 15px;
