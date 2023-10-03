@@ -356,7 +356,6 @@
 
 <script>
 import axios from '@/lib/axiosConfig.js'
-
 import Position from '../../components/Public/LISTE_PME/position.vue'
 import Loading from '../../components/Public/other/preloader.vue';
 import Pag from '../../components/Public/other/pag.vue';

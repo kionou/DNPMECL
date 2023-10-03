@@ -1,5 +1,25 @@
 <template>
     <Loading v-if="loading"></Loading>
+    <div id="banner-area" class="banner-area" >
+    <div class="banner-text">
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-heading">
+                  <h1 class="banner-title">OPPORTUNITES</h1>
+                  <nav aria-label="breadcrumb">
+                     
+                    <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">opportunites</li>
+                    </ol>
+                  </nav>
+                </div>
+            </div><!-- Col end -->
+          </div><!-- Row end -->
+      </div><!-- Container end -->
+    </div><!-- Banner text end -->
+  </div>
   <div class="container_content" data-aos="fade-up">
 
       <div class="section-header ">
@@ -89,7 +109,7 @@
                   </h5>
 
                   <div class="texte">
-                      <p class="texte-content chef"><i class="bi bi-briefcase-fill"></i> <span> {{obtenirValeursPourCles(offre.liste_sous_secteurs)}} </span></p>
+                      <!-- <p class="texte-content chef"><i class="bi bi-briefcase-fill"></i> <span> {{obtenirValeursPourCles(offre.liste_sous_secteurs)}} </span></p> -->
                       <p class="texte-content open"> <i class="bi bi-calendar-plus-fill"></i> <span> {{ offre.dateCreation }}</span></p>
                       <p class="texte-content close"> <i class="bi bi-calendar2-x-fill"></i> <span> {{ offre.dateCloture }}</span></p>
                       <!-- <p class="texte-content maps"><i class="bi bi-geo-alt-fill"></i> <span>Nzérékoré , Macenta</span> -->
@@ -245,6 +265,62 @@ const pmeName = item.titre || '';
 
 <style lang="css" scoped>
 
+
+/* debut banier */
+.banner-area {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #266486;
+    min-height: 250px;
+    background-image: url('@/assets/img/img1.webp'); 
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+ 
+}
+.banner-area:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+}
+.breadcrumb-item , .breadcrumb-item a{
+    color: #fff !important;
+}
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    /* -webkit-transform: translateY(-50%); */
+    transform: translateY(-50%);
+}
+.banner-heading {
+    text-align: center;
+}
+.banner-title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 58px;
+    font-weight: 900;
+}
+.breadcrumb {
+    padding: 0;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff !important;
+}
+
+/* fin banier */
 .noresul {
 border: 1px solid #F9D310;
 max-width: 1140px;

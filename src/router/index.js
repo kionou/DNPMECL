@@ -33,6 +33,7 @@ import Aide from '../views/Public/DemandeAide.vue'
 import Contact from '../views/Public/Contact.vue'
 
 import Partenaire from '../views/Public/Partenaire/partenaire.vue'
+import DetailPartenaire from '../views/Public/Partenaire/detailPartenaire.vue'
 import DemandePartenanriat from '../views/Public/Partenaire/demandePartenanriat.vue'
 import InfoMpme from '../views/Public/Partenaire/infoMpme.vue'
 
@@ -63,6 +64,7 @@ const router = createRouter({
          { path: '/contact', name: 'Contact', component: Contact},
 
          { path: '/partenaires', name: 'Partenaire', component: Partenaire},
+         { path: '/partenaires/:id', name: 'DetailPartenaire', component: DetailPartenaire  ,  props:true},
          { path: '/partenaires/demande', name: 'DemandePartenanriat', component: DemandePartenanriat},
          { path: '/partenaires/info-mpme', name: 'InfoMpme', component: InfoMpme},
 

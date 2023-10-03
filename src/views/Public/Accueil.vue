@@ -146,7 +146,7 @@
 
         <div class="col-lg-4 col-md-6">
           <div class="ts-pricing-box">
-            <div class="ts-pricing-header" style="background-color: #056839;">
+            <div class="ts-pricing-header" style="background-color: var(--color-primary);">
               <h2 class="ts-pricing-price" style="font-size: 38px;">
                 <strong>Objectifs</strong>
               </h2>
@@ -180,7 +180,7 @@
 
         <div class="col-lg-4 col-md-6">
           <div class="ts-pricing-box">
-            <div class="ts-pricing-header" style="background-color: #fed517;">
+            <div class="ts-pricing-header" style="background-color: var(--color-secondary);">
               <h2 class="ts-pricing-price" style="font-size: 38px; color: #000;">
                 <strong>cibles</strong>
               </h2>
@@ -609,20 +609,20 @@ async  mounted() {
       },
       breakpoints: {
         320: {
-          slidesPerView: 2,
+          slidesPerView: 1,
           spaceBetween: 40
         },
         480: {
-          slidesPerView: 3,
-          spaceBetween: 60
+          slidesPerView: 2,
+          spaceBetween: 30
         },
         640: {
-          slidesPerView: 4,
-          spaceBetween: 80
+          slidesPerView: 3,
+          spaceBetween: 20
         },
         992: {
-          slidesPerView: 4,
-          spaceBetween: 120
+          slidesPerView: 5,
+          spaceBetween: 10
         }
       }
     });
@@ -657,7 +657,7 @@ await this.fetchDataJuridique()
     await this.$store.dispatch('fetchTotalEmploisFemmeAndTotalMpme');
     this.totalEmplois = this.$store.getters['getTotalEmploisFemme'];
     this.totalMpme = this.$store.getters['getTotalMpme'].total;
-    console.log('Données de la réponse2233333334444444444 :', this.totalEmplois , this.totalMpme);
+    console.log('Données de la réponse:', this.totalEmplois , this.totalMpme);
 
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error.message);
@@ -796,12 +796,13 @@ async fetchRegionOptions() {
 
 <style lang="css" scoped>
 .swiper-slide{
-  width: 200px !important;
+  /* width: 200px !important; */
     border: 1px solid var(--color-secondary);
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 
 }
 .missions-bg {

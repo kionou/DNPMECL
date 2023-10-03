@@ -4,7 +4,7 @@
       <div class="row gy-4">
         <div class="col-lg-6 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center flex-column">
-            <img src="@/assets/img/MADOU.svg" alt="">
+            <img src="@/assets/img/armoirie.png" alt="">
           <h1 class="my-4" style="color: white; font-size: 27px !important; ;">DNPME-CL</h1>
           <p style="color: white;">Direction Nationale des PME et du Contenu Local.</p>
 

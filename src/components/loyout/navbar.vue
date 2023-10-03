@@ -39,7 +39,7 @@
         <ul  class="dropdown-menu">
               <li><router-link to="/dnpme/apropos">A PROPOS</router-link></li>
               <li><router-link to="/dnpme/mot-de-la-dn">MOT DE LA DN</router-link></li>
-              <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li>
+              <!-- <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li> -->
               <li><router-link  class="text-uppercase" to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
             </ul>

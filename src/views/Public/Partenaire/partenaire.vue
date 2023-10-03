@@ -1,7 +1,27 @@
 <template>
   <Loading v-if="loading"></Loading>
+  <div id="banner-area" class="banner-area" >
+    <div class="banner-text">
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-heading">
+                  <h1 class="banner-title">PARTENAIRES</h1>
+                  <nav aria-label="breadcrumb">
+                     
+                    <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">partenaires</li>
+                    </ol>
+                  </nav>
+                </div>
+            </div><!-- Col end -->
+          </div><!-- Row end -->
+      </div><!-- Container end -->
+    </div><!-- Banner text end -->
+  </div>
 <div class="container_content" data-aos="fade-up">
-
+  
     <div class="section-header ">
         <h2>LISTES DES PARTENAIRES</h2>
     </div>
@@ -15,35 +35,20 @@
 
     </div>
 
-    <div class="class1 mt-8" data-aos="fade-up" data-aos-delay="100">
+    <div class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
+        data-aos-delay="100">
 
          <div v-if="paginatedItems.length === 0" class="noresul">
            <span> Vous n'avez pas encore de partenaires </span>
            </div> 
+           <div v-else class="card" v-for="partenaire in paginatedItems" :key="partenaire.id" @click="$router.push({ path: `/partenaires/${partenaire.CodePartenaire}`, })" >
 
-  <div  v-else class="task" v-for="partenaire in paginatedItems" :key="partenaire.id" >
+          <img v-if="partenaire.logo === null" src="@/assets/img/ninba1.png" alt="">
+          <!-- <img  v-if="partenaire.logo === null" src="@/assets/img/partenariat/part1.png" alt=""> -->
+          <img v-else :src="partenaire.logo" alt="">
+            <span>{{partenaire.CodePartenaire }}</span>
+    </div>
 
-<div class="tag">
-  <div class="image">
-    <img  v-if="partenaire.logo === null" src="@/assets/img/ninba1.png" alt="">
-    <img v-else :src="partenaire.logo" alt="">
-  </div>
-  <div class="texte">
-    <p class="para">{{ partenaire.NomPartenaire }}</p>
-  </div>
-</div>
-
-<div class="item">
- <p>La SARL est une forme juridique de société commerciale à responsabilité limitée constituée
-   par deux associés au minimum (ou par un seul associé lorsqu’elle prend la forme d’une SARL unipersonnelle). En SARL, 
-  la responsabilité des associés est limitée au montant de leurs apports.</p>
-  
-</div>
-<div class="boutton">
-  <a href="#" class="sign">Visitez ici</a>
- 
-</div>
-</div>
     </div>
     <div class="container_pagination">
 <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
@@ -52,10 +57,9 @@
 </template>
 
 <script>
+
 import Loading from '../../../components/Public/other/preloader.vue';
 import Pag from '../../../components/Public/other/pag.vue';
-
-
 export default {
 name: 'Mpmeoffre',
 components: {
@@ -145,7 +149,61 @@ this.partenairesOptions = [...this.$store.getters['getPartenaires']];
 </script>
 
 <style lang="css" scoped>
+/* debut banier */
+.banner-area {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #266486;
+    min-height: 250px;
+    background-image: url('@/assets/img/img1.webp'); 
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+ 
+}
+.banner-area:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+}
+.breadcrumb-item , .breadcrumb-item a{
+    color: #fff !important;
+}
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    /* -webkit-transform: translateY(-50%); */
+    transform: translateY(-50%);
+}
+.banner-heading {
+    text-align: center;
+}
+.banner-title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 58px;
+    font-weight: 900;
+}
+.breadcrumb {
+    padding: 0;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff !important;
+}
 
+/* fin banier */
 .noresul {
 border: 1px solid #F9D310;
 max-width: 1140px;
@@ -244,6 +302,39 @@ cursor: pointer;
 }
 }
 
+.contenu {
+
+padding: 15px 10px;
+}
+.card {
+background-color: #fff;
+border-radius: 3px;
+padding: 10px;
+margin: 10px;
+text-align: center;
+width: 220px;
+height: 170px;
+max-width: 100%;
+align-items: center;
+justify-content: space-around;
+cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.card img {
+/* border-radius: 50%;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+width: 62%;
+/* border: 1px solid blue; */
+/* height: 75px; */
+}
+
+
+.card span {
+color: #777;
+display: block;
+font-weight: 800;
+}
 
 .container_pagination {
 width: auto;
@@ -256,106 +347,6 @@ box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 margin: 5px;
 
 }
-
-
-
-.task {
-  position: relative;
-  color: #2e2e2f;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  /* box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12); */
-  margin: 0 10px 10px 0;
-  border: 1px solid #dee2e6;
-  width: 350px;
-  display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.task .para {
-  font-size: 14px;
-  width: 226px;
-  color: #777;
-  display: block;
-  font-weight: 800;
-}
-
-.texte {
-  margin-top: 10px;
-}
-
-.tag {
-  font-size: 12px;
-  width: 100%;
-  display: flex;
-  /* border: 1px solid red; */
-    height: 90px;
-}
-
-.tag .image {
-  /* height: 100px;
-  width: 100px; */
-  margin-right: 10px;
-  border: 1px solid #dee2e6;
-  display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.tag .image img {
-
-  width: 100%;
-  height: 100%;
-  /* border-radius: 50%; */
-
-}
-
-
-p {
-  margin-bottom: 0 !important;
-}
-
-
-.boutton {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-top: 10px;
-}
-
-.item p {
-    line-height: 24px;
-    font-size: 14px;
-    margin-bottom: 0;
-    margin: 15px 0;
-}
-.sign {
-  display: block;
-  width: 150px;
-  background-color: var(--color-secondary);
-  padding: 0.75rem;
-  text-align: center;
-  color: black;
-  border: none;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-.sign:hover {
-  background-color: #fff;
-  border: 1px solid var(--color-secondary);
-  cursor: pointer;
-
-}
-
-.class1{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
 </style>
+
+

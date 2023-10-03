@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="banner-area" class="banner-area" >
+   <div id="banner-area" class="banner-area" >
     <div class="banner-text">
       <div class="container">
           <div class="row">
@@ -29,37 +29,37 @@
 
       <div class="class">
         <div class="">
-          <div class="ts-service-box-bg text-center h-100">
+          <div class="ts-service-box-bg text-center">
             <span class="ts-service-icon icon-round">
               <i class="bi bi-geo-alt"></i>
             </span>
             <div class="ts-service-box-content">
               <h4>Adresse</h4>
-              <p>En face de la Banque Sino-Congolaise pour l'Afrique (BSCA), rue Docteur Janot, Centre-ville </p>
+              <p>Petit Simbaya Près de l'Hôpital Flamboyant,Conakry, Guinée </p>
             </div>
           </div>
         </div><!-- Col 1 end -->
 
         <div class="">
-          <div class="ts-service-box-bg text-center h-100">
+          <div class="ts-service-box-bg text-center ">
             <span class="ts-service-icon icon-round">
                 <i class="bi bi-envelope"></i>
             </span>
             <div class="ts-service-box-content">
               <h4>Email</h4>
-              <p>secretariat-dg@dgpme.com</p>
+              <p>infodnpmecl@gmail.com</p>
             </div>
           </div>
         </div><!-- Col 2 end -->
 
         <div class="">
-          <div class="ts-service-box-bg text-center h-100">
+          <div class="ts-service-box-bg text-center ">
             <span class="ts-service-icon icon-round">
                 <i class="bi bi-telephone"></i>
             </span>
             <div class="ts-service-box-content">
               <h4>Téléphone</h4>
-              <p>(+242) 22 605 79 79 <br> BP : 13387</p>
+              <p>(+224) 622 33 63 43 <br> BP : 13387</p>
             </div>
           </div>
         </div><!-- Col 3 end -->
@@ -83,15 +83,16 @@
 
       <div class="google-map">
         <!-- <div id="map" class="map" data-latitude="-4.277474412916962" data-longitude="15.277883914738364" data-marker="Publics/images/marker.png" data-marker-name="DGPME"></div> -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d497.33889365146695!2d15.276104294150748!3d-4.276255100126738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2scd!4v1609515655837!5m2!1sfr!2scd" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d983.4238443767539!2d-13.618187735697543!3d9.62147577943573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf1cd505b67dee35%3A0x85079bf78f0736b6!2sDIRECTION%20NATIONALE%20DES%20PETITES%20ET%20MOYENNES%20ENTREPRISES!5e0!3m2!1sfr!2sci!4v1696330465785!5m2!1sfr!2sci" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <div class="gap-40" id="contact"></div>
 
-      <div class="row">
+      <div class="class1">
         <div class="col-md-6">
           <div class="form-container">
-        <p class="title">ECRIRE À LA DGPME</p>
+        <p class="title">ECRIRE À LA DNPME-CL</p>
        
         <small class="text-center">{{error}}</small>
         <form class="form">
@@ -154,7 +155,7 @@
 
 
         <div class="col-md-6" style="padding: 25px 15px;">
-          <h3 class="column-title">Vos doléances</h3>
+          <p class="title">Vos doléances</p>
 
           <p>N'hésitez pas à prendre contact avec les différents organes d'appui pour tous vos besoins en entreprise. Cliquez sur les liens ci-dessous afin d'écrire directement à l'entité concernée en fonction de votre besoin.</p>
             
@@ -198,12 +199,26 @@ export default {
 <style lang="css" scoped>
 .banner-area {
     position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #266486;
     min-height: 250px;
-    color: #fff;
-    /* background-position: 50% 50%;
-    background-size: 110%; */
-    background: bottom center url('@/assets/img/img1.webp');
-    filter: brightness(70%) !important;
+    background-image: url('@/assets/img/img1.webp'); 
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+ 
+}
+.banner-area:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+}
+.breadcrumb-item , .breadcrumb-item a{
+    color: #fff !important;
 }
 .banner-text {
     position: absolute;
@@ -254,19 +269,23 @@ export default {
     justify-content: space-evenly;
     border-radius: 6px;
 }
-.ts-service-icon.icon-round i {
-    font-size: 30px;
-    color: #fff;
-    background: #056839;
+.ts-service-icon.icon-round{
+
+  color: #fff;
+    background: var(--color-primary);
     text-align: center;
-    /* border-radius: 100%; */
+    border-radius: 100%;
     width: 60px;
     height: 60px;
     line-height: 60px;
     margin-bottom: 20px;
     position: relative;
     float: none;
-    padding: 10px;
+    /* padding: 10px; */
+}
+.ts-service-icon.icon-round i {
+    font-size: 30px;
+  
 }
 .ts-service-box-bg h4, .ts-service-box-bg h3 {
     color: #101010;
@@ -414,16 +433,13 @@ textarea {
   font-weight: 600;
   margin-top: 30px;
 }
-
-.no-scroll {
-  overflow: hidden;
-
-}
-.scroll{
-  overflow: auto;
+.class1{
+display: flex;
+flex-direction: row;
 }
 
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 992px) {
 
   .form-container {
     width: 700px;
@@ -434,6 +450,13 @@ textarea {
     display: flex;
     flex-direction: column;
   }
+  .class1{
+
+flex-direction: column;
+}
+.col-md-6{
+  width: 100%;
+}
 
 }
 
@@ -458,6 +481,8 @@ textarea {
   background-color: white;
 
 }
+
+
 
 
 </style>
