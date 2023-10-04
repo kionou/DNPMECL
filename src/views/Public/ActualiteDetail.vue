@@ -1,170 +1,108 @@
 <template>
+    <Loading v-if="loading"></Loading>
     <div>
-        <section>
-            <div class="containerr" style="padding: 20px;">
-                <div class="section-title">
-                    <h2>
-                        Détails actualités
-                    </h2>
-                </div>
+        <div id="banner-area" class="banner-area">
+            <div class="banner-text">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="banner-heading">
+                                <h1 class="banner-title">actualités</h1>
+                                <nav aria-label="breadcrumb">
+
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">actualités</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div><!-- Col end -->
+                    </div><!-- Row end -->
+                </div><!-- Container end -->
+            </div><!-- Banner text end -->
+        </div>
+
+        <div class="section-header " style="padding-bottom: 0 !important;">
+            <h2 style="color: var(--color-primary);">ACTUALITES </h2>
+        </div>
+
+        <section id="main-container" class="main-container" style="padding:0 0 60px !important;">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="main-container fl-wrap fix-container-init">
-                            <!-- single-post-header  -->
-                            <div class="single-post-header fl-wrap">
-                                <div class="clearfix"></div>
-                                <h1 style="font-size: 10px important!;">21ème édition du prix d’excellence de la Direction
-                                    Générale des Impôts</h1>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="class1">
-                            <!-- <img src="@/assets/img/carousel/carousel1.jpg" class="" alt="..."> -->
-                            <div class="container swiper-container" data-aos="zoom-out">   
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide ee" style="width: 100% !important;" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">    
-            </div>
 
-            <div class="swiper-slide ee" style="width: 100% !important;" >
-             <img  src="@/assets/img/actualite/3.webp" alt="">	    
-            </div>
-
-            <div class="swiper-slide ee" style="width: 100% !important;" >
-             <img  src="@/assets/img/actualite/3.jpg" alt="">	    
-            </div>
+                    <div class="col-lg-8 mb-5 mb-lg-0 article">
 
 
-            <div class="swiper-slide ee" style="width: 100% !important;" >
-             <img  src="@/assets/img/actualite/4.jpg" alt="">	    
-            </div>
-
-          </div>
-          <div class="swiper-pagination"></div>
-      </div>
-            
-                            </div>
-
-                            <div class="single-post-content fl-wrap">
-                                <div class="clearfix"></div>
-                                <div class="single-post-content_text" id="font_chage">
-                                    <p class="has-drop-cap"> </p>
-                                    <p class="ydpd5fc33faMsoNormal"
-                                        style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
-                                        Dans un contexte de crise économique mondiale due à la pandémie de la Covid-19, la
-                                        guerre russo-ukrainienne et singulièrement, à l’environnement
-                                        sécuritaire difficile de la sous-région ouest-africaine, les problèmes liés au
-                                        financement de l’économie sont réels. Pour le Ministre du Budget
-                                        et du Portefeuille de l’État, devant une telle situation, il n’y a pas lieu de
-                                        chercher d’autres solutions. «Aujourd’hui, plus qu’hier, chaque
-                                        pays doit compter sur ses propres ressources », a affirmé Moussa Sanogo, le mercredi
-                                        19 juillet, à Cocody, à l’occasion de la 21ème&nbsp;édition
-                                        du prix d’excellence de la Direction Générale des Impôts (Dgi). Un appel à une
-                                        mobilisation accrue de ressources internes. Pour y arriver,
-                                        le Ministre a demandé aux lauréats de poursuivre le travail avec la même volonté et
-                                        de&nbsp;partager leurs expériences. Moussa Sanogo a
-                                        félicité le Directeur Général des Impôts, Ouattara&nbsp;Sié Abou, qui a assuré la
-                                        pérennité de ce prix qui participe de la bonne
-                                        gouvernance au sein de l’administration fiscale et constitue un moyen de consolider
-                                        la culture de la performance.
-                                    </p>
-
-                                    <p class="ydpd5fc33faMsoNormal"
-                                        style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
-                                        Ouattara Sié Abou a souligné que la Direction Générale des Impôts s’est engagée dans
-                                        la mise en œuvre d’un programme stratégique
-                                        qui prend en compte tous les axes des missions des agents. « Il s’agit pour la Dgi
-                                        de s’assurer que les recettes fiscales sont
-                                        collectées au bon moment et de la meilleure des manières », a-t-il rassuré. A l’en
-                                        croire, l’administration fiscale a pris de
-                                        nouvelles résolutions pour atteindre des résultats probants. Le prix d’excellence,
-                                        a-t-il indiqué, est le reflet des qualités
-                                        de professionnalisme et d’éthique exigées à tous les agents, et vise à honorer ceux
-                                        d’entre eux qui se sont distingués positivement
-                                        dans l’exécution de leur mission. « Ce prix est à la fois, un puissant facteur de
-                                        saine émulation et un véritable hymne à la
-                                        gloire au travail. Aux lauréats, je salue vos performances mais sachez qu’à partir
-                                        d’aujourd’hui, le plus gros défi reste à
-                                        venir, car le plus difficile n’est pas de gravir la montagne mais d’y demeurer »,
-                                        a-t-il déclaré. Par ailleurs, le DG a rendu
-                                        hommage au parrain de cette 21e&nbsp;édition, Kanvaly Diomandé, en égrenant sa riche
-                                        carrière professionnelle et son parcours
-                                        académique exceptionnel. Selon lui, le président de la Cour des comptes est un
-                                        modèle et une excellence incarnée.
-                                    </p>
-
-                                    <p class="ydpd5fc33faMsoNormal"
-                                        style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
-                                        Kanvaly Diomandé a fait savoir que son choix pour parrainer cette cérémonie n’est
-                                        pas fortuit. Car, a-t-il relevé, la Cour
-                                        des comptes et la Dgi s’impliquent dans l’optimisation des recettes publiques.
-                                    </p>
-
-                                    <p class="ydpd5fc33faMsoNormal"
-                                        style="margin-right: 0px; margin-bottom: 1em; margin-left: 0px;">
-                                        « Il y a une complémentarité entre la Direction Générale des impôts qui collecte les
-                                        impôts et la Cour des comptes,
-                                        une juridiction qui fait un contrôle a posteriori de la bonne utilisation des
-                                        recettes », a précisé le président de
-                                        la Cour des comptes. Avec pour thème « Plan stratégique Dgi 2021-2025, un outil de
-                                        gouvernance inclusive »,
-                                        la 21e&nbsp;édition du prix d’excellence a été raflée par Dibi Serge Désiré,
-                                        Inspecteur des impôts en poste
-                                        au service de gestion du centre des moyennes entreprises du Plateau. Sept autres
-                                        agents et le service d’assiette
-                                        des impôts divers de Yopougon ont été primés au cours de cette cérémonie.
-                                    </p>
-
-                                    <p></p>
+                        <h1>{{ actualite.titre }}</h1><br>
+                        <div class="container swiper-container" data-aos="zoom-out">
+                            <div class="swiper-wrapper align-items-center">
+                                <div class="swiper-slide ee" style="width: 100% !important;" v-for="image in images"
+                                    :key="image.id">
+                                    <img :src="image" class="img-fluid" alt=" actualite" style="height: 512px !important;">
                                 </div>
                             </div>
-                            <!-- single-post-content  end   -->
+                            <div class="swiper-pagination"></div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4">
-
-
-                        <!-- sidebar   -->
-                        <div class="sidebar-content fl-wrap fixed-bar">
-
-
-                            <!-- box-actualités -->
-                            <div class="box-widget fl-wrap" style="padding: 65px 0 10px ; ">
-                                <div class="box-widget-content">
-                                    <div class="banner-widget fl-wrap">
-                                        <div class="bg-wrap">
-                                            
-                                            <img src="../../assets/img/actualite/2.jpg" alt=""
-                                                style="height:225px; width:100%">
-                                            <!-- <div class="bg" data-bg="../../ressources/img/MIA_1636_26_07_2023.jpg"></div> -->
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-widget fl-wrap" style="padding: 65px 0 10px ; ">
-                                <div class="box-widget-content">
-                                    <div class="banner-widget fl-wrap">
-                                        <div class="bg-wrap">
-                                            
-                                            <img src="../../assets/img/actualite/2.jpg" alt=""
-                                                style="height:225px; width:100%">
-                                            <!-- <div class="bg" data-bg="../../ressources/img/MIA_1636_26_07_2023.jpg"></div> -->
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- box-actualités  end -->
-
-                        </div>
-                        <!-- sidebar  end -->
+                        <p>
+                            <span style="background-color: initial;">
+                                {{ actualite.content }}
+                            </span>
+                        </p>
 
                     </div>
-                </div>
-                <div class="limit-box fl-wrap"></div>
-            </div>
+                    <!-- Content Col end -->
+
+
+
+                    <div class="col-lg-4">
+
+                        <div class="sidebar sidebar-right">
+
+                            <div class="widget">
+                                <h3 class="widget-title">A PROPOS DE LA DNPME-CL</h3>
+                                <ul class="arrow nav nav-tabs">
+                                    <li><router-link to="/dnpme/router-linkpropos">A propos</router-link></li>
+                                    <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
+                                    <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
+                                            lois</router-link></li>
+                                    <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+
+                                </ul>
+                            </div>
+
+                            <div class="widget recent-posts">
+                                <h3 class="widget-title">Autres articles</h3>
+                                <ul class="list-unstyled">
+
+                                    <li class="d-flex align-items-center" v-for="actualiteRecent in ActualitesOptions" :key="actualiteRecent.id">
+                                        <div class="posts-thumb" >
+                                            <a :href="`/actualites/${actualiteRecent.id}`">
+                                                <img loading="lazy" alt="img"
+                                                    :src="updatePicture( actualiteRecent.images)">
+                                            </a>
+                                           
+                                        </div>
+
+                                        <div class="post-info" >
+                                            <h4 class="entry-title" style="text-transform: capitalize;">
+                                                <a :href="`/actualites/${actualiteRecent.id}`">
+                                                {{ actualiteRecent.titre }}
+                                            </a>
+                                            </h4>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+
+                        </div><!-- Sidebar end -->
+                    </div><!-- Sidebar Col end -->
+
+                </div><!-- Main row end -->
+
+            </div><!-- Container end -->
         </section>
     </div>
 </template>
@@ -173,125 +111,266 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 import axios from '@/lib/axiosConfig.js'
+import Loading from '../../components/Public/other/preloader.vue';
 export default {
     name: 'DNPMECLActualiteDetail',
-    props:['id'],
+    props: ['id'],
+    components: {
+        Loading
+
+    },
 
     data() {
         return {
+            loading: true,
+            actualite: '',
+            images: [],
+            ActualitesOptions:[], 
 
         };
     },
 
-  async  mounted() {
-    const swiper = await new Swiper('.swiper-container', {
-      speed: 400,
-      loop: false,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false
-      },
-      slidesPerView: 'auto',
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'bullets',
-        clickable: true
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 40
-        },
-        480: {
-          slidesPerView: 1,
-          spaceBetween: 60
-        },
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 80
-        },
-        992: {
-          slidesPerView: 1,
-          spaceBetween: 20
-        }
-      }
-    });
-        console.log('id',this.id);
-      await this.fecthActualitesDetail()
-
+    async mounted() {
+        const swiper = await new Swiper('.swiper-container', {
+            speed: 400,
+            loop: false,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
+            slidesPerView: 'auto',
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 1
+                },
+                480: {
+                    slidesPerView: 1,
+                    spaceBetween: 1
+                },
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 1
+                },
+                992: {
+                    slidesPerView: 1,
+                    spaceBetween: 1
+                }
+            }
+        });
+        await this.fecthActualitesDetail()
+        this.images = this.actualite.images.split('|')
+       await  this.fetchActualites()
     },
 
     methods: {
+        updatePicture(picture){
+       return picture.split('|')[0]
+        // Object.keys(monObjet).map(key => monObjet[key])
+      },
         async fecthActualitesDetail() {
-        
-         try {
-         const response = await axios.get(`/details/actualites/${this.id}`);
-         console.log('response.sousprefecture', response);
-        //  if (response.data.status === 'success') {
-        //    this.loading = false
-        //    this.isOpen = true
-           
-        //  } else {
-        //    this.loading = false
-        
-        //  }
-         
-       } catch (error) {
-         console.error('Erreur post:', error);
-       }
-         
-         
 
-   },
+            try {
+                const response = await axios.get(`/details/actualites/${this.id}`);
+                console.log('response.sousprefecture', response);
+                if (response.data.status === 'success') {
+                    this.actualite = response.data.data
+
+                    console.log('response.sousprefecture', response.data.data);
+
+                    this.loading = false
+
+
+                } else {
+                    this.loading = false
+
+                }
+
+            } catch (error) {
+                console.error('Erreur post:', error);
+            }
+
+
+
+        },
+
+        async fetchActualites() {
+            try {
+                await this.$store.dispatch('fetchActualites');
+                const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
+                this.ActualitesOptions = actualites
+                console.log('Actualités récupérées :', actualites);
+                   // Triez vos actualités par ordre décroissant de date
+                        actualites.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                    // Obtenez les 3 dernières actualités
+                    this.ActualitesOptions = actualites.slice(0, 3);
+
+                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+
+                // Continuez avec le reste de votre code pour traiter les actualités
+            } catch (error) {
+                console.error('Erreur lors de la récupération des actualités :', error.message);
+            }
+        },
 
     },
 };
 </script>
 
 <style lang="css" scoped>
-section {
-    /* float: left; */
+/* section {
+    float: left;
     width: 100%;
     position: relative;
-    /* padding: 70px 0; */
+    padding: 70px 0;
     z-index: 10;
     overflow: hidden;
-}
-.class1{
-    /* height: 357px; */
-    width: 100%;
-    display: flex;
-    padding: 20px;
+} */
+.section-header {
+    padding: 30px 0;
 
 }
 
-.class1 img{
-width: 100%;
-height: 100%;
+/* debut banier */
+.banner-area {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #266486;
+    min-height: 250px;
+    background-image: url('@/assets/img/img1.webp');
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
 }
 
-.containerr {
-    /* max-width: 1300px;
-    width: 92%; */
+.banner-area:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.breadcrumb-item,
+.breadcrumb-item a {
+    color: #fff !important;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    max-width: 1170px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    border: 1px solid red;
-
-}
-
-.section-title {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    position: relative;
-}
-
-.single-slider img, .single-slider-wrap img {
     width: 100%;
-    height: auto;
+    z-index: 1;
+    /* -webkit-transform: translateY(-50%); */
+    transform: translateY(-50%);
 }
+
+.banner-heading {
+    text-align: center;
+}
+
+.banner-title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 58px;
+    font-weight: 900;
+}
+
+.breadcrumb {
+    padding: 0;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff !important;
+}
+
+@media (max-width: 992px) {
+    .banner-title {
+
+        font-size: 40px;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-title {
+
+        font-size: 30px;
+
+    }
+}
+
+@media (max-width: 500px) {
+    .banner-title {
+
+        font-size: 25px;
+
+    }
+}
+
+/* fin banier */
+
+
+.into-sub-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: normal;
+    margin: 10px 0;
+}
+
+hr {
+    background-color: #e7e7e7;
+    border: 0;
+    height: 1px;
+    margin: 40px 0;
+}
+
+
+
+h4 {
+    font-size: 18px;
+    line-height: 28px;
+    text-transform: uppercase;
+    letter-spacing: -.2px;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 48px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #101010;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+.article p {
+    text-align: justify !important;
+}
+
 .swiper-slide {
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
@@ -303,42 +382,7 @@ height: 100%;
     transition-property: -webkit-transform;
     -o-transition-property: transform;
     transition-property: transform;
-    transition-property: transform,-webkit-transform;
-}
-
-.section-title h2 {
-    text-align: left;
-    font-size: 16px;
-    font-weight: 700;
-    color: #292929;
-    text-transform: uppercase !important;
-
-}
-
-.row {
-    margin-left: -15px;
-    margin-right: -15px;
-}
-
-.fl-wrap {
-    float: left;
-    width: 100%;
-    position: relative;
-}
-
-/* .single-post-header {
-    padding: 0 0 30px;
-    border-bottom: 1px solid #eee;
-} */
-
-.single-post-header h1 {
-    font-size: 18px !important;
-    font-weight: 700;
-    text-align: left;
-}
-
-.single-post-media {
-    margin-bottom: 20px;
+    transition-property: transform, -webkit-transform;
 }
 
 .swiper-container {
@@ -350,14 +394,102 @@ height: 100%;
     z-index: 1;
 }
 
-.single-post-content_text p {
-    font-size: 12px;
+.swiper-slide {
+    width: 100% !important;
+
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+
+.sidebar-right .widget {
+    margin-left: 20px;
+}
+
+.sidebar .widget {
+    margin-bottom: 40px;
+}
+
+
+.sidebar .widget-title {
+    font-size: 16px;
+    font-weight: 700;
+    position: relative;
+    margin: 0 0 30px;
+    padding-left: 15px;
+    text-transform: uppercase;
+    border-left: 4px solid var(--color-secondary);
+}
+
+.sidebar ul.nav-tabs {
+    border: 0;
+}
+
+.sidebar ul.nav-tabs li {
+    color: #303030;
+    line-height: normal;
+}
+
+
+.sidebar ul.nav-tabs li {
+    width: 100%;
+}
+
+.sidebar ul.nav-tabs li a {
+    color: #303030;
+    border-radius: 0;
+    padding: 15px 0;
+    padding-left: 0;
     font-weight: 400;
-    color: #000;
-}
-.swiper-slide{
-width: 100% !important;
-
+    border-bottom: 1px solid #ddd;
+    display: block;
+    transition: 400ms;
 }
 
-</style>
+.widget.recent-posts .widget-title {
+    margin-bottom: 35px;
+}
+
+.widget.recent-posts ul li {
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 15px;
+    margin-bottom: 17px;
+}
+
+.widget ul li {
+    line-height: 30px;
+}
+
+ul li a {
+    color: #303030;
+}
+
+.sidebar .widget ul li a:hover {
+    color: var(--color-primary) !important;
+    font-weight: bold;
+}
+
+.posts-thumb {
+    width: 70% !important;
+}
+
+.widget.recent-posts .posts-thumb img {
+    margin-right: 15px;
+    /* width: 90px; */
+    height: 70px;
+}
+
+.widget.recent-posts .post-info .entry-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+}
+
+.widget.recent-posts .post-info .entry-title a {
+    color: #303030;
+    display: inline-block;
+}</style>

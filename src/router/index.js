@@ -9,6 +9,7 @@ import Mot from '../views/Public/DNPME-CL/mot.vue'
 import Documents from '../views/Public/Documentation.vue'
 import Organigramme from '../views/Public/DNPME-CL/organigramme.vue'
 import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
+import PhotothequeDetail from '../views/Public/DNPME-CL/detailPhoto.vue'
 
 
 import Liste from '../views/Public/Liste_PME.vue'
@@ -56,6 +57,7 @@ const router = createRouter({
          { path: '/dnpme/organigramme', name: 'Organigramme', component: Organigramme},
          { path: '/dnpme/Reformes-textes-de-lois', name: 'documents', component: Documents},
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
+         { path: '/dnpme/phototheque/detail', name: 'PhotothequeDetail', component: PhotothequeDetail},
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
          { path: '/actualites/:id', name: 'ActuliteDetail', component: ActuliteDetail , props:true },

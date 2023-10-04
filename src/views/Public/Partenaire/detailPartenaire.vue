@@ -269,6 +269,28 @@ p {
     font-size: 58px;
     font-weight: 900;
 }
+@media (max-width: 992px) {
+    .banner-title {
+    
+    font-size: 40px;
+    
+}
+}
+@media (max-width: 768px) {
+    .banner-title {
+    
+    font-size: 30px;
+    
+}
+}
+
+@media (max-width: 500px) {
+    .banner-title {
+    
+    font-size: 25px;
+    
+}
+}
 .breadcrumb {
     padding: 0;
     background: none;

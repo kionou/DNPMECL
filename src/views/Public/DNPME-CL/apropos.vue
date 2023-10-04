@@ -28,7 +28,7 @@
             <!--<h3 class="into-title">A propos</h3>-->
             <h1 class="into-sub-title">À PROPOS</h1>
             <hr style="margin-top: 30px; margin-bottom: 30px;">
-            <p class="text-justify;" style="font-size:18px;"><strong><i>Décret n°2003-160 du 4 Août 2003</i></strong> portant attributions et organisation de la Direction Générale des Petites et Moyennes Entreprises .</p>
+            <p class="text-justify;" style="font-size:18px;">Lorem earum  Porro qui commodi obcaecati cumque deserunt repellendus harum facere non ducimus fugit, omnis, sequi eos quam, impedit beatae?</p>
           </div><!-- Col end -->
       </div><!-- Content row end -->
 
@@ -59,26 +59,35 @@
 
       <div class="row">
           <div class="col-lg-12">
-            <div class="container swiper-container" data-aos="zoom-out">   
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">	   
-            </div>
-            <div class="swiper-slide" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">	   
-            </div>
-            <div class="swiper-slide" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">	   
-            </div>
-            <div class="swiper-slide" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">	   
-            </div>
-            <div class="swiper-slide" >
-              <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">	   
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-      </div>
+            <swiper ref="{swiperRef}" 
+            :autoHeight="true"
+            :slidesPerView="3"
+            :watchSlidesProgress="true" 
+            :spaceBetween="20"
+           :navigation="true"
+           :modules="modules"
+    class="mySwiper"
+  >
+    <swiper-slide>
+      <a href="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692564684.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/actualite/1.jpeg" class="img-fluid" alt=""></a>
+
+    </swiper-slide>
+    <swiper-slide>
+      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
+
+    </swiper-slide>
+    <swiper-slide>
+      <img  src="@/assets/img/actualite/3.jpg" class="img-fluid"  alt="">	
+
+    </swiper-slide>
+    <swiper-slide>
+      <img  src="@/assets/img/actualite/4.jpg" class="img-fluid"  alt="">	
+
+    </swiper-slide>
+  </swiper>
+
+  <p class="append-buttons"></p>
+        
           </div>
       </div><!--/ Content row end -->
     </div><!--/ Container end -->
@@ -87,10 +96,25 @@
 </template>
 
 <script>
-import Swiper from 'swiper/bundle';
-import 'swiper/swiper-bundle.css';
+ import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+ import 'swiper/css/pagination';
+ import 'swiper/css/navigation';
+ import  "glightbox/dist/css/glightbox.css";
+import  "glightbox/dist/js/glightbox.js";
+import   GLightbox from 'glightbox';
+// import { Pagination, Navigation } from 'swiper/modules';
 export default {
     name: 'DNPMECLApropos',
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      return {
+        // modules: [Pagination, Navigation],
+      };
+    },
 
     data() {
         return {
@@ -98,69 +122,11 @@ export default {
         };
     },
 
-//   async mounted() {
-//         const swiper = await new Swiper('.swiper-container', {
-//       speed: 400,
-//       loop: false,
-//       autoplay: {
-//         delay: 5000,
-//         disableOnInteraction: false
-//       },
-//       slidesPerView: 'auto',
-//       pagination: {
-//         el: '.swiper-pagination',
-//         type: 'bullets',
-//         clickable: true
-//       },
-//       breakpoints: {
-//         320: {
-//           slidesPerView: 1,
-//           spaceBetween: 40
-//         },
-//         480: {
-//           slidesPerView: 2,
-//           spaceBetween: 60
-//         },
-//         640: {
-//           slidesPerView: 3,
-//           spaceBetween: 80
-//         },
-//         992: {
-//           slidesPerView: 4,
-//           spaceBetween: 120
-//         }
-//       }
-//     });
-        
-//     },
-async mounted() {
-  const swiper = await new Swiper('.swiper-container', {
-    speed: 400,
-    loop: false,
-    navigation: {
-      nextEl: '.swiper-button-next', // Sélecteur du bouton Suivant
-      prevEl: '.swiper-button-prev', // Sélecteur du bouton Précédent
-    },
-    slidesPerView: 'auto',
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 40
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 60
-      },
-      640: {
-        slidesPerView: 3,
-        spaceBetween: 80
-      },
-      992: {
-        slidesPerView: 4,
-        spaceBetween: 120
-      }
-    }
-  });
+ mounted() {
+  this.lightbox = GLightbox({ 
+              selector: ".glightbox"
+             });
+
 },
 
 
@@ -172,14 +138,21 @@ async mounted() {
 
 <style lang="css" scoped>
 .swiper-slide{
-  width: 200px !important;
-    border: 1px solid var(--color-secondary);
-    height: 200px;
+    /* width: 230px !important; */
+    border: 1px solid var(--color-secondary); 
+     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
+    cursor: pointer;
 
+}
+
+.swiper-slide img{
+
+  width: 100%;
+  height: 100%;
 }
 /* debut banier */
 .banner-area {
@@ -244,6 +217,7 @@ async mounted() {
     font-size: 32px;
     line-height: normal;
     margin: 10px 0;
+    color: var(--color-primary);
 }
 hr {
     background-color: #e7e7e7;
@@ -268,7 +242,7 @@ hr {
     font-size: 36px;
     line-height: 46px;
     margin: 0 0 60px;
-    color: #212121;
+    color: var(--color-primary);
 }
 
 

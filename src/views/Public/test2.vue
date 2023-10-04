@@ -20,7 +20,7 @@
                           
                           <div class="class1">
                           <!-- <img src="@/assets/img/carousel/carousel1.jpg" class="" alt="..."> -->
-                          <div class="container swiper-container" data-aos="zoom-out">   
+            <div class="container swiper-container" data-aos="zoom-out">   
         <div class="swiper-wrapper align-items-center">
           <div class="swiper-slide ee" style="width: 100% !important;" >
             <img  src="@/assets/img/ninba1.png" class="img-fluid"  alt="">    

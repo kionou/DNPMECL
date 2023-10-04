@@ -2,7 +2,7 @@
      <Loading v-if="loading"></Loading>
     <div>
         <div>
-            <div class="section-header ">
+          <div class="section-header ">
           <h2>ACTUALITES DE LA DIRECTION NATIONALE</h2>
       </div>
         <div  class="contenu d-flex justify-content-center align-items-center flex-wrap" data-aos="fade-up"
@@ -36,9 +36,9 @@
 <script>
 import Loading from '../../components/Public/other/preloader.vue';
 import Pag from '../../components/Public/other/pag.vue';
-import Actualites from '@/lib/actualites.json'
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
+
 export default {
     name: 'DNPMECLActualite',
     components: {
@@ -64,13 +64,11 @@ paginatedItems() {
             currentPage: 1,
             itemsPerPage: 12,
             ActualitesOptions:[],
+           
         };
     },
 
    async mounted() {
-    console.log('ActualitesOptions',this.ActualitesOptions);
-    
-    
     await this.fetchActualites()
         
     },
@@ -79,9 +77,6 @@ paginatedItems() {
       updatePicture(picture){
        return picture.split('|')[0]
         // Object.keys(monObjet).map(key => monObjet[key])
-       
-
-      
       },
       datenew(isoDate){
         const dateObj = parseISO(isoDate);
@@ -141,7 +136,18 @@ h3 {
   padding: 20px 0 !important;
 
 }
+.noresul {
+border: 1px solid #F9D310;
+max-width: 1140px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 50px;
+border-radius: 6px;
+font-size: 20px;
 
+}
 .contenu {
 padding: 15px 10px;
 }
