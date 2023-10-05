@@ -75,6 +75,15 @@ export default {
   SET_PARTENAIRES_DATA(state, data) {
     state.partenaires = data;
   },
+  SET_REGIMES(state, regimes) {
+    state.regimes = regimes;
+  },
+  SET_TYPES_GESTIONS(state, typesGestions) {
+    state.typesGestions = typesGestions;
+  },
+  SET_TYPES_CONTRIBUABLES(state, typesContribuables) {
+    state.typesContribuables = typesContribuables;
+  },
   
   
 }

@@ -24,5 +24,8 @@ export default{
     typeDemandesData:[],
     actualites: [],
     partenaires: [],
+    regimes: [],
+    typesGestions: [],
+    typesContribuables: [],
 
 }

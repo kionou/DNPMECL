@@ -59,10 +59,10 @@ async fetchDataFromAPI({ commit }) {
       console.log('response.data2Region', response.data.data.data); // Remplacez l'URL par l'URL de votre API
       const regionsFromAPI = response.data.data.data;
 
-      // Formater les données de l'API en options pour MazSelect
+      // Formater les données de l'API en options pour MazSelect   CodeRegion
       const options = regionsFromAPI.map(region => ({
         label: region.NomRegion        ,
-        value: region.NomRegion
+        value: region.CodeRegion
       }));
       
       commit('SET_REGION_OPTIONS', options);
@@ -98,7 +98,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = sousprefecturesFromAPI.map(sousprefecture => ({
         label: sousprefecture.NomSousPrefecture,
-        value: sousprefecture.NomSousPrefecture
+        value: sousprefecture.CodeSousPrefecture
       }));
       
       commit('SET_SOUS_PREFECTURE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
@@ -115,7 +115,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = quartierFromAPI.map(quartier => ({
         label: quartier.NomQuartier,
-        value: quartier.NomQuartier
+        value: quartier.CodeQuartier
       }));
       
       commit('SET_QUARTIER_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
@@ -134,7 +134,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = secteurActiviteFromAPI.map(secteur => ({
         label: secteur.NomSecteurActivite,
-        value: secteur.NomSecteurActivite
+        value: secteur.CodeSecteurActivite
       }));
 
       commit('SET_SECTEUR_ACTIVITE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de secteurs d'activité
@@ -169,8 +169,8 @@ async fetchDataFromAPI({ commit }) {
 
       // Formater les données de l'API en options pour MazSelect
       const options = statutJuridiqueFromAPI.map(statutJuridique => ({
-        label: statutJuridique.SigleStatutJuridique,
-        value: statutJuridique.SigleStatutJuridique,
+        label: statutJuridique.NomStatutJuridique,
+        value: statutJuridique.CodeStatutJuridique,
       }));
 
       commit('SET_STATUT_JURIDIQUE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de statuts juridiques
@@ -187,7 +187,7 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = boursesFromAPI.map(bourse => ({
         label: bourse.NomBourse,
-        value: bourse.NomBourse
+        value: bourse.CodeBourse
       }));
       
       commit('SET_BOURSE_OPTIONS', options);
@@ -344,6 +344,46 @@ async fetchDataFromAPI({ commit }) {
       commit('SET_PARTENAIRES_DATA', partenairesFiltres);
     } catch (error) {
       console.error('Erreur lors de la récupération des partenaires :', error);
+    }
+  },
+
+  async fetchRegimes({ commit }) {
+    try {
+      const response = await axios.get('/regimes'); // Remplacez l'URL par l'URL de votre API
+      console.log('response.regimes', response.data.data.data);
+      const regimesFromAPI = response.data.data.data;
+  
+      commit('SET_REGIMES', regimesFromAPI); // Utilisez une mutation pour stocker les données dans le store Vuex
+    } catch (error) {
+      console.error('Erreur lors de la récupération des régimes :', error);
+    }
+  },
+  async fetchTypesGestions({ commit }) {
+    try {
+      const response = await axios.get('/types-gestions');
+      console.log('typesGestionsFromAPI',response);
+      const typesGestionsFromAPI = response.data.data.data;
+
+      // Formatez les données de l'API en options appropriées si nécessaire
+
+      commit('SET_TYPES_GESTIONS', typesGestionsFromAPI);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types de gestions:', error);
+    }
+  },
+
+  async fetchTypesContribuables({ commit }) {
+    try {
+      const response = await axios.get('/types-contribuables');
+      console.log('typesContribuablesFromAPI',response);
+
+      const typesContribuablesFromAPI = response.data.data.data;
+
+      // Formatez les données de l'API en options appropriées si nécessaire
+
+      commit('SET_TYPES_CONTRIBUABLES', typesContribuablesFromAPI);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des types de contribuables:', error);
     }
   },
   

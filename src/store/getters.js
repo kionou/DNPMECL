@@ -24,6 +24,9 @@ export default{
     getTypeDemandesData: (state) => state.typeDemandesData,
     getActualites:(state) => state.actualites,
     getPartenaires:(state)  => state.partenaires,
+    getRegimes: (state) => state.regimes,
+    getTypesGestions: (state) => state.typesGestions,
+    getTypesContribuables: (state) => state.typesContribuables,
       
 
 

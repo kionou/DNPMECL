@@ -34,7 +34,9 @@
 
 
                         <h1>{{ actualite.titre }}</h1><br>
-                        <div class="container swiper-container" data-aos="zoom-out">
+                        
+                        <p class="article-p"><img :src="images[0]" class="img-fluid" alt=" actualite" style="height: 512px !important;"></p>
+                        <!-- <div class="container swiper-container" data-aos="zoom-out">
                             <div class="swiper-wrapper align-items-center">
                                 <div class="swiper-slide ee" style="width: 100% !important;" v-for="image in images"
                                     :key="image.id">
@@ -42,10 +44,10 @@
                                 </div>
                             </div>
                             <div class="swiper-pagination"></div>
-                        </div>
-                        <p>
-                            <span style="background-color: initial;">
-                                {{ actualite.content }}
+                        </div> -->
+                        <p class="x11i5rnm" style="white-space: pre-line; color: black;">
+                            <span  >
+                                {{  convertirHtmlEnTexte(actualite.content)  }}
                             </span>
                         </p>
 
@@ -173,6 +175,19 @@ export default {
        return picture.split('|')[0]
         // Object.keys(monObjet).map(key => monObjet[key])
       },
+      convertirHtmlEnTexte(chaineHtml) {
+  // Créez un élément HTML temporaire (div)
+  const tempDiv = document.createElement('div');
+
+  // Injetez le HTML dans l'élément temporaire
+  tempDiv.innerHTML = chaineHtml;
+
+  // Utilisez textContent pour extraire le texte brut
+  const texteBrut = tempDiv.textContent || tempDiv.innerText;
+
+  // Retournez le texte brut
+  return texteBrut;
+},
         async fecthActualitesDetail() {
 
             try {
@@ -370,6 +385,13 @@ h6 {
 .article p {
     text-align: justify !important;
 }
+.article-p{
+    padding: 10px;
+    border: 1px solid var(--color-secondary);
+    display: flex;
+    justify-content: center;
+
+}
 
 .swiper-slide {
     -webkit-flex-shrink: 0;
@@ -492,4 +514,14 @@ ul li a {
 .widget.recent-posts .post-info .entry-title a {
     color: #303030;
     display: inline-block;
-}</style>
+}
+.x11i5rnm {
+  white-space: pre-line;
+  /* Autres styles CSS que vous souhaitez appliquer ici */
+}
+
+.x11i5rnm strong {
+  color: black;
+}
+
+</style>

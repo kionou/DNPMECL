@@ -28,7 +28,7 @@
 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
-                    classification
+                    <Classification />
 
                 </div>
 
@@ -38,10 +38,12 @@
 </template>
 
 <script>
+import Classification from '../../components/Public/classification.vue';
 import Form from '../../components/Public/formulaire.vue';
+
 export default {
     name: 'DNPMECLFormulaire',
-    components: { Form },
+    components: { Form , Classification},
     data() {
         return {
 
