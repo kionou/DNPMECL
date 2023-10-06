@@ -385,7 +385,7 @@ color: var(--color-primary);
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 90px;
+  height: 65px;
   background-color: var(--color-primary);
   width: 100%;
   display: flex;

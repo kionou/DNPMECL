@@ -84,6 +84,9 @@ export default {
   SET_TYPES_CONTRIBUABLES(state, typesContribuables) {
     state.typesContribuables = typesContribuables;
   },
+  SET_PUBLIQUE_VISIBLE_PHOTOS(state, photos) {
+    state.publiqueVisiblePhotos = photos;
+  },
   
   
 }

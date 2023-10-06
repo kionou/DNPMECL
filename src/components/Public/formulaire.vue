@@ -26,6 +26,7 @@
     </div>
     <div class="container-fluid" data-aos="zoom-out" data-aos-delay="100" style="margin-top:48px">
         <p class="title">Enregistrez votre MPME dès maintenant</p>
+        <p class="aider"  @click="openModal">Cliquez ici si vous avez besoin d'aide</p>
         <p class="text-center">Un seul formulaire pour concrétiser votre projet entrepreneurial et enregistrer votre MPME en
             toute simplicité.</p>
             <p class="text-center text-danger">Les champs marqués * sont obligatoires</p>
@@ -49,7 +50,9 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="Region">Region <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step1.region" color="secondary" :options="regionOptions" />
+                                    <MazSelect v-model="step1.region" color="secondary" 
+                                    :options="regionOptions"
+                                    :class="{ 'error-border': resultError['Region'] }" @input="resultError['Region'] = false" />
                                 </div>
                                 <small v-if="v$.step1.region.$error">{{ v$.step1.region.$errors[0].$message }}</small>
                                 <small v-if="resultError['Region']" > {{ resultError['Region'] }} </small>
@@ -242,7 +245,7 @@
                                             class="text-danger">*</span></label>
                                     <!-- <MazSelect v-model="step1.an_entre_acti" color="secondary" :options="yearOptions" /> -->
                                     <VueDatePicker v-model="step1.an_entre_acti" :year-picker="true"
-                                        :year-range="[1990, new Date().getFullYear()]"></VueDatePicker>
+                                        :year-range="[1990, new Date().getFullYear()]" ></VueDatePicker>
 
                                 </div>
                                 <small v-if="v$.step1.an_entre_acti.$error">{{ v$.step1.an_entre_acti.$errors[0].$message
@@ -330,10 +333,13 @@
                                 
                             </div>
                             <div class="col">
-                                <div class="input-groupe">
+                                <div class="input-groupe" >
                                     <label for="PersonnelPermanentHomme">Personnel Permanent Homme </label>
-                                    <input type="text" name="PersonnelPermanentHomme" id="PersonnelPermanentHomme"
-                                        placeholder="" v-model="step1.pers_per_homm">
+                                    <input type="text"
+                                     name="PersonnelPermanentHomme"
+                                      id="PersonnelPermanentHomme"
+                                       placeholder="" v-model="step1.pers_per_homm" 
+                                       :class="{ 'error-border': resultError['PersonnelPermanentHomme'] }" @input="resultError['PersonnelPermanentHomme'] = false" >
                                 </div>
                                 <small v-if="v$.step1.pers_per_homm.$error">{{ v$.step1.pers_per_homm.$errors[0].$message
                                 }}</small>
@@ -427,12 +433,11 @@
                           </div>
                       </div>
                         <div class="row mb-3 mt-3 content-group">
-                            <div class="col">
+                            <!-- <div class="col">
                                 <div class="input-groupe">
                                     <label for="ChiffreAffaire1">Chiffre Affaire 1</label>
                                     <MazSelect v-model="step1.ch_aff_1" color="secondary" :options="ChiffreOptions" />
-                                    <!-- <input type="text" name="ChiffreAffaire1" id="ChiffreAffaire1" placeholder=""
-                                        v-model="step1.ch_aff_1"> -->
+                                   
                                 </div>
                                 <small v-if="v$.step1.ch_aff_1.$error">{{ v$.step1.ch_aff_1.$errors[0].$message }}</small>
                                 <small v-if="resultError['ChiffreAffaire1']" > {{ resultError['ChiffreAffaire1'] }} </small>
@@ -443,15 +448,15 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="ChiffreAffaire2">ChiffreAffaire 2</label>
-                                    <!-- <input type="text" name="ChiffreAffaire2" id="ChiffreAffaire2" placeholder=""
-                                        v-model="step1.ch_aff_2"> -->
+                                  
                                     <MazSelect v-model="step1.ch_aff_2" color="secondary" :options="ChiffreOptions" />
                                 </div>
                                 <small v-if="v$.step1.ch_aff_2.$error">{{ v$.step1.ch_aff_2.$errors[0].$message }}</small>
                                 <small v-if="resultError['ChiffreAffaire2']" > {{ resultError['ChiffreAffaire2'] }} </small>
 
 
-                            </div>
+                            </div> -->
+                            
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="PartChiffreAffaireExprtation">Part Chiffre Affaire Exportation </label>
@@ -464,9 +469,7 @@
 
 
                             </div>
-                           
-                        </div>
-                        <div class="row mb-3 mt-3 content-group">
+
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="GroupeFililale">Groupe Fililale </label>
@@ -500,6 +503,10 @@
                                 <small v-if="resultError['NationaliteGroupe']" > {{ resultError['NationaliteGroupe'] }} </small>
 
                             </div>
+                           
+                        </div>
+                        <div class="row mb-3 mt-3 content-group">
+                            
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="CapitalSocial">Capital Social</label>
@@ -511,11 +518,6 @@
                                 <small v-if="resultError['CapitalSocial']" > {{ resultError['CapitalSocial'] }} </small>
 
                             </div>
-                           
-                        </div>
-
-                        
-                        <div class="row mb-3 mt-3 content-group">
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="PaysSiegeSocial">Pays du Siège Social <span
@@ -550,8 +552,12 @@
                             </div>
                             <small v-if="v$.step1.nbre_rccm.$error">{{ v$.step1.nbre_rccm.$errors[0].$message }}</small>
                             <small v-if="resultError['NumeroRccm']" > {{ resultError['NumeroRccm'] }} </small>
+                           
+                        </div>
 
-
+                        
+                        <div class="row mb-3 mt-3 content-group">
+                           
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="NumeroNif">Numero Nif</label>
@@ -562,12 +568,6 @@
                             <small v-if="v$.step1.nbre_nif.$error">{{ v$.step1.nbre_nif.$errors[0].$message }}</small>
                             <small v-if="resultError['NumeroNif']" > {{ resultError['NumeroNif'] }} </small>
 
-
-                        </div>
-
-
-                        <div class="row mb-3 mt-3 content-group">
-                            
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="DateGenerationNif">Date Generation du Numero Nif </label>
@@ -588,6 +588,12 @@
                             <small v-if="v$.step1.NumeroTva.$error">{{ v$.step1.NumeroTva.$errors[0].$message }}</small>
                             <small v-if="resultError['NumeroTva']" > {{ resultError['NumeroTva'] }} </small>
 
+
+                        </div>
+
+
+                        <div class="row mb-3 mt-3 content-group">
+                        
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="CodeRegime">Code du Regime</label>
@@ -596,10 +602,8 @@
                             </div>
                                 <small v-if="v$.step1.CodeRegime.$error">{{ v$.step1.CodeRegime.$errors[0].$message }}</small>
                                 <small v-if="resultError['CodeRegime']" > {{ resultError['CodeRegime'] }} </small>
-                        </div>
 
-                        <div class="row mb-3 mt-3 content-group">
-                            <div class="col">
+                                <div class="col">
                                 <div class="input-groupe">
                                     <label for="CodeTypeGestion">Code Type Gestion</label>
                                     <MazSelect v-model="step1.CodeTypeGestion" color="secondary" :options="TypesGestionsOptions" />
@@ -617,7 +621,6 @@
                             </div>
                                 <small v-if="v$.step1.CodeTypeContribuable.$error">{{ v$.step1.CodeTypeContribuable.$errors[0].$message }}</small>
                                 <small v-if="resultError['CodeTypeContribuable']" > {{ resultError['CodeTypeContribuable'] }} </small>
-
 
                         </div>
 
@@ -1469,7 +1472,7 @@
                     <button class="btnLogin" @click.prevent="nextStep">Terminer</button>
                 </div>
             </div>
-            <MazDialog v-model="isOpen" noClose>
+            <MazDialog v-model="isOpen" noClose title="Modification de l'Entreprise">
                 <p>
                     Votre compte a été modifié avec succès. Souhaitez-vous consulter votre profil ?
                 </p>
@@ -1482,7 +1485,7 @@
                 </template>
             </MazDialog>
 
-            <MazDialog v-if="PostLogo" v-model="PostLogo">
+            <MazDialog v-if="PostLogo" v-model="PostLogo" title="Ajoutez votre logo">
                 <div>
 
                     <div id="uploadArea" class="upload-area">
@@ -1524,7 +1527,7 @@
 
             </MazDialog>
 
-            <MazDialog v-model="msgsuccess">
+            <MazDialog v-model="msgsuccess" title="Enregistrement de Logo">
                 <p>
                     Logo enregistrer avec succès !!!
                 </p>
@@ -1534,7 +1537,7 @@
 
                 </template>
             </MazDialog>
-            <MazDialog v-model="DemandeAide" noClose>
+            <MazDialog v-model="DemandeAide" noClose title="Demande d'aide">
                 <p>
                     Besoin d'aide ? <br>
                     Souhaitez-vous être assisté par la direction pour remplir vos informations ?
@@ -1548,6 +1551,13 @@
 
                 </template>
             </MazDialog>
+            <MazDialog v-model="msg" title="Demande Validée">
+        <p>
+            Votre demande  a été enregistrée avec succès. Vous allez bientôt recevoir
+                   un e-mail contenant les étapes à suivre.
+        </p>
+          <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+      </MazDialog>
         </form>
     </div>
 </template>
@@ -1583,6 +1593,7 @@ export default {
             PostLogo: false,
             msgsuccess: false,
             DemandeAide:false,
+            msg:false,
             imagesTypes: ['jpeg', 'png', 'svg', 'gif'],
             currentStep: 1,
             error: '',
@@ -2517,10 +2528,39 @@ async formatValidationErrors(errors) {
             this.PostLogo = true
 
         },
-        HamdleAide() {
-            this.$router.push({ path: '/demande-aide', })
+     async   HamdleAide() {
+        this.DemandeAide = false
+        this.loading = true
+            try {
+         const response = await axios.post('/gestion-des-demandes', {code:this.loggedInUser.id} , {
+                    headers: {
+                         Authorization: `Bearer ${this.loggedInUser.token}`,
+                        'Content-Type': 'application/json',
+                    },
+
+
+                });
+         console.log('response.sousprefecture', response);
+         if (response.data.status === 'success') {
+           this.loading = false
+           this.msg = true
+           
+         } else {
+           this.loading = false
+        
+         }
+         
+       } catch (error) {
+          console.error('Erreur post:', error);
+        }
 
         },
+        close(){
+                this.msg = false
+                this.$router.push({ path: '/mon-espace', })
+              
+              
+              } ,
         async loadFile(event) {
             this.loading = true
             console.log(event.target.files[0]);
@@ -2571,19 +2611,8 @@ async formatValidationErrors(errors) {
 
             }
         },
-        handleChange(event) {
-      // Vous pouvez accéder à la valeur sélectionnée par l'utilisateur avec event.target.value
-      const selectedValues = event.target.value;
-      console.log('this.step1.commune',this.step1.commune);
-      // Faites ce que vous souhaitez avec la valeur sélectionnée
-      console.log(`Option sélectionnée : ${selectedValues}`);
-      
-      // Vous pouvez également mettre à jour une propriété de données de votre composant avec la valeur sélectionnée
-      this.selectedOption = selectedValues;
-      const selectedValue = this.step1.commune;
-    console.log('this.step1.commune', selectedValue);
-    console.log(`Option sélectionnée : ${selectedValue}`);
-
+        openModal() {
+      this.DemandeAide = true;
     },
 
     },
@@ -2619,9 +2648,12 @@ async formatValidationErrors(errors) {
                 this.fetchRegimesOptions(),
                 this.fetchTypesGestionsOptions(),
             ]);
-            setTimeout(() => {
+            if (this.step1.region === null || this.step1.NbreEmployeGuinne === null ) {
+                setTimeout(() => {
             this.DemandeAide = true;
         }, 5000);
+            }
+         
         } catch (error) {
             console.error('Erreur lors du chargement des données:', error);
         }
@@ -2641,6 +2673,27 @@ async formatValidationErrors(errors) {
     color: red;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 
+}
+.aider{
+    text-align: center;
+    color: var(--color-primary);
+    cursor: pointer;
+    margin-bottom:0 !important;
+    font-weight: bold;
+
+}
+
+.aider:hover{
+    
+    color: var(--color-secondary);
+    
+
+}
+
+.error-border {
+  border: 2px solid red !important; /* Bordure rouge en cas d'erreur */
+  border-radius: 0.5rem !important;
+   
 }
 
 .profil1 {

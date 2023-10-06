@@ -12,7 +12,7 @@
 
         <form class="form">
           <div class="input-group">
-            <MazInput type="tel" v-model="code" color="secondary" placeholder="XXXX" />
+            <MazInput type="password" v-model="code" color="secondary" placeholder="XXXX" />
           </div>
           <small v-if="v$.code.$error">{{ v$.code.$errors[0].$message }}</small>
           <button class="sign" @click.prevent="submit">Se connecter</button>

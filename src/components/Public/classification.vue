@@ -10,7 +10,7 @@
     </div>
     <div class=" d-flex justify-content-center align-items-center flex-wrap w-100" data-aos="fade-up" data-aos-delay="100"
         style="margin-top: 40px ; position: relative;">
-        <div class="bar_search">
+        <!-- <div class="bar_search">
             <div class="liste-searcher">
                 <div class="nsl">
                     <i class="bi bi-search"></i>
@@ -27,12 +27,12 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="btnLogin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
-        <div v-if="sortedDocuments.length === 0" class="noresul">
-            <span>Vous n'avez pas encore de document, vous pouvez également en ajouter un !!</span>
+        <div v-if="paginatedItems.length === 0" class="noresul">
+            <span>Vous n'avez pas encore de classification, vous pouvez également en ajouter une !!</span>
         </div>
-        <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else>
+        <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else >
 
             <div class="two-section">
 
@@ -43,9 +43,12 @@
 
                             <tr>
                                 <th> # </th>
-                                <th> Nom</th>
-                                <th>Source</th>
-                                <th> Type</th>
+                                <th> Annee</th>
+                                <th>Critere par Chiffre d'Affaire</th>
+                                <th> Critère du Capital Social</th>
+                                <th>Type de Comptabilite</th>
+                                <th> Chiffre d'Affaire Réel</th>
+                                <th> Capital Social Réel</th>
                                 <th>Action</th>
 
                             </tr>
@@ -55,29 +58,36 @@
 
                             <tr v-for="(item, index ) in paginatedItems" :key="item.id">
                                 <td>{{ getSequentialNumber(index) }} </td>
-                                <td>{{ item.NomDocument }} </td>
-                                <td>{{ item.OrigineDocument }}</td>
-                                <td> {{ item.SousCategorieDocument }}</td>
-                                <td>
+                                <td>{{ item.Annee }} </td>
+                                <td>{{ item.CodeCritereChiffreAffaire }}</td>
+                                <td> {{ item.CodeCritereCapitalSocial }}</td>
+                                <td> {{ item.TypeComptabilite }}</td>
+
+                                <td v-if="item.ChiffreAffaireReel === ''"> 0</td>
+                                <td v-else> {{ item.ChiffreAffaireReel }}</td>
+
+                                <td v-if="item.CapitalSocialReel === ''"> 0</td>
+                                <td v-else> {{ item.CapitalSocialReel }}</td>
+                                <td v-if="item.Annee !== new Date().getFullYear()">
                                     <div class="sci">
-                                        <span style="--i:1" class="dow">
-                                            <i class="bi bi-cloud-arrow-down-fill"></i>
-                                            <a :href="item.LienDocument" download>
-                                            </a>
+                                        <span style="--i:1" class="updateclose">
+                                            <i class="bi bi-pen" ></i>
+
                                         </span>
+                                        <span style="--i:2"  class="deleteclose">
+                                            <i class="bi bi-trash"></i>
+                                        </span>
+
+                                    </div>
+                                </td>
+                                <td v-else>
+                                    <div class="sci">
                                         <span style="--i:1" class="update">
                                             <i class="bi bi-pen" @click="updatedoc(item.id)"></i>
 
                                         </span>
-                                        <span style="--i:2" @click="hamdledeletedoc(item.id)" class="delete">
+                                        <span style="--i:2" @click="hamdledelete(item.id)" class="delete">
                                             <i class="bi bi-trash"></i>
-                                        </span>
-
-                                        <span style="--i:1" class="opens" v-if="item.publish === 1">
-                                            <i class="bi bi-power" @click="publish(item.id, item.publish)"></i>
-                                        </span>
-                                        <span style="--i:1" class="open" v-else>
-                                            <i class="bi bi-power" @click="publish(item.id, item.publish)"></i>
                                         </span>
 
                                     </div>
@@ -99,13 +109,7 @@
                     <!-- Header -->
                     <div class="upload-area__header">
                         <h1 class="upload-area__title">Ajoutez votre classification annuelle</h1>
-                        <!-- <p class="upload-area__paragraph">
-          Le fichier doit être un document
-          <strong class="upload-area__tooltip">
-            comme
-            <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-          </strong>
-        </p> -->
+                        <small v-if="error">{{ error }}</small>
                     </div>
                     <!-- End Header -->
 
@@ -123,7 +127,7 @@
                                 <div class="input-group">
                                     <label for="CodeCritereChiffreAffaire">Critère par Chiffre d'Affaire <span
                                             class="text-danger">*</span></label>
-                                            <MazSelect v-model="step1.CodeCritereChiffreAffaire" color="secondary" :options="classificationOptions"    />
+                                            <MazSelect v-model="step1.CodeCritereChiffreAffaire" color="secondary" :options="classificationAffaireOptions" />
                                 </div>
                                 <small v-if="v$.step1.CodeCritereChiffreAffaire.$error">{{ v$.step1.CodeCritereChiffreAffaire.$errors[0].$message }}</small>
 
@@ -142,7 +146,8 @@
                         <div class="col">
                             <div class="input-group">
                             <label for="CodeCritereCapitalSocial">Critère par Capital Social <span class="text-danger">*</span></label>
-                            <input type="text" name="CodeCritereCapitalSocial" id="CodeCritereCapitalSocial" placeholder="" v-model="step1.CodeCritereCapitalSocial">
+                            <MazSelect v-model="step1.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
+                           
                         </div>
                         <small v-if="v$.step1.CodeCritereCapitalSocial.$error">{{ v$.step1.CodeCritereCapitalSocial.$errors[0].$message }}</small>
                         </div>
@@ -177,9 +182,9 @@
 
         </MazDialog>
 
-        <MazDialog v-model="msgsuccess">
+        <MazDialog v-model="msgsuccess"  title="Enregistrement de classification" >
             <p>
-                Document enregistré avec succès !!
+                Classification enregistrée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -187,21 +192,21 @@
 
             </template>
         </MazDialog>
-        <MazDialog v-model="isdeletedoc" title="Suppression d'image">
+        <MazDialog v-model="isdelete" title="Suppression de la clasification">
             <p>
-                Êtes-vous sûr de vouloir supprimer ce document ?
+                Êtes-vous sûr de vouloir supprimer cette classification ?
             </p>
             <template #footer="{ close }">
 
                 <div class="supp" @click="close" style="background-color: red; "> Non</div>
 
-                <div class="supp" @click="confirmDeletedoc" style="background-color: var(--color-primary);"> Oui</div>
+                <div class="supp" @click="confirmDelete" style="background-color: var(--color-primary);"> Oui</div>
 
             </template>
         </MazDialog>
-        <MazDialog v-model="confirmdeletedoc">
+        <MazDialog v-model="confirmdelete" title="Suppression de la clasification">
             <p>
-                Document supprimé avec succès !!
+                Classification supprimée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -213,55 +218,91 @@
         </MazDialog>
 
 
-        <MazDialog v-if="updated" v-model="updated" width="600px" max-height="revert" padding="0 1.5rem 1.5rem">
+        <MazDialog v-if="updated" v-model="updated" width="710px" max-height="revert" padding="0 1.5rem 1.5rem">
             <div>
 
-                <div id="uploadArea" class="upload-area">
-                    <!-- Header -->
-                    <div class="upload-area__header">
-                        <h1 class="upload-area__title">Modififiez votre fichier</h1>
-                    </div>
-                    <!-- End Header -->
+<div id="uploadArea" class="upload-area">
+    <!-- Header -->
+    <div class="upload-area__header">
+        <h1 class="upload-area__title">Modifiez votre classification annuelle</h1>
+        <small v-if="error">{{ error }}</small>
+    </div>
+    <!-- End Header -->
 
-                    <!-- Drop Zoon -->
-                    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                        <form action="">
-                            <div class="input-group">
-                                <label for="username">Nom du document <span class="text-danger">*</span></label>
-                                <input type="text" name="nom" id="nom" placeholder="" v-model="step2.nom">
-                            </div>
-                            <small v-if="v$.step2.nom.$error">{{ v$.step2.nom.$errors[0].$message }}</small>
-
-
-                            <div class="input-group">
-                                <label for="tel">Source du document <span class="text-danger">*</span></label>
-                                <input type="text" name="origine" id="origine" placeholder="" v-model="step2.origine">
-                            </div>
-                            <small v-if="v$.step2.origine.$error">{{ v$.step2.origine.$errors[0].$message }}</small>
-
-                            <div class="input-group">
-                                <label for="tel">Type<span class="text-danger">*</span></label>
-                                <MazSelect v-model="step2.sousdoc" color="secondary" :options="sousdocOptions" />
-
-                            </div>
-                            <small v-if="v$.step2.sousdoc.$error">{{ v$.sousdoc.$errors[0].$message }}</small>
-
-                            <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
-                        </form>
-
-                    </div>
-                    <!-- End Drop Zoon -->
-
-
+    <!-- Drop Zoon -->
+    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+        <div class="row mb-3 mt-3 content-group">
+            <div class="col">
+                <div class="input-group">
+                    <label for="username">Année <span class="text-danger">*</span></label>
+            <MazInput v-model="step2.annee" type="text" color="secondary"  style="width: 100%;" disabled />
+                   
                 </div>
+               
             </div>
+            <div class="col">
+                <div class="input-group">
+                    <label for="CodeCritereChiffreAffaire">Critère par Chiffre d'Affaire <span
+                            class="text-danger">*</span></label>
+                            <MazSelect v-model="step2.CodeCritereChiffreAffaire" color="secondary" :options="classificationAffaireOptions" />
+                </div>
+                <small v-if="v$.step2.CodeCritereChiffreAffaire.$error">{{ v$.step2.CodeCritereChiffreAffaire.$errors[0].$message }}</small>
+
+            </div>
+
+        </div>
+        <div class="row mb-3 mt-3 content-group">
+            <div class="col">
+            <div class="input-group">
+            <label for="comptabilite">Type de Comptabilité<span class="text-danger">*</span></label>
+            <MazSelect v-model="step2.comptabilite" color="secondary" :options="Comptabilite"  />
+        </div>
+        <small v-if="v$.step2.comptabilite.$error">{{ v$.step2.comptabilite.$errors[0].$message }}</small>
+        </div>
+
+        <div class="col">
+            <div class="input-group">
+            <label for="CodeCritereCapitalSocial">Critère par Capital Social <span class="text-danger">*</span></label>
+            <MazSelect v-model="step2.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
+           
+        </div>
+        <small v-if="v$.step2.CodeCritereCapitalSocial.$error">{{ v$.step2.CodeCritereCapitalSocial.$errors[0].$message }}</small>
+        </div>
+        </div>
+
+        <div class="row mb-3 mt-3 content-group" >
+            <div class="col">
+                <div class="input-group">
+            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel <span class="text-danger">*</span></label>
+            <input type="text" name="ChiffreAffaireReel" id="ChiffreAffaireReel" placeholder="" v-model="step2.ChiffreAffaireReel">
+          
+        </div>
+        <small v-if="v$.step2.ChiffreAffaireReel.$error">{{ v$.step2.ChiffreAffaireReel.$errors[0].$message }}</small>
+            </div>
+            <div class="col">
+                <div class="input-group">
+            <label for="CapitalSocialReel">Capital Social Réel <span class="text-danger">*</span></label>
+            <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step2.CapitalSocialReel">
+        </div>
+        <small v-if="v$.step2.CapitalSocialReel.$error">{{ v$.step2.CapitalSocialReel.$errors[0].$message }}</small>
+            </div>
+
+        </div>
+                               
+        <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
+    </div>
+    <!-- End Drop Zoon -->
+
+
+</div>
+</div>
 
         </MazDialog>
 
 
-        <MazDialog v-model="publishDoc">
+        <MazDialog v-model="updatemsg" title="Modification de classification">
             <p>
-                {{ publier }}
+                Classification modifiée avec succès !!
 
             </p>
             <template #footer="{ close }">
@@ -282,7 +323,7 @@
 import MazDialog from 'maz-ui/components/MazDialog'
 import axios from '@/lib/axiosConfig.js'
 import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail } from '@/functions/rules';
+import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import Pag from './other/pag.vue';
 import Loading from './other/preloader.vue';
 export default {
@@ -296,20 +337,14 @@ export default {
         loggedInUser() {
             return this.$store.getters['user/loggedInUser'];
         },
-        sortedDocuments() {
-            return this.originalDocuments
-                .slice()
-                .filter(document => document.CodeMpme === this.loggedInUser.id)
-                .sort((a, b) => a.CodeMpme.localeCompare(b.CodeMpme));
-        },
         totalPages() {
             // return Math.ceil(this.items.length / this.itemsPerPage);
-            return Math.ceil(this.filteredDocuments.length / this.itemsPerPage);
+            return Math.ceil(this.classificationOptions.length / this.itemsPerPage);
         },
         paginatedItems() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
-            return this.filteredDocuments.slice(startIndex, endIndex);
+            return this.classificationOptions.slice(startIndex, endIndex);
         },
     },
 
@@ -325,31 +360,31 @@ export default {
             loading: true,
             publishDoc: false,
             msgsuccess: false,
-            isdeletedoc: false,
-            confirmdeletedoc: false,
+            isdelete: false,
+            confirmdelete: false,
             updated: false,
             v$: useVuelidate(),
 
             years: [],
             yearOptions: [],
             Comptabilite:[],
+            classificationAffaireOptions:[],
+            classificationSocialOptions:[],
             classificationOptions:[],
 
-            sousdoc: '',
+            error: '',
             origine: '',
             nom: '',
             startIndex: 0,
             currentPage: 1,
-            itemsPerPage: 15,
+            itemsPerPage: 5,
 
 
-            originalDocuments: [], // Les données originales
-            filteredDocuments: [], // Les résultats filtrés
-            paginatedDocuments: [], // Les résultats paginés
+          
             resultnone: '',
-            imageToDeleteId: null,
+            ToDeleteId: null,
             updateImageId: null,
-            updateDocId: null,
+            updateClassId: null,
             step1: {
                 annee:'',
                 CodeCritereChiffreAffaire: '',
@@ -359,9 +394,12 @@ export default {
                 CapitalSocialReel:'',
             },
             step2: {
-                sousdoc: '',
-                origine: '',
-                nom: '',
+                annee:'',
+                CodeCritereChiffreAffaire: '',
+                comptabilite: '',
+                CodeCritereCapitalSocial: '',
+                ChiffreAffaireReel:'',
+                CapitalSocialReel:'',
             },
 
         };
@@ -381,39 +419,38 @@ export default {
             CodeCritereCapitalSocial: {
                 require,
             },
-            ChiffreAffaireReel: {},
-            CapitalSocialReel: {},
+            ChiffreAffaireReel: {ValidNumeri},
+            CapitalSocialReel: {ValidNumeri},
         },
         step2: {
-            nom: {
+            
+            CodeCritereChiffreAffaire: {
                 require,
-                lgmin: lgmin(2),
-            },
-            origine: {
-                require,
-                lgmin: lgmin(2),
 
             },
-            sousdoc: {
+            comptabilite: {
                 require,
             },
+            CodeCritereCapitalSocial: {
+                require,
+            },
+            ChiffreAffaireReel: {ValidNumeri},
+            CapitalSocialReel: {ValidNumeri},
         },
 
     },
     async created() {
-        try {
-            await this.fetchgetDocMpme(); // Assurez-vous d'appeler cette fonction au moment approprié
-        } catch (error) {
-            console.error('Erreur lors de la récupération des options des sousdoc :', error.message);
-        }
+        
     },
 
-    mounted() {
-
+  async  mounted() {
+    
+     await this.fetchgetClassificationAllMpme()
+     await this.fetchgetClassificationCritereMpme()
+     await  this.initializeYears()
+     await  this.fetchCarteAndComptabiliteOptions()
         console.log("datadossiers", this.loggedInUser);
-        this.fetchgetClassificationMpme()
-        this.initializeYears()
-        this.fetchCarteAndComptabiliteOptions()
+       
         
     },
     methods: {
@@ -450,72 +487,34 @@ export default {
                 console.error('Erreur lors de la récupération des options des bourses:', error.message);
             }
         },
-        async confirmDeletedoc() {
-            this.loading = true
-            console.log('gggg', this.ToDeleteId);
-            this.isdeletedoc = false
-            try {
-                // Faites une requête pour supprimer l'élément avec l'ID itemId
-                const response = await axios.delete(`/documents-mpme/${this.ToDeleteId}`, {
-                    headers: {
-                        Authorization: `Bearer ${this.loggedInUser.token}`,
-                        'Content-Type': 'multipart/form-data',
-
-                    },
-
-
-                });
-                console.log('Réponse de suppression:', response);
-                if (response.data.status === 'success') {
-                    this.confirmdeletedoc = true
-                    this.fetchgetDocMpme();
-                    this.loading = false
-
-                } else {
-                    console.log('error', response.data)
-                    this.loading = false
-                }
-            } catch (error) {
-                console.error('Erreur lors de la suppression:', error);
-                if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-                    this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-            }
-
-        },
+      
         async submit() {
-            this.loading = true
             this.v$.step1.$touch()
             if (this.v$.$errors.length == 0) {
+            this.loading = true
+
                let DataClassification = {
             
-                Annee:this.step1.annee,
-                CodeMpme:this.loggedInUser,
+                Annee:parseInt(this.step1.annee) ,
+                CodeMpme:this.loggedInUser.id,
                 CodeCritereChiffreAffaire:this.step1.CodeCritereChiffreAffaire,
                 CodeCritereCapitalSocial:this.step1.CodeCritereCapitalSocial,
                 ChiffreAffaireReel: this.step1.ChiffreAffaireReel,
                 CapitalSocialReel:this.step1.CapitalSocialReel,
                 TypeComptabilite: this.step1.comptabilite,
             }
+            console.log('DataClassification', DataClassification);
 
                 try {
                     const response = await axios.post('/mpme/classifications/annuel', DataClassification, {
                         headers: {
                             Authorization: `Bearer ${this.loggedInUser.token}`,
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
+                            'Content-Type': 'application/json'
+                        }});
                     console.log('Réponse du téléversement :', response);
                     if (response.data.status === 'success') {
-                        await this.fetchgetDocMpme()
                         this.msgsuccess = true
+                        await this.fetchgetClassificationAllMpme()
                         this.isOpen = false
                         this.loading = false
 
@@ -525,13 +524,15 @@ export default {
                     }
                 } catch (error) {
                     console.error('Erreur lors du téléversement :', error);
-                    if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    if (error && error.response.data === 'Unauthorized' ) {
                         console.log('aut', error.response.data.status === 'error');
                         await this.$store.dispatch('user/clearLoggedInUser');
                         this.$router.push('/connexion-mpme');
 
                     } else {
-                        this.formatValidationErrors(error.response.data.errors)
+                        console.log('aut', error.response.data.message);
+                        this.error = error.response.data.message
+
                         this.loading = false
                         return false;
                     }
@@ -550,7 +551,7 @@ export default {
         // delete picture
         hamdledelete(itemId) {
             console.log(itemId);
-            this.imageToDeleteId = itemId;
+            this.ToDeleteId = itemId;
             this.isdelete = true
 
         },
@@ -560,7 +561,7 @@ export default {
 
             try {
                 // Faites une requête pour supprimer l'élément avec l'ID itemId
-                const response = await axios.delete(`mpme/photos/${this.imageToDeleteId}`, {
+                const response = await axios.delete(`mpme/classifications/annuel/${this.ToDeleteId}`, {
                     headers: {
                         Authorization: `Bearer ${this.loggedInUser.token}`,
                         'Content-Type': 'multipart/form-data',
@@ -570,9 +571,9 @@ export default {
                 });
                 console.log('Réponse de suppression:', response);
                 if (response.data.status === 'success') {
+                    await this.fetchgetClassificationAllMpme()
                     this.confirmdelete = true
                     this.isdelete = false
-                    this.fetchgetPhotoMpme();
                     this.loading = false
 
 
@@ -600,24 +601,71 @@ export default {
 
 
         // get allpicture
-        async fetchgetClassificationMpme() {
+        async fetchgetClassificationCritereMpme() {
             try {
               
                 const response = await axios.get('/mpme/criteres-classifications/annuel', {
                     headers: {
                         Authorization: `Bearer ${this.loggedInUser.token}`,
                         'Content-Type': 'multipart/form-data',
-
                     },
 
                 });
                 console.log('classifications/annuel:', response);
 
                 if (response.data.status === 'success') {
-                    this.classificationOptions = response.data.data.data;
-                    // this.originalDocuments = [...response.data.data.data];
-                    // this.filteredDocuments = this.originalDocuments;
+                    const filteredDataAffaire = response.data.data.data.filter(item => item.ChiffreCapital === 1);
+                    const mappedDataAffaire = filteredDataAffaire.map(item => ({
+                          label: item.Description, // Vous pouvez utiliser la propriété que vous préférez ici
+                          value: item.CodeCritere, // Ou toute autre propriété que vous préférez
+                     }));
+                     this.classificationAffaireOptions = mappedDataAffaire;
+
+                     const filteredDataSocial = response.data.data.data.filter(item => item.ChiffreCapital === 0);
+                    const mappedDataSocial = filteredDataSocial.map(item => ({
+                          label: item.Description, // Vous pouvez utiliser la propriété que vous préférez ici
+                          value: item.CodeCritere, // Ou toute autre propriété que vous préférez
+                     }));
+                     this.classificationSocialOptions = mappedDataSocial;
+                     this.loading = false
+
+                }
+                else {
+
+                }
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    console.log('aut', error.response.data.status === 'error');
+                    await this.$store.dispatch('user/clearLoggedInUser');
+                    this.$router.push('/connexion-mpme');
+
+                } else {
+                    this.formatValidationErrors(error.response.data.errors)
                     this.loading = false
+                    return false;
+                }
+            }
+        },
+        async fetchgetClassificationAllMpme() {
+            try {
+              
+                const response = await axios.get('/mpme/classifications/annuel', {
+                    headers: {
+                        Authorization: `Bearer ${this.loggedInUser.token}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+
+                });
+                console.log('classifications/annuel222:', response);
+
+                if (response.data.status === 'success') {
+                    const filteredDataMpme = response.data.data.data.filter(item => item.CodeMpme === this.loggedInUser.id);
+                    this.classificationOptions = filteredDataMpme
+                    this.GetUpdateClass = filteredDataMpme
+                     this.loading = false
 
                 }
                 else {
@@ -642,38 +690,46 @@ export default {
 
         // upload document
         updatedoc(id) {
-            this.updateDocId = id
+            this.updateClassId = id
             this.updated = true
             // Trouver le document correspondant dans le tableau userData
-            const documentToUpdate = this.originalDocuments.find(doc => doc.id === id);
+            const classificationToUpdate = this.GetUpdateClass.find(doc => doc.id === id);
 
-            // Attribuer les valeurs aux champs d'entrée
-            this.step2.nom = documentToUpdate.NomDocument;
-            this.step2.origine = documentToUpdate.OrigineDocument;
-            this.step2.sousdoc = documentToUpdate.SousCategorieDocument;
+            // Attribuer les valeurs aux champs d'
+            this.step2.annee = classificationToUpdate.Annee;
+            this.step2.CodeCritereChiffreAffaire = classificationToUpdate.CodeCritereChiffreAffaire;
+            this.step2.CodeCritereCapitalSocial = classificationToUpdate.CodeCritereCapitalSocial;
+            this.step2.ChiffreAffaireReel = classificationToUpdate.ChiffreAffaireReel;
+            this.step2.CapitalSocialReel = classificationToUpdate.CapitalSocialReel;
+            this.step2.comptabilite = classificationToUpdate.TypeComptabilite;
+
 
             // Vous pouvez également stocker l'URL du document pour l'affichage
-            // this.updateImageUrl = documentToUpdate.LienDocument;
+            // this.updateImageUrl = classificationToUpdate.LienDocument;
 
-            console.log('Document à mettre à jour :', documentToUpdate);
+            console.log('classification à mettre à jour :', classificationToUpdate);
 
 
         },
         async hamdleUpdated() {
-            this.updated = false
-            this.loading = true
+          
+          
             this.v$.step2.$touch()
             if (this.v$.$errors.length == 0) {
-                let dataDoc = {
-                    NomDocument: this.step2.nom,
-                    SousCategorieDocument: this.step2.sousdoc,
-                    OrigineDocument: this.step2.origine,
-                    CodeMpme: this.loggedInUser.id
-
-                }
-                console.log('dataDoc', dataDoc);
+                this.loading = true
+                let DataClassification = {
+            
+            Annee:parseInt(this.step2.annee) ,
+            CodeMpme:this.loggedInUser.id,
+            CodeCritereChiffreAffaire:this.step2.CodeCritereChiffreAffaire,
+            CodeCritereCapitalSocial:this.step2.CodeCritereCapitalSocial,
+            ChiffreAffaireReel: this.step2.ChiffreAffaireReel,
+            CapitalSocialReel:this.step2.CapitalSocialReel,
+            TypeComptabilite: this.step2.comptabilite,
+        }
+                console.log('DataClassification', DataClassification);
                 try {
-                    const response = await axios.put(`/documents-mpme/${this.updateDocId}`, dataDoc, {
+                    const response = await axios.put(`/mpme/classifications/annuel/${this.updateClassId}`, DataClassification, {
                         headers: {
                             Authorization: `Bearer ${this.loggedInUser.token}`,
                             'Content-Type': 'application/json',
@@ -681,25 +737,24 @@ export default {
                     });
                     console.log('Réponse du téléversement :', response);
                     if (response.data.status === 'success') {
-                        await this.fetchgetDocMpme()
+                        await this.fetchgetClassificationAllMpme()
+                        this.updated = false
                         this.loading = false
-                        this.msgsuccess = true
-
-
-
+                        this.updatemsg = true
                     } else {
 
                     }
                 } catch (error) {
                     console.error('Erreur lors du téléversement :', error);
                     console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
-                    if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                    if (error.response.data === 'Unauthorized' ) {
                         console.log('aut', error.response.data.status === 'error');
                         await this.$store.dispatch('user/clearLoggedInUser');
                         this.$router.push('/connexion-mpme');
 
                     } else {
-                        this.formatValidationErrors(error.response.data.errors)
+                        console.log('aut', error.response.data.message);
+
                         this.loading = false
                         return false;
                     }
@@ -747,63 +802,7 @@ export default {
                 behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
             });
         },
-        async publish(id, statut) {
-            this.loading = true
-
-            let statutTraitement;
-            if (statut === 1) {
-                statutTraitement = false;
-            } else if (statut === 0) {
-                statutTraitement = true;
-            } else {
-                // Gérer le cas où la valeur de statut n'est ni 0 ni 1 (vous pouvez ajouter une logique personnalisée ici)
-                statutTraitement = null; // Ou une autre valeur par défaut si nécessaire
-            }
-
-            let dataMpme = {
-                document: id,
-                statut: statutTraitement
-            };
-            console.log('dataMpme', dataMpme);
-
-            try {
-                const response = await axios.put('/documents-mpme/publier/publication-de-document-mpme', dataMpme, {
-                    headers: {
-                        Authorization: `Bearer ${this.loggedInUser.token}`,
-
-                    }
-                });
-                console.log('Réponse du téléversement :', response);
-                if (response.data.status === 'success') {
-                    if (response.data.message === "publier") {
-                        this.publier = await 'Votre document a été publié avec succès !'
-                    } else {
-                        this.publier = await 'Votre document a été retiré de la liste avec succès.'
-
-                    }
-                    this.loading = false
-                    this.publishDoc = true
-                    await this.fetchgetDocMpme()
-
-
-                } else {
-
-                }
-            } catch (error) {
-                console.error('Erreur lors du téléversement :', error);
-                if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-                    this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-
-            }
-        }
+      
 
     },
 
@@ -987,25 +986,7 @@ export default {
 
 
 
-.dow {
-    background-color: #4c4c4c;
-    position: relative;
-}
 
-.dow a {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    height: 81%;
-    color: transparent;
-
-}
-
-.dow:hover {
-    background-color: #fff;
-    color: #4c4c4c;
-    border: 1px solid #4c4c4c;
-}
 
 .update {
     background-color: rgb(63, 134, 255);
@@ -1027,26 +1008,19 @@ export default {
     border: 1px solid red;
 }
 
+.updateclose{
+    background-color: rgb(183, 239, 243);
+   
 
-.open {
-    background-color: var(--color-secondary);
+}
+.updateclose i , .deleteclose i  {
+    cursor: not-allowed;
+}
+.deleteclose{
+    background-color: rgb(245, 108, 108);
 }
 
-.open:hover {
-    background-color: #fff;
-    color: var(--color-secondary);
-    border: 1px solid var(--color-secondary);
-}
 
-.opens {
-    background-color: var(--color-primary);
-}
-
-.opens:hover {
-    background-color: #fff;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
-}
 
 p {
     margin-bottom: 0 !important;

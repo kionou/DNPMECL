@@ -123,6 +123,7 @@ import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
 export default {
     name: 'DNPMECLDetailPhoto',
+    props:['id'],
 
     data() {
         return {
@@ -130,13 +131,36 @@ export default {
         };
     },
 
-    mounted() {
+  async  mounted() {
         this.lightbox = GLightbox({ 
               selector: ".glightbox"
              }); 
+
+             console.log('iddd',this.id);
+             await this.fetchPhotos()
     },
 
     methods: {
+      async fetchPhotos() {
+      try {
+              await this.$store.dispatch('fetchPubliqueVisiblePhotos');
+                const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
+                this.PhotosOptions = options
+              console.log('Photos récupérées detail222 :', options);
+              const filteredDataAlbum = options.find((item) => {
+                console.log(item.id , this.id  , typeof(this.id  )  , item.id ===  parseInt(this.id));
+                item.id ===  parseInt(this.id) 
+              });
+              console.log('Photos récupérées detail :', filteredDataAlbum);
+
+
+              
+
+        // Continuez avec le reste de votre code pour afficher les photos
+      } catch (error) {
+        console.error('Erreur lors de la récupération des photos :', error.message);
+      }
+    },
         
     },
 };

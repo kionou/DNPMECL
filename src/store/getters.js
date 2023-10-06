@@ -27,6 +27,7 @@ export default{
     getRegimes: (state) => state.regimes,
     getTypesGestions: (state) => state.typesGestions,
     getTypesContribuables: (state) => state.typesContribuables,
+    getPubliqueVisiblePhotos: (state) => state.publiqueVisiblePhotos,
       
 
 

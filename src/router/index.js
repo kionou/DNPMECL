@@ -39,8 +39,8 @@ import DemandePartenanriat from '../views/Public/Partenaire/demandePartenanriat.
 import InfoMpme from '../views/Public/Partenaire/infoMpme.vue'
 
 
- import Test from '../views/Public/test2.vue'
-// import Test from '../views/test3.vue'
+//  import Test from '../views/Public/test2.vue'
+import Test from '../views/test5.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,12 +57,13 @@ const router = createRouter({
          { path: '/dnpme/organigramme', name: 'Organigramme', component: Organigramme},
          { path: '/dnpme/Reformes-textes-de-lois', name: 'documents', component: Documents},
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
-         { path: '/dnpme/phototheque/detail', name: 'PhotothequeDetail', component: PhotothequeDetail},
+         { path: '/dnpme/phototheque/:id', name: 'PhotothequeDetail', component: PhotothequeDetail , props:true},
+         { path: '/dnpme/formalisation', name: 'Formalisation', component: Formalisation},
+
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
          { path: '/actualites/:id', name: 'ActuliteDetail', component: ActuliteDetail , props:true },
          { path: '/statistique', name: 'statistique', component: Statistique},
-         { path: '/formalisation', name: 'Formalisation', component: Formalisation},
          { path: '/contact', name: 'Contact', component: Contact},
 
          { path: '/partenaires', name: 'Partenaire', component: Partenaire},

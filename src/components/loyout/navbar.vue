@@ -42,11 +42,12 @@
               <!-- <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li> -->
               <li><router-link  class="text-uppercase" to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
+            <li><router-link to="/dnpme/formalisation">FORMALISATION</router-link></li>
+
             </ul>
            </li>
             <li><router-link to="/actualites">Actualités</router-link></li>
             <li><router-link to="/statistique">Statistiques</router-link></li>
-            <li><router-link to="/formalisation">Formalisation</router-link></li>
             <li class="dropdown">
             <router-link to="#">Partenaires <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
             <ul  class="dropdown-menu">

@@ -378,14 +378,23 @@ async fetchDataFromAPI({ commit }) {
       console.log('typesContribuablesFromAPI',response);
 
       const typesContribuablesFromAPI = response.data.data.data;
-
-      // Formatez les données de l'API en options appropriées si nécessaire
-
       commit('SET_TYPES_CONTRIBUABLES', typesContribuablesFromAPI);
     } catch (error) {
       console.error('Erreur lors de la récupération des types de contribuables:', error);
     }
   },
+  async fetchPubliqueVisiblePhotos({ commit }) { 
+    try {
+      const response = await axios.get('/photos-tech/albums/photos/publique-visible');
+      const publiqueVisiblePhotos = response.data.data.data; // Assurez-vous que la structure de réponse correspond à vos besoins
+     
+      commit('SET_PUBLIQUE_VISIBLE_PHOTOS', publiqueVisiblePhotos);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des photos publiques visibles :', error);
+    }
+  },
+
+
   
 
 

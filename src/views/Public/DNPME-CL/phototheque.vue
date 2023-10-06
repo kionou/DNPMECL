@@ -33,86 +33,27 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <div v-if="PhotosOptions.length === 0" class="noresul">Aucun Album disponible pour le moment !</div>
         
-        <div class="class1" style="margin:5px;">
+        <div v-else class="class1" style="margin:5px;" v-for="photo in PhotosOptions" :key="photo.id">
           <div class="card text-center " >
-            <div class="container-img" @click="$router.push({ path: `/dnpme/phototheque/detail`, })" >
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
+            <div class="container-img" @click="$router.push({ path: `/dnpme/phototheque/${photo.id}`, })" >
+              <img class="img-fluid image" :src="photo.CouverturePhoto">
             
             </div>
             <div class="card-body" >
-              <h5 class="card-title" @click="$router.push({ path: `/dnpme/phototheque/detail`, })">
-                {{ truncateText(originalText, 150) }}
+              <h5 class="card-title" @click="$router.push({ path: `/dnpme/phototheque/${photo.id}`, })">
+                {{ truncateText(photo.AlbumTitre, 150) }}
 
                </h5>
             </div>
           </div>
 
         </div>
-        <div class="class1" style="margin:5px;">
-          <div class="card text-center " >
-            <div class="container-img">  
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
-            </div>
-            <div class="card-body" >
-              <h5 class="card-title">
-                
-                  Descente du DGPME dans les locaux de la DDPME Pointe-Noire</h5>
-            </div>
-          </div>
-        </div>
 
-        <div class="class1" style="margin:5px;">
-          <div class="card text-center " >
-            <div class="container-img">
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
-            </div>
-            <div class="card-body" >
-              <h5 class="card-title">
-                  Visite des stands par les Cadres du Ministère desjjjjjjjjjjjjjjjj PMEASI à la CCIAM de Pointe-Noire pour la célébration de la Journée Internationale des MPME</h5>
-            </div>
-          </div>
-        </div>
+       
 
-        <div class="class1" style="margin:5px;">
-          <div class="card text-center " >
-            <div class="container-img">
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
-            </div>
-            <div class="card-body" >
-              <h5 class="card-title">
-                  Participation des Cadres du Ministères des PMEASI à la CCIAM de Pointe-Noire pour la Journée Internationale des MPME
-                </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="class1" style="margin:5px;">
-          <div class="card text-center " >
-            <div class="container-img">
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
-            </div>
-            <div class="card-body" >
-              <h5 class="card-title">
-                Célébration de la Journée Internationale des Micros, Petites et Moyennes Entreprises à la Chambre de Commerce de Pointe-Noire
-              </h5>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="class1" style="margin:5px;">
-          <div class="card text-center " >
-            <div class="container-img">
-              <img class="img-fluid image" src="@/assets/img/actualite/2.jpg">
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">
-                Mission des visites des sites agro-pastoraux par les experts et dirigeants de la BAD et les cadres des Ministères.   
-              </h5>
-            </div>
-          </div>
-        </div>
+       
       </div>
 
       <hr>
@@ -184,13 +125,15 @@ computed: {
     return {
       originalText: " Visite des stands par les Cadres du Ministère desjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj PMEASI à la CCIAM de Pointe-Noire pour la célébration de la Journée Internationale des MPME  ",
         loading:false,
+        PhotosOptions:[],
          data:'',
          currentPage: 1,
          itemsPerPage: 12,
     };
   },
 
-  mounted() {
+async   mounted() {
+ await   this.fetchPhotos()
     
   },
 
@@ -201,9 +144,19 @@ computed: {
       } else {
         return text.slice(0, maxLength) + "...";
       }
-   
-  
-  }
+  },
+  async fetchPhotos() {
+      try {
+              await this.$store.dispatch('fetchPubliqueVisiblePhotos');
+                const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
+                this.PhotosOptions = options
+              console.log('Photos récupérées :', options);
+
+        // Continuez avec le reste de votre code pour afficher les photos
+      } catch (error) {
+        console.error('Erreur lors de la récupération des photos :', error.message);
+      }
+    },
     
   },
 };
@@ -300,6 +253,19 @@ margin: 5px;
 
 /* fin banier */
 
+
+.noresul {
+    border: 1px solid #F9D310;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 6px;
+    font-size: 20px;
+
+}
 
 .section-header {
 padding: 20px 0 !important;

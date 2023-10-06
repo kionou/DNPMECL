@@ -27,5 +27,6 @@ export default{
     regimes: [],
     typesGestions: [],
     typesContribuables: [],
+    publiqueVisiblePhotos: [],
 
 }
