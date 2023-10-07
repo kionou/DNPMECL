@@ -190,14 +190,15 @@
                 <div class="card">
                   <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
                       <h2 class="mb-0">
-                        <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+                        <div class="btn  text-left" @click="show = !show">
                             Cliquez ici pour lire
-                        </button>
+                            <i :class="show ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
+                        </div>
                       </h2>
                   </div>
                 
-                  <div id="collapsesix" class="collapse" aria-labelledby="headingOne" data-parent="#our-values-accordion">
-                      <div class="card-body" style="text-align: left !important;">
+                  <div   v-show="show " :class="{ 'transition-height': show }">
+                      <div class="card-body"  style="text-align: left !important;">
                       
                           <ul>
                             <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
@@ -224,36 +225,17 @@
               </h2>
             </div><!-- Pricing header -->
             
-            <div class="accordion accordion-group" id="our-values-accordion">
-                <div class="card">
-                  <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
-                      <h2 class="mb-0">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                            Cliquez ici pour lire
-                        </button>
-                      </h2>
-                  </div>
-                
-                  <div  class="accordion-collapse collapse" id="faq-content-1" data-bs-parent="#faqlist">
-                      <div class=" accordion-body" style="text-align: left !important;">
-                      
-                          <ul>
-                            <li><span>Restructurer le cadre juridique et institutionnel pour le rendre plus incitatif et engageant;</span></li>
-                            <li><span>Rechercher et améliorer l'accès au financement par la mise en place d’institutions de financement dotées de mécanismes de garantie;</span></li>
-                            <li><span>Encourager l'initiative des hommes, des femmes, jeunes et moins jeunes, des micros entrepreneurs urbains et ruraux à la création et à l'innovation en partenariat avec les Organisations Non Gouvernementales, associations et autres acteurs de l’écosystème entrepreneurial;</span></li>
-                            <li><span>Faciliter l'accès à l'information, aux conseils et l'accès aux réseaux;</span></li>
-                            <li><span>Renforcer les capacités des acteurs et améliorer la compétitivité des entreprises congolaises;</span></li>
-                            <li><span>•	Valoriser la production locale dans la commande publique et à l'exportation.</span></li>
-                          </ul>
-                     
-                      </div>
-                  </div>
-                </div>  
-            </div>
+            
+
+
+
           </div><!-- Plan 1 end -->
+
+
+ 
         </div><!-- Col end -->
        
-
+  
         
 
         
@@ -585,7 +567,8 @@ export default {
     secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
-    totalEmplois:0
+    totalEmplois:0,
+    show:false,
 
 
       
@@ -641,6 +624,12 @@ await this.fetchDataJuridique()
 
 
   methods: {
+    toggleCategory() {
+
+      category.show = !category.show;
+    
+ 
+},
     async fetchPartenaires() {
   try {
     await this.$store.dispatch('fetchPartenairesData');
@@ -841,8 +830,18 @@ async fetchRegionOptions() {
     padding: 13px 15px;
     color: #fff;
     padding-bottom: 10px;
+    width: 100%;
+    display: flex;
+        justify-content: space-between;
+    align-items: center;
 }
+.accordion-group .card-header .btn i {
 
+padding: 2px 5px 0;
+    border-radius: 3px;
+    background-color: var(--color-primary);
+    font-weight: bold !important;
+}
 .sign {
 display: block;
 width: 100%;
@@ -920,5 +919,9 @@ width: 75%;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.transition-height {
+  transition: height 0.5s ease-in-out; /* Vous pouvez ajuster la durée et la fonction d'accélération selon vos préférences */
 }
 </style>
