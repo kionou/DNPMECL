@@ -1,80 +1,76 @@
 <template>
   <div>
-    <canvas id="myChart"></canvas>
+      <canvas ref="chartCanvas"></canvas>
+
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import Chart from "chart.js/auto";
-import axios from "@/lib/axiosConfig.js"; // Importez Axios
+import { defineComponent } from 'vue';
+import { Chart } from 'chart.js';
+export default defineComponent({
+  name: 'DNPMECLBaton',
 
-export default {
-  setup() {
-    const chart = ref(null);
+data() {
+  return {
+     
+  };
+},
 
-    // Récupérez les données de votre API
-    async function fetchDataActivite() {
-      try {
-        const response = await axios.get('/secteurs-activites', {
-          params: { with_relation: true },
-        });
+mounted() {
+  this.renderChart();
+},
 
-        if (response.data.status === 'success') {
-          const secteurActiviteData = response.data.data.data;
-          console.log(secteurActiviteData);
-          const filteredData = secteurActiviteData.filter(item => item.secteur_activite !== null);
-
-          // Utilisez secteurActiviteData pour créer vos données de graphique ici
-          const data = {
-            labels: filteredData.map(item => item.secteur_activite.NomSecteurActivite),
-            datasets: [
-              {
-                label: "Nombre d'entreprises",
-                data: filteredData.map(item => item.nbre),
-                backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)"],
-                borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
-                borderWidth: 1,
-              },
-            ],
-          };
-
-          // Options du graphique
-          const options = {
-            responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          };
-
-          // Création du graphique
-          chart.value = new Chart("myChart", {
-            type: "bar",
-            data: data,
-            options: options,
-          });
-        } else {
-          console.error('Erreur de l\'API :', response.data.message);
+methods: {
+  renderChart() {
+    const chartCanvas = this.$refs.chartCanvas;
+    const ctx = chartCanvas.getContext('2d');
+    
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'My Dataset',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
-      } catch (error) {
-        console.error('Erreur lors de la requête GET :', error);
       }
-    }
-
-    onMounted(() => {
-      // Appelez la fonction pour récupérer les données et créer le graphique
-      fetchDataActivite();
     });
+  }
+}
+});
 
-    return {
-      chart,
-    };
-  },
-};
 </script>
 
-<style>
-/* Styles CSS pour personnaliser le graphique */
+<style lang="css" scoped>
+canvas{
+height: 577px !important;
+
+}
+
 </style>

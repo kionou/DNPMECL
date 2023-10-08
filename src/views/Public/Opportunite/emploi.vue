@@ -228,18 +228,16 @@ paginatedItems() {
         if (response.data.status === 'success') {
             this.loading = false
             console.log('UserData:', response.data.data.data);
-            this.offres = response.data.data.data
-             this.filterOffres =  this.offres
+            const offresPubliees = response.data.data.data.filter(offre => offre.publish === 0);
+            this.offres = offresPubliees
+             this.filterOffres =  offresPubliees
           
         }  
       } catch (error) {
         console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-        console.log('aut',error.response.data === 'Unauthorized.');
+        console.log('aut',error);
 
-          if (error.response.data === 'Unauthorized.') {
-                  await this.$store.dispatch('user/clearLoggedInUser'); 
-                  this.$router.push('/connexion-mpme'); 
-          } 
+          
       }
     },
 

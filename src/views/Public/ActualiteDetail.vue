@@ -35,7 +35,13 @@
 
                         <h1>{{ actualite.titre }}</h1><br>
                         
-                        <p class="article-p"><img :src="images[0]" class="img-fluid" alt=" actualite" style="height: 512px !important;"></p>
+                        <div class="article-p">
+                            <div class="image">
+                            <img :src="images[0]" class="img-fluid" alt=" actualite" >
+
+                            </div>
+                        </div>
+
                         <!-- <div class="container swiper-container" data-aos="zoom-out">
                             <div class="swiper-wrapper align-items-center">
                                 <div class="swiper-slide ee" style="width: 100% !important;" v-for="image in images"
@@ -239,14 +245,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-/* section {
-    float: left;
-    width: 100%;
-    position: relative;
-    padding: 70px 0;
-    z-index: 10;
-    overflow: hidden;
-} */
+
 .section-header {
     padding: 30px 0;
 
@@ -390,8 +389,24 @@ h6 {
     border: 1px solid var(--color-secondary);
     display: flex;
     justify-content: center;
+        align-items: center;
+    width: 100%;
+    height: 400px;
 
 }
+
+.article-p .image{
+/* border: 1px solid red; */
+width: 100%;
+height: 100%;
+}
+
+.article-p .image img{
+
+width: 100%;
+height: 100%;
+}
+
 
 .swiper-slide {
     -webkit-flex-shrink: 0;

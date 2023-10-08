@@ -156,19 +156,24 @@
                 <div class="card">
                   <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
                       <h2 class="mb-0">
-                        <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+                        <div class="btn  text-left" @click="show1 = !show1">
                             Cliquez ici pour lire
-                        </button>
+                            <i :class="show1 ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
+                        </div>
                       </h2>
                   </div>
                 
-                  <div id="collapsefive" class="collapse" aria-labelledby="headingOne" data-parent="#our-values-accordion">
-                      <div class="card-body" style="text-align: left !important;">
+                  <div   v-show="show1 " class="transition-height" >
+                      <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
                       
                           <ul>
-                            <li><span>Soutenir et assister les Petites et Moyennes Entreprises;</span></li>
-                            <li><span>Informer, orienter, conseiller et contribuer à l'émergence et au développement des Petites et Moyennes Entreprises;</span></li>
-                            <li><span>Contribuer à la création de richesses et d'emplois.</span></li>
+                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
+                            <li><span>Les groupements d'entreprises;</span></li>
+                            <li><span>Les groupements professionnels;</span></li>
+                            <li><span>Les coopératives de production et de transformation;</span></li>
+                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
+                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
+                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
                           </ul>
                      
                       </div>
@@ -190,15 +195,15 @@
                 <div class="card">
                   <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
                       <h2 class="mb-0">
-                        <div class="btn  text-left" @click="show = !show">
+                        <div class="btn  text-left" @click="show2 = !show2">
                             Cliquez ici pour lire
-                            <i :class="show ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
+                            <i :class="show2 ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
                         </div>
                       </h2>
                   </div>
                 
-                  <div   v-show="show " :class="{ 'transition-height': show }">
-                      <div class="card-body"  style="text-align: left !important;">
+                  <div   v-show="show2 " class="transition-height" >
+                      <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
                       
                           <ul>
                             <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
@@ -224,7 +229,34 @@
                 <strong>Perspectives</strong>
               </h2>
             </div><!-- Pricing header -->
-            
+            <div class="accordion accordion-group" id="our-values-accordion">
+                <div class="card">
+                  <div class="card-header p-0 bg-transparent" id="headingOne" style="background-color: #6c757d !important;">
+                      <h2 class="mb-0">
+                        <div class="btn  text-left" @click="show3 = !show3">
+                            Cliquez ici pour lire
+                            <i :class="show3 ? 'bi bi-chevron-up' : 'bi bi-chevron-down'" class="flex-shrink-0"></i>
+                        </div>
+                      </h2>
+                  </div>
+                
+                  <div   v-show="show3 " class="transition-height" >
+                      <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
+                      
+                          <ul>
+                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
+                            <li><span>Les groupements d'entreprises;</span></li>
+                            <li><span>Les groupements professionnels;</span></li>
+                            <li><span>Les coopératives de production et de transformation;</span></li>
+                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
+                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
+                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
+                          </ul>
+                     
+                      </div>
+                  </div>
+                </div>  
+            </div>
             
 
 
@@ -319,9 +351,9 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
-
-
-                  <table class="table" style="border: 1px solid #d9dee3 !important;">
+                  
+                <SecteurActiviteVue/>
+                  <!-- <table class="table" style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr>
                         <th>Secteur d'activité</th>
@@ -335,7 +367,7 @@
                       </tr>
                      
                     </tbody>
-                  </table>
+                  </table> -->
 
 
 
@@ -528,17 +560,19 @@ import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
 import axios from '@/lib/axiosConfig.js'
 
+
 import slide111 from "@/assets/img/slide/slide111.jpg"
 import slide22 from "@/assets/img/slide/slide22.jpg"
 import slide33 from "@/assets/img/slide/slide33.jpg"
 import slide44 from "@/assets/img/slide/slide44.jpg"
+import SecteurActiviteVue from '../../components/Public/Statistique/SecteurActivite.vue';
 
 
 
 export default {
   name: 'DNPMECLAccueil',
   components: {
-
+    SecteurActiviteVue
   },
   data() {
     return {
@@ -568,7 +602,7 @@ export default {
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
     totalEmplois:0,
-    show:false,
+    show1:false, show2:false, show3:false,
 
 
       
@@ -785,15 +819,16 @@ async fetchRegionOptions() {
 
 <style lang="css" scoped>
 .swiper-slide{
-  /* width: 200px !important; */
+  width: 150px !important;
     border: 1px solid var(--color-secondary);
-    height: 200px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
 
 }
+
 .missions-bg {
     background: #ededed url('@/assets/img/skyscraper.jpg') fixed top center no-repeat;
 }
@@ -922,6 +957,8 @@ width: 75%;
 }
 
 .transition-height {
-  transition: height 0.5s ease-in-out; /* Vous pouvez ajuster la durée et la fonction d'accélération selon vos préférences */
+  transition: all 5s; /* Vous pouvez ajuster la durée et la fonction d'accélération selon vos préférences */
 }
+
+
 </style>

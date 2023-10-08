@@ -60,7 +60,7 @@ paginatedItems() {
 
     data() {
         return {
-            loading:false,
+            loading:true,
             currentPage: 1,
             itemsPerPage: 12,
             ActualitesOptions:[],
@@ -102,6 +102,7 @@ paginatedItems() {
     const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
     this.ActualitesOptions = actualites
     console.log('Actualités récupérées :', actualites);
+    this.loading = false
 
     // Continuez avec le reste de votre code pour traiter les actualités
   } catch (error) {
