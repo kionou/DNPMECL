@@ -37,12 +37,12 @@
         
         <div v-else class="class1" style="margin:5px;" v-for="photo in PhotosOptions" :key="photo.id">
           <div class="card text-center " >
-            <div class="container-img" @click="$router.push({ path: `/dnpme/phototheque/${photo.id}`, })" >
+            <div class="container-img" @click="$router.push({ path: `/dnpme/phototheque/${photo.CodeAlbum}`, })" >
               <img class="img-fluid image" :src="photo.CouverturePhoto">
             
             </div>
             <div class="card-body" >
-              <h5 class="card-title" @click="$router.push({ path: `/dnpme/phototheque/${photo.id}`, })">
+              <h5 class="card-title" @click="$router.push({ path: `/dnpme/phototheque/${photo.CodeAlbum}`, })">
                 {{ truncateText(photo.AlbumTitre, 150) }}
 
                </h5>

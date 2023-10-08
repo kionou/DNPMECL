@@ -147,10 +147,7 @@ export default {
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
                 this.PhotosOptions = options
               console.log('Photos récupérées detail222 :', options);
-              const filteredDataAlbum = options.find((item) => {
-                console.log(item.id , this.id  , typeof(this.id  )  , item.id ===  parseInt(this.id));
-                item.id ===  parseInt(this.id) 
-              });
+              const filteredDataAlbum = options.find(offre => offre.CodeAlbum === this.id);
               console.log('Photos récupérées detail :', filteredDataAlbum);
 
 

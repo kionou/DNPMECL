@@ -284,7 +284,7 @@ export default {
 }
 
 .btnCt{
-    padding: 10px;
+    padding: 12px 0 0 0;
     font-size: 14px;
     font-weight: 500;
     color: #fff;
@@ -322,7 +322,7 @@ font-size: 12px;
   .second{
   /* border: 1px solid red; */
   width: 104px;
-  height: 89px;
+  /* height: 89px; */
  
 }
 }
