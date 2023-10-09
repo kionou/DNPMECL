@@ -284,7 +284,7 @@ export default {
 }
 
 .btnCt{
-    padding: 12px 0 0 0;
+    /* padding: 12px 0 0 0; */
     font-size: 14px;
     font-weight: 500;
     color: #fff;
@@ -320,9 +320,9 @@ font-size: 12px;
 @media (min-width: 1280px) {
 
   .second{
-  /* border: 1px solid red; */
+
   width: 104px;
-  /* height: 89px; */
+  height: 59px;
  
 }
 }
@@ -332,6 +332,7 @@ font-size: 12px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-right: 14px;
 }
 .btnCt{
   

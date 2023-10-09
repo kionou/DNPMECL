@@ -75,16 +75,7 @@
           </ul>
         </div>
 
-        <!-- <div class="widget">
-          <h3 class="widget-title">ORGANES D'APPUI</h3>
-          <ul class="arrow nav nav-tabs">
-            <li><a href="acpce.php">ACPCE</a></li>
-            <li><a href="figa.php">FIGA</a></li>
-            <li><a href="adpme.php">ADPME</a></li>
-            <li><a href="bstpe.php">BSTPE</a></li>
-            <li><a href="ana.php">ANA</a></li>
-          </ul>
-        </div> -->
+       
       </div><!-- Sidebar end -->
     </div><!-- Sidebar Col end -->
 
@@ -124,7 +115,7 @@ computed: {
   data() {
     return {
       originalText: " Visite des stands par les Cadres du Ministère desjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj PMEASI à la CCIAM de Pointe-Noire pour la célébration de la Journée Internationale des MPME  ",
-        loading:false,
+        loading:true,
         PhotosOptions:[],
          data:'',
          currentPage: 1,
@@ -151,6 +142,7 @@ async   mounted() {
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
                 this.PhotosOptions = options
               console.log('Photos récupérées :', options);
+              this.loading = false
 
         // Continuez avec le reste de votre code pour afficher les photos
       } catch (error) {
@@ -292,6 +284,7 @@ h4 {
   height: 310px;
    box-shadow: rgb(133 133 133) 0px 2px 10px -5px;
    cursor: pointer;
+   padding: 8px;
 }
 .card-body{
   display: flex;
@@ -303,6 +296,22 @@ h4 {
    font-size: 15px; 
    font-weight: 500;
    color: #777;
+}
+.container-img{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    padding:10px ;
+    border-radius: 8px;
+    border: 1px solid var(--color-secondary);
+
+}
+
+.container-img img{
+width: 100% !important;
+height: 100% !important;
 }
 .card-title:hover{
  

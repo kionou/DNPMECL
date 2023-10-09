@@ -208,6 +208,28 @@ export default {
     color: #fff !important;
 }
 
+@media (max-width: 992px) {
+    .banner-title {
+    
+    font-size: 40px;
+    
+}
+}
+@media (max-width: 768px) {
+    .banner-title {
+    
+    font-size: 30px;
+    
+}
+}
+
+@media (max-width: 500px) {
+    .banner-title {
+    
+    font-size: 25px;
+    
+}
+}
 /* fin banier */
 
 

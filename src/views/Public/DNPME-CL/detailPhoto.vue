@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item"><a href="/">accueil</a></li>
                     <li class="breadcrumb-item"><a href="/dnpmecl/phototheque">Dnpmecl</a></li>
                     <li class="breadcrumb-item"><a href="/dnpmecl/phototheque">photothèques</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">detail</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ filteredDataAlbum.CodeAlbum }}</li>
                     </ol>
                   </nav>
                 </div>
@@ -25,7 +25,7 @@
    
     <section id="main-container" class="main-container">
         <div class="section-header " >
-        <h2 style="color: var(--color-primary);">ALBUM 3</h2>
+        <h2 style="color: var(--color-primary);">{{ filteredDataAlbum.CodeAlbum }}</h2>
     </div>
 
 <div class="container">
@@ -38,7 +38,7 @@
       <div class="row">
         
         <div class="col-lg-12">
-          <h3>Participation des Cadres du Ministères des PMEASI à la CCIAM de Pointe-Noire pour la Journée Internationale des MPME</h3>
+          <h3>{{ filteredDataAlbum.AlbumTitre }}</h3>
           <hr>
         </div>
         <div id="portfolio" class="portfolio sections-bg" >
@@ -46,26 +46,15 @@
 
           
 
-<div class="row gy-4 portfolio-container">
+<div class="contenu d-flex justify-content-center align-items-center flex-wrap portfolio-container">
+  <gallery :images="images" :index="index" @close="index = null"></gallery>
+ 
 
-  <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-    <div class="portfolio-wrap">
-      <a href="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KOUE_1693466169.png" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+  <div class=" portfolio-item filter-app" v-for="(image, imageIndex) in images"  :key="imageIndex"  @click="index = imageIndex" >
+    <div class="portfolio-wrap" :style="{ backgroundImage: 'url(' + image + ')' }">
     </div>
   </div>
 
-
-  <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-    <div class="portfolio-wrap">
-      <a href="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692564684.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-    </div>
-  </div>
-
-  <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-    <div class="portfolio-wrap">
-      <a href="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692811770.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-    </div>
-  </div>
 </div>
 
         </div>
@@ -77,7 +66,7 @@
       <hr>
 
       <div class="d-flex justify-content-center align-items-center " style="margin-top: 20px;">
-        <p class="sign"  style="width: 300px; margin-top: 0px !important; cursor: pointer;" @click="$router.push({ path: '/dnpme/photothequ', })" >
+        <p class="sign"  style="width: 300px; margin-top: 0px !important; cursor: pointer;" @click="$router.push({ path: '/dnpme/phototheque', })" >
             <i class="bi bi-arrow-counterclockwise"></i>&nbsp;Retour à la photothèque
         </p>
       </div>
@@ -121,13 +110,31 @@
 import  "glightbox/dist/css/glightbox.css";
 import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
+import VueGallery from 'vue-gallery';
+
 export default {
     name: 'DNPMECLDetailPhoto',
     props:['id'],
+    components: {
+      'gallery': VueGallery
+  },
 
     data() {
         return {
-            
+          filteredDataAlbum: '',
+          imag: [
+          'https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692564684.jpg',
+          'https://dummyimage.com/1600/ffffff/000000',
+          'https://dummyimage.com/1280/000000/ffffff',
+          'https://dummyimage.com/400/000000/ffffff',
+        ],
+        index: null,
+          imagess:[],
+          galleryOptions: {
+      showIndex: true, // Affiche le numéro de l'image actuelle
+      closeOnEsc: true, // Ferme la galerie en appuyant sur la touche Échap
+      // Plus d'options disponibles, consultez la documentation de vue-gallery
+    },
         };
     },
 
@@ -147,8 +154,18 @@ export default {
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
                 this.PhotosOptions = options
               console.log('Photos récupérées detail222 :', options);
-              const filteredDataAlbum = options.find(offre => offre.CodeAlbum === this.id);
-              console.log('Photos récupérées detail :', filteredDataAlbum);
+              this.filteredDataAlbum = options.find(offre => offre.CodeAlbum === this.id);
+              this.images = this.filteredDataAlbum.active_photos.map((image) => image.Photo);
+
+      //       this.imagess =   this.filteredDataAlbum.active_photos
+      //       this.images =   this.filteredDataAlbum.active_photos.map((image) => ({
+      //   src: image.Photo, // Assurez-vous que Photo est la clé appropriée dans vos données
+      //   alt: image.CodeAlbum, // Assurez-vous que alt est la clé appropriée dans vos données
+      // }));
+      
+      console.log('Images récupérées :', this.images);
+              console.log('Photos récupérées detail :', this.filteredDataAlbum);
+             
 
 
               
@@ -158,6 +175,8 @@ export default {
         console.error('Erreur lors de la récupération des photos :', error.message);
       }
     },
+
+ 
         
     },
 };
@@ -339,5 +358,14 @@ h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased !important;
 }
+
+.image {
+    float: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 1px solid #ebebeb;
+    margin: 5px;
+  }
 
 </style>

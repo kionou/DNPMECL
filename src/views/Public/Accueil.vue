@@ -331,19 +331,28 @@
             <div class="nav-align-top mb-4">
               <ul class="nav nav-pills mb-3" role="tablist">
                 <li class="nav-item">
-                  <button type="button"  class="nav-link  active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1" aria-selected="true">
+                  <button type="button"  class="nav-link  active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1"
+                  @click="toggleChart('SecteurActivite')"
+                :class="{ active: activeChart === 'SecteurActivite' }"
+                  aria-selected="true">
                     MPME par secteur d'activité
                   </button>
                 </li>
 
                 <li class="nav-item">
-                  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile1" aria-controls="navs-pills-top-profile1" aria-selected="false">
+                  <button type="button" class="nav-link" 
+                  @click="toggleChart('Region')"
+                :class="{ active: activeChart === 'Region' }"
+                  role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile1" aria-controls="navs-pills-top-profile1" aria-selected="false">
                     MPME par région
                   </button>
                 </li>
                 
                 <li class="nav-item">
-                  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages1" aria-selected="false">
+                  <button type="button" class="nav-link"
+                  @click="toggleChart('Juridique')"
+                :class="{ active: activeChart === 'Juridique' }"
+                  role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages1" aria-selected="false">
                     MPME par statut juridique
                   </button>
                 </li>
@@ -373,7 +382,8 @@
 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
-                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
+                  <Region/>
+                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                      
                       <tr>
@@ -388,7 +398,7 @@
                            <td>{{ region.nbre || 0 }}</td>
                       </tr>    
                     </tbody>
-                  </table>
+                  </table> -->
 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-messages1" role="tabpanel">
@@ -397,8 +407,8 @@
                     <option value="Toutes">Toutes</option>
                     <!-- <option ng-repeat="year in yearList" value="{{year}}"> {{year}} </option> -->
                   </select>
-
-                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
+                  <!-- <Juridique/> -->
+                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr >
                         <th>Statut juridique</th>
@@ -408,19 +418,19 @@
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
                         <td>{{ statut.label }}</td>
-                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
+                          
                            <td>{{ statutJuridiqueMpmeCounts[statut.label] || 0 }}</td>
                         
                       </tr>
                     
                     </tbody>
-                  </table>
+                  </table> -->
 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
-                  
+                  <Juridique/>
 
-                  <table class="table"  style="border: 1px solid #d9dee3 !important;">
+                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
                     <thead class="table-light">
                       <tr >
                         <th>Statut juridique</th>
@@ -430,13 +440,13 @@
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
                         <td>{{ statut.statut_juridique.NomStatutJuridique }}</td>
-                           <!-- Utiliser regionMpmeCounts pour afficher le nombre de MPME par région -->
+                           
                            <td>{{ statut.mpmes || 0 }}</td>
                         
                       </tr>
                     
                     </tbody>
-                  </table>
+                  </table> -->
 
                 </div>
 
@@ -559,6 +569,7 @@ import  "glightbox/dist/css/glightbox.css";
 import  "glightbox/dist/js/glightbox.js";
 import   GLightbox from 'glightbox';
 import axios from '@/lib/axiosConfig.js'
+import { ref } from 'vue';
 
 
 import slide111 from "@/assets/img/slide/slide111.jpg"
@@ -566,13 +577,28 @@ import slide22 from "@/assets/img/slide/slide22.jpg"
 import slide33 from "@/assets/img/slide/slide33.jpg"
 import slide44 from "@/assets/img/slide/slide44.jpg"
 import SecteurActiviteVue from '../../components/Public/Statistique/SecteurActivite.vue';
+import Region from '../../components/Public/Statistique/region.vue';
+import Juridique from '../../components/Public/Statistique/juridiques.vue';
 
 
 
 export default {
   name: 'DNPMECLAccueil',
   components: {
-    SecteurActiviteVue
+    SecteurActiviteVue , Region , Juridique
+  },
+  setup() {
+    const activeChart = ref(null);
+
+    function toggleChart(chartName) {
+      // Mettre à jour le graphique actif
+      activeChart.value = chartName;
+    }
+
+    return {
+      toggleChart,
+      activeChart,
+    };
   },
   data() {
     return {
@@ -603,6 +629,7 @@ export default {
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
     totalEmplois:0,
     show1:false, show2:false, show3:false,
+    
 
 
       
@@ -714,7 +741,7 @@ async  fetchDataRegions() {
 },
 async  fetchDataJuridique() {
   try {
-    const response = await axios.get('mpme/statistics/par-statut-juridiques');
+    const response = await axios.get('/mpme/statistics/par-statut-juridiques');
     if (response.data.status === 'success') {
       console.log('Données de la réponse 3:', response.data.data);
        this.statutJuridiqueOptions = response.data.data

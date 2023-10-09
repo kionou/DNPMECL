@@ -1,33 +1,32 @@
 <template>
     <div>
-      <canvas  height="600px" id="myCharts"></canvas>
+      <canvas  height="600px" id="myChartss"></canvas>
     </div>
   </template>
   
   <script>
-  import { ref, onMounted , onUnmounted } from "vue";
+  import { ref, onMounted  , onUnmounted} from "vue";
   import Chart from "chart.js/auto";
   import axios from "@/lib/axiosConfig.js"; // Importez Axios
   
   export default {
     setup() {
       const chart = ref(null);
+     
   
       // Récupérez les données de votre API
       async function fetchDataActivite() {
         try {
-          const response = await axios.get('/secteurs-activites', {
-            params: { with_relation: true },
-          });
+            const response = await axios.get('/regions', {params: { with_relation: true}});
   
           if (response.data.status === 'success') {
             const secteurActiviteData = response.data.data.data;
             console.log(secteurActiviteData);
-            const filteredData = secteurActiviteData.filter(item => item.secteur_activite !== null);
+            const filteredData = secteurActiviteData.filter(item => item.region !== null);
   
             // Utilisez secteurActiviteData pour créer vos données de graphique ici
             const data = {
-              labels: filteredData.map(item => item.secteur_activite.NomSecteurActivite),
+              labels: filteredData.map(item => item.region.NomRegion),
               datasets: [
                 {
                   label: "Nombre d'entreprises",
@@ -47,7 +46,7 @@
 
                   beginAtZero: true,
                   //  min: 0, // Commence à 2000
-                   max: 72000, // Incréments de 2000
+                    max: 96000, // Incréments de 2000
                   ticks: {
           // forces step size to be 50 units
           stepSize: 1000
@@ -64,7 +63,7 @@
             };
   
             // Création du graphique
-            chart.value = new Chart("myCharts", {
+            chart.value = new Chart("myChartss", {
               type: "bar",
               data: data,
               options: options,
