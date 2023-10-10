@@ -163,8 +163,6 @@ showFs() {
             },
 
             askVote: false,
-            
-
             offres: [],
             filterOffres: [],
             SousSecteurActiviteOptions:[],
@@ -235,18 +233,21 @@ showFs() {
     if (response.data.status === 'success') {
       this.loading = false;
       this.offres = response.data.data.data;
+      console.log('this.offres',this.offres);
       this.offres = this.offres.filter((offre) => {
        const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
+       console.log('sousSecteurActiviteOffre',sousSecteurActiviteOffre);
 
         if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
           const sousSecteurs = sousSecteurActiviteOffre.split('|');
             return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
         } else {
-          return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
+          return this.data.includes(sousSecteurActiviteOffre) && offre.publish ===1 ;
         }
       });
 
       this.filterOffres = this.offres;
+      console.log('this.filterOffres',this.offres);
     }
   } catch (error) {
     console.error('Erreur lors de la récupération des options des sous-prefecture :', error);

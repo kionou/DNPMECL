@@ -10,26 +10,53 @@
     </div>
     <div class=" d-flex justify-content-center align-items-center flex-wrap w-100" data-aos="fade-up" data-aos-delay="100"
         style="margin-top: 40px ; position: relative;">
-        <!-- <div class="bar_search">
+        <div class="bar_search">
             <div class="liste-searcher">
-                <div class="nsl">
-                    <i class="bi bi-search"></i>
-                    <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name"
-                        @input="filterByName" />
-                </div>
-
-                <div class="nsl" style="border-right: none">
-                    <i class="bi bi-filter"></i>
-                    <select name="sousdoc" v-model="control.sousdoc" @change="filterData">
-                        <option value="" selected="true">Choisir un type de document</option>
-                        <option v-for="doc in sousdocOptions" :key="doc.id" :value="doc.value">{{ doc.label }}</option>
-                    </select>
-
-                </div>
+              <!-- <div class="nsl">
+                <i class="bi bi-search"></i>
+                <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name"
+                  @input="filterByName" />
+              </div> -->
+              <div class="nsl">
+                <i class="bi bi-funnel-fill"></i>
+                <select name="speciality" v-model="control.spec" @change="updateFilterSpec">
+                  <option value="" selected="true">Filtre</option>
+                  <option value="annee">Année</option>
+                  <option value="chiffreaffaire">Chiffre d'Affaire</option>
+                  <option value="capitalsocial">Capital Social</option>
+                  <option value="typecomptabilite">Type De Comptabilite</option>
+      
+                  
+                </select>
+              </div>
+              <div class="nsl" style="border-right: none" v-if="control.spec === 'annee' || control.spec === 'chiffreaffaire' || control.spec === 'capitalsocial' || control.spec === 'typecomptabilite'">
+                <i class="bi bi-filter"></i>
+                <select name="speciality" v-if="control.spec === 'annee'" v-model="control.speciality" @change="filterData">
+                  <option value="" selected="true">Choisir une année</option>
+                  <option v-for="year in yearOptions" :value="year.label" :key="year.value">{{ year.label }}</option>
+                </select>
+                <select name="speciality" v-else-if="control.spec === 'chiffreaffaire'" v-model="control.speciality" @change="filterData">
+                  <option value="" selected="true">Choisir un chiffre d'affaire</option>
+                  <option v-for="chiffreaffaire in classificationAffaireOptions" :value="chiffreaffaire.label" :key="chiffreaffaire.value">{{ chiffreaffaire.label }}</option>
+                </select>
+                <select name="speciality" v-else-if="control.spec === 'capitalsocial'" v-model="control.speciality" @change="filterData">
+                  <option value="" selected="true">Choisir un capital social</option>
+                  <option v-for="capitalsocial in classificationSocialOptions" :value="capitalsocial.label" :key="capitalsocial.value">{{ capitalsocial.label }}</option>
+                </select>
+                <select name="speciality" v-else-if="control.spec === 'typecomptabilite'" v-model="control.speciality" @change="filterData">
+                  <option value="" selected="true">Choisir un chiffre d'affaire</option>
+                  <option v-for="typecomptabilite in Comptabilite" :value="typecomptabilite.label" :key="typecomptabilite.value">{{ typecomptabilite.label }}</option>
+                </select>
+                
+              </div>
+              <div class="nsl" style="border-right: none" v-else>
+                <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
+                <input type="text" placeholder="Aucun filtre sélectionné" disabled />
+              </div>
             </div>
-        </div> -->
+          </div>
         <div class="btnLogin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
-        <div v-if="paginatedItems.length === 0" class="noresul">
+        <div v-if="filteredClassifications.length === 0" class="noresul">
             <span>Vous n'avez pas encore de classification, vous pouvez également en ajouter une !!</span>
         </div>
         <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else >
@@ -339,22 +366,23 @@ export default {
         },
         totalPages() {
             // return Math.ceil(this.items.length / this.itemsPerPage);
-            return Math.ceil(this.classificationOptions.length / this.itemsPerPage);
+            return Math.ceil(this.filteredClassifications.length / this.itemsPerPage);
         },
         paginatedItems() {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
-            return this.classificationOptions.slice(startIndex, endIndex);
+            return this.filteredClassifications.slice(startIndex, endIndex);
         },
     },
 
     data() {
         return {
             control: {
-                name: '',
-                sousdoc: '',
-              
-            },
+        name: '',
+        spec: '',
+        speciality: '',
+
+      },
 
             isOpen: false,
             loading: true,
@@ -371,13 +399,14 @@ export default {
             classificationAffaireOptions:[],
             classificationSocialOptions:[],
             classificationOptions:[],
+            filteredClassifications:[],
 
             error: '',
             origine: '',
             nom: '',
             startIndex: 0,
             currentPage: 1,
-            itemsPerPage: 5,
+            itemsPerPage: 4,
 
 
           
@@ -446,6 +475,7 @@ export default {
   async  mounted() {
     
      await this.fetchgetClassificationAllMpme()
+     this.filteredClassifications = await this.classificationOptions;
      await this.fetchgetClassificationCritereMpme()
      await  this.initializeYears()
      await  this.fetchCarteAndComptabiliteOptions()
@@ -786,15 +816,7 @@ export default {
             }
 
         },
-        filterData() {
-            // Vérifier si le type de document est sélectionné
-            if (this.control.sousdoc) {
-                this.filteredDocuments = this.originalDocuments.filter(item =>
-                    item.SousCategorieDocument.toLowerCase() === this.control.sousdoc.toLowerCase());
-            } else {
-                this.filteredDocuments = this.originalDocuments; // Afficher tous les résultats si aucun type de document n'est sélectionné
-            }
-        },
+
         updateCurrentPage(pageNumber) {
             this.currentPage = pageNumber;
             window.scrollTo({
@@ -802,6 +824,70 @@ export default {
                 behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
             });
         },
+filterData() {
+  console.log('Selected Speciality:', this.control.speciality);
+  console.log('Selected Secteur Activite:', this.control.secteurActivite); // Ajout du champ secteurActivite
+
+  if (
+    this.control.spec === 'annee' ||
+    this.control.spec === 'chiffreaffaire' ||
+    this.control.spec === 'capitalsocial'  ||
+    this.control.spec === 'typecomptabilite'
+  ) {
+    if (this.control.speciality === '') {
+      // Réinitialiser la liste si aucune région, sous-préfecture ou secteur d'activité n'est sélectionné
+      this.filteredClassifications = [...this.classificationOptions];
+    } else {
+      // Filtrer par région, sous-préfecture ou secteur d'activité
+      let filterKey;
+      let selectedOption;
+
+      if (this.control.spec === 'annee') {
+        filterKey = 'Annee';
+        const specialityAsNumber = parseInt(this.control.speciality, 10);
+        selectedOption =  this.yearOptions.find(option => option.label ===  this.control.speciality);
+      } else if (this.control.spec === 'chiffreaffaire') {
+        filterKey = 'CodeCritereChiffreAffaire';
+        selectedOption = this.classificationAffaireOptions.find(option => option.label === this.control.speciality);
+        console.log('Sousprefecture',selectedOption);
+
+      } else if (this.control.spec === 'capitalsocial') {
+        filterKey = 'CodeCritereCapitalSocial'; // Utilisez la clé correcte pour le champ de secteur d'activité
+        selectedOption = this.classificationSocialOptions.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
+
+      } else if (this.control.spec === 'typecomptabilite') {
+        filterKey = 'TypeComptabilite'; // Utilisez la clé correcte pour le champ de secteur d'activité
+        selectedOption = this.Comptabilite.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
+      }
+      console.log('selectedOptioneeeedernier',selectedOption);
+      if (selectedOption) {
+        this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey] === selectedOption.value );
+      console.log('filteredClassifications',this.classificationOptions);
+
+      } else {
+        this.filteredClassifications = [];
+      }
+    }
+  } else {
+    this.filteredClassifications = [...this.classificationOptions];
+  }
+},
+
+
+    clearFilters() {
+      this.control = {
+        name: '',
+        spec: '',
+        speciality: '',
+        promotion: '',
+      };
+
+      // Réinitialiser filteredPmes pour refléter les données d'origine
+      this.filteredClassifications = [...this.classificationOptions];
+
+      // Réinitialiser currentPage à 1 pour afficher la première page après avoir effacé les filtres
+      this.currentPage = 1;
+    },
       
 
     },

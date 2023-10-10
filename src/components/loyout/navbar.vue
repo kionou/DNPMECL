@@ -6,15 +6,20 @@
     <section id="topbar" class="topbar ">
       <div class=" topbar1 ">
         <div class="">
-          <img src="@/assets/img/armoirie.png" alt="">
+          <img src="@/assets/img/logo/logopme.png" alt="">
         </div>
         <div class="texte">
           <h1>REPUBLIQUE DE GUINEE </h1>
           <span>Ministère du Commerce, de l’Industrie</span>
           <span>et des Petites et Moyennes Entreprises</span>
         </div>
-        <div class="">
-          <img src="@/assets/img/ninba1.png" alt="">
+        <div class="top-right">
+          <router-link to="/" class="logo ">
+          
+            <h1>DNPME-CL </h1>
+            <span>DIRECTION NATIONALE DES PME</span> 
+            <span>ET DU CONTENU LOCAL </span>
+          </router-link>
         </div>
       </div>
     </section>

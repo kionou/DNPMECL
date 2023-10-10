@@ -39,6 +39,7 @@
             Conakry, Guinée <br><br>
             <strong>Téléphone:</strong> +224 622 33 63 43<br>
             <strong>Email:</strong> infodnpmecl@gmail.com<br>
+            <strong style="visibility: hidden;">Email:</strong>: dnpmecl@mcipme.gov.gn<br>
           </p>
 
         </div>

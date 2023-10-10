@@ -44,9 +44,9 @@
         <div id="portfolio" class="portfolio sections-bg" >
             <div class="portfolio-isotope"  data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
 
-          
+          <div v-if="images.length === 0" class="noresul">Aucune photo disponible pour le moment !!!</div>
 
-<div class="contenu d-flex justify-content-center align-items-center flex-wrap portfolio-container">
+<div class="contenu d-flex justify-content-center align-items-center flex-wrap portfolio-container" v-else>
   <gallery :images="images" :index="index" @close="index = null"></gallery>
  
 
@@ -122,14 +122,9 @@ export default {
     data() {
         return {
           filteredDataAlbum: '',
-          imag: [
-          'https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692564684.jpg',
-          'https://dummyimage.com/1600/ffffff/000000',
-          'https://dummyimage.com/1280/000000/ffffff',
-          'https://dummyimage.com/400/000000/ffffff',
-        ],
+        
         index: null,
-          imagess:[],
+          images:[],
           galleryOptions: {
       showIndex: true, // Affiche le numéro de l'image actuelle
       closeOnEsc: true, // Ferme la galerie en appuyant sur la touche Échap
@@ -157,13 +152,8 @@ export default {
               this.filteredDataAlbum = options.find(offre => offre.CodeAlbum === this.id);
               this.images = this.filteredDataAlbum.active_photos.map((image) => image.Photo);
 
-      //       this.imagess =   this.filteredDataAlbum.active_photos
-      //       this.images =   this.filteredDataAlbum.active_photos.map((image) => ({
-      //   src: image.Photo, // Assurez-vous que Photo est la clé appropriée dans vos données
-      //   alt: image.CodeAlbum, // Assurez-vous que alt est la clé appropriée dans vos données
-      // }));
       
-      console.log('Images récupérées :', this.images);
+             console.log('Images récupérées :', this.images);
               console.log('Photos récupérées detail :', this.filteredDataAlbum);
              
 
@@ -368,4 +358,17 @@ h1, h2, h3, h4, h5, h6 {
     margin: 5px;
   }
 
+
+  .noresul {
+    border: 1px solid #F9D310;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 6px;
+    font-size: 20px;
+    
+    }
 </style>

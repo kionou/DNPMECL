@@ -48,6 +48,7 @@
             <div class="ts-service-box-content">
               <h4>Email</h4>
               <p>infodnpmecl@gmail.com</p>
+              <p>dnpmecl@mcipme.gov.gn</p>
             </div>
           </div>
         </div><!-- Col 2 end -->

@@ -12,7 +12,7 @@
         <p>{{ offre.description }}</p>
     </div>
     <div class="date">
-        <p >Secteur concerné : <span>{{ sousSecteursLabel }}</span> </p>
+        <p >Secteur concerné : <span>  {{obtenirValeursPourCles(sousSecteursLabel)}}</span> </p>
     </div>
     <div class="date">
         <p >Site Web : <a :href="offre.siteWeb">{{ offre.siteWeb }}</a> </p>
@@ -23,10 +23,10 @@
     <div class="date">
         <p>Date de Fin : <span>{{ offre.dateCloture }}</span> </p>
     </div>
-    <!-- <div class="btn_sign" v-if="offre.manage === 1">
-    <button class="sign" @click="hamdleSubmit(offre.CodeOffre)">CANDIDATER</button>
-    
-</div> -->
+    <div class="btn_sign" v-if="offre.manage === 1">
+<button class="sign" @click="hamdleSubmit(offre.CodeOffre)">CANDIDATER</button>
+
+</div>
   </div>
   <MazDialog v-if="isOpen" v-model="isOpen" width="500px" max-height="revert"  padding="0 1.5rem 1.5rem">
 <div>
@@ -92,6 +92,7 @@ import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
 import Loading from '../../../components/Public/other/preloader.vue';
 import MazDialog from 'maz-ui/components/MazDialog'
+
 export default {
 name: 'DNPMECLDetailOffre',
 props:['id'],
@@ -119,7 +120,7 @@ data() {
         idOffre:'',
         error:'',
         sousSecteursLabel: '',
-          SousSecteurActiviteOptions:[],
+        SousSecteurActiviteOptions:[],
     
     };
 },
@@ -135,27 +136,44 @@ validations: {
     },
 
 async   mounted() {
-
-  await this.fetchSousSecteurActiviteOptions()
-  await this.fetchgetOffreMpme()
-      console.log(this.id);
-    console.log("datadossiers", this.loggedInUser);
+await this.fetchSousSecteurActiviteOptions()
+await this.fetchgetOffreMpme()
+    console.log(this.id);
+  console.log("datadossiers", this.loggedInUser);
+ 
     
 },
 
 methods: {
+  obtenirValeursPourCles(sousSecteurs) {
+if (sousSecteurs && sousSecteurs.includes('|')) {
+const sousSecteursArray = sousSecteurs.split('|');
+const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
+const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+  return option ? option.label : valeur;
+});
+return nomsSousSecteurs.sort().join(' , ');
+} else {
+const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
+return option ? option.label : sousSecteurs;
+}
+},
   async fetchSousSecteurActiviteOptions() {
-    try {
-      await this.$store.dispatch('fetchSousSecteurOptions'); 
-      this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
-    } catch (error) {
-      console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
-    }
-  },
+  try {
+    await this.$store.dispatch('fetchSousSecteurOptions'); 
+    this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
+  } catch (error) {
+    console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+  }
+},
+
     async fetchgetOffreMpme() {
     try {
-    //   const userId = this.loggedInUser.id;
-      const response = await axios.get('/offres/publique');
+      const response = await axios.get('/offres', {
+        headers: {
+          Authorization: `Bearer ${this.loggedInUser.token}`,
+
+        },});
         console.log('UserData:', response);
 
       if (response.data.status === 'success') {
@@ -163,19 +181,23 @@ methods: {
           console.log('UserData:', response.data.data.data);
           this.offre = response.data.data.data.find(offre => offre.CodeOffre === this.id);
           const valeur = this.offre.liste_sous_secteurs;
-            const option =  this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
-            this.sousSecteursLabel =  option ? option.label : valeur; 
-            this.loading = false
+          const option =  this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+          this.sousSecteursLabel =  option ? option.label : valeur; 
+          this.loading = false
         
       }  
     } catch (error) {
       console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-      console.log('aut',error.response.data === 'Unauthorized.');
+      if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                console.log('aut', error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser');
+                this.$router.push('/connexion-mpme');
 
-        if (error.response.data === 'Unauthorized.') {
-                await this.$store.dispatch('user/clearLoggedInUser'); 
-                this.$router.push('/connexion-mpme'); 
-        } 
+            } else {
+                this.formatValidationErrors(error.response.data.errors)
+                this.loading = false
+                return false;
+            } 
     }
   },
   hamdleSubmit(id){
@@ -224,7 +246,16 @@ if (this.v$.$errors.length == 0 ) {
     }
   } catch (error) {
     console.error('Erreur lors du téléversement :', error);
-    this.loading = false
+    if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+                console.log('aut', error.response.data.status === 'error');
+                await this.$store.dispatch('user/clearLoggedInUser');
+                this.$router.push('/connexion-mpme');
+
+            } else {
+                this.formatValidationErrors(error.response.data.errors)
+                this.loading = false
+                return false;
+            }
 
   }    
     }else{

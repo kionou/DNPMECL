@@ -327,8 +327,8 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get('/actualites',{ params : {statut: true }});
       const data = response.data.data.data;
-      // const ActualitesFiltres = data.filter(partenaire => partenaire.publish === 1);       
-      commit('SET_ACTUALITES', data); // Mutation pour stocker les actualités dans le state
+      const ActualitesFiltres = data.filter(partenaire => partenaire.publish === 1);       
+      commit('SET_ACTUALITES', ActualitesFiltres); // Mutation pour stocker les actualités dans le state
     } catch (error) {
       console.error('Erreur lors de la récupération des actualités :', error);
     }

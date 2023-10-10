@@ -1,4 +1,4 @@
-<template>
+  <template>
     <div>
           <!-- ======= Hero Section ======= -->
 
@@ -359,95 +359,16 @@
 
               </ul>
               <div class="tab-content">
-                <div class="tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">
-                  
+                <div class="tab-pane fade show active" id="navs-pills-top-home1" role="tabpanel">   
                 <SecteurActiviteVue/>
-                  <!-- <table class="table" style="border: 1px solid #d9dee3 !important;">
-                    <thead class="table-light">
-                      <tr>
-                        <th>Secteur d'activité</th>
-                        <th>MPME</th> 
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr v-for="(secteur, index) in SecteurActiviteOptions" :key="index">
-                        <td v-if="secteur.secteur_activite">{{ secteur.secteur_activite.NomSecteurActivite }}</td>
-                        <td v-if="secteur.secteur_activite">{{ secteur.nbre || 0 }}</td>
-                      </tr>
-                     
-                    </tbody>
-                  </table> -->
-
-
-
+                 
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
                   <Region/>
-                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
-                    <thead class="table-light">
-                     
-                      <tr>
-                        <th>Région</th>
-                        <th>MPME</th> 
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr v-for="(region, index) in regionOptions" :key="index">
-                      
-                        <td>{{ region.region.NomRegion }}</td>
-                           <td>{{ region.nbre || 0 }}</td>
-                      </tr>    
-                    </tbody>
-                  </table> -->
-
                 </div>
-                <div class="tab-pane fade" id="navs-pills-top-messages1" role="tabpanel">
-                  <label for="annee-select">Sélectionner une année :</label>
-                  <select id="annee-select" ng-model="anneeChoisie" ng-change="updateFilter()">
-                    <option value="Toutes">Toutes</option>
-                    <!-- <option ng-repeat="year in yearList" value="{{year}}"> {{year}} </option> -->
-                  </select>
-                  <!-- <Juridique/> -->
-                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
-                    <thead class="table-light">
-                      <tr >
-                        <th>Statut juridique</th>
-                        <th>MPME</th> 
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
-                        <td>{{ statut.label }}</td>
-                          
-                           <td>{{ statutJuridiqueMpmeCounts[statut.label] || 0 }}</td>
-                        
-                      </tr>
-                    
-                    </tbody>
-                  </table> -->
-
-                </div>
+               
                 <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
                   <Juridique/>
-
-                  <!-- <table class="table"  style="border: 1px solid #d9dee3 !important;">
-                    <thead class="table-light">
-                      <tr >
-                        <th>Statut juridique</th>
-                        <th>MPME</th> 
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr v-for="(statut, index) in statutJuridiqueOptions" :key="index">
-                        <td>{{ statut.statut_juridique.NomStatutJuridique }}</td>
-                           
-                           <td>{{ statut.mpmes || 0 }}</td>
-                        
-                      </tr>
-                    
-                    </tbody>
-                  </table> -->
-
                 </div>
 
               </div>
@@ -576,9 +497,9 @@ import slide111 from "@/assets/img/slide/slide111.jpg"
 import slide22 from "@/assets/img/slide/slide22.jpg"
 import slide33 from "@/assets/img/slide/slide33.jpg"
 import slide44 from "@/assets/img/slide/slide44.jpg"
-import SecteurActiviteVue from '../../components/Public/Statistique/SecteurActivite.vue';
-import Region from '../../components/Public/Statistique/region.vue';
-import Juridique from '../../components/Public/Statistique/juridiques.vue';
+import SecteurActiviteVue from '../../components/Public/Statistique/tbSecteur.vue';
+import Region from '../../components/Public/Statistique/tbRegion.vue';
+import Juridique from '../../components/Public/Statistique/tbJuridiques.vue';
 
 
 
@@ -619,11 +540,11 @@ export default {
         ],
       totalMpme:0,
     regionMpmeCounts: {},
-    regionOptions: [], // Pour stocker les données des régions
+
     mpmeData: [], // Pour stocker les données des MPME
     partenairesOptions:[],
     regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
-    SecteurActiviteOptions: [], // Vos options de secteurs d'activité
+
     secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
@@ -676,9 +597,7 @@ async  mounted() {
     this.lightbox = GLightbox({ 
               selector: ".glightbox"
              });
-await this.fetchDataActivite()
-await this.fetchDataRegions() 
-await this.fetchDataJuridique()
+
    
   },
 
@@ -713,45 +632,7 @@ await this.fetchDataJuridique()
     console.error('Erreur lors de la récupération des données :', error.message);
   }
 },
-async  fetchDataActivite() {
-  try {
-    const response = await axios.get('/secteurs-activites', {params: { with_relation: true}});
-    if (response.data.status === 'success') {
-      console.log('Données de la réponse 1:', response.data.data.data);
-      this.SecteurActiviteOptions = response.data.data.data
-    } else {
-  
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
-  }
-},
-async  fetchDataRegions() {
-  try {
-    const response = await axios.get('/regions', {params: { with_relation: true}});
-    if (response.data.status === 'success') {
-      console.log('Données de la réponse2 :', response.data.data.data);
-      this.regionOptions = response.data.data.data
-    } else {
-  
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
-  }
-},
-async  fetchDataJuridique() {
-  try {
-    const response = await axios.get('/mpme/statistics/par-statut-juridiques');
-    if (response.data.status === 'success') {
-      console.log('Données de la réponse 3:', response.data.data);
-       this.statutJuridiqueOptions = response.data.data
-    } else {
-  
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
-  }
-},
+
 
 
 async fetchRegionOptions() {

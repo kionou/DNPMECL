@@ -228,7 +228,7 @@ paginatedItems() {
         if (response.data.status === 'success') {
             this.loading = false
             console.log('UserData:', response.data.data.data);
-            const offresPubliees = response.data.data.data.filter(offre => offre.publish === 0);
+            const offresPubliees = response.data.data.data.filter(offre => offre.publish === 1);
             this.offres = offresPubliees
              this.filterOffres =  offresPubliees
           
