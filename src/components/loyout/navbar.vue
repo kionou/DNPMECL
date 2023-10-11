@@ -8,18 +8,63 @@
         <div class="">
           <img src="@/assets/img/logo/logopme.png" alt="">
         </div>
-        <div class="texte">
-          <h1>REPUBLIQUE DE GUINEE </h1>
-          <span>Ministère du Commerce, de l’Industrie</span>
-          <span>et des Petites et Moyennes Entreprises</span>
-        </div>
+        <div class="col-lg-6 header-right">
+
+          <ul class="top-info-box">
+
+            <li>
+
+              <div class="info-box" >
+
+                <div class="info-box-content">
+
+                    <p class="info-box-title">Téléphone</p>
+
+                    <p class="info-box-subtitle">+(224) 622 33 63 43 </p>
+
+                </div>
+
+              </div>
+
+            </li>
+
+            <li>
+
+              <div class="info-box">
+
+                <div class="info-box-content">
+
+                    <p class="info-box-title">Email</p>
+
+                    <p class="info-box-subtitle">infodnpmecl@gmail.com </p>
+
+                </div>
+
+              </div>
+
+            </li>
+
+            <li class="last">
+
+              <div class="info-box last">
+
+                <div class="info-box-content">
+
+                    <p class="info-box-title">Horaires</p>
+
+                    <p class="info-box-subtitle">08h00 - 17h00</p>
+
+                </div>
+
+              </div>
+
+            </li>
+          </ul><!-- Ul end -->
+
+      </div>
         <div class="top-right">
-          <router-link to="/" class="logo ">
-          
-            <h1>DNPME-CL </h1>
-            <span>DIRECTION NATIONALE DES PME</span> 
-            <span>ET DU CONTENU LOCAL </span>
-          </router-link>
+          <img src="@/assets/img/ninba1.png" alt="">
+         
         </div>
       </div>
     </section>
@@ -353,6 +398,95 @@ padding-top: 10px;
 
 }
 
+.header-right {
+  float: right;
+  width: 512px;
+
+}
+
+ul.top-info-box {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+ul.top-info-box li {
+  position: relative;
+  float: left;
+  margin-left: 0;
+  border-right: 1px solid #dedede;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+  padding: 5px 10px;
+
+}
+
+ul.top-info-box li .info-box .info-box-content {
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  flex-direction: column;
+}
+
+ul.top-info-box li .info-box .info-box-title {
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: normal;
+}
+
+ul.top-info-box li .info-box .info-box-subtitle {
+  margin: 0;
+  line-height: normal;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+
+@media (max-width: 1100px) {
+  .header-right {
+  
+    width: 320px;
+
+  }
+  ul.top-info-box {
+   flex-direction: column;
+  }
+
+  ul.top-info-box li {
+    border-bottom: 1px solid #dedede;
+    border-right:none ;
+    width: 100%;
+    text-align: center;
+}
+
+}
+
+@media (max-width: 800px) {
+
+  ul.top-info-box li .info-box .info-box-title {
+    font-size: 11px;
+  
+  }
+  
+  ul.top-info-box li .info-box .info-box-subtitle {
+ 
+    font-size: 12px;
+  
+  }
+}
+
+@media (max-width: 600px) {
+
+  .header-right {
+  
+    width: auto;
+
+  }
+}
 /* .btnLogin:hover {
   background-color: #fff;
   border: 1px solid #F9D310;

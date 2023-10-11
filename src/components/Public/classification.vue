@@ -406,7 +406,7 @@ export default {
             nom: '',
             startIndex: 0,
             currentPage: 1,
-            itemsPerPage: 4,
+            itemsPerPage: 10,
 
 
           
@@ -695,6 +695,7 @@ export default {
                     const filteredDataMpme = response.data.data.data.filter(item => item.CodeMpme === this.loggedInUser.id);
                     this.classificationOptions = filteredDataMpme
                     this.GetUpdateClass = filteredDataMpme
+                    this.filteredClassifications = filteredDataMpme;
                      this.loading = false
 
                 }
@@ -824,6 +825,11 @@ export default {
                 behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
             });
         },
+        updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.filteredPmes.slice(startIndex, endIndex);
+    },
 filterData() {
   console.log('Selected Speciality:', this.control.speciality);
   console.log('Selected Secteur Activite:', this.control.secteurActivite); // Ajout du champ secteurActivite
@@ -873,7 +879,10 @@ filterData() {
   }
 },
 
-
+updateFilterSpec() {
+      this.control.speciality = ''; // Réinitialiser la valeur de spécialité lorsque la spécification change
+      this.filteredClassifications = [...this.classificationOptions];
+    },
     clearFilters() {
       this.control = {
         name: '',
@@ -1365,14 +1374,14 @@ td {
 
 .bar_search {
 
-    width: 100%;
+    width: 70%;
     /* height: 100px; */
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding:40px 10px;
 }
 
 .liste-searcher {
