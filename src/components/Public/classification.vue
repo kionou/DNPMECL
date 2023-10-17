@@ -867,7 +867,7 @@ filterData() {
       }
       console.log('selectedOptioneeeedernier',selectedOption);
       if (selectedOption) {
-        this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey] === selectedOption.value );
+        this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey].toString() === selectedOption.value );
       console.log('filteredClassifications',this.classificationOptions);
 
       } else {

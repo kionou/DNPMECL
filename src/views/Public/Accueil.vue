@@ -468,7 +468,7 @@
       </div>
       <div class="container swiper-container" data-aos="zoom-out">   
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide" v-for="partenaire in partenairesOptions" :key="partenaire.id">
+            <div class="swiper-slide" v-for="partenaire in partenairesOptions" :key="partenaire.id" @click="$router.push({ path: `/partenaires/${partenaire.CodePartenaire}`, })">
               <img v-if="partenaire.logo === null" src="@/assets/img/ninba1.png" class="img-fluid"  alt="">
 				    <img :src="partenaire.logo" alt="" class="img-fluid">
             </div>
@@ -734,6 +734,7 @@ async fetchRegionOptions() {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    cursor: pointer;
 
 }
 
