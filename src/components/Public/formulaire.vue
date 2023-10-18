@@ -722,7 +722,9 @@
                                 <div class="input-groupe">
                                     <label for="MpmeBourse">Mpme Bourse <span class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.mpmeBourse" color="secondary" :options="choix"
-                                        @change="handleMpmeBourseChange" />
+                                        @change="handleMpmeBourseChange"
+                                        :class="{ 'error-border': resultError['MpmeBourse'] }" @input="resultError['MpmeBourse'] = false" 
+                                         />
 
                                 </div>
                                 <small v-if="v$.step2.mpmeBourse.$error">{{ v$.step2.mpmeBourse.$errors[0].$message
@@ -733,7 +735,9 @@
                             <div class="col" v-if="step2.mpmeBourse === 'Oui'">
                                 <div class="input-groupe">
                                     <label for="NomBourse">Nom Bourse <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.nomBourse" color="secondary" :options="BourseOptions" />
+                                    <MazSelect v-model="step2.nomBourse" color="secondary" :options="BourseOptions" 
+                                    :class="{ 'error-border': resultError['NomBourse'] }" @input="resultError['NomBourse'] = false" 
+                                    />
 
                                 </div>
                                 <small v-if="v$.step2.nomBourse.$error">{{ v$.step2.nomBourse.$errors[0].$message }}</small>
@@ -743,7 +747,9 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="RecptionPrix">Réception Prix <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.receptionPrix" color="secondary" :options="choix" />
+                                    <MazSelect v-model="step2.receptionPrix" color="secondary" :options="choix" 
+                                    :class="{ 'error-border': resultError['RecptionPrix'] }" @input="resultError['RecptionPrix'] = false" 
+                                     />
 
                                 </div>
                                 <small v-if="v$.step2.receptionPrix.$error">{{ v$.step2.receptionPrix.$errors[0].$message
@@ -757,7 +763,9 @@
                                 <div class="input-groupe">
                                     <label for="PrincipalPrix">Principal Prix<span class="text-danger">*</span></label>
                                     <input type="text" name="PrincipalPrix" id="PrincipalPrix" placeholder=""
-                                        v-model="step2.principalPrix">
+                                        v-model="step2.principalPrix" 
+                                        :class="{ 'error-border': resultError['PrincipalPrix'] }" @input="resultError['PrincipalPrix'] = false" 
+                                        >
                                 </div>
                                 <small v-if="v$.step2.principalPrix.$error">{{ v$.step2.principalPrix.$errors[0].$message
                                 }}</small>
@@ -769,7 +777,9 @@
                                     <label for="AnneePrixPrincipal">Année Prix Principal <span
                                             class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.anneePrixPrincipal" color="secondary"
-                                        :options="yearOptions" />
+                                        :options="yearOptions" 
+                                        :class="{ 'error-border': resultError['AnneePrixPrincipal'] }" @input="resultError['AnneePrixPrincipal'] = false" 
+                                         />
                                     <!-- <VueDatePicker v-model="step2.anneePrixPrincipal" :year-picker="true"
                                         :year-range="[1990, new Date().getFullYear()]"></VueDatePicker> -->
                                 </div>
@@ -781,7 +791,9 @@
                             <div class="col">
                                 <div class="input-groupe">
                                     <label for="TitreDirigeant">Titre Dirigeant <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.titreDirigeant" color="secondary" :options="titre" />
+                                    <MazSelect v-model="step2.titreDirigeant" color="secondary" :options="titre" 
+                                    :class="{ 'error-border': resultError['TitreDirigeant'] }" @input="resultError['TitreDirigeant'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.titreDirigeant.$error">{{ v$.step2.titreDirigeant.$errors[0].$message
                                 }}</small>
@@ -795,7 +807,9 @@
                                 <div class="input-groupe">
                                     <label for="NomDirigeant">Nom Dirigeant <span class="text-danger">*</span></label>
                                     <input type="text" name="NomDirigeant" id="NomDirigeant" placeholder=""
-                                        v-model="step2.nomDirigeant">
+                                        v-model="step2.nomDirigeant" 
+                                        :class="{ 'error-border': resultError['NomDirigeant'] }" @input="resultError['NomDirigeant'] = false" 
+                                        >
 
                                 </div>
                                 <small v-if="v$.step2.nomDirigeant.$error">{{ v$.step2.nomDirigeant.$errors[0].$message
@@ -807,7 +821,9 @@
                                 <div class="input-groupe"> <label for="PrenomDirigeant">Prénom Dirigeant <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="PrenomDirigeant" id="PrenomDirigeant" placeholder=""
-                                        v-model="step2.prenomDirigeant">
+                                        v-model="step2.prenomDirigeant"  
+                                        :class="{ 'error-border': resultError['PrenomDirigeant'] }" @input="resultError['PrenomDirigeant'] = false" 
+                                        >
                                 </div>
                                 <small v-if="v$.step2.prenomDirigeant.$error">{{
                                     v$.step2.prenomDirigeant.$errors[0].$message
@@ -818,7 +834,9 @@
                             <div class="col">
                                 <div class="input-groupe"> <label for="SexeDirigeant">Sexe Dirigeant <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.sexeDirigeant" color="secondary" :options="sexes" />
+                                    <MazSelect v-model="step2.sexeDirigeant" color="secondary" :options="sexes"  
+                                    :class="{ 'error-border': resultError['SexeDirigeant'] }" @input="resultError['SexeDirigeant'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.sexeDirigeant.$error">{{ v$.step2.sexeDirigeant.$errors[0].$message
                                 }}</small>
@@ -835,7 +853,9 @@
                                         v-slot="{ option }" search color="secondary">
                                         <div class="flex items-center"
                                             style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
-                                            <MazAvatar size="0.8rem" :src="option.flag" />
+                                            <MazAvatar size="0.8rem" :src="option.flag"  
+                                            :class="{ 'error-border': resultError['PaysDirigeant'] }" @input="resultError['PaysDirigeant'] = false" 
+                                            />
                                             <strong>
                                                 {{ option.label }}
                                             </strong>
@@ -852,7 +872,9 @@
 
                                     <label for="AnneeNaissanceDirigeant">Année Naissance Dirigeant </label>
                                     <MazSelect v-model="step2.anneeNaissanceDirigeant" color="secondary"
-                                        :options="yearOptions" />
+                                        :options="yearOptions"  
+                                        :class="{ 'error-border': resultError['AnneeNaissanceDirigeant'] }" @input="resultError['AnneeNaissanceDirigeant'] = false" 
+                                        />
                                     <!-- <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :year-picker="true"
                                         :year-range="[1940, new Date().getFullYear()]"></VueDatePicker> -->
                                 </div>
@@ -865,7 +887,9 @@
                                 <div class="input-groupe">
                                     <label for="DirigeantProprietaire">Dirigeant Proprietaire <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.dirigeantProprietaire" color="secondary" :options="choix" />
+                                    <MazSelect v-model="step2.dirigeantProprietaire" color="secondary" :options="choix"  
+                                    :class="{ 'error-border': resultError['DirigeantProprietaire'] }" @input="resultError['DirigeantProprietaire'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.dirigeantProprietaire.$error">{{
                                     v$.step2.dirigeantProprietaire.$errors[0].$message }}</small>
@@ -879,7 +903,9 @@
                                 <div class="input-groupe">
                                     <label for="TitreProprietaire">Titre Proprietaire <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.titreProprietaire" color="secondary" :options="titre" />
+                                    <MazSelect v-model="step2.titreProprietaire" color="secondary" :options="titre"  
+                                    :class="{ 'error-border': resultError['TitreProprietaire'] }" @input="resultError['TitreProprietaire'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.titreProprietaire.$error">{{
                                     v$.step2.titreProprietaire.$errors[0].$message }}</small>
@@ -890,7 +916,9 @@
                                 <div class="input-groupe"> <label for="NomProprietaire">Nom Proprietaire <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="NomProprietaire" id="NomProprietaire" placeholder=""
-                                        v-model="step2.nomProprietaire">
+                                        v-model="step2.nomProprietaire"  
+                                        :class="{ 'error-border': resultError['NomProprietaire'] }" @input="resultError['NomProprietaire'] = false" 
+                                        >
                                 </div>
                                 <small v-if="v$.step2.nomProprietaire.$error">{{
                                     v$.step2.nomProprietaire.$errors[0].$message
@@ -903,7 +931,9 @@
                                     <label for="PrenomProprietaire">Prénom Proprietaire <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="PrenomProprietaire" id="PrenomProprietaire" placeholder=""
-                                        v-model="step2.prenomProprietaire">
+                                        v-model="step2.prenomProprietaire" 
+                                        :class="{ 'error-border': resultError['PrenomProprietaire'] }" @input="resultError['PrenomProprietaire'] = false" 
+                                        >
                                 </div>
                                 <small v-if="v$.step2.prenomProprietaire.$error">{{
                                     v$.step2.prenomProprietaire.$errors[0].$message }}</small>
@@ -916,7 +946,9 @@
                             <div class="col">
                                 <div class="input-groupe"> <label for="SexeProprietaire">Sexe Proprietaire <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.sexeProprietaire" color="secondary" :options="sexes" />
+                                    <MazSelect v-model="step2.sexeProprietaire" color="secondary" :options="sexes" 
+                                    :class="{ 'error-border': resultError['SexeProprietaire'] }" @input="resultError['SexeProprietaire'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.sexeProprietaire.$error">{{
                                     v$.step2.sexeProprietaire.$errors[0].$message
@@ -931,7 +963,9 @@
                                         v-slot="{ option }" search color="secondary">
                                         <div class="flex items-center"
                                             style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
-                                            <MazAvatar size="0.8rem" :src="option.flag" />
+                                            <MazAvatar size="0.8rem" :src="option.flag"  
+                                            :class="{ 'error-border': resultError['PaysProprietaire'] }" @input="resultError['PaysProprietaire'] = false" 
+                                            />
                                             <strong>
                                                 {{ option.label }}
                                             </strong>
@@ -949,7 +983,9 @@
 
                                     <label for="AnneeNaissanceProprietaire">Année Naissance Proprietaire </label>
                                     <MazSelect v-model="step2.anneeNaissanceProprietaire" color="secondary"
-                                        :options="yearOptions" />
+                                        :options="yearOptions" 
+                                        :class="{ 'error-border': resultError['AnneeNaissanceProprietaire'] }" @input="resultError['AnneeNaissanceProprietaire'] = false" 
+                                        />
                                     <!-- <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :year-picker="true"
                                         :year-range="[1940, new Date().getFullYear()]"></VueDatePicker> -->
                                 </div>
@@ -975,7 +1011,9 @@
                                     <label for="AppartenanceReseauProfessionnel">Appartenance Reseau Professionnel <span
                                             class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.appartenanceReseauProfessionnel" color="secondary"
-                                        :options="choix" />
+                                        :options="choix"  
+                                        :class="{ 'error-border': resultError['AppartenanceReseauProfessionnel'] }" @input="resultError['AppartenanceReseauProfessionnel'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.appartenanceReseauProfessionnel.$error">{{
                                     v$.step2.appartenanceReseauProfessionnel.$errors[0].$message }}</small>
@@ -989,7 +1027,9 @@
                                     <label for="NomReseauProfessionnel">Nom Reseau Professionnel <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="NomReseauProfessionnel" id="NomReseauProfessionnel"
-                                        placeholder="" v-model="step2.nomReseauProfessionnel">
+                                        placeholder="" v-model="step2.nomReseauProfessionnel" 
+                                        :class="{ 'error-border': resultError['NomReseauProfessionnel'] }" @input="resultError['NomReseauProfessionnel'] = false" 
+                                        >
                                 </div>
                                 <small v-if="v$.step2.nomReseauProfessionnel.$error">{{
                                     v$.step2.nomReseauProfessionnel.$errors[0].$message }}</small>
@@ -1000,7 +1040,9 @@
                                 <div class="input-groupe">
                                     <label for="FinancementFondPropre">Financement Fond Propre <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.financementFondPropre" color="secondary" :options="choix" />
+                                    <MazSelect v-model="step2.financementFondPropre" color="secondary" :options="choix" 
+                                    :class="{ 'error-border': resultError['FinancementFondPropre'] }" @input="resultError['FinancementFondPropre'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.financementFondPropre.$error">{{
                                     v$.step2.financementFondPropre.$errors[0].$message }}</small>
@@ -1015,7 +1057,9 @@
                                     <label for="FinancementCreditBancaire">Financement Credit Bancaire <span
                                             class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.financementCreditBancaire" color="secondary"
-                                        :options="choix" />
+                                        :options="choix" 
+                                        :class="{ 'error-border': resultError['FinancementCreditBancaire'] }" @input="resultError['FinancementCreditBancaire'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.financementCreditBancaire.$error">{{
                                     v$.step2.financementCreditBancaire.$errors[0].$message }}</small>
@@ -1028,7 +1072,9 @@
                                     <label for="FinancementPartenaireExterieurs">Financement Partenaire Exterieurs <span
                                             class="text-danger">*</span></label>
                                     <MazSelect v-model="step2.financementPartenaireExterieurs" color="secondary"
-                                        :options="choix" />
+                                        :options="choix" 
+                                        :class="{ 'error-border': resultError['FinancementPartenaireExterieurs'] }" @input="resultError['FinancementPartenaireExterieurs'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.financementPartenaireExterieurs.$error">{{
                                     v$.step2.financementPartenaireExterieurs.$errors[0].$message }}</small>
@@ -1038,7 +1084,9 @@
                             <div class="col">
                                 <div class="input-groupe"> <label for="FinancementAutre">Financement Autre <span
                                             class="text-danger">*</span></label>
-                                    <MazSelect v-model="step2.financementAutre" color="secondary" :options="choix" />
+                                    <MazSelect v-model="step2.financementAutre" color="secondary" :options="choix" 
+                                    :class="{ 'error-border': resultError['FinancementAutre'] }" @input="resultError['FinancementAutre'] = false" 
+                                    />
                                 </div>
                                 <small v-if="v$.step2.financementAutre.$error">{{
                                     v$.step2.financementAutre.$errors[0].$message
@@ -1053,7 +1101,9 @@
                                 <div class="input-groupe"> <label for="AutreFinancement">Autre Financement <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="AutreFinancement" id="AutreFinancement" placeholder=""
-                                        v-model="step2.autreFinancement">
+                                        v-model="step2.autreFinancement" 
+                                        :class="{ 'error-border': resultError['AutreFinancement'] }" @input="resultError['AutreFinancement'] = false" 
+                                        >
                                     <!-- <MazSelect v-model="step2.autreFinancement" color="secondary" :options="choix" /> -->
                                 </div>
                                 <small v-if="v$.step2.autreFinancement.$error">{{
@@ -1071,7 +1121,9 @@
                                     <label for="DescriptionReseau">Description du Reseau <span
                                             class="text-danger">*</span></label>
                                     <MazTextarea v-model="step2.descriptionReseau" name="comment" id="comment"
-                                        color="secondary" />
+                                        color="secondary" 
+                                        :class="{ 'error-border': resultError['DescriptionReseau'] }" @input="resultError['DescriptionReseau'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.descriptionReseau.$error">{{
                                     v$.step2.descriptionReseau.$errors[0].$message }}</small>
@@ -1092,7 +1144,9 @@
                                 <div class="input-groupe">
                                     <label for="DifficultesRencontrees">Difficultes Rencontrees </label>
                                     <MazTextarea v-model="step2.difficultesRencontrees" name="comment" id="comment"
-                                        color="secondary" />
+                                        color="secondary" 
+                                        :class="{ 'error-border': resultError['DifficultesRencontrees'] }" @input="resultError['DifficultesRencontrees'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.difficultesRencontrees.$error">{{
                                     v$.step2.difficultesRencontrees.$errors[0].$message }}</small>
@@ -1103,7 +1157,9 @@
                                 <div class="input-groupe">
                                     <label for="SuggestionsProposees">Suggestions Proposees </label>
                                     <MazTextarea v-model="step2.suggestionsProposees" name="comment" id="comment"
-                                        color="secondary" />
+                                        color="secondary" 
+                                        :class="{ 'error-border': resultError['SuggestionsProposees'] }" @input="resultError['SuggestionsProposees'] = false" 
+                                        />
                                 </div>
                                 <small v-if="v$.step2.suggestionsProposees.$error">{{ v$.step2.suggestionsProposees.$errors[0].$message }}</small>
                             <small v-if="resultError['SuggestionsProposees']" > {{ resultError['SuggestionsProposees'] }} </small>
