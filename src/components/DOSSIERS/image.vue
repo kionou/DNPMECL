@@ -208,7 +208,7 @@ export default {
       updateImageId: null,
       updateImageUrl: null,
       currentPage: 1,
-    itemsPerPage: 10,
+      itemsPerPage: 10,
 
     };
   },

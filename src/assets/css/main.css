@@ -1326,7 +1326,7 @@ section {
   padding: 10px;
     border-radius: 8px;
     border: 1px solid var(--color-secondary);
-    margin: 0 10px 10px 0;
+    margin:10px ;
     width: 240px;
     height: 200px;
 }

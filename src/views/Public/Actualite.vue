@@ -254,6 +254,7 @@ padding: 15px 10px;
 .box {
   display: flex;
   flex-direction: column;
+  height:300px;
   width: 300px;
   position: relative;
   background: #fff;
@@ -280,7 +281,7 @@ color: var(--color-secondary);
 
 .box-image {
   width: 100%;
-  height: 140px;     
+  height: 186px;     
   object-fit: cover;
   object-position: 50% 20%;
 

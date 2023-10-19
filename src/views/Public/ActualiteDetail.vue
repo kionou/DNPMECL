@@ -397,8 +397,11 @@ h6 {
 
 .article-p .image{
 /* border: 1px solid red; */
-width: 100%;
+/* width: 100%; */
 height: 100%;
+display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .article-p .image img{

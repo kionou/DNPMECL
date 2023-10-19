@@ -2694,14 +2694,13 @@ async formatValidationErrors(errors) {
               } ,
         async loadFile(event) {
             this.loading = true
-            console.log(event.target.files[0]);
             var image = document.getElementById("output");
             image.src = URL.createObjectURL(event.target.files[0]);
             const file = event.target.files[0]
             const formData = new FormData();
             formData.append('code', this.loggedInUser.id);
             formData.append('profile', file);
-            console.log('eee', this.loggedInUser.id, file);
+           
 
             try {
 
