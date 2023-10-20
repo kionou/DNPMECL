@@ -647,7 +647,7 @@
 
                             <div class="col">
                                 <div class="input-groupe">
-                                    <label for="NumeroTva">Numero de la Tva</label>
+                                    <label for="NumeroTva">Numero de la TVA</label>
                                     <input type="text" name="NumeroTva" id="NumeroTva" placeholder=""
                                         v-model="step1.NumeroTva" 
                                         :class="{ 'error-border': resultError['NumeroTva'] }" @input="resultError['NumeroTva'] = false"
@@ -1540,7 +1540,7 @@
 
                     <div class="col">
                         <div class="input-groupe">
-                            <label for="TypeCarte">Type Carte<span class="text-danger">*</span></label>
+                            <label for="TypeCarte">Type de Carte<span class="text-danger">*</span></label>
                                     <MazSelect v-model="step3.TypeCarte" color="secondary" :options="CarteTypeOptions"  
                                     :class="{ 'error-border': resultError['TypeCarte'] }" @input="resultError['TypeCarte'] = false" 
                                     />
@@ -1551,7 +1551,7 @@
                     </div>
                     <div class="col" v-if="step3.TypeCarte !== null ">
                         <div class="input-groupe">
-                            <label for="NumeroCarte">Numero Carte<span class="text-danger">*</span></label>
+                            <label for="NumeroCarte">Numero de Carte<span class="text-danger">*</span></label>
                             <input v-model="step3.NumeroCarte" type="text" name="NumeroCarte" id="NumeroCarte"
                                 placeholder=""  
                                 :class="{ 'error-border': resultError['NumeroCarte'] }" @input="resultError['NumeroCarte'] = false" 
@@ -1645,7 +1645,7 @@
                                         :class="{ 'error-border': resultError['OrigineDonnees'] }" @input="resultError['OrigineDonnees'] = false" 
                                         >
                                         <small v-if="v$.step3.origineDonnees.$error">{{ v$.step3.origineDonnees.$errors[0].$message }}</small>
-                            <small v-if="resultError['OrigineDonnees']" > {{ resultError['OrigineDonnees'] }} </small>
+                                       <small v-if="resultError['OrigineDonnees']" > {{ resultError['OrigineDonnees'] }} </small>
 
                                 </div>
                             </div>

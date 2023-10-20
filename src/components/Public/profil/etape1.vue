@@ -20,7 +20,7 @@
                                             class="px-4 py-3 lg:bg-gray-50 class3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Commune</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.Commune }}</dd>
+                                                data.Sousprefecture }}</dd>
                                         </div>
 
                                     </div>
@@ -32,21 +32,21 @@
                                                 data.Ville }}</dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Sous préfecture</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Localisation</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.Sousprefecture }}</dd>
+                                                data.Localisation }}</dd>
                                         </div>
 
                                     </div>
 
-                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
+                                    <!-- <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Localisation</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
                                                 data.Localisation }}</dd>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </dl>
                             </div>
@@ -128,6 +128,8 @@
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
+
+                                    
 
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
@@ -247,65 +249,135 @@
                                                 data.PersonnelTemporaireHomme }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Chiffre Affaire 1</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Nombre d'employés Guinéens</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.ChiffreAffaire1 }} </dd>
+                                                data.NbreEmploye }} </dd>
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
 
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2 ">ChiffreAffaire 2</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Nombre d'actionnaires Guinéens Femmes</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.ChiffreAffaire2 }} </dd>
+                                                data.NbreActionnaireGuinneF }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class=" px-4 py-3 lg:bg-gray-50 class3">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Part Chiffre Affaire
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Nombre d'actionnaires Guinéens Hommes
                                                 Exportation</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.PartChiffreAffaireExprtation }} </dd>
+                                                data.NbreActionnaireGuinneH }} </dd>
                                         </div>
 
                                     </div>
 
                                     <div class="  d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
-                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Groupe Fililale </dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Nombre d'actionnaires Guinéens </dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.GroupeFililale }}</dd>
+                                                data.NbreActionnaireGuinne }}</dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Nationalité Groupe</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Part Chiffre Affaire Exportation</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.NationaliteGroupe }} </dd>
+                                                data.PartChiffreAffaireExprtation }} </dd>
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
 
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Capital Social</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Groupe Fililale</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.CapitalSocial }} </dd>
+                                                data.GroupeFililale }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class=" px-4 py-3 lg:bg-gray-50 class3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Numéro Rccm</dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Nationalité Groupe</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.NumeroRccm }}</dd>
+                                                data.NationaliteGroupe }}</dd>
                                         </div>
 
                                     </div>
-                                    <div class="  d-flex justify-content-between class1 ">
+                                    <!-- <div class="  d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Numero Nif </dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
                                                 data.NumeroNif }} </dd>
                                         </div>
 
+                                    </div> -->
+                                    <div class="  d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Capital Social </dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.CapitalSocial }}</dd>
+                                        </div>
+                                        <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Pays du Siège Social</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.PaysSiegeSocial }} </dd>
+                                        </div>
+                                        <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
+
+                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Numéro Rccm</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.NumeroRccm }} </dd>
+                                        </div>
+                                        <div style="display: flex;align-items: center;"
+                                            class=" px-4 py-3 lg:bg-gray-50 class3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Numero Nif</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.NumeroNif }}</dd>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="  d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Date Generation du Numero Nif </dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.DateGenerationNif }}</dd>
+                                        </div>
+                                        <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Numero de la TVA</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.NumeroTva }} </dd>
+                                        </div>
+                                        <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
+                                    </div>
+
+                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Code du Regime</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.CodeRegime }} </dd>
+                                        </div>
+                                        <div style="display: flex;align-items: center;"
+                                            class=" px-4 py-3 lg:bg-gray-50 class3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Code Type Gestion</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.CodeTypeGestion }}</dd>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="  d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Code Type Contribuable </dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.CodeTypeContribuable }}</dd>
+                                        </div>
+                                       
+                                    </div>
+
+               
+
+                                    
 
                                 </dl>
                             </div>

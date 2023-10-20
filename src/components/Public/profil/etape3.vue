@@ -196,6 +196,53 @@
         </div>
 
         <div class="row tab-content">
+            <p class="titre">INFORMATIONS DE COMPTABILITE ET DE CARTE</p>
+            <div class=" card col-xl-12 col-lg-12 col-md-12 py-2">
+                <div class="   ">
+
+                    <div class="">
+                        <div class="overflow-hidden bg-white rounded-lg">
+
+                            <div class="">
+                                <dl>
+                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Type Comptabilite </dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.TypeComptabilite }} </dd>
+                                        </div>
+                                        <div style="display: flex;align-items: center;"
+                                            class=" px-4 py-3 lg:bg-gray-50 class3 ">
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Type de Carte</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.TypeCarte }} </dd>
+                                        </div>
+
+                                    </div>
+                                    <div class="  d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
+                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Numero de Carte</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.NumeroCarte }} </dd>
+                                        </div>
+                                       
+                                    </div>
+                                    
+
+                                
+
+                                </dl>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row tab-content">
             <p class="titre">INFORMATIONS GEOGRAPHIQUES</p>
             <div class=" card col-xl-12 col-lg-12 col-md-12 py-2">
                 <div class="   ">

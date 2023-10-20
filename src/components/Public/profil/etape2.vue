@@ -160,7 +160,7 @@
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class=" px-4 py-3 lg:bg-gray-50 class3">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">>Nom Reseau Professionnel </dt>
+                                            <dt class="text-sm font-medium text-gray-500 me-2">Nom Reseau Professionnel </dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
                                                 data.NomReseauProfessionnel }}</dd>
                                         </div>
@@ -211,7 +211,7 @@
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
-
+<!-- 
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Financement Partenaire Exterieurs</dt>
@@ -220,7 +220,7 @@
                                         </div>
                                       
 
-                                    </div>
+                                    </div> -->
 
 
                                 </dl>
