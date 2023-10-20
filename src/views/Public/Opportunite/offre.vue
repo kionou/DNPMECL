@@ -242,7 +242,7 @@ showFs() {
           const sousSecteurs = sousSecteurActiviteOffre.split('|');
             return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
         } else {
-          return this.data.includes(sousSecteurActiviteOffre) && offre.publish ===1 ;
+          return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
         }
       });
 

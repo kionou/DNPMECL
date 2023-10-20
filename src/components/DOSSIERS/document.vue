@@ -122,10 +122,16 @@
   </div>
   <small v-if="v$.step1.sousdoc.$error">{{v$.step1.sousdoc.$errors[0].$message}}</small>
 
-  <div class="input-group">
+  <!-- <div class="input-group">
     <label for="tel">Telecharger le ficher <span class="text-danger">*</span></label>
     <input type="file" name="file" id="ficher" placeholder="" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload"> 
-  </div>
+  </div> -->
+  
+  <input type="file" name="file" id="file" class="inputfile"  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload" />
+                      <label for="file">
+                        <i class="bi bi-cloud-arrow-down"></i>
+                        Telecharger le ficher
+                      </label>
   <small v-if="v$.step1.selectedFile.$error">{{v$.step1.selectedFile.$errors[0].$message}}</small>
 
      
@@ -1264,6 +1270,35 @@ padding: 10px;
   .nsl select {
     width: 207.5px;
   }
+}
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  margin-top: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--color-primary);
+    /* background-color: black; */
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 0.375rem;
+    border: 2px solid #e5e7eb;
+}
+
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
 }
   </style >
  

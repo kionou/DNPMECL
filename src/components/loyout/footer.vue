@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="container" style="font-size: 16px;">
+      <!-- <div class="container" style="font-size: 16px;">
       <div class="row gy-4">
         <div class="col-lg-6 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center flex-column">
@@ -45,14 +45,58 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
 
-    <div class="container mt-4">
+    <footer id="footer" class="footer bg-overlay">
+<div class="footer-main">
+<div class="container">
+<div class="row justify-content-between">
+<div class="col-lg-4 col-md-6 footer-widget footer-about pb-5">
+<h3 class="widget-title">DNPME-CL</h3>
+<p>La Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local sous tutelle du Ministère du Commerce, de l’Industrie et des PME a pour objectif d’accompagner et de promouvoir les activités des Micros, Petites et Moyennes Entreprises et de vulgariser la loi portant Contenu Local en République de Guinée.</p>
+<div class="footer-social">
+  <div class="social-links d-flex mt-4 justify-content-center">
+           
+           <a href="https://www.facebook.com/dnpme" class="facebook"><i class="bi bi-facebook"></i></a>
+           <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
+           <a href="https://www.instagram.com/dnpmecl/" class="instagram"><i class="bi bi-instagram"></i></a>
+         </div>
+</div>
+</div>
+<div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0 pb-5">
+<h3 class="widget-title">Contacts</h3>
+<div class="working-hours">
+Pour tout besoin d'assistance, vous pouvez nous contacter,
+par email ou par téléphone via les coordonnées ci-après :
+<br> Lundi - Vendredi : <span class="text-left">08:00 - 17:00 </span>
+<br> Téléphone : <span class="text-left">+224 622 33 63 43</span>
+<br> Email : <span class="text-left">infodnpmecl@gmail.com</span>
+<br> Email : <span class="text-left">dnpmecl@mcipme.gov.gn</span>
+</div>
+</div>
+<div class="col-lg-4 col-md-12  mt -md-5 footer-widget   ">
+<h3 class="widget-title">Liens utiles</h3>
+<ul class="list-arrow">
+  <li><router-link to="/">ACCUEIL</router-link></li>
+  <li ><router-link to="/dnpme/apropos">DNPME-CL </router-link> </li>
+  <li><router-link to="/actualites">ACTUALITES</router-link></li>
+  <li><router-link to="/statistique">STATISQUES</router-link></li>
+  <li><router-link to="/partenaires">PARTENAIRES</router-link></li>
+  <li ><router-link to="/opportunites">OPPORTUNITES </router-link> </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+</footer>
+
+    <div class=" mt-4 py-3" style="background-color: #0f7a50;" >
       <div class="copyright">
         &copy; Copyright <strong><span>DNPME-CL</span></strong>. Tous droits réservés
       </div>
       <div class="credits">
-        Développé par <a href="https://cosit-mali.com/">COSIT</a>
+        Conçu et développé par <a href="https://cosit-mali.com/">COSIT</a>
       </div>
     </div>
     </div>
@@ -79,5 +123,49 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+
+.bg-overlay .container {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-social {
+    margin-top: 15px;
+}
+
+
+.footer-social ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: -13px;
+}
+
+.footer-social ul li {
+    display: inline-block;
+}
+
+.footer-widget ul.list-arrow li {
+    border-bottom: 1px solid #eceef1;
+    padding: 8px 0;
+}
+
+
+
+.footer-widget ul.list-arrow li a, .footer-widget ul.list-arrow li:before {
+    color: #fff;
+}
+
+.footer .widget-title {
+    font-size: 16px;
+    font-weight: 700;
+    position: relative;
+    margin: 0 0 30px;
+    padding-left: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    /* border-left: 3px solid #ffe600; */
+}
 
 </style>

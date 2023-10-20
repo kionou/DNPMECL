@@ -98,52 +98,36 @@
             <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
             <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
             <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+            <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
 
           </ul>
         </div>
 
         <div class="widget recent-posts">
-          <h3 class="widget-title">Articles récents</h3>
-            <ul class="list-unstyled">
+                                <h3 class="widget-title">Autres articles</h3>
+                                <ul class="list-unstyled">
 
-                 <li class="d-flex align-items-center">
-                <div class="posts-thumb" >
-                  <a href="article.php?id=20"><img loading="lazy" alt="img" src="http://dgpme.com/admin/uploads/articles/1328316637.png"></a>
-                </div>
+                                    <li class="d-flex align-items-center" v-for="actualiteRecent in ActualitesOptions" :key="actualiteRecent.id">
+                                        <div class="posts-thumb" >
+                                            <a :href="`/actualites/${actualiteRecent.id}`">
+                                                <img loading="lazy" alt="img"
+                                                    :src="updatePicture( actualiteRecent.images)">
+                                            </a>
+                                           
+                                        </div>
 
-                <div class="post-info">
-                  <h4 class="entry-title" style="text-transform: capitalize;">
-                    <a href="article.php?id=20">Cérémonie de Clôture de la 2ème Edition du Salon des Métiers de Bois.</a>
-                  </h4>
-                </div>
-              </li>
+                                        <div class="post-info" >
+                                            <h4 class="entry-title" style="text-transform: capitalize;">
+                                                <a :href="`/actualites/${actualiteRecent.id}`">
+                                                {{ actualiteRecent.titre }}
+                                            </a>
+                                            </h4>
+                                        </div>
+                                    </li>
 
-                <li class="d-flex align-items-center">
-                <div class="posts-thumb">
-                  <a href="article.php?id=19"><img loading="lazy" alt="img" src="http://dgpme.com/admin/uploads/articles/1962441736.png"></a>
-                </div>
 
-                <div class="post-info">
-                  <h4 class="entry-title" style="text-transform: capitalize;">
-                    <a href="article.php?id=19">Prise de contact pour un partenariat d’affaires pour une chambre de commerce Brésil-Congo.</a>
-                  </h4>
-                </div>
-              </li>
-
-                 <li class="d-flex align-items-center">
-                <div class="posts-thumb">
-                  <a href="article.php?id=18"><img loading="lazy" alt="img" src="http://dgpme.com/admin/uploads/articles/292624425.png"></a>
-                </div>
-
-                <div class="post-info">
-                  <h4 class="entry-title" style="text-transform: capitalize;">
-                    <a href="article.php?id=18">Concours d’affaires (CPA) : les lauréats éligibles au Fonds ADPME.</a>
-                  </h4>
-                </div>
-              </li>
-
-                </ul>
-        </div>
+                                </ul>
+                            </div>
 
 
       </div><!-- Sidebar end -->
@@ -176,6 +160,7 @@ Loading
         return {
             loading:true,
             partenaire:'',
+            ActualitesOptions:[], 
             
         };
     },
@@ -183,9 +168,14 @@ Loading
    async mounted() {
       await  this.fetchOnePartenaire()
         console.log('iddd',this.id);
+      await  this.fetchActualites()
     },
 
     methods: {
+      updatePicture(picture){
+       return picture.split('|')[0]
+        // Object.keys(monObjet).map(key => monObjet[key])
+      },
         async fetchOnePartenaire() {
             try {
                 const response = await axios.get(`/partenaires/${this.id}`)
@@ -203,6 +193,26 @@ Loading
            console.error('Erreur post:', error);
          }
             
+        },
+
+        async fetchActualites() {
+            try {
+                await this.$store.dispatch('fetchActualites');
+                const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
+                this.ActualitesOptions = actualites
+                console.log('Actualités récupérées :', actualites);
+                   // Triez vos actualités par ordre décroissant de date
+                        actualites.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                    // Obtenez les 3 dernières actualités
+                    this.ActualitesOptions = actualites.slice(0, 3);
+
+                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+
+                // Continuez avec le reste de votre code pour traiter les actualités
+            } catch (error) {
+                console.error('Erreur lors de la récupération des actualités :', error.message);
+            }
         },
     },
 };

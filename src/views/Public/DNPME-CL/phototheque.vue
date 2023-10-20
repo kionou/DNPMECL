@@ -14,6 +14,8 @@
                     <li class="breadcrumb-item"><a href="/">accueil</a></li>
                     <li class="breadcrumb-item"><a href="dnmpecl/phototheques">Dnpmecl</a></li>
                     <li class="breadcrumb-item active" aria-current="page">photothèques</li>
+                    <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+
                     </ol>
                   </nav>
                 </div>

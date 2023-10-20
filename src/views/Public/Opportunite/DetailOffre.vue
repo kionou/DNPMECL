@@ -82,6 +82,8 @@
                                   <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
                                           lois</router-link></li>
                                   <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+            <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+
 
                               </ul>
                           </div>
@@ -148,10 +150,15 @@
         
         
         
-        <div class="input-group">
+        <!-- <div class="input-group">
         <label for="tel">Telecharger le ficher <span class="text-danger">*</span></label>
         <input type="file" name="file" id="ficher" placeholder="" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload"> 
-        </div>
+        </div> -->
+        <input type="file" name="file" id="file" class="inputfile"  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload" />
+                      <label for="file">
+                        <i class="bi bi-cloud-arrow-down"></i>
+                        Telecharger le ficher
+                      </label>
         <small v-if="v$.selectedFile.$error">{{v$.selectedFile.$errors[0].$message}}</small>
         
          
@@ -324,7 +331,7 @@ const response = await axios.get('/offres', {
 
        const Offres = this.offres;
       
-       const offresPubliees = Offres.filter(offre => offre.publish === 0);
+       const offresPubliees = Offres.filter(offre => offre.publish === 1);
       
       // Trier les offres par date de création de la plus récente à la moins récente
       offresPubliees.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
@@ -806,5 +813,35 @@ color: black;
   transition: border-color 300ms ease-in-out;
   padding: 10px 34px;
   }
+
+
+  
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  margin-top: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--color-primary);
+    /* background-color: black; */
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 0.375rem;
+    border: 2px solid #e5e7eb;
+}
+
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
 
 </style>

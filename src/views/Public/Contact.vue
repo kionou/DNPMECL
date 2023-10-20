@@ -167,9 +167,11 @@
                       v$.object.$errors[0].$message
                     }}</small>
                   </div>
-                  <div class="col">
-                    <div class="input-groupe">
-                      <label for="Libelle"
+                  <div class="col" style="display: flex;
+    flex-direction: column;
+    justify-content: flex-end;">
+                    <!-- <div class="input-groupe"> -->
+                      <!-- <label for="Libelle"
                         >joindre une pièce <span class="text-danger">*</span></label
                       >
                       <input
@@ -180,8 +182,16 @@
                         ref="fileInput"
                         accept="image/*"
                         @change="handleFileChange"
-                      />
-                    </div>
+                      /> -->
+                      <input type="file" name="file" id="file" class="inputfile"  ref="fileInput"
+                        accept="image/*"
+                        @change="handleFileChange" />
+                      <label for="file">
+                        <i class="bi bi-cloud-arrow-down"></i>
+                      Joindre une pièce
+                      </label>
+                  
+                    <!-- </div> -->
                     <!-- <small v-if="v$.selectedFile.$error">{{ v$.selectedFile.$errors[0].$message }}</small> -->
                   </div>
                 </div>
@@ -203,6 +213,8 @@
                     }}</small>
                   </div>
                 </div>
+
+                
 
                 <div class="btn">
                   <button class="sign" @click.prevent="submit">Envoyer le message</button>
@@ -662,5 +674,32 @@ textarea {
   border: 1px solid var(--color-secondary);
   color: var(--color-secondary);
   background-color: white;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--color-primary);
+    /* background-color: black; */
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 0.375rem;
+    border: 2px solid #e5e7eb;
+}
+
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
 }
 </style>

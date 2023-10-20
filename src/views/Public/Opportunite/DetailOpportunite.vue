@@ -75,6 +75,8 @@
                                   <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
                                           lois</router-link></li>
                                   <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+            <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+
 
                               </ul>
                           </div>
