@@ -48,7 +48,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link  active" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1"
-                                aria-selected="true">
+                                aria-selected="true" @click="selectedStep = 1" >
                                Etape 1
                             </button>
                         </li>
@@ -56,7 +56,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-profile1" aria-controls="navs-pills-top-profile1"
-                                aria-selected="false">
+                                aria-selected="false" @click="selectedStep = 2" >
                                 Etape 2
                             </button>
                         </li>
@@ -64,7 +64,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages11"
-                                aria-selected="false" @click="reloadChild">
+                                aria-selected="false"  @click="updateMap" >
                                 Etape 3
                             </button>
                         </li>
@@ -81,9 +81,9 @@
                         <Etape2 :data="data" :items="items"/>
                     </div>
 
-                    <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
+                    <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel" >
                        
-                       <Etape3 :data="data" :items="items"/>
+                       <Etape3 :data="data" />
                    </div>
 
                 </div>
@@ -115,7 +115,9 @@ loggedInUser() {
             loading:true,
             data: '',
             item:'',
-           items:''
+           items:'',
+           selectedStep: 1,
+          
         };
     },
 
@@ -128,6 +130,8 @@ loggedInUser() {
                             behavior: 'smooth',
                         });
         console.log("profil", this.loggedInUser);
+
+    
     },
 
     methods: {
@@ -156,6 +160,11 @@ loggedInUser() {
           }
            
         },
+        updateMap() {
+            // Appelez la méthode 'update' du composant 'Maps' pour actualiser la carte
+            this.$refs.mapsComponent.update();
+        },
+     
     },
 };
 </script>

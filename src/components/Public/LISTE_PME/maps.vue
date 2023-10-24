@@ -1,75 +1,100 @@
 <template>
     <div class="maps_container">
-        <div :class="{ 'map-container': !isFullScreen, 'full-screen-map-container': isFullScreen }">
-            <div class="map-wrap">
-                <a href="https://www.maptiler.com" class="watermark">
-                    <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
-                </a>
-                <div class="map" ref="mapContainer"></div>
+                <div class="map-wrap">
+                    <a href="https://www.maptiler.com" class="watermark">
+                        <img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo" />
+                    </a>
+                    <div class="map" ref="mapContainer"></div>
+
+                </div>
+
 
             </div>
-        </div>
-
-    </div>
 </template>
   
 <script>
-import { onMounted, onUnmounted, ref } from 'vue';
 import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl';
+import { shallowRef, onMounted, onUnmounted, markRaw, ref } from 'vue';
+import { inject } from 'vue';
 
 export default {
     name: 'CPtMagasin',
+    props: ['data'],
     data() {
         return {
-            isFullScreen: false,
-            map: null,
-            mapContainer: ref(null),
-            markers: [],
+            show: false,
+      marker: '',
+      isFullScreen: false,
         };
     },
-    setup() {
-        onMounted(async () => {
-            const mapContainer = ref(null);
-           ;
-            const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
-            const initialState = { lng: 11.52, lat: 3.91, zoom: 9 };
+    setup(props) {
+    const mapContainer = shallowRef(null);
+    const map = shallowRef(null);
+    const markers = shallowRef([]);
+    const myPropValue = ref(props.data);
+    const data = inject('data');
+    let newMarker;
 
-            const map = new Map({
-                container: mapContainer.value,
-                style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
-                center: [initialState.lng, initialState.lat],
-                zoom: initialState.zoom,
-            });
+    onMounted(async () => {
+      console.log('rrreeeeee',data);
+      const apiKey = 'R0tHx9tGeRGXSyvwlX0q';
+      const initialState = { lng: -11.283844999999985, lat: 9.934886500000001, zoom: 5.5 };
 
-            map.addControl(new NavigationControl(), 'top-right');
+      map.value = markRaw(
+        new Map({
+          container: mapContainer.value,
+          style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`,
+          center: [initialState.lng, initialState.lat],
+          zoom: initialState.zoom,
+        })
+      );
+    
+      map.value.addControl(new NavigationControl(), 'top-right');
+      console.log('rrrss', myPropValue.value.LatitudeMpme);
 
-            // Récupérer les marqueurs depuis votre API
-            // const response = await axiosClient.get('/magasin');
-            // this.markers = response.data;
+      const newMarker = new Marker({ color: '#FF0000' })
+        .setLngLat([myPropValue.value.LongitudeMpme, myPropValue.value.LatitudeMpme])
+        .addTo(map.value);
 
-            // Créer les marqueurs sur la carte
-            // this.markers.forEach(marker => {
-            //   marker.show = false;
-            //   const newMarker = new Marker({ color: '#FF0000' })
-            //     .setLngLat([marker.longitude, marker.latitude])
-            //     .addTo(map);
+      const popupContent = `
+                <div >
+                    <p> Nom:  ${myPropValue.value.NomMpme}</p>
+                    
+                </div>
+                `;
+      newMarker.setPopup(new Popup().setHTML(popupContent));
 
-            //   const popupContent = `
-            //     <div>
-            //       <h3>${('magasin.sous_titre')} ${marker.nom}</h3>
-            //       <p><h4>Description:</h4> ${marker.description}</p>
-            //     </div>
-            //   `;
-            //   newMarker.setPopup(new Popup().setHTML(popupContent));
-            // });
-
-            this.map = map;
+      // Gestionnaire d'événement pour le clic sur le marqueur
+      newMarker.getElement().addEventListener('click', () => {
+        map.value.flyTo({
+          center: [myPropValue.value.LongitudeMpme, myPropValue.value.LatitudeMpme],
+          zoom: 10, // Niveau de zoom souhaité
         });
+      });
+    }),
 
-        onUnmounted(() => {
-            this.map?.remove();
+    onUnmounted(() => {
+      map.value?.remove();
+    });
+
+    const update = (nouvellesCoordonnees) => {
+      if (nouvellesCoordonnees) {
+        // Update the marker's position
+        newMarker.setLngLat([nouvellesCoordonnees.longitude, nouvellesCoordonnees.latitude]);
+        map.value.flyTo({
+          center: [nouvellesCoordonnees.longitude, nouvellesCoordonnees.latitude],
+          zoom: 10, // Desired zoom level
         });
-    },
+      }
+    };
+
+    return {
+      map,
+      mapContainer,
+      markers,
+      update
+    };
+  },
     methods: {
         // Vos autres méthodes ici
     },
@@ -79,7 +104,7 @@ export default {
 <style scoped>
 .maps_container {
     width: 100%;
-    height: 450px;
+    height: 550px;
     padding: 10px;
 }
 
