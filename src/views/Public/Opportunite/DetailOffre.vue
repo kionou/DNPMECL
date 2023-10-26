@@ -673,6 +673,7 @@ height: 100%;
   border-bottom: 1px solid #ddd;
   display: block;
   transition: 400ms;
+  font-size: 14px;
 }
 
 .widget.recent-posts .widget-title {

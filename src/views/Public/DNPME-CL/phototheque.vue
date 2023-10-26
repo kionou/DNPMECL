@@ -14,7 +14,7 @@
                     <li class="breadcrumb-item"><a href="/">accueil</a></li>
                     <li class="breadcrumb-item"><a href="dnmpecl/phototheques">Dnpmecl</a></li>
                     <li class="breadcrumb-item active" aria-current="page">photothèques</li>
-                    <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+                    
 
                     </ol>
                   </nav>
@@ -35,7 +35,7 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="d-flex justify-content-center align-items-center flex-wrap">
-        <div v-if="PhotosOptions.length === 0" class="noresul">Aucun Album disponible pour le moment !</div>
+        <div v-if="paginatedItems.length === 0" class="noresul">Aucun Album disponible pour le moment !</div>
         
         <div v-else class="class1" style="margin:5px;" v-for="photo in PhotosOptions" :key="photo.id">
           <div class="card text-center " >
@@ -104,19 +104,19 @@ Loading , Pag
 computed: {
 
 
-// totalPages() {
-// return Math.ceil(this.partenairesOptions.length / this.itemsPerPage);
-// },
-// paginatedItems() {
-//   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-//   const endIndex = startIndex + this.itemsPerPage;
-//   return this.partenairesOptions.slice(startIndex, endIndex);
-// },
+totalPages() {
+return Math.ceil(this.PhotosOptions.length / this.itemsPerPage);
+},
+paginatedItems() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.PhotosOptions.slice(startIndex, endIndex);
+},
 },
 
   data() {
     return {
-      originalText: " Visite des stands par les Cadres du Ministère desjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj PMEASI à la CCIAM de Pointe-Noire pour la célébration de la Journée Internationale des MPME  ",
+     
         loading:true,
         PhotosOptions:[],
          data:'',
@@ -150,6 +150,18 @@ async   mounted() {
       } catch (error) {
         console.error('Erreur lors de la récupération des photos :', error.message);
       }
+    },
+    updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
+    },
+    updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.ActualitesOptions.slice(startIndex, endIndex);
     },
     
   },
@@ -361,6 +373,7 @@ height: 100% !important;
     border-bottom: 1px solid #ddd;
     display: block;
     transition: 400ms;
+    font-size: 14px;
 }
 .widget.recent-posts .widget-title {
     margin-bottom: 35px;

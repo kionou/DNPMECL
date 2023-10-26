@@ -62,10 +62,13 @@
           </ul><!-- Ul end -->
 
       </div>
-        <div class="top-right">
-          <img src="@/assets/img/ninba1.png" alt="">
+        <div class="top-right1">
+          <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
+          <img src="@/assets/img/logo/dnpme-cl3.png" alt="" style="max-height: 100px;">
+
          
         </div>
+      
       </div>
     </section>
    
@@ -74,7 +77,7 @@
 
  
          <header    id="header" class=" header">
-        <div class="container-fluid d-flex align-items-center justify-content-between m-0 w-100">
+        <div class="container-fluid d-flex align-items-center justify-content-between m-0 w-75">
         <router-link to="/" class="logo ">
           
           <h1>DNPME-CL </h1>
@@ -400,7 +403,7 @@ padding-top: 10px;
 
 .header-right {
   float: right;
-  width: 512px;
+  width: 430px;
 
 }
 
@@ -432,7 +435,7 @@ ul.top-info-box li .info-box .info-box-content {
 }
 
 ul.top-info-box li .info-box .info-box-title {
-  font-size: 14px;
+  font-size: 11px;
   margin-bottom: 8px;
   line-height: normal;
 }
@@ -440,7 +443,7 @@ ul.top-info-box li .info-box .info-box-title {
 ul.top-info-box li .info-box .info-box-subtitle {
   margin: 0;
   line-height: normal;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   color: #111;
 }

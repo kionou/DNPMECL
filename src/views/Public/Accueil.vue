@@ -739,7 +739,10 @@ async fetchRegionOptions() {
 }
 
 .missions-bg {
-    background: #ededed url('@/assets/img/skyscraper.jpg') fixed top center no-repeat;
+    /* background: #ededed url('@/assets/img/skyscraper.jpg') fixed top center no-repeat; */
+ 
+    background: rgb(246, 246, 246);
+
 }
 .ts-pricing-box {
     margin: 20px 0;

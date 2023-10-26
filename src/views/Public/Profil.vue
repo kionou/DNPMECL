@@ -48,7 +48,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link  active" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-home1" aria-controls="navs-pills-top-home1"
-                                aria-selected="true" @click="selectedStep = 1" >
+                                aria-selected="true" >
                                Etape 1
                             </button>
                         </li>
@@ -56,7 +56,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-profile1" aria-controls="navs-pills-top-profile1"
-                                aria-selected="false" @click="selectedStep = 2" >
+                                aria-selected="false" >
                                 Etape 2
                             </button>
                         </li>
@@ -64,7 +64,7 @@
                         <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages11"
-                                aria-selected="false"  @click="updateMap" >
+                                aria-selected="false" >
                                 Etape 3
                             </button>
                         </li>
@@ -160,10 +160,7 @@ loggedInUser() {
           }
            
         },
-        updateMap() {
-            // Appelez la méthode 'update' du composant 'Maps' pour actualiser la carte
-            this.$refs.mapsComponent.update();
-        },
+       
      
     },
 };

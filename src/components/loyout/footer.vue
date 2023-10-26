@@ -53,7 +53,7 @@
 <div class="row justify-content-between">
 <div class="col-lg-4 col-md-6 footer-widget footer-about pb-5">
 <h3 class="widget-title">DNPME-CL</h3>
-<p>La Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local sous tutelle du Ministère du Commerce, de l’Industrie et des PME a pour objectif d’accompagner et de promouvoir les activités des Micros, Petites et Moyennes Entreprises et de vulgariser la loi portant Contenu Local en République de Guinée.</p>
+<p style="text-align: justify;">La Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local sous tutelle du Ministère du Commerce, de l’Industrie et des PME a pour objectif d’accompagner et de promouvoir les activités des Micros, Petites et Moyennes Entreprises et de vulgariser la loi portant Contenu Local en République de Guinée.</p>
 <div class="footer-social">
   <div class="social-links d-flex mt-4 justify-content-center">
            

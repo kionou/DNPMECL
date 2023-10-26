@@ -77,22 +77,13 @@ export default {
       map.value?.remove();
     });
 
-    const update = (nouvellesCoordonnees) => {
-      if (nouvellesCoordonnees) {
-        // Update the marker's position
-        newMarker.setLngLat([nouvellesCoordonnees.longitude, nouvellesCoordonnees.latitude]);
-        map.value.flyTo({
-          center: [nouvellesCoordonnees.longitude, nouvellesCoordonnees.latitude],
-          zoom: 10, // Desired zoom level
-        });
-      }
-    };
+   
 
     return {
       map,
       mapContainer,
       markers,
-      update
+    
     };
   },
     methods: {

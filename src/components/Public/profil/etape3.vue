@@ -308,7 +308,7 @@
         </div>
 
 
-        <div class="row tab-content">
+        <!-- <div class="row tab-content">
             <p class="titre">INFORMATIONS LOCALISATION</p>
             <div class=" card col-xl-12 col-lg-12 col-md-12 py-2">
                 <div class="   ">
@@ -317,7 +317,7 @@
                         <div class="overflow-hidden bg-white rounded-lg">
 
                             <div class="">
-                            <Maps :data="data" />
+                            <Maps :data="data"  :key="childKey" />
                             </div>
                         </div>
 
@@ -326,7 +326,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -345,14 +345,14 @@ export default {
         };
     },
 
-    mounted() {
+   async mounted() {
+    await this.reloadChild()
       
     },
 
     methods: {
-        updateMap() {
-      // Emit the event to update the map
-      this.$refs.mapsComponent.update();
+        async  reloadChild() {
+      this.childKey += 1; // Changez la clé pour recharger le composant enfant
     },
     },
 };

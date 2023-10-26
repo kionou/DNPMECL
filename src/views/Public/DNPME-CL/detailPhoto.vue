@@ -299,6 +299,7 @@ padding: 20px 0 !important;
     border-bottom: 1px solid #ddd;
     display: block;
     transition: 400ms;
+    font-size: 14px;
 }
 .widget.recent-posts .widget-title {
     margin-bottom: 35px;
