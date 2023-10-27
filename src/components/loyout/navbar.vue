@@ -64,7 +64,7 @@
       </div>
         <div class="top-right1">
           <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
-          <img src="@/assets/img/logo/dnpme-cl3.png" alt="" style="max-height: 100px;">
+          <img src="@/assets/img/logo/dnpme-cl4.png" alt="" style="max-height: 100px;">
 
          
         </div>

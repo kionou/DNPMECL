@@ -77,7 +77,7 @@
                           <div class="widget">
                               <h3 class="widget-title">A PROPOS DE LA DNPME-CL</h3>
                               <ul class="arrow nav nav-tabs">
-                                  <li><router-link to="/dnpme/router-linkpropos">A propos</router-link></li>
+                                <li><router-link to="/dnpme/apropos">A propos</router-link></li>
                                   <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
                                   <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
                                           lois</router-link></li>

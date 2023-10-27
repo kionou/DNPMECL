@@ -27,11 +27,7 @@
                   </button>
                 </li>
                 
-                <li class="nav-item">
-                  <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-messages11" aria-controls="navs-pills-top-messages1" aria-selected="false">
-                    Vidéos
-                  </button>
-                </li>
+               
 
               </ul>
             
@@ -50,12 +46,7 @@
                
 
                 </div>
-                <div class="tab-pane fade" id="navs-pills-top-messages11" role="tabpanel">
-                  
-
-                <P>VIDEO</P>
-
-                </div>
+               
 
               
            
