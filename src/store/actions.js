@@ -36,15 +36,17 @@ async fetchDataFromAPI({ commit }) {
     }
   },
 
-
   fetchCountries: async ({ commit }) => {
     try {
-      const response = await axios.get('https://restcountries.com/v3.1/all');
+      // Ajoutez le paramètre "lang=fr" pour demander les données en français
+      const response = await axios.get('https://restcountries.com/v3.1/all?lang=fr');
       const countries = response.data;
-      console.log('countries',countries);
+      console.log('countries', countries);
       const sortedCountries = countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
       const options = sortedCountries.map((country) => ({
-        label: country.name.common,
+        label: country.translations && country.translations.fr && country.translations.fr.common
+          ? country.translations.fr.common
+          : country.name.common,
         flag: country.flags.png,
         value: country.name.common,
       }));
@@ -53,6 +55,7 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des données des pays:', error);
     }
   },
+  
   async fetchRegionOptions({ commit }) {
     try {
       const response = await axios.get('/regions');
@@ -73,14 +76,15 @@ async fetchDataFromAPI({ commit }) {
   },
   async fetchPrefectureOptions({ commit }) {
     try {
-      const response = await axios.get('/prefectures');
-      console.log('response.prefecture', response.data.data.data); // Remplacez l'URL par l'URL de votre API
-      const prefecturesFromAPI = response.data.data.data;
+      const response = await axios.get('/prefectures-sans-pagination');
+      console.log('response.prefecture', response.data.data); // Remplacez l'URL par l'URL de votre API
+      const prefecturesFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
       const options = prefecturesFromAPI.map(prefecture => ({
         label: prefecture.NomPrefecture,
-        value: prefecture.NomPrefecture
+        value: prefecture.CodePrefecture,
+        code:  prefecture.CodeRegion
       }));
       
       commit('SET_PREFECTURE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
@@ -91,9 +95,9 @@ async fetchDataFromAPI({ commit }) {
 
   async fetchSous_PrefectureOptions({ commit }) {
     try {
-      const response = await axios.get('/sous-prefectures');
-      console.log('response.sousprefecture', response.data.data.data); // Remplacez l'URL par l'URL de votre API
-      const sousprefecturesFromAPI = response.data.data.data;
+      const response = await axios.get('/sous-prefectures-no-pagination');
+      console.log('response.sousprefecture', response.data.data); // Remplacez l'URL par l'URL de votre API
+      const sousprefecturesFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
       const options = sousprefecturesFromAPI.map(sousprefecture => ({

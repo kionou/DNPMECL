@@ -26,7 +26,7 @@
        <p class="signin" style="text-align: end; margin: 8px 0 0;" @click="ChangePassword"> <span >Mot de passe oublié ?</span> </p>
 
   <button class="sign" @click.prevent="submit">Se connecter</button>
- <p class="signin">Vous n'avez pas de compte ? <span @click="$router.push({ path: '/sign_user_mpme',  })" >Créer un compte</span> </p>
+ <p class="signin">Vous n'avez pas de compte ? <span @click="$router.push({ path: '/inscription-mpme',  })" >Créer un compte</span> </p>
 
 </form>
   </div>   

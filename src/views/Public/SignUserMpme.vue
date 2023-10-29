@@ -87,7 +87,18 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="region">Région <span class="text-danger">*</span></label>
-                <MazSelect v-model="region" color="secondary" :options="regionOptions" />
+                <MazSelect v-model="region" color="secondary" :options="regionOptions"  v-slot="{ option }" > 
+                  <div
+      class="flex items-center"
+      style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem"
+      @click="handleOptionClick(option)"
+    >
+     
+        {{ option.label }}
+      
+    </div>
+                
+                </MazSelect>
               </div>
               <small v-if="v$.region.$error">{{ v$.region.$errors[0].$message }}</small>
 
@@ -219,6 +230,7 @@ export default {
   },
 
   methods: {
+  
     validatePasswordsMatch() {
       return this.password === this.confirmer_password;
     },
@@ -334,6 +346,11 @@ export default {
         console.error('Erreur lors de la récupération des options des sous prefecture :', error);
       }
     },
+    handleOptionClick  (option)  {
+  
+  console.log('Option sélectionnée :', option.value);
+  this.prefectureOptions
+},
 
   },
   created() {

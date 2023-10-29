@@ -14,7 +14,7 @@
     <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
     <div class="input-group">
       <label for="username">Code Email <span class="text-danger">*</span></label>
-      <input type="tel" name="numero" id="username" placeholder="XXXX" v-model="code">
+      <MazInput v-model="code" type="password" color="secondary"  style="width: 100%;" />
     </div>
     <small v-if="v$.code.$error">{{v$.code.$errors[0].$message}}</small>
 		<div class="input-group">
@@ -34,7 +34,7 @@
        
     </div>
 
-    <MazDialog v-model="msg">
+    <MazDialog v-model="msg" title="Mot de passe changé avec succès">
       <p>
         Votre mot de passe a été changé avec succès. Vous pouvez maintenant vous connecter en toute sécurité.
       </p>

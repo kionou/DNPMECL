@@ -40,7 +40,9 @@
         <div v-else class="class1" style="margin:5px;" v-for="photo in PhotosOptions" :key="photo.id">
           <div class="card text-center " >
             <div class="container-img" @click="$router.push({ path: `/dnpme/phototheque/${photo.CodeAlbum}`, })" >
-              <img class="img-fluid image" :src="photo.CouverturePhoto">
+              <img class="img-fluid image" v-if="photo.CouverturePhoto === null" src="../../../assets/img/ninba1.png" :alt="photo.AlbumTitre" >
+            
+              <img class="img-fluid image" v-else :src="photo.CouverturePhoto" :alt="photo.AlbumTitre" >
             
             </div>
             <div class="card-body" >

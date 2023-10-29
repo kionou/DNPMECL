@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import store from '../store'
 import LayoutPublic from '../views/Public/Layout.vue'
-import Accueil from '../views/Public/Accueil.vue'
+import Page404 from '../views/Public/page404.vue';
 
+import Accueil from '../views/Public/Accueil.vue'
 import Apropos from '../views/Public/DNPME-CL/apropos.vue'
 import Mot from '../views/Public/DNPME-CL/mot.vue'
 import Documents from '../views/Public/Documentation.vue'
@@ -75,10 +76,11 @@ const router = createRouter({
          { path: '/opportunites/:id', name: 'DetailOpportunite', component: DetailOpportunite , props:true  },
 
 
-         { path: '/sign_user_mpme', name: 'Singmpme', component: Singmpme  , },
+         { path: '/inscription-mpme', name: 'Singmpme', component: Singmpme  , },
          { path: '/connexion-mpme', name: 'Loginmpme', component: Loginmpme , },
          { path: '/connexion-mpme/verification', name: 'Verification', component: Verification  ,  },
          { path: '/reinitialiser', name: 'connexion', component: Connexion , },
+         { path: '/:pathMatch(.*)', name: 'page404', component: Page404 },
         
 
          { path: '/liste_pme', name: 'liste_pme', component: Liste},

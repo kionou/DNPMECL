@@ -87,8 +87,7 @@
                                     <li class="d-flex align-items-center" v-for="actualiteRecent in ActualitesOptions" :key="actualiteRecent.id">
                                         <div class="posts-thumb" >
                                             <a :href="`/actualites/${actualiteRecent.id}`">
-                                                <img loading="lazy" alt="img"
-                                                    :src="updatePicture( actualiteRecent.images)">
+                                                <img loading="lazy" alt="image-actualite" :src="updatePicture( actualiteRecent.images)">
                                             </a>
                                            
                                         </div>

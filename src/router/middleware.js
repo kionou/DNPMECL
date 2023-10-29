@@ -8,7 +8,7 @@ export default function ({  redirect }) {
     const requiresAuth = router.currentRoute.meta.requiresAuth;
   
     if (requiresAuth && !isLoggedIn) {
-      redirect('/sign_user_mpme'); // Redirigez vers la page de connexion si nécessaire
+      redirect('/inscription-mpme'); // Redirigez vers la page de connexion si nécessaire
     }
   }
   

@@ -18,7 +18,7 @@
           <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
           
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/sign_user_mpme" class="btn-get-started">Enregistrez votre entreprise</router-link>
+            <router-link to="/inscription-mpme" class="btn-get-started">Enregistrez votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                
@@ -48,7 +48,7 @@
           <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
           
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/sign_user_mpme" class="btn-get-started">Identifier votre entreprise</router-link>
+            <router-link to="/inscription-mpme" class="btn-get-started">Identifier votre entreprise</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                
