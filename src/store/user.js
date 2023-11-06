@@ -24,7 +24,7 @@ const state = {
       const now = Math.floor(Date.now() / 1000); // Timestamp actuel en secondes
       const tokenExpiration = now + user.expires_in; // Calcul de l'expiration du token
       const userSessionData = {
-        id: user.user.Entreprises,
+        id: user.user.Entreprises || user.user.Identifiant ,
         nom:user.user.Nom,
         prenom:user.user.Prenoms,
         email:user.user.email,

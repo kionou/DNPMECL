@@ -183,7 +183,7 @@
                         <div class="row mb-3 mt-3 content-group" >
                             <div class="col">
                                 <div class="input-group">
-                            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel <span class="text-danger">*</span></label>
+                            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel  </label>
                             <input type="text" name="ChiffreAffaireReel" id="ChiffreAffaireReel" placeholder="" v-model="step1.ChiffreAffaireReel">
                           
                         </div>
@@ -191,7 +191,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                            <label for="CapitalSocialReel">Capital Social Réel <span class="text-danger">*</span></label>
+                            <label for="CapitalSocialReel">Capital Social Réel </label>
                             <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step1.CapitalSocialReel">
                         </div>
                         <small v-if="v$.step1.CapitalSocialReel.$error">{{ v$.step1.CapitalSocialReel.$errors[0].$message }}</small>
@@ -300,7 +300,7 @@
         <div class="row mb-3 mt-3 content-group" >
             <div class="col">
                 <div class="input-group">
-            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel <span class="text-danger">*</span></label>
+            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel </label>
             <input type="text" name="ChiffreAffaireReel" id="ChiffreAffaireReel" placeholder="" v-model="step2.ChiffreAffaireReel">
           
         </div>
@@ -308,7 +308,7 @@
             </div>
             <div class="col">
                 <div class="input-group">
-            <label for="CapitalSocialReel">Capital Social Réel <span class="text-danger">*</span></label>
+            <label for="CapitalSocialReel">Capital Social Réel </label>
             <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step2.CapitalSocialReel">
         </div>
         <small v-if="v$.step2.CapitalSocialReel.$error">{{ v$.step2.CapitalSocialReel.$errors[0].$message }}</small>
@@ -646,14 +646,14 @@ export default {
                 if (response.data.status === 'success') {
                     const filteredDataAffaire = response.data.data.data.filter(item => item.ChiffreCapital === 1);
                     const mappedDataAffaire = filteredDataAffaire.map(item => ({
-                          label: item.Description, // Vous pouvez utiliser la propriété que vous préférez ici
+                          label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
                           value: item.CodeCritere, // Ou toute autre propriété que vous préférez
                      }));
                      this.classificationAffaireOptions = mappedDataAffaire;
 
                      const filteredDataSocial = response.data.data.data.filter(item => item.ChiffreCapital === 0);
                     const mappedDataSocial = filteredDataSocial.map(item => ({
-                          label: item.Description, // Vous pouvez utiliser la propriété que vous préférez ici
+                          label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
                           value: item.CodeCritere, // Ou toute autre propriété que vous préférez
                      }));
                      this.classificationSocialOptions = mappedDataSocial;

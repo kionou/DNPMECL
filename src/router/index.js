@@ -80,7 +80,7 @@ const router = createRouter({
          { path: '/connexion-mpme', name: 'Loginmpme', component: Loginmpme , },
          { path: '/connexion-mpme/verification', name: 'Verification', component: Verification  ,  },
          { path: '/reinitialiser', name: 'connexion', component: Connexion , },
-         { path: '/:pathMatch(.*)', name: 'page404', component: Page404 },
+         { path: '/:pathMatch(.*)', name: 'NotFound', component: Page404 },
         
 
          { path: '/liste_pme', name: 'liste_pme', component: Liste},

@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item"><a href="/">accueil</a></li>
                     <li class="breadcrumb-item"><a href="/dnpmecl/phototheque">Dnpmecl</a></li>
                     <li class="breadcrumb-item"><a href="/dnpmecl/phototheque">photothèques</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ filteredDataAlbum.CodeAlbum }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ formaterChaine()  }}</li>
                     </ol>
                   </nav>
                 </div>
@@ -25,7 +25,7 @@
    
     <section id="main-container" class="main-container">
         <div class="section-header " >
-        <h2 style="color: var(--color-primary);">{{ filteredDataAlbum.CodeAlbum }}</h2>
+        <h2 style="color: var(--color-primary);">{{ formaterChaine(filteredDataAlbum.CodeAlbum)  }}</h2>
     </div>
 
 <div class="container">
@@ -167,6 +167,22 @@ export default {
         console.error('Erreur lors de la récupération des photos :', error.message);
       }
     },
+
+    formaterChaine() {
+  if (this.filteredDataAlbum && this.filteredDataAlbum.CodeAlbum) {
+    var elements = this.filteredDataAlbum.CodeAlbum.split("_");
+    var dateStr = elements.slice(1, 4).join('-');
+    var heureStr = elements[4];
+     var chaineFormatee = "Album du " + dateStr  + " publié à "+ heureStr;
+     return chaineFormatee;
+  } else {
+    return ""; // Gérer le cas où les données sont manquantes
+  }
+}
+
+
+
+
 
  
         

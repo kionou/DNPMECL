@@ -95,7 +95,7 @@
                   <MazSelect
                     v-model="step1.prefecture"
                     color="secondary"
-                    :options="prefectureOptions"
+                    :options="prefectureOptions1"
                     v-slot="{ option }"
                     search
                     :disabled="isPrefectureDisabled"
@@ -176,7 +176,8 @@
                 }}</small>
                 <small v-if="resultError['Ville']"> {{ resultError["Ville"] }} </small>
               </div>
-              <div class="col">
+
+              <!-- <div class="col">
                 <div class="input-groupe">
                   <label for="Localisation">Localisation </label>
                   <input
@@ -195,7 +196,9 @@
                 <small v-if="resultError['Localisation']">
                   {{ resultError["Localisation"] }}
                 </small>
-              </div>
+              </div> -->
+
+
             </div>
           </div>
           <!-- fin infos genral -->
@@ -362,9 +365,7 @@
               </div>
               <div class="col">
                 <div class="input-groupe">
-                  <label for="AdresseEmail"
-                    >Adresse Email <span class="text-danger">*</span></label
-                  >
+                  <label for="AdresseEmail">Adresse Email <span class="text-danger">*</span></label>
                   <input
                     type="email"
                     name="email"
@@ -539,7 +540,8 @@
               </div>
             </div>
             <div class="row mb-3 mt-3 content-group">
-              <div class="col">
+              
+              <!-- <div class="col">
                 <div class="input-groupe">
                   <label for="AnneeProduction1"
                     >Année de Production 1 <span class="text-danger">*</span></label
@@ -552,8 +554,8 @@
                     :class="{ 'error-border': resultError['AnneeProduction1'] }"
                     @input="resultError['AnneeProduction1'] = false"
                   />
-                  <!-- <VueDatePicker v-model="step1.an_prod_1" :year-picker="true"
-                                        :year-range="[1990, new Date().getFullYear()]"></VueDatePicker> -->
+                  <VueDatePicker v-model="step1.an_prod_1" :year-picker="true"
+                                        :year-range="[1990, new Date().getFullYear()]"></VueDatePicker>
                 </div>
                 <small v-if="v$.step1.an_prod_1.$error">{{
                   v$.step1.an_prod_1.$errors[0].$message
@@ -561,7 +563,47 @@
                 <small v-if="resultError['AnneeProduction1']">
                   {{ resultError["AnneeProduction1"] }}
                 </small>
+              </div> -->
+
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="PaysSiegeSocial"
+                    >Pays du Siège Social <span class="text-danger">*</span></label
+                  >
+                  <MazSelect
+                    v-model="step1.PaysSiegeSocial"
+                    :options="sortedCountryOptions"
+                    v-slot="{ option }"
+                    search
+                    color="secondary"
+                    :class="{ 'error-border': resultError['PaysSiegeSocial'] }"
+                    @input="resultError['PaysSiegeSocial'] = false"
+                  >
+                    <div
+                      class="flex items-center"
+                      style="
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        width: 100%;
+                        gap: 1rem;
+                      "
+                    >
+                      <MazAvatar size="0.8rem" :src="option.flag" />
+                      <strong>
+                        {{ option.label }}
+                      </strong>
+                    </div>
+                  </MazSelect>
+                </div>
+                <small v-if="v$.step1.PaysSiegeSocial.$error">{{
+                  v$.step1.PaysSiegeSocial.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['PaysSiegeSocial']">
+                  {{ resultError["PaysSiegeSocial"] }}
+                </small>
               </div>
+
+
               <div class="col">
                 <div class="input-groupe">
                   <label for="PersonnelPermanentFemme">Personnel Permanent Femme </label>
@@ -852,7 +894,8 @@
                 </small>
               </div>
             </div>
-            <div class="row mb-3 mt-3 content-group">
+            <!-- <div class="row mb-3 mt-3 content-group">
+
               <div class="col">
                 <div class="input-groupe">
                   <label for="CapitalSocial">Capital Social</label>
@@ -873,44 +916,12 @@
                   {{ resultError["CapitalSocial"] }}
                 </small>
               </div>
-              <div class="col">
-                <div class="input-groupe">
-                  <label for="PaysSiegeSocial"
-                    >Pays du Siège Social <span class="text-danger">*</span></label
-                  >
-                  <MazSelect
-                    v-model="step1.PaysSiegeSocial"
-                    :options="sortedCountryOptions"
-                    v-slot="{ option }"
-                    search
-                    color="secondary"
-                    :class="{ 'error-border': resultError['PaysSiegeSocial'] }"
-                    @input="resultError['PaysSiegeSocial'] = false"
-                  >
-                    <div
-                      class="flex items-center"
-                      style="
-                        padding-top: 0.5rem;
-                        padding-bottom: 0.5rem;
-                        width: 100%;
-                        gap: 1rem;
-                      "
-                    >
-                      <MazAvatar size="0.8rem" :src="option.flag" />
-                      <strong>
-                        {{ option.label }}
-                      </strong>
-                    </div>
-                  </MazSelect>
-                </div>
-                <small v-if="v$.step1.PaysSiegeSocial.$error">{{
-                  v$.step1.PaysSiegeSocial.$errors[0].$message
-                }}</small>
-                <small v-if="resultError['PaysSiegeSocial']">
-                  {{ resultError["PaysSiegeSocial"] }}
-                </small>
-              </div>
 
+             
+            
+            </div> -->
+
+            <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
                   <label for="NumeroRccm">Numéro Rccm </label>
@@ -931,9 +942,6 @@
               <small v-if="resultError['NumeroRccm']">
                 {{ resultError["NumeroRccm"] }}
               </small>
-            </div>
-
-            <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
                   <label for="NumeroNif">Numero Nif</label>
@@ -976,6 +984,10 @@
                 {{ resultError["DateGenerationNif"] }}
               </small>
 
+             
+            </div>
+
+            <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
                   <label for="NumeroTva">Numero de la TVA</label>
@@ -996,10 +1008,7 @@
               <small v-if="resultError['NumeroTva']">
                 {{ resultError["NumeroTva"] }}
               </small>
-            </div>
-
-            <div class="row mb-3 mt-3 content-group">
-              <div class="col">
+              <!-- <div class="col">
                 <div class="input-groupe">
                   <label for="CodeRegime">Code du Regime</label>
                   <MazSelect
@@ -1016,7 +1025,7 @@
               }}</small>
               <small v-if="resultError['CodeRegime']">
                 {{ resultError["CodeRegime"] }}
-              </small>
+              </small> -->
 
               <div class="col">
                 <div class="input-groupe">
@@ -1340,8 +1349,22 @@
                     color="secondary"
                     :options="choix"
                     :class="{ 'error-border': resultError['DirigeantProprietaire'] }"
-                    @input="resultError['DirigeantProprietaire'] = false"
-                  />
+                    @input="resultError['DirigeantProprietaire'] = false"   v-slot="{ option }"
+                  >
+
+                  <div
+                      class="flex items-center"
+                      style="
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        width: 100%;
+                        gap: 1rem;
+                      "
+                      @click="handleDirigeantProprietaireChange(option)"
+                    >
+                      {{ option.label }}
+                    </div>
+                  </MazSelect>
                 </div>
                 <small v-if="v$.step2.dirigeantProprietaire.$error">{{
                   v$.step2.dirigeantProprietaire.$errors[0].$message
@@ -2377,7 +2400,7 @@
               </div>
             </div>
 
-            <div class="row mb-3 mt-3 content-group">
+            <!-- <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
                   <label for="AltitudeMpme">Altitude Mpme </label>
@@ -2440,7 +2463,8 @@
                   </small>
                 </div>
               </div>
-            </div>
+            </div> -->
+
           </div>
           <!-- fin infos activite -->
         </div>
@@ -2570,7 +2594,8 @@ export default {
     },
     isCommuneDisabled() {
       return !this.step1.prefecture;
-    }, isQuartierDisabled() {
+    }, 
+    isQuartierDisabled() {
       return !this.step1.commune;
     },
   },
@@ -2591,6 +2616,7 @@ export default {
       sortedCountryOptions: [],
       regionOptions: [],
       prefectureOptions: [],
+      prefectureOptions1: [],
       sous_prefectureOptions: [],
       SecteurActiviteOptions: [],
       StatutJuridiqueOptions: [],
@@ -2849,9 +2875,9 @@ export default {
       lienGoogleMapMpme: {},
       latitudeMpme: {},
       longitudeMpme: {},
-      altitudeMpme: {},
-      precisionGPSMpme: {},
-      origineDonnees: {},
+      // altitudeMpme: {},
+      // precisionGPSMpme: {},
+      // origineDonnees: {},
 
       TypeComptabilite: { require },
       TypeCarte: { require },
@@ -2985,7 +3011,7 @@ export default {
           const success = await this.enregistrerMpmeDonnees(mpmeData);
           console.log("success", success);
           if (success) {
-           localStorage.setItem('prefecture-mpme', JSON.stringify(this.option));
+         
             this.currentStep++;
             window.scrollTo({
               top: 0,
@@ -3132,6 +3158,9 @@ export default {
         // console.log('UserData:', this.userData.ListeSousSecteurActivite);
       } catch (error) {
         console.error("Erreur lors de la récupération des options des USER :", error);
+        if (error.response.status === 500) {
+          this.$router.push("/connexion-mpme");  //a revoir
+        }
       }
     },
 
@@ -3225,19 +3254,10 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getprefectureOptions"])
         ); // Accéder aux options des pays via le getter
-        this.prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
+         this.prefectureOptions = options; 
+        // Affecter les options à votre propriété sortedCountryOptions
 
-          const storedPrefectureData = localStorage.getItem(`prefecture-mpme`);
-    if (storedPrefectureData) {
-     
-      const prefectureData = JSON.parse(storedPrefectureData);
-if (prefectureData.identifiant === this.loggedInUser.id ) {
-  this.step1.prefecture = prefectureData.value;
-} else {
-  localStorage.removeItem('prefecture-mpme');
-}
-      // Utilisez ces données pour pré-remplir le formulaire.
-    }
+      
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des options des prefecture :",
@@ -3247,20 +3267,36 @@ if (prefectureData.identifiant === this.loggedInUser.id ) {
     },
 
     async fetchSousPrefectureOptions() {
-      // Renommez la méthode pour refléter qu'elle récupère les options de pays
-      try {
-        await this.$store.dispatch("fetchSous_PrefectureOptions");
-        const options = JSON.parse(
-          JSON.stringify(this.$store.getters["getSousprefectureOptions"])
-        ); // Accéder aux options des pays via le getter
-        this.sous_prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des sous prefecture :",
-          error.message
-        );
+  try {
+    await this.$store.dispatch("fetchSous_PrefectureOptions");
+    const options = JSON.parse(JSON.stringify(this.$store.getters["getSousprefectureOptions"]));
+    this.sous_prefectureOptions = options;
+    // console.log('Sous-préfecture :', options);
+    const sousPrefectureValue = this.userData.Commune;
+    const selectedSousPrefecture = this.sous_prefectureOptions.find(option => option.value === sousPrefectureValue);
+    if (selectedSousPrefecture) {
+      const selectedPrefecture = this.prefectureOptions.find(option => option.value === selectedSousPrefecture.code);
+      if (selectedPrefecture) {
+        
+        console.log('Préfecture sélectionnée :',selectedPrefecture);
+        console.log('Code de la préfecture :', selectedPrefecture.code);
+        this.prefectureOptions1.push(selectedPrefecture);
+        this.step1.prefecture = selectedPrefecture.value
+         console.log('Code de la préfecture :', this.prefectureOptions1 );
+        
+      } else {
+        console.log('Préfecture non trouvée pour la valeur de la sous-préfecture :', sousPrefectureValue);
       }
-    },
+    } else {
+      console.log('Sous-préfecture non trouvée pour la valeur :', sousPrefectureValue);
+    }
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des options des sous-préfectures :",
+      error.message
+    );
+  }
+},
 
     async fetchQuartierOptions() {
       // Renommez la méthode pour refléter qu'elle récupère les options de pays
@@ -3483,6 +3519,18 @@ if (prefectureData.identifiant === this.loggedInUser.id ) {
       }
     },
 
+     handleDirigeantProprietaireChange(option) {
+      console.log("Données de localité :", option);
+      if (option.value === 'Oui') {
+        // Copiez les données du dirigeant dans les données du propriétaire
+        this.step2.titreProprietaire = this.step2.titreDirigeant;
+        this.step2.nomProprietaire = this.step2.nomDirigeant;
+        this.step2.prenomProprietaire = this.step2.prenomDirigeant;
+        this.step2.sexeProprietaire = this.step2.sexeDirigeant;
+        this.step2.paysProprietaire = this.step2.paysDirigeant;
+        this.step2.anneeNaissanceProprietaire = this.step2.anneeNaissanceDirigeant;
+      }
+    },
     async formatValidationErrors(errors) {
       const formattedErrors = {};
 
@@ -3634,25 +3682,26 @@ if (prefectureData.identifiant === this.loggedInUser.id ) {
       this.DemandeAide = false;
       this.loading = true;
       try {
-        const response = await axios.post(
-          "/gestion-des-demandes",
-          { code: this.loggedInUser.id },
+        const response = await axios.post( "/gestion-des-demandes", { code: this.loggedInUser.id },
           {
             headers: {
               Authorization: `Bearer ${this.loggedInUser.token}`,
               "Content-Type": "application/json",
             },
-          }
-        );
+          });
         console.log("response.sousprefecture", response);
         if (response.data.status === "success") {
           this.loading = false;
           this.msg = true;
-        } else {
+        } else if(response.data.status === "error") {
           this.loading = false;
+         this.$router.push({ name: 'NotFound' }); 
+
         }
       } catch (error) {
         console.error("Erreur post:", error);
+        this.loading = false;
+         this.$router.push({ name: 'NotFound' }); 
       }
     },
     close() {

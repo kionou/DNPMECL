@@ -102,7 +102,8 @@ async fetchDataFromAPI({ commit }) {
       // Formater les données de l'API en options pour MazSelect
       const options = sousprefecturesFromAPI.map(sousprefecture => ({
         label: sousprefecture.NomSousPrefecture,
-        value: sousprefecture.CodeSousPrefecture
+        value: sousprefecture.CodeSousPrefecture,
+        code:sousprefecture.CodePrefecture
       }));
       
       commit('SET_SOUS_PREFECTURE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
@@ -150,9 +151,9 @@ async fetchDataFromAPI({ commit }) {
   },
   async fetchSousSecteurOptions({ commit }) {
     try {
-      const response = await axios.get('/sous-secteurs'); // Remplacez l'URL par l'URL de votre API
-      console.log('soussecteur', response.data.data.data);
-      const sousSecteurFromAPI = response.data.data.data;
+      const response = await axios.get('/sous-secteurs/sans-pagination'); // Remplacez l'URL par l'URL de votre API
+      console.log('soussecteur', response.data.data);
+      const sousSecteurFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
       const options = sousSecteurFromAPI.map(sousSecteur => ({

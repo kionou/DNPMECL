@@ -34,7 +34,7 @@
 
    <div v-else class="box"  v-for="actualite in paginatedItems" :key="actualite.id"  @click="$router.push({ path: `/actualites/${actualite.id}`, })">
     <div class="box-top">
-      <img v-if="actualite.images === null" class="box-image" src="@/assets/img/ninba1.jpg" alt="image-actualite" > 
+      <img v-if="actualite.images === null" class="box-image" src="@/assets/img/ninba1.png" alt="image-actualite" > 
       <img  v-else class="box-image" :src="updatePicture( actualite.images)" alt="image-actualite" > 
 
       <div class="title-flex">

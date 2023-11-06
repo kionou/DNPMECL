@@ -58,7 +58,7 @@
                           
                           <!-- </div> -->
 
-                        <p >Secteur concerné : <span>  {{obtenirValeursPourCles(sousSecteursLabel)}}</span> </p>
+         <p >Secteur concerné : <span>  {{obtenirValeursPourCles(sousSecteursLabel)}}</span> </p>
         <p >Date d'Ouverture de Soumission : <span>{{datenew(offre.dateCreation)}}</span> </p>
     </div>
     <div class="date">
@@ -82,7 +82,7 @@
                                   <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
                                           lois</router-link></li>
                                   <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
-            <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+                                 <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
 
 
                               </ul>
@@ -122,7 +122,7 @@
 
           </div><!-- Container end -->
       </section>
-      <MazDialog v-if="isOpen" v-model="isOpen" width="500px" max-height="revert"  padding="0 1.5rem 1.5rem">
+      <MazDialog v-if="isOpen" v-model="isOpen" width="900px" max-height="revert"  padding="0 1.5rem 1.5rem" position="relative">
         <div>
         <small> {{ error }}</small>
         
@@ -130,8 +130,9 @@
         <!-- Header -->
         <div class="upload-area__header">
           <h1 class="upload-area__title">Téléchargez votre fichier</h1>
+          <div class="btnLogin" @click="addDocument"> <i class="bi bi-plus-lg"></i> Ajouter</div>
           <p class="upload-area__paragraph">
-            Le fichier doit être une image
+            Le fichier doit être un document
             <strong class="upload-area__tooltip">
               comme
               <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
@@ -142,28 +143,67 @@
         
         <!-- Drop Zoon -->
         <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+       <form @submit.prevent="submitForm" style="widht:100%;">
+      <div v-for="(document, index) in documents" :key="index">
+        <div class="row mb-3 mt-3 content-group justify-content-center" >
+          <div class="col">
         <div class="input-group">
+        <!-- <label for="username">Nom du document <span class="text-danger">*</span></label> -->
+        <input type="text" name="nom" id="nom" placeholder="" v-model="nom">
+        </div>
+        <small v-if="v$.nom.$error">{{v$.nom.$errors[0].$message}}</small>
+      </div>
+       <div class="col">
+        <input type="file" name="file" id="file" class="inputfile" @change="handleFileChange(document, $event)"  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput"  />
+                      <label for="file">
+                        <i class="bi bi-cloud-arrow-down"></i>
+                        Telecharger le ficher
+                      </label>
+        <small v-if="v$.selectedFiles.$error">{{v$.selectedFiles.$errors[0].$message}}</small>
+      </div>
+
+      <div class="col" style="  max-width: 63px !important;
+   
+    display: flex;
+    justify-content: center;
+    padding:22px 0 14px;
+    align-items: center;">
+        <div class="sci">
+          
+          <span style="--i:2" @click="removeDocument(index)" class="delete">
+              <i class="bi bi-trash"></i>
+          </span>
+
+              </div>
+        <!-- <button @click="removeDocument(index)">Supprimer</button> -->
+
+      </div>
+      </div>
+
+        
+      </div>
+
+      <button type="submit" class="sign">Envoyer</button>
+    </form>
+
+
+
+        <!-- <div class="input-group">
         <label for="username">Nom du document <span class="text-danger">*</span></label>
         <input type="text" name="nom" id="nom" placeholder="" v-model="nom">
         </div>
         <small v-if="v$.nom.$error">{{v$.nom.$errors[0].$message}}</small>
         
-        
-        
-        <!-- <div class="input-group">
-        <label for="tel">Telecharger le ficher <span class="text-danger">*</span></label>
-        <input type="file" name="file" id="ficher" placeholder="" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload"> 
-        </div> -->
-        <input type="file" name="file" id="file" class="inputfile"  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload" />
+        <input type="file" name="file" id="file" class="inputfile" multiple  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload" />
                       <label for="file">
                         <i class="bi bi-cloud-arrow-down"></i>
                         Telecharger le ficher
                       </label>
-        <small v-if="v$.selectedFile.$error">{{v$.selectedFile.$errors[0].$message}}</small>
+        <small v-if="v$.selectedFiles.$error">{{v$.selectedFiles.$errors[0].$message}}</small>
         
          
         
-          <button class="sign" @click.prevent="submit">Envoyer</button>
+          <button class="sign" @click.prevent="submit">Envoyer</button> -->
         </div>
         <!-- End Drop Zoon -->
         
@@ -217,6 +257,7 @@ return this.$store.getters['user/loggedInUser'];
         msgsuccess:false,
         v$:useVuelidate(),
         selectedFile: null,
+        selectedFiles: [],
         imagesTypes: ['pdf', 'word', 'txt', 'excel' , 'powerpoint'],
         nom:'',
         idOffre:'',
@@ -224,6 +265,7 @@ return this.$store.getters['user/loggedInUser'];
         sousSecteursLabel: '',
         SousSecteurActiviteOptions:[],
         OppOptions:[],
+        documents: [{ nom: '', fichier: null }],
 
       };
   },
@@ -234,7 +276,7 @@ nom:{
     require,
     lgmin:lgmin(2),
  },
- selectedFile:{
+ selectedFiles:{
    require,
  }  
 },
@@ -290,6 +332,7 @@ try {
 async fetchData() {
             const response = await axios.get(`/mpme/${this.loggedInUser.id}`)
             const data = response.data.data
+            console.log('dattta',data);
             if (data.ListeSousSecteurActivite.includes('|')) {
                 return  this.data = data.ListeSousSecteurActivite.split("|")
                 
@@ -319,19 +362,19 @@ const response = await axios.get('/offres', {
        this.offres = response.data.data.data.filter((offre) => {
        const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
        console.log('sousSecteurActiviteOffre',sousSecteurActiviteOffre);
-
+    
         if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
           const sousSecteurs = sousSecteurActiviteOffre.split('|');
-            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
+            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish ===0;
         } else {
-          return this.data.includes(sousSecteurActiviteOffre) && offre.publish ===1 ;
+          return this.data.includes(sousSecteurActiviteOffre) && offre.publish ===0 ;
         }
       });
 
 
        const Offres = this.offres;
       
-       const offresPubliees = Offres.filter(offre => offre.publish === 1);
+       const offresPubliees = Offres.filter(offre => offre.publish ===0);
       
       // Trier les offres par date de création de la plus récente à la moins récente
       offresPubliees.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
@@ -372,9 +415,25 @@ this.isOpen = true
 
 },
 handleFileUpload() {
-this.selectedFile = this.$refs.fileInput.files[0];
-console.log( this.selectedFile);
+  this.selectedFiles = this.$refs.fileInput.files; // Stockez les fichiers sélectionnés dans le tableau
+  console.log(this.selectedFiles);
 },
+
+
+handleFileChange(document, event) {
+      document.fichier = event.target.files[0];
+    },
+    addDocument() {
+      this.documents.push({ nom: '', fichier: null });
+    },
+    removeDocument(index) {
+      this.documents.splice(index, 1);
+    },
+    submitForm() {
+      // Vous pouvez accéder à this.documents pour envoyer les données au serveur
+      // Assurez-vous de gérer correctement les fichiers et les noms de documents
+      console.log(this.documents);
+    },
 async  submit(){
 this.v$.$touch()
 if (this.v$.$errors.length == 0 ) {
@@ -382,12 +441,14 @@ this.isOpen = false
 this.loading = true
 console.log('bonjour');
 const formData = new FormData();
-formData.append('document', this.selectedFile);
+for (let i = 0; i < this.selectedFiles.length; i++) {
+    formData.append('document', this.selectedFiles[i]);
+  }
 formData.append('intitule', this.nom);
 formData.append('CodeOffre', this.idOffre);
 formData.append('CodeMpme', this.loggedInUser.id);
 console.log( formData);
-console.log( this.selectedFile ,this.nom ,this.idOffre , this.loggedInUser.id );
+console.log( this.selectedFiles ,this.nom ,this.idOffre , this.loggedInUser.id );
 
 
 try {
@@ -518,7 +579,11 @@ this.loading = false
 
 /* fin banier */
 
+form{
+width: 100%;
 
+
+}
 .into-sub-title {
   font-weight: 900;
   text-transform: uppercase;
@@ -812,7 +877,7 @@ color: black;
   border-radius: 15px;
   margin-top: 15Px;
   transition: border-color 300ms ease-in-out;
-  padding: 10px 34px;
+  padding:  10px;
   }
 
 
@@ -843,6 +908,67 @@ color: black;
 
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
+}
+
+
+
+.btnLogin {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    background-color: #F9D310;
+    border: none;
+    border-radius: 45px;
+    position: absolute;
+    z-index: 3;
+    right: 47px;
+    top: 126px;
+    cursor: pointer;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnLogin:hover {
+    background-color: #fff;
+    border: 1px solid #F9D310;
+    color: #F9D310;
+
+}
+
+.sci {
+    bottom: 10px;
+    left: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    /* border: 1px solid red; */
+}
+
+.sci span {
+    margin: 0 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    color: #fff;
+    z-index: 4;
+    cursor: pointer;
+    padding: 5px 10px;
+
+}
+
+.delete {
+    background-color: red;
+}
+
+.delete:hover {
+    background-color: #fff;
+    color: red;
+    border: 1px solid red;
 }
 
 </style>
