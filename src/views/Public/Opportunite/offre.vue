@@ -224,7 +224,7 @@ showFs() {
 
  async fetchgetOffreMpme() {
   try {
-    const response = await axios.get('/offres', {
+    const response = await axios.get('/offres/liste-sans-pagination', {
       headers: {
         Authorization: `Bearer ${this.loggedInUser.token}`,
       },
@@ -232,17 +232,19 @@ showFs() {
 
     if (response.data.status === 'success') {
       this.loading = false;
-      this.offres = response.data.data.data;
+      this.offres = response.data.data;
+      console.log('jjjjjjjjjj',response);
+
       console.log('this.offres',this.offres);
       this.offres = this.offres.filter((offre) => {
        const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
-       console.log('sousSecteurActiviteOffre',sousSecteurActiviteOffre);
+       console.log('sousSecteurActiviteOffrej',sousSecteurActiviteOffre);
 
         if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
           const sousSecteurs = sousSecteurActiviteOffre.split('|');
-            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 0;
+            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
         } else {
-          return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 0;
+          return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
         }
       });
 

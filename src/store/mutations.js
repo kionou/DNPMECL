@@ -87,6 +87,10 @@ export default {
   SET_PUBLIQUE_VISIBLE_PHOTOS(state, photos) {
     state.publiqueVisiblePhotos = photos;
   },
+
+  SET_SOUS_SECTEURS(state, data) {
+    state.sousSecteurs = data;
+  },
   
   
 }

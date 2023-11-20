@@ -1,492 +1,511 @@
 <template>
   <Loading v-if="loading"></Loading>
   <div>
-      <div id="banner-area" class="banner-area">
-          <div class="banner-text">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-lg-12">
-                          <div class="banner-heading">
-                              <h1 class="banner-title">{{ offre.CodeOffre }}</h1>
-                              <nav aria-label="breadcrumb">
+    <div id="banner-area" class="banner-area">
+      <div class="banner-text">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="banner-heading">
+                <h1 class="banner-title">{{ offre.CodeOffre }}</h1>
+                <nav aria-label="breadcrumb">
 
-                                  <ol class="breadcrumb justify-content-center">
-                                      <li class="breadcrumb-item"><a href="/">accueil</a></li>
-                                      <li class="breadcrumb-item"><a href="/opportunites">opportunies</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page">{{ offre.CodeOffre }}</li>
-                                  </ol>
-                              </nav>
-                          </div>
-                      </div><!-- Col end -->
-                  </div><!-- Row end -->
-              </div><!-- Container end -->
-          </div><!-- Banner text end -->
-      </div>
-
-      <div class="section-header " style="padding-bottom: 0 !important;">
-          <h2 style="color: var(--color-primary);">{{ offre.CodeOffre }} </h2>
-      </div>
-
-      <section id="main-container" class="main-container" style="padding:0 0 60px !important;">
-          <div class="container">
-              <div class="row">
-
-                  <div class="col-lg-8 mb-5 mb-lg-0 article">
-
-
-                      <h1>{{ offre.titre }}</h1><br>
-                      
-                      <div class="article-p">
-                          <div class="image">
-                            <img src="@/assets/img/slide/slide11.jpg" alt="">
-
-                          </div>
-                      </div>
-                       <h3 class="text-center my-5">DESCRIPTION</h3>
-                      <p class="x11i5rnm" style="white-space: pre-line; color: black;">
-                          <span  >
-                            {{ offre.description }}
-                          </span>
-
-                      </p>
-                      <p  style=" font-weight: bolder;" class="p-hover"  @click="hamdleSubmit(offre.CodeOffre)"> Cliquez ici pour postuler </p>
-                      <h3 class="text-center my-5">INFORMATIONS</h3>
-                      <div class="date">
-                        <!-- <div class="btn_sign" v-if="offre.manage === 1"> -->
-                         
-                      <p  style=" font-weight: bolder;">Pour plus d'informations veuillez cliquez  : <a :href="offre.siteWeb" style=" font-weight: bolder;" class="p-hover">ici</a> </p>
-                          
-                          <!-- </div> -->
-
-         <p >Secteur concerné : <span>  {{obtenirValeursPourCles(sousSecteursLabel)}}</span> </p>
-        <p >Date d'Ouverture de Soumission : <span>{{datenew(offre.dateCreation)}}</span> </p>
-    </div>
-    <div class="date">
-        <p>Date Limite de Soumission : <span>{{datenew(offre.dateCloture) }}</span> </p>
+                  <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                    <li class="breadcrumb-item"><a href="/opportunites">opportunies</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ offre.CodeOffre }}</li>
+                  </ol>
+                </nav>
+              </div>
+            </div><!-- Col end -->
+          </div><!-- Row end -->
+        </div><!-- Container end -->
+      </div><!-- Banner text end -->
     </div>
 
-                  </div>
-                  <!-- Content Col end -->
+    <div class="section-header " style="padding-bottom: 0 !important;">
+      <h2 style="color: var(--color-primary);">{{ offre.CodeOffre }} </h2>
+    </div>
+
+    <section id="main-container" class="main-container" style="padding:0 0 60px !important;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-8 mb-5 mb-lg-0 article">
+
+
+            <h1>{{ offre.titre }}</h1><br>
+
+            <div class="article-p">
+              <div class="image">
+                <img src="@/assets/img/slide/slide11.jpg" alt="">
+
+              </div>
+            </div>
+            <h3 class="text-center my-5">DESCRIPTION</h3>
+            <p class="x11i5rnm" style="white-space: pre-line; color: black;">
+              <span>
+                {{ offre.description }}
+              </span>
+
+            </p>
+            <p style=" font-weight: bolder;" class="p-hover" @click="hamdleSubmit(offre.CodeOffre)"> Cliquez ici pour
+              postuler </p>
+            <h3 class="text-center my-5">INFORMATIONS</h3>
+            <div class="date">
+              <!-- <div class="btn_sign" v-if="offre.manage === 1"> -->
+
+              <p style=" font-weight: bolder;">Pour plus d'informations veuillez cliquez : <a :href="offre.siteWeb"
+                  style=" font-weight: bolder;" class="p-hover">ici</a> </p>
+
+              <!-- </div> -->
+
+              <p>Secteur concerné : <span> {{ obtenirValeursPourCles(sousSecteursLabel) }}</span> </p>
+              <p>Date d'Ouverture de Soumission : <span>{{ datenew(offre.dateCreation) }}</span> </p>
+            </div>
+            <div class="date">
+              <p>Date Limite de Soumission : <span>{{ datenew(offre.dateCloture) }}</span> </p>
+            </div>
+
+          </div>
+          <!-- Content Col end -->
 
 
 
-                  <div class="col-lg-4">
+          <div class="col-lg-4">
 
-                      <div class="sidebar sidebar-right">
+            <div class="sidebar sidebar-right">
 
-                          <div class="widget">
-                              <h3 class="widget-title">A PROPOS DE LA DNPME-CL</h3>
-                              <ul class="arrow nav nav-tabs">
-                                <li><router-link to="/dnpme/apropos">A propos</router-link></li>
-                                  <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
-                                  <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
-                                          lois</router-link></li>
-                                  <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
-                                 <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
-
-
-                              </ul>
-                          </div>
-
-                          <div class="widget recent-posts">
-                              <h3 class="widget-title">Autres opportunités</h3>
-                              <ul class="list-unstyled">
-
-                                  <li class="d-flex align-items-center" v-for="opp in OppOptions" :key="opp.id">
-                                      <div class="posts-thumb" >
-                                          <a :href="`/offre/${opp.CodeOffre}`">
-                                            <img src="@/assets/img/slide/slide11.jpg" alt="">
-                                              <!-- <img :src="getImage('img/slide/slide11.jpg')" alt=""> -->
-                                          </a>
-                                         
-                                      </div>
-
-                                      <div class="post-info" >
-                                          <h4 class="entry-title" style="text-transform: capitalize;">
-                                              <a :href="`/offre/${opp.CodeOffre}`">
-                                              {{ opp.titre }}
-                                          </a>
-                                          </h4>
-                                      </div>
-                                  </li>
+              <div class="widget">
+                <h3 class="widget-title">A PROPOS DE LA DNPME-CL</h3>
+                <ul class="arrow nav nav-tabs">
+                  <li><router-link to="/dnpme/apropos">A propos</router-link></li>
+                  <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
+                  <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
+                      lois</router-link></li>
+                  <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+                  <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
 
 
-                              </ul>
-                          </div>
+                </ul>
+              </div>
+
+              <div class="widget recent-posts">
+                <h3 class="widget-title">Autres opportunités</h3>
+                <ul class="list-unstyled">
+
+                  <li class="d-flex align-items-center" v-for="opp in OppOptions" :key="opp.id">
+                    <div class="posts-thumb">
+                      <a :href="`/offre/${opp.CodeOffre}`">
+                        <img src="@/assets/img/slide/slide11.jpg" alt="">
+                        <!-- <img :src="getImage('img/slide/slide11.jpg')" alt=""> -->
+                      </a>
+
+                    </div>
+
+                    <div class="post-info">
+                      <h4 class="entry-title" style="text-transform: capitalize;">
+                        <a :href="`/offre/${opp.CodeOffre}`">
+                          {{ opp.titre }}
+                        </a>
+                      </h4>
+                    </div>
+                  </li>
 
 
-                      </div><!-- Sidebar end -->
-                  </div><!-- Sidebar Col end -->
+                </ul>
+              </div>
 
-              </div><!-- Main row end -->
 
-          </div><!-- Container end -->
-      </section>
-      <MazDialog v-if="isOpen" v-model="isOpen" width="900px" max-height="revert"  padding="0 1.5rem 1.5rem" position="relative">
-        <div>
+            </div><!-- Sidebar end -->
+          </div><!-- Sidebar Col end -->
+
+        </div><!-- Main row end -->
+
+      </div><!-- Container end -->
+    </section>
+    <MazDialog v-if="isOpen" v-model="isOpen" width="900px" max-height="revert" padding="0 1.5rem 1.5rem"
+      position="relative">
+      <div>
         <small> {{ error }}</small>
-        
-        <div id="uploadArea" class="upload-area">
-        <!-- Header -->
-        <div class="upload-area__header">
-          <h1 class="upload-area__title">Téléchargez votre fichier</h1>
-          <div class="btnLogin" @click="addDocument"> <i class="bi bi-plus-lg"></i> Ajouter</div>
-          <p class="upload-area__paragraph">
-            Le fichier doit être un document
-            <strong class="upload-area__tooltip">
-              comme
-              <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
-            </strong>
-          </p>
-        </div>
-        <!-- End Header -->
-        
-        <!-- Drop Zoon -->
-        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-       <form @submit.prevent="submitForm" style="widht:100%;">
-      <div v-for="(document, index) in documents" :key="index">
-        <div class="row mb-3 mt-3 content-group justify-content-center" >
-          <div class="col">
-        <div class="input-group">
-        <!-- <label for="username">Nom du document <span class="text-danger">*</span></label> -->
-        <input type="text" name="nom" id="nom" placeholder="" v-model="nom">
-        </div>
-        <small v-if="v$.nom.$error">{{v$.nom.$errors[0].$message}}</small>
-      </div>
-       <div class="col">
-        <input type="file" name="file" id="file" class="inputfile" @change="handleFileChange(document, $event)"  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput"  />
-                      <label for="file">
-                        <i class="bi bi-cloud-arrow-down"></i>
-                        Telecharger le ficher
-                      </label>
-        <small v-if="v$.selectedFiles.$error">{{v$.selectedFiles.$errors[0].$message}}</small>
-      </div>
 
-      <div class="col" style="  max-width: 63px !important;
+        <div id="uploadArea" class="upload-area">
+          <!-- Header -->
+          <div class="upload-area__header">
+            <h1 class="upload-area__title">Téléchargez votre fichier</h1>
+            <div class="btnLogin" @click="addDocument"> <i class="bi bi-plus-lg"></i> Ajouter</div>
+            <p class="upload-area__paragraph">
+              Le fichier doit être un document
+              <strong class="upload-area__tooltip">
+                comme
+                <span class="upload-area__tooltip-data">{{ imagesTypes.join(', ') }}</span>
+              </strong>
+            </p>
+          </div>
+          <!-- End Header -->
+
+          <!-- Drop Zoon -->
+          <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+            <form @submit.prevent="submitForm" style="widht:100%;">
+              <div v-for="(document, index) in documents" :key="index">
+                <div class="row mb-3 mt-3 content-group justify-content-center">
+                  <div class="col">
+                    <div class="input-group">
+                         <input  type="text" name="nom" v-model="document.nom" placeholder="Nom du document" />
+
+                    </div>
+                    <small v-if="errors[index] && errors[index].nom">{{ errors[index].nom }}</small>
+                  
+                  </div>
+
+                  <div class="col">
+                    <div class="input-group">
+                      <input type="file" name="file"   @change="handleFileChange(document, $event)" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"/>
+                      
+                    </div>
+                    <small v-if="errors[index] && errors[index].file">{{ errors[index].file }}</small>
+                  
+                  </div>
+
+                   <!-- <div class="col">
+                 <input type="file" class="inputfile" name="file" @change="handleFileChange(document, $event)" />
+
+                    <input type="file" name="file" id="file" class="inputfile" @change="handleFileChange(document, $event)" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"/>
+                    <label for="file">
+                      <i class="bi bi-cloud-arrow-down"></i>
+                      Telecharger le ficher
+                    </label> 
+                    <small  v-if="errorFile" >{{ errorFile }}</small>
+
+                  </div> -->
+
+                  <div class="col" style="  max-width: 63px !important;
    
     display: flex;
     justify-content: center;
-    padding:22px 0 14px;
     align-items: center;">
-        <div class="sci">
-          
-          <span style="--i:2" @click="removeDocument(index)" class="delete">
-              <i class="bi bi-trash"></i>
-          </span>
+                    <div class="sci">
+
+                      <span style="--i:2" @click="removeDocument(index)" class="delete">
+                        <i class="bi bi-trash"></i>
+                      </span>
+
+                    </div>
+                  </div>
+                </div>
+
 
               </div>
-        <!-- <button @click="removeDocument(index)">Supprimer</button> -->
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="sign" style="width:120px">Envoyer</button>
 
+              </div>
+
+            </form>
+
+
+          </div>
+          <!-- End Drop Zoon -->
+
+
+        </div>
       </div>
-      </div>
 
-        
-      </div>
+    </MazDialog>
+    <MazDialog v-model="msgsuccess" title="Candidature ">
+      <p>
+        Votre candidature a été envoyée avec succès. Merci.
+      </p>
+      <template #footer="{ close }">
 
-      <button type="submit" class="sign">Envoyer</button>
-    </form>
+        <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
 
-
-
-        <!-- <div class="input-group">
-        <label for="username">Nom du document <span class="text-danger">*</span></label>
-        <input type="text" name="nom" id="nom" placeholder="" v-model="nom">
-        </div>
-        <small v-if="v$.nom.$error">{{v$.nom.$errors[0].$message}}</small>
-        
-        <input type="file" name="file" id="file" class="inputfile" multiple  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"  ref="fileInput" @change="handleFileUpload" />
-                      <label for="file">
-                        <i class="bi bi-cloud-arrow-down"></i>
-                        Telecharger le ficher
-                      </label>
-        <small v-if="v$.selectedFiles.$error">{{v$.selectedFiles.$errors[0].$message}}</small>
-        
-         
-        
-          <button class="sign" @click.prevent="submit">Envoyer</button> -->
-        </div>
-        <!-- End Drop Zoon -->
-        
-        
-        </div>
-        </div>
-        
-          </MazDialog>
-          <MazDialog v-model="msgsuccess"  title="Candidature ">
-            <p>
-                Votre candidature a été envoyée avec succès. Merci.
-            </p>
-            <template #footer="{ close }">
-        
-              <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
-        
-            </template>
-          </MazDialog>
+      </template>
+    </MazDialog>
   </div>
 </template>
 
 <script>
 import axios from '@/lib/axiosConfig.js'
-import useVuelidate from '@vuelidate/core';
-import { require, lgmin, lgmax, ValidEmail  } from '@/functions/rules';
 import Loading from '../../../components/Public/other/preloader.vue';
 import MazDialog from 'maz-ui/components/MazDialog'
 import { parseISO, format } from 'date-fns';
-import {getImage} from '@/lib/getImage.js'
+import { getImage } from '@/lib/getImage.js'
 export default {
   name: 'DNPMECLActualiteDetail',
   props: ['id'],
   components: {
-      Loading , MazDialog
+    Loading, MazDialog
 
   },
   computed: {
 
-loggedInUser() {
-return this.$store.getters['user/loggedInUser'];
-},
-},
-
-  data() {
-      return {
-        offre:'',
-        offres:[],
-        filterOffres:[],
-        isOpen:false,
-        loading:true,
-        msgsuccess:false,
-        v$:useVuelidate(),
-        selectedFile: null,
-        selectedFiles: [],
-        imagesTypes: ['pdf', 'word', 'txt', 'excel' , 'powerpoint'],
-        nom:'',
-        idOffre:'',
-        error:'',
-        sousSecteursLabel: '',
-        SousSecteurActiviteOptions:[],
-        OppOptions:[],
-        documents: [{ nom: '', fichier: null }],
-
-      };
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
   },
 
-  validations: {
+  data() {
+    return {
+      offre: '',
+      offres: [],
+      filterOffres: [],
+      isOpen: false,
+      loading: true,
+      msgsuccess: false,
+      selectedFile: null,
+      selectedFiles: [],
+      imagesTypes: ['pdf', 'word', 'txt', 'excel', 'powerpoint'],
+      nom: '',
+      idOffre: '',
+      error: '',
+      errors:[],
+      sousSecteursLabel: '',
+      SousSecteurActiviteOptions: [],
+      OppOptions: [],
+      documents: [{ nom: '', fichier: null }],
+      errorNom: '',
+      errorFile: '',
 
-nom:{
-    require,
-    lgmin:lgmin(2),
- },
- selectedFiles:{
-   require,
- }  
-},
+    };
+  },
 
-async   mounted() {
-await this.fetchData()
-await this.fetchgetOffreMpme()
-await this.fetchSousSecteurActiviteOptions()
- console.log(this.id);
-console.log("datadossiers", this.loggedInUser);
 
-},
+  async mounted() {
+    await this.fetchData()
+    await this.fetchgetOffreMpme()
+    await this.fetchSousSecteurActiviteOptions()
+    console.log(this.id);
+    console.log("datadossiers", this.loggedInUser);
 
-methods: {
-  obtenirValeursPourCles(sousSecteurs) {
-if (sousSecteurs && sousSecteurs.includes('|')) {
-const sousSecteursArray = sousSecteurs.split('|');
-const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
-const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
-  return option ? option.label : valeur;
-});
-return nomsSousSecteurs.sort().join(' , ');
-} else {
-const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
-return option ? option.label : sousSecteurs;
-}
-},
-  getImage:getImage,
-   formatMoisFrancais(date) {
-  const moisFrancais = [
-    'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
-  ];
-  return moisFrancais[date.getMonth()];
-},
+  },
 
-// Fonction pour formater la date
- datenew(isoDate) {
-  const dateObj = parseISO(isoDate);
-  const jour = dateObj.getDate();
-  const mois = this.formatMoisFrancais(dateObj);
-  const annee = dateObj.getFullYear();
-  return `${jour} ${mois} ${annee}`;
-},
-async fetchSousSecteurActiviteOptions() {
-try {
- await this.$store.dispatch('fetchSousSecteurOptions'); 
- this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
-} catch (error) {
- console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
-}
-},
-async fetchData() {
-            const response = await axios.get(`/mpme/${this.loggedInUser.id}`)
-            const data = response.data.data
-            console.log('dattta',data);
-            if (data.ListeSousSecteurActivite.includes('|')) {
-                return  this.data = data.ListeSousSecteurActivite.split("|")
-                
-                } else{
-                
-                    return  this.data = data.ListeSousSecteurActivite.split(' ') 
-                }
-        },
-async fetchgetOffreMpme() {
-try {
-//   const userId = this.loggedInUser.id;
-const response = await axios.get('/offres', {
-        headers: {
-          Authorization: `Bearer ${this.loggedInUser.token}`,
+  methods: {
+    obtenirValeursPourCles(sousSecteurs) {
+      if (sousSecteurs && sousSecteurs.includes('|')) {
+        const sousSecteursArray = sousSecteurs.split('|');
+        const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
+          const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+          return option ? option.label : valeur;
+        });
+        return nomsSousSecteurs.sort().join(' , ');
+      } else {
+        const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
+        return option ? option.label : sousSecteurs;
+      }
+    },
+    getImage: getImage,
+    formatMoisFrancais(date) {
+      const moisFrancais = [
+        'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+        'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
+      ];
+      return moisFrancais[date.getMonth()];
+    },
 
-        },});
-   console.log('UserData:', response);
+    // Fonction pour formater la date
+    datenew(isoDate) {
+      const dateObj = parseISO(isoDate);
+      const jour = dateObj.getDate();
+      const mois = this.formatMoisFrancais(dateObj);
+      const annee = dateObj.getFullYear();
+      return `${jour} ${mois} ${annee}`;
+    },
+    async fetchSousSecteurActiviteOptions() {
+      try {
+        await this.$store.dispatch('fetchSousSecteurOptions');
+        this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
+      } catch (error) {
+        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+      }
+    },
+    async fetchData() {
+      const response = await axios.get(`/mpme/${this.loggedInUser.id}`)
+      const data = response.data.data
+      console.log('dattta', data);
+      if (data.ListeSousSecteurActivite.includes('|')) {
+        return this.data = data.ListeSousSecteurActivite.split("|")
 
- if (response.data.status === 'success') {
-     this.loading = false
-     console.log('UserData:', response.data.data.data);
-     this.offre = response.data.data.data.find(offre => offre.CodeOffre === this.id);
-      const valeur = this.offre.liste_sous_secteurs;
-       const option =  this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
-       this.sousSecteursLabel =  option ? option.label : valeur;
+      } else {
 
-       this.offres = response.data.data.data.filter((offre) => {
-       const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
-       console.log('sousSecteurActiviteOffre',sousSecteurActiviteOffre);
-    
-        if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
-          const sousSecteurs = sousSecteurActiviteOffre.split('|');
-            return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish ===0;
-        } else {
-          return this.data.includes(sousSecteurActiviteOffre) && offre.publish ===0 ;
+        return this.data = data.ListeSousSecteurActivite.split(' ')
+      }
+    },
+    async fetchgetOffreMpme() {
+      try {
+        //   const userId = this.loggedInUser.id;
+        const response = await axios.get('/offres/liste-sans-pagination', {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+
+          },
+        });
+        console.log('UserData:', response);
+
+        if (response.data.status === 'success') {
+          this.loading = false
+          console.log('UserData:', response.data.data);
+          this.offre = response.data.data.find(offre => offre.CodeOffre === this.id);
+          const valeur = this.offre.liste_sous_secteurs;
+          const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+          this.sousSecteursLabel = option ? option.label : valeur;
+
+          this.offres = response.data.data.data.filter((offre) => {
+            const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
+            console.log('sousSecteurActiviteOffre', sousSecteurActiviteOffre);
+
+            if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
+              const sousSecteurs = sousSecteurActiviteOffre.split('|');
+              return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
+            } else {
+              return this.data.includes(sousSecteurActiviteOffre) && offre.publish === 1;
+            }
+          });
+
+
+          const Offres = this.offres;
+
+          const offresPubliees = Offres.filter(offre => offre.publish === 1);
+
+          // Trier les offres par date de création de la plus récente à la moins récente
+          offresPubliees.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
+
+          // Obtenir les 3 dernières offres publiées
+          this.OppOptions = offresPubliees.slice(0, 3);
+
+          console.log('Les 3 dernières actualités publiées :', this.OppOptions);
+
+          this.loading = false
+
         }
-      });
+      } catch (error) {
+        console.log('Erreur lors de la mise à jour des données MPME guinee :', error);
+        console.log('aut', error.response);
+        if (error && error.response.data.message === "Vous n'êtes pas autorisé.") {
+          await this.$store.dispatch('user/clearLoggedInUser');
+          this.$router.push('/connexion-mpme');
+
+        } else {
+          console.log('aut', error.response.data);
+
+          // this.formatValidationErrors(error.response.data.errors)
+          this.loading = false
+          return false;
+        }
 
 
-       const Offres = this.offres;
-      
-       const offresPubliees = Offres.filter(offre => offre.publish ===0);
-      
-      // Trier les offres par date de création de la plus récente à la moins récente
-      offresPubliees.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
-      
-      // Obtenir les 3 dernières offres publiées
-      this.OppOptions = offresPubliees.slice(0, 3);
-
-      console.log('Les 3 dernières actualités publiées :', this.OppOptions);
-
-       this.loading = false
-   
- }  
-} catch (error) {
-  console.log('Erreur lors de la mise à jour des données MPME guinee :', error);
-  console.log('aut', error.response);
-                if (error && error.response.data.message === "Vous n'êtes pas autorisé." ) {
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-  console.log('aut', error.response.data);
-
-                    // this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-
-   
-}
-},
+      }
+    },
 
 
-hamdleSubmit(id){
-this.idOffre = id
-console.log(id);
-this.isOpen = true
+    hamdleSubmit(id) {
+      this.idOffre = id
+      console.log(id);
+      this.isOpen = true
 
 
-},
-handleFileUpload() {
-  this.selectedFiles = this.$refs.fileInput.files; // Stockez les fichiers sélectionnés dans le tableau
-  console.log(this.selectedFiles);
-},
+    },
 
 
-handleFileChange(document, event) {
+    handleFileChange(document, event) {
       document.fichier = event.target.files[0];
     },
     addDocument() {
       this.documents.push({ nom: '', fichier: null });
     },
     removeDocument(index) {
-      this.documents.splice(index, 1);
-    },
-    submitForm() {
-      // Vous pouvez accéder à this.documents pour envoyer les données au serveur
-      // Assurez-vous de gérer correctement les fichiers et les noms de documents
-      console.log(this.documents);
-    },
-async  submit(){
-this.v$.$touch()
-if (this.v$.$errors.length == 0 ) {
-this.isOpen = false
-this.loading = true
-console.log('bonjour');
-const formData = new FormData();
-for (let i = 0; i < this.selectedFiles.length; i++) {
-    formData.append('document', this.selectedFiles[i]);
+      if (index > 0) {
+    // Vérifiez si l'index est supérieur à zéro (c'est-à-dire, à partir du deuxième champ)
+    this.documents.splice(index, 1);
   }
-formData.append('intitule', this.nom);
-formData.append('CodeOffre', this.idOffre);
-formData.append('CodeMpme', this.loggedInUser.id);
-console.log( formData);
-console.log( this.selectedFiles ,this.nom ,this.idOffre , this.loggedInUser.id );
+
+    },
+
+ async submitApi(formData){
 
 
-try {
-const response = await axios.post('/candidatures', formData, {
- headers: {
-   Authorization: `Bearer ${this.loggedInUser.token}`,
-   'Content-Type': 'multipart/form-data'
- }
+    try {
+        const response = await axios.post('/candidatures', formData, {
+         headers: {
+           Authorization: `Bearer ${this.loggedInUser.token}`,
+           'Content-Type': 'multipart/form-data'
+         }
+        });
+        console.log('Réponse du téléversement :', response);
+        if (response.data.status === 'success') {
+          this.msgsuccess = true
+          this.loading = false
+         this.isOpen = false
+
+
+        }else{
+         this.loading = false
+         this.isOpen = true
+         this.error = response.data.message
+        }
+        } catch (error) {
+        console.error('Erreur lors du téléversement :', error);
+        this.loading = false
+
+        } 
+      
+
+  },
+   
+    async submitForm() {
+      this.errorNom = ''
+      this.errorFile = ''
+    // Réinitialisez les erreurs
+  this.errors = [];
+
+// Validez chaque document
+this.documents.forEach((document, index) => {
+  const errors = {};
+
+  if (!document.nom) {
+    errors.nom = 'Ce champ est obligatoire!';
+  }
+
+  if (!document.fichier) {
+    errors.file = 'Ce champ est obligatoire!';
+  }
+
+  this.errors[index] = errors;
 });
-console.log('Réponse du téléversement :', response);
-if (response.data.status === 'success') {
-  this.msgsuccess = true
-  this.loading = false
- this.isOpen = false
 
- 
-}else{
- this.loading = false
- this.isOpen = true
- this.error = response.data.message
-}
-} catch (error) {
-console.error('Erreur lors du téléversement :', error);
-this.loading = false
+// Vérifiez s'il y a des erreurs
+if (this.errors.some((errors) => errors.nom || errors.file)) {
+  return; // Ne poursuivez pas la soumission si des erreurs sont présentes
+} else {
 
-}    
-}else{
+        this.errorNom = ''
+        this.errorFile = ''
+    
+        this.isOpen = false
+        this.loading = true
+        console.log('bonjour', this.documents);
+        const formData = new FormData();
+        this.documents.forEach((document, index) => {
+        console.log( 'this.idOffre',{ 'nom':document.nom , 'document':document.fichier} );
 
+        formData.append('intitule', document.nom);
+        formData.append('document', document.fichier);
+        formData.append('CodeOffre', this.idOffre);
+        formData.append('CodeMpme', this.loggedInUser.id);
+        console.log(formData);
+        console.log( this.idOffre, this.loggedInUser.id);
+         this.submitApi(formData)
 
-}
+      });
+    }
+        
+    },
 
-},
-},
+  },
 };
 </script>
 
 <style lang="css" scoped>
-
 .section-header {
   padding: 30px 0;
 
@@ -556,7 +575,7 @@ this.loading = false
 @media (max-width: 992px) {
   .banner-title {
 
-      font-size: 40px;
+    font-size: 40px;
 
   }
 }
@@ -564,7 +583,7 @@ this.loading = false
 @media (max-width: 768px) {
   .banner-title {
 
-      font-size: 30px;
+    font-size: 30px;
 
   }
 }
@@ -572,18 +591,19 @@ this.loading = false
 @media (max-width: 500px) {
   .banner-title {
 
-      font-size: 25px;
+    font-size: 25px;
 
   }
 }
 
 /* fin banier */
 
-form{
-width: 100%;
+form {
+  width: 100%;
 
 
 }
+
 .into-sub-title {
   font-weight: 900;
   text-transform: uppercase;
@@ -591,15 +611,17 @@ width: 100%;
   line-height: normal;
   margin: 10px 0;
 }
-.p-hover{
-color: var(--color-primary);
-cursor: pointer;
+
+.p-hover {
+  color: var(--color-primary);
+  cursor: pointer;
 
 }
-.p-hover:hover{
+
+.p-hover:hover {
   color: var(--color-secondary);
-  
-  }
+
+}
 
 hr {
   background-color: #e7e7e7;
@@ -638,27 +660,28 @@ h6 {
 .article p {
   text-align: justify !important;
 }
-.article-p{
+
+.article-p {
   padding: 10px;
   border: 1px solid var(--color-secondary);
   display: flex;
   justify-content: center;
-      align-items: center;
+  align-items: center;
   width: 100%;
   height: 400px;
 
 }
 
-.article-p .image{
-/* border: 1px solid red; */
-width: 100%;
-height: 100%;
+.article-p .image {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
 }
 
-.article-p .image img{
+.article-p .image img {
 
-width: 100%;
-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -785,13 +808,14 @@ ul li a {
   color: #303030;
   display: inline-block;
 }
+
 .x11i5rnm {
-white-space: pre-line;
-/* Autres styles CSS que vous souhaitez appliquer ici */
+  white-space: pre-line;
+  /* Autres styles CSS que vous souhaitez appliquer ici */
 }
 
 .x11i5rnm strong {
-color: black;
+  color: black;
 }
 
 
@@ -810,40 +834,41 @@ color: black;
   align-items: center;
   justify-content: center;
   margin: 0 5px;
-  }
-  .upload-area {
+}
+
+.upload-area {
   width: 100%;
   background-color: rgb(255, 255, 255);
   border: 2px solid var(--color-secondary);
   border-radius: 24px;
   padding: 10px;
   text-align: center;
-  }
-  
-  .upload-area__title {
+}
+
+.upload-area__title {
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 0.3125rem;
-  }
-  
-  .upload-area__paragraph {
+}
+
+.upload-area__paragraph {
   font-size: 0.9375rem;
   color: rgb(196, 195, 196);
   margin-top: 0;
-  }
-  
-  .upload-area__tooltip {
+}
+
+.upload-area__tooltip {
   position: relative;
   color: var(--color-secondary);
   cursor: pointer;
   transition: color 300ms ease-in-out;
-  }
-  
-  .upload-area__tooltip:hover {
+}
+
+.upload-area__tooltip:hover {
   color: var(--clr-blue);
-  }
-  
-  .upload-area__tooltip-data {
+}
+
+.upload-area__tooltip-data {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -858,15 +883,15 @@ color: black;
   visibility: hidden;
   transition: none 300ms ease-in-out;
   transition-property: opacity, visibility;
-  }
-  
-  .upload-area__tooltip:hover .upload-area__tooltip-data {
+}
+
+.upload-area__tooltip:hover .upload-area__tooltip-data {
   opacity: 1;
   visibility: visible;
-  }
-  
-  /* Drop Zoon */
-  .upload-area__drop-zoon {
+}
+
+/* Drop Zoon */
+.upload-area__drop-zoon {
   position: relative;
   /* height: 11.25rem; */
   display: flex;
@@ -877,98 +902,97 @@ color: black;
   border-radius: 15px;
   margin-top: 15Px;
   transition: border-color 300ms ease-in-out;
-  padding:  10px;
-  }
+  padding: 10px;
+}
 
 
-  
+
 .inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
-.inputfile + label {
-  margin-top: 10px;
-    font-size: 1.25em;
-    font-weight: 700;
-    color: var(--color-primary);
-    /* background-color: black; */
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    border-radius: 0.375rem;
-    border: 2px solid #e5e7eb;
+.inputfile+label {
+
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--color-primary);
+  /* background-color: black; */
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 0.375rem;
+  border: 2px solid #e5e7eb;
 }
 
 
-.inputfile + label {
-	cursor: pointer; /* "hand" cursor */
+.inputfile+label {
+  cursor: pointer;
+  /* "hand" cursor */
 }
 
 
 
 .btnLogin {
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
-    background-color: #F9D310;
-    border: none;
-    border-radius: 45px;
-    position: absolute;
-    z-index: 3;
-    right: 47px;
-    top: 126px;
-    cursor: pointer;
-    outline: none;
-    width: 100px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  background-color: #F9D310;
+  border: none;
+  border-radius: 45px;
+  position: absolute;
+  z-index: 3;
+  right: 47px;
+  top: 126px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btnLogin:hover {
-    background-color: #fff;
-    border: 1px solid #F9D310;
-    color: #F9D310;
+  background-color: #fff;
+  border: 1px solid #F9D310;
+  color: #F9D310;
 
 }
 
 .sci {
-    bottom: 10px;
-    left: 58px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-around;
-    /* border: 1px solid red; */
+  bottom: 10px;
+  left: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  /* border: 1px solid red; */
 }
 
 .sci span {
-    margin: 0 10px;
-    font-size: 18px;
-    border-radius: 6px;
-    color: #fff;
-    z-index: 4;
-    cursor: pointer;
-    padding: 5px 10px;
+  margin: 0 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #fff;
+  z-index: 4;
+  cursor: pointer;
+  padding: 5px 10px;
 
 }
 
 .delete {
-    background-color: red;
+  background-color: red;
 }
 
 .delete:hover {
-    background-color: #fff;
-    color: red;
-    border: 1px solid red;
-}
-
-</style>
+  background-color: #fff;
+  color: red;
+  border: 1px solid red;
+}</style>

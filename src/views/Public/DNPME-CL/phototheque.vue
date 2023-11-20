@@ -124,11 +124,12 @@ paginatedItems() {
          data:'',
          currentPage: 1,
          itemsPerPage: 12,
+         totalPageArray: [],
     };
   },
 
 async   mounted() {
- await   this.fetchPhotos()
+ await   this.fetchPhotos(1)
     
   },
 
@@ -140,12 +141,26 @@ async   mounted() {
         return text.slice(0, maxLength) + "...";
       }
   },
-  async fetchPhotos() {
+  async fetchPhotos(page) {
       try {
-              await this.$store.dispatch('fetchPubliqueVisiblePhotos');
+              await this.$store.dispatch('fetchPubliqueVisiblePhotos' , page);
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
-                this.PhotosOptions = options
-              console.log('Photos récupérées :', options);
+                this.totalPageArray = this.totalPageArray.concat(options.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        this.PhotosOptions = this.totalPageArray
+
+        console.log('Photos récupérées :', options);
+
+          if (page === 1) {
+            this.PhotosOptions = this.totalPageArray;
+        const totalPages = options.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+              
               this.loading = false
 
         // Continuez avec le reste de votre code pour afficher les photos
@@ -153,6 +168,12 @@ async   mounted() {
         console.error('Erreur lors de la récupération des photos :', error.message);
       }
     },
+
+    compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchPhotos(i);
+  }
+},
     updateCurrentPage(pageNumber) {
       this.currentPage = pageNumber;
       window.scrollTo({

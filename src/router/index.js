@@ -41,7 +41,7 @@ import InfoMpme from '../views/Public/Partenaire/infoMpme.vue'
 
 
 //  import Test from '../views/Public/test2.vue'
-import Test from '../views/test5.vue'
+import Test from '../views/test4.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

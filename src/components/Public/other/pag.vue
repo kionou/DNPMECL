@@ -12,7 +12,7 @@
   export default {
     props: {
       currentPage: Number,
-      totalPages: Number,
+      totalPages: Number
     },
     computed: {
       pageNumbers() {

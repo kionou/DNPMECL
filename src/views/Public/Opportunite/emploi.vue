@@ -191,7 +191,8 @@ paginatedItems() {
           loading:true,
           data:'',
           currentPage: 1,
-       itemsPerPage: 15,
+          itemsPerPage: 15,
+          totalPageArray: [], 
       };
   },
  
@@ -199,7 +200,7 @@ paginatedItems() {
  async  mounted() {
     await    this.fetchSousSecteurActiviteOptions()
     // await    this.fetchData() 
-    await    this.fetchgetOffreMpme()
+    await    this.fetchgetOffreMpme(1)
      console.log("datadossiers", this.loggedInUser);
   },
 
@@ -220,17 +221,32 @@ paginatedItems() {
         console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
       }
     },
-      async fetchgetOffreMpme() {
+      async fetchgetOffreMpme(page) {
       try {
-        const response = await axios.get('offres/publique');
+        const response = await axios.get(`/offres/publique?page=${page}`);
         console.log('UserData:', response);
 
         if (response.data.status === 'success') {
-            this.loading = false
-            console.log('UserData:', response.data.data.data);
-            const offresPubliees = response.data.data.data.filter(offre => offre.publish === 1);
+          
+            console.log('UserData:', response.data.data);
+
+            this.totalPageArray = this.totalPageArray.concat(response.data.data.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+      
+
+
+          if (page === 1) {
+            this.totalPageArray = this.totalPageArray;
+        const totalPages = response.data.data.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+      }
+
+
+            const offresPubliees = this.totalPageArray.filter(offre => offre.publish === 1);
             this.offres = offresPubliees
              this.filterOffres =  offresPubliees
+             this.loading = false
           
         }  
       } catch (error) {
@@ -240,6 +256,12 @@ paginatedItems() {
           
       }
     },
+
+    compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchgetOffreMpme(i);
+  }
+},
 
     filterByName() {
   this.currentPage = 1;

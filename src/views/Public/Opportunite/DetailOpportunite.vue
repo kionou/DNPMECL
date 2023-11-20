@@ -72,8 +72,7 @@
                               <ul class="arrow nav nav-tabs">
                                 <li><router-link to="/dnpme/apropos">A propos</router-link></li>
                                   <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
-                                  <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
-                                          lois</router-link></li>
+                                  <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
                                   <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
                                  <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
 
@@ -147,6 +146,7 @@ export default {
         sousSecteursLabel: '',
           SousSecteurActiviteOptions:[],
           OppOptions:[],
+          totalPageArray: [],
 
       };
   },
@@ -164,7 +164,7 @@ nom:{
 
 async   mounted() {
 
-await this.fetchgetOffreMpme()
+await this.fetchgetOffreMpme(1)
 await this.fetchSousSecteurActiviteOptions()
  console.log(this.id);
 console.log("datadossiers", this.loggedInUser);
@@ -197,23 +197,36 @@ try {
  console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
 }
 },
-async fetchgetOffreMpme() {
+async fetchgetOffreMpme(page) {
 try {
 //   const userId = this.loggedInUser.id;
- const response = await axios.get('/offres/publique');
+ const response = await axios.get(`/offres/publique?page=${page}`);
    console.log('UserData:', response);
 
  if (response.data.status === 'success') {
-     this.loading = false
+    
      console.log('UserData:', response.data.data.data);
-     this.offre = response.data.data.data.find(offre => offre.CodeOffre === this.id);
+
+     this.totalPageArray = this.totalPageArray.concat(response.data.data.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+      
+
+
+          if (page === 1) {
+            this.totalPageArray = this.totalPageArray;
+        const totalPages = response.data.data.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+      }
+
+     this.offre = this.totalPageArray.find(offre => offre.CodeOffre === this.id);
     //  const valeur = this.offre.liste_sous_secteurs;
     //    const option =  this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
     //    this.sousSecteursLabel =  option ? option.label : valeur;
        
-       const Offres = response.data.data.data;
+       const Offres = this.totalPageArray;
       
-       const offresPubliees = Offres.filter(offre => offre.publish === 0);
+       const offresPubliees = Offres.filter(offre => offre.publish === 1);
       
       // Trier les offres par date de création de la plus récente à la moins récente
       offresPubliees.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
@@ -232,6 +245,12 @@ try {
 
    
 }
+},
+
+compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchgetOffreMpme(i);
+  }
 },
 
 

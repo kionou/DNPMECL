@@ -128,6 +128,11 @@ export default {
         Loading
 
     },
+    computed: {
+    parsedContent() {
+      return this.content.replace(/&nbsp;/g, ' '); // Remplace les espaces non rompus HTML
+    },
+  },
 
     data() {
         return {
@@ -135,6 +140,7 @@ export default {
             actualite: '',
             images: [],
             ActualitesOptions:[], 
+            totalPageArray: [], 
 
         };
     },
@@ -172,7 +178,7 @@ export default {
                 }
             }
         });
-        await this.fecthActualitesDetail()
+        await this.fecthActualitesDetail(1)
         this.images = this.actualite.images.split('|')
        await  this.fetchActualites()
     },
@@ -221,25 +227,41 @@ export default {
 
         },
 
-        async fetchActualites() {
+        async fetchActualites(page) {
             try {
-                await this.$store.dispatch('fetchActualites');
+                await this.$store.dispatch('fetchActualites' ,page);
                 const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
-                this.ActualitesOptions = actualites
-                console.log('Actualités récupérées :', actualites);
-                   // Triez vos actualités par ordre décroissant de date
-                        actualites.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+             
 
-                    // Obtenez les 3 dernières actualités
-                    this.ActualitesOptions = actualites.slice(0, 3);
+                    this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
+        
 
+
+          if (page === 1) {
+            this.ActualitesOptions = this.totalPageArray.filter(partenaire => partenaire.publish === 1);
+        const totalPages = actualites.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+      }
+
+      
+                     console.log('Actualités récupérées :', this.ActualitesOptions);
+                     this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
                     console.log('Les 3 dernières actualités :', this.ActualitesOptions);
-
-                // Continuez avec le reste de votre code pour traiter les actualités
             } catch (error) {
                 console.error('Erreur lors de la récupération des actualités :', error.message);
             }
         },
+
+        compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchActualites(i);
+  }
+},
 
     },
 };

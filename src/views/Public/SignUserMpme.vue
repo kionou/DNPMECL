@@ -364,8 +364,9 @@ computed:{
   },
 
   async mounted() {
-    this.fetchCountryOptions();
-    this.fetchRegionOptions();
+   await this.fetchCountryOptions();
+   await this.fetchRegionOptions();
+   await this.fetchSousSecteurActiviteOptions();
     // this.fetchPrefectureOptions(),
     //   this.fetchSousPrefectureOptions()
   },
@@ -399,7 +400,6 @@ computed:{
         
         if (this.identifiant) {
          
-const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21wbWUtZ3VpbmVlLmNvbS9iZC9wdWJsaWMvYXBpL2xvZ2luIiwiaWF0IjoxNjkzODE4NDk3LCJleHAiOjE2OTM4MjIwOTcsIm5iZiI6MTY5MzgxODQ5NywianRpIjoiTGRFNm1HRlRQOENJWUZHUiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.oty0aOH0NljADbPXsjzH3nQHQGruRVe7WaPxxicbqZs"
           let DataMpme2 = {
             email: this.email,
             password: this.password,
@@ -415,12 +415,14 @@ const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21wbWUtZ
        console.log('eeedata222', DataMpme2);
           try {
           
-            const response = await axios.post('/register/system-user', DataMpme2 , {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+            const response = await axios.post('/register/system-user', DataMpme2 
+        //     , {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //     "Content-Type": "application/json",
+        //   },
+        // }
+        );
             console.log('response.sousprefecture33', response);
             if (response.data.status === "success") {
               this.loading = false
@@ -434,13 +436,13 @@ const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21wbWUtZ
              
             } else {
               this.loading = false
-              return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
+              this.$router.push({ name: 'NotFound' }); 
             }
 
           } catch (error) {
             this.loading = false
-
             console.error('Erreur post:', error);
+            this.$router.push({ name: 'NotFound' }); 
           }
 
         } else {
@@ -463,27 +465,29 @@ const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21wbWUtZ
           try {
             const response = await axios.post('/register/mpme', DataMpme);
             console.log('response.sousprefecture', response);
-            if (response.data.message.email) {
-              console.log('response', response.data.message.email);
-              this.loading = false
-
-              return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
-
-            } else {
-              this.loading = false
-
+            if (response.data.status === 'success') {
+                this.loading = false
               this.revele = !this.revele;
               if (this.revele) {
                 document.body.classList.add('no-scroll');
               } else {
                 document.body.classList.add('scroll');
               }
+            } else if(response.data.message.email) {
+
+              console.log('response', response.data.message.email);
+              this.loading = false
+              return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
+            
+            }else{
+
+              this.$router.push({ name: 'NotFound' }); 
             }
 
           } catch (error) {
-            this.loading = false
-
             console.error('Erreur post:', error);
+            this.loading = false
+            this.$router.push({ name: 'NotFound' }); 
           }
 
         }
@@ -658,7 +662,7 @@ try {
 
   },
   created() {
-    this.fetchSousSecteurActiviteOptions(); // Appeler la méthode pour obtenir les options de l'API lors de la création du composant
+    // Appeler la méthode pour obtenir les options de l'API lors de la création du composant
   },
 };
 </script>

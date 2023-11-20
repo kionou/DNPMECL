@@ -127,6 +127,7 @@ export default {
         
         index: null,
           images:[],
+          totalPageArray: [],
           galleryOptions: {
       showIndex: true, // Affiche le numéro de l'image actuelle
       closeOnEsc: true, // Ferme la galerie en appuyant sur la touche Échap
@@ -145,13 +146,29 @@ export default {
     },
 
     methods: {
-      async fetchPhotos() {
+      async fetchPhotos(page) {
       try {
-              await this.$store.dispatch('fetchPubliqueVisiblePhotos');
+              await this.$store.dispatch('fetchPubliqueVisiblePhotos', page);
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
-                this.PhotosOptions = options
+
+                this.totalPageArray = this.totalPageArray.concat(options.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        // this.PhotosOptions = this.totalPageArray
+
+        console.log('Photos récupérées :', options);
+
+          if (page === 1) {
+            // this.PhotosOptions = this.totalPageArray;
+        const totalPages = options.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+                // this.PhotosOptions = options
               console.log('Photos récupérées detail222 :', options);
-              this.filteredDataAlbum = options.find(offre => offre.CodeAlbum === this.id);
+              this.filteredDataAlbum = this.totalPageArray.find(offre => offre.CodeAlbum === this.id);
               this.images = this.filteredDataAlbum.active_photos.map((image) => image.Photo);
 
       
@@ -167,7 +184,11 @@ export default {
         console.error('Erreur lors de la récupération des photos :', error.message);
       }
     },
-
+    compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchPhotos(i);
+  }
+},
     formaterChaine() {
   if (this.filteredDataAlbum && this.filteredDataAlbum.CodeAlbum) {
     var elements = this.filteredDataAlbum.CodeAlbum.split("_");

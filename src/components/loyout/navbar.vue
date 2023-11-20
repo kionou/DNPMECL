@@ -77,7 +77,7 @@
 
  
          <header    id="header" class=" header">
-        <div class="container-fluid d-flex align-items-center justify-content-between m-0 w-75">
+        <div class="container-fluid d-flex align-items-center justify-content-around m-0 w-75">
         <router-link to="/" class="logo ">
           
           <h1>DNPME-CL </h1>
@@ -100,7 +100,7 @@
             </ul>
            </li>
             <li><router-link to="/actualites">Actualités</router-link></li>
-            <li><router-link to="/statistique">Statistiques</router-link></li>
+            <!-- <li><router-link to="/statistique">Statistiques</router-link></li> -->
             <li class="dropdown">
             <router-link to="#">Partenaires <i class="bi bi-chevron-down dropdown-indicator"></i></router-link>
             <ul  class="dropdown-menu">

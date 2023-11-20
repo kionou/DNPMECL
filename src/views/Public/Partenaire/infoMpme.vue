@@ -215,10 +215,11 @@ export default {
     },
     async fetchSecteurActiviteOptions() {
       try {
-        await this.$store.dispatch('fetchSecteurActiviteOptions'); // Remplacez par l'action de votre store
-        this.SecteurActiviteOptions = this.$store.getters['getsecteurActiviteOptions2'].map(option => {
-          return  { state: option.NomSecteurActivite, 
-                     abbr: option.CodeSecteurActivite
+        await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
+        this.SecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
+          return  { 
+            state: option.label,
+            abbr: option.value
 
                      }
         });

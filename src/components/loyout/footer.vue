@@ -80,7 +80,6 @@ par email ou par téléphone via les coordonnées ci-après :
   <li><router-link to="/">ACCUEIL</router-link></li>
   <li ><router-link to="/dnpme/apropos">DNPME-CL </router-link> </li>
   <li><router-link to="/actualites">ACTUALITES</router-link></li>
-  <li><router-link to="/statistique">STATISQUES</router-link></li>
   <li><router-link to="/partenaires">PARTENAIRES</router-link></li>
   <li ><router-link to="/opportunites">OPPORTUNITES </router-link> </li>
 </ul>

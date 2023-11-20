@@ -11,7 +11,7 @@
                     <tbody class="table-border-bottom-0">
                       <tr v-for="(region, index) in regionOptions" :key="index">
                       
-                        <td>{{ region.region.NomRegion }}</td>
+                        <td v-if=" region.region && region.region.NomRegion">{{ region.region.NomRegion }}</td>
                            <td>{{ region.nbre || 0 }}</td>
                       </tr>    
                     </tbody>

@@ -3271,9 +3271,13 @@ export default {
     await this.$store.dispatch("fetchSous_PrefectureOptions");
     const options = JSON.parse(JSON.stringify(this.$store.getters["getSousprefectureOptions"]));
     this.sous_prefectureOptions = options;
-    // console.log('Sous-préfecture :', options);
+     console.log('Sous-préfecture :', options);
     const sousPrefectureValue = this.userData.Commune;
     const selectedSousPrefecture = this.sous_prefectureOptions.find(option => option.value === sousPrefectureValue);
+    console.log('Sous-préfecture111 :', sousPrefectureValue);
+    console.log('Sous-préfecture2222 :', selectedSousPrefecture);
+
+    
     if (selectedSousPrefecture) {
       const selectedPrefecture = this.prefectureOptions.find(option => option.value === selectedSousPrefecture.code);
       if (selectedPrefecture) {
@@ -3368,7 +3372,7 @@ export default {
         );
         console.log("Options bourse:", options);
         this.BourseOptions = options;
-        this.loading = false;
+        
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des options des bourses:",
@@ -3389,6 +3393,7 @@ export default {
           JSON.stringify(this.$store.getters["getTypeComptabilitesData"])
         );
         this.Comptabilite = option;
+        this.loading = false;
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des options des bourses:",
@@ -3762,11 +3767,9 @@ export default {
         top: 0,
         behavior: "smooth",
       });
-
+      await this.fetchgetOneMpme()
       console.log("data", this.loggedInUser);
-
       await Promise.all([
-        this.fetchgetOneMpme(),
         this.fetchCountryOptions(),
         this.fetchRegionOptions(),
         this.fetchPrefectureOptions(),

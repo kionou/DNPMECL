@@ -313,6 +313,7 @@
       originalDocuments: [], // Les données originales
       filteredDocuments: [], // Les résultats filtrés
       paginatedDocuments: [], // Les résultats paginés
+      totalPageArray: [], 
         resultnone: '',
         imageToDeleteId: null,
         updateImageId: null,
@@ -553,12 +554,12 @@
   
   
       // get allpicture
-      async fetchgetDocMpme() {
+      async fetchgetDocMpme(page) {
         try {
           const userId = this.loggedInUser.id;
           
                   // const userId = 'MPME-1580-2023'
-          const response = await axios.get(`/documents-mpme/${userId}/documents`, {
+          const response = await axios.get(`/documents-mpme/${userId}/documents?page=${page}`, {
             headers: {
               Authorization: `Bearer ${this.loggedInUser.token}`,
               'Content-Type': 'multipart/form-data',
@@ -569,8 +570,23 @@
           console.log('UserData:', response);
 
           if (response.data.status === 'success') {
-            this.userData = [...response.data.data.data];
-             this.originalDocuments = [...response.data.data.data];
+
+
+            this.totalPageArray = this.totalPageArray.concat(response.data.data.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+      
+
+
+          if (page === 1) {
+            this.originalDocuments = this.totalPageArray;
+        const totalPages = response.data.data.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+      }
+
+
+            this.userData = [...this.totalPageArray];
+             this.originalDocuments = [...this.totalPageArray];
               this.filteredDocuments = this.originalDocuments;
               this.loading = false
             
@@ -597,6 +613,12 @@
                 } 
         }
       },
+
+      compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchgetDocMpme(i);
+  }
+},
   
       // upload document
       updatedoc(id){

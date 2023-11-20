@@ -31,7 +31,7 @@
 
       <div class="doc">
 
-        <div    v-for="(category, categoryIndex) in categoriesData" :key="categoryIndex">
+        <div  class="infoss"  v-for="(category, categoryIndex) in categoriesData" :key="categoryIndex">
         <div
           @click="toggleCategory(categoryIndex ,category )"
           class="info-item d-flex justify-content-center align-items-center"
@@ -117,6 +117,7 @@ paginatedItems() {
       selectedSubDocument: null,
       subDocuments:[],
       filteredDocuments: [],
+      totalPageArray: [],
       subDocumentsByCategoryMap: {},
       Documents:Documents,
       currentPage: 1,
@@ -150,13 +151,29 @@ paginatedItems() {
         console.error('Erreur lors de la récupération des données des catégories :', error.message);
       }
     },
-    async fetchSousCategoriesData() {
+    async fetchSousCategoriesData(page) {
   try {
 
-    await this.$store.dispatch('fetchSousCategoriesData');
+    await this.$store.dispatch('fetchSousCategoriesData',page);
     const sousCategoriesData = JSON.parse(JSON.stringify(this.$store.getters.getSousCategoriesData));
     console.log('Données des sous-catégories:', sousCategoriesData);
-    this.subDocuments = sousCategoriesData.data.data;
+
+       
+    this.totalPageArray = this.totalPageArray.concat(sousCategoriesData.data.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+       
+
+
+          if (page === 1) {
+            this.subDocuments = this.totalPageArray;
+        const totalPages = sousCategoriesData.data.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+    this.subDocuments = this.totalPageArray;
     this.categoriesData.forEach(category => {
     this.subDocumentsByCategoryMap[category.CodeCategorie] = this.subDocuments.filter(subDoc => subDoc.CodeCategorie === category.CodeCategorie);
         });
@@ -174,6 +191,12 @@ paginatedItems() {
       category.show = false;
     }
   });
+},
+
+compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchSousCategoriesData(i);
+  }
 },
 
     showSubDocument(subDocument) {
@@ -372,11 +395,13 @@ width: 300px;
 }
 .doc{
   /* border: 1px solid blue; */
-  /* height: 100px; */
- width: 30%;
+  height: 300px;
+  padding: 10px;
+ /* width: 30%; */
  display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
 
 }
 
@@ -457,6 +482,29 @@ padding-top: 10px;
 }
 .margin-zero {
 margin-bottom: 0 !important;
+}
+
+
+
+
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #fff;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 11px;
+}
+
+
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  border: 4px solid #fff;
 }
 </style>
 

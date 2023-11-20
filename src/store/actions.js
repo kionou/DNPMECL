@@ -200,9 +200,9 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des options de bourses:', error);
     }
   },
-  async fetchSousDocOptions({ commit }) {
+  async fetchSousDocOptions({ commit } , page) {
     try {
-      const response = await axios.get('/sous-categories-document'); // Remplacez l'URL par l'URL de votre API
+      const response = await axios.get(`/sous-categories-document?page=${page}`); // Remplacez l'URL par l'URL de votre API
       console.log('sousdoc', response.data.data.data);
       const sousdocFromAPI = response.data.data.data;
 
@@ -256,7 +256,7 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get('/documents-administrative/statut/publique');
       const data = response.data.data;
-      console.log('Données pour /documents-administrative/statut/publique :', data);
+      console.log('Données pour /documents-administrative/statut/publique :', response);
       // Assurez-vous que la structure des données est correcte
       commit('SET_PUBLIQUE_DATA', data);
     } catch (error) {
@@ -328,12 +328,12 @@ async fetchDataFromAPI({ commit }) {
     }
   },
 
-  async fetchActualites({ commit }) {
+  async fetchActualites({ commit } , page) {
     try {
-      const response = await axios.get('/actualites',{ params : {statut: true }});
-      const data = response.data.data.data;
-      const ActualitesFiltres = data.filter(partenaire => partenaire.publish === 1);       
-      commit('SET_ACTUALITES', ActualitesFiltres); // Mutation pour stocker les actualités dans le state
+      const response = await axios.get(`/actualites?page=${page}`,{ params : {statut: true }});
+      const data = response.data.data;
+      console.log('data',data);
+      commit('SET_ACTUALITES', data); // Mutation pour stocker les actualités dans le state
     } catch (error) {
       console.error('Erreur lors de la récupération des actualités :', error);
     }
@@ -388,14 +388,32 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des types de contribuables:', error);
     }
   },
-  async fetchPubliqueVisiblePhotos({ commit }) { 
+  async fetchPubliqueVisiblePhotos({ commit } , page) { 
     try {
-      const response = await axios.get('/photos-tech/albums/photos/publique-visible');
-      const publiqueVisiblePhotos = response.data.data.data; // Assurez-vous que la structure de réponse correspond à vos besoins
+      const response = await axios.get(`/photos-tech/albums/photos/publique-visible?page=${page}`);
+      const publiqueVisiblePhotos = response.data.data; // Assurez-vous que la structure de réponse correspond à vos besoins
+      console.log('publiqueVisiblePhotos',publiqueVisiblePhotos);
+
      
       commit('SET_PUBLIQUE_VISIBLE_PHOTOS', publiqueVisiblePhotos);
     } catch (error) {
       console.error('Erreur lors de la récupération des photos publiques visibles :', error);
+    }
+  },
+
+
+
+  async fetchSousSecteurs({ commit }, page) {
+    console.log('page',page);
+    try {
+      const response = await axios.get(`https://mpme-guinee.com/bd/public/api/sous-secteurs?page=${page}`);
+      const sousSecteursData = response.data.data;
+      console.log('sousSecteursData',sousSecteursData);
+
+
+      commit('SET_SOUS_SECTEURS', sousSecteursData); // Met à jour l'état avec les données récupérées
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données des sous-secteurs:', error);
     }
   },
 
