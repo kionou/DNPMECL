@@ -49,8 +49,7 @@
   </form>
     </MazDialog>
 
-    <MazDialog v-model="responseEmail">
-<small>{{ error }}</small> 
+    <MazDialog v-model="responseEmail" title="Verification du mail">
       <p>
         Veuillez entrer le code que nous avons envoyé à votre adresse e-mail pour réinitialiser votre mot de passe.
       </p>
@@ -58,10 +57,13 @@
     
     <div class="input-group">
       <label for="username">Code de  réinitialisation <span class="text-danger">*</span></label>
-      <input type="tel" name="numero" id="username"  v-model="step3.code" placeholder="XXXX" >
+      
+      <MazInput v-model="step3.code" type="password" color="secondary"  style="width: 100%;" />
+
     </div>
         <small v-if="v$.step3.code.$error">{{v$.step3.code.$errors[0].$message}}</small>
-  
+        <small v-if="errordialog">{{ errordialog }}</small> 
+    
   
     <button class="sign" @click.prevent="HandleCode">Valider</button>
    
@@ -100,6 +102,7 @@ export default {
           responseEmail:false,
           
            error:'',
+           errordialog:'',
            data:'',
            v$:useVuelidate(), 
            revele: false,
@@ -111,10 +114,10 @@ export default {
           
           },
           step2:{
-            email:null,
+            email:'',
           },
           step3:{
-            code:null,
+            code:'',
           }
       };
   },
@@ -242,6 +245,7 @@ export default {
     }
           }else{
           
+        console.log('error',this.v$.$errors);
           
           
           }
@@ -265,14 +269,19 @@ async HandleCode(){
             const response = await axios.post('/mpme/verification-otp', DataUser);
             if (response.data.status === 'error') {
               this.loading = false
-              return this.error = response.data.message
+               this.responseEmail = true
+
+              return this.errordialog = response.data.message
 
             } else {
               console.log('response.Code', response.data);
+              localStorage.setItem('resetPasswordInfo', JSON.stringify({
+          email: this.step2.email,
+          code: this.step3.code// Assurez-vous de récupérer le code correctement
+        }));
               this.loading = false
-              this.$router.push({ path: '/reinitialiser', })
-
-
+               this.$router.push({ path: '/reinitialiser', })
+            
             }
 
           } catch (error) {

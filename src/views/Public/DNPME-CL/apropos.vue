@@ -28,7 +28,17 @@
             <!--<h3 class="into-title">A propos</h3>-->
             <h1 class="into-sub-title">À PROPOS</h1>
             <hr style="margin-top: 30px; margin-bottom: 30px;">
-            <p class="text-justify;" style="font-size:18px;">Lorem earum  Porro qui commodi obcaecati cumque deserunt repellendus harum facere non ducimus fugit, omnis, sequi eos quam, impedit beatae?</p>
+            <p class="text-justify;" style="font-size:18px;">
+              Placée sous la tutelle du Ministère du Commerce, de l’Industrie et des Petites et Moyennes Entreprises, la Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local (DNPMECL) est l’une des Directions
+               Centrales du Ministère du Commerce, de l’Industrie et des PME.    
+            </p>
+            <p class="text-justify;" style="font-size:18px;">
+              Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022. 
+            </p>
+            <p class="text-justify;" style="font-size:18px;">
+              Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi.
+
+            </p>
           </div><!-- Col end -->
       </div><!-- Content row end -->
 
@@ -42,8 +52,11 @@
         <h2 class="into-sub-title">Organigramme</h2>
         
         <hr style="margin-top: 30px; margin-bottom: 30px;"> 
+        <div class="image">
+        <img src="@/assets/img/organigramme1.jpg" class="" alt="notre organigramme">
 
-        <img src="@/assets/img/organigramme.png" class="img-fluid w-100" alt="notre organigramme">
+        </div>
+
 
       </div>
     </div></div>
@@ -77,11 +90,11 @@
 
     </swiper-slide>
     <swiper-slide>
-      <img  src="@/assets/img/actualite/3.jpg" class="img-fluid"  alt="">	
+      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
 
     </swiper-slide>
     <swiper-slide>
-      <img  src="@/assets/img/actualite/4.jpg" class="img-fluid"  alt="">	
+      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
 
     </swiper-slide>
   </swiper>
@@ -265,6 +278,26 @@ hr {
     line-height: 46px;
     margin: 0 0 60px;
     color: var(--color-primary);
+}
+
+.image{
+
+  width: 100%;
+  height: auto;
+  /* border: 1px solid red;
+  border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.image img{
+
+width: 100%;
+height: auto;
+/* border: 1px solid blue; */
 }
 
 

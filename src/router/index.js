@@ -8,9 +8,10 @@ import Accueil from '../views/Public/Accueil.vue'
 import Apropos from '../views/Public/DNPME-CL/apropos.vue'
 import Mot from '../views/Public/DNPME-CL/mot.vue'
 import Documents from '../views/Public/Documentation.vue'
-import Organigramme from '../views/Public/DNPME-CL/organigramme.vue'
 import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
 import PhotothequeDetail from '../views/Public/DNPME-CL/detailPhoto.vue'
+import Accompagnenment from '../views/Public/DNPME-CL/accompagnement.vue'
+import Equipe from '../views/Public/DNPME-CL/equipe.vue'
 
 
 import Liste from '../views/Public/Liste_PME.vue'
@@ -55,11 +56,12 @@ const router = createRouter({
          
          { path: '/dnpme/apropos', name: 'Apropos', component: Apropos},
          { path: '/dnpme/mot-de-la-dn', name: 'Mot', component: Mot},
-         { path: '/dnpme/organigramme', name: 'Organigramme', component: Organigramme},
          { path: '/dnpme/Reformes-textes-de-lois', name: 'documents', component: Documents},
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
          { path: '/dnpme/phototheque/:id', name: 'PhotothequeDetail', component: PhotothequeDetail , props:true},
          { path: '/dnpme/formalisation', name: 'Formalisation', component: Formalisation},
+         { path: '/dnpme/accompagnement', name: 'Accompagnenment', component: Accompagnenment},
+         { path: '/dnpme/equipe-direction', name: 'Equipe', component: Equipe},
 
 
          { path: '/actualites', name: 'Actulite', component: Actulite},
@@ -79,7 +81,7 @@ const router = createRouter({
          { path: '/inscription-mpme', name: 'Singmpme', component: Singmpme  , },
          { path: '/connexion-mpme', name: 'Loginmpme', component: Loginmpme , },
          { path: '/connexion-mpme/verification', name: 'Verification', component: Verification  ,  },
-         { path: '/reinitialiser', name: 'connexion', component: Connexion , },
+         { path: '/reinitialiser', name: 'connexion', component: Connexion ,props: true, },
          { path: '/:pathMatch(.*)', name: 'NotFound', component: Page404 },
         
 

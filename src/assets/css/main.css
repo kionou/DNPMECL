@@ -438,11 +438,11 @@ flex-direction: column;
 font-family: 'Racing Sans One', cursive;
 align-items: center;
 width: 198px;
-display: none;
+/* display: none; */
 }
 .header .logo span{
 
-font-size: 7px;
+font-size: 8px;
 font-family: var(--font-primary);
 }
 
@@ -814,6 +814,7 @@ section {
 .about .content ul li {
   padding: 0 0 10px 30px;
   position: relative;
+  font-size: 15px;
 }
 
 .about .content ul i {
@@ -2875,7 +2876,7 @@ width: 100%;
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-.footer {
+footer {
   font-size: 14px;
   background-color: var(--color-primary);
   padding: 20px 0 0;

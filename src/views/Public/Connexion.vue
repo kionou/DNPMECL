@@ -1,22 +1,12 @@
 <template>
   <Loading v-if="loading"></Loading>
     <div>
-
+    
        <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
         <div class="form-container">
 	<p class="title">Redéfinir votre mot de passe</p>
   <small>{{ error }}</small>
 	<form class="form">
-    <div class="input-group">
-      <label for="username">Email <span class="text-danger">*</span></label>
-      <input type="email" name="email" id="username" placeholder="" v-model="email">
-    </div>
-    <small v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</small>
-    <div class="input-group">
-      <label for="username">Code Email <span class="text-danger">*</span></label>
-      <MazInput v-model="code" type="password" color="secondary"  style="width: 100%;" />
-    </div>
-    <small v-if="v$.code.$error">{{v$.code.$errors[0].$message}}</small>
 		<div class="input-group">
 			<label for="username">Nouveau mot de passe <span class="text-danger">*</span></label>
       <MazInput v-model="password" type="password" color="secondary"  style="width: 100%;" />
@@ -61,30 +51,18 @@ export default {
     data() {
         return {
           loading:false,
-             email:'',
+              email:'',
              msg:false,
-             code:'',
+              code:'',
              password:'',
              confirmer_password:'',
              error:'',
              v$:useVuelidate(), 
+           
         };
     },
     validations: {
-           email:{
-              require,
-              ValidEmail
-              
-            },
-            code:{
-              require,
-              ValidNumeri,
-                lgmin:lgmin(4),
-                lgmax:lgmax(4),
-
-              
-            },
-     
+          
             password:{
               require,
                 lgmin:lgmin(8), 
@@ -98,7 +76,13 @@ export default {
     },
 
     mounted() {
-      
+   
+      const resetPasswordInfo = JSON.parse(localStorage.getItem('resetPasswordInfo'));
+
+if (resetPasswordInfo) {
+  this.email = resetPasswordInfo.email;
+  this.code = resetPasswordInfo.code;
+}
     },
 
     methods: {
@@ -123,6 +107,7 @@ export default {
             const response = await axios.post('/mpme-password/password/reset', DataUser);
             console.log('response.Code', response);
             if (response.data.status === 'success') {
+              localStorage.removeItem('resetPasswordInfo');
               this.loading = false
               this.msg = true
 

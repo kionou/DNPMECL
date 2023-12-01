@@ -73,14 +73,26 @@
 
     <div class="section-header">
       <h2>Présentation de la DNPME-CL</h2>
-      <p>
+      <!-- <p>
         La Direction Nationale des Petites et Moyennes Entreprises et du Contenu
          Local sous tutelle du Ministère du Commerce, de l’Industrie et des PME a
           pour objectif d’accompagner et de promouvoir les activités des Micros, 
           Petites et Moyennes Entreprises et de
          vulgariser la loi portant Contenu Local en République de Guinée. 
 
-      </p>
+      </p> -->
+
+      <p class="text-justify;" style="font-size:18px;">
+              Placée sous la tutelle du Ministère du Commerce, de l’Industrie et des Petites et Moyennes Entreprises, la Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local (DNPMECL) est l’une des Directions
+               Centrales du Ministère du Commerce, de l’Industrie et des PME.    
+            </p>
+            <p class="text-justify;" style="font-size:18px;">
+              Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022. 
+            </p>
+            <p class="text-justify;" style="font-size:18px;">
+              Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi.
+
+            </p>
       <!-- <p>
         Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop
 
@@ -118,16 +130,36 @@
           
           </p>
           <ul>
-            <li><i class="bi bi-check-circle-fill"></i>Promotion des Petites et Moyennes Entreprises ;</li>
-            <li><i class="bi bi-check-circle-fill"></i>Suivi et de la coordination des actions de développement des PME ;</li>
-            <li><i class="bi bi-check-circle-fill"></i>Suivi des politiques visant l’amélioration de l’efficacité des PME ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>D’élaborer les projets de textes législatifs et réglementaires relatifs aux micros, petites et moyennes entreprises et contenu local et de veiller à leur application ; </li>
+            <li><i class="bi bi-check-circle-fill"></i>D’élaborer et de mettre en œuvre les stratégies, plans, programmes et projets relatifs à la promotion et au développement des Micros, Petites et Moyennes Entreprises et du Contenu Local ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>D’établir et de développer des relations de partenariat avec les institutions nationales, bi et multilatérales spécialisées dans les domaines des Micros, Petites et Moyennes Entreprises et du Contenu Local ;</li>
 
-            <li><i class="bi bi-check-circle-fill"></i>Elaboration et mise en place d’un cadre institutionnel et règlementaire de création et de financement des PME ;</li>
-            <li><i class="bi bi-check-circle-fill"></i>Encadrement des PME ;</li>
-            <li><i class="bi bi-check-circle-fill"></i>Développement des actions d’aide à la création d’entreprises par les nationaux;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De promouvoir l’entreprenariat féminin et des jeunes dans le domaine des Micros, Petites et Moyennes Entreprises ; </li>
+            <li><i class="bi bi-check-circle-fill"></i>De favoriser la participation des Micros, Petites et Moyennes Entreprises aux rencontres nationales et internationales traitant des questions relative au secteur ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De promouvoir la créativité et l’innovation dans les domaines des Micros, Petites et Moyennes Entreprises et du Contenu Local ;</li>
 
-            <li><i class="bi bi-check-circle-fill"></i>Mise en œuvre des actions visant le renforcement de capacités managériales des nationaux chefs d’entreprises, notamment en matière de gestion d’entreprises;</li>
-            <li><i class="bi bi-check-circle-fill"></i>Promouvoir et former sur la loi portant contenu local . </li>
+            <li><i class="bi bi-check-circle-fill"></i>D’identifier et de promouvoir les startups et d’en assurer le suivi ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>D’encadrer les interventions des structures d’accompagnements des entreprises évoluant dans les domaines des micros, petites et moyennes entreprises ; </li>
+
+
+            <li><i class="bi bi-check-circle-fill"></i>De coordonner toutes les actions entreprises dans le domaine des Micros, Petites et Moyennes Entreprises et du contenu local ;  </li>
+            <li><i class="bi bi-check-circle-fill"></i>D’apporter des appui-conseils aux promoteurs des Micros, Petites et Moyennes Entreprises ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De mettre en place et de développer un système d’information en faveur des promoteurs, entrepreneurs, institutions et autres acteurs impliqués dans la création et le développement des Micros, Petites et Moyennes Entreprises ;</li>
+
+            <li><i class="bi bi-check-circle-fill"></i>De valider les plans d’actions des centres d’appui aux Petites et Moyennes Entreprises et d’en assurer le suivi ;  </li>
+            <li><i class="bi bi-check-circle-fill"></i>D’œuvrer à la mise en place, au bon fonctionnement et à la coordination d’infrastructures dédiées aux Micros, Petites et Moyennes Entreprises y compris les Centres d’Appui aux Petites et Moyennes Entreprises et les Structures d’Accompagnements des Entreprises ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De promouvoir la sous-traitance et le partenariat en faveur des Micros, Petites et Moyennes Entreprises et le développement du Contenu Local ;</li>
+
+            <li><i class="bi bi-check-circle-fill"></i>D’œuvrer à la mise en place et au bon fonctionnement du cadre de concertation des acteurs concernés par les Micros, Petites et Moyennes Entreprises et le Contenu Local ;</li>
+            <li><i class="bi bi-check-circle-fill"></i> -	De coordonner les interventions des partenaires au développement et autres structures d’appui en faveur des Micros, Petites et Moyennes Entreprises et de la promotion du Contenu Local ;</li>
+
+
+
+            <li><i class="bi bi-check-circle-fill"></i>De délivrer le certificat de labélisation des start-ups et la carte professionnelle des Micros, Petites et Moyennes Entreprises ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De s’assurer de la prise en compte du Contenu Local dans les projets et programmes de développements ;</li>
+
+            <li><i class="bi bi-check-circle-fill"></i>De s’assurer de la prise en compte de la dimension environnementale dans les programmes et projet des Micros, Petites et Moyennes Entreprises ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De participer aux rencontres nationales, sous régionales, régionales et internationales traitant des questions de Micros, Petites et Moyennes Entreprises et de Contenu Local.</li>
           </ul>
          
         </div>
@@ -870,6 +902,34 @@ width: 75%;
 
 .transition-height {
   transition: all 5s; /* Vous pouvez ajuster la durée et la fonction d'accélération selon vos préférences */
+}
+
+.ps-0{
+
+  border: 1px solid hsl(240deg 7% 62% / 46%);
+  height: 375px;
+    overflow-y: scroll;
+    width: auto;
+    border-radius: 10px;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #fff;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 11px;
+}
+
+
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  border: 4px solid #fff;
 }
 
 

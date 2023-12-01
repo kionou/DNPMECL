@@ -64,7 +64,7 @@
       </div>
         <div class="top-right1">
           <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
-          <img src="@/assets/img/logo/dnpme-cl4.png" alt="" style="max-height: 100px;">
+          <img src="@/assets/img/logo/dnpme-cl5.png" alt="" style="max-height: 100px;">
 
          
         </div>
@@ -72,17 +72,13 @@
       </div>
     </section>
    
-   
-
-
- 
-         <header    id="header" class=" header">
-        <div class="container-fluid d-flex align-items-center justify-content-around m-0 w-75">
+         <header  id="header" class=" header">
+        <div class="container-fluid d-flex align-items-center justify-content-around m-0 w-100">
         <router-link to="/" class="logo ">
           
-          <h1>DNPME-CL </h1>
-          <span>DIRECTION NATIONALE DES PME</span> 
-          <span>ET DU CONTENU LOCAL </span>
+          <h1>SIGEG – MPME</h1>
+          <span>SYSTEME INFORMATISE DE GESTION</span> 
+          <span>DES ENTREPRISES DE GUINEE - MPME </span>
         </router-link>
         <nav id="navbar" class="navbar">
           <ul>
@@ -92,10 +88,12 @@
         <ul  class="dropdown-menu">
               <li><router-link to="/dnpme/apropos">A PROPOS</router-link></li>
               <li><router-link to="/dnpme/mot-de-la-dn">MOT DE LA DN</router-link></li>
-              <!-- <li><router-link to="/dnpme/organigramme">ORGANIGRAMME</router-link></li> -->
               <li><router-link  class="text-uppercase" to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
-            <li><router-link to="/dnpme/formalisation">FORMALISATION</router-link></li>
+              <li><router-link to="/dnpme/formalisation">FORMALISATION</router-link></li>
+              <li><router-link to="/dnpme/accompagnement">ACCOMPAGNEMENT</router-link></li>
+              <li><router-link to="/dnpme/equipe-direction">EQUIPE-DIRECTION</router-link></li>
+
 
             </ul>
            </li>
@@ -386,6 +384,11 @@ font-size: 12px;
   display: flex;
   justify-content: flex-end;
   margin-right: 14px;
+}
+
+.header .logo{
+
+  width: 330px;
 }
 .btnCt{
   

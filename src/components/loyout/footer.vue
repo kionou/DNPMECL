@@ -92,7 +92,7 @@ par email ou par téléphone via les coordonnées ci-après :
 
     <div class=" mt-4 py-3" style="background-color: #0f7a50;" >
       <div class="copyright">
-        &copy; Copyright <strong><span>DNPME-CL</span></strong>. Tous droits réservés
+        &copy; Copyright  <strong> <span> SIGEG – MPME</span></strong>. Tous droits réservés
       </div>
       <div class="credits">
         Conçu et développé par <a href="https://cosit-mali.com/">COSIT</a>

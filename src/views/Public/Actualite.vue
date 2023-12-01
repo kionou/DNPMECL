@@ -34,12 +34,16 @@
 
    <div v-else class="box"  v-for="actualite in paginatedItems" :key="actualite.id"  @click="$router.push({ path: `/actualites/${actualite.id}`, })">
     <div class="box-top">
-      <img v-if="actualite.images === null" class="box-image" src="@/assets/img/ninba1.png" alt="image-actualite" > 
-      <img  v-else class="box-image" :src="updatePicture( actualite.images)" alt="image-actualite" > 
+      <div class="box-image">
+        <img v-if="actualite.images === null" class="" src="@/assets/img/ninba1.png" alt="image-actualite" > 
+      <img  v-else class="" :src="updatePicture( actualite.images)" alt="image-actualite" > 
+      </div>
+    
 
       <div class="title-flex">
         <small><i class="bi bi-clock"></i> Publié {{datenew (actualite.created_at)}}</small>
-        <h3 class="box-title text-uppercase">{{ actualite.titre }}</h3>
+        <h3 class="box-title text-uppercase">{{ truncateTitle(actualite.titre, 70) }}</h3>
+
       </div>
     </div>
   
@@ -96,6 +100,14 @@ paginatedItems() {
     },
 
     methods: {
+
+      truncateTitle(title, maxLength) {
+    if (title.length > maxLength) {
+      return title.slice(0, maxLength) + '...';
+    }
+    return title;
+  },
+
       updatePicture(picture){
        return picture.split('|')[0]
         // Object.keys(monObjet).map(key => monObjet[key])
@@ -308,7 +320,15 @@ color: var(--color-secondary);
   object-fit: cover;
   object-position: 50% 20%;
 
-  /* 235px pour height */
+  
+}
+.box-image img {
+  width: 100%;
+  height: 100%;     
+  /* object-fit: cover;
+  object-position: 50% 20%; */
+
+  
 }
 
 .title-flex {
