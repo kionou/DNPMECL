@@ -53,7 +53,7 @@
         
         <hr style="margin-top: 30px; margin-bottom: 30px;"> 
         <div class="image">
-        <img src="@/assets/img/organigramme1.jpg" class="" alt="notre organigramme">
+        <img src="@/assets/img/orga.png" class="" alt="notre organigramme">
 
         </div>
 

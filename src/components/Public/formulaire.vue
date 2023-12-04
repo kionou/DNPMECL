@@ -3477,7 +3477,9 @@ export default {
           value: prefecture.CodePrefecture,
           code: prefecture.CodeRegion,
         }));
-        this.prefectureOptions = options;
+        console.log("Données de localitézzz :",options );
+
+        this.prefectureOptions1 = options;
         this.loading = false;
       } catch (error) {
         console.error("Erreur lors de la récupération des données de localité :", error);

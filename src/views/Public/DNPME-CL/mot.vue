@@ -71,7 +71,7 @@
   <div class="col-lg-4 mt-5 mt-lg-0">
 
     <div class="sidebar text-center sidebar-right">
-      <img src="../../../assets/img/carousel/carousel2.jpg" alt="Mme Fanta BERETE" class="img-fluid" style="border:2px solid #ededed; padding:3px;"><br><br>
+      <img src="../../../assets/img/dg.jpeg" alt="Mme Fanta BERETE" class="img-fluid" style="border:2px solid #ededed; padding:3px;"><br>
       <h4>Mme Fanta BERETE</h4>
       <hr style="width:10%;border:4px;height:4px;background:#056839;margin:0 auto;">
       <p>Directrice Nationale des Petites et Moyennes Entreprises et du Cotenu Local</p>

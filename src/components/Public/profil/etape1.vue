@@ -14,13 +14,13 @@
                                         <div style="display: flex;align-items: center;" class="bg-gray-50 px-4 py-3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Region</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.Region }}</dd>
+                                                nomRegion }}</dd>
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class="px-4 py-3 lg:bg-gray-50 class3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Commune</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.Sousprefecture }}</dd>
+                                                nomCommune }}</dd>
                                         </div>
 
                                     </div>
@@ -88,7 +88,7 @@
                                         <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Quartier</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.Quartier }} </dd>
+                                                nomQuartier }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Rue</dt>
@@ -134,8 +134,7 @@
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Site Web</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.url
-                                            }} </dd>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.SiteWeb}} </dd>
                                         </div>
 
                                     </div>
@@ -181,12 +180,12 @@
                                         <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Code Statut Juridique</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.AnneeEntreeActivite }} </dd>
+                                                selectedJuridique }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3  class3">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Autre Statut Juridique</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.AutreStatutJuridique }} </dd>
+                                                selectedJuridiqueAutre }} </dd>
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
@@ -197,13 +196,13 @@
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Principal Secteur Activite
                                             </dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.PrincipalSecteurActivite }} </dd>
+                                                selectedActivite }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class=" px-4 py-3 lg:bg-gray-50 class3">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Liste Sous Secteur Activite
                                             </dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ items }}
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.ListeSousSecteurActivite }}
                                             </dd>
                                         </div>
 
@@ -375,10 +374,6 @@
                                        
                                     </div>
 
-               
-
-                                    
-
                                 </dl>
                             </div>
                         </div>
@@ -399,15 +394,145 @@ export default {
 
     data() {
         return {
-
+            nomRegion: '',
+            nomCommune:'',
+            nomQuartier:'',
+            selectedJuridique:'',
+            selectedJuridiqueAutre:'',
+            selectedActivite:''
         };
     },
 
-    mounted() {
-
+   async mounted() {
+        
+     await  this.fetchRegionOptions(),
+     await  this.fetchSousPrefectureOptions(),
+     await  this.fetchQuartierOptions(),
+     await  this.fetchStatutJuridiqueOptions(),
+     await  this.fetchSecteurActiviteOptions(),
+     await  this.fetchSousSecteurActiviteOptions()
+        
     },
 
     methods: {
+
+        async fetchRegionOptions() {
+    try {
+        await this.$store.dispatch("fetchRegionOptions");
+        const options = JSON.parse(JSON.stringify(this.$store.getters["getRegionOptions"])); // Accéder aux options des pays via le getter
+        const selectedRegion = options.find(region => region.CodeRegion === this.data.region);
+        if (selectedRegion) {
+            this.nomRegion = selectedRegion.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+    } catch (error) {
+        console.error(
+            "Erreur lors de la récupération des options des pays :",
+            error.message
+        );
+    }
+},
+
+   
+    async fetchSousPrefectureOptions() {
+  try {
+    await this.$store.dispatch("fetchSous_PrefectureOptions");
+    const options = JSON.parse(JSON.stringify(this.$store.getters["getSousprefectureOptions"]));
+    const selectedCommune = options.find(region => region.value === this.data.Commune);
+        if (selectedCommune) {
+            this.nomCommune = selectedCommune.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des options des sous-préfectures :",
+      error.message
+    );
+  }
+},
+
+    async fetchQuartierOptions() {
+      // Renommez la méthode pour refléter qu'elle récupère les options de pays
+      try {
+        await this.$store.dispatch("fetchQuartierOptions");
+        const options = JSON.parse(
+          JSON.stringify(this.$store.getters["getQuartierOptions"])); // Accéder aux options des pays via le getter
+          const selectedQuartier = options.find(region => region.value === this.data.Quartier);
+        if (selectedQuartier) {
+            this.nomQuartier = selectedQuartier.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des options des prefecture :",
+          error.message
+        );
+      }
+    },
+    async fetchStatutJuridiqueOptions() {
+      try {
+        await this.$store.dispatch("fetchStatutJuridiqueOptions"); // Action spécifique aux statuts juridiques
+        const options = JSON.parse(
+          JSON.stringify(this.$store.getters["getStatutJuridiqueOptions"]));
+          const selectedJuridique = options.find(region => region.value === this.data.CodeStatutJuridique);
+          const selectedJuridiqueAutre = options.find(region => region.value === this.data.AutreStatutJuridique);
+        if (selectedJuridique) {
+            this.selectedJuridique = selectedJuridique.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+
+        if (selectedJuridiqueAutre) {
+            this.selectedJuridiqueAutre = selectedJuridiqueAutre.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des options des statuts juridiques:",
+          error.message
+        );
+      }
+    },
+    async fetchSecteurActiviteOptions() {
+      try {
+        await this.$store.dispatch("fetchSecteurActiviteOptions"); // Action spécifique aux secteurs d'activité
+        const options = JSON.parse(JSON.stringify(this.$store.getters["getsecteurActiviteOptions"]));
+        const selectedActivite = options.find(region => region.value === this.data.PrincipalSecteurActivite);
+        if (selectedActivite) {
+            this.selectedActivite = selectedActivite.label;         
+        } else {
+            console.error('Région non trouvée dans les options.');
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des options des secteurs d'activité:",
+          error.message
+        );
+      }
+    },
+    async fetchSousSecteurActiviteOptions() {
+      try {
+        await this.$store.dispatch("fetchSousSecteurOptions"); // Remplacez par l'action de votre store
+        this.SousSecteurActiviteOptions = this.$store.getters[
+          "getSousSecteurOptions"
+        ].map((option) => {
+          return {
+            state: option.label,
+            abbr: option.value,
+          };
+        });
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des options des secteurs d'activité:",
+          error.message
+        );
+      }
+    },
+  
 
     },
 };

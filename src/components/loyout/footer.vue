@@ -68,10 +68,11 @@
 <div class="working-hours">
 Pour tout besoin d'assistance, vous pouvez nous contacter,
 par email ou par téléphone via les coordonnées ci-après :
-<br> Lundi - Vendredi : <span class="text-left">08:00 - 17:00 </span>
-<br> Téléphone : <span class="text-left">+224 622 33 63 43</span>
-<br> Email : <span class="text-left">infodnpmecl@gmail.com</span>
-<br> Email : <span class="text-left">dnpmecl@mcipme.gov.gn</span>
+<br> <i class="bi bi-alarm"></i> : Lundi - Vendredi : <span class="text-left">08:00 - 17:00 </span>
+<br> <i class="bi bi-telephone"></i> : <span class="text-left">+224 622 33 63 43</span>
+<br> <i class="bi bi-envelope"></i> : <span class="text-left">infodnpmecl@gmail.com</span>
+<br> <i class="bi bi-envelope"></i> : <span class="text-left">dnpmecl@mcipme.gov.gn</span>
+<br>  <i class="bi bi-geo-alt"></i> : <span class="text-left">DNPME-CL, Petit Simbaya, Commune de Ratoma <br>        à 300m de l'Hôpital Flamboyant </span>
 </div>
 </div>
 <div class="col-lg-4 col-md-12  mt -md-5 footer-widget   ">

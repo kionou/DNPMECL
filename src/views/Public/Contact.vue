@@ -39,7 +39,7 @@
               </span>
               <div class="ts-service-box-content">
                 <h4>Adresse</h4>
-                <p>Petit Simbaya Près de l'Hôpital Flamboyant,Conakry, Guinée</p>
+                <p>DNPME-CL, Petit Simbaya, Commune de Ratoma <br>  à 300m de l'Hôpital Flamboyant</p>
               </div>
             </div>
           </div>
