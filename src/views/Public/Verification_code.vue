@@ -2,8 +2,8 @@
   <Loading v-if="loading"></Loading>
   <div>
 
-    <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out"
-      data-aos-delay="100" style="padding: 60px;">
+    <div class="generals " data-aos="zoom-out"
+      data-aos-delay="100" >
       <div class="form-container">
         <p class="title">connexion</p>
         <p class="text-center" v-if="selectedChannel === 'E-mail'">Entrez le code de vérification envoyé à <br>{{ formatPhoneNumber(getVerificationCode.user.email) }}</p>
@@ -104,10 +104,22 @@ export default {
               return this.error = response.data.message
 
             } else {
-              console.log('response.Code', response.data);
-              this.setLoggedInUser(this.getVerificationCode);
-              this.$router.push('/mon-espace');
+              console.log('response.CodeEmail;;;;;;;;;;', response.data);
+              console.log('response.CodeEmail;;;;;;;;;;', response.data.data.FirstConnexion);
+              if (response.data.data.FirstConnexion <= 1) {
+                localStorage.setItem('resetPasswordInfo', JSON.stringify({
+                  email: this.getVerificationCode.user.email,
+                  code: this.code// Assurez-vous de récupérer le code correctement
+                }));
               this.loading = false
+               this.$router.push({ path: '/reinitialiser', })
+              } else {
+                  this.setLoggedInUser(this.getVerificationCode);
+                   this.$router.push('/mon-espace');
+                  this.loading = false
+
+              }
+             
 
             }
 
@@ -133,9 +145,19 @@ export default {
 
             } else {
               console.log('response.Code', response.data);
-              this.setLoggedInUser(this.getVerificationCode);
-              this.$router.push('/mon-espace');
+              if (response.data.data.FirstConnexion <= 1) {
+                localStorage.setItem('resetPasswordInfo', JSON.stringify({
+                  email: this.getVerificationCode.user.email,
+                  code: this.code// Assurez-vous de récupérer le code correctement
+                }));
               this.loading = false
+               this.$router.push({ path: '/reinitialiser', })
+              } else {
+                  this.setLoggedInUser(this.getVerificationCode);
+                   this.$router.push('/mon-espace');
+                  this.loading = false
+
+              }
             }
 
           } catch (error) {
@@ -220,6 +242,18 @@ small {
   justify-content: center;
 }
 
+.generals{
+
+display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    margin-top: 30px;
+
+}
+
+
 .form-container {
   width: 400px;
   border-radius: 0.75rem;
@@ -283,4 +317,27 @@ color: royalblue;
 text-decoration: underline royalblue;
 cursor: pointer;
 }
+
+@media (max-width: 768px) {
+
+  .generals{
+
+
+    padding: 10px;
+   
+
+}
+
+.form-container{
+padding:  10px !important;
+
+
+}
+
+.sign {
+  
+  margin-top: 20px !important;
+}
+}
+  
 </style>

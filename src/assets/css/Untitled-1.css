@@ -115,25 +115,6 @@ padding: 0 !important;
   font-size: 18px;
 }
 
-@media (max-width: 768px) {
-  .section-header p {
-   
-    font-size: 16px;
-    text-align: justify;
-  }
-
-  .section-header {
-    text-align: center;
-    padding-top: 20px;
-  }
-
-  .sign{
-
-    font-size: 14px !important;
-  }
-  
-}
-
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
@@ -267,22 +248,7 @@ padding: 0 !important;
   [data-aos-delay] {
     transition-delay: 0 !important;
   }
-
-  .section-header h2 {
-    font-size: 23px;
-   
-  }
-
-  .text-justify{
-
-    font-size: 16px !important;
-    margin-bottom: 10px !important;
-  }
-
-
 }
-
-
 
 /*--------------------------------------------------------------
 # Header
@@ -382,14 +348,22 @@ color: var(--color-primary);
       }
   }
 
-  @media (max-width: 768px) {
-    .topbar{
-      display: none;
-    }
-
-  }
-
   @media (max-width: 450px) {
+
+    /* .topbar1 img {
+      max-height: 35px;
+    } */
+    
+  
+    .topbar .texte span{
+    
+      font-size: 8px;
+      }
+        
+      .topbar .texte h1 {
+        font-size: 12px;
+      
+      }
 
 
       .header .logo h1 {
@@ -938,27 +912,6 @@ section {
   }
 }
 
-@media screen and (max-width: 768px) {
-
-  .about  {
-     padding: 20px 0 !important;
-    
-     
-    }
-    .about h3 {
-     
-      font-size: 20px;
-      
-  }
-
-  .about .content ul {
-   
-    padding: 0 0 0 5px;
-  }
-  
-  }
-  
-
 /*--------------------------------------------------------------
 # Clients Section
 --------------------------------------------------------------*/
@@ -993,14 +946,6 @@ section {
 
 .clients .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--color-primary);
-}
-
-@media (max-width: 768px) {
-  .clients  {
-    padding: 20px 0 !important;
-  }
-  
-  
 }
 
 /*--------------------------------------------------------------
@@ -1040,19 +985,6 @@ section {
   font-family: var(--font-primary);
   font-size: 25px;
 }
-
-@media screen and (max-width: 768px) {
-  
-  .stats-counter {
-    padding: 40px 0 !important;
-   
-}
-  .stats-counter .stats-item p {
-   
-    font-size: 20px;
-  }
-}
-
 
 /*--------------------------------------------------------------
 # Call To Action Section
@@ -1261,14 +1193,6 @@ section {
   border-color: var(--color-primary);
 }
 
-@media (max-width: 768px) {
-  .services .service-item h3 {
-   
-    font-size: 16px;
-    text-align: center;
-   
-  }
-}
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
@@ -1725,17 +1649,7 @@ section {
   font-size: 18px;
   margin: 0 2px;
 }
-@media (max-width: 768px) {
-  .team  {
-    padding: 20px 0 !important;
-  }
-  table{
 
-    font-size: 12px;
-    text-align:right;
-  }
-  
-}
 /*--------------------------------------------------------------
 # Pricing Section
 --------------------------------------------------------------*/
@@ -2151,15 +2065,6 @@ section {
   100% {
     transform: rotate(360deg);
   }
-}
-
-@media (max-width: 768px) {
-  
- .info-item p {
- 
-  font-size: 14px;
-}
-
 }
 
 /*--------------------------------------------------------------
@@ -3090,13 +2995,16 @@ footer {
 
 @media screen and (max-width: 768px) {
 
-footer  {
+  .footer .footer-links ul li {
    
-   display: none;
+   justify-content: center;
    
   }
-}
 
+  .footer h4 {
+  text-align: center;
+  }
+}
 
 /*--------------------------------------------------------------
 #  newsletter Section 

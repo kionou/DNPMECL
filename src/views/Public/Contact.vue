@@ -39,7 +39,7 @@
               </span>
               <div class="ts-service-box-content">
                 <h4>Adresse</h4>
-                <p>DNPME-CL, Petit Simbaya, Commune de Ratoma <br>  à 300m de l'Hôpital Flamboyant</p>
+                <p>DNPME-CL, Petit Simbaya,<br> Commune de Ratoma à 300m de l'Hôpital Flamboyant</p>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@
             </div>
           </div>
 
-          <div class="col-md-6" style="padding: 25px 15px">
+          <div class="col-md-6 bas" style="padding: 25px 15px">
             <p class="title">Vos doléances</p>
 
             <p>
@@ -701,5 +701,37 @@ textarea {
 
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+.form-container {
+  /* width: 700px; */
+  max-width: 100%;
+  padding: 10px;
+}
+
+.content-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+ 
+  font-size: 22px;
+  /* line-height: 2rem; */
+  
+}
+
+.bas{
+
+  display: none;
+}
+.container{
+
+  margin-bottom: 20px;
+}
 }
 </style>

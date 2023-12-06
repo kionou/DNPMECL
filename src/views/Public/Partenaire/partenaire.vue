@@ -157,7 +157,7 @@ this.partenairesOptions = [...this.$store.getters['getPartenaires']];
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/part1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -201,6 +201,34 @@ this.partenairesOptions = [...this.$store.getters['getPartenaires']];
     text-transform: uppercase;
     font-size: 12px;
     color: #fff !important;
+}
+
+@media (max-width: 992px) {
+    .banner-title {
+    
+    font-size: 40px;
+    
+}
+}
+@media (max-width: 768px) {
+
+  .container{
+
+    margin-top: 20px;
+  }
+    .banner-title {
+    
+    font-size: 20px !important;
+    
+}
+}
+
+@media (max-width: 500px) {
+    .banner-title {
+    
+    font-size: 25px;
+    
+}
 }
 
 /* fin banier */
@@ -286,8 +314,8 @@ cursor: pointer;
 .liste-searcher {
     flex-direction: column;
     height: auto;
-    margin: 20px auto;
-    width: 80%;
+    /* margin: 20px auto; */
+    width: 100%;
 }
 
 .liste-searcher div {

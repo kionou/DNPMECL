@@ -38,7 +38,8 @@
 
             <div class="article-p">
               <div class="image">
-                <img src="@/assets/img/slide/slide11.jpg" alt="">
+                <img v-if="offre.photo === null" src="@/assets/img/slide/slide11.jpg" alt="">
+                <img v-else :src="offre.photo" alt="">
 
               </div>
             </div>
@@ -97,8 +98,8 @@
                   <li class="d-flex align-items-center" v-for="opp in OppOptions" :key="opp.id">
                     <div class="posts-thumb">
                       <a :href="`/offre/${opp.CodeOffre}`">
-                        <img src="@/assets/img/slide/slide11.jpg" alt="">
-                        <!-- <img :src="getImage('img/slide/slide11.jpg')" alt=""> -->
+                        <img v-if="opp.photo === null" src="@/assets/img/slide/slide11.jpg" alt="">
+                <img v-else :src="opp.photo" alt="">
                       </a>
 
                     </div>
@@ -344,13 +345,13 @@ export default {
 
         if (response.data.status === 'success') {
           this.loading = false
-          console.log('UserData:', response.data.data);
+          console.log('UserDataeee:', response.data.data);
           this.offre = response.data.data.find(offre => offre.CodeOffre === this.id);
           const valeur = this.offre.liste_sous_secteurs;
           const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
           this.sousSecteursLabel = option ? option.label : valeur;
 
-          this.offres = response.data.data.data.filter((offre) => {
+          this.offres = response.data.data.filter((offre) => {
             const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
             console.log('sousSecteurActiviteOffre', sousSecteurActiviteOffre);
 
@@ -380,18 +381,18 @@ export default {
         }
       } catch (error) {
         console.log('Erreur lors de la mise à jour des données MPME guinee :', error);
-        console.log('aut', error.response);
-        if (error && error.response.data.message === "Vous n'êtes pas autorisé.") {
-          await this.$store.dispatch('user/clearLoggedInUser');
-          this.$router.push('/connexion-mpme');
+        console.log('aut', error);
+        // if (error && error.response.data.message === "Vous n'êtes pas autorisé.") {
+        //   await this.$store.dispatch('user/clearLoggedInUser');
+        //   this.$router.push('/connexion-mpme');
 
-        } else {
-          console.log('aut', error.response.data);
+        // } else {
+        //   console.log('aut', error.response.data);
 
-          // this.formatValidationErrors(error.response.data.errors)
-          this.loading = false
-          return false;
-        }
+        //   // this.formatValidationErrors(error.response.data.errors)
+        //   this.loading = false
+        //   return false;
+        // }
 
 
       }

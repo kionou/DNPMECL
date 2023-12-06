@@ -212,7 +212,7 @@ margin: 5px;
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/photo1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -264,13 +264,20 @@ margin: 5px;
     
 }
 }
-@media (max-width: 768px) {
-    .banner-title {
-    
-    font-size: 30px;
-    
+
+  @media (max-width: 768px) {
+
+.container{
+
+  margin-top: 20px;
+}
+  .banner-title {
+  
+  font-size: 20px !important;
+  
 }
 }
+
 
 @media (max-width: 500px) {
     .banner-title {
@@ -432,6 +439,14 @@ ul li a {
 .widget.recent-posts .post-info .entry-title a {
     color: #303030;
     display: inline-block;
+}
+
+@media (max-width: 768px) {
+  
+  .sidebar .widget {
+    margin-top: 20px;
+}
+
 }
 
 </style>

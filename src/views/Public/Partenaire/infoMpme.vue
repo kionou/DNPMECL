@@ -284,8 +284,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
 /* debut banier */
 .banner-area {
     position: relative;
@@ -294,7 +292,7 @@ export default {
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/part1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -348,20 +346,20 @@ export default {
 }
 }
 @media (max-width: 768px) {
+
+  .container{
+
+    margin-top: 20px;
+  }
     .banner-title {
     
-    font-size: 30px;
+    font-size: 20px !important;
     
 }
 }
 
-@media (max-width: 500px) {
-    .banner-title {
-    
-    font-size: 25px;
-    
-}
-}
+
+
 /* fin banier */
 .supp {
     font-size: 15px;
@@ -460,27 +458,12 @@ textarea {
 .input-groupe textarea:focus {
   border-color: var(--color-primary);
 }
-
-.form-select:focus {
-  border-color: var(--color-primary);
-  outline: 0;
-  box-shadow: 0 0 0 0 rgba(101, 113, 255, .25);
-}
-
-
 .btn {
   display: flex;
   flex-direction: column;
   align-items: center;
 
 }
-
-
-
-.signup a:hover {
-  text-decoration: underline var(--color-primary);
-}
-
 .sign {
   display: block;
   width: 300px;
@@ -494,30 +477,6 @@ textarea {
   margin-top: 30px;
 }
 
-.signup {
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(156, 163, 175, 1);
-}
-
-.signin {
-  color: rgba(88, 87, 87, 0.822);
-  font-size: 14px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-
-
-.signin span {
-  color: royalblue;
-}
-
-.signin span:hover {
-  text-decoration: underline royalblue;
-  cursor: pointer;
-}
 .no-scroll {
   overflow: hidden;
 
@@ -529,9 +488,9 @@ textarea {
 @media screen and (max-width: 768px) {
 
   .form-container {
-
-    width: 700px;
+    /* width: 700px; */
     max-width: 100%;
+    padding: 10px;
   }
 
   .content-group {
@@ -539,6 +498,12 @@ textarea {
     flex-direction: column;
   }
 
+  .title{
+   
+    font-size: 22px;
+    /* line-height: 2rem; */
+    
+}
 
 }
 
@@ -551,11 +516,6 @@ textarea {
   .sign {
 
     width: 200px;
-
-  }
-
-  .signin {
-    font-size: 12px;
 
   }
 

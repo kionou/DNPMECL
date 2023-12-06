@@ -38,7 +38,8 @@
                       
                       <div class="article-p">
                           <div class="image">
-                            <img src="@/assets/img/slide/slide11.jpg" alt="">
+                            <img v-if="offre.photo === null" src="@/assets/img/slide/slide11.jpg" alt="">
+                            <img v-else :src="offre.photo" alt="">
 
                           </div>
                       </div>
@@ -87,8 +88,8 @@
                                   <li class="d-flex align-items-center" v-for="opp in OppOptions" :key="opp.id">
                                       <div class="posts-thumb" >
                                           <a :href="`/opportunites/${opp.CodeOffre}`">
-                                            <img src="@/assets/img/slide/slide11.jpg" alt="">
-                                              <!-- <img :src="getImage('img/slide/slide11.jpg')" alt=""> -->
+                                            <img v-if="opp.photo === null" src="@/assets/img/slide/slide11.jpg" alt="">
+                                             <img v-else :src="opp.photo" alt="">
                                           </a>
                                          
                                       </div>
@@ -608,5 +609,25 @@ white-space: pre-line;
 .x11i5rnm strong {
 color: black;
 }
+@media (max-width: 768px) {
+    h1 {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: justify;
+}
 
+.article-p {
+   
+    height: auto;
+}
+
+
+h3
+ {
+  
+  font-size: 16px;
+}
+
+   
+}
 </style>

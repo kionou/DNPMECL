@@ -3,7 +3,7 @@
   <Modal :revele="revele" :toggleModale="toggleModale"></Modal>
 
   <div>
-    <div class="container-fluid  d-flex justify-content-center align-items-center general" data-aos="zoom-out"
+    <div class=" general" data-aos="zoom-out"
       data-aos-delay="100">
       <div class="form-container">
         <p class="title">Inscription</p>
@@ -678,6 +678,9 @@ small {
 .general {
 
   padding: 20px 60px 60px;
+  flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .form-container {
@@ -817,11 +820,17 @@ textarea {
 }
 
 @media screen and (max-width: 768px) {
+  .general {
+
+padding:  5px;
+margin-top: 80px;
+}
 
   .form-container {
 
-    width: 700px;
+    /* width: 700px; */
     max-width: 100%;
+    padding: 10px;
   }
 
   .content-group {
@@ -829,14 +838,14 @@ textarea {
     flex-direction: column;
   }
 
+  .upload-area__drop-zoon{
+
+    padding: 10px !important;
+  }
 
 }
 
 @media screen and (max-width: 550px) {
-  .general {
-
-    padding: 15px 10px;
-  }
 
   .sign {
 

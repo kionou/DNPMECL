@@ -310,9 +310,14 @@ async  mounted() {
 }
 }
 @media (max-width: 768px) {
+
+  .container{
+
+    margin-top: 20px;
+  }
     .banner-title {
     
-    font-size: 30px;
+    font-size: 20px !important;
     
 }
 }
@@ -506,6 +511,33 @@ margin-bottom: 0 !important;
   border-radius: 20px;
   border: 4px solid #fff;
 }
+
+
+@media screen and (max-width: 768px) {
+
+.doc{
+
+width: 110%;
+/* height: auto; */
+margin-bottom: 25px;
+border-bottom: 1px solid var(--color-secondary);
+
+}
+
+.sous_doc {
+    width: 105%;
+}
+.noresul{
+   
+    padding: 10px;
+    
+    font-size: 16px;
+}
+
+
+
+}
+
 </style>
 
 

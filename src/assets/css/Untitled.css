@@ -119,19 +119,7 @@ padding: 0 !important;
   .section-header p {
    
     font-size: 16px;
-    text-align: justify;
   }
-
-  .section-header {
-    text-align: center;
-    padding-top: 20px;
-  }
-
-  .sign{
-
-    font-size: 14px !important;
-  }
-  
 }
 
 /*--------------------------------------------------------------
@@ -1261,14 +1249,6 @@ section {
   border-color: var(--color-primary);
 }
 
-@media (max-width: 768px) {
-  .services .service-item h3 {
-   
-    font-size: 16px;
-    text-align: center;
-   
-  }
-}
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
@@ -2151,15 +2131,6 @@ section {
   100% {
     transform: rotate(360deg);
   }
-}
-
-@media (max-width: 768px) {
-  
- .info-item p {
- 
-  font-size: 14px;
-}
-
 }
 
 /*--------------------------------------------------------------

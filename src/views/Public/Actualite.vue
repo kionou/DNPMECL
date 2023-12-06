@@ -209,12 +209,12 @@ font-size: 20px;
 /* debut banier */
 .banner-area {
     position: relative;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/actualites1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }

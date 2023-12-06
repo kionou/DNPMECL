@@ -28,14 +28,14 @@
             <!--<h3 class="into-title">A propos</h3>-->
             <h1 class="into-sub-title">À PROPOS</h1>
             <hr style="margin-top: 30px; margin-bottom: 30px;">
-            <p class="text-justify;" style="font-size:18px;">
+            <p class="text-justify" style="font-size:18px;">
               Placée sous la tutelle du Ministère du Commerce, de l’Industrie et des Petites et Moyennes Entreprises, la Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local (DNPMECL) est l’une des Directions
                Centrales du Ministère du Commerce, de l’Industrie et des PME.    
             </p>
-            <p class="text-justify;" style="font-size:18px;">
+            <p class="text-justify" style="font-size:18px;">
               Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022. 
             </p>
-            <p class="text-justify;" style="font-size:18px;">
+            <p class="text-justify" style="font-size:18px;">
               Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi.
 
             </p>
@@ -175,7 +175,7 @@ export default {
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/propo1.jpeg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -300,5 +300,30 @@ height: auto;
 /* border: 1px solid blue; */
 }
 
+
+@media (max-width: 768px) {
+  .into-sub-title {
+   
+    font-size: 23px;
+    text-align: center;
+  
+}
+
+.text-justify{
+
+font-size: 16px !important;
+margin-bottom: 10px !important;
+}
+.main-container{
+
+
+  margin-bottom: 20px;
+}
+
+#ts-team{
+
+  display: none;
+}
+}
 
 </style>

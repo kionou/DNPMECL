@@ -272,7 +272,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 /* debut banier */
 .banner-area {
     position: relative;
@@ -281,7 +280,7 @@ export default {
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/part1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -335,9 +334,14 @@ export default {
 }
 }
 @media (max-width: 768px) {
+
+  .container{
+
+    margin-top: 20px;
+  }
     .banner-title {
     
-    font-size: 30px;
+    font-size: 20px !important;
     
 }
 }
@@ -349,6 +353,7 @@ export default {
     
 }
 }
+
 /* fin banier */
 .supp {
     font-size: 15px;
@@ -477,14 +482,22 @@ textarea {
 @media screen and (max-width: 768px) {
 
   .form-container {
-    width: 700px;
+    /* width: 700px; */
     max-width: 100%;
+    padding: 10px;
   }
 
   .content-group {
     display: flex;
     flex-direction: column;
   }
+
+  .title{
+   
+    font-size: 22px;
+    /* line-height: 2rem; */
+    
+}
 
 }
 

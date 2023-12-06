@@ -448,10 +448,10 @@ font-size: 20px;
 
 @media screen and (max-width: 768px) {
   .liste-searcher {
-      flex-direction: column;
+      flex-direction: row;
       height: auto;
-      margin: 20px auto;
-      width: 80%;
+      /* margin: 20px auto; */
+      width: 100%;
   }
 
   .liste-searcher div {
@@ -459,6 +459,10 @@ font-size: 20px;
       width: 100%;
       border-bottom: 0.2px solid var(--color-primary);
       border-right: none;
+  }
+  .liste-searcher i {
+
+    display: none;
   }
 
   .nsl select {

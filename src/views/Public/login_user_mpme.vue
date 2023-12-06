@@ -4,7 +4,7 @@
   <div>
  <Modal v-if="modal" :revele="revele" :data="data" :toggleModale="toggleModale" @redirectWithProps="redirectWithProps"></Modal>
 
-  <div class="container-fluid  d-flex justify-content-center align-items-center " data-aos="zoom-out" data-aos-delay="100" style="padding: 60px;" >
+  <div class="generals   " data-aos="zoom-out" data-aos-delay="100"  >
 <div class="form-container1">
 <p class="title">Connexion</p>
   <p class="text-center mb-0">Accédez à votre espace utilisateur</p>
@@ -309,6 +309,16 @@ small{
   align-items: center;
   justify-content: center;
 }
+.generals{
+
+display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    margin-top: 30px;
+
+}
 
 .form-container1 {
 width: 400px;
@@ -322,14 +332,7 @@ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 
 }
 
-@media (max-width: 500px) {
 
-  .container-fluid {
-padding: 20px 10px !important;
-
-
-}
-}
 
 .title {
 text-align: center;
@@ -439,7 +442,19 @@ background-color: white;
     margin: 0 5px;
   }
 
+@media (max-width: 768px) {
+
+.form-container1 {
+padding:  10px !important;
+
+
+}
+
+.sign {
   
+  margin-top: 20px !important;
+}
+}
   
 
 </style>

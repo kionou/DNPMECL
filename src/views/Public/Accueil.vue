@@ -82,14 +82,14 @@
 
       </p> -->
 
-      <p class="text-justify;" style="font-size:18px;">
+      <p class="text-justify" style="font-size:18px;">
               Placée sous la tutelle du Ministère du Commerce, de l’Industrie et des Petites et Moyennes Entreprises, la Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local (DNPMECL) est l’une des Directions
                Centrales du Ministère du Commerce, de l’Industrie et des PME.    
             </p>
-            <p class="text-justify;" style="font-size:18px;">
+            <p class="text-justify" style="font-size:18px;">
               Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022. 
             </p>
-            <p class="text-justify;" style="font-size:18px;">
+            <p class="text-justify" style="font-size:18px;">
               Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi.
 
             </p>
@@ -882,6 +882,14 @@ width: 75%;
   
   padding:30px 0;
   }
+
+}
+
+@media (max-width: 768px) {
+  .class4 , .class5 {
+    width: 100%;
+    margin-top: 0 !important;
+}
 
 }
 

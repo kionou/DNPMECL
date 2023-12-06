@@ -277,12 +277,12 @@ export default {
 /* debut banier */
 .banner-area {
     position: relative;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp');
+    background-image: url('@/assets/img/banner/actualites1.jpg'); 
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
 }
@@ -399,7 +399,7 @@ h5,
 h6 {
     color: #101010;
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
+    
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased !important;
 }
@@ -566,4 +566,17 @@ ul li a {
   color: black;
 }
 
+@media (max-width: 768px) {
+    h1 {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.article-p {
+   
+    height: auto;
+}
+   
+}
 </style>

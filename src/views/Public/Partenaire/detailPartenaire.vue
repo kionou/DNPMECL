@@ -259,7 +259,7 @@ p {
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/img1.webp'); 
+    background-image: url('@/assets/img/banner/part1.jpg'); 
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
  
 }
@@ -296,6 +296,15 @@ p {
     font-size: 58px;
     font-weight: 900;
 }
+.breadcrumb {
+    padding: 0;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff !important;
+}
+
 @media (max-width: 992px) {
     .banner-title {
     
@@ -304,9 +313,14 @@ p {
 }
 }
 @media (max-width: 768px) {
+
+  .container{
+
+    margin-top: 20px;
+  }
     .banner-title {
     
-    font-size: 30px;
+    font-size: 20px !important;
     
 }
 }
@@ -317,14 +331,6 @@ p {
     font-size: 25px;
     
 }
-}
-.breadcrumb {
-    padding: 0;
-    background: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: #fff !important;
 }
 
 /* fin banier */
