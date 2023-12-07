@@ -112,5 +112,18 @@ background: var(--color-secondary);
 
 }
 
+@media (max-width: 768px) {
+  .sticked-header-offset {
+    margin-top: 0 !important;
+     
+
+  }
+
+  .class1{
+
+    margin-top:70px;
+  }
+}
+
 
 </style>

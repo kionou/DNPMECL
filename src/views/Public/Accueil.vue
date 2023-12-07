@@ -84,13 +84,13 @@
 
       <p class="text-justify" style="font-size:18px;">
               Placée sous la tutelle du Ministère du Commerce, de l’Industrie et des Petites et Moyennes Entreprises, la Direction Nationale des Petites et Moyennes Entreprises et du Contenu Local (DNPMECL) est l’une des Directions
-               Centrales du Ministère du Commerce, de l’Industrie et des PME.    
+               Centrales du Ministère du Commerce, de l’Industrie et des PME. Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022.   Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi. 
             </p>
             <p class="text-justify" style="font-size:18px;">
-              Elle a été créée par Décret N° D / 2009 /167 /PRG/SGG du 19 aout 2009 et modifiée par Décret N° D/2022/0026/PRG/CNRD/SGG du 13 Janvier 2022. 
+             
             </p>
             <p class="text-justify" style="font-size:18px;">
-              Elle a pour mission, la mise en œuvre de la politique du Gouvernement dans le domaine de la promotion et du développement des Micros, Petites et Moyennes Entreprises et du Contenu Local et d’en assurer le suivi.
+            
 
             </p>
       <!-- <p>
@@ -151,7 +151,7 @@
             <li><i class="bi bi-check-circle-fill"></i>De promouvoir la sous-traitance et le partenariat en faveur des Micros, Petites et Moyennes Entreprises et le développement du Contenu Local ;</li>
 
             <li><i class="bi bi-check-circle-fill"></i>D’œuvrer à la mise en place et au bon fonctionnement du cadre de concertation des acteurs concernés par les Micros, Petites et Moyennes Entreprises et le Contenu Local ;</li>
-            <li><i class="bi bi-check-circle-fill"></i> -	De coordonner les interventions des partenaires au développement et autres structures d’appui en faveur des Micros, Petites et Moyennes Entreprises et de la promotion du Contenu Local ;</li>
+            <li><i class="bi bi-check-circle-fill"></i>De coordonner les interventions des partenaires au développement et autres structures d’appui en faveur des Micros, Petites et Moyennes Entreprises et de la promotion du Contenu Local ;</li>
 
 
 
@@ -198,14 +198,12 @@
                   <div   v-show="show1 " class="transition-height" >
                       <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
                       
-                          <ul>
-                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
-                            <li><span>Les groupements d'entreprises;</span></li>
-                            <li><span>Les groupements professionnels;</span></li>
-                            <li><span>Les coopératives de production et de transformation;</span></li>
-                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
-                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
-                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
+                          <ul class='text-justify'>
+                            <li><i class="bi bi-check-circle-fill"></i> De promouvoir la créativité et l’innovation dans les domaines des Micros, Petites et Moyennes Entreprises et du Contenu Local ;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> D’identifier et de promouvoir les startups et d’en assurer le suivi ;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> D’encadrer les interventions des structures d’accompagnements des entreprises évoluant dans les domaines des micros, petites et moyennes entreprises ; </li>
+                            <li><i class="bi bi-check-circle-fill"></i> D’œuvrer à la mise en place, au bon fonctionnement et à la coordination d’infrastructures dédiées aux Micros, Petites et Moyennes Entreprises y compris les Centres d’Appui aux Petites et Moyennes Entreprises et les Structures d’Accompagnements des Entreprises ;</li>
+                          
                           </ul>
                      
                       </div>

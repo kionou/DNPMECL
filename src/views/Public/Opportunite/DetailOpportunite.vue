@@ -394,6 +394,7 @@ this.loading = false
   .banner-title {
 
       font-size: 30px;
+      text-align: center;
 
   }
 }

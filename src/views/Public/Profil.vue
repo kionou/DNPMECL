@@ -3,7 +3,7 @@
     <div>
         <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Header -->
-            <div class="row">
+            <div class="row haut">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="user-profile-header-banner">
@@ -180,6 +180,20 @@ height: auto;
 .fade:not(.show) {
     display: none;
     opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+ 
+.haut{
+
+    margin-top: 50px;
+}
+
+.user-profile-header .user-profile-img{
+
+    width: 120px !important;
+}
+
 }
 
 </style>

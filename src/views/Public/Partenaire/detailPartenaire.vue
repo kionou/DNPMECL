@@ -51,8 +51,12 @@
       <div class="gap-20"></div>
 
           <h4>2. Missions</h4>
-
-          <p>{{ partenaire.Description }}</p>
+          <p class="x11i5rnm" style="white-space: pre-line; color: black;">
+                            <span  >
+                                {{  convertirHtmlEnTexte(partenaire.Description)  }}
+                            </span>
+                        </p>
+          
           <p>Site : <a :href="partenaire.SiteWeb" target="blank" style="color:var(--color-primary); text-decoration:underline; cursor: pointer;">Visitez Ici</a></p>
           
 
@@ -177,6 +181,20 @@ Loading
        return picture.split('|')[0]
         // Object.keys(monObjet).map(key => monObjet[key])
       },
+
+      convertirHtmlEnTexte(chaineHtml) {
+  // Créez un élément HTML temporaire (div)
+  const tempDiv = document.createElement('div');
+
+  // Injetez le HTML dans l'élément temporaire
+  tempDiv.innerHTML = chaineHtml;
+
+  // Utilisez textContent pour extraire le texte brut
+  const texteBrut = tempDiv.textContent || tempDiv.innerText;
+
+  // Retournez le texte brut
+  return texteBrut;
+},
         async fetchOnePartenaire() {
             try {
                 const response = await axios.get(`/partenaires/${this.id}`)
@@ -467,6 +485,15 @@ ul li a {
 .widget.recent-posts .post-info .entry-title a {
     color: #303030;
     display: inline-block;
+}
+
+.x11i5rnm {
+  white-space: pre-line;
+  /* Autres styles CSS que vous souhaitez appliquer ici */
+}
+
+.x11i5rnm strong {
+  color: black;
 }
 
 </style>

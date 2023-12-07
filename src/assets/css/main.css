@@ -270,6 +270,7 @@ padding: 0 !important;
 
   .section-header h2 {
     font-size: 23px;
+    margin-bottom: 0 !important;
    
   }
 
@@ -3088,14 +3089,7 @@ footer {
   color: #fff;
 }
 
-@media screen and (max-width: 768px) {
 
-footer  {
-   
-   display: none;
-   
-  }
-}
 
 
 /*--------------------------------------------------------------

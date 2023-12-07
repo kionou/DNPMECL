@@ -37,6 +37,7 @@
                     <p class="info-box-title">Email</p>
 
                     <p class="info-box-subtitle">infodnpmecl@gmail.com </p>
+                    <p class="info-box-subtitle">dnpmecl@mcipme.gov.gn </p>
 
                 </div>
 
@@ -64,7 +65,7 @@
       </div>
         <div class="top-right1">
           <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
-          <img src="@/assets/img/logo/dnpme-cl5.png" alt="" style="max-height: 100px;">
+          <img src="@/assets/img/logo/dnpme-cl6.png" alt="" style="max-height: 100px;">
 
          
         </div>
@@ -406,7 +407,7 @@ padding-top: 10px;
 
 .header-right {
   float: right;
-  width: 430px;
+  width: 436px;
 
 }
 

@@ -198,7 +198,22 @@ export default {
     padding: 15px 10px;
   }
   
+  @media (max-width: 768px){
 
+section {
+padding: 10px !important;
+}
+.page-header h1 {
+
+font-size: 2.5rem;
+text-align: center;   
+}
+
+.page-header p {
+
+text-align: justify;
+}
+}
 
 
 

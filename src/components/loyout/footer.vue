@@ -75,7 +75,7 @@ par email ou par téléphone via les coordonnées ci-après :
 <br>  <i class="bi bi-geo-alt"></i> : <span class="text-left">DNPME-CL, Petit Simbaya, Commune de Ratoma <br>        à 300m de l'Hôpital Flamboyant </span>
 </div>
 </div>
-<div class="col-lg-4 col-md-12  mt -md-5 footer-widget   ">
+<div class="col-lg-4 col-md-12  mt -md-5 footer-widget  trois ">
 <h3 class="widget-title">Liens utiles</h3>
 <ul class="list-arrow">
   <li><router-link to="/">ACCUEIL</router-link></li>
@@ -166,6 +166,14 @@ export default {
     text-transform: uppercase;
     color: #fff;
     /* border-left: 3px solid #ffe600; */
+}
+
+@media screen and (max-width: 768px) {
+
+  .trois{
+
+    display: none;
+  }
 }
 
 </style>

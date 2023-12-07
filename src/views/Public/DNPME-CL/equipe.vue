@@ -35,7 +35,7 @@
                     <div class=" row">
                                                     <!-- 1  -->
                             <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(1)"><img src="@/assets/img/1.png" alt=""></a>
+                                <a ng-click="getEquipe(1)"><img src="@/assets/img/12.jpg" alt=""></a>
                                 <div class="item-related_content fl-wrap" style="background-color: white !important;">
                                     <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(1)"> M                                            Adama SALL</a></h3>
                                     <h3>Directeur de cabinet</h3>
@@ -46,7 +46,7 @@
                             <!-- 1 end-->
                                                     <!-- 1  -->
                             <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(2)"><img src="@/assets/img/3.png" alt=""></a>
+                                <a ng-click="getEquipe(2)"><img src="@/assets/img/12.jpg" alt=""></a>
                                 <div class="item-related_content fl-wrap" style="background-color: white !important;">
                                     <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(2)"> M                                            Yaya KEHO</a></h3>
                                     <h3>Directeur de Cabinet Adjoint</h3>
@@ -57,7 +57,7 @@
                             <!-- 1 end-->
                                                     <!-- 1  -->
                             <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(3)"><img src="@/assets/img/5.png" alt=""></a>
+                                <a ng-click="getEquipe(3)"><img src="@/assets/img/12.jpg" alt=""></a>
                                 <div class="item-related_content fl-wrap" style="background-color: white !important;">
                                     <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(3)"> M                                            Soiliho GRAMBOUTE</a></h3>
                                     <h3>Chef de Cabinet</h3>
@@ -68,7 +68,7 @@
                             <!-- 1 end-->
                                                     <!-- 1  -->
                             <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(4)"><img src="@/assets/img/6.png" alt=""></a>
+                                <a ng-click="getEquipe(4)"><img src="@/assets/img/12.jpg" alt=""></a>
                                 <div class="item-related_content fl-wrap" style="background-color: white !important;">
                                     <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(4)"> M                                            Paul Assémien KOUA</a></h3>
                                     <h3>Chef de la Cellule de Coordination de la Politique Fiscale (CCPF)</h3>
@@ -77,95 +77,10 @@
                                 </div>
                             </div>
                             <!-- 1 end-->
+                                               
+                       
                                                     <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(5)"><img src="@/assets/img/8.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(5)"> M                                            Salifou OUEDRAOGO</a></h3>
-                                    <h3>Conseiller Spécial en charge des réflexions stratégiques</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(6)"><img src="@/assets/img/9.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(6)"> M                                            Hilaire SEA</a></h3>
-                                    <h3>Conseiller Technique en charge du programme économique et financier</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(7)"><img src="@/assets/img/10.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(7)"> Mme                                            Mariame FOFANA</a></h3>
-                                    <h3>Conseiller Technique en charge du Budget</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(9)"><img src="@/assets/img/11.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(9)"> M                                            Fatayu OYENIYE</a></h3>
-                                    <h3>Conseiller Technique en charge des Affaires Douanières</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(10)"><img src="@/assets/img/5.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(10)"> M                                            Daouda KAMAGATE</a></h3>
-                                    <h3>Conseiller Technique en charge de la Fiscalité</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(11)"><img src="@/assets/img/1.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(11)"> M                                            Fabrice TAHI</a></h3>
-                                    <h3>Conseiller Technique en charge du suivi des opérations de financement et du développement</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(12)"><img src="@/assets/img/3.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(12)"> M                                            Adama DOSSO</a></h3>
-                                    <h3>Conseiller Technique en charge de réflexion de politique  économique</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(14)"><img src="@/assets/img/8.png" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(14)"> M                                            Mohamed Hussein Ahmed  KONET</a></h3>
-                                    <h3>Conseiller technique en charge des Participations et de la Privatisation</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
+                            <!-- 1  -->
                         
                                             </div>
                 </div>

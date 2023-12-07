@@ -3954,17 +3954,6 @@ export default {
   color: rgba(156, 163, 175, 1);
 }
 
-@media screen and (max-width: 768px) {
-  .form-container {
-    width: 700px;
-    max-width: 100%;
-  }
-
-  .content-group {
-    display: flex;
-    flex-direction: column;
-  }
-}
 
 .btnForm {
   max-width: 1140px;
@@ -4263,5 +4252,28 @@ export default {
   margin-top: 2.1875rem;
 
   transition: border-color 300ms ease-in-out;
+}
+
+
+@media screen and (max-width: 768px) {
+  .form-container {
+    width: 700px;
+    max-width: 100%;
+  }
+
+  .content-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profil1{
+
+    top:-26px;
+  }
+
+  .upload-area__title{
+
+    font-size:1.6rem;
+  }
 }
 </style>

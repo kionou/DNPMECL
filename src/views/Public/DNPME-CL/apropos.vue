@@ -82,19 +82,19 @@
     class="mySwiper"
   >
     <swiper-slide>
-      <a href="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692564684.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/actualite/1.jpeg" class="img-fluid" alt=""></a>
+      <a href="@/assets/img/carousel/carousel1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="@/assets/img/actualite/1.jpeg" class="img-fluid" alt=""></a>
 
     </swiper-slide>
     <swiper-slide>
-      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
+      <img  src="@/assets/img/carousel/carousel1.jpg" class="img-fluid"  alt="">	
 
     </swiper-slide>
     <swiper-slide>
-      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
+      <img  src="@/assets/img/carousel/carousel2.jpg" class="img-fluid"  alt="">	
 
     </swiper-slide>
     <swiper-slide>
-      <img  src="@/assets/img/actualite/2.jpg" class="img-fluid"  alt="">	
+      <img  src="@/assets/img/carousel/carousel3.jpg" class="img-fluid"  alt="">	
 
     </swiper-slide>
   </swiper>

@@ -386,4 +386,12 @@ export default {
 
     }
 }
+
+@media (max-width: 768px) {
+  .tab-content {
+
+      padding: 10px !important;
+
+  }
+}
 </style>

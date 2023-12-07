@@ -585,6 +585,7 @@ if (this.errors.some((errors) => errors.nom || errors.file)) {
   .banner-title {
 
     font-size: 30px;
+    text-align: center;
 
   }
 }
@@ -996,4 +997,28 @@ ul li a {
   background-color: #fff;
   color: red;
   border: 1px solid red;
-}</style>
+}
+
+@media (max-width: 768px) {
+    h1 {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.article-p {
+   
+    height: auto;
+}
+
+
+h3
+ {
+  
+  font-size: 16px;
+}
+
+   
+}
+
+</style>

@@ -76,6 +76,7 @@
                                 <th>Type de Comptabilite</th>
                                 <th> Chiffre d'Affaire Réel</th>
                                 <th> Capital Social Réel</th>
+                                <th> Nombre d'employés</th>
                                 <th>Action</th>
 
                             </tr>
@@ -95,6 +96,7 @@
 
                                 <td v-if="item.CapitalSocialReel === ''"> 0</td>
                                 <td v-else> {{ item.CapitalSocialReel }}</td>
+                                <td> {{ item.NbreEmploye || 0}} </td>
                                 <td v-if="item.Annee !== new Date().getFullYear()">
                                     <div class="sci">
                                         <span style="--i:1" class="updateclose">
@@ -198,6 +200,19 @@
                             </div>
 
                         </div>
+
+                        <!-- <div class="row mb-3 mt-3 content-group" > -->
+                            <!-- <div class="col"> -->
+                                <div class="input-group">
+                            <label for="NbreEmploye">Nombre d'employés <span class="text-danger">*</span></label>
+                            <input type="text" name="NbreEmploye" id="NbreEmploye" placeholder="" v-model="step1.NbreEmploye">
+                          
+                        </div>
+                        <small v-if="v$.step1.NbreEmploye.$error">{{ v$.step1.NbreEmploye.$errors[0].$message }}</small>
+                            <!-- </div> -->
+                           
+
+                        <!-- </div> -->
                                                
                         <button class="sign" @click.prevent="submit">Enregistrer</button>
                     </div>
@@ -315,6 +330,20 @@
             </div>
 
         </div>
+
+        
+        <!-- <div class="row mb-3 mt-3 content-group" > -->
+                            <!-- <div class="col"> -->
+                                <div class="input-group">
+                            <label for="NbreEmploye">Nombre d'employés <span class="text-danger">*</span> </label>
+                            <input type="text" name="NbreEmploye" id="NbreEmploye" placeholder="" v-model="step2.NbreEmploye">
+                          
+                        </div>
+                        <small v-if="v$.step2.NbreEmploye.$error">{{ v$.step2.NbreEmploye.$errors[0].$message }}</small>
+                            <!-- </div> -->
+                           
+
+                        <!-- </div> -->
                                
         <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
     </div>
@@ -421,6 +450,7 @@ export default {
                 CodeCritereCapitalSocial: '',
                 ChiffreAffaireReel:'',
                 CapitalSocialReel:'',
+                NbreEmploye:'',
             },
             step2: {
                 annee:'',
@@ -429,6 +459,7 @@ export default {
                 CodeCritereCapitalSocial: '',
                 ChiffreAffaireReel:'',
                 CapitalSocialReel:'',
+                NbreEmploye:'',
             },
 
         };
@@ -450,6 +481,7 @@ export default {
             },
             ChiffreAffaireReel: {ValidNumeri},
             CapitalSocialReel: {ValidNumeri},
+            NbreEmploye: {require ,ValidNumeri},
         },
         step2: {
             
@@ -465,6 +497,7 @@ export default {
             },
             ChiffreAffaireReel: {ValidNumeri},
             CapitalSocialReel: {ValidNumeri},
+            NbreEmploye: {require ,ValidNumeri},
         },
 
     },
@@ -532,6 +565,7 @@ export default {
                 ChiffreAffaireReel: this.step1.ChiffreAffaireReel,
                 CapitalSocialReel:this.step1.CapitalSocialReel,
                 TypeComptabilite: this.step1.comptabilite,
+                NbreEmploye: parseInt(this.step1.NbreEmploye) 
             }
             console.log('DataClassification', DataClassification);
 
@@ -733,6 +767,7 @@ export default {
             this.step2.ChiffreAffaireReel = classificationToUpdate.ChiffreAffaireReel;
             this.step2.CapitalSocialReel = classificationToUpdate.CapitalSocialReel;
             this.step2.comptabilite = classificationToUpdate.TypeComptabilite;
+            this.step2.NbreEmploye = classificationToUpdate.NbreEmploye;
 
 
             // Vous pouvez également stocker l'URL du document pour l'affichage
@@ -757,6 +792,7 @@ export default {
             ChiffreAffaireReel: this.step2.ChiffreAffaireReel,
             CapitalSocialReel:this.step2.CapitalSocialReel,
             TypeComptabilite: this.step2.comptabilite,
+            NbreEmploye: parseInt(this.step2.NbreEmploye)
         }
                 console.log('DataClassification', DataClassification);
                 try {
@@ -905,19 +941,19 @@ updateFilterSpec() {
 </script>
     
 <style lang="css" scoped>
+
+/* debut banier */
 .page-header {
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #266486;
-    padding-bottom: 50px;
-    padding-top: 100px;
-    background-image: url('@/assets/img/img1.webp');
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+    padding: 50px 0;
+    background-image: url('@/assets/img/img1.webp'); 
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
 }
-
 .page-header:before {
     content: "";
     position: absolute;
@@ -927,28 +963,51 @@ updateFilterSpec() {
     left: 0;
     background: rgba(0, 0, 0, .45);
 }
-
 .page-header__inner {
     position: relative;
 }
 
-
 .page-header h1 {
     position: relative;
     color: #fff;
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 700;
     padding-top: 1rem;
     margin-bottom: 1rem;
     text-transform: inherit;
 }
-
 .page-header p {
     max-width: 530px;
-    font-size: 1.375rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #fff;
 }
+
+
+@media (max-width: 992px) {
+    .banner-title {
+    
+    font-size: 40px;
+    
+}
+}
+@media (max-width: 768px){
+
+section {
+padding: 20px !important;
+}
+.page-header h1 {
+
+font-size: 2.5rem;
+text-align: center;   
+}
+
+.page-header p {
+
+text-align: justify;
+}
+}
+/* fin banier */
 
 .container_pagination {
     width: auto;
@@ -1426,11 +1485,21 @@ td {
 }
 
 @media screen and (max-width: 768px) {
+
+    .contenu{
+
+        padding: 10px;
+    }
+
+    .bar_search{
+
+        width:100% !important;
+    }
     .liste-searcher {
         flex-direction: column;
         height: auto;
-        margin: 20px auto;
-        width: 80%;
+        /* margin: 20px auto; */
+        width: 100%;
     }
 
     .liste-searcher div {
@@ -1443,5 +1512,30 @@ td {
     .nsl select {
         width: 207.5px;
     }
-}</style >
+}
+
+@media screen and (max-width: 768px) {
+  .form-container {
+    width: 700px;
+    max-width: 100%;
+  }
+
+  .content-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profil1{
+
+    top:-26px;
+  }
+
+  .upload-area__title{
+
+    font-size:1.6rem;
+  }
+}
+
+
+</style >
    

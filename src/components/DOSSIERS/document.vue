@@ -1275,11 +1275,23 @@ padding: 10px;
 }
 
 @media screen and (max-width: 768px) {
+  .bar_search{
+
+    padding: 0 !important;
+  }
+  .two-section{
+    margin:0 !important;
+  }
+
+  .contenu{
+
+    padding:0 !important;
+  }
   .liste-searcher {
     flex-direction: column;
     height: auto;
     margin: 20px auto;
-    width: 80%;
+    width: 100%;
   }
 
   .liste-searcher div {
@@ -1292,6 +1304,15 @@ padding: 10px;
   .nsl select {
     width: 207.5px;
   }
+  .upload-area__drop-zoon{
+
+    padding: 10px;
+  }
+
+  .upload-area__title {
+    font-size: 1.3rem;
+   
+}
 }
 
 
@@ -1321,6 +1342,16 @@ padding: 10px;
 
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
+}
+
+@media (max-width: 768px){
+
+  .btnLogin {
+    
+    right: 5px;
+    top: -43px;
+  
+}
 }
   </style >
  
