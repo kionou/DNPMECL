@@ -398,7 +398,7 @@ export default {
             return Math.ceil(this.filteredClassifications.length / this.itemsPerPage);
         },
         paginatedItems() {
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const startIndex = (this.currentPage - 1)*this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return this.filteredClassifications.slice(startIndex, endIndex);
         },

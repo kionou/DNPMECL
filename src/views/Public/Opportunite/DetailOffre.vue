@@ -134,7 +134,10 @@
           <!-- Header -->
           <div class="upload-area__header">
             <h1 class="upload-area__title">Téléchargez votre fichier</h1>
-            <div class="btnLogin" @click="addDocument"> <i class="bi bi-plus-lg"></i> Ajouter</div>
+            <div class="btnLogin" @click="addDocument"> 
+              <i class="bi bi-plus-lg ajouter"></i>
+               <span>Ajouter</span> 
+             </div>
             <p class="upload-area__paragraph">
               Le fichier doit être un document
               <strong class="upload-area__tooltip">
@@ -1018,7 +1021,46 @@ h3
   font-size: 16px;
 }
 
+.form-container {
+    width: 700px;
+    max-width: 100%;
+  }
+
+  .content-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profil1{
+
+    top:-26px;
+  }
+
+  .upload-area__title{
+
+    font-size:1.6rem;
+    text-align: center !important;
+  }
+
+  .btnLogin{
+    
+    right: 26px;
+    top: 96px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+ 
+}
+  .btnLogin span {
+        display: none;
+    }
+
+
    
 }
+
+
 
 </style>

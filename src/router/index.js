@@ -11,6 +11,7 @@ import Documents from '../views/Public/Documentation.vue'
 import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
 import PhotothequeDetail from '../views/Public/DNPME-CL/detailPhoto.vue'
 import Accompagnenment from '../views/Public/DNPME-CL/accompagnement.vue'
+import Outils from '../views/Public/DNPME-CL/outils.vue'
 import Equipe from '../views/Public/DNPME-CL/equipe.vue'
 
 
@@ -61,6 +62,7 @@ const router = createRouter({
          { path: '/dnpme/phototheque/:id', name: 'PhotothequeDetail', component: PhotothequeDetail , props:true},
          { path: '/dnpme/formalisation', name: 'Formalisation', component: Formalisation},
          { path: '/dnpme/accompagnement', name: 'Accompagnenment', component: Accompagnenment},
+         { path: '/dnpme/outils-acquis', name: 'Outils', component: Outils},
          { path: '/dnpme/equipe-direction', name: 'Equipe', component: Equipe},
 
 

@@ -202,7 +202,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> De promouvoir la créativité et l’innovation dans les domaines des Micros, Petites et Moyennes Entreprises et du Contenu Local ;</li>
                             <li><i class="bi bi-check-circle-fill"></i> D’identifier et de promouvoir les startups et d’en assurer le suivi ;</li>
                             <li><i class="bi bi-check-circle-fill"></i> D’encadrer les interventions des structures d’accompagnements des entreprises évoluant dans les domaines des micros, petites et moyennes entreprises ; </li>
-                            <li><i class="bi bi-check-circle-fill"></i> D’œuvrer à la mise en place, au bon fonctionnement et à la coordination d’infrastructures dédiées aux Micros, Petites et Moyennes Entreprises y compris les Centres d’Appui aux Petites et Moyennes Entreprises et les Structures d’Accompagnements des Entreprises ;</li>
+                           
                           
                           </ul>
                      
@@ -273,14 +273,12 @@
                   <div   v-show="show3 " class="transition-height" >
                       <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
                       
-                          <ul>
-                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
-                            <li><span>Les groupements d'entreprises;</span></li>
-                            <li><span>Les groupements professionnels;</span></li>
-                            <li><span>Les coopératives de production et de transformation;</span></li>
-                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
-                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
-                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
+                            <ul class='text-justify'>
+                            <li><i class="bi bi-check-circle-fill"></i> Construction des Centres d’Appuis aux Petites et Moyennes Entreprises dans les sept (7) régions administratives, celui de Conakry est déjà opérationnel;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Elaboration de la loi sur les Startups ;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Proposition d'un Décret qui règlemente le secteur des Structures d'Appui aux Entreprises ; </li>
+                            <li><i class="bi bi-check-circle-fill"></i> S'assurer que 90% des entreprises respectent la loi portant Contenu Local.</li>
+                          
                           </ul>
                      
                       </div>

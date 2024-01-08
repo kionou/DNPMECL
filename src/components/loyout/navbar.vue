@@ -93,6 +93,7 @@
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
               <li><router-link to="/dnpme/formalisation">FORMALISATION</router-link></li>
               <li><router-link to="/dnpme/accompagnement">ACCOMPAGNEMENT</router-link></li>
+              <li><router-link to="/dnpme/outils-acquis">OUTILS & ACQUIS </router-link></li>
               <li><router-link to="/dnpme/equipe-direction">EQUIPE-DIRECTION</router-link></li>
 
 

@@ -127,6 +127,7 @@ paginatedItems() {
     },
     updatePaginatedItems() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+     
       const endIndex = startIndex + this.itemsPerPage;
       return this.ActualitesOptions.slice(startIndex, endIndex);
     },
@@ -134,7 +135,8 @@ paginatedItems() {
   try {
     await this.$store.dispatch('fetchActualites' , page);
     const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
-    console.log('Actualités récupérées :', actualites);
+    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchActualites ~ actualites:", actualites)
+   
     this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
         console.log('jjjjjjjjjj',this.totalPageArray);
         this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
