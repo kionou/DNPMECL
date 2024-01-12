@@ -1,5 +1,5 @@
 <template >
-   
+    <Loading v-if="loading"></Loading>
     <div id="banner-area" class="banner-area" >
     <div class="banner-text">
       <div class="container">
@@ -32,73 +32,151 @@
                         <h2>Les Directeurs de Cabinet, le Chef de Cabinet et les Conseillers du Ministre</h2>
                     </div>
                     <!-- post-related -->
-                    <div class=" row">
+                    <div v-if="paginatedItems.length === 0" class="noresul">
+                     <span> Aucune Equipe !!! </span>
+             </div> 
+                    <div v-else   class=" row justify-content-center">
                                                     <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(1)"><img src="@/assets/img/12.jpg" alt=""></a>
+                            <div v-for="equipe in paginatedItems" :key="equipe.id" class="item-related-equipe col-md-3 show-reg-form mr-3" style="height: 370px; cursor:pointer;">
+                                <a v-if="equipe.PhotoPersonnel === null" ng-click="getEquipe(1)"><img src="@/assets/img/12.jpg" alt=""></a>
+                                <a  v-else ng-click="getEquipe(1)"><img :src="equipe.PhotoPersonnel" alt=""></a>
                                 <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(1)"> M                                            Adama SALL</a></h3>
-                                    <h3>Directeur de cabinet</h3>
+                                    <h3 v-if="equipe.SexePersonnel === 'M'" class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(1)"> Monsieur {{equipe.NomPersonnel}} {{equipe.PrenomsPersonnel}} </a></h3>
+                                    <h3  v-else class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(1)"> Madame {{equipe.NomPersonnel}} {{equipe.PrenomsPersonnel}}</a></h3>
+                                    <h3>{{equipe.PostePersonnel}} </h3>
                                     <ul class="pwic_opt">
                                     </ul>
                                 </div>
                             </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(2)"><img src="@/assets/img/12.jpg" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(2)"> M                                            Yaya KEHO</a></h3>
-                                    <h3>Directeur de Cabinet Adjoint</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(3)"><img src="@/assets/img/12.jpg" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(3)"> M                                            Soiliho GRAMBOUTE</a></h3>
-                                    <h3>Chef de Cabinet</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                                    <!-- 1  -->
-                            <div class="item-related-equipe col-md-3 show-reg-form" style="height: 370px; cursor:pointer;">
-                                <a ng-click="getEquipe(4)"><img src="@/assets/img/12.jpg" alt=""></a>
-                                <div class="item-related_content fl-wrap" style="background-color: white !important;">
-                                    <h3 class="srf_btn htact show-reg-form hover"><a ng-click="getEquipe(4)"> M                                            Paul Assémien KOUA</a></h3>
-                                    <h3>Chef de la Cellule de Coordination de la Politique Fiscale (CCPF)</h3>
-                                    <ul class="pwic_opt">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 1 end-->
-                                               
-                       
-                                                    <!-- 1  -->
-                            <!-- 1  -->
+                           
+                            
+                            
+                           
+                          
                         
                                             </div>
                 </div>
                 <!-- post-related  end-->
             </div>
+
+            <div class="container_pagination">
+  <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
+</div>
 </div>
    
 </template>
 <script>
+import Loading from '@/components/Public/other/preloader.vue';
+import Pag from '@/components/Public/other/pag.vue';
 export default {
+    components: {
+   Loading , Pag
+
+},
+
+computed: {
+
+
+totalPages() {
+return Math.ceil(this.EquipesOptions.length / this.itemsPerPage);
+},
+paginatedItems() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.EquipesOptions.slice(startIndex, endIndex);
+},
+},
     data() {
         return {
-            
+            loading:true,
+            currentPage: 1,
+            itemsPerPage: 12,
+            EquipesOptions:[],
+            totalPageArray: [],
         }
+    },
+    async mounted() {
+    await this.fetchPersonnel(1)
+        
+    },
+    methods: {
+        updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
+    },
+    updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+     
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.EquipesOptions.slice(startIndex, endIndex);
+    },
+  async fetchPersonnel(page) {
+  try {
+    await this.$store.dispatch('fetchPersonnel' , page);
+    const Personnels = JSON.parse(JSON.stringify(this.$store.getters['getPersonnelData']));
+    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchPersonnel ~ actualites:", Personnels)
+   
+    this.totalPageArray = this.totalPageArray.concat(Personnels.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        this.EquipesOptions  = this.totalPageArray.filter(partenaire => partenaire.Publish === 1);  
+        console.log('rrrrrrrrrrr',this.EquipesOptions);     
+        
+
+
+          if (page === 1) {
+            this.EquipesOptions = this.totalPageArray.filter(partenaire => partenaire.Publish === 1);
+        const totalPages = Personnels.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+      this.loading = false
+    
+
+    // Continuez avec le reste de votre code pour traiter les actualités
+  } catch (error) {
+    console.error('Erreur lors de la récupération des actualités :', error.message);
+  }
+},
+
+compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchPersonnel(i);
+  }
+},
     },
 }
 </script>
 <style lang="css" scoped>
+
+.container_pagination {
+  width: auto;
+  text-align: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin: 5px;
+
+}
+.noresul {
+border: 1px solid #F9D310;
+max-width: 1140px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 50px;
+border-radius: 6px;
+font-size: 20px;
+
+}
 
 .banner-area {
     position: relative;

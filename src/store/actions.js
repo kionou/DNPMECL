@@ -406,7 +406,7 @@ async fetchDataFromAPI({ commit }) {
   async fetchSousSecteurs({ commit }, page) {
     console.log('page',page);
     try {
-      const response = await axios.get(`https://mpme-guinee.com/bd/public/api/sous-secteurs?page=${page}`);
+      const response = await axios.get(`/sous-secteurs?page=${page}`);
       const sousSecteursData = response.data.data;
       console.log('sousSecteursData',sousSecteursData);
 
@@ -416,6 +416,31 @@ async fetchDataFromAPI({ commit }) {
       console.error('Erreur lors de la récupération des données des sous-secteurs:', error);
     }
   },
+
+
+  async fetchAccompagnement({ commit }, page) {
+    try {
+      const response = await axios.get(`/mpme/liste/accompagnement?page=${page}`, { params: { statut: true } });
+      const data = response.data.data;
+      console.log('data', data);
+      commit('SET_ACCOMPAGEMENT', data);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des accompagnements :', error);
+    }
+  },
+
+  // Méthode pour récupérer les données depuis /mpme/personnel
+async fetchPersonnel({ commit }, page) {
+  try {
+    const response = await axios.get(`/mpme/liste/personnel?page=${page}`, { params: { statut: true } });
+    const data = response.data.data;
+    console.log('data', data);
+    commit('SET_PERSONNEL', data); // Utilisez le nom de mutation approprié
+  } catch (error) {
+    console.error('Erreur lors de la récupération du personnel :', error);
+  }
+},
+
 
 
   

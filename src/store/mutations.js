@@ -91,6 +91,14 @@ export default {
   SET_SOUS_SECTEURS(state, data) {
     state.sousSecteurs = data;
   },
+
+  SET_ACCOMPAGEMENT(state, accompagnementData) {
+    state.accompagnementData = accompagnementData;
+  },
+
+  SET_PERSONNEL(state, personnelData) {
+    state.personnelData = personnelData;
+  },
   
   
 }

@@ -409,6 +409,7 @@ computed:{
             Whatsapp: this.phoneNumber,
             Identifiant: this.identifiant || null,
             CodePartenaire:null,
+            FirstConnexion:2
 
 
        }
@@ -459,6 +460,7 @@ computed:{
           AdresseEmail: this.email,
           password: this.password,
           password_confirmation: this.confirmer_password,
+          FirstConnexion:2
          
         }
         console.log('eeedata', DataMpme);

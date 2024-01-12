@@ -1,4 +1,5 @@
 <template>
+   <Loading v-if="loading"></Loading>
     <div>
       <div id="banner-area" class="banner-area" >
     <div class="banner-text">
@@ -32,86 +33,169 @@
         <p class="mt-3" style="font-weight: bolder;">Sélectionner la forme d’entreprise que vous voulez créer !</p>
              
         </div> -->
-        <div class=" class1" data-aos="fade-up" data-aos-delay="100">
+
+        <div v-if="paginatedItems.length === 0" class="noresul">
+                     <span> Aucune Equipe !!! </span>
+             </div> 
+        <div  v-else class=" class1" data-aos="fade-up" data-aos-delay="100">
         
         
-          <div class="box">
+          <div class="box" v-for="accompagnement in paginatedItems" :key="accompagnement.id">
             <div class="service-item position-relative">
               
-              <h3> Lorem ipsum dolor sit amet, consectetur. </h3>
+              <h3> {{ accompagnement.Intitule }} </h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum aperiam ipsum sint. Voluptatibus, reiciendis doloremque.
+                {{ truncateTitle(accompagnement.Description, 70) }}
 
               </p>
-                <a class="sign" href="#">Detail</a>
+                <router-link class="sign"  :to="'/dnpme/accompagnement/' + accompagnement.id" >Detail</router-link>
 
             </div>
           </div>
 
-          <!-- <div class="box">
-            <div class="service-item position-relative">
-              
-              <h3>Société Anonyme SA </h3>
-              <p> La SA ou société anonyme est une société de capitaux. 
-                Elle rassemble des personnes qui peuvent ne pas se connaître et dont la participation
-                 est fondée sur les capitaux qu'ils ont investis dans l'entreprise.
-                 Elle concerne donc les projets importants.</p>
-                 <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=sa">Procedure de formalisation</a>
-
-            </div>
-          </div>
-
-          <div class="box">
-            <div class="service-item position-relative">
-              
-              <h3> Groupement d’intérêt économique GIE  </h3>
-              <p>
-                Un "Groupement d'intérêt économique" est une organisation créée entre deux ou plusieurs personnes
-                 physiques ou morales en vue du développement de l'activité de ses membres.
-                </p>
-                <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=gie">Procedure de formalisation</a>
-
-            </div>
-          </div>
-
-          <div class="box">
-            <div class="service-item position-relative"> 
-              <h3>Succursale </h3>
-              <p>Établissement qui dépend d'un siège central, tout en jouissant d'une certaine autonomie. </p>
-              <a class="sign" href="https://www.invest.gov.gn/page/creer-votre-entreprise?onglet=succursale">Procedure de formalisation</a>
-
-            </div>
-           </div>  -->
+        
 
         </div>
 
       </div>
     </section>
-    <!-- End Our Services Section -->
+    <div class="container_pagination">
+  <Pag :current-page="currentPage" :total-pages="totalPages" @page-change="updateCurrentPage" />
+</div>
     </div>
 </template>
 
 <script>
+import Loading from '@/components/Public/other/preloader.vue';
+import Pag from '@/components/Public/other/pag.vue';
+
 export default {
     name: 'DNPMECLReglementation',
+    components: {
+   Loading , Pag
 
+},
+
+computed: {
+
+
+totalPages() {
+return Math.ceil(this.AccompagnementsOptions.length / this.itemsPerPage);
+},
+paginatedItems() {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  return this.AccompagnementsOptions.slice(startIndex, endIndex);
+},
+},
     data() {
         return {
-            
+          loading:true,
+            currentPage: 1,
+            itemsPerPage: 12,
+            AccompagnementsOptions:[],
+            totalPageArray: [],
         };
     },
 
-    mounted() {
-        
+   async mounted() {
+         
+    await this.fetchAccompagnement(1)
+     
     },
 
     methods: {
         
     },
+
+
+    methods: {
+
+      truncateTitle(title, maxLength) {
+    if (title.length > maxLength) {
+      return title.slice(0, maxLength) + '...';
+    }
+    return title;
+  },
+        updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
+    },
+    updatePaginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+     
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.AccompagnementsOptions.slice(startIndex, endIndex);
+    },
+  async fetchAccompagnement(page) {
+  try {
+    await this.$store.dispatch('fetchAccompagnement' , page);
+    const accompagnement = JSON.parse(JSON.stringify(this.$store.getters['getAccompagnementData']));
+    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchAccompagnement ~ actualites:", accompagnement)
+   
+    this.totalPageArray = this.totalPageArray.concat(accompagnement.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        this.AccompagnementsOptions  = this.totalPageArray.filter(partenaire => partenaire.Valid === 0);  
+        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+        
+
+
+          if (page === 1) {
+            this.AccompagnementsOptions = this.totalPageArray.filter(partenaire => partenaire.Valid === 0);
+        const totalPages = accompagnement.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+      this.loading = false
+    
+
+    // Continuez avec le reste de votre code pour traiter les actualités
+  } catch (error) {
+    console.error('Erreur lors de la récupération des actualités :', error.message);
+  }
+},
+
+compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchPersonnel(i);
+  }
+},
+    },
 };
 </script>
 
 <style lang="css" scoped>
+
+.noresul {
+border: 1px solid #F9D310;
+max-width: 1140px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 50px;
+border-radius: 6px;
+font-size: 20px;
+
+}
+
+.container_pagination {
+  width: auto;
+  text-align: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin: 5px;
+
+}
 
 .banner-area {
     position: relative;

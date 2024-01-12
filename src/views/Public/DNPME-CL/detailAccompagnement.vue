@@ -1,0 +1,555 @@
+<template>
+    <Loading v-if="loading"></Loading>
+    <div>
+        <div id="banner-area" class="banner-area">
+            <div class="banner-text">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="banner-heading">
+                                <h1 class="banner-title">accompagnement</h1>
+                                <nav aria-label="breadcrumb">
+
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">accompagnement</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div><!-- Col end -->
+                    </div><!-- Row end -->
+                </div><!-- Container end -->
+            </div><!-- Banner text end -->
+        </div>
+
+        <div class="section-header " style="padding-bottom: 0 !important;">
+            <h2 style="color: var(--color-primary);">ACCOMPAGNEMENT </h2>
+        </div>
+
+        <section id="main-container" class="main-container" style="padding:0 0 60px !important;">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 mb-5 mb-lg-0 article">
+
+
+                        <h1>{{ AccompagnementsOptions.Intitule }}</h1><br>
+                        
+                        <div class="article-p">
+                            <div class="image">
+                            <img :src="AccompagnementsOptions.Photo" class="img-fluid" alt=" actualite" >
+
+                            </div>
+                        </div>
+
+                      
+                        <p class="x11i5rnm" style="white-space: pre-line; color: black;">
+                            <span  >
+                                {{  convertirHtmlEnTexte(AccompagnementsOptions.Description)  }}
+                            </span>
+                        </p>
+
+                    </div>
+                    <!-- Content Col end -->
+
+
+
+                    <div class="col-lg-4">
+
+                        <div class="sidebar sidebar-right">
+
+                            <div class="widget">
+                                <h3 class="widget-title">A PROPOS DE LA DNPME-CL</h3>
+                                <ul class="arrow nav nav-tabs">
+                                    <li><router-link to="/dnpme/apropos">A propos</router-link></li>
+                                    <li><router-link to="/dnpme/mot-de-la-dn">Mot du DN</router-link></li>
+                                    <li><router-link to="/dnpme/Reformes-textes-de-lois">Réformes et textes de
+                                            lois</router-link></li>
+                                    <li><router-link to="/dnpme/phototheque">Photothèque</router-link></li>
+                                  <li><router-link to="/dnpme/formalisation">formalisations</router-link></li>
+
+
+                                </ul>
+                            </div>
+
+                            <div class="widget recent-posts">
+                                <h3 class="widget-title">Autres articles</h3>
+                                <ul class="list-unstyled">
+
+                                    <li class="d-flex align-items-center" v-for="actualiteRecent in ActualitesOptions" :key="actualiteRecent.id">
+                                        <div class="posts-thumb" >
+                                            <a :href="`/actualites/${actualiteRecent.id}`">
+                                                <img loading="lazy" alt="image-actualite" :src="updatePicture( actualiteRecent.images)">
+                                            </a>
+                                           
+                                        </div>
+
+                                        <div class="post-info" >
+                                            <h4 class="entry-title" style="text-transform: capitalize;">
+                                                <a :href="`/actualites/${actualiteRecent.id}`">
+                                                {{ actualiteRecent.titre }}
+                                            </a>
+                                            </h4>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+
+                        </div><!-- Sidebar end -->
+                    </div><!-- Sidebar Col end -->
+
+                </div><!-- Main row end -->
+
+            </div><!-- Container end -->
+        </section>
+    </div>
+</template>
+
+<script>
+
+import 'swiper/swiper-bundle.css';
+
+import Loading from '@/components/Public/other/preloader.vue';
+export default {
+    name: 'DNPMECLActualiteDetail',
+    props: ['id'],
+    components: {
+        Loading
+
+    },
+    computed: {
+    parsedContent() {
+      return this.content.replace(/&nbsp;/g, ' '); // Remplace les espaces non rompus HTML
+    },
+  },
+
+    data() {
+        return {
+            loading: true,
+            ActualitesOptions:[],
+            images: [],
+            AccompagnementsOptions:'', 
+            totalPageArray: [], 
+
+        };
+    },
+
+    async mounted() {
+       
+        await this.fetchAccompagnementDetail(1)
+       
+       await  this.fetchActualites()
+    },
+
+    methods: {
+
+        updatePicture(picture){
+       return picture.split('|')[0]
+        // Object.keys(monObjet).map(key => monObjet[key])
+      },
+    
+      convertirHtmlEnTexte(chaineHtml) {
+  // Créez un élément HTML temporaire (div)
+  const tempDiv = document.createElement('div');
+
+  // Injetez le HTML dans l'élément temporaire
+  tempDiv.innerHTML = chaineHtml;
+
+  // Utilisez textContent pour extraire le texte brut
+  const texteBrut = tempDiv.textContent || tempDiv.innerText;
+
+  // Retournez le texte brut
+  return texteBrut;
+},
+async fetchAccompagnementDetail(page) {
+  try {
+    await this.$store.dispatch('fetchAccompagnement' , page);
+    const accompagnement = JSON.parse(JSON.stringify(this.$store.getters['getAccompagnementData']));
+    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchAccompagnement ~ actualites:", accompagnement)
+   
+    this.totalPageArray = this.totalPageArray.concat(accompagnement.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        const foundAccompagnement = this.totalPageArray.find(item => item.id === parseInt(this.id) );
+        this.AccompagnementsOptions  =  foundAccompagnement 
+        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+        
+
+
+          if (page === 1) {
+            const foundAccompagnement = this.totalPageArray.find(item => item.id === parseInt(this.id) );
+           this.AccompagnementsOptions  =  foundAccompagnement 
+        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+
+        const totalPages = accompagnement.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+
+
+      }
+      this.loading = false
+    
+
+    // Continuez avec le reste de votre code pour traiter les actualités
+  } catch (error) {
+    console.error('Erreur lors de la récupération des actualités :', error.message);
+  }
+},
+
+        async fetchActualites(page) {
+            try {
+                await this.$store.dispatch('fetchActualites' ,page);
+                const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
+             
+
+                    this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray);
+        this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
+        
+
+
+          if (page === 1) {
+            this.ActualitesOptions = this.totalPageArray.filter(partenaire => partenaire.publish === 1);
+        const totalPages = actualites.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+      }
+
+      
+                     console.log('Actualités récupérées :', this.ActualitesOptions);
+                     this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
+                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des actualités :', error.message);
+            }
+        },
+
+        compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchActualites(i);
+    this.fetchAccompagnementDetail(i)
+  }
+},
+
+    },
+};
+</script>
+
+<style lang="css" scoped>
+
+.section-header {
+    padding: 30px 0;
+
+}
+
+/* debut banier */
+.banner-area {
+    position: relative;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #266486;
+    min-height: 250px;
+    background-image: url('@/assets/img/banner/actualites1.jpg'); 
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+
+}
+
+.banner-area:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.breadcrumb-item,
+.breadcrumb-item a {
+    color: #fff !important;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    max-width: 1170px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    /* -webkit-transform: translateY(-50%); */
+    transform: translateY(-50%);
+}
+
+.banner-heading {
+    text-align: center;
+}
+
+.banner-title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 58px;
+    font-weight: 900;
+}
+
+.breadcrumb {
+    padding: 0;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff !important;
+}
+
+@media (max-width: 992px) {
+    .banner-title {
+
+        font-size: 40px;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-title {
+
+        font-size: 30px;
+
+    }
+}
+
+@media (max-width: 500px) {
+    .banner-title {
+
+        font-size: 25px;
+
+    }
+}
+
+/* fin banier */
+
+
+.into-sub-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: normal;
+    margin: 10px 0;
+}
+
+hr {
+    background-color: #e7e7e7;
+    border: 0;
+    height: 1px;
+    margin: 40px 0;
+}
+
+
+
+h4 {
+    font-size: 18px;
+    line-height: 28px;
+    text-transform: uppercase;
+    letter-spacing: -.2px;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 48px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #101010;
+    font-weight: 700;
+    
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+.article p {
+    text-align: justify !important;
+}
+.article-p{
+    padding: 10px;
+    border: 1px solid var(--color-secondary);
+    display: flex;
+    justify-content: center;
+        align-items: center;
+    width: 100%;
+    height: 400px;
+
+}
+
+.article-p .image{
+/* border: 1px solid red; */
+/* width: 100%; */
+height: 100%;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-p .image img{
+
+width: 100%;
+height: 100%;
+}
+
+
+.swiper-slide {
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+}
+
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.swiper-slide {
+    width: 100% !important;
+
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+
+.sidebar-right .widget {
+    margin-left: 20px;
+}
+
+.sidebar .widget {
+    margin-bottom: 40px;
+}
+
+
+.sidebar .widget-title {
+    font-size: 16px;
+    font-weight: 700;
+    position: relative;
+    margin: 0 0 30px;
+    padding-left: 15px;
+    text-transform: uppercase;
+    border-left: 4px solid var(--color-secondary);
+}
+
+.sidebar ul.nav-tabs {
+    border: 0;
+}
+
+.sidebar ul.nav-tabs li {
+    color: #303030;
+    line-height: normal;
+}
+
+
+.sidebar ul.nav-tabs li {
+    width: 100%;
+}
+
+.sidebar ul.nav-tabs li a {
+    color: #303030;
+    border-radius: 0;
+    padding: 15px 0;
+    padding-left: 0;
+    font-weight: 400;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    transition: 400ms;
+    font-size: 14px;
+}
+
+.widget.recent-posts .widget-title {
+    margin-bottom: 35px;
+}
+
+.widget.recent-posts ul li {
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 15px;
+    margin-bottom: 17px;
+}
+
+.widget ul li {
+    line-height: 30px;
+}
+
+ul li a {
+    color: #303030;
+}
+
+.sidebar .widget ul li a:hover {
+    color: var(--color-primary) !important;
+    font-weight: bold;
+}
+
+.posts-thumb {
+    width: 70% !important;
+}
+
+.widget.recent-posts .posts-thumb img {
+    margin-right: 15px;
+    /* width: 90px; */
+    height: 70px;
+}
+
+.widget.recent-posts .post-info .entry-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+}
+
+.widget.recent-posts .post-info .entry-title a {
+    color: #303030;
+    display: inline-block;
+}
+.x11i5rnm {
+  white-space: pre-line;
+  /* Autres styles CSS que vous souhaitez appliquer ici */
+}
+
+.x11i5rnm strong {
+  color: black;
+}
+
+@media (max-width: 768px) {
+    h1 {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.article-p {
+   
+    height: auto;
+}
+   
+}
+</style>

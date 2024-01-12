@@ -29,8 +29,9 @@ export default{
     getTypesContribuables: (state) => state.typesContribuables,
     getPubliqueVisiblePhotos: (state) => state.publiqueVisiblePhotos,
 
-    getSousSecteursOptions: (state) =>state.sousSecteurs
-    
+    getSousSecteursOptions: (state) =>state.sousSecteurs,
+    getAccompagnementData: (state) => state.accompagnementData,
+    getPersonnelData: (state) => state.personnelData,
       
 
 

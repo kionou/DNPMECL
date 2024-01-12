@@ -29,5 +29,7 @@ export default{
     typesContribuables: [],
     publiqueVisiblePhotos: [],
     sousSecteurs: [],
+    accompagnementData: [],
+    personnelData: [],
 
 }

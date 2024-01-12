@@ -75,11 +75,11 @@
           <div class="row mb-3 mt-3 content-group">
             <div class="col">
               <div class="input-groupe">
-                <label for="typedemande">Type de la Demande <span class="text-danger">*</span></label>
-                <MazSelect v-model="typedemande" color="secondary" :options="DemandesOptions"/>
+                <label for="typedemande">Region <span class="text-danger">*</span></label>
+                <MazSelect v-model="typedemande" color="secondary" :options="regionOptions"/>
               </div>
-              <small v-if="v$.typedemande.$error && !validateDemandeMatch()">{{ v$.typedemande.$errors[0].$message }}</small>
-            <small v-else-if="validateDemandeMatch()">Le type sélectionné ne convient pas à votre demande</small>
+              <small v-if="v$.typedemande.$error">{{ v$.typedemande.$errors[0].$message }}</small>
+            
 
             </div>
             <div class="col">
@@ -92,6 +92,9 @@
           </div>
 
           <div class="row mb-3 mt-3 content-group">
+
+
+            
             <div class="col">
               <div class="input-groupe">
                 <label for="Description">Description<span class="text-danger">*</span></label>
@@ -156,7 +159,7 @@ export default {
       typepartenariat:'',
       description:'',
       error:'',
-      DemandesOptions:[],
+      regionOptions:[],
      v$:useVuelidate(), 
     };
     
@@ -194,7 +197,7 @@ export default {
   },
 
   async mounted() {
-    await this.fetchDemandesOptions()
+    await this.fetchRegionOptions()
  
   },
 
@@ -206,14 +209,20 @@ export default {
       
      return this.typedemande !== 'Demande de partenariat' &&  this.typedemande !== ""
     },
-    async fetchDemandesOptions() { 
+    async fetchRegionOptions() {
+      // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
-        await this.$store.dispatch('fetchTypeDemandeData');
-        const options = JSON.parse(JSON.stringify(this.$store.getters['getTypeDemandesData']));
-        console.log('Options des deamde:', options);
-        this.DemandesOptions = options; 
+        await this.$store.dispatch("fetchRegionOptions");
+        const options = JSON.parse(
+          JSON.stringify(this.$store.getters["getRegionOptions"])
+        ); // Accéder aux options des pays via le getter
+        this.regionOptions = options; // Affecter les options à votre propriété sortedCountryOptions
+        console.log( this.regionOptions);
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des demande :', error);
+        console.error(
+          "Erreur lors de la récupération des options des pays :",
+          error.message
+        );
       }
     },
   
@@ -230,13 +239,14 @@ export default {
             Description: this.description,
             AdresseEmail: this.email,
             Telephone: this.phoneNumber,
-            TypeDemande: this.typedemande,
+            TypeDemande: "Demande de partenariat",
             TypePartenariat: this.typepartenariat,
+            Region:this.typedemande
         }
         console.log('eeedata', DataPartenariat);
           try {
-          const response = await axios.post('/gestion-des-demandes', DataPartenariat);
-          console.log('response.sousprefecture', response);
+          // const response = await axios.post('/gestion-des-demandes', DataPartenariat);
+          // console.log('response.sousprefecture', response);
           if (response.data.status === 'success') {
             this.loading = false
             this.isOpen = true
