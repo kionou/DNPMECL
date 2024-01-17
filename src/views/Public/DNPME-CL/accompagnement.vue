@@ -35,7 +35,7 @@
         </div> -->
 
         <div v-if="paginatedItems.length === 0" class="noresul">
-                     <span> Aucune Equipe !!! </span>
+                     <span> Aucun accompagnement !!! </span>
              </div> 
         <div  v-else class=" class1" data-aos="fade-up" data-aos-delay="100">
         
@@ -138,13 +138,13 @@ paginatedItems() {
    
     this.totalPageArray = this.totalPageArray.concat(accompagnement.data); // Fusion des tableaux des différentes pages
         console.log('jjjjjjjjjj',this.totalPageArray);
-        this.AccompagnementsOptions  = this.totalPageArray.filter(partenaire => partenaire.Valid === 0);  
+        this.AccompagnementsOptions  = this.totalPageArray.filter(partenaire => partenaire.Valid === 1);  
         console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
         
 
 
           if (page === 1) {
-            this.AccompagnementsOptions = this.totalPageArray.filter(partenaire => partenaire.Valid === 0);
+            this.AccompagnementsOptions = this.totalPageArray.filter(partenaire => partenaire.Valid === 1);
         const totalPages = accompagnement.last_page;
         this.totalPages = totalPages;
         this.compterJusqua(totalPages);

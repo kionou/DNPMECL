@@ -255,7 +255,7 @@ async fetchAccompagnementDetail(page) {
     background-size: cover;
     background-color: #266486;
     min-height: 250px;
-    background-image: url('@/assets/img/banner/actualites1.jpg'); 
+    background-image: url('@/assets/img/img1.webp'); 
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
 }

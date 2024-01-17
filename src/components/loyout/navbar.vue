@@ -65,7 +65,7 @@
       </div>
         <div class="top-right1">
           <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
-          <img src="@/assets/img/logo/dnpme-cl6.png" alt="" style="max-height: 100px;">
+          <img src="@/assets/img/logo/logo.svg" alt="" style="max-height: 135px;">
 
          
         </div>
@@ -89,6 +89,7 @@
         <ul  class="dropdown-menu">
               <li><router-link to="/dnpme/apropos">A PROPOS</router-link></li>
               <li><router-link to="/dnpme/mot-de-la-dn">MOT DE LA DN</router-link></li>
+              <li><router-link to="/dnpme/mot-de-la-ministre">MOT DE LA MINISTRE</router-link></li>
               <li><router-link  class="text-uppercase" to="/dnpme/Reformes-textes-de-lois">Réformes et textes de lois</router-link></li>
               <li><router-link to="/dnpme/phototheque">PHOTOTHEQUE</router-link></li>
               <li><router-link to="/dnpme/formalisation">FORMALISATION</router-link></li>

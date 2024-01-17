@@ -7,6 +7,7 @@ import Page404 from '../views/Public/page404.vue';
 import Accueil from '../views/Public/Accueil.vue'
 import Apropos from '../views/Public/DNPME-CL/apropos.vue'
 import Mot from '../views/Public/DNPME-CL/mot.vue'
+import Ministre from '../views/Public/DNPME-CL/ministre.vue'
 import Documents from '../views/Public/Documentation.vue'
 import Phototheque from '../views/Public/DNPME-CL/phototheque.vue'
 import PhotothequeDetail from '../views/Public/DNPME-CL/detailPhoto.vue'
@@ -58,6 +59,7 @@ const router = createRouter({
          
          { path: '/dnpme/apropos', name: 'Apropos', component: Apropos},
          { path: '/dnpme/mot-de-la-dn', name: 'Mot', component: Mot},
+         { path: '/dnpme/mot-de-la-ministre', name: 'Ministre', component: Ministre},
          { path: '/dnpme/Reformes-textes-de-lois', name: 'documents', component: Documents},
          { path: '/dnpme/phototheque', name: 'Photothèque', component: Phototheque},
          { path: '/dnpme/phototheque/:id', name: 'PhotothequeDetail', component: PhotothequeDetail , props:true},
