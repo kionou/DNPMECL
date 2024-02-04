@@ -148,7 +148,7 @@
                             <div class="col">
                                 <div class="input-group">
                                     <label for="username">Année <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"    />
+                                    <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  />
                                 </div>
                                 <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
                             </div>
@@ -174,7 +174,7 @@
 
                         <div class="col">
                             <div class="input-group">
-                            <label for="CodeCritereCapitalSocial">Critère par Capital Social <span class="text-danger">*</span></label>
+                            <label for="CodeCritereCapitalSocial">Critère par Invertissement <span class="text-danger">*</span></label>
                             <MazSelect v-model="step1.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
                            
                         </div>
@@ -193,7 +193,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                            <label for="CapitalSocialReel">Capital Social Réel </label>
+                            <label for="CapitalSocialReel">Invertissement Réel </label>
                             <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step1.CapitalSocialReel">
                         </div>
                         <small v-if="v$.step1.CapitalSocialReel.$error">{{ v$.step1.CapitalSocialReel.$errors[0].$message }}</small>
@@ -277,7 +277,7 @@
             <div class="col">
                 <div class="input-group">
                     <label for="username">Année <span class="text-danger">*</span></label>
-            <MazInput v-model="step2.annee" type="text" color="secondary"  style="width: 100%;" disabled />
+               <MazInput v-model="step2.annee" type="text" color="secondary"  style="width: 100%;" disabled  search option-value-key="value" option-label-key="label" option-input-value-key="value"/>
                    
                 </div>
                
@@ -304,7 +304,7 @@
 
         <div class="col">
             <div class="input-group">
-            <label for="CodeCritereCapitalSocial">Critère par Capital Social <span class="text-danger">*</span></label>
+            <label for="CodeCritereCapitalSocial">Critère par Invertissement <span class="text-danger">*</span></label>
             <MazSelect v-model="step2.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
            
         </div>
@@ -323,7 +323,7 @@
             </div>
             <div class="col">
                 <div class="input-group">
-            <label for="CapitalSocialReel">Capital Social Réel </label>
+            <label for="CapitalSocialReel">Invertissement Réel </label>
             <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step2.CapitalSocialReel">
         </div>
         <small v-if="v$.step2.CapitalSocialReel.$error">{{ v$.step2.CapitalSocialReel.$errors[0].$message }}</small>
@@ -443,8 +443,9 @@ export default {
             ToDeleteId: null,
             updateImageId: null,
             updateClassId: null,
+            anneeEnCours:'',
             step1: {
-                annee:'',
+                annee: '',
                 CodeCritereChiffreAffaire: '',
                 comptabilite: '',
                 CodeCritereCapitalSocial: '',
@@ -506,7 +507,8 @@ export default {
     },
 
   async  mounted() {
-    
+ 
+   
      await this.fetchgetClassificationAllMpme()
      this.filteredClassifications = await this.classificationOptions;
      await this.fetchgetClassificationCritereMpme()
@@ -527,7 +529,7 @@ export default {
         },
         initializeYears() {
             const currentYear = new Date().getFullYear();
-            for (let year = 1990; year <= currentYear; year++) {
+            for (let year = 1900; year <= currentYear; year++) {
                 this.years.push(year);
             }
             this.yearOptions = this.years.map(year => ({

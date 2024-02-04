@@ -223,7 +223,7 @@
             </div>
           </div>
 
-          <div class="col-md-6 bas" style="padding: 25px 15px">
+          <!-- <div class="col-md-6 bas" style="padding: 25px 15px">
             <p class="title">Vos doléances</p>
 
             <p>
@@ -254,7 +254,7 @@
                 <a href="tel:242055560401"><strong>écrire à la BSTPE</strong></a>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <!-- Content row -->
       </div>
@@ -640,6 +640,8 @@ textarea {
 .class1 {
   display: flex;
   flex-direction: row;
+  align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width: 992px) {

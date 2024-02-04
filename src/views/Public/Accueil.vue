@@ -406,88 +406,49 @@
       </div>
     </section>
     <!-- End Our Team Section -->
-    <!-- <section id="testimonials" class="testimonials">
+     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>TÉMOIGNAGES</h2>
+          <h2>QUELQUES OFFRES</h2>
         </div>
 
         <div class="container swiper-temoignage" data-aos="fade-up" data-aos-delay="100">
           <div class=" testimonial">
 
-            <div class="testimonial-wrap">
-              <div class="">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <div class="task"  v-for="offre in filterOffres" :key="offre.id">
+              <div class="tag">
+                  <h5>
+                      {{ offre.titre }}
+                  </h5>
 
-            <div class="testimonial-wrap">
-              <div class="">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
+                  <div class="texte">
+                      <!-- <p class="texte-content chef"><i class="bi bi-briefcase-fill"></i> <span> {{obtenirValeursPourCles(offre.liste_sous_secteurs)}} </span></p> -->
+                      <p class="texte-content open"> <i class="bi bi-calendar-plus-fill"></i> <span> {{ offre.dateCreation }}</span></p>
+                      <p class="texte-content close"> <i class="bi bi-calendar2-x-fill"></i> <span> {{ offre.dateCloture }}</span></p>
+                      <!-- <p class="texte-content maps"><i class="bi bi-geo-alt-fill"></i> <span>Nzérékoré , Macenta</span> -->
+                      <!-- </p> -->
+
+
                   </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
               </div>
-            </div> <div class="testimonial-wrap">
-              <div class="">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="@/assets/img/17.png" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div>
-           
+
+
+               <div class="boutton">
+          <p @click="$router.push({ path: `/opportunites/${offre.CodeOffre}`, })" id="btn">Detail<span></span></p>
+             </div>
 
 
           </div>
+          </div>
+          <div class="" style="display: flex; justify-content: flex-end;">
+          <p @click="$router.push({ path: '/opportunites' })" id="btn">voir plus<span></span></p>
+             </div>
           <div class="swiper-pagination2"></div>
         </div>
 
       </div>
-    </section> -->
+    </section> 
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="clients" class="clients" >
       <div class="section-header">
@@ -498,7 +459,7 @@
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide" v-for="partenaire in partenairesOptions" :key="partenaire.id" @click="$router.push({ path: `/partenaires/${partenaire.CodePartenaire}`, })">
               <img v-if="partenaire.logo === null" src="@/assets/img/ninba1.png" class="img-fluid"  alt="">
-				    <img :src="partenaire.logo" alt="" class="img-fluid">
+				    <img :src="partenaire.logo" alt="" class="img-fluid h-100" >
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -568,7 +529,8 @@ export default {
         ],
       totalMpme:0,
     regionMpmeCounts: {},
-
+    totalPageArray: [], 
+    filterOffres:[],
     mpmeData: [], // Pour stocker les données des MPME
     partenairesOptions:[],
     regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
@@ -586,6 +548,7 @@ export default {
   },
 async  mounted() {
   await this.fetchPartenaires()
+  await    this.fetchgetOffreMpme(1)
  
   const swiper = await new Swiper('.swiper-container', {
       speed: 400,
@@ -669,16 +632,6 @@ async fetchRegionOptions() {
       await this.$store.dispatch('fetchMpmeData');
       this.mpmeData = JSON.parse(JSON.stringify(this.$store.getters['getMpmeData']));
     
-
-    //  await this.mpmeData.forEach(pme => {
-    //   const personnelFemme =  pme.PersonnelPermanentFemme || 0;
-    //   const personnelHomme = pme.PersonnelPermanentHomme || 0;
-    //   this.totalPersonnelPermanent += personnelFemme + personnelHomme;
-    //   this.totalPersonnelPermanentFemme += pme.PersonnelPermanentFemme || 0;
-    //   this.totalPersonnelPermanentHomme  += pme.PersonnelPermanentHomme || 0;
-    // });
-
-
     await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
     this.SecteurActiviteOptions = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
     console.log('eeee',this.SecteurActiviteOptions );
@@ -746,8 +699,42 @@ async fetchRegionOptions() {
     }
     return secteurTable;
   },
+  async fetchgetOffreMpme(page) {
+  try {
+    const response = await axios.get(`/offres/publique?page=${page}`);
+    
+    if (response.data.status === 'success') {
+      this.totalPageArray = this.totalPageArray.concat(response.data.data.data);
+
+      if (page === 1) {
+        this.totalPageArray = this.totalPageArray;
+        const totalPages = response.data.data.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+      }
+
+      const offresPubliees = this.totalPageArray.filter(offre => offre.publish === 1);
+
+      // Trier les offres par date de création
+      offresPubliees.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      // Prendre les trois dernières offres
+      
+      this.filterOffres = offresPubliees.slice(0, 3);
+      console.log(this.filterOffres); // Vous pouvez ajuster cela en fonction de vos besoins
+      this.loading = false;
+    }  
+  } catch (error) {
+    console.error('Erreur lors de la récupération des offres publiques :', error);
+  }
+},
 
 
+    compterJusqua(nombre) {
+  for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
+    this.fetchgetOffreMpme(i);
+  }
+},
 
   },
 };
@@ -937,4 +924,127 @@ width: 75%;
 }
 
 
+.task {
+  position: relative;
+  color: #2e2e2f;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin: 0 10px 10px 0;
+  border: 3px dashed transparent;
+  max-width: 330px;
+  width: 100%;
+  height: 221px;
+}
+
+
+/* .task:hover {
+box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+border-color: rgba(162, 179, 207, 0.2) !important;
+background-color: var(--color-primary);
+color: white !important;
+}
+.task:hover .texte-content {
+  color: white !important;
+} */
+.task h5 {
+  color: #333;
+  text-align: center;
+}
+
+.texte-content bi {
+  font-size: 14px;
+
+}
+
+.texte-content .chef {
+  color: #777;
+
+}
+
+.texte-content .open {
+  color: #999999;
+}
+
+.texte-content .close {
+  color: #999999;
+
+}
+
+.texte-content .maps {
+  color: #999999;
+
+}
+
+.bi-briefcase-fill {
+
+  color: #f5851e;
+}
+
+.bi-calendar-plus-fill {
+
+  color: rgb(4, 243, 123);
+
+}
+
+.bi-calendar2-x-fill {
+
+  color: red;
+
+}
+
+.bi-geo-alt-fill {
+
+  color: var(--color-secondary);
+
+}
+
+
+.texte-content {
+  /* color: #6f6f6f !important; */
+  font-weight: bold;
+  font-size: 13px;
+
+}
+
+
+
+p {
+  margin-bottom: 0 !important;
+}
+
+
+
+#btn {
+  padding: 1em 2em;
+  font-size: 10px;
+  font-weight: 500;
+  color: #000;
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 45px;
+  /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+  cursor: pointer;
+  outline: none;
+}
+
+#btn:hover {
+  background-color: #fff;
+  border: 1px solid var(--color-secondary);
+
+}
+
+.boutton {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  bottom: 8px;
+  position: absolute;
+  left: -11px;
+
+
+}
 </style>

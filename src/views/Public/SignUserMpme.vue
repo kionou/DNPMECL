@@ -75,7 +75,7 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="nationnalite">Pays Dirigeant<span class="text-danger">*</span></label>
-                <MazSelect v-model="pays" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary">
+                <MazSelect v-model="pays" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary"  option-value-key="value" option-label-key="label" option-input-value-key="value">
                   <div class="flex items-center"
                     style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
                     <MazAvatar size="0.8rem" :src="option.flag" />
@@ -90,7 +90,7 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="region">Région <span class="text-danger">*</span></label>
-                <MazSelect v-model="region" color="secondary" :options="regionOptions" v-slot="{ option }">
+                <MazSelect v-model="region" color="secondary" :options="regionOptions" v-slot="{ option }" >
                   <div class="flex items-center"
                     style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem"
                     @click="handleOptionClick(option)">
@@ -292,7 +292,7 @@ computed:{
       confirmer_password: '',
       nom: '',
       prenom: '',
-      pays: '',
+      pays: "Guinea",
       region: '',
       sous_secteur: '',
       sous_prefecture: '',
@@ -409,6 +409,7 @@ computed:{
             Whatsapp: this.phoneNumber,
             Identifiant: this.identifiant || null,
             CodePartenaire:null,
+            DureeCessationActivite:null,
             FirstConnexion:2
 
 
@@ -460,7 +461,9 @@ computed:{
           AdresseEmail: this.email,
           password: this.password,
           password_confirmation: this.confirmer_password,
+          DureeCessationActivite:null,
           FirstConnexion:2
+          
          
         }
         console.log('eeedata', DataMpme);
@@ -564,7 +567,7 @@ try {
       try {
         await this.$store.dispatch('fetchCountries');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getCountryOptions'])); // Accéder aux options des pays via le getter
-        // console.log('Options des pays:', options);
+         console.log('Options des pays:', options);
         this.sortedCountryOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
         console.error('Erreur lors de la récupération des options des pays :', error);

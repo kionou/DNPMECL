@@ -340,8 +340,8 @@ border-radius: 3px;
 padding: 10px;
 margin: 10px;
 text-align: center;
-width: 220px;
-height: 170px;
+width: 250px;
+height: 200px;
 max-width: 100%;
 align-items: center;
 justify-content: space-around;
@@ -352,7 +352,7 @@ cursor: pointer;
 .card img {
 /* border-radius: 50%;
 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
-width: 62%;
+height:159px;
 /* border: 1px solid blue; */
 /* height: 75px; */
 }

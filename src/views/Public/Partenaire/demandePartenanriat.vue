@@ -245,8 +245,8 @@ export default {
         }
         console.log('eeedata', DataPartenariat);
           try {
-          // const response = await axios.post('/gestion-des-demandes', DataPartenariat);
-          // console.log('response.sousprefecture', response);
+           const response = await axios.post('/gestion-des-demandes', DataPartenariat);
+           console.log('response.sousprefecture', response);
           if (response.data.status === 'success') {
             this.loading = false
             this.isOpen = true

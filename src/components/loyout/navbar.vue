@@ -65,7 +65,7 @@
       </div>
         <div class="top-right1">
           <!-- <img src="@/assets/img/ninba1.png" alt="" style="max-height: 70px;"> -->
-          <img src="@/assets/img/logo/logo.svg" alt="" style="max-height: 135px;">
+          <img src="@/assets/img/logo/logo.png" alt="" style="max-height: 115px;">
 
          
         </div>

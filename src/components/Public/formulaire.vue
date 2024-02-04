@@ -66,6 +66,7 @@
                     :class="{ 'error-border': resultError['Region'] }"
                     @input="resultError['Region'] = false"
                     v-slot="{ option }"
+                     search
                    
                   >
                     <div
@@ -156,7 +157,7 @@
                 </small>
               </div>
             </div>
-            <div class="row mb-3 mt-3 content-group">
+            <!-- <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
                   <label for="ville">Ville <span class="text-danger">*</span></label>
@@ -175,7 +176,7 @@
                   v$.step1.ville.$errors[0].$message
                 }}</small>
                 <small v-if="resultError['Ville']"> {{ resultError["Ville"] }} </small>
-              </div>
+              </div> -->
 
               <!-- <div class="col">
                 <div class="input-groupe">
@@ -199,7 +200,7 @@
               </div> -->
 
 
-            </div>
+            <!-- </div> -->
           </div>
           <!-- fin infos genral -->
 
@@ -211,7 +212,7 @@
               <div class="col">
                 <div class="input-groupe">
                   <label for="SigleMpme"
-                    >SigleMpme <span class="text-danger">*</span></label
+                    >Raison sociale </label
                   >
                   <input
                     type="text"
@@ -422,6 +423,7 @@
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneeCreation'] }"
                     @input="resultError['AnneeCreation'] = false"
+                    search
                   />
                   <!-- <VueDatePicker v-model="step1.an_creation" :year-picker="true"
                                         :year-range="[1990, new Date().getFullYear()]"></VueDatePicker> -->
@@ -444,6 +446,7 @@
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneeEntreeActivite'] }"
                     @input="resultError['AnneeEntreeActivite'] = false"
+                    search
                   />
                   <!-- <VueDatePicker v-model="step1.an_entre_acti" :year-picker="true"
                                         :year-range="[1990, new Date().getFullYear()]" ></VueDatePicker> -->
@@ -457,13 +460,15 @@
               </div>
               <div class="col">
                 <div class="input-groupe">
-                  <label for="CodeStatutJuridique">Code Statut Juridique</label>
+                  <label for="CodeStatutJuridique">Statut Juridique</label>
                   <MazSelect
                     v-model="step1.code_st_juriq"
                     color="secondary"
                     :options="StatutJuridiqueOptions"
                     :class="{ 'error-border': resultError['CodeStatutJuridique'] }"
                     @input="resultError['CodeStatutJuridique'] = false"
+                    v-bind:disabled="step1.code_st_juriq !== null"
+                    search
                   />
                 </div>
                 <small v-if="v$.step1.code_st_juriq.$error">{{
@@ -484,6 +489,7 @@
                     :options="StatutJuridiqueOptions"
                     :class="{ 'error-border': resultError['AutreStatutJuridique'] }"
                     @input="resultError['AutreStatutJuridique'] = false"
+                    search
                   />
                   <!-- <input type="text" name="AutreStatutJuridique" id="AutreStatutJuridique" placeholder=""
                                         v-model="step1.autr_st_juriq"> -->
@@ -506,6 +512,8 @@
                     :options="SecteurActiviteOptions"
                     :class="{ 'error-border': resultError['PrincipalSecteurActivite'] }"
                     @input="resultError['PrincipalSecteurActivite'] = false"
+                    v-bind:disabled="step1.prin_sect_acti !== null"
+                    search
                   />
                 </div>
                 <small v-if="v$.step1.prin_sect_acti.$error">{{
@@ -578,6 +586,8 @@
                     color="secondary"
                     :class="{ 'error-border': resultError['PaysSiegeSocial'] }"
                     @input="resultError['PaysSiegeSocial'] = false"
+                    option-value-key="value" option-label-key="label" option-input-value-key="value"
+                   
                   >
                     <div
                       class="flex items-center"
@@ -615,6 +625,7 @@
                     v-model="step1.pers_per_femm"
                     :class="{ 'error-border': resultError['PersonnelPermanentFemme'] }"
                     @input="resultError['PersonnelPermanentFemme'] = false"
+                    option-value-key="value" option-label-key="label" option-input-value-key="value"
                   />
                 </div>
                 <small v-if="v$.step1.pers_per_femm.$error">{{
@@ -864,6 +875,7 @@
                     v-slot="{ option }"
                     search
                     color="secondary"
+                    option-value-key="value" option-label-key="label" option-input-value-key="value"
                   >
                     <div
                       class="flex items-center"
@@ -1036,6 +1048,7 @@
                     :options="TypesGestionsOptions"
                     :class="{ 'error-border': resultError['CodeTypeGestion'] }"
                     @input="resultError['CodeTypeGestion'] = false"
+                    search
                   />
                 </div>
               </div>
@@ -1055,6 +1068,7 @@
                     :options="TypesContribuablesOptions"
                     :class="{ 'error-border': resultError['CodeTypeContribuable'] }"
                     @input="resultError['CodeTypeContribuable'] = false"
+                    search
                   />
                 </div>
               </div>
@@ -1094,6 +1108,7 @@
                     @change="handleMpmeBourseChange"
                     :class="{ 'error-border': resultError['MpmeBourse'] }"
                     @input="resultError['MpmeBourse'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.mpmeBourse.$error">{{
@@ -1114,6 +1129,7 @@
                     :options="BourseOptions"
                     :class="{ 'error-border': resultError['NomBourse'] }"
                     @input="resultError['NomBourse'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.nomBourse.$error">{{
@@ -1134,6 +1150,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['RecptionPrix'] }"
                     @input="resultError['RecptionPrix'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.receptionPrix.$error">{{
@@ -1178,6 +1195,7 @@
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneePrixPrincipal'] }"
                     @input="resultError['AnneePrixPrincipal'] = false"
+                    search
                   />
                   <!-- <VueDatePicker v-model="step2.anneePrixPrincipal" :year-picker="true"
                                         :year-range="[1990, new Date().getFullYear()]"></VueDatePicker> -->
@@ -1200,6 +1218,7 @@
                     :options="titre"
                     :class="{ 'error-border': resultError['TitreDirigeant'] }"
                     @input="resultError['TitreDirigeant'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.titreDirigeant.$error">{{
@@ -1267,6 +1286,7 @@
                     :options="sexes"
                     :class="{ 'error-border': resultError['SexeDirigeant'] }"
                     @input="resultError['SexeDirigeant'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.sexeDirigeant.$error">{{
@@ -1290,6 +1310,7 @@
                     v-slot="{ option }"
                     search
                     color="secondary"
+                    option-value-key="value" option-label-key="label" option-input-value-key="value"
                   >
                     <div
                       class="flex items-center"
@@ -1328,6 +1349,7 @@
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneeNaissanceDirigeant'] }"
                     @input="resultError['AnneeNaissanceDirigeant'] = false"
+                    search
                   />
                   <!-- <VueDatePicker v-model="step2.anneeNaissanceDirigeant" :year-picker="true"
                                         :year-range="[1940, new Date().getFullYear()]"></VueDatePicker> -->
@@ -1350,6 +1372,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['DirigeantProprietaire'] }"
                     @input="resultError['DirigeantProprietaire'] = false"   v-slot="{ option }"
+                    search
                   >
 
                   <div
@@ -1387,6 +1410,7 @@
                     :options="titre"
                     :class="{ 'error-border': resultError['TitreProprietaire'] }"
                     @input="resultError['TitreProprietaire'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.titreProprietaire.$error">{{
@@ -1454,6 +1478,7 @@
                     :options="sexes"
                     :class="{ 'error-border': resultError['SexeProprietaire'] }"
                     @input="resultError['SexeProprietaire'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.sexeProprietaire.$error">{{
@@ -1474,6 +1499,7 @@
                     v-slot="{ option }"
                     search
                     color="secondary"
+                    option-value-key="value" option-label-key="label" option-input-value-key="value"
                   >
                     <div
                       class="flex items-center"
@@ -1514,6 +1540,7 @@
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneeNaissanceProprietaire'] }"
                     @input="resultError['AnneeNaissanceProprietaire'] = false"
+                    search
                   />
                   <!-- <VueDatePicker v-model="step2.anneeNaissanceProprietaire" :year-picker="true"
                                         :year-range="[1940, new Date().getFullYear()]"></VueDatePicker> -->
@@ -1548,6 +1575,7 @@
                       'error-border': resultError['AppartenanceReseauProfessionnel'],
                     }"
                     @input="resultError['AppartenanceReseauProfessionnel'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.appartenanceReseauProfessionnel.$error">{{
@@ -1591,6 +1619,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['FinancementFondPropre'] }"
                     @input="resultError['FinancementFondPropre'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.financementFondPropre.$error">{{
@@ -1614,6 +1643,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['FinancementCreditBancaire'] }"
                     @input="resultError['FinancementCreditBancaire'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.financementCreditBancaire.$error">{{
@@ -1637,6 +1667,7 @@
                       'error-border': resultError['FinancementPartenaireExterieurs'],
                     }"
                     @input="resultError['FinancementPartenaireExterieurs'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.financementPartenaireExterieurs.$error">{{
@@ -1657,6 +1688,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['FinancementAutre'] }"
                     @input="resultError['FinancementAutre'] = false"
+                    search
                   />
                 </div>
                 <small v-if="v$.step2.financementAutre.$error">{{
@@ -1722,6 +1754,161 @@
             </div>
           </div>
           <!-- fin infos entreprise -->
+
+          <!-- debut infos activite -->
+          <div class="content">
+            <p class="titre">INFORMATIONS SUR LE CONTENU LOCAL</p>
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="AchatMatierePremiere"
+                    >Achat de Matières Premières Locales </label>
+                  <MazSelect
+                    v-model="step2.AchatMatierePremiere"
+                    color="secondary"
+                    :options="chois"
+                    search
+                    :class="{ 'error-border': resultError['AchatMatierePremiere'] }"
+                    @input="resultError['AchatMatierePremiere'] = false"
+                  />
+                </div>
+                <small v-if="v$.step2.AchatMatierePremiere.$error">{{
+                  v$.step2.AchatMatierePremiere.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['AchatMatierePremiere']">
+                  {{ resultError["AchatMatierePremiere"] }}
+                </small>
+              </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="Fournisseur"
+                    >Fournisseurs locaux</label
+                  >
+                  <MazSelect
+                    v-model="step2.Fournisseur"
+                    color="secondary"
+                    :options="chois"
+                    :class="{ 'error-border': resultError['Fournisseur'] }"
+                    @input="resultError['Fournisseur'] = false"
+                    search
+                  />
+                </div>
+                <small v-if="v$.step2.Fournisseur.$error">{{
+                  v$.step2.Fournisseur.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['Fournisseur']">
+                  {{ resultError["Fournisseur"] }}
+                </small>
+              </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="SousTraitence"
+                    >Sous Traitence</label
+                  >
+                  <MazSelect
+                    v-model="step2.SousTraitence"
+                    color="secondary"
+                    :options="chois"
+                    :class="{ 'error-border': resultError['SousTraitence'] }"
+                    @input="resultError['SousTraitence'] = false"
+                    search
+                  />
+                </div>
+                <small v-if="v$.step2.SousTraitence.$error">{{
+                  v$.step2.SousTraitence.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['SousTraitence']">
+                  {{ resultError["SousTraitence"] }}
+                </small>
+              </div>
+            </div>
+
+            <div class="row mb-3 mt-3 content-group">
+              
+
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="PartMatierePremmiereAcheter"
+                    >Part Matière Première Achetée
+                  </label>
+                  <input
+                    type="text"
+                    name="PartMatierePremmiereAcheter"
+                    id="PartMatierePremmiereAcheter"
+                    placeholder=""
+                    v-model="step2.PartMatierePremmiereAcheter"
+                    :class="{ 'error-border': resultError['PartMatierePremmiereAcheter'] }"
+                    @input="resultError['PartMatierePremmiereAcheter'] = false"
+                  />
+                </div>
+                <small v-if="v$.step2.PartMatierePremmiereAcheter.$error">{{
+                  v$.step2.PartMatierePremmiereAcheter.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['PartMatierePremmiereAcheter']">
+                  {{ resultError["PartMatierePremmiereAcheter"] }}
+                </small>
+              </div>
+              
+             
+            </div>
+          </div>
+          <!-- fin infos activite -->
+
+           <!-- debut infos activite -->
+           <div class="content">
+            <p class="titre">INFORMATIONS SUR LA MORTALITE</p>
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="DateDepotBilan"
+                    >Date Dépôt Bilan </label
+                  >
+                  <input
+                    type="date"
+                    name="DateDepotBilan"
+                    id="DateDepotBilan"
+                    placeholder=""
+                    v-model="step2.DateDepotBilan"
+                    :class="{ 'error-border': resultError['DateDepotBilan'] }"
+                    @input="resultError['DateDepotBilan'] = false"
+                  />
+                   <!-- <VueDatePicker v-model="step2.DateDepotBilan" :enable-time-picker="false"></VueDatePicker>  -->
+                </div>
+                <small v-if="v$.step2.DateDepotBilan.$error">{{
+                  v$.step2.DateDepotBilan.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['DateDepotBilan']">
+                  {{ resultError["DateDepotBilan"] }}
+                </small>
+              </div>
+
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="DureeCessationActivite"
+                    >Durée de la Cessation d'Activité
+                  </label>
+                  <input
+                    type="text"
+                    name="DureeCessationActivite"
+                    id="DureeCessationActivite"
+                    placeholder=""
+                    v-model="step2.DureeCessationActivite"
+                    :class="{ 'error-border': resultError['DureeCessationActivite'] }"
+                    @input="resultError['DureeCessationActivite'] = false"
+                  />
+                </div>
+                <small v-if="v$.step2.DureeCessationActivite.$error">{{
+                  v$.step2.DureeCessationActivite.$errors[0].$message
+                }}</small>
+                <small v-if="resultError['DureeCessationActivite']">
+                  {{ resultError["DureeCessationActivite"] }}
+                </small>
+              </div>
+              
+             
+            </div>
+          </div>
+          <!-- fin infos activite -->
 
           <!-- debut infos activite -->
           <div class="content">
@@ -1793,6 +1980,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['ExistanceActionnaire'] }"
                     @input="resultError['ExistanceActionnaire'] = false"
+                    search
                   />
                   <small v-if="v$.step3.existanceActionnaire.$error">{{
                     v$.step3.existanceActionnaire.$errors[0].$message
@@ -1816,6 +2004,7 @@
                       'error-border': resultError['ExistanceConseilAdministration'],
                     }"
                     @input="resultError['ExistanceConseilAdministration'] = false"
+                    search
                   />
                   <small v-if="v$.step3.existanceConseilAdministration.$error">{{
                     v$.step3.existanceConseilAdministration.$errors[0].$message
@@ -1836,6 +2025,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['ExistancePartenariat'] }"
                     @input="resultError['ExistancePartenariat'] = false"
+                    search
                   />
                   <small v-if="v$.step3.existancePartenariat.$error">{{
                     v$.step3.existancePartenariat.$errors[0].$message
@@ -1858,6 +2048,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['PartenariatTechnique'] }"
                     @input="resultError['PartenariatTechnique'] = false"
+                    search
                   />
                   <small v-if="v$.step3.partenariatTechnique.$error">{{
                     v$.step3.partenariatTechnique.$errors[0].$message
@@ -1878,6 +2069,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['PartenariatFinancier'] }"
                     @input="resultError['PartenariatFinancier'] = false"
+                    search
                   />
                   <small v-if="v$.step3.partenariatFinancier.$error">{{
                     v$.step3.partenariatFinancier.$errors[0].$message
@@ -1898,6 +2090,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['PartenariatCommercial'] }"
                     @input="resultError['PartenariatCommercial'] = false"
+                    search
                   />
                   <small v-if="v$.step3.partenariatCommercial.$error">{{
                     v$.step3.partenariatCommercial.$errors[0].$message
@@ -1920,6 +2113,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['PartenariatAutre'] }"
                     @input="resultError['PartenariatAutre'] = false"
+                    search
                   />
                   <small v-if="v$.step3.partenariatAutre.$error">{{
                     v$.step3.partenariatAutre.$errors[0].$message
@@ -1943,6 +2137,7 @@
                     placeholder=""
                     :class="{ 'error-border': resultError['AutrePartenariat'] }"
                     @input="resultError['AutrePartenariat'] = false"
+                    search
                   />
                   <small v-if="v$.step3.autrePartenariat.$error">{{
                     v$.step3.autrePartenariat.$errors[0].$message
@@ -1963,6 +2158,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['BesoinPartenaire'] }"
                     @input="resultError['BesoinPartenaire'] = false"
+                    search
                   />
                   <small v-if="v$.step3.besoinPartenaire.$error">{{
                     v$.step3.besoinPartenaire.$errors[0].$message
@@ -1986,6 +2182,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['BesoinPartenaireTechnique'] }"
                     @input="resultError['BesoinPartenaireTechnique'] = false"
+                    search
                   />
                   <small v-if="v$.step3.besoinPartenaireTechnique.$error">{{
                     v$.step3.besoinPartenaireTechnique.$errors[0].$message
@@ -2007,6 +2204,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['BesoinPartenaireFinancier'] }"
                     @input="resultError['BesoinPartenaireFinancier'] = false"
+                    search
                   />
                   <small v-if="v$.step3.besoinPartenaireFinancier.$error">{{
                     v$.step3.besoinPartenaireFinancier.$errors[0].$message
@@ -2029,6 +2227,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['BesoinPartenaireCommercial'] }"
                     @input="resultError['BesoinPartenaireCommercial'] = false"
+                    search
                   />
                   <small v-if="v$.step3.besoinPartenaireCommercial.$error">{{
                     v$.step3.besoinPartenaireCommercial.$errors[0].$message
@@ -2054,6 +2253,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['BesoinPartenaireAutre'] }"
                     @input="resultError['BesoinPartenaireAutre'] = false"
+                    search
                   />
                   <small v-if="v$.step3.besoinPartenaireAutre.$error">{{
                     v$.step3.besoinPartenaireAutre.$errors[0].$message
@@ -2077,6 +2277,7 @@
                     placeholder=""
                     :class="{ 'error-border': resultError['AutreBesoinPartenaire'] }"
                     @input="resultError['AutreBesoinPartenaire'] = false"
+                    search
                   />
                   <small v-if="v$.step3.autreBesoinPartenaire.$error">{{
                     v$.step3.autreBesoinPartenaire.$errors[0].$message
@@ -2106,6 +2307,7 @@
                     :options="titre"
                     :class="{ 'error-border': resultError['TitreRepondant'] }"
                     @input="resultError['TitreRepondant'] = false"
+                    search
                   />
                   <small v-if="v$.step3.titreRepondant.$error">{{
                     v$.step3.titreRepondant.$errors[0].$message
@@ -2248,6 +2450,7 @@
                     :options="choix"
                     :class="{ 'error-border': resultError['Contacter'] }"
                     @input="resultError['Contacter'] = false"
+                    search
                   />
                   <small v-if="v$.step3.contacter.$error">{{
                     v$.step3.contacter.$errors[0].$message
@@ -2268,7 +2471,7 @@
               <div class="col">
                 <div class="input-groupe">
                   <label for="TypeComptabilite"
-                    >Type Comptabilite <span class="text-danger">*</span></label
+                    >Type Comptabilite </label
                   >
                   <MazSelect
                     v-model="step3.TypeComptabilite"
@@ -2276,6 +2479,7 @@
                     :options="Comptabilite"
                     :class="{ 'error-border': resultError['TypeComptabilite'] }"
                     @input="resultError['TypeComptabilite'] = false"
+                    search
                   />
                   <small v-if="v$.step3.TypeComptabilite.$error">{{
                     v$.step3.TypeComptabilite.$errors[0].$message
@@ -2297,6 +2501,7 @@
                     :options="CarteTypeOptions"
                     :class="{ 'error-border': resultError['TypeCarte'] }"
                     @input="resultError['TypeCarte'] = false"
+                    search
                   />
                   <small v-if="v$.step3.TypeCarte.$error">{{
                     v$.step3.TypeCarte.$errors[0].$message
@@ -2643,6 +2848,10 @@ export default {
         { label: "Oui", value: "Oui" },
         { label: "Non", value: "Non" },
       ],
+      chois: [
+        { label: "Oui", value: 1 },
+        { label: "Non", value: 0 },
+      ],
       titre: [
         { label: "Monsieur", value: "M" },
         { label: "Madame", value: "F" },
@@ -2680,7 +2889,7 @@ export default {
         ch_aff_2: "",
         part_chiffre_affaire_exprtation: "",
         grpe_fililale: "",
-        nationalite_groupe: "",
+        nationalite_groupe: "Guinea",
         capital_social: "",
         nbre_rccm: "",
         nbre_nif: "",
@@ -2689,7 +2898,7 @@ export default {
         NbreActionnaireGuinneF: 0,
         NbreActionnaireGuinneH: 0,
         NbreActionnaireGuinne: 0,
-        PaysSiegeSocial: 0,
+        PaysSiegeSocial: "Guinea",
 
         DateGenerationNif: "",
         NumeroTva: "",
@@ -2709,7 +2918,7 @@ export default {
         nomDirigeant: "",
         prenomDirigeant: "",
         sexeDirigeant: "",
-        paysDirigeant: "",
+        paysDirigeant: "Guinea",
         anneeNaissanceDirigeant: "",
         dirigeantProprietaire: "",
 
@@ -2717,7 +2926,7 @@ export default {
         nomProprietaire: "",
         prenomProprietaire: "",
         sexeProprietaire: "",
-        paysProprietaire: "",
+        paysProprietaire: "Guinea",
         anneeNaissanceProprietaire: "",
         appartenanceReseauProfessionnel: "",
         nomReseauProfessionnel: "",
@@ -2725,6 +2934,14 @@ export default {
         financementCreditBancaire: "",
         financementPartenaireExterieurs: "",
         financementAutre: "",
+
+        AchatMatierePremiere:"",
+        Fournisseur:"",
+        SousTraitence:"",
+        PartMatierePremmiereAcheter:"",
+
+        DateDepotBilan:"",
+        DureeCessationActivite:"",
 
         autreFinancement: "",
         descriptionReseau: "",
@@ -2773,11 +2990,11 @@ export default {
     step1: {
       region: { require },
       commune: { require },
-      ville: { require },
+      // ville: { require },
       prefecture: { require },
       // sous_prefecture: { require },
       localisation: {},
-      sigle_mpme: { require },
+      sigle_mpme: { },
       nom: { require },
       quartier: { require },
       rue: {},
@@ -2792,7 +3009,7 @@ export default {
       autr_st_juriq: {},
       prin_sect_acti: { require },
       selectedSousSecteurs: { require },
-      an_prod_1: { require },
+      // an_prod_1: { require },
       pers_per_femm: { ValidNumeri },
       pers_per_homm: { ValidNumeri },
       pers_temp_femm: { ValidNumeri },
@@ -2845,6 +3062,14 @@ export default {
       financementPartenaireExterieurs: { require },
       financementAutre: { require },
 
+      AchatMatierePremiere: {},
+      Fournisseur: {},
+      SousTraitence: {},
+      PartMatierePremmiereAcheter:{},
+
+      DateDepotBilan:{},
+      DureeCessationActivite:{},
+
       autreFinancement: {},
       descriptionReseau: {},
       difficultesRencontrees: {},
@@ -2879,7 +3104,7 @@ export default {
       // precisionGPSMpme: {},
       // origineDonnees: {},
 
-      TypeComptabilite: { require },
+      TypeComptabilite: {},
       TypeCarte: { require },
       NumeroCarte: {},
     },
@@ -2963,6 +3188,15 @@ export default {
         FinancementAutre: this.step2.financementAutre,
         DescriptionReseau: this.step2.descriptionReseau,
         AutreFinancement: this.step2.autreFinancement,
+        AchatMatierePremiere: this.step2.AchatMatierePremiere,
+        Fournisseur: this.step2.Fournisseur,
+        SousTraitence: this.step2.SousTraitence,
+        PartMatierePremmiereAcheter:this.step2.PartMatierePremmiereAcheter,
+
+         DateDepotBilan:this.step2.DateDepotBilan,
+         // DateDepotBilan:'2015-01-01',
+        DureeCessationActivite:this.step2.DureeCessationActivite,
+
         DifficultesRencontrees: this.step2.difficultesRencontrees,
         SuggestionsProposees: this.step2.suggestionsProposees,
 
@@ -3166,7 +3400,7 @@ export default {
 
     initializeYears() {
       const currentYear = new Date().getFullYear();
-      for (let year = 1990; year <= currentYear; year++) {
+      for (let year = 1900; year <= currentYear; year++) {
         this.years.push(year);
       }
       this.yearOptions = this.years.map((year) => ({
@@ -3356,7 +3590,11 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getStatutJuridiqueOptions"])
         );
+        console.log('Code de la préfecture :', options);
+
         this.StatutJuridiqueOptions = options;
+        console.log('Code de la préfecture :', this.StatutJuridiqueOptions );
+
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des options des statuts juridiques:",
@@ -3574,8 +3812,8 @@ export default {
       this.step1.url = userData.SiteWeb;
       this.step1.an_creation = userData.AnneeCreation;
       this.step1.an_entre_acti = userData.AnneeEntreeActivite;
-      this.step1.code_st_juriq = userData.CodeStatutJuridique;
-      this.step1.autr_st_juriq = userData.AutreStatutJuridique;
+      this.step1.code_st_juriq = parseInt(userData.CodeStatutJuridique);
+      this.step1.autr_st_juriq = parseInt(userData.AutreStatutJuridique);
       this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
       if (userData.ListeSousSecteurActivite.includes("|")) {
         this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split("|");
@@ -3638,6 +3876,15 @@ export default {
       this.step2.financementAutre = userData.FinancementAutre;
       this.step2.descriptionReseau = userData.DescriptionReseau;
       this.step2.autreFinancement = userData.AutreFinancement;
+
+      this.step2.AchatMatierePremiere = userData.AchatMatierePremiere;
+      this.step2.Fournisseur = userData.Fournisseur;
+      this.step2.SousTraitence = userData.SousTraitence;
+      this.step2.PartMatierePremmiereAcheter = userData.PartMatierePremmiereAcheter
+      this.step2.DateDepotBilan = userData.DateDepotBilan;
+      this.step2.DureeCessationActivite = userData.DureeCessationActivite ;
+     
+
       this.step2.difficultesRencontrees = userData.DifficultesRencontrees;
       this.step2.suggestionsProposees = userData.SuggestionsProposees;
 

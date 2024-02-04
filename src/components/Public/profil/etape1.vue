@@ -419,8 +419,9 @@ export default {
         async fetchRegionOptions() {
     try {
         await this.$store.dispatch("fetchRegionOptions");
-        const options = JSON.parse(JSON.stringify(this.$store.getters["getRegionOptions"])); // Accéder aux options des pays via le getter
-        const selectedRegion = options.find(region => region.CodeRegion === this.data.region);
+        const options = JSON.parse(JSON.stringify(this.$store.getters["getRegionOptions"])); 
+        const selectedRegion = options.find(region => region.value === this.data.Region);
+        
         if (selectedRegion) {
             this.nomRegion = selectedRegion.label;         
         } else {
@@ -477,8 +478,9 @@ export default {
         await this.$store.dispatch("fetchStatutJuridiqueOptions"); // Action spécifique aux statuts juridiques
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getStatutJuridiqueOptions"]));
-          const selectedJuridique = options.find(region => region.value === this.data.CodeStatutJuridique);
-          const selectedJuridiqueAutre = options.find(region => region.value === this.data.AutreStatutJuridique);
+          const selectedJuridique = options.find(region => region.value === parseInt( this.data.CodeStatutJuridique));
+          const selectedJuridiqueAutre = options.find(region => region.value === parseInt(this.data.AutreStatutJuridique));
+  
         if (selectedJuridique) {
             this.selectedJuridique = selectedJuridique.label;         
         } else {
