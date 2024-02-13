@@ -22,14 +22,12 @@
                 <select name="speciality" v-model="control.spec" @change="updateFilterSpec">
                   <option value="" selected="true">Filtre</option>
                   <option value="annee">Année</option>
-                  <option value="chiffreaffaire">Chiffre d'Affaire</option>
-                  <option value="capitalsocial">Capital Social</option>
-                  <option value="typecomptabilite">Type De Comptabilite</option>
+                 
       
                   
                 </select>
               </div>
-              <div class="nsl" style="border-right: none" v-if="control.spec === 'annee' || control.spec === 'chiffreaffaire' || control.spec === 'capitalsocial' || control.spec === 'typecomptabilite'">
+              <div class="nsl" style="border-right: none" v-if="control.spec === 'annee' || control.spec === 'chiffreaffaire' ">
                 <i class="bi bi-filter"></i>
                 <select name="speciality" v-if="control.spec === 'annee'" v-model="control.speciality" @change="filterData">
                   <option value="" selected="true">Choisir une année</option>
@@ -57,7 +55,7 @@
           </div>
         <div class="btnLogin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
         <div v-if="filteredClassifications.length === 0" class="noresul">
-            <span>Vous n'avez pas encore de classification, vous pouvez également en ajouter une !!</span>
+            <span>Vous n'avez pas encore d'Appui à la valorisation, vous pouvez également en ajouter aussi !!</span>
         </div>
         <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else >
 
@@ -71,12 +69,10 @@
                             <tr>
                                 <th> # </th>
                                 <th> Annee</th>
-                                <th>Critere par Chiffre d'Affaire</th>
-                                <th> Critère du Capital Social</th>
-                                <th>Type de Comptabilite</th>
-                                <th> Chiffre d'Affaire Réel</th>
-                                <th> Capital Social Réel</th>
-                                <th> Nombre d'employés</th>
+                                <th>Produit Service</th>
+                                <th>Nombre de Commande</th>
+                                <th>Marché Produit Service</th>
+                                <th> Quantité du Produit </th>
                                 <th>Actions</th>
 
                             </tr>
@@ -87,16 +83,12 @@
                             <tr v-for="(item, index ) in paginatedItems" :key="item.id">
                                 <td>{{ getSequentialNumber(index) }} </td>
                                 <td>{{ item.Annee }} </td>
-                                <td>{{ item.CodeCritereChiffreAffaire }}</td>
-                                <td> {{ item.CodeCritereCapitalSocial }}</td>
-                                <td> {{ item.TypeComptabilite }}</td>
-
-                                <td v-if="item.ChiffreAffaireReel === ''"> 0</td>
-                                <td v-else> {{ item.ChiffreAffaireReel }}</td>
-
-                                <td v-if="item.CapitalSocialReel === ''"> 0</td>
-                                <td v-else> {{ item.CapitalSocialReel }}</td>
-                                <td> {{ item.NbreEmploye || 0}} </td>
+                                <td>{{ item.ProduitService }}</td>
+                                <td> {{ item.NombreCommande }}</td>
+                                <td v-if="item.MarcheProduitService === 1"> Oui</td>
+                                <td v-else> Non</td>
+                                <td> {{ item.QuantiteProduit || 0}} </td>
+                                
                                 <td v-if="item.Annee !== new Date().getFullYear()">
                                     <div class="sci">
                                         <span style="--i:1" class="updateclose">
@@ -137,82 +129,62 @@
                 <div id="uploadArea" class="upload-area">
                     <!-- Header -->
                     <div class="upload-area__header">
-                        <h1 class="upload-area__title">Ajoutez votre classification annuelle</h1>
+                        <h1 class="upload-area__title">Ajoutez votre contenu local</h1>
                         <small v-if="error">{{ error }}</small>
                     </div>
                     <!-- End Header -->
 
                     <!-- Drop Zoon -->
                     <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                        <div class="row mb-3 mt-3 content-group">
-                            <div class="col">
+                        <!-- <div class="row mb-3 mt-3 content-group">
+                            <div class="col"> -->
                                 <div class="input-group">
                                     <label for="username">Année <span class="text-danger">*</span></label>
                                     <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  />
                                 </div>
                                 <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
-                            </div>
-                            <div class="col">
-                                <div class="input-group">
-                                    <label for="CodeCritereChiffreAffaire">Critère par Chiffre d'Affaire <span
-                                            class="text-danger">*</span></label>
-                                            <MazSelect v-model="step1.CodeCritereChiffreAffaire" color="secondary" :options="classificationAffaireOptions" />
-                                </div>
-                                <small v-if="v$.step1.CodeCritereChiffreAffaire.$error">{{ v$.step1.CodeCritereChiffreAffaire.$errors[0].$message }}</small>
-
-                            </div>
-
-                        </div>
+                            <!-- </div>
+                        </div> -->
                         <div class="row mb-3 mt-3 content-group">
                             <div class="col">
                             <div class="input-group">
-                            <label for="comptabilite">Type de Comptabilité<span class="text-danger">*</span></label>
-                            <MazSelect v-model="step1.comptabilite" color="secondary" :options="Comptabilite"  />
+                            <label for="ProduitService">Produit Service<span class="text-danger">*</span></label>
+                            <input v-model="step1.ProduitService" name="ProduitService"   id="ProduitService"  />
                         </div>
-                        <small v-if="v$.step1.comptabilite.$error">{{ v$.step1.comptabilite.$errors[0].$message }}</small>
+                        <small v-if="v$.step1.ProduitService.$error">{{ v$.step1.ProduitService.$errors[0].$message }}</small>
                         </div>
 
                         <div class="col">
                             <div class="input-group">
-                            <label for="CodeCritereCapitalSocial">Critère par Invertissement <span class="text-danger">*</span></label>
-                            <MazSelect v-model="step1.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
+                            <label for="MarcheProduitService">Marché Produit Service <span class="text-danger">*</span></label>
+                            <MazSelect v-model="step1.MarcheProduitService" color="secondary" :options="Choix"  />
                            
                         </div>
-                        <small v-if="v$.step1.CodeCritereCapitalSocial.$error">{{ v$.step1.CodeCritereCapitalSocial.$errors[0].$message }}</small>
+                        <small v-if="v$.step1.MarcheProduitService.$error">{{ v$.step1.MarcheProduitService.$errors[0].$message }}</small>
                         </div>
                         </div>
 
                         <div class="row mb-3 mt-3 content-group" >
                             <div class="col">
                                 <div class="input-group">
-                            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel  </label>
-                            <input type="text" name="ChiffreAffaireReel" id="ChiffreAffaireReel" placeholder="" v-model="step1.ChiffreAffaireReel">
+                            <label for="NombreCommande">Nombre de Commande  </label>
+                            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step1.NombreCommande">
                           
                         </div>
-                        <small v-if="v$.step1.ChiffreAffaireReel.$error">{{ v$.step1.ChiffreAffaireReel.$errors[0].$message }}</small>
+                        <small v-if="v$.step1.NombreCommande.$error">{{ v$.step1.NombreCommande.$errors[0].$message }}</small>
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                            <label for="CapitalSocialReel">Invertissement Réel </label>
-                            <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step1.CapitalSocialReel">
+                                    <label for="QuantiteProduit">Quantité de Produit <span class="text-danger">*</span></label>
+                            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step1.QuantiteProduit">
+                          
                         </div>
-                        <small v-if="v$.step1.CapitalSocialReel.$error">{{ v$.step1.CapitalSocialReel.$errors[0].$message }}</small>
+                        <small v-if="v$.step1.QuantiteProduit.$error">{{ v$.step1.QuantiteProduit.$errors[0].$message }}</small>
                             </div>
 
                         </div>
 
-                        <!-- <div class="row mb-3 mt-3 content-group" > -->
-                            <!-- <div class="col"> -->
-                                <div class="input-group">
-                            <label for="NbreEmploye">Nombre d'employés <span class="text-danger">*</span></label>
-                            <input type="text" name="NbreEmploye" id="NbreEmploye" placeholder="" v-model="step1.NbreEmploye">
-                          
-                        </div>
-                        <small v-if="v$.step1.NbreEmploye.$error">{{ v$.step1.NbreEmploye.$errors[0].$message }}</small>
-                            <!-- </div> -->
-                           
-
-                        <!-- </div> -->
+                      
                                                
                         <button class="sign" @click.prevent="submit">Enregistrer</button>
                     </div>
@@ -224,9 +196,9 @@
 
         </MazDialog>
 
-        <MazDialog v-model="msgsuccess"  title="Enregistrement de classification" >
+        <MazDialog v-model="msgsuccess"  title="Enregistrement du contenu local" >
             <p>
-                Classification enregistrée avec succès !!
+                Contenu local enregistrée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -236,7 +208,7 @@
         </MazDialog>
         <MazDialog v-model="isdelete" title="Suppression de la clasification">
             <p>
-                Êtes-vous sûr de vouloir supprimer cette classification ?
+                Êtes-vous sûr de vouloir supprimer ce contenu  ?
             </p>
             <template #footer="{ close }">
 
@@ -248,7 +220,7 @@
         </MazDialog>
         <MazDialog v-model="confirmdelete" title="Suppression de la clasification">
             <p>
-                Classification supprimée avec succès !!
+                Contenu Local supprimée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -266,84 +238,66 @@
 <div id="uploadArea" class="upload-area">
     <!-- Header -->
     <div class="upload-area__header">
-        <h1 class="upload-area__title">Modifiez votre classification annuelle</h1>
+        <h1 class="upload-area__title">Modifiez votre contenu local</h1>
         <small v-if="error">{{ error }}</small>
     </div>
     <!-- End Header -->
 
     <!-- Drop Zoon -->
     <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-        <div class="row mb-3 mt-3 content-group">
-            <div class="col">
+        <!-- <div class="row mb-3 mt-3 content-group">
+            <div class="col"> -->
                 <div class="input-group">
                     <label for="username">Année <span class="text-danger">*</span></label>
                <MazInput v-model="step2.annee" type="text" color="secondary"  style="width: 100%;" disabled  search option-value-key="value" option-label-key="label" option-input-value-key="value"/>
                    
                 </div>
                
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <label for="CodeCritereChiffreAffaire">Critère par Chiffre d'Affaire <span
-                            class="text-danger">*</span></label>
-                            <MazSelect v-model="step2.CodeCritereChiffreAffaire" color="secondary" :options="classificationAffaireOptions" />
-                </div>
-                <small v-if="v$.step2.CodeCritereChiffreAffaire.$error">{{ v$.step2.CodeCritereChiffreAffaire.$errors[0].$message }}</small>
+            <!-- </div>
+           
 
-            </div>
-
-        </div>
+        </div> -->
         <div class="row mb-3 mt-3 content-group">
             <div class="col">
-            <div class="input-group">
-            <label for="comptabilite">Type de Comptabilité<span class="text-danger">*</span></label>
-            <MazSelect v-model="step2.comptabilite" color="secondary" :options="Comptabilite"  />
-        </div>
-        <small v-if="v$.step2.comptabilite.$error">{{ v$.step2.comptabilite.$errors[0].$message }}</small>
-        </div>
+                <div class="input-group">
+                    <label for="ProduitService">Produit Service <span
+                            class="text-danger">*</span></label>
+                            <input v-model="step2.ProduitService" name="ProduitService"   id="ProduitService"  />
+                </div>
+                <small v-if="v$.step2.ProduitService.$error">{{ v$.step2.ProduitService.$errors[0].$message }}</small>
 
-        <div class="col">
+            </div>
+            <div class="col">
             <div class="input-group">
-            <label for="CodeCritereCapitalSocial">Critère par Invertissement <span class="text-danger">*</span></label>
-            <MazSelect v-model="step2.CodeCritereCapitalSocial" color="secondary" :options="classificationSocialOptions"  />
-           
+            <label for="MarcheProduitService">Marché Produit Service<span class="text-danger">*</span></label>
+            <MazSelect v-model="step2.MarcheProduitService" color="secondary" :options="Choix"  />
         </div>
-        <small v-if="v$.step2.CodeCritereCapitalSocial.$error">{{ v$.step2.CodeCritereCapitalSocial.$errors[0].$message }}</small>
+        <small v-if="v$.step2.MarcheProduitService.$error">{{ v$.step2.MarcheProduitService.$errors[0].$message }}</small>
         </div>
         </div>
 
         <div class="row mb-3 mt-3 content-group" >
             <div class="col">
-                <div class="input-group">
-            <label for="ChiffreAffaireReel">Chiffre d'Affaire Réel </label>
-            <input type="text" name="ChiffreAffaireReel" id="ChiffreAffaireReel" placeholder="" v-model="step2.ChiffreAffaireReel">
-          
+            <div class="input-group">
+            <label for="NombreCommande">Nombre de Commande  <span class="text-danger">*</span></label>
+            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step2.NombreCommande"   />
+           
         </div>
-        <small v-if="v$.step2.ChiffreAffaireReel.$error">{{ v$.step2.ChiffreAffaireReel.$errors[0].$message }}</small>
-            </div>
+        <small v-if="v$.step2.NombreCommande.$error">{{ v$.step2.NombreCommande.$errors[0].$message }}</small>
+        </div>
             <div class="col">
                 <div class="input-group">
-            <label for="CapitalSocialReel">Invertissement Réel </label>
-            <input type="text" name="CapitalSocialReel" id="CapitalSocialReel" placeholder="" v-model="step2.CapitalSocialReel">
+            <label for="QuantiteProduit">Quantité de Produit </label>
+            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step2.QuantiteProduit">
+          
         </div>
-        <small v-if="v$.step2.CapitalSocialReel.$error">{{ v$.step2.CapitalSocialReel.$errors[0].$message }}</small>
+        <small v-if="v$.step2.QuantiteProduit.$error">{{ v$.step2.QuantiteProduit.$errors[0].$message }}</small>
             </div>
+          
 
         </div>
 
-        
-        <!-- <div class="row mb-3 mt-3 content-group" > -->
-                            <!-- <div class="col"> -->
-                                <div class="input-group">
-                            <label for="NbreEmploye">Nombre d'employés <span class="text-danger">*</span> </label>
-                            <input type="text" name="NbreEmploye" id="NbreEmploye" placeholder="" v-model="step2.NbreEmploye">
-                          
-                        </div>
-                        <small v-if="v$.step2.NbreEmploye.$error">{{ v$.step2.NbreEmploye.$errors[0].$message }}</small>
-                            <!-- </div> -->
-                           
-
-                        <!-- </div> -->
+    
                                
         <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
     </div>
@@ -356,9 +310,9 @@
         </MazDialog>
 
 
-        <MazDialog v-model="updatemsg" title="Modification de classification">
+        <MazDialog v-model="updatemsg" title="Modification du Contenu local">
             <p>
-                Classification modifiée avec succès !!
+                Contenu Local modifié avec succès !!
 
             </p>
             <template #footer="{ close }">
@@ -446,22 +400,22 @@ export default {
             anneeEnCours:'',
             step1: {
                 annee: '',
-                CodeCritereChiffreAffaire: '',
-                comptabilite: '',
-                CodeCritereCapitalSocial: '',
-                ChiffreAffaireReel:'',
-                CapitalSocialReel:'',
-                NbreEmploye:'',
+                ProduitService: '',
+                MarcheProduitService: '',
+                NombreCommande: '',
+                QuantiteProduit:'',
             },
             step2: {
                 annee:'',
-                CodeCritereChiffreAffaire: '',
-                comptabilite: '',
-                CodeCritereCapitalSocial: '',
-                ChiffreAffaireReel:'',
-                CapitalSocialReel:'',
-                NbreEmploye:'',
+                ProduitService: '',
+                MarcheProduitService: '',
+                NombreCommande: '',
+                QuantiteProduit:'',
             },
+            Choix: [
+        { label: "Oui", value: true },
+        { label: "Non", value: false },
+      ],
 
         };
     },
@@ -470,35 +424,31 @@ export default {
             annee: {
                 require,
             },
-            CodeCritereChiffreAffaire: {
+            ProduitService: {
                 require,
 
             },
-            comptabilite: {
+            MarcheProduitService: {
                 require,
             },
-            CodeCritereCapitalSocial: {
-                require,
+            NombreCommande: {
+                require,ValidNumeri
             },
-            ChiffreAffaireReel: {ValidNumeri},
-            CapitalSocialReel: {ValidNumeri},
-            NbreEmploye: {require ,ValidNumeri},
+            QuantiteProduit: {require,ValidNumeri},
         },
         step2: {
             
-            CodeCritereChiffreAffaire: {
+            ProduitService: {
                 require,
 
             },
-            comptabilite: {
+            MarcheProduitService: {
                 require,
             },
-            CodeCritereCapitalSocial: {
-                require,
+            NombreCommande: {
+                require,ValidNumeri
             },
-            ChiffreAffaireReel: {ValidNumeri},
-            CapitalSocialReel: {ValidNumeri},
-            NbreEmploye: {require ,ValidNumeri},
+            QuantiteProduit: {require,ValidNumeri},
         },
 
     },
@@ -513,7 +463,7 @@ export default {
      this.filteredClassifications = await this.classificationOptions;
      await this.fetchgetClassificationCritereMpme()
      await  this.initializeYears()
-     await  this.fetchCarteAndComptabiliteOptions()
+   
         console.log("datadossiers", this.loggedInUser);
        
         
@@ -537,42 +487,27 @@ export default {
                 value: String(year)
             }));
         },
-        async fetchCarteAndComptabiliteOptions() {
-            try {
-
-                await this.$store.dispatch('fetchTypeCartesData');
-                const options = JSON.parse(JSON.stringify(this.$store.getters['getTypeCartesData']));
-                this.CarteTypeOptions = options
-
-                await this.$store.dispatch('fetchTypeComptabilitesData');
-                const option = JSON.parse(JSON.stringify(this.$store.getters['getTypeComptabilitesData']));
-                this.Comptabilite = option
-               
-            } catch (error) {
-                console.error('Erreur lors de la récupération des options des bourses:', error.message);
-            }
-        },
+       
       
         async submit() {
             this.v$.step1.$touch()
             if (this.v$.$errors.length == 0) {
             this.loading = true
 
-               let DataClassification = {
+               let DataContenu = {
             
                 Annee:parseInt(this.step1.annee) ,
                 CodeMpme:this.loggedInUser.id,
-                CodeCritereChiffreAffaire:this.step1.CodeCritereChiffreAffaire,
-                CodeCritereCapitalSocial:this.step1.CodeCritereCapitalSocial,
-                ChiffreAffaireReel: this.step1.ChiffreAffaireReel,
-                CapitalSocialReel:this.step1.CapitalSocialReel,
-                TypeComptabilite: this.step1.comptabilite,
-                NbreEmploye: parseInt(this.step1.NbreEmploye) 
+                ProduitService:this.step1.ProduitService,
+                MarcheProduitService:this.step1.MarcheProduitService,
+                NombreCommande: this.step1.NombreCommande,
+                QuantiteProduit:this.step1.QuantiteProduit,
+                
             }
-            console.log('DataClassification', DataClassification);
+            console.log('DataClassification', DataContenu);
 
                 try {
-                    const response = await axios.post('/mpme/classifications/annuel', DataClassification, {
+                    const response = await axios.post('/appui-contenu-locals', DataContenu, {
                         headers: {
                             Authorization: `Bearer ${this.loggedInUser.token}`,
                             'Content-Type': 'application/json'
@@ -627,10 +562,10 @@ export default {
 
             try {
                 // Faites une requête pour supprimer l'élément avec l'ID itemId
-                const response = await axios.delete(`mpme/classifications/annuel/${this.ToDeleteId}`, {
+                const response = await axios.delete(`/appui-contenu-locals/${this.ToDeleteId}`, {
                     headers: {
                         Authorization: `Bearer ${this.loggedInUser.token}`,
-                        'Content-Type': 'multipart/form-data',
+                       
 
                     },
 
@@ -718,17 +653,17 @@ export default {
         async fetchgetClassificationAllMpme() {
             try {
               
-                const response = await axios.get('/mpme/classifications/annuel', {
+                const response = await axios.get(`/appui-contenu-locals/detail/par-mpme/${this.loggedInUser.id}`, {
                     headers: {
                         Authorization: `Bearer ${this.loggedInUser.token}`,
-                        'Content-Type': 'multipart/form-data',
+                        
                     },
 
                 });
-                console.log('classifications/annuel222:', response);
+                console.log('classifications/annuel222:', response.data.data.appuis);
 
                 if (response.data.status === 'success') {
-                    const filteredDataMpme = response.data.data.data.filter(item => item.CodeMpme === this.loggedInUser.id);
+                    const filteredDataMpme = response.data.data.appuis
                     this.classificationOptions = filteredDataMpme
                     this.GetUpdateClass = filteredDataMpme
                     this.filteredClassifications = filteredDataMpme;
@@ -759,24 +694,21 @@ export default {
         updatedoc(id) {
             this.updateClassId = id
             this.updated = true
-            // Trouver le document correspondant dans le tableau userData
             const classificationToUpdate = this.GetUpdateClass.find(doc => doc.id === id);
 
             // Attribuer les valeurs aux champs d'
             this.step2.annee = classificationToUpdate.Annee;
-            this.step2.CodeCritereChiffreAffaire = classificationToUpdate.CodeCritereChiffreAffaire;
-            this.step2.CodeCritereCapitalSocial = classificationToUpdate.CodeCritereCapitalSocial;
-            this.step2.ChiffreAffaireReel = classificationToUpdate.ChiffreAffaireReel;
-            this.step2.CapitalSocialReel = classificationToUpdate.CapitalSocialReel;
-            this.step2.comptabilite = classificationToUpdate.TypeComptabilite;
-            this.step2.NbreEmploye = classificationToUpdate.NbreEmploye;
+            this.step2.ProduitService = classificationToUpdate.ProduitService;
+            this.step2.NombreCommande = classificationToUpdate.NombreCommande;
+            this.step2.QuantiteProduit = classificationToUpdate.QuantiteProduit;
 
-
-            // Vous pouvez également stocker l'URL du document pour l'affichage
-            // this.updateImageUrl = classificationToUpdate.LienDocument;
-
-            console.log('classification à mettre à jour :', classificationToUpdate);
-
+            if (classificationToUpdate.MarcheProduitService === 1) {
+                return  this.step2.MarcheProduitService = true;
+            } else {
+                return  this.step2.MarcheProduitService = false;
+                
+            }
+           
 
         },
         async hamdleUpdated() {
@@ -787,18 +719,16 @@ export default {
                 this.loading = true
                 let DataClassification = {
             
-            Annee:parseInt(this.step2.annee) ,
-            CodeMpme:this.loggedInUser.id,
-            CodeCritereChiffreAffaire:this.step2.CodeCritereChiffreAffaire,
-            CodeCritereCapitalSocial:this.step2.CodeCritereCapitalSocial,
-            ChiffreAffaireReel: this.step2.ChiffreAffaireReel,
-            CapitalSocialReel:this.step2.CapitalSocialReel,
-            TypeComptabilite: this.step2.comptabilite,
-            NbreEmploye: parseInt(this.step2.NbreEmploye)
+                Annee:parseInt(this.step2.annee) ,
+                CodeMpme:this.loggedInUser.id,
+                ProduitService:this.step2.ProduitService,
+                MarcheProduitService:this.step2.MarcheProduitService,
+                NombreCommande: this.step2.NombreCommande,
+                QuantiteProduit:this.step2.QuantiteProduit,
         }
                 console.log('DataClassification', DataClassification);
                 try {
-                    const response = await axios.put(`/mpme/classifications/annuel/${this.updateClassId}`, DataClassification, {
+                    const response = await axios.put(`/appui-contenu-locals/${this.updateClassId}`, DataClassification, {
                         headers: {
                             Authorization: `Bearer ${this.loggedInUser.token}`,
                             'Content-Type': 'application/json',

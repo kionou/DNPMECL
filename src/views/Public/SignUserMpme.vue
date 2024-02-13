@@ -75,7 +75,9 @@
             <div class="col">
               <div class="input-groupe">
                 <label for="nationnalite">Pays Dirigeant<span class="text-danger">*</span></label>
-                <MazSelect v-model="pays" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary"  option-value-key="value" option-label-key="label" option-input-value-key="value">
+                <MazSelect v-model="pays" :options="sortedCountryOptions" v-slot="{ option }" search color="secondary" 
+                option-value-key="value" option-label-key="label" option-input-value-key="value"
+                 >
                   <div class="flex items-center"
                     style="padding-top: 0.5rem; padding-bottom: 0.5rem; width: 100%; gap: 1rem">
                     <MazAvatar size="0.8rem" :src="option.flag" />
@@ -292,7 +294,7 @@ computed:{
       confirmer_password: '',
       nom: '',
       prenom: '',
-      pays: "Guinea",
+      pays: "Guinée",
       region: '',
       sous_secteur: '',
       sous_prefecture: '',

@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <form class="form">
+    <form class="form"  enctype="multipart/form-data">
       <!-- Étape 1 -->
       <div v-if="currentStep === 1">
         <div class="form-container">
@@ -212,7 +212,7 @@
               <div class="col">
                 <div class="input-groupe">
                   <label for="SigleMpme"
-                    >Raison sociale </label
+                    >Sigle Mpme </label
                   >
                   <input
                     type="text"
@@ -234,7 +234,7 @@
               <div class="col">
                 <div class="input-groupe">
                   <label for="nom"
-                    >Nom de l'entreprise <span class="text-danger">*</span></label
+                    >Raison sociale  <span class="text-danger">*</span></label
                   >
                   <input
                     type="text"
@@ -936,26 +936,6 @@
             <div class="row mb-3 mt-3 content-group">
               <div class="col">
                 <div class="input-groupe">
-                  <label for="NumeroRccm">Numéro Rccm </label>
-                  <input
-                    type="text"
-                    name="NumeroRccm"
-                    id="NumeroRccm"
-                    placeholder=""
-                    v-model="step1.nbre_rccm"
-                    :class="{ 'error-border': resultError['NumeroRccm'] }"
-                    @input="resultError['NumeroRccm'] = false"
-                  />
-                </div>
-              </div>
-              <small v-if="v$.step1.nbre_rccm.$error">{{
-                v$.step1.nbre_rccm.$errors[0].$message
-              }}</small>
-              <small v-if="resultError['NumeroRccm']">
-                {{ resultError["NumeroRccm"] }}
-              </small>
-              <div class="col">
-                <div class="input-groupe">
                   <label for="NumeroNif">Numero Nif</label>
                   <input
                     type="text"
@@ -974,7 +954,8 @@
               <small v-if="resultError['NumeroNif']">
                 {{ resultError["NumeroNif"] }}
               </small>
-
+            
+            
               <div class="col">
                 <div class="input-groupe">
                   <label for="DateGenerationNif">Date Generation du Numero Nif </label>
@@ -992,14 +973,75 @@
               <small v-if="v$.step1.DateGenerationNif.$error">{{
                 v$.step1.DateGenerationNif.$errors[0].$message
               }}</small>
-              <small v-if="resultError['DateGenerationNif']">
-                {{ resultError["DateGenerationNif"] }}
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="FichierNif">Fichier Nif</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                     @change="handleFileUploadNif"
+                    name="FichierNif"
+                    id="FichierNif"
+                    placeholder=""
+                   
+                    :class="{ 'error-border': resultError['FichierNif'] }"
+                    @input="resultError['FichierNif'] = false"
+                  />
+                </div>
+              </div>
+              <small v-if="v$.step1.FichierNif.$error">{{
+                v$.step1.FichierNif.$errors[0].$message
+              }}</small>
+              <small v-if="resultError['FichierNif']">
+                {{ resultError["FichierNif"] }}
               </small>
 
              
             </div>
 
             <div class="row mb-3 mt-3 content-group">
+             <div class="col">
+                <div class="input-groupe">
+                  <label for="NumeroRccm">Numéro Rccm </label>
+                  <input
+                    type="text"
+                    name="NumeroRccm"
+                    id="NumeroRccm"
+                    placeholder=""
+                    v-model="step1.nbre_rccm"
+                    :class="{ 'error-border': resultError['NumeroRccm'] }"
+                    @input="resultError['NumeroRccm'] = false"
+                  />
+                </div>
+              </div>
+                <small v-if="v$.step1.nbre_rccm.$error">{{
+                v$.step1.nbre_rccm.$errors[0].$message
+              }}</small>
+              <small v-if="resultError['NumeroRccm']">
+                {{ resultError["NumeroRccm"] }}
+              </small>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="FichierRccm">Fichier Rccm </label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                     @change="handleFileUploadRccm"
+                    name="FichierRccm"
+                    id="FichierRccm"
+                    placeholder=""
+                   
+                    :class="{ 'error-border': resultError['FichierRccm'] }"
+                    @input="resultError['FichierRccm'] = false"
+                  />
+                </div>
+              </div>
+                <small v-if="v$.step1.FichierRccm.$error">{{
+                v$.step1.FichierRccm.$errors[0].$message
+              }}</small>
+              <small v-if="resultError['FichierRccm']">
+                {{ resultError["FichierRccm"] }}
+              </small>
               <div class="col">
                 <div class="input-groupe">
                   <label for="NumeroTva">Numero de la TVA</label>
@@ -1020,6 +1062,11 @@
               <small v-if="resultError['NumeroTva']">
                 {{ resultError["NumeroTva"] }}
               </small>
+             
+            </div>
+
+            <div class="row mb-3 mt-3 content-group">
+              
               <!-- <div class="col">
                 <div class="input-groupe">
                   <label for="CodeRegime">Code du Regime</label>
@@ -1105,7 +1152,6 @@
                     v-model="step2.mpmeBourse"
                     color="secondary"
                     :options="choix"
-                    @change="handleMpmeBourseChange"
                     :class="{ 'error-border': resultError['MpmeBourse'] }"
                     @input="resultError['MpmeBourse'] = false"
                     search
@@ -1858,7 +1904,28 @@
            <div class="content">
             <p class="titre">INFORMATIONS SUR LA MORTALITE</p>
             <div class="row mb-3 mt-3 content-group">
-              <div class="col">
+            <div class="col">
+                <div class="input-groupe">
+                  <label for="ExistanceActionnaire"
+                    >En activité <span class="text-danger">*</span></label
+                  >
+                  <MazSelect
+                    v-model="step2.activite"
+                    color="secondary"
+                    :options="choix"
+                    :class="{ 'error-border': resultError['activite'] }"
+                    @input="resultError['activite'] = false"  
+                    search
+                    />
+                  <small v-if="v$.step2.activite.$error">{{
+                    v$.step2.activite.$errors[0].$message
+                  }}</small>
+                  <small v-if="resultError['activite']">
+                    {{ resultError["activite"] }}
+                  </small>
+                </div>
+              </div>
+              <div class="col" v-if="step2.activite === 'Non'">
                 <div class="input-groupe">
                   <label for="DateDepotBilan"
                     >Date Dépôt Bilan </label
@@ -1882,7 +1949,7 @@
                 </small>
               </div>
 
-              <div class="col">
+              <div class="col" v-if="step2.activite === 'Non'">
                 <div class="input-groupe">
                   <label for="DureeCessationActivite"
                     >Durée de la Cessation d'Activité
@@ -2889,10 +2956,12 @@ export default {
         ch_aff_2: "",
         part_chiffre_affaire_exprtation: "",
         grpe_fililale: "",
-        nationalite_groupe: "Guinea",
+        nationalite_groupe: "Guinée",
         capital_social: "",
         nbre_rccm: "",
+        FichierRccm:"",
         nbre_nif: "",
+        FichierNif:"",
 
         NbreEmployeGuinne: 0,
         NbreActionnaireGuinneF: 0,
@@ -2947,6 +3016,7 @@ export default {
         descriptionReseau: "",
         difficultesRencontrees: "",
         suggestionsProposees: "",
+         activite:'',
       },
 
       // etapes 3
@@ -2983,6 +3053,8 @@ export default {
         TypeComptabilite: "",
         TypeCarte: "",
         NumeroCarte: "",
+
+       
       },
     };
   },
@@ -3021,7 +3093,9 @@ export default {
       nationalite_groupe: {},
       capital_social: {},
       nbre_rccm: {},
+      FichierRccm:{},
       nbre_nif: {},
+      FichierNif:{},
 
       NbreEmployeGuinne: { require, ValidNumeri },
       NbreActionnaireGuinneF: { ValidNumeri },
@@ -3074,6 +3148,7 @@ export default {
       descriptionReseau: {},
       difficultesRencontrees: {},
       suggestionsProposees: {},
+      activite: {},
     },
     step3: {
       existanceActionnaire: { require },
@@ -3107,6 +3182,7 @@ export default {
       TypeComptabilite: {},
       TypeCarte: { require },
       NumeroCarte: {},
+      
     },
   },
   methods: {
@@ -3146,7 +3222,9 @@ export default {
         NationaliteGroupe: this.step1.nationalite_groupe,
         CapitalSocial: this.step1.capital_social,
         NumeroRccm: this.step1.nbre_rccm,
+        FichierRccm: this.step1.FichierRccm,
         NumeroNif: this.step1.nbre_nif,
+        FichierNif: this.step1.FichierNif,
 
         NbreEmploye: this.step1.NbreEmployeGuinne || 0,
         NbreActionnaireGuinneF: this.step1.NbreActionnaireGuinneF || 0,
@@ -3834,7 +3912,9 @@ export default {
       this.step1.nationalite_groupe = userData.NationaliteGroupe;
       this.step1.capital_social = userData.CapitalSocial;
       this.step1.nbre_rccm = userData.NumeroRccm;
+       this.step1.FichierRccm=userData.FichierRccm
       this.step1.nbre_nif = userData.NumeroNif;
+       this.step1.FichierNif = userData.FichierNif
 
       this.step1.NbreEmployeGuinne = userData.NbreEmploye;
       this.step1.NbreActionnaireGuinneF = userData.NbreActionnaireGuinneF;
@@ -4008,8 +4088,41 @@ export default {
     openModal() {
       this.DemandeAide = true;
     },
-  },
+     handleFileUploadRccm(event) {
+      console.log("File input change");
+      const file = event.target.files[0];
+      console.log("handleFileUploadRccm Selected file:", file);
+      this.step1.FichierRccm = file
+    },
+     handleFileUploadNif(event) {
+      console.log("File input change");
+      const file = event.target.files[0];
+      console.log("handleFileUploadNif Selected file:", file);
+      this.step1.FichierNif = file
+    },
 
+       calculerNombreAnnees() {
+          console.error('La date n\'est pas valide',);
+
+      if (this.step2.activite === 'Non') {
+        // Assurez-vous que step2.DateDepotBilan est une chaîne au format YYYY-MM-DD
+        const dateDepotBilan = new Date(this.step2.DateDepotBilan);
+          console.error('La date n\'est pas valide',this.step2.DateDepotBilan);
+        
+        // Vérifiez si la date est valide
+        if (!isNaN(dateDepotBilan.getTime())) {
+          const dateActuelle = new Date();
+          const differenceAnnees = dateActuelle.getFullYear() - dateDepotBilan.getFullYear();
+
+          // Utilisez differenceAnnees selon vos besoins
+          console.log(`Nombre d'années : ${differenceAnnees}`);
+        } else {
+          // Gérez le cas où la date n'est pas valide
+          console.error('La date n\'est pas valide');
+        }
+      }
+  },
+  },
   async mounted() {
     try {
       window.scrollTo({

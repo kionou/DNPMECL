@@ -22,6 +22,14 @@
                             Classification
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <div class="btns" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-top-profile11" aria-controls="navs-pills-top-profile11"
+                            aria-selected="false">
+                            Valorisation
+                        </div>
+                    </li>
                 </ul>
                 <div class="tab-pane fade show active  contenu" id="navs-pills-top-home1" role="tabpanel">
                     <Form />
@@ -29,6 +37,11 @@
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile1" role="tabpanel">
                     <Classification />
+
+                </div>
+
+                <div class="tab-pane fade" id="navs-pills-top-profile11" role="tabpanel">
+                    <Valorisation />
 
                 </div>
 
@@ -40,10 +53,12 @@
 <script>
 import Classification from '../../components/Public/classification.vue';
 import Form from '../../components/Public/formulaire.vue';
+import Valorisation from '@/components/Public/valorisation.vue'
+
 
 export default {
     name: 'DNPMECLFormulaire',
-    components: { Form , Classification},
+    components: { Form , Classification , Valorisation},
     data() {
         return {
 

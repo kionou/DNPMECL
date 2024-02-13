@@ -42,13 +42,11 @@ async fetchDataFromAPI({ commit }) {
       const response = await axios.get('https://restcountries.com/v3.1/all?lang=fr');
       const countries = response.data;
       console.log('countries', countries);
-      const sortedCountries = countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+      const sortedCountries = countries.sort((a, b) => a.translations.fra.common.localeCompare(b.translations.fra.common));
       const options = sortedCountries.map((country) => ({
-        label: country.translations && country.translations.fr && country.translations.fr.common
-          ? country.translations.fr.common
-          : country.name.common,
+        label:country.translations.fra.common,
         flag: country.flags.png,
-        value: country.name.common,
+        value: country.translations.fra.common,
       }));
       commit('SET_COUNTRY_OPTIONS', options); // Appeler la mutation pour mettre à jour la liste des pays
     } catch (error) {
