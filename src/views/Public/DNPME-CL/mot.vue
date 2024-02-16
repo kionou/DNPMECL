@@ -95,7 +95,7 @@ loggedInUser() {
                 );
                 console.log('classifications/annuel:', response);
 
-                if (response.data.dat !== undefined) {
+                if (response.data.data !== undefined) {
                 console.log('classifications/annuel:', response.data.data);
                    this.Words =  response.data.data
                      this.loading = false
