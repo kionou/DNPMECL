@@ -64,7 +64,7 @@
 </div>
 </div>
 <div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0 pb-5">
-<h3 class="widget-title">Contacts</h3>
+<h3 class="widget-title ">Contacts</h3>
 <div class="working-hours">
 Pour tout besoin d'assistance, vous pouvez nous contacter,
 par email ou par téléphone via les coordonnées ci-après :
@@ -76,13 +76,10 @@ par email ou par téléphone via les coordonnées ci-après :
 </div>
 </div>
 <div class="col-lg-4 col-md-12  mt -md-5 footer-widget  trois ">
-<h3 class="widget-title">Liens utiles</h3>
+<h3 class="widget-title" style="padding-left: 31px;">Liens partenaires</h3>
 <ul class="list-arrow">
-  <li><router-link to="/">ACCUEIL</router-link></li>
-  <li ><router-link to="/dnpme/apropos">DNPME-CL </router-link> </li>
-  <li><router-link to="/actualites">ACTUALITES</router-link></li>
-  <li><router-link to="/partenaires">PARTENAIRES</router-link></li>
-  <li ><router-link to="/opportunites">OPPORTUNITES </router-link> </li>
+  <li v-for="partenaire in partenairesOptions" :key="partenaire.id"> <a :href="partenaire.SiteWeb">{{partenaire.CodePartenaire}}</a></li>
+ 
 </ul>
 </div>
 </div>
@@ -103,21 +100,35 @@ par email ou par téléphone via les coordonnées ci-après :
 </template>
 
 <script>
+
 export default {
     name: 'MpmeFooter',
 
     data() {
         return {
-            
+          partenairesOptions:[]
         };
     },
 
-    mounted() {
-        
+  async  mounted() {
+      await this.fetchPartenaires()
     },
 
     methods: {
-        
+      async fetchPartenaires() {
+  try {
+    await this.$store.dispatch('fetchPartenairesData');
+    const partenairesOptions = JSON.parse(JSON.stringify(this.$store.getters['getPartenaires']));
+    console.log('Partenaires récupérés :', this.partenairesOptions);
+    this.partenairesOptions = partenairesOptions.slice(0, 5);
+
+console.log('Les 5 premiers partenaires :', this.partenairesOptions);
+
+    // Continuez avec le reste de votre code pour traiter les partenaires
+  } catch (error) {
+    console.error('Erreur lors de la récupération des partenaires :', error.message);
+  }
+},
     },
 };
 </script>
@@ -149,6 +160,7 @@ export default {
 .footer-widget ul.list-arrow li {
     border-bottom: 1px solid #eceef1;
     padding: 8px 0;
+    list-style: none;
 }
 
 
@@ -162,7 +174,7 @@ export default {
     font-weight: 700;
     position: relative;
     margin: 0 0 30px;
-    padding-left: 15px;
+   
     text-transform: uppercase;
     color: #fff;
     /* border-left: 3px solid #ffe600; */

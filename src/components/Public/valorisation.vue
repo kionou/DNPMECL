@@ -129,53 +129,44 @@
                 <div id="uploadArea" class="upload-area">
                     <!-- Header -->
                     <div class="upload-area__header">
-                        <h1 class="upload-area__title">Ajoutez votre contenu local</h1>
+                        <h1 class="upload-area__title">Ajouter appui à la valorisation</h1>
                         <small v-if="error">{{ error }}</small>
                     </div>
                     <!-- End Header -->
 
                     <!-- Drop Zoon -->
                     <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                        <!-- <div class="row mb-3 mt-3 content-group">
-                            <div class="col"> -->
+                     
                                 <div class="input-group">
                                     <label for="username">Année <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  />
+                                    <Day @selectedYear="handleSelectedYear"></Day>
+                                    <!-- <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  /> -->
                                 </div>
                                 <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
-                            <!-- </div>
-                        </div> -->
-                        <div class="row mb-3 mt-3 content-group">
-                            <div class="col">
-                            <div class="input-group">
-                            <label for="ProduitService">Produit Service<span class="text-danger">*</span></label>
-                            <input v-model="step1.ProduitService" name="ProduitService"   id="ProduitService"  />
-                        </div>
-                        <small v-if="v$.step1.ProduitService.$error">{{ v$.step1.ProduitService.$errors[0].$message }}</small>
-                        </div>
-
-                        <div class="col">
-                            <div class="input-group">
-                            <label for="MarcheProduitService">Marché Produit Service <span class="text-danger">*</span></label>
+                                <div class="input-group" style="margin-top: 10px !important;">
+                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span class="text-danger">*</span> </label>
                             <MazSelect v-model="step1.MarcheProduitService" color="secondary" :options="Choix"  />
                            
                         </div>
                         <small v-if="v$.step1.MarcheProduitService.$error">{{ v$.step1.MarcheProduitService.$errors[0].$message }}</small>
+                        
+                            <div class="input-group" v-if="step1.MarcheProduitService === true" style="margin-top: 10px !important;">
+                            <label for="ProduitService">Veuillez décrire les services et/ou produits</label>
+                            <input v-model="step1.ProduitService" name="ProduitService"   id="ProduitService"  />
                         </div>
-                        </div>
-
+                        <small v-if="v$.step1.ProduitService.$error">{{ v$.step1.ProduitService.$errors[0].$message }}</small>
                         <div class="row mb-3 mt-3 content-group" >
-                            <div class="col">
+                            <div class="col" v-if="step1.MarcheProduitService === true">
                                 <div class="input-group">
-                            <label for="NombreCommande">Nombre de Commande  </label>
+                            <label for="NombreCommande">Nombre Commande</label>
                             <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step1.NombreCommande">
                           
                         </div>
                         <small v-if="v$.step1.NombreCommande.$error">{{ v$.step1.NombreCommande.$errors[0].$message }}</small>
                             </div>
-                            <div class="col">
-                                <div class="input-group">
-                                    <label for="QuantiteProduit">Quantité de Produit <span class="text-danger">*</span></label>
+                            <div class="col" v-if="step1.MarcheProduitService === true" >
+                                <div class="input-group" >
+                                    <label for="QuantiteProduit">Quantité de produits vendus </label>
                             <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step1.QuantiteProduit">
                           
                         </div>
@@ -198,7 +189,7 @@
 
         <MazDialog v-model="msgsuccess"  title="Enregistrement du contenu local" >
             <p>
-                Contenu local enregistrée avec succès !!
+                Valorisation enregistrée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -208,7 +199,7 @@
         </MazDialog>
         <MazDialog v-model="isdelete" title="Suppression de la clasification">
             <p>
-                Êtes-vous sûr de vouloir supprimer ce contenu  ?
+               Êtes-vous sûr de vouloir supprimer cette valorisation ?
             </p>
             <template #footer="{ close }">
 
@@ -220,7 +211,7 @@
         </MazDialog>
         <MazDialog v-model="confirmdelete" title="Suppression de la clasification">
             <p>
-                Contenu Local supprimée avec succès !!
+                Valorisation supprimée avec succès !!
             </p>
             <template #footer="{ close }">
 
@@ -238,7 +229,7 @@
 <div id="uploadArea" class="upload-area">
     <!-- Header -->
     <div class="upload-area__header">
-        <h1 class="upload-area__title">Modifiez votre contenu local</h1>
+        <h1 class="upload-area__title">Modifier l'appui à la valorisation</h1>
         <small v-if="error">{{ error }}</small>
     </div>
     <!-- End Header -->
@@ -253,50 +244,37 @@
                    
                 </div>
                
-            <!-- </div>
-           
-
-        </div> -->
-        <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-                <div class="input-group">
-                    <label for="ProduitService">Produit Service <span
-                            class="text-danger">*</span></label>
+                <div class="input-group" style="margin-top: 10px !important;">
+                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span class="text-danger">*</span> </label>
+                            <MazSelect v-model="step2.MarcheProduitService" color="secondary" :options="Choix"  />
+                           
+                        </div>
+                        <small v-if="v$.step2.MarcheProduitService.$error">{{ v$.step2.MarcheProduitService.$errors[0].$message }}</small>
+                        
+                            <div class="input-group" v-if="step2.MarcheProduitService === true" style="margin-top: 10px !important;">
+                            <label for="ProduitService">Veuillez décrire les services et/ou produits</label>
                             <input v-model="step2.ProduitService" name="ProduitService"   id="ProduitService"  />
-                </div>
-                <small v-if="v$.step2.ProduitService.$error">{{ v$.step2.ProduitService.$errors[0].$message }}</small>
+                        </div>
+                        <small v-if="v$.step2.ProduitService.$error">{{ v$.step2.ProduitService.$errors[0].$message }}</small>
+                        <div class="row mb-3 mt-3 content-group" >
+                            <div class="col" v-if="step2.MarcheProduitService === true">
+                                <div class="input-group">
+                            <label for="NombreCommande">Nombre Commande</label>
+                            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step2.NombreCommande">
+                          
+                        </div>
+                        <small v-if="v$.step2.NombreCommande.$error">{{ v$.step2.NombreCommande.$errors[0].$message }}</small>
+                            </div>
+                            <div class="col" v-if="step2.MarcheProduitService === true" >
+                                <div class="input-group" >
+                                    <label for="QuantiteProduit">Quantité de produits vendus </label>
+                            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step2.QuantiteProduit">
+                          
+                        </div>
+                        <small v-if="v$.step2.QuantiteProduit.$error">{{ v$.step2.QuantiteProduit.$errors[0].$message }}</small>
+                            </div>
 
-            </div>
-            <div class="col">
-            <div class="input-group">
-            <label for="MarcheProduitService">Marché Produit Service<span class="text-danger">*</span></label>
-            <MazSelect v-model="step2.MarcheProduitService" color="secondary" :options="Choix"  />
-        </div>
-        <small v-if="v$.step2.MarcheProduitService.$error">{{ v$.step2.MarcheProduitService.$errors[0].$message }}</small>
-        </div>
-        </div>
-
-        <div class="row mb-3 mt-3 content-group" >
-            <div class="col">
-            <div class="input-group">
-            <label for="NombreCommande">Nombre de Commande  <span class="text-danger">*</span></label>
-            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step2.NombreCommande"   />
-           
-        </div>
-        <small v-if="v$.step2.NombreCommande.$error">{{ v$.step2.NombreCommande.$errors[0].$message }}</small>
-        </div>
-            <div class="col">
-                <div class="input-group">
-            <label for="QuantiteProduit">Quantité de Produit </label>
-            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step2.QuantiteProduit">
-          
-        </div>
-        <small v-if="v$.step2.QuantiteProduit.$error">{{ v$.step2.QuantiteProduit.$errors[0].$message }}</small>
-            </div>
-          
-
-        </div>
-
+                        </div>
     
                                
         <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
@@ -310,9 +288,9 @@
         </MazDialog>
 
 
-        <MazDialog v-model="updatemsg" title="Modification du Contenu local">
+        <MazDialog v-model="updatemsg" title="Modification de la valorisation">
             <p>
-                Contenu Local modifié avec succès !!
+                Valorisation modifiée avec succèss !!
 
             </p>
             <template #footer="{ close }">
@@ -336,10 +314,11 @@ import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import Pag from './other/pag.vue';
 import Loading from './other/preloader.vue';
+import Day from './other/componentDay.vue';
 export default {
     name: 'DNPMECLImage',
     components: {
-        MazDialog, Pag, Loading
+        MazDialog, Pag, Loading ,Day
 
     },
     computed: {
@@ -424,17 +403,12 @@ export default {
             annee: {
                 require,
             },
-            ProduitService: {
-                require,
-
-            },
+            ProduitService: {},
             MarcheProduitService: {
                 require,
             },
-            NombreCommande: {
-                require,ValidNumeri
-            },
-            QuantiteProduit: {require,ValidNumeri},
+            NombreCommande: {ValidNumeri},
+            QuantiteProduit: {ValidNumeri},
         },
         step2: {
             
@@ -446,9 +420,9 @@ export default {
                 require,
             },
             NombreCommande: {
-                require,ValidNumeri
+                ValidNumeri
             },
-            QuantiteProduit: {require,ValidNumeri},
+            QuantiteProduit: {ValidNumeri},
         },
 
     },
@@ -525,7 +499,7 @@ export default {
                     }
                 } catch (error) {
                     console.error('Erreur lors du téléversement :', error);
-                    if (error && error.response.data === 'Unauthorized' ) {
+                    if (error && error.response.data === 'Unauthorized' || error.response.status === 401 ) {
                         console.log('aut', error.response.data.status === 'error');
                         await this.$store.dispatch('user/clearLoggedInUser');
                         this.$router.push('/connexion-mpme');
@@ -864,6 +838,12 @@ updateFilterSpec() {
 
       // Réinitialiser currentPage à 1 pour afficher la première page après avoir effacé les filtres
       this.currentPage = 1;
+    },
+
+    handleSelectedYear(selectedYear) {
+      // Gérer la valeur sélectionnée de l'enfant ici
+      console.log('Année sélectionnée dans le composant enfant :', selectedYear);
+      this.step1.annee = selectedYear
     },
       
 
@@ -1455,7 +1435,14 @@ td {
   .content-group {
     display: flex;
     flex-direction: column;
+    width: 100% !important;
   }
+  .row > * {
+   
+    padding-right:0 !important;
+    padding-left:0 !important;
+    
+}
 
   .profil1{
 

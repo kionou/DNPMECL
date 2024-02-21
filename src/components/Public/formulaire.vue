@@ -60,6 +60,7 @@
                 <div class="input-groupe">
                   <label for="Region">Region <span class="text-danger">*</span></label>
                   <MazSelect
+                   label="Sélectionner la région"
                     v-model="step1.region"
                     color="secondary"
                     :options="regionOptions"
@@ -94,6 +95,7 @@
                     >Prefecture <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner la préfecture"
                     v-model="step1.prefecture"
                     color="secondary"
                     :options="prefectureOptions1"
@@ -123,6 +125,7 @@
                 <div class="input-groupe">
                   <label for="Commune">Commune <span class="text-danger">*</span></label>
                   <MazSelect
+                  label="Sélectionner la commune"
                     v-model="step1.commune"
                     color="secondary"
                     :options="sous_prefectureOptions"
@@ -218,7 +221,7 @@
                     type="text"
                     name="SigleMpme"
                     id="SigleMpme"
-                    placeholder=""
+                    placeholder="DNPMECL"
                     v-model="step1.sigle_mpme"
                     :class="{ 'error-border': resultError['SigleMpme'] }"
                     @input="resultError['SigleMpme'] = false"
@@ -240,7 +243,7 @@
                     type="text"
                     name="nom"
                     id="nom"
-                    placeholder=""
+                    placeholder="DNPMECL"
                     v-model="step1.nom"
                     :class="{ 'error-border': resultError['NomMpme'] }"
                     @input="resultError['NomMpme'] = false"
@@ -259,9 +262,11 @@
                     >Quartier <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner le quartier"
                     v-model="step1.quartier"
                     color="secondary"
                     :options="QuartierOptions"
+
                     :class="{ 'error-border': resultError['Quartier'] }"
                     @input="resultError['Quartier'] = false"
                     search
@@ -285,7 +290,7 @@
                     type="text"
                     name="Rue"
                     id="Rue"
-                    placeholder=""
+                    placeholder="12 Conakry"
                     v-model="step1.rue"
                     :class="{ 'error-border': resultError['Rue'] }"
                     @input="resultError['Rue'] = false"
@@ -303,7 +308,7 @@
                     type="text"
                     name="BoitePostale"
                     id="BoitePostale"
-                    placeholder=""
+                    placeholder="1234"
                     v-model="step1.boite_postale"
                     :class="{ 'error-border': resultError['BoitePostale'] }"
                     @input="resultError['BoitePostale'] = false"
@@ -371,7 +376,7 @@
                     type="email"
                     name="email"
                     id="AdresseEmail"
-                    placeholder=""
+                    placeholder="dnpmecl@gmail.com"
                     v-model="step1.email"
                     :class="{ 'error-border': resultError['AdresseEmail'] }"
                     @input="resultError['AdresseEmail'] = false"
@@ -391,7 +396,7 @@
                     type="url"
                     name="url"
                     id="SiteWeb"
-                    placeholder=""
+                    placeholder="https://exemple.com"
                     v-model="step1.url"
                     :class="{ 'error-border': resultError['SiteWeb'] }"
                     @input="resultError['SiteWeb'] = false"
@@ -418,6 +423,7 @@
                     >Année de Création <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                    label="Sélectionner une année"
                     v-model="step1.an_creation"
                     color="secondary"
                     :options="yearOptions"
@@ -442,6 +448,7 @@
                   >
                   <MazSelect
                     v-model="step1.an_entre_acti"
+                    label="Sélectionner une année"
                     color="secondary"
                     :options="yearOptions"
                     :class="{ 'error-border': resultError['AnneeEntreeActivite'] }"
@@ -463,6 +470,7 @@
                   <label for="CodeStatutJuridique">Statut Juridique</label>
                   <MazSelect
                     v-model="step1.code_st_juriq"
+                    label="Sélectionner votre statut juridique"
                     color="secondary"
                     :options="StatutJuridiqueOptions"
                     :class="{ 'error-border': resultError['CodeStatutJuridique'] }"
@@ -484,6 +492,7 @@
                 <div class="input-groupe">
                   <label for="AutreStatutJuridique">Autre Statut Juridique</label>
                   <MazSelect
+                  label="Sélectionner votre statut juridique"
                     v-model="step1.autr_st_juriq"
                     color="secondary"
                     :options="StatutJuridiqueOptions"
@@ -507,6 +516,7 @@
                     >Principal Secteur d'Activite <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre secteur activité"
                     v-model="step1.prin_sect_acti"
                     color="secondary"
                     :options="SecteurActiviteOptions"
@@ -579,6 +589,7 @@
                     >Pays du Siège Social <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre pays"
                     v-model="step1.PaysSiegeSocial"
                     :options="sortedCountryOptions"
                     v-slot="{ option }"
@@ -621,7 +632,7 @@
                     type="text"
                     name="PersonnelPermanentFemme"
                     id="PersonnelPermanentFemme"
-                    placeholder=""
+                    placeholder="21"
                     v-model="step1.pers_per_femm"
                     :class="{ 'error-border': resultError['PersonnelPermanentFemme'] }"
                     @input="resultError['PersonnelPermanentFemme'] = false"
@@ -642,7 +653,7 @@
                     type="text"
                     name="PersonnelPermanentHomme"
                     id="PersonnelPermanentHomme"
-                    placeholder=""
+                    placeholder="11"
                     v-model="step1.pers_per_homm"
                     :class="{ 'error-border': resultError['PersonnelPermanentHomme'] }"
                     @input="resultError['PersonnelPermanentHomme'] = false"
@@ -668,7 +679,7 @@
                     type="text"
                     name="PersonnelTemporaireFemme"
                     id="PersonnelTemporaireFemme"
-                    placeholder=""
+                    placeholder="33"
                     v-model="step1.pers_temp_femm"
                     :class="{ 'error-border': resultError['PersonnelTemporaireFemme'] }"
                     @input="resultError['PersonnelTemporaireFemme'] = false"
@@ -690,7 +701,7 @@
                     type="text"
                     name="PersonnelTemporaireHomme"
                     id="PersonnelTemporaireHomme"
-                    placeholder=""
+                    placeholder="44"
                     v-model="step1.pers_temp_homm"
                     :class="{ 'error-border': resultError['PersonnelTemporaireHomme'] }"
                     @input="resultError['PersonnelTemporaireHomme'] = false"
@@ -712,7 +723,7 @@
                     type="text"
                     name="NbreEmployeGuinne"
                     id="NbreEmployeGuinne"
-                    placeholder=""
+                    placeholder="12"
                     v-model="step1.NbreEmployeGuinne"
                     :class="{ 'error-border': resultError['NbreEmploye'] }"
                     @input="resultError['NbreEmploye'] = false"
@@ -736,7 +747,7 @@
                     type="text"
                     name="NbreActionnaireGuinneF"
                     id="NbreActionnaireGuinneF"
-                    placeholder=""
+                    placeholder="11"
                     v-model="step1.NbreActionnaireGuinneF"
                     :class="{ 'error-border': resultError['NbreActionnaireGuinneF'] }"
                     @input="resultError['NbreActionnaireGuinneF'] = false"
@@ -758,7 +769,7 @@
                     type="text"
                     name="NbreActionnaireGuinneH"
                     id="NbreActionnaireGuinneH"
-                    placeholder=""
+                    placeholder="55"
                     v-model="step1.NbreActionnaireGuinneH"
                     :class="{ 'error-border': resultError['NbreActionnaireGuinneH'] }"
                     @input="resultError['NbreActionnaireGuinneH'] = false"
@@ -780,7 +791,7 @@
                     type="text"
                     name="NbreActionnaireGuinne"
                     id="NbreActionnaireGuinne"
-                    placeholder=""
+                    placeholder="33"
                     v-model="step1.NbreActionnaireGuinne"
                     :class="{ 'error-border': resultError['NbreActionnaireGuinne'] }"
                     @input="resultError['NbreActionnaireGuinne'] = false"
@@ -828,7 +839,7 @@
                     type="text"
                     name="PartChiffreAffaireExprtation"
                     id="PartChiffreAffaireExprtation"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step1.part_chiffre_affaire_exprtation"
                     :class="{
                       'error-border': resultError['PartChiffreAffaireExprtation'],
@@ -851,7 +862,7 @@
                     type="text"
                     name="GroupeFililale"
                     id="GroupeFililale"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step1.grpe_fililale"
                     :class="{ 'error-border': resultError['GroupeFililale'] }"
                     @input="resultError['GroupeFililale'] = false"
@@ -870,6 +881,7 @@
                   <label for="NationaliteGroupe">Nationalité du Groupe</label>
 
                   <MazSelect
+                  label="Sélectionner votre pays"
                     v-model="step1.nationalite_groupe"
                     :options="sortedCountryOptions"
                     v-slot="{ option }"
@@ -941,7 +953,7 @@
                     type="text"
                     name="NumeroNif"
                     id="NumeroNif"
-                    placeholder=""
+                    placeholder="1234567890L"
                     v-model="step1.nbre_nif"
                     :class="{ 'error-border': resultError['NumeroNif'] }"
                     @input="resultError['NumeroNif'] = false"
@@ -1007,7 +1019,7 @@
                     type="text"
                     name="NumeroRccm"
                     id="NumeroRccm"
-                    placeholder=""
+                    placeholder="09R09999999"
                     v-model="step1.nbre_rccm"
                     :class="{ 'error-border': resultError['NumeroRccm'] }"
                     @input="resultError['NumeroRccm'] = false"
@@ -1049,7 +1061,7 @@
                     type="text"
                     name="NumeroTva"
                     id="NumeroTva"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step1.NumeroTva"
                     :class="{ 'error-border': resultError['NumeroTva'] }"
                     @input="resultError['NumeroTva'] = false"
@@ -1090,6 +1102,7 @@
                 <div class="input-groupe">
                   <label for="CodeTypeGestion">Code Type Gestion</label>
                   <MazSelect
+                  label="Sélectionner votre Type Gestion"
                     v-model="step1.CodeTypeGestion"
                     color="secondary"
                     :options="TypesGestionsOptions"
@@ -1110,6 +1123,7 @@
                 <div class="input-groupe">
                   <label for="CodeTypeContribuable">Code Type Contribuable</label>
                   <MazSelect
+                  label="Sélectionner votre  Type Contribuable"
                     v-model="step1.CodeTypeContribuable"
                     color="secondary"
                     :options="TypesContribuablesOptions"
@@ -1149,6 +1163,7 @@
                     >Mpme Bourse <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.mpmeBourse"
                     color="secondary"
                     :options="choix"
@@ -1170,6 +1185,7 @@
                     >Nom Bourse <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre  Bourse"
                     v-model="step2.nomBourse"
                     color="secondary"
                     :options="BourseOptions"
@@ -1191,6 +1207,7 @@
                     >Réception Prix <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.receptionPrix"
                     color="secondary"
                     :options="choix"
@@ -1217,7 +1234,7 @@
                     type="text"
                     name="PrincipalPrix"
                     id="PrincipalPrix"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step2.principalPrix"
                     :class="{ 'error-border': resultError['PrincipalPrix'] }"
                     @input="resultError['PrincipalPrix'] = false"
@@ -1236,6 +1253,7 @@
                     >Année Prix Principal <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner une année"
                     v-model="step2.anneePrixPrincipal"
                     color="secondary"
                     :options="yearOptions"
@@ -1259,6 +1277,7 @@
                     >Titre Dirigeant <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Monsieur ou Madame"
                     v-model="step2.titreDirigeant"
                     color="secondary"
                     :options="titre"
@@ -1286,7 +1305,7 @@
                     type="text"
                     name="NomDirigeant"
                     id="NomDirigeant"
-                    placeholder=""
+                    placeholder="Doe"
                     v-model="step2.nomDirigeant"
                     :class="{ 'error-border': resultError['NomDirigeant'] }"
                     @input="resultError['NomDirigeant'] = false"
@@ -1308,7 +1327,7 @@
                     type="text"
                     name="PrenomDirigeant"
                     id="PrenomDirigeant"
-                    placeholder=""
+                    placeholder="John"
                     v-model="step2.prenomDirigeant"
                     :class="{ 'error-border': resultError['PrenomDirigeant'] }"
                     @input="resultError['PrenomDirigeant'] = false"
@@ -1327,6 +1346,7 @@
                     >Sexe Dirigeant <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Masculin ou Feminin"
                     v-model="step2.sexeDirigeant"
                     color="secondary"
                     :options="sexes"
@@ -1351,6 +1371,7 @@
                     >Pays Dirigeant <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre pays"
                     v-model="step2.paysDirigeant"
                     :options="sortedCountryOptions"
                     v-slot="{ option }"
@@ -1390,6 +1411,7 @@
                 <div class="input-groupe">
                   <label for="AnneeNaissanceDirigeant">Année Naissance Dirigeant </label>
                   <MazSelect
+                  label="Sélectionner une année"
                     v-model="step2.anneeNaissanceDirigeant"
                     color="secondary"
                     :options="yearOptions"
@@ -1413,6 +1435,7 @@
                     >Dirigeant Proprietaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.dirigeantProprietaire"
                     color="secondary"
                     :options="choix"
@@ -1451,6 +1474,7 @@
                     >Titre Proprietaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Monsieur ou Madamed"
                     v-model="step2.titreProprietaire"
                     color="secondary"
                     :options="titre"
@@ -1475,7 +1499,7 @@
                     type="text"
                     name="NomProprietaire"
                     id="NomProprietaire"
-                    placeholder=""
+                    placeholder="Doe"
                     v-model="step2.nomProprietaire"
                     :class="{ 'error-border': resultError['NomProprietaire'] }"
                     @input="resultError['NomProprietaire'] = false"
@@ -1497,7 +1521,7 @@
                     type="text"
                     name="PrenomProprietaire"
                     id="PrenomProprietaire"
-                    placeholder=""
+                    placeholder="John"
                     v-model="step2.prenomProprietaire"
                     :class="{ 'error-border': resultError['PrenomProprietaire'] }"
                     @input="resultError['PrenomProprietaire'] = false"
@@ -1519,6 +1543,7 @@
                     >Sexe Proprietaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Masculin ou Féminin"
                     v-model="step2.sexeProprietaire"
                     color="secondary"
                     :options="sexes"
@@ -1540,6 +1565,7 @@
                     >Pays Proprietaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre pays"
                     v-model="step2.paysProprietaire"
                     :options="sortedCountryOptions"
                     v-slot="{ option }"
@@ -1581,6 +1607,7 @@
                     >Année Naissance Proprietaire
                   </label>
                   <MazSelect
+                  label="Sélectionner une année"
                     v-model="step2.anneeNaissanceProprietaire"
                     color="secondary"
                     :options="yearOptions"
@@ -1614,6 +1641,7 @@
                     <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.appartenanceReseauProfessionnel"
                     color="secondary"
                     :options="choix"
@@ -1641,7 +1669,7 @@
                     type="text"
                     name="NomReseauProfessionnel"
                     id="NomReseauProfessionnel"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step2.nomReseauProfessionnel"
                     :class="{ 'error-border': resultError['NomReseauProfessionnel'] }"
                     @input="resultError['NomReseauProfessionnel'] = false"
@@ -1660,6 +1688,7 @@
                     >Financement Fond Propre <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.financementFondPropre"
                     color="secondary"
                     :options="choix"
@@ -1684,6 +1713,7 @@
                     >Financement Credit Bancaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.financementCreditBancaire"
                     color="secondary"
                     :options="choix"
@@ -1706,6 +1736,7 @@
                     <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.financementPartenaireExterieurs"
                     color="secondary"
                     :options="choix"
@@ -1729,6 +1760,7 @@
                     >Financement Autre <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.financementAutre"
                     color="secondary"
                     :options="choix"
@@ -1756,7 +1788,7 @@
                     type="text"
                     name="AutreFinancement"
                     id="AutreFinancement"
-                    placeholder=""
+                    placeholder="exemple"
                     v-model="step2.autreFinancement"
                     :class="{ 'error-border': resultError['AutreFinancement'] }"
                     @input="resultError['AutreFinancement'] = false"
@@ -1782,6 +1814,7 @@
                     >Description du Reseau <span class="text-danger">*</span></label
                   >
                   <MazTextarea
+                  label="Entrez votre commentaire"
                     v-model="step2.descriptionReseau"
                     name="comment"
                     id="comment"
@@ -1810,6 +1843,7 @@
                   <label for="AchatMatierePremiere"
                     >Achat de Matières Premières Locales </label>
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.AchatMatierePremiere"
                     color="secondary"
                     :options="chois"
@@ -1831,6 +1865,7 @@
                     >Fournisseurs locaux</label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.Fournisseur"
                     color="secondary"
                     :options="chois"
@@ -1852,6 +1887,7 @@
                     >Sous Traitence</label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.SousTraitence"
                     color="secondary"
                     :options="chois"
@@ -1881,7 +1917,7 @@
                     type="text"
                     name="PartMatierePremmiereAcheter"
                     id="PartMatierePremmiereAcheter"
-                    placeholder=""
+                    placeholder="123"
                     v-model="step2.PartMatierePremmiereAcheter"
                     :class="{ 'error-border': resultError['PartMatierePremmiereAcheter'] }"
                     @input="resultError['PartMatierePremmiereAcheter'] = false"
@@ -1910,6 +1946,7 @@
                     >En activité <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step2.activite"
                     color="secondary"
                     :options="choix"
@@ -1934,7 +1971,7 @@
                     type="date"
                     name="DateDepotBilan"
                     id="DateDepotBilan"
-                    placeholder=""
+                    placeholder="01/01/1900"
                     v-model="step2.DateDepotBilan"
                     :class="{ 'error-border': resultError['DateDepotBilan'] }"
                     @input="resultError['DateDepotBilan'] = false"
@@ -1958,7 +1995,7 @@
                     type="text"
                     name="DureeCessationActivite"
                     id="DureeCessationActivite"
-                    placeholder=""
+                    placeholder="123"
                     v-model="step2.DureeCessationActivite"
                     :class="{ 'error-border': resultError['DureeCessationActivite'] }"
                     @input="resultError['DureeCessationActivite'] = false"
@@ -1985,6 +2022,7 @@
                 <div class="input-groupe">
                   <label for="DifficultesRencontrees">Difficultes Rencontrees </label>
                   <MazTextarea
+                  label="Entrez votre commentaire"
                     v-model="step2.difficultesRencontrees"
                     name="comment"
                     id="comment"
@@ -2004,6 +2042,7 @@
                 <div class="input-groupe">
                   <label for="SuggestionsProposees">Suggestions Proposees </label>
                   <MazTextarea
+                  label="Entrez votre commentaire"
                     v-model="step2.suggestionsProposees"
                     name="comment"
                     id="comment"
@@ -2042,6 +2081,7 @@
                     >Existance Actionnaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                    label="Sélectionner Oui ou Non"
                     v-model="step3.existanceActionnaire"
                     color="secondary"
                     :options="choix"
@@ -2064,6 +2104,7 @@
                     <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.existanceConseilAdministration"
                     color="secondary"
                     :options="choix"
@@ -2087,6 +2128,7 @@
                     >Existance Partenariat <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.existancePartenariat"
                     color="secondary"
                     :options="choix"
@@ -2110,6 +2152,7 @@
                     >Partenariat Technique<span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.partenariatTechnique"
                     color="secondary"
                     :options="choix"
@@ -2131,6 +2174,7 @@
                     >Partenariat Financier <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.partenariatFinancier"
                     color="secondary"
                     :options="choix"
@@ -2152,6 +2196,7 @@
                     >Partenariat Commercial <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.partenariatCommercial"
                     color="secondary"
                     :options="choix"
@@ -2175,6 +2220,7 @@
                     >Partenariat Autre <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.partenariatAutre"
                     color="secondary"
                     :options="choix"
@@ -2201,7 +2247,7 @@
                     type="text"
                     name="FonctionRepondant"
                     id="FonctionRepondant"
-                    placeholder=""
+                    placeholder="exemple"
                     :class="{ 'error-border': resultError['AutrePartenariat'] }"
                     @input="resultError['AutrePartenariat'] = false"
                     search
@@ -2220,6 +2266,7 @@
                     >Besoin Partenaire <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.besoinPartenaire"
                     color="secondary"
                     :options="choix"
@@ -2244,6 +2291,7 @@
                     >Besoin Partenaire Technique<span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.besoinPartenaireTechnique"
                     color="secondary"
                     :options="choix"
@@ -2266,6 +2314,7 @@
                     >Besoin Partenaire Financier <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.besoinPartenaireFinancier"
                     color="secondary"
                     :options="choix"
@@ -2289,6 +2338,7 @@
                     <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.besoinPartenaireCommercial"
                     color="secondary"
                     :options="choix"
@@ -2315,6 +2365,7 @@
                     >Besoin Partenaire Autre <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.besoinPartenaireAutre"
                     color="secondary"
                     :options="choix"
@@ -2341,7 +2392,7 @@
                     type="text"
                     name="FonctionRepondant"
                     id="FonctionRepondant"
-                    placeholder=""
+                    placeholder="exemple"
                     :class="{ 'error-border': resultError['AutreBesoinPartenaire'] }"
                     @input="resultError['AutreBesoinPartenaire'] = false"
                     search
@@ -2369,6 +2420,7 @@
                     >Titre Repondant <span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.titreRepondant"
                     color="secondary"
                     :options="titre"
@@ -2395,7 +2447,7 @@
                     type="text"
                     name="NomRepondant"
                     id="NomRepondant"
-                    placeholder=""
+                    placeholder="Doe"
                     :class="{ 'error-border': resultError['NomRepondant'] }"
                     @input="resultError['NomRepondant'] = false"
                   />
@@ -2418,7 +2470,7 @@
                     type="text"
                     name="FonctionRepondant"
                     id="FonctionRepondant"
-                    placeholder=""
+                    placeholder="Chef de service"
                     :class="{ 'error-border': resultError['FonctionRepondant'] }"
                     @input="resultError['FonctionRepondant'] = false"
                   />
@@ -2442,7 +2494,7 @@
                     type="text"
                     name="AdresseRepondant"
                     id="AdresseRepondant"
-                    placeholder=""
+                    placeholder="12 conakry"
                     :class="{ 'error-border': resultError['AdresseRepondant'] }"
                     @input="resultError['AdresseRepondant'] = false"
                   />
@@ -2465,7 +2517,7 @@
                     type="text"
                     name="VilleRepondant"
                     id="VilleRepondant"
-                    placeholder=""
+                    placeholder="conakry"
                     :class="{ 'error-border': resultError['VilleRepondant'] }"
                     @input="resultError['VilleRepondant'] = false"
                   />
@@ -2512,6 +2564,7 @@
                     >Contacter<span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner Oui ou Non"
                     v-model="step3.contacter"
                     color="secondary"
                     :options="choix"
@@ -2541,6 +2594,7 @@
                     >Type Comptabilite </label
                   >
                   <MazSelect
+                  label="Sélectionner votre Type Comptabilite"
                     v-model="step3.TypeComptabilite"
                     color="secondary"
                     :options="Comptabilite"
@@ -2563,6 +2617,7 @@
                     >Type de Carte<span class="text-danger">*</span></label
                   >
                   <MazSelect
+                  label="Sélectionner votre carte"
                     v-model="step3.TypeCarte"
                     color="secondary"
                     :options="CarteTypeOptions"
@@ -2588,7 +2643,7 @@
                     type="text"
                     name="NumeroCarte"
                     id="NumeroCarte"
-                    placeholder=""
+                    placeholder="11AA11"
                     :class="{ 'error-border': resultError['NumeroCarte'] }"
                     @input="resultError['NumeroCarte'] = false"
                   />
@@ -2616,7 +2671,7 @@
                     type="text"
                     name="LienGoogleMapMpme"
                     id="LienGoogleMapMpme"
-                    placeholder=""
+                    placeholder="https://www.google.com/maps/place/ROUEN+39 RUE DE AZERTY"
                     :class="{ 'error-border': resultError['LienGoogleMapMpme'] }"
                     @input="resultError['LienGoogleMapMpme'] = false"
                   />
@@ -2637,7 +2692,7 @@
                     type="text"
                     name="LatitudeMpme"
                     id="LatitudeMpme"
-                    placeholder=""
+                    placeholder="11.3333"
                     :class="{ 'error-border': resultError['LatitudeMpme'] }"
                     @input="resultError['LatitudeMpme'] = false"
                   />
@@ -2658,7 +2713,7 @@
                     type="text"
                     name="LongitudeMpme"
                     id="LongitudeMpme"
-                    placeholder=""
+                    placeholder="-12.333"
                     :class="{ 'error-border': resultError['LongitudeMpme'] }"
                     @input="resultError['LongitudeMpme'] = false"
                   />

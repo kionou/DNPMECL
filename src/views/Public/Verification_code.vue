@@ -13,6 +13,7 @@
         <form class="form">
           <div class="input-group">
             <MazInput type="password" v-model="code" color="secondary" placeholder="XXXX" />
+           
           </div>
           <small v-if="v$.code.$error">{{ v$.code.$errors[0].$message }}</small>
           <button class="sign" @click.prevent="submit">Se connecter</button>
@@ -35,10 +36,11 @@ import { mapGetters } from 'vuex';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import { mapActions } from 'vuex';
 
+
 export default {
   name: 'DNPMECLConnexion',
   components: {
-    Navbar, Footer , Loading
+    Navbar, Footer , Loading 
   },
   computed: {
     ...mapGetters(['getVerificationCode']),

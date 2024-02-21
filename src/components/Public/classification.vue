@@ -148,7 +148,8 @@
                             <div class="col">
                                 <div class="input-group">
                                     <label for="username">Année <span class="text-danger">*</span></label>
-                                    <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  />
+                                        <Day @selectedYear="handleSelectedYear"></Day>
+                                    <!-- <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  /> -->
                                 </div>
                                 <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
                             </div>
@@ -382,10 +383,11 @@ import useVuelidate from '@vuelidate/core';
 import { require, lgmin, lgmax, ValidNumeri } from '@/functions/rules';
 import Pag from './other/pag.vue';
 import Loading from './other/preloader.vue';
+import Day from './other/componentDay.vue';
 export default {
     name: 'DNPMECLImage',
     components: {
-        MazDialog, Pag, Loading
+        MazDialog, Pag, Loading ,Day
 
     },
     computed: {
@@ -514,7 +516,8 @@ export default {
      await this.fetchgetClassificationCritereMpme()
      await  this.initializeYears()
      await  this.fetchCarteAndComptabiliteOptions()
-        console.log("datadossiers", this.loggedInUser);
+    console.log("datadossiers", this.loggedInUser);
+    
        
         
     },
@@ -934,6 +937,11 @@ updateFilterSpec() {
 
       // Réinitialiser currentPage à 1 pour afficher la première page après avoir effacé les filtres
       this.currentPage = 1;
+    },
+    handleSelectedYear(selectedYear) {
+      // Gérer la valeur sélectionnée de l'enfant ici
+      console.log('Année sélectionnée dans le composant enfant :', selectedYear);
+      this.step1.annee = selectedYear
     },
       
 

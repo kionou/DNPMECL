@@ -27,7 +27,7 @@
                         <div class="btns" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-top-profile11" aria-controls="navs-pills-top-profile11"
                             aria-selected="false">
-                            Valorisation
+                            Appuis à la valorisation du contenu local
                         </div>
                     </li>
                 </ul>

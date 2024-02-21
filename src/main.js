@@ -30,6 +30,7 @@ import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
 import MazSelect from 'maz-ui/components/MazSelect'
 import MazAvatar from 'maz-ui/components/MazAvatar'
 import MazTextarea from 'maz-ui/components/MazTextarea'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -55,6 +56,7 @@ app.component('MazSelect', MazSelect)
 app.component('MazAvatar', MazAvatar)
 app.component('MazTextarea', MazTextarea)
 app.component('VueDatePicker', VueDatePicker);
+
 
 
 

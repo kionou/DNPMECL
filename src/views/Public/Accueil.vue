@@ -236,13 +236,14 @@
                       <div class="card-body"  style="text-align: left !important;  transition: all 5s;">
                       
                           <ul>
-                            <li><span>Les Petites et Moyennes Entreprises individuelles ou en Associations;</span></li>
-                            <li><span>Les groupements d'entreprises;</span></li>
-                            <li><span>Les groupements professionnels;</span></li>
-                            <li><span>Les coopératives de production et de transformation;</span></li>
-                            <li><span>Les investisseurs à la recherche d'un réseau porteur;</span></li>
-                            <li><span>Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</span></li>
-                            <li><span>Les entreprises (ssous toutes les formes juridiques) et de tout secteur d'activité.</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i> Les Petites et Moyennes Entreprises individuelles ou en Associations;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Les coopératives de production et de transformation;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Les groupements d'entreprises;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Les investisseurs à la recherche d'un réseau porteur;</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Les jeunes promoteurs présentant des projets novateurs, crédibles et porteurs d'avenir;</li>
+                           
+                         
+                           
                           </ul>
                      
                       </div>

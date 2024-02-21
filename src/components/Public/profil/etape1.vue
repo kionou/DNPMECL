@@ -13,8 +13,7 @@
                                     <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class="bg-gray-50 px-4 py-3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Region</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                nomRegion }}</dd>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ nomRegion }}</dd>
                                         </div>
                                         <div style="display: flex;align-items: center;"
                                             class="px-4 py-3 lg:bg-gray-50 class3 ">
@@ -25,7 +24,7 @@
 
                                     </div>
 
-                                    <div class="d-flex justify-content-between class1">
+                                    <!-- <div class="d-flex justify-content-between class1">
                                         <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Ville</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
@@ -37,7 +36,7 @@
                                                 data.Localisation }}</dd>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                     <!-- <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
                                         <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
@@ -91,37 +90,24 @@
                                                 nomQuartier }} </dd>
                                         </div>
                                         <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Rue</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.Rue
+                                            <dt class="text-sm font-medium text-gray-500 me-2"> Numéro WhatsApp</dt>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.NumeroWhatsApp
                                             }} </dd>
                                         </div>
                                         <!-- md:bg-gray-50 sm:bg-gray-50 xs:bg-gray-50 -->
                                     </div>
 
 
-                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
-                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
-                                            <dt class="text-sm font-medium text-gray-500 me-2 ">Boîte Postale</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.BoitePostale }} </dd>
-                                        </div>
-                                        <div style="display: flex;align-items: center;"
-                                            class=" px-4 py-3 lg:bg-gray-50 class3">
-                                            <dt class="text-sm font-medium text-gray-500 me-2">Numéro WhatsApp</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
-                                                data.NumeroWhatsApp }} </dd>
-                                        </div>
+                                
 
-                                    </div>
-
-                                    <div class="  d-flex justify-content-between class1 ">
-                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
+                                    <div class="lg:bg-gray-50  d-flex justify-content-between class1 ">
+                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Numéro Téléphone Secondaire
                                             </dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
                                                 data.NumeroTelephoneSecondaire }} </dd>
                                         </div>
-                                        <div style="display: flex;align-items: center;" class=" px-4 py-3 class3 ">
+                                        <div style="display: flex;align-items: center;" class=" px-4 py-3 lg:bg-gray-50 class3 ">
                                             <dt class="text-sm font-medium text-gray-500 me-2">Adresse Email</dt>
                                             <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
                                                 data.AdresseEmail }} </dd>
@@ -131,12 +117,13 @@
 
                                     
 
-                                    <div class=" lg:bg-gray-50 d-flex justify-content-between class1 ">
-                                        <div style="display: flex;align-items: center;" class=" bg-gray-50 px-4 py-3 ">
+                                    <div class="  d-flex justify-content-between class1 ">
+                                       
+                                        <div style="display: flex;align-items: center;" class="  px-4 py-3 class2">
                                             <dt class="text-sm font-medium text-gray-500 me-2 ">Site Web</dt>
-                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{ data.SiteWeb}} </dd>
+                                            <dd class="mt-1 font-semibold text-gray-900 sm:mt-0 sm:col-span-2"> {{
+                                                data.SiteWeb }} </dd>
                                         </div>
-
                                     </div>
 
 
@@ -388,6 +375,7 @@
 </template>
 
 <script>
+import axios from '@/lib/axiosConfig.js'
 export default {
     name: 'DNPMECLEtape1',
     props: ['data', 'items'],
@@ -399,43 +387,68 @@ export default {
             nomQuartier:'',
             selectedJuridique:'',
             selectedJuridiqueAutre:'',
-            selectedActivite:''
+            selectedActivite:'',
+            selectedRegion:''
         };
     },
+    computed: {
+
+loggedInUser() {
+  return this.$store.getters['user/loggedInUser'];
+},
+},
 
    async mounted() {
+    console.log('eee',this.data);
+    await this.initializeValues();
         
-     await  this.fetchRegionOptions(),
+    },
+
+    methods: {
+       
+async initializeValues() {
+     await   this.fetchOneMpme()
+ 
      await  this.fetchSousPrefectureOptions(),
      await  this.fetchQuartierOptions(),
      await  this.fetchStatutJuridiqueOptions(),
      await  this.fetchSecteurActiviteOptions(),
      await  this.fetchSousSecteurActiviteOptions()
-        
-    },
 
-    methods: {
+        },
 
-        async fetchRegionOptions() {
-    try {
-        await this.$store.dispatch("fetchRegionOptions");
-        const options = JSON.parse(JSON.stringify(this.$store.getters["getRegionOptions"])); 
-        const selectedRegion = options.find(region => region.value === this.data.Region);
-        
-        if (selectedRegion) {
-            this.nomRegion = selectedRegion.label;         
-        } else {
-            console.error('Région non trouvée dans les options.');
-        }
-    } catch (error) {
-        console.error(
-            "Erreur lors de la récupération des options des pays :",
-            error.message
-        );
-    }
-},
+        async fetchOneMpme() {
+            try {
+            const response = await axios.get(`/mpme/${this.loggedInUser.id}`);
+            console.log('response.Code', response);
+            if (response.data.status === 'success' ) {
+              console.log(' response.data.data.Region', response.data.data.Region);
+                
+            await this.$store.dispatch("fetchRegionOptions");
+            const options = JSON.parse(JSON.stringify(this.$store.getters["getRegionOptions"])); 
+            const selectedRegion = options.find(region => region.value === response.data.data.Region);
+            console.log('options',options);
+            
+            console.log('selectedRegion',selectedRegion);
+            if (selectedRegion) {
+            return this.nomRegion =  selectedRegion.label;         
+            } else {
+                console.error('Région non trouvée dans les options.');
+            }
+             
 
-   
+
+            } else {
+             
+            }
+
+          } catch (error) {
+
+            console.error('Erreur postlogin:', error);
+          }
+           
+        },
+
     async fetchSousPrefectureOptions() {
   try {
     await this.$store.dispatch("fetchSous_PrefectureOptions");
