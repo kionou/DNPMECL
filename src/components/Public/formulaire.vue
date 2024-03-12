@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <form class="form"  enctype="multipart/form-data">
+    <form class="form"  >
       <!-- Étape 1 -->
       <div v-if="currentStep === 1">
         <div class="form-container">
@@ -3241,7 +3241,7 @@ export default {
     },
   },
   methods: {
-    createMpmeData() {
+       createMpmeData() {
       return {
         Region: this.step1.region,
         Commune: this.step1.commune,
@@ -3326,10 +3326,8 @@ export default {
         SousTraitence: this.step2.SousTraitence,
         PartMatierePremmiereAcheter:this.step2.PartMatierePremmiereAcheter,
 
-         DateDepotBilan:this.step2.DateDepotBilan,
-         // DateDepotBilan:'2015-01-01',
+        DateDepotBilan:this.step2.DateDepotBilan,
         DureeCessationActivite:this.step2.DureeCessationActivite,
-
         DifficultesRencontrees: this.step2.difficultesRencontrees,
         SuggestionsProposees: this.step2.suggestionsProposees,
 
@@ -3367,6 +3365,132 @@ export default {
       };
     },
 
+    createMpmeFormData() {
+  // Création d'un nouvel objet FormData
+  const formData = new FormData();
+
+  // Ajout des champs et de leurs valeurs à formData
+  formData.append('Region', this.step1.region);
+  formData.append('Commune', this.step1.commune);
+  formData.append('Sousprefecture', this.step1.sous_prefecture);
+  formData.append('Ville', this.step1.ville);
+  formData.append('Localisation', this.step1.localisation);
+  formData.append('SigleMpme', this.step1.sigle_mpme);
+  formData.append('NomMpme', this.step1.nom);
+  formData.append('Quartier', this.step1.quartier);
+  formData.append('Rue', this.step1.rue);
+  formData.append('BoitePostale', this.step1.boite_postale);
+  formData.append('NumeroWhatsApp', this.step1.tel_what);
+  formData.append('NumeroTelephoneSecondaire', this.step1.tel_second);
+  formData.append('AdresseEmail', this.step1.email);
+  formData.append('SiteWeb', this.step1.url);
+  formData.append('AnneeCreation', this.step1.an_creation);
+  formData.append('AnneeEntreeActivite', this.step1.an_entre_acti);
+  formData.append('CodeStatutJuridique', this.step1.code_st_juriq);
+  formData.append('AutreStatutJuridique', this.step1.autr_st_juriq);
+  formData.append('PrincipalSecteurActivite', this.step1.prin_sect_acti);
+  formData.append( 'ListeSousSecteurActivite',JSON.parse( JSON.stringify(this.step1.selectedSousSecteurs)));
+  formData.append('AnneeProduction1', this.step1.an_prod_1);
+  formData.append('PersonnelPermanentFemme', this.step1.pers_per_femm || 0);
+  formData.append('PersonnelPermanentHomme', this.step1.pers_per_homm || 0);
+  formData.append('PersonnelTemporaireFemme', this.step1.pers_temp_femm || 0);
+  formData.append('PersonnelTemporaireHomme', this.step1.pers_temp_homm || 0);
+  formData.append('ChiffreAffaire1', this.step1.ch_aff_1);
+  formData.append('ChiffreAffaire2', this.step1.ch_aff_2);
+  formData.append('PartChiffreAffaireExprtation', this.step1.part_chiffre_affaire_exprtation);
+  formData.append('GroupeFililale', this.step1.grpe_fililale);
+  formData.append('NationaliteGroupe', this.step1.nationalite_groupe);
+  formData.append('CapitalSocial', this.step1.capital_social);
+  formData.append('NumeroRccm', this.step1.nbre_rccm);
+  formData.append('FichierRccm', this.step1.FichierRccm);
+  formData.append('NumeroNif', this.step1.nbre_nif);
+  formData.append('FichierNif', this.step1.FichierNif);
+  formData.append('NbreEmploye', this.step1.NbreEmployeGuinne || 0);
+  formData.append('NbreActionnaireGuinneF', this.step1.NbreActionnaireGuinneF || 0);
+  formData.append('NbreActionnaireGuinneH', this.step1.NbreActionnaireGuinneH || 0);
+  formData.append('NbreActionnaire', this.step1.NbreActionnaireGuinne || 0);
+  formData.append('PaysSiegeSocial', this.step1.PaysSiegeSocial);
+  formData.append('DateGenerationNif', this.step1.DateGenerationNif);
+  formData.append('NumeroTva', this.step1.NumeroTva);
+  formData.append('CodeRegime', this.step1.CodeRegime);
+  formData.append('CodeTypeGestion', this.step1.CodeTypeGestion);
+  formData.append('CodeTypeContribuable', this.step1.CodeTypeContribuable);
+
+    // Ajout des champs du step2 à formData
+  formData.append('MpmeBourse', this.step2.mpmeBourse);
+  formData.append('NomBourse', this.step2.nomBourse);
+  formData.append('RecptionPrix', this.step2.receptionPrix);
+  formData.append('PrincipalPrix', this.step2.principalPrix);
+  // formData.append('AnneePrixPrincipal', parseInt(this.step2.anneePrixPrincipal));
+  formData.append('TitreDirigeant', this.step2.titreDirigeant);
+  formData.append('NomDirigeant', this.step2.nomDirigeant);
+  formData.append('PrenomDirigeant', this.step2.prenomDirigeant);
+  formData.append('SexeDirigeant', this.step2.sexeDirigeant);
+  formData.append('PaysDirigeant', this.step2.paysDirigeant);
+  formData.append('AnneeNaissanceDirigeant', parseInt(this.step2.anneeNaissanceDirigeant).toString());
+  formData.append('DirigeantProprietaire', this.step2.dirigeantProprietaire);
+  formData.append('TitreProprietaire', this.step2.titreProprietaire);
+  formData.append('NomProprietaire', this.step2.nomProprietaire);
+  formData.append('PrenomProprietaire', this.step2.prenomProprietaire);
+  formData.append('SexeProprietaire', this.step2.sexeProprietaire);
+  formData.append('PaysProprietaire', this.step2.paysProprietaire);
+  formData.append('AnneeNaissanceProprietaire', this.step2.anneeNaissanceProprietaire);
+  formData.append('AppartenanceReseauProfessionnel', this.step2.appartenanceReseauProfessionnel);
+  formData.append('NomReseauProfessionnel', this.step2.nomReseauProfessionnel);
+  formData.append('FinancementFondPropre', this.step2.financementFondPropre);
+  formData.append('FinancementCreditBancaire', this.step2.financementCreditBancaire);
+  formData.append('FinancementPartenaireExterieurs', this.step2.financementPartenaireExterieurs);
+  formData.append('FinancementAutre', this.step2.financementAutre);
+  formData.append('DescriptionReseau', this.step2.descriptionReseau);
+  formData.append('AutreFinancement', this.step2.autreFinancement);
+  formData.append('AchatMatierePremiere', this.step2.AchatMatierePremiere);
+  formData.append('Fournisseur', this.step2.Fournisseur);
+  formData.append('SousTraitence', this.step2.SousTraitence);
+  formData.append('PartMatierePremmiereAcheter', this.step2.PartMatierePremmiereAcheter);
+  formData.append('DateDepotBilan', this.step2.DateDepotBilan);
+  formData.append('DureeCessationActivite', this.step2.DureeCessationActivite);
+  formData.append('DifficultesRencontrees', this.step2.difficultesRencontrees);
+  formData.append('SuggestionsProposees', this.step2.suggestionsProposees);
+
+   // Ajout des champs du step3 à formData
+   formData.append('ExistanceActionnaire', this.step3.existanceActionnaire);
+  formData.append('ExistanceConseilAdministration', this.step3.existanceConseilAdministration);
+  formData.append('ExistancePartenariat', this.step3.existancePartenariat);
+  formData.append('PartenariatTechnique', this.step3.partenariatTechnique);
+  formData.append('PartenariatFinancier', this.step3.partenariatFinancier);
+  formData.append('PartenariatCommercial', this.step3.partenariatCommercial);
+  formData.append('PartenariatAutre', this.step3.partenariatAutre);
+  formData.append('AutrePartenariat', this.step3.autrePartenariat);
+  formData.append('BesoinPartenaire', this.step3.besoinPartenaire);
+  formData.append('BesoinPartenaireTechnique', this.step3.besoinPartenaireTechnique);
+  formData.append('BesoinPartenaireFinancier', this.step3.besoinPartenaireFinancier);
+  formData.append('BesoinPartenaireCommercial', this.step3.besoinPartenaireCommercial);
+  formData.append('BesoinPartenaireAutre', this.step3.besoinPartenaireAutre);
+  formData.append('AutreBesoinPartenaire', this.step3.autreBesoinPartenaire);
+  formData.append('TitreRepondant', this.step3.titreRepondant);
+  formData.append('NomRepondant', this.step3.nomRepondant);
+  formData.append('FonctionRepondant', this.step3.fonctionRepondant);
+  formData.append('AdresseRepondant', this.step3.adresseRepondant);
+  formData.append('VilleRepondant', this.step3.villeRepondant);
+  formData.append('TelephoneWhatsAppRepondant', this.step3.telephoneWhatsAppRepondant);
+  formData.append('Contacter', this.step3.contacter);
+  formData.append('LienGoogleMapMpme', this.step3.lienGoogleMapMpme);
+  formData.append('LatitudeMpme', this.step3.latitudeMpme);
+  formData.append('LongitudeMpme', this.step3.longitudeMpme);
+  formData.append('AltitudeMpme', this.step3.altitudeMpme);
+  formData.append('PrecisionGPSMpme', this.step3.precisionGPSMpme);
+  formData.append('OrigineDonnees', this.step3.origineDonnees);
+  formData.append('TypeComptabilite', this.step3.TypeComptabilite);
+  formData.append('TypeCarte', this.step3.TypeCarte);
+  formData.append('NumeroCarte', this.step3.NumeroCarte);
+
+
+  // Retourne l'objet FormData créé
+  return formData;
+},
+
+
+
     async nextStep() {
       this.loading = true;
       if (this.currentStep === 1) {
@@ -3374,8 +3498,13 @@ export default {
         this.v$.step1.$touch();
         if (this.v$.$errors.length == 0) {
           const mpmeData = this.createMpmeData();
+          // const mpmeLocal = this.createMpmeFormData()
           console.log("mpmeData1", mpmeData);
-          const success = await this.enregistrerMpmeDonnees(mpmeData);
+          // console.log("mpmeData1", mpmeLocal);
+          localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
+          localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
+
+           const success = await this.enregistrerMpmeDonnees(mpmeData);
           console.log("success", success);
           if (success) {
          
@@ -3405,6 +3534,10 @@ export default {
         this.v$.step2.$touch();
         if (this.v$.$errors.length == 0) {
           const mpmeData = this.createMpmeData();
+         
+          console.log("mpmeData1", mpmeData);
+         
+         
           const vide = "";
           if (this.step2.mpmeBourse !== "Oui") {
             mpmeData.NomBourse = vide;
@@ -3417,7 +3550,8 @@ export default {
             mpmeData.PrincipalPrix = vide;
             mpmeData.AnneePrixPrincipal = vide;
           }
-          console.log("mpmeData1", mpmeData);
+          localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
+          localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
           console.log("success", success);
           if (success) {
@@ -3449,6 +3583,8 @@ export default {
         if (this.v$.$errors.length === 0) {
           this.loading = true;
           const mpmeData = this.createMpmeData();
+          console.log("mpmeData1", mpmeData);
+          
           const vide = "";
           if (this.step3.partenariatAutre !== "Oui") {
             mpmeData.AutrePartenariat = vide;
@@ -3456,7 +3592,8 @@ export default {
           if (this.step3.besoinPartenaireAutre !== "Oui") {
             mpmeData.AutreBesoinPartenaire = vide;
           }
-          console.log("mpmeData1", mpmeData);
+          localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
+          localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
           console.log("success", success);
           if (success) {
@@ -3489,6 +3626,10 @@ export default {
         if (this.v$.$errors.length === 0) {
           this.loading = true;
           const mpmeData = this.createMpmeData();
+         
+          console.log("mpmeData1", mpmeData);
+          
+          
           const vide = "";
           if (this.step3.partenariatAutre !== "Oui") {
             mpmeData.AutrePartenariat = vide;
@@ -3496,7 +3637,8 @@ export default {
           if (this.step3.besoinPartenaireAutre !== "Oui") {
             mpmeData.AutreBesoinPartenaire = vide;
           }
-          console.log("mpmeData1", mpmeData);
+          localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
+          localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
           console.log("success", success);
           if (success) {
@@ -3520,8 +3662,17 @@ export default {
         // const userId = 'MPME-1580-2023'
         const response = await axios.get(`/mpme/${userId}`);
         this.userData = response.data.data;
-        this.storeUserData(this.userData);
-        console.log("UserData:", this.userData);
+        const CodeIdentifiant = this.getTempMpmeData('CodeIdentifiant');
+        const localStorageUserData = this.getTempMpmeData('tempMpmeData');
+          if (CodeIdentifiant === this.loggedInUser.id) {
+            const userDataString = JSON.parse(localStorageUserData)
+            this.storeUserDataLocal(userDataString);
+           console.log("UserData:",userDataString );
+          } else {
+            this.storeUserData(this.userData);
+           console.log("UserData:", this.userData);
+          }
+        
         // console.log('UserData:', this.userData.ListeSousSecteurActivite);
       } catch (error) {
         console.error("Erreur lors de la récupération des options des USER :", error);
@@ -3550,7 +3701,8 @@ export default {
         const response = await axios.put(`/mpme/${userId}`, mpmeData, {
           headers: {
             Authorization: `Bearer ${this.loggedInUser.token}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json', 
+            
           },
         });
 
@@ -3927,7 +4079,11 @@ export default {
       // Maintenant, this.resultError est un objet où les clés sont les noms des champs
       console.log("resultError", this.resultError);
     },
-
+    getTempMpmeData(key) {
+      // Votre logique pour récupérer les données du local storage
+      // Assurez-vous de retourner les données ou une valeur par défaut appropriée
+      return localStorage.getItem(key) || null;
+    },
     storeUserData(userData) {
       this.step1.region = userData.Region;
       this.step1.commune = userData.Commune;
@@ -3948,6 +4104,8 @@ export default {
       this.step1.code_st_juriq = parseInt(userData.CodeStatutJuridique);
       this.step1.autr_st_juriq = parseInt(userData.AutreStatutJuridique);
       this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
+      // this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite;
+
       if (userData.ListeSousSecteurActivite.includes("|")) {
         this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split("|");
       } else if (userData.ListeSousSecteurActivite.includes(",")) {
@@ -3955,6 +4113,128 @@ export default {
       } else {
         this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite.split(" ");
       }
+      this.step1.an_prod_1 = userData.AnneeProduction1;
+      this.step1.pers_per_femm = userData.PersonnelPermanentFemme;
+      this.step1.pers_per_homm = userData.PersonnelPermanentHomme;
+      this.step1.pers_temp_femm = userData.PersonnelTemporaireFemme;
+      this.step1.pers_temp_homm = userData.PersonnelTemporaireHomme;
+      this.step1.ch_aff_1 = userData.ChiffreAffaire1;
+      this.step1.ch_aff_2 = userData.ChiffreAffaire2;
+      this.step1.part_chiffre_affaire_exprtation = userData.PartChiffreAffaireExprtation;
+      this.step1.grpe_fililale = userData.GroupeFililale;
+      this.step1.nationalite_groupe = userData.NationaliteGroupe;
+      this.step1.capital_social = userData.CapitalSocial;
+      this.step1.nbre_rccm = userData.NumeroRccm;
+       this.step1.FichierRccm=userData.FichierRccm
+      this.step1.nbre_nif = userData.NumeroNif;
+       this.step1.FichierNif = userData.FichierNif
+
+      this.step1.NbreEmployeGuinne = userData.NbreEmploye;
+      this.step1.NbreActionnaireGuinneF = userData.NbreActionnaireGuinneF;
+      this.step1.NbreActionnaireGuinneH = userData.NbreActionnaireGuinneH;
+      this.step1.NbreActionnaireGuinne = userData.NbreActionnaire;
+      this.step1.PaysSiegeSocial = userData.PaysSiegeSocial;
+
+      this.step1.DateGenerationNif = userData.DateGenerationNif;
+      this.step1.NumeroTva = userData.NumeroTva;
+      this.step1.CodeRegime = userData.CodeRegime;
+      this.step1.CodeTypeGestion = userData.CodeTypeGestion;
+      this.step1.CodeTypeContribuable = userData.CodeTypeContribuable;
+
+      this.step2.mpmeBourse = userData.MpmeBourse;
+      this.step2.nomBourse = userData.NomBourse;
+      this.step2.receptionPrix = userData.RecptionPrix;
+      this.step2.principalPrix = userData.PrincipalPrix;
+      this.step2.anneePrixPrincipal = userData.AnneePrixPrincipal;
+      this.step2.titreDirigeant = userData.TitreDirigeant;
+      this.step2.nomDirigeant = userData.NomDirigeant;
+      this.step2.prenomDirigeant = userData.PrenomDirigeant;
+      this.step2.sexeDirigeant = userData.SexeDirigeant;
+      this.step2.paysDirigeant = userData.PaysDirigeant;
+      this.step2.anneeNaissanceDirigeant = userData.AnneeNaissanceDirigeant;
+      this.step2.dirigeantProprietaire = userData.DirigeantProprietaire;
+      this.step2.titreProprietaire = userData.TitreProprietaire;
+      this.step2.nomProprietaire = userData.NomProprietaire;
+      this.step2.prenomProprietaire = userData.PrenomProprietaire;
+      this.step2.sexeProprietaire = userData.SexeProprietaire;
+      this.step2.paysProprietaire = userData.PaysProprietaire;
+      this.step2.anneeNaissanceProprietaire = userData.AnneeNaissanceProprietaire;
+      this.step2.appartenanceReseauProfessionnel =
+        userData.AppartenanceReseauProfessionnel;
+      this.step2.nomReseauProfessionnel = userData.NomReseauProfessionnel;
+      this.step2.financementFondPropre = userData.FinancementFondPropre;
+      this.step2.financementCreditBancaire = userData.FinancementCreditBancaire;
+      this.step2.financementPartenaireExterieurs =
+        userData.FinancementPartenaireExterieurs;
+      this.step2.financementAutre = userData.FinancementAutre;
+      this.step2.descriptionReseau = userData.DescriptionReseau;
+      this.step2.autreFinancement = userData.AutreFinancement;
+
+      this.step2.AchatMatierePremiere = userData.AchatMatierePremiere;
+      this.step2.Fournisseur = userData.Fournisseur;
+      this.step2.SousTraitence = userData.SousTraitence;
+      this.step2.PartMatierePremmiereAcheter = userData.PartMatierePremmiereAcheter
+      this.step2.DateDepotBilan = userData.DateDepotBilan;
+      this.step2.DureeCessationActivite = userData.DureeCessationActivite ;
+     
+
+      this.step2.difficultesRencontrees = userData.DifficultesRencontrees;
+      this.step2.suggestionsProposees = userData.SuggestionsProposees;
+
+      this.step3.existanceActionnaire = userData.ExistanceActionnaire;
+      this.step3.existanceConseilAdministration = userData.ExistanceConseilAdministration;
+      this.step3.existancePartenariat = userData.ExistancePartenariat;
+      this.step3.partenariatTechnique = userData.PartenariatTechnique;
+      this.step3.partenariatFinancier = userData.PartenariatFinancier;
+      this.step3.partenariatCommercial = userData.PartenariatCommercial;
+      this.step3.partenariatAutre = userData.PartenariatAutre;
+      this.step3.autrePartenariat = userData.AutrePartenariat;
+      this.step3.besoinPartenaire = userData.BesoinPartenaire;
+      this.step3.besoinPartenaireTechnique = userData.BesoinPartenaireTechnique;
+      this.step3.besoinPartenaireFinancier = userData.BesoinPartenaireFinancier;
+      this.step3.besoinPartenaireCommercial = userData.BesoinPartenaireCommercial;
+      this.step3.besoinPartenaireAutre = userData.BesoinPartenaireAutre;
+      this.step3.autreBesoinPartenaire = userData.AutreBesoinPartenaire;
+      this.step3.titreRepondant = userData.TitreRepondant;
+      this.step3.nomRepondant = userData.NomRepondant;
+      this.step3.fonctionRepondant = userData.FonctionRepondant;
+      this.step3.adresseRepondant = userData.AdresseRepondant;
+      this.step3.villeRepondant = userData.VilleRepondant;
+      this.step3.telephoneWhatsAppRepondant = userData.TelephoneWhatsAppRepondant;
+      this.step3.contacter = userData.Contacter;
+      this.step3.lienGoogleMapMpme = userData.LienGoogleMapMpme;
+      this.step3.latitudeMpme = userData.LatitudeMpme;
+      this.step3.longitudeMpme = userData.LongitudeMpme;
+      this.step3.altitudeMpme = userData.AltitudeMpme;
+      this.step3.precisionGPSMpme = userData.PrecisionGPSMpme;
+      this.step3.origineDonnees = userData.OrigineDonnees;
+
+      this.step3.TypeComptabilite = userData.TypeComptabilite;
+      this.step3.TypeCarte = userData.TypeCarte;
+      this.step3.NumeroCarte = userData.NumeroCarte;
+      // ... Lier d'autres propriétés de la même manière
+    },
+    storeUserDataLocal(userData) {
+      this.step1.region = userData.Region;
+      this.step1.commune = userData.Commune;
+      this.step1.ville = userData.Ville;
+      this.step1.sous_prefecture = userData.Sousprefecture;
+      this.step1.localisation = userData.Localisation;
+      this.step1.sigle_mpme = userData.SigleMpme;
+      this.step1.nom = userData.NomMpme;
+      this.step1.quartier = userData.Quartier;
+      this.step1.rue = userData.Rue;
+      this.step1.boite_postale = userData.BoitePostale;
+      this.step1.tel_what = userData.NumeroWhatsApp;
+      this.step1.tel_second = userData.NumeroTelephoneSecondaire;
+      this.step1.email = userData.AdresseEmail;
+      this.step1.url = userData.SiteWeb;
+      this.step1.an_creation = userData.AnneeCreation;
+      this.step1.an_entre_acti = userData.AnneeEntreeActivite;
+      this.step1.code_st_juriq = parseInt(userData.CodeStatutJuridique);
+      this.step1.autr_st_juriq = parseInt(userData.AutreStatutJuridique);
+      this.step1.prin_sect_acti = userData.PrincipalSecteurActivite;
+      this.step1.selectedSousSecteurs = userData.ListeSousSecteurActivite;
       this.step1.an_prod_1 = userData.AnneeProduction1;
       this.step1.pers_per_femm = userData.PersonnelPermanentFemme;
       this.step1.pers_per_homm = userData.PersonnelPermanentHomme;

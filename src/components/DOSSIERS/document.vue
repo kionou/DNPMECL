@@ -439,7 +439,7 @@
        this.v$.step1.$touch()
     if (this.v$.$errors.length == 0 ) {
       console.log('bonjour');
-      const formData = new FormData();
+     const formData = new FormData(); 
       formData.append('document', this.step1.selectedFile);
       formData.append('NomDocument', this.step1.nom);
       formData.append('CodeMpme', this.loggedInUser.id);
