@@ -50,9 +50,9 @@ export default {
 
     data() {
         return {
-          loading:false,
+             loading:false,
               email:'',
-             msg:false,
+              msg:false,
               code:'',
              password:'',
              confirmer_password:'',

@@ -96,7 +96,7 @@ const router = createRouter({
 
 
 
-         { path: '/formulaire', name: 'Formulaire', component: Formulaire  ,   meta: { requiresAuth: true } },
+         { path: '/formulaire', name: 'Formulaire', component: Formulaire  , },
          { path: '/mon-espace', name: 'Espace', component: Espace ,  meta: { requiresAuth: true } },
          { path: '/dossiers', name: 'Dossiers', component: Dossiers  ,  meta: { requiresAuth: true } },
          { path: '/profil', name: 'Profil', component: Profil , meta: { requiresAuth: true }   },
