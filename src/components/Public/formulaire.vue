@@ -2893,9 +2893,7 @@
       </MazDialog>
     </form>
   </div>
-</template>
-
-<script>
+</template><script>
 import axios from "@/lib/axiosConfig.js";
 import MazPhoneNumberInput from "maz-ui/components/MazPhoneNumberInput";
 import useVuelidate from "@vuelidate/core";

@@ -104,8 +104,14 @@
         <h3>Notre mission</h3>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
+    
     <div class="carousel-item active" data-bs-interval="5000">
       <img src="@/assets/img/carousel/carousel6.jpeg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
+    </div>
+    <div class="carousel-item active" data-bs-interval="120000" style="height:350px; width:100%">
+      <!-- <source :src="videoSource" type="video/mp4"  style="height:300px; width:100%"> -->
+      <iframe  height="350" style="width:100%" src="https://www.youtube.com/embed/ZbIzZD_YNsA?si=PkQaU28M5JBwAzax" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
     </div>
     <div class="carousel-item" data-bs-interval="5000">
       <img src="@/assets/img/carousel/carousel5.jpeg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
@@ -407,7 +413,7 @@
       </div>
     </section>
     <!-- End Our Team Section -->
-     <section id="testimonials" class="testimonials">
+     <section id="testimonials" class="testimonials" v-if="filterOffres.length !== 0">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
@@ -450,6 +456,26 @@
 
       </div>
     </section> 
+
+       <!-- ======= Our Team Section ======= -->
+       <section id="team" class="team" style=" background-color: #f6f6f6; ">
+      <div  data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Video de la DNPME</h2>
+        </div>
+        <div class="corps-video">
+        <video width="1140" height="550" controls>
+      <source :src="videoSource" type="video/mp4">
+      Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+    </video>
+       
+      </div>
+
+      </div>
+    </section>
+    <!-- End Our Team Section -->
+
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section id="clients" class="clients" >
       <div class="section-header">
@@ -465,7 +491,9 @@
           </div>
           <div class="swiper-pagination"></div>
       </div>
-    </section> 
+       </section> 
+
+     
 
 
 </main>
@@ -487,6 +515,7 @@ import slide111 from "@/assets/img/slide/slide111.jpg"
 import slide22 from "@/assets/img/slide/slide22.jpg"
 import slide33 from "@/assets/img/slide/slide33.jpg"
 import slide44 from "@/assets/img/slide/slide44.jpg"
+import videoSource from '@/assets/img/video/demo.mp4'
 import SecteurActiviteVue from '../../components/Public/Statistique/tbSecteur.vue';
 import Region from '../../components/Public/Statistique/tbRegion.vue';
 import Juridique from '../../components/Public/Statistique/tbJuridiques.vue';
@@ -513,6 +542,7 @@ export default {
   },
   data() {
     return {
+      videoSource: videoSource,
       items: [
           {
             src: slide111,
@@ -1047,5 +1077,23 @@ p {
   left: -11px;
 
 
+}
+
+.corps-video {
+  max-width: 1180px;
+  margin: 47px auto;
+  height: 550px;
+ 
+  border-radius: 20px;
+
+}
+
+.corps-video video {
+  /* height: 500px;
+    width: 1140px; */
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: aliceblue;
 }
 </style>
