@@ -2,23 +2,28 @@
     <div>
           <!-- ======= Hero Section ======= -->
 
-          <section id="hero" class="hero" style="padding: 0 !important;">
-      <v-carousel :cycle="true" width="100%"  :show-arrows="false"
-  >
+          <section id="hero" class="hero" style="padding: 10px 0 !important;"> 
+            <div class="row heads">
+              <div class=" col-lg-8">
+                <v-carousel :cycle="true" width="100%"  :show-arrows="false" >
     <v-carousel-item v-for="(item,i) in items" :key="i"  >
-      <v-img :src="item.src" class="fill-height immg "  cover  max-height="800">
+      <v-img :src="updatePicture( item.images)" class="fill-height immg "  cover  max-height="800">
       </v-img>
         <v-container fill-height>
         <div class="hero_content absolute-fill">
       <div class="rowe gy-5" data-aos="fade-in">
         <div class="hero_content1   text-center text-lg-start" style="margin-bottom:auto">
-          <h2>Enregistrez votre entreprise</h2>
-          <p>Portail officiel de de la Direction Nationale des PME et du Contenu Local dédié à l’enregistrement des micros, petites et moyennes entreprises en Guinée afin de faciliter l’accès 
+          <!-- <h2>Enregistrez votre entreprise</h2> -->
+          <h2>{{item.titre}}</h2>
+          <!-- <p>Portail officiel de de la Direction Nationale des PME et du Contenu Local dédié à l’enregistrement des micros, petites et moyennes entreprises en Guinée afin de faciliter l’accès 
             aux informations liées à ces entreprises. </p>
-          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p>
+          <p>Ne ratez plus aucunes opportunités pour booster les activités de vos MPME !</p> -->
+
+            <p>{{ convertirHtmlEnTexte(item.content) }}</p>
           
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <router-link to="/inscription-mpme" class="btn-get-started">Enregistrez votre entreprise</router-link>
+            <router-link v-if="item.id === 0" to="#" class="btn-get-started">Voir plus</router-link>
+            <router-link v-else :to="{ name: 'ActuliteDetail', params: { id: item.id }}" class="btn-get-started">Voir plus</router-link>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center">
               <i class="bi bi-play-circle" style="color: white; position: relative;">
                
@@ -36,6 +41,23 @@
 
     </v-carousel-item>
   </v-carousel>
+              </div>
+          
+            <div class="col-lg-4 mt-5 mt-lg-0">
+        <div class="sidebar text-center imageheader sidebar-right">
+          <div class="imageheader1">
+          <img :src="Words.Photo" :alt="Words.Name" class="img-fluid" style="border:2px solid #ededed; padding:3px;"><br>
+
+          </div>
+          <h4>{{ Words.Name }}</h4>
+          <hr style="width:10%;border:4px;height:4px;background:#056839;margin:0 auto;">
+          <p style="color: #000; text-shadow:none">{{ Words.titre?.Name }}</p>
+        </div><!-- Sidebar end -->
+
+        </div>
+
+            </div>
+   
  
   </section>
   <!-- <section id="hero" class="hero">
@@ -68,7 +90,7 @@
   <main id="main">
 
 <!-- ======= Présentation de la directiion Section ======= -->
-<section id="about" class="about">
+<section id="about" class="about" style="padding: 20px  !important;">
   <div class="container" data-aos="fade-up">
 
     <div class="section-header">
@@ -107,11 +129,6 @@
     
     <div class="carousel-item active" data-bs-interval="5000">
       <img src="@/assets/img/carousel/carousel6.jpeg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
-    </div>
-    <div class="carousel-item active" data-bs-interval="120000" style="height:350px; width:100%">
-      <!-- <source :src="videoSource" type="video/mp4"  style="height:300px; width:100%"> -->
-      <iframe  height="350" style="width:100%" src="https://www.youtube.com/embed/ZbIzZD_YNsA?si=PkQaU28M5JBwAzax" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
     </div>
     <div class="carousel-item" data-bs-interval="5000">
       <img src="@/assets/img/carousel/carousel5.jpeg" class="d-block w-100 img-fluid rounded-4 mb-4" alt="...">
@@ -353,16 +370,19 @@
 
      <!-- ======= Our Team Section ======= -->
      <section id="team" class="team" style=" background-color: #f6f6f6; ">
-      <div class="container" data-aos="fade-up">
+      <div class="container " data-aos="fade-up">
 
-        <div class="section-header">
+        <!-- <div class="section-header">
           <h2>Quelques Statistiques</h2>
           <p> Voici quelques statistiques  réparties par région, statut juridique et secteur d'activité </p>
+        </div> -->
+
+        <div class="row gy-4 class6">
+
+          <div class="col-lg-6 col-6 mb-4 class7">
+              <div class="section-header">
+          <h2>Quelques Statistiques</h2>
         </div>
-
-        <div class="row gy-4">
-
-          <div class="col-lg-12 col-12 mb-4">
             <div class="nav-align-top mb-4">
               <ul class="nav nav-pills mb-3" role="tablist">
                 <li class="nav-item">
@@ -409,6 +429,25 @@
               </div>
             </div>
           </div>
+
+          <div class="col-lg-6 col-6 mb-4 class8">
+            <div  data-aos="fade-up">
+
+<div class="section-header">
+  <h2>Video de la DNPME</h2>
+</div>
+<div class="corps-video">
+<video width="1140" height="650" controls>
+<source :src="videoSource" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
+</video>
+
+</div>
+
+</div>
+          </div>
+
+
         </div>
       </div>
     </section>
@@ -458,7 +497,7 @@
     </section> 
 
        <!-- ======= Our Team Section ======= -->
-       <section id="team" class="team" style=" background-color: #f6f6f6; ">
+       <!-- <section id="team" class="team" style=" background-color: #f6f6f6; ">
       <div  data-aos="fade-up">
 
         <div class="section-header">
@@ -473,7 +512,7 @@
       </div>
 
       </div>
-    </section>
+    </section> -->
     <!-- End Our Team Section -->
 
         <!-- ======= Frequently Asked Questions Section ======= -->
@@ -542,30 +581,20 @@ export default {
   },
   data() {
     return {
+      ActualitesOptions:[],
+      items: [ // { //   src: slide111,// }, 
+
+    ],
+    Words:'',
       videoSource: videoSource,
-      items: [
-          {
-            src: slide111,
-          },
-          {
-            src:slide22,
-          },
-          {
-            src:slide33,
-          },
-          {
-            src:slide44,
-          },
-          
-        ],
       totalMpme:0,
     regionMpmeCounts: {},
     totalPageArray: [], 
+    totalPageArray1: [], 
     filterOffres:[],
     mpmeData: [], // Pour stocker les données des MPME
     partenairesOptions:[],
     regionMpmeCounts: {}, // Pour stocker les comptes de MPME par région
-
     secteurMpmeCounts: {}, // Stockez le nombre de MPME par secteur ici
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
@@ -577,9 +606,16 @@ export default {
       
     };
   },
+ async created() {
+
+    await  this.fetchActualites(1)
+    await this. fetchMot()
+
+},
 async  mounted() {
-  await this.fetchPartenaires()
-  await    this.fetchgetOffreMpme(1)
+  // await  this.fetchActualites(1)
+  await  this.fetchPartenaires()
+  await  this.fetchgetOffreMpme(1)
  
   const swiper = await new Swiper('.swiper-container', {
       speed: 400,
@@ -632,6 +668,20 @@ async  mounted() {
     
  
 },
+convertirHtmlEnTexte(chaineHtml) {
+
+const tempDiv = document.createElement('div');
+tempDiv.innerHTML = chaineHtml;
+const texteBrut = tempDiv.textContent || tempDiv.innerText;
+return this.truncateTitle(texteBrut,250)
+
+},
+truncateTitle(title, maxLength) {
+    if (title.length > maxLength) {
+      return title.slice(0, maxLength) + '...';
+    }
+    return title;
+  },
     async fetchPartenaires() {
   try {
     await this.$store.dispatch('fetchPartenairesData');
@@ -759,13 +809,95 @@ async fetchRegionOptions() {
     console.error('Erreur lors de la récupération des offres publiques :', error);
   }
 },
+async fetchActualites(page) {
+            try {
+                await this.$store.dispatch('fetchActualites' ,page);
+                const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
+             
 
+                    this.totalPageArray1 = this.totalPageArray1.concat(actualites.data); // Fusion des tableaux des différentes pages
+        console.log('jjjjjjjjjj',this.totalPageArray1);
+        this.ActualitesOptions  = this.totalPageArray1.filter(partenaire => partenaire.publish === 1);       
+        
+
+
+          if (page === 1) {
+            this.ActualitesOptions = this.totalPageArray1.filter(partenaire => partenaire.publish === 1);
+        const totalPages = actualites.last_page;
+        this.totalPages = totalPages;
+        this.compterJusqua(totalPages);
+       
+      }
+
+      
+                     console.log('Actualités récupérées :', this.ActualitesOptions);
+                     this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
+                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+                    if( this.ActualitesOptions.length === 0){
+                    console.log('Les 3 dernières actualités :', );
+                    let data =   {
+                                  id: 0,
+                                  titre: "Premiere actu",
+                                  content: "Talking about fantasies.. I have fantasies that he’s hurting, crying, and all these sad things that should happen to him because he’s not with me anymore.. it does make me feel a little more confident. I think my confidence has been shot down to the lowest level three months ago when my boyfriend of 5 years broke up with me telling me, “it’s just not going to work out, i can’t give you what you want, i dont want to be in a relationship with you.” This was my first and only bf… i’m turning 27 in 1 day!\n\nI’m doing a lot better in this past month focusing more on myself and nothing about the future or the past.\n\nBack to this article, texts… ha, i doubt i’ll even get one, but if i did.. it would definitely be a ego boost for me? one way or another? But obviously i’m not replying back as i am trying really hard on the NCR. Like i said, it’s all fantasy of what i think, wish and want him to do during this time… *sad, but it makes me feel better. — maybe i’m just weird…\n\nI wish there was an article to let me know how different guys deal with a relationship that they dumped.",
+                                  images: slide111,
+                                  publish: 1,
+                               
+                            }
+                            this.items.push(data)    
+
+                    }else{
+                    this.items = this.ActualitesOptions 
+                    console.log('Les 3 dernières actualités :', );
+
+
+                    }
+            } catch (error) {
+                console.error('Erreur lors de la récupération des actualités :', error.message);
+            }
+        },
 
     compterJusqua(nombre) {
   for (let i = 2; i <= nombre; i++) { // Commence à 2 car la première page a déjà été chargée
     this.fetchgetOffreMpme(i);
+    this.fetchActualites(i)
   }
 },
+updatePicture(picture){
+       return picture.split('|')[0]
+        // Object.keys(monObjet).map(key => monObjet[key])
+      },
+      async fetchMot() {
+            try {
+              
+                const response = await axios.get('/words/detail', {
+                    params: { type: "DIR"},
+                       
+                    },
+
+                );
+                console.log('classifications/annuel:', response);
+
+                if (response.data.data !== undefined) {
+                console.log('classifications/annuel:', response.data.data);
+                   this.Words =  response.data.data
+                     this.loading = false
+
+                }
+                else {
+                    this.loading = false
+                    return this.text = "Pas de données disponibles actuellement."
+
+                }
+
+
+            } catch (error) {
+                console.log('eee',error);
+                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+               
+            }
+        },
 
   },
 };
@@ -896,6 +1028,7 @@ width: 75%;
   
   padding:30px 0;
   }
+ 
 
 }
 
@@ -904,6 +1037,9 @@ width: 75%;
     width: 100%;
     margin-top: 0 !important;
 }
+.heads {
+        padding: 63px 0px;
+    }
 
 }
 
@@ -1080,10 +1216,10 @@ p {
 }
 
 .corps-video {
-  max-width: 1180px;
-  margin: 47px auto;
-  height: 550px;
- 
+  /* max-width: 1180px;
+  margin: 47px auto; */
+  height: 640px;
+ margin-top: 88px;
   border-radius: 20px;
 
 }
@@ -1095,5 +1231,62 @@ p {
   width: 100%;
   height: 100%;
   background-color: aliceblue;
+}
+.heads{
+
+  padding: 20px 30px;
+  box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06);
+  /* border:1px solid red; */
+  width: 99%;
+  background: #fff;
+
+}
+
+.imageheader{
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+
+}
+.imageheader1{
+
+  border: 5px solid var(--color-primary);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+}
+
+.imageheader1 img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+}
+
+@media (max-width: 991px) {
+  .heads {
+    padding: 20px 0px;
+   
+}
+.class6{
+  flex-direction: column
+}
+.class7{
+  width: 100%;
+}
+.class8{
+  width: 100%;
+}
+}
+
+@media (max-width: 768px) {
+ 
+.heads {
+        padding: 63px 0px;
+    }
+
 }
 </style>

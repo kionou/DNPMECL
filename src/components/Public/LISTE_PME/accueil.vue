@@ -133,6 +133,9 @@ export default {
     };
   },
   computed: {
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
+    },
     totalPages() {
       // return Math.ceil(this.items.length / this.itemsPerPage);
       return Math.ceil(this.filteredPmes.length / this.itemsPerPage);
@@ -190,10 +193,28 @@ export default {
   methods: {
     getImage:getImage,
     async fetchData() {
-      const response = await axios.get('/mpme')
-      const data = response
-      console.log('eeee', data);
-      this.items = data.data.data;
+      const response = await axios.get('mpme',{
+           headers: {Authorization: `Bearer ${this.loggedInUser.token}`, },
+         });
+
+          try {
+            console.log("Réponse du téléversement :", response);
+         if (response.data.status === "success") {
+          const data = response
+          console.log('eeee', data);
+         this.items = data.data.data;
+           this.loading = false
+           
+         }  else {
+                  console.log('Utilisateur non trouvé avec l\'ID', this.id);
+              }
+              this.loading = false;
+          } catch (error) {
+              console.error('Erreur lors de la mise à jour du document:', error);
+             
+              this.loading = false;
+          }
+      
 
     },
 

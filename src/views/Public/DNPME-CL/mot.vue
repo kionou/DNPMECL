@@ -45,7 +45,8 @@
       <p>{{ Words.titre?.Name }}</p>
     </div><!-- Sidebar end -->
 
-  </div><!-- Col end -->
+  </div>
+  <!-- Col end -->
 
 </div><!-- Content row end -->
 

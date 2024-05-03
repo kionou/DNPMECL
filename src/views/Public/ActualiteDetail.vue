@@ -188,17 +188,11 @@ export default {
        return picture.split('|')[0]
         // Object.keys(monObjet).map(key => monObjet[key])
       },
-      convertirHtmlEnTexte(chaineHtml) {
-  // Créez un élément HTML temporaire (div)
+convertirHtmlEnTexte(chaineHtml) {
+
   const tempDiv = document.createElement('div');
-
-  // Injetez le HTML dans l'élément temporaire
   tempDiv.innerHTML = chaineHtml;
-
-  // Utilisez textContent pour extraire le texte brut
   const texteBrut = tempDiv.textContent || tempDiv.innerText;
-
-  // Retournez le texte brut
   return texteBrut;
 },
         async fecthActualitesDetail() {

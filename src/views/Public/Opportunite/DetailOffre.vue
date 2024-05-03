@@ -406,8 +406,6 @@ export default {
       this.idOffre = id
       console.log(id);
       this.isOpen = true
-
-
     },
 
 
