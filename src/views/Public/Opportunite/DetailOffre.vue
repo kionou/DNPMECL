@@ -150,7 +150,7 @@
 
           <!-- Drop Zoon -->
           <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-            <form @submit.prevent="submitForm" style="widht:100%;">
+            <form @submit.prevent="submitForm" style="width:100%;">
               <div v-for="(document, index) in documents" :key="index">
                 <div class="row mb-3 mt-3 content-group justify-content-center">
                   <div class="col">
@@ -279,8 +279,7 @@ export default {
     await this.fetchData()
     await this.fetchgetOffreMpme()
     await this.fetchSousSecteurActiviteOptions()
-    console.log(this.id);
-    console.log("datadossiers", this.loggedInUser);
+
 
   },
 
@@ -320,13 +319,13 @@ export default {
         await this.$store.dispatch('fetchSousSecteurOptions');
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+       
       }
     },
     async fetchData() {
       const response = await axios.get(`/mpme/${this.loggedInUser.id}`)
       const data = response.data.data
-      console.log('dattta', data);
+   
       if (data.ListeSousSecteurActivite.includes('|')) {
         return this.data = data.ListeSousSecteurActivite.split("|")
 
@@ -344,11 +343,11 @@ export default {
 
           },
         });
-        console.log('UserData:', response);
+     
 
         if (response.data.status === 'success') {
           this.loading = false
-          console.log('UserDataeee:', response.data.data);
+      
           this.offre = response.data.data.find(offre => offre.CodeOffre === this.id);
           const valeur = this.offre.liste_sous_secteurs;
           const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
@@ -356,7 +355,7 @@ export default {
 
           this.offres = response.data.data.filter((offre) => {
             const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
-            console.log('sousSecteurActiviteOffre', sousSecteurActiviteOffre);
+           
 
             if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
               const sousSecteurs = sousSecteurActiviteOffre.split('|');
@@ -377,25 +376,14 @@ export default {
           // Obtenir les 3 dernières offres publiées
           this.OppOptions = offresPubliees.slice(0, 3);
 
-          console.log('Les 3 dernières actualités publiées :', this.OppOptions);
+     
 
           this.loading = false
 
         }
       } catch (error) {
-        console.log('Erreur lors de la mise à jour des données MPME guinee :', error);
-        console.log('aut', error);
-        // if (error && error.response.data.message === "Vous n'êtes pas autorisé.") {
-        //   await this.$store.dispatch('user/clearLoggedInUser');
-        //   this.$router.push('/connexion-mpme');
-
-        // } else {
-        //   console.log('aut', error.response.data);
-
-        //   // this.formatValidationErrors(error.response.data.errors)
-        //   this.loading = false
-        //   return false;
-        // }
+       
+        
 
 
       }
@@ -404,7 +392,7 @@ export default {
 
     hamdleSubmit(id) {
       this.idOffre = id
-      console.log(id);
+
       this.isOpen = true
     },
 
@@ -417,7 +405,7 @@ export default {
     },
     removeDocument(index) {
       if (index > 0) {
-    // Vérifiez si l'index est supérieur à zéro (c'est-à-dire, à partir du deuxième champ)
+   
     this.documents.splice(index, 1);
   }
 
@@ -433,7 +421,7 @@ export default {
            'Content-Type': 'multipart/form-data'
          }
         });
-        console.log('Réponse du téléversement :', response);
+   
         if (response.data.status === 'success') {
           this.msgsuccess = true
           this.loading = false
@@ -446,7 +434,7 @@ export default {
          this.error = response.data.message
         }
         } catch (error) {
-        console.error('Erreur lors du téléversement :', error);
+    
         this.loading = false
 
         } 
@@ -485,17 +473,17 @@ if (this.errors.some((errors) => errors.nom || errors.file)) {
     
         this.isOpen = false
         this.loading = true
-        console.log('bonjour', this.documents);
+     
         const formData = new FormData();
         this.documents.forEach((document, index) => {
-        console.log( 'this.idOffre',{ 'nom':document.nom , 'document':document.fichier} );
+       
 
         formData.append('intitule', document.nom);
         formData.append('document', document.fichier);
         formData.append('CodeOffre', this.idOffre);
         formData.append('CodeMpme', this.loggedInUser.id);
-        console.log(formData);
-        console.log( this.idOffre, this.loggedInUser.id);
+      
+       
          this.submitApi(formData)
 
       });

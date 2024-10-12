@@ -438,7 +438,7 @@ export default {
      await this.fetchgetClassificationCritereMpme()
      await  this.initializeYears()
    
-        console.log("datadossiers", this.loggedInUser);
+     
        
         
     },
@@ -446,7 +446,7 @@ export default {
 
         // delete picture
         hamdledeletedoc(itemId) {
-            console.log(itemId);
+         
             this.ToDeleteId = itemId;
             this.isdeletedoc = true
 
@@ -478,7 +478,7 @@ export default {
                 QuantiteProduit:this.step1.QuantiteProduit,
                 
             }
-            console.log('DataClassification', DataContenu);
+          
 
                 try {
                     const response = await axios.post('/appui-contenu-locals', DataContenu, {
@@ -486,7 +486,7 @@ export default {
                             Authorization: `Bearer ${this.loggedInUser.token}`,
                             'Content-Type': 'application/json'
                         }});
-                    console.log('Réponse du téléversement :', response);
+                 
                     if (response.data.status === 'success') {
                         this.msgsuccess = true
                         await this.fetchgetClassificationAllMpme()
@@ -498,14 +498,14 @@ export default {
 
                     }
                 } catch (error) {
-                    console.error('Erreur lors du téléversement :', error);
+                  
                     if (error && error.response.data === 'Unauthorized' || error.response.status === 401 ) {
-                        console.log('aut', error.response.data.status === 'error');
+                       
                         await this.$store.dispatch('user/clearLoggedInUser');
                         this.$router.push('/connexion-mpme');
 
                     } else {
-                        console.log('aut', error.response.data.message);
+                      
                         this.error = error.response.data.message
 
                         this.loading = false
@@ -525,7 +525,7 @@ export default {
 
         // delete picture
         hamdledelete(itemId) {
-            console.log(itemId);
+         
             this.ToDeleteId = itemId;
             this.isdelete = true
 
@@ -544,7 +544,7 @@ export default {
                     },
 
                 });
-                console.log('Réponse de suppression:', response);
+               
                 if (response.data.status === 'success') {
                     await this.fetchgetClassificationAllMpme()
                     this.confirmdelete = true
@@ -553,15 +553,14 @@ export default {
 
 
                 } else {
-                    console.log('error', response.data)
+                  
                     this.loading = false
 
                 }
             } catch (error) {
-                console.error('Erreur lors de la suppression:', error);
-                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+              
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
+                   
                     await this.$store.dispatch('user/clearLoggedInUser');
                     this.$router.push('/connexion-mpme');
 
@@ -586,7 +585,7 @@ export default {
                     },
 
                 });
-                console.log('classifications/annuel:', response);
+                
 
                 if (response.data.status === 'success') {
                     const filteredDataAffaire = response.data.data.data.filter(item => item.ChiffreCapital === 1);
@@ -610,10 +609,9 @@ export default {
                 }
 
             } catch (error) {
-                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+               
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
+                   
                     await this.$store.dispatch('user/clearLoggedInUser');
                     this.$router.push('/connexion-mpme');
 
@@ -634,7 +632,7 @@ export default {
                     },
 
                 });
-                console.log('classifications/annuel222:', response.data.data.appuis);
+                
 
                 if (response.data.status === 'success') {
                     const filteredDataMpme = response.data.data.appuis
@@ -649,10 +647,9 @@ export default {
                 }
 
             } catch (error) {
-                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+              
                 if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
+                   
                     await this.$store.dispatch('user/clearLoggedInUser');
                     this.$router.push('/connexion-mpme');
 
@@ -700,7 +697,7 @@ export default {
                 NombreCommande: this.step2.NombreCommande,
                 QuantiteProduit:this.step2.QuantiteProduit,
         }
-                console.log('DataClassification', DataClassification);
+      
                 try {
                     const response = await axios.put(`/appui-contenu-locals/${this.updateClassId}`, DataClassification, {
                         headers: {
@@ -708,7 +705,7 @@ export default {
                             'Content-Type': 'application/json',
                         }
                     });
-                    console.log('Réponse du téléversement :', response);
+               
                     if (response.data.status === 'success') {
                         await this.fetchgetClassificationAllMpme()
                         this.updated = false
@@ -718,16 +715,14 @@ export default {
 
                     }
                 } catch (error) {
-                    console.error('Erreur lors du téléversement :', error);
-                    console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+                  
                     if (error.response.data === 'Unauthorized' ) {
-                        console.log('aut', error.response.data.status === 'error');
+                      
                         await this.$store.dispatch('user/clearLoggedInUser');
                         this.$router.push('/connexion-mpme');
 
                     } else {
-                        console.log('aut', error.response.data.message);
-
+                       
                         this.loading = false
                         return false;
                     }
@@ -735,7 +730,7 @@ export default {
                 }
 
             } else {
-                console.log('error', this.v$.$errors);
+               
                 this.loading = false
 
             }
@@ -773,8 +768,7 @@ export default {
       return this.filteredPmes.slice(startIndex, endIndex);
     },
 filterData() {
-  console.log('Selected Speciality:', this.control.speciality);
-  console.log('Selected Secteur Activite:', this.control.secteurActivite); // Ajout du champ secteurActivite
+
 
   if (
     this.control.spec === 'annee' ||
@@ -797,7 +791,7 @@ filterData() {
       } else if (this.control.spec === 'chiffreaffaire') {
         filterKey = 'CodeCritereChiffreAffaire';
         selectedOption = this.classificationAffaireOptions.find(option => option.label === this.control.speciality);
-        console.log('Sousprefecture',selectedOption);
+       
 
       } else if (this.control.spec === 'capitalsocial') {
         filterKey = 'CodeCritereCapitalSocial'; // Utilisez la clé correcte pour le champ de secteur d'activité
@@ -807,10 +801,10 @@ filterData() {
         filterKey = 'TypeComptabilite'; // Utilisez la clé correcte pour le champ de secteur d'activité
         selectedOption = this.Comptabilite.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
       }
-      console.log('selectedOptioneeeedernier',selectedOption);
+    
       if (selectedOption) {
         this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey].toString() === selectedOption.value );
-      console.log('filteredClassifications',this.classificationOptions);
+  
 
       } else {
         this.filteredClassifications = [];
@@ -841,8 +835,7 @@ updateFilterSpec() {
     },
 
     handleSelectedYear(selectedYear) {
-      // Gérer la valeur sélectionnée de l'enfant ici
-      console.log('Année sélectionnée dans le composant enfant :', selectedYear);
+     
       this.step1.annee = selectedYear
     },
       

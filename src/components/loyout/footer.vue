@@ -69,7 +69,7 @@
 Pour tout besoin d'assistance, vous pouvez nous contacter,
 par email ou par téléphone via les coordonnées ci-après :
 <br> <i class="bi bi-alarm"></i> : Lundi - Vendredi : <span class="text-left">08:00 - 17:00 </span>
-<br> <i class="bi bi-telephone"></i> : <span class="text-left">+224 622 33 63 43</span>
+<br> <i class="bi bi-telephone"></i> : <span class="text-left">+224 622 95 96 72</span>
 <br> <i class="bi bi-envelope"></i> : <span class="text-left">infodnpmecl@gmail.com</span>
 <br> <i class="bi bi-envelope"></i> : <span class="text-left">dnpmecl@mcipme.gov.gn</span>
 <br>  <i class="bi bi-geo-alt"></i> : <span class="text-left">DNPME-CL, Petit Simbaya, Commune de Ratoma <br>        à 300m de l'Hôpital Flamboyant </span>
@@ -78,7 +78,11 @@ par email ou par téléphone via les coordonnées ci-après :
 <div class="col-lg-4 col-md-12  mt -md-5 footer-widget  trois ">
 <h3 class="widget-title" style="padding-left: 31px;">Liens partenaires</h3>
 <ul class="list-arrow">
-  <li v-for="partenaire in partenairesOptions" :key="partenaire.id"> <a :href="partenaire.SiteWeb">{{partenaire.CodePartenaire}}</a></li>
+  <li v-for="partenaire in partenairesOptions" :key="partenaire.id">
+     <a v-if="partenaire.SiteWeb === null  || partenaire.SiteWeb === 'null' || partenaire.SiteWeb === 'undefined'" href="#"   >{{partenaire.CodePartenaire}}</a>
+     <a v-else :href="partenaire.SiteWeb"  target="_blank" >{{partenaire.CodePartenaire}}</a>
+     
+     </li>
  
 </ul>
 </div>
@@ -119,14 +123,14 @@ export default {
   try {
     await this.$store.dispatch('fetchPartenairesData');
     const partenairesOptions = JSON.parse(JSON.stringify(this.$store.getters['getPartenaires']));
-    console.log('Partenaires récupérés :', this.partenairesOptions);
+   
     this.partenairesOptions = partenairesOptions.slice(0, 5);
 
-console.log('Les 5 premiers partenaires :', this.partenairesOptions);
+
 
     // Continuez avec le reste de votre code pour traiter les partenaires
   } catch (error) {
-    console.error('Erreur lors de la récupération des partenaires :', error.message);
+    
   }
 },
     },

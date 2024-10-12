@@ -12,8 +12,7 @@ async fetchDataFromAPI({ commit }) {
       const mpmeData = mpmeResponse.data.data.data;
       const regionsData = regionsResponse.data.data.data;
 
-      console.log('mpmeData:', mpmeData);
-      console.log('regionsData:', regionsData);
+ 
 
      
       commit('SET_ALLMPME', mpmeData)
@@ -21,18 +20,18 @@ async fetchDataFromAPI({ commit }) {
 
     
     } catch (error) {
-      console.log(error);
+     
     }
   },
   async fetchMpmeData({ commit }) {
     try {
       const response = await axios.get('/mpme');
       const data = response.data.data;
-      console.log('Données récupérées de mpme :', data);
+   
 
       commit('SET_MPME_DATA', data); // Appel de la mutation pour mettre à jour le state
     } catch (error) {
-      console.error('Erreur lors de la récupération des données de /mpme:', error);
+      
     }
   },
 
@@ -41,7 +40,7 @@ async fetchDataFromAPI({ commit }) {
       // Ajoutez le paramètre "lang=fr" pour demander les données en français
       const response = await axios.get('https://restcountries.com/v3.1/all?lang=fr');
       const countries = response.data;
-      console.log('countries', countries);
+    
       const sortedCountries = countries.sort((a, b) => a.translations.fra.common.localeCompare(b.translations.fra.common));
       const options = sortedCountries.map((country) => ({
         label:country.translations.fra.common,
@@ -50,14 +49,14 @@ async fetchDataFromAPI({ commit }) {
       }));
       commit('SET_COUNTRY_OPTIONS', options); // Appeler la mutation pour mettre à jour la liste des pays
     } catch (error) {
-      console.error('Erreur lors de la récupération des données des pays:', error);
+     
     }
   },
   
   async fetchRegionOptions({ commit }) {
     try {
       const response = await axios.get('/regions');
-      console.log('response.data2Region', response.data.data.data); // Remplacez l'URL par l'URL de votre API
+       // Remplacez l'URL par l'URL de votre API
       const regionsFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect   CodeRegion
@@ -69,13 +68,13 @@ async fetchDataFromAPI({ commit }) {
       commit('SET_REGION_OPTIONS', options);
       commit('SET_REGION2_OPTIONS', regionsFromAPI); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
-      console.error('Erreur lors de la récupération des régions:', error);
+     
     }
   },
   async fetchPrefectureOptions({ commit }) {
     try {
       const response = await axios.get('/prefectures-sans-pagination');
-      console.log('response.prefecture', response.data.data); // Remplacez l'URL par l'URL de votre API
+      // Remplacez l'URL par l'URL de votre API
       const prefecturesFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -87,14 +86,14 @@ async fetchDataFromAPI({ commit }) {
       
       commit('SET_PREFECTURE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
-      console.error('Erreur lors de la récupération des prefectures:', error);
+     
     }
   },
 
   async fetchSous_PrefectureOptions({ commit }) {
     try {
       const response = await axios.get('/sous-prefectures-no-pagination');
-      console.log('response.sousprefecture', response.data.data); // Remplacez l'URL par l'URL de votre API
+      // Remplacez l'URL par l'URL de votre API
       const sousprefecturesFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -106,13 +105,13 @@ async fetchDataFromAPI({ commit }) {
       
       commit('SET_SOUS_PREFECTURE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
-      console.error('Erreur lors de la récupération des sousprefectures:', error);
+     
     }
   },
   async fetchQuartierOptions({ commit }) {
     try {
       const response = await axios.get('/quartiers');
-      console.log('response.sousprefecture', response.data.data.data); // Remplacez l'URL par l'URL de votre API
+       // Remplacez l'URL par l'URL de votre API
       const quartierFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -123,14 +122,14 @@ async fetchDataFromAPI({ commit }) {
       
       commit('SET_QUARTIER_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de régions
     } catch (error) {
-      console.error('Erreur lors de la récupération des quartier:', error);
+   
     }
   },
 
   async fetchSecteurActiviteOptions({ commit }) {
     try {
       const response = await axios.get('/secteurs-activites'); // Remplacez l'URL par l'URL de votre API
-      console.log('activite',response.data.data.data);
+     
 
       const secteurActiviteFromAPI = response.data.data.data;
 
@@ -144,13 +143,13 @@ async fetchDataFromAPI({ commit }) {
       commit('SET_SECTEUR_ACTIVITE2_OPTIONS', secteurActiviteFromAPI); // Appeler la mutation pour mettre à jour les options de secteurs d'activité
 
     } catch (error) {
-      console.error('Erreur lors de la récupération des secteurs d\'activité:', error);
+    
     }
   },
   async fetchSousSecteurOptions({ commit }) {
     try {
       const response = await axios.get('/sous-secteurs/sans-pagination'); // Remplacez l'URL par l'URL de votre API
-      console.log('soussecteur', response.data.data);
+    
       const sousSecteurFromAPI = response.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -161,13 +160,13 @@ async fetchDataFromAPI({ commit }) {
 
       commit('SET_SOUS_SECTEUR_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de sous-secteurs
     } catch (error) {
-      console.error('Erreur lors de la récupération des sous-secteurs:', error);
+
     }
   },
   async fetchStatutJuridiqueOptions({ commit }) {
     try {
       const response = await axios.get('/statut-juridiques'); // Remplacez l'URL par l'URL de votre API
-      console.log('statut',response.data.data.data);
+
       const statutJuridiqueFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -178,13 +177,13 @@ async fetchDataFromAPI({ commit }) {
 
       commit('SET_STATUT_JURIDIQUE_OPTIONS', options); // Appeler la mutation pour mettre à jour les options de statuts juridiques
     } catch (error) {
-      console.error('Erreur lors de la récupération des statuts juridiques:', error);
+      
     }
   },
   async fetchBourseOptions({ commit }) {
     try {
       const response = await axios.get('/bourses'); // Remplacez l'URL par l'URL de votre API
-      console.log('rrrr', response.data.data.data);
+    
       const boursesFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -195,13 +194,13 @@ async fetchDataFromAPI({ commit }) {
       
       commit('SET_BOURSE_OPTIONS', options);
     } catch (error) {
-      console.error('Erreur lors de la récupération des options de bourses:', error);
+  
     }
   },
   async fetchSousDocOptions({ commit } , page) {
     try {
       const response = await axios.get(`/sous-categories-document?page=${page}`); // Remplacez l'URL par l'URL de votre API
-      console.log('sousdoc', response.data.data.data);
+    
       const sousdocFromAPI = response.data.data.data;
 
       // Formater les données de l'API en options pour MazSelect
@@ -212,18 +211,18 @@ async fetchDataFromAPI({ commit }) {
       
       commit('SET_SOUS_DOC_OPTIONS', options);
     } catch (error) {
-      console.error('Erreur lors de la récupération des options de sous doc:', error);
+     
     }
   },
   async fetchUserData({ commit }, userId) {
     try {
       const response = await axios.get(`/mpme/${userId}`);
       const userData = response.data.data;
-      console.log('rrrrSSSS', response.data.data);
+    
 
       commit('SET_LOGGED_IN_MPME', userData);
     } catch (error) {
-      console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
+      
     }
   },
   
@@ -232,10 +231,10 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get('/categories-document');
       const data = response.data; 
-      console.log('SET_CATEGORIES_DATA', data);// Assurez-vous que la structure des données est correcte
+     // Assurez-vous que la structure des données est correcte
       commit('SET_CATEGORIES_DATA', data);
     } catch (error) {
-      console.error('Erreur lors de la récupération des catégories de documents :', error);
+      
     }
   },
 
@@ -243,22 +242,21 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get('/sous-categories-document');
       const data = response.data;
-        console.log('SET_SOUS_CATEGORIES_DATA', data);
-       // Assurez-vous que la structure des données est correcte
+    
+    
       commit('SET_SOUS_CATEGORIES_DATA', data);
     } catch (error) {
-      console.error('Erreur lors de la récupération des sous-catégories de documents :', error);
+     
     }
   },
   async fetchPubliqueData({ commit }) {
     try {
       const response = await axios.get('/documents-administrative/statut/publique');
       const data = response.data.data;
-      console.log('Données pour /documents-administrative/statut/publique :', response);
-      // Assurez-vous que la structure des données est correcte
+    
       commit('SET_PUBLIQUE_DATA', data);
     } catch (error) {
-      console.error('Erreur lors de la récupération des données publique :', error);
+
     }
   },
   async fetchTotalEmploisFemmeAndTotalMpme({ commit }) {
@@ -272,13 +270,12 @@ async fetchDataFromAPI({ commit }) {
       const totalEmploisFemme = emploisFemmeResponse.data.data;
       const totalMpme = totalMpmeResponse.data.data;
 
-      console.log('totalEmploisFemme:', totalEmploisFemme);
-      console.log('totalMpme:', totalMpme);
+
 
       commit('SET_TOTAL_EMPLOIS_FEMME', totalEmploisFemme);
       commit('SET_TOTAL_MPME', totalMpme);
     } catch (error) {
-      console.log(error);
+   
     }
   },
   async fetchTypeCartesData({ commit }) {
@@ -289,10 +286,10 @@ async fetchDataFromAPI({ commit }) {
         label: doc,
         value: doc
       }));
-      console.log('Type Cartes Data:', options);
+    
       commit('SET_TYPE_CARTES_DATA', options);
     } catch (error) {
-      console.error('Erreur lors de la récupération des types de cartes :', error);
+     
     }
   },
   
@@ -304,10 +301,10 @@ async fetchDataFromAPI({ commit }) {
         label: doc,
         value: doc
       }));
-      console.log('Type Comptabilités Data:', options);
+ 
       commit('SET_TYPE_COMPTABILITES_DATA', options);
     } catch (error) {
-      console.error('Erreur lors de la récupération des types de comptabilités :', error);
+     ;
     }
   },
 
@@ -319,10 +316,10 @@ async fetchDataFromAPI({ commit }) {
         label: demande,
         value: demande
       }));
-      console.log('Type Demande Data:', options);
+  
       commit('SET_TYPE_DEMANDE_DATA', options);
     } catch (error) {
-      console.error('Erreur lors de la récupération des types de Demande :', error);
+     
     }
   },
 
@@ -330,10 +327,10 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get(`/actualites?page=${page}`,{ params : {statut: true }});
       const data = response.data.data;
-      console.log('data',data);
+    
       commit('SET_ACTUALITES', data); // Mutation pour stocker les actualités dans le state
     } catch (error) {
-      console.error('Erreur lors de la récupération des actualités :', error);
+     
     }
   },
   async fetchPartenairesData({ commit }) {
@@ -342,76 +339,75 @@ async fetchDataFromAPI({ commit }) {
       const data = response.data.data.data;   
       // Filtrer les partenaires avec un statut de 1
       const partenairesFiltres = data.filter(partenaire => partenaire.StatutPartenaire === "1"); 
-      console.log('SET_PARTENAIRES_DATA', partenairesFiltres);
-      // Assurez-vous que la structure des données est correcte
+   
       commit('SET_PARTENAIRES_DATA', partenairesFiltres);
     } catch (error) {
-      console.error('Erreur lors de la récupération des partenaires :', error);
+      
     }
   },
 
   async fetchRegimes({ commit }) {
     try {
       const response = await axios.get('/regimes'); // Remplacez l'URL par l'URL de votre API
-      console.log('response.regimes', response.data.data.data);
+    
       const regimesFromAPI = response.data.data.data;
   
       commit('SET_REGIMES', regimesFromAPI); // Utilisez une mutation pour stocker les données dans le store Vuex
     } catch (error) {
-      console.error('Erreur lors de la récupération des régimes :', error);
+      
     }
   },
   async fetchTypesGestions({ commit }) {
     try {
       const response = await axios.get('/types-gestions');
-      console.log('typesGestionsFromAPI',response);
+     
       const typesGestionsFromAPI = response.data.data.data;
 
       // Formatez les données de l'API en options appropriées si nécessaire
 
       commit('SET_TYPES_GESTIONS', typesGestionsFromAPI);
     } catch (error) {
-      console.error('Erreur lors de la récupération des types de gestions:', error);
+    
     }
   },
 
   async fetchTypesContribuables({ commit }) {
     try {
       const response = await axios.get('/types-contribuables');
-      console.log('typesContribuablesFromAPI',response);
+     
 
       const typesContribuablesFromAPI = response.data.data.data;
       commit('SET_TYPES_CONTRIBUABLES', typesContribuablesFromAPI);
     } catch (error) {
-      console.error('Erreur lors de la récupération des types de contribuables:', error);
+    
     }
   },
   async fetchPubliqueVisiblePhotos({ commit } , page) { 
     try {
       const response = await axios.get(`/photos-tech/albums/photos/publique-visible?page=${page}`);
       const publiqueVisiblePhotos = response.data.data; // Assurez-vous que la structure de réponse correspond à vos besoins
-      console.log('publiqueVisiblePhotos',publiqueVisiblePhotos);
+  
 
      
       commit('SET_PUBLIQUE_VISIBLE_PHOTOS', publiqueVisiblePhotos);
     } catch (error) {
-      console.error('Erreur lors de la récupération des photos publiques visibles :', error);
+     
     }
   },
 
 
 
   async fetchSousSecteurs({ commit }, page) {
-    console.log('page',page);
+ 
     try {
       const response = await axios.get(`/sous-secteurs?page=${page}`);
       const sousSecteursData = response.data.data;
-      console.log('sousSecteursData',sousSecteursData);
+     
 
 
       commit('SET_SOUS_SECTEURS', sousSecteursData); // Met à jour l'état avec les données récupérées
     } catch (error) {
-      console.error('Erreur lors de la récupération des données des sous-secteurs:', error);
+      
     }
   },
 
@@ -420,10 +416,10 @@ async fetchDataFromAPI({ commit }) {
     try {
       const response = await axios.get(`/mpme/liste/accompagnement?page=${page}`, { params: { statut: true } });
       const data = response.data.data;
-      console.log('data', data);
+     
       commit('SET_ACCOMPAGEMENT', data);
     } catch (error) {
-      console.error('Erreur lors de la récupération des accompagnements :', error);
+      
     }
   },
 
@@ -432,10 +428,10 @@ async fetchPersonnel({ commit }, page) {
   try {
     const response = await axios.get(`/mpme/liste/personnel?page=${page}`, { params: { statut: true } });
     const data = response.data.data;
-    console.log('data', data);
+    
     commit('SET_PERSONNEL', data); // Utilisez le nom de mutation approprié
   } catch (error) {
-    console.error('Erreur lors de la récupération du personnel :', error);
+    
   }
 },
 

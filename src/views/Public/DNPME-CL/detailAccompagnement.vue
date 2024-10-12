@@ -168,20 +168,20 @@ async fetchAccompagnementDetail(page) {
   try {
     await this.$store.dispatch('fetchAccompagnement' , page);
     const accompagnement = JSON.parse(JSON.stringify(this.$store.getters['getAccompagnementData']));
-    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchAccompagnement ~ actualites:", accompagnement)
+   
    
     this.totalPageArray = this.totalPageArray.concat(accompagnement.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+      
         const foundAccompagnement = this.totalPageArray.find(item => item.id === parseInt(this.id) );
         this.AccompagnementsOptions  =  foundAccompagnement 
-        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+      
         
 
 
           if (page === 1) {
             const foundAccompagnement = this.totalPageArray.find(item => item.id === parseInt(this.id) );
            this.AccompagnementsOptions  =  foundAccompagnement 
-        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+        
 
         const totalPages = accompagnement.last_page;
         this.totalPages = totalPages;
@@ -195,7 +195,7 @@ async fetchAccompagnementDetail(page) {
 
     // Continuez avec le reste de votre code pour traiter les actualités
   } catch (error) {
-    console.error('Erreur lors de la récupération des actualités :', error.message);
+
   }
 },
 
@@ -206,7 +206,7 @@ async fetchAccompagnementDetail(page) {
              
 
                     this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+ 
         this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
         
 
@@ -220,12 +220,11 @@ async fetchAccompagnementDetail(page) {
       }
 
       
-                     console.log('Actualités récupérées :', this.ActualitesOptions);
                      this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                     this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
-                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+                
             } catch (error) {
-                console.error('Erreur lors de la récupération des actualités :', error.message);
+               
             }
         },
 

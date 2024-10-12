@@ -199,16 +199,14 @@ paginatedItems() {
 
  async  mounted() {
     await    this.fetchSousSecteurActiviteOptions()
-    // await    this.fetchData() 
     await    this.fetchgetOffreMpme(1)
-     console.log("datadossiers", this.loggedInUser);
+
   },
 
 
   methods: {
     obtenirValeursPourCles(sousSecteurs){
             const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
-           console.log('option',option)
 
       return option ? option.label : sousSecteurs; 
         
@@ -218,23 +216,17 @@ paginatedItems() {
         await this.$store.dispatch('fetchSousSecteurOptions'); 
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+       
       }
     },
       async fetchgetOffreMpme(page) {
       try {
         const response = await axios.get(`/offres/publique?page=${page}`);
-        console.log('UserData:', response);
+
 
         if (response.data.status === 'success') {
-          
-            console.log('UserData:', response.data.data);
-
+        
             this.totalPageArray = this.totalPageArray.concat(response.data.data.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
-      
-
-
           if (page === 1) {
             this.totalPageArray = this.totalPageArray;
         const totalPages = response.data.data.last_page;
@@ -250,8 +242,7 @@ paginatedItems() {
           
         }  
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-        console.log('aut',error);
+     
 
           
       }

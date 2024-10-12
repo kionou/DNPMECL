@@ -220,8 +220,7 @@ async  mounted() {
       }
     }
   });
-      console.log('id',this.id);
-    // await this.fecthActualitesDetail()
+    
 
   },
 
@@ -230,18 +229,10 @@ async  mounted() {
       
        try {
        const response = await axios.get(`/details/actualites/${this.id}`);
-       console.log('response.sousprefecture', response);
-      //  if (response.data.status === 'success') {
-      //    this.loading = false
-      //    this.isOpen = true
-         
-      //  } else {
-      //    this.loading = false
-      
-      //  }
+     
        
      } catch (error) {
-       console.error('Erreur post:', error);
+      
      }
        
        

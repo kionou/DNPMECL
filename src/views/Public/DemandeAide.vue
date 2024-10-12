@@ -106,7 +106,7 @@
   
   async  mounted() {
         await this. fetchDemandesOptions()
-        console.log("dataespace", this.loggedInUser);
+       
       },
   
       methods: {
@@ -115,10 +115,10 @@
       try {
         await this.$store.dispatch('fetchTypeDemandeData');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getTypeDemandesData']));
-        console.log('Options des deamde:', options);
+
         this.DemandesOptions = options; 
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des demande :', error);
+     
       }
     },
 
@@ -137,10 +137,10 @@
            TypeDemande: this.typedemande,
            
        }
-       console.log('eeedata', DataPartenariat);
+   
          try {
          const response = await axios.post('/gestion-des-demandes', DataPartenariat);
-         console.log('response.sousprefecture', response);
+    
          if (response.data.status === 'success') {
            this.loading = false
            this.msg = true
@@ -151,13 +151,13 @@
          }
          
        } catch (error) {
-          console.error('Erreur post:', error);
+      
         }
          
          
          
 }else{
- console.log('pas bon' , this.v$.$errors );
+
 
 
 

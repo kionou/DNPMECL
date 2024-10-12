@@ -73,8 +73,7 @@ export default {
 if (selectHeader) {
   let headerOffset = selectHeader.offsetTop;
   let nextElement = selectHeader.nextElementSibling;
-  console.log('headerOffset',headerOffset);
-  console.log('headerOffset222',nextElement);
+ 
 
   const headerFixed = () => {
     if ((headerOffset - window.scrollY) <= 0) {

@@ -2683,6 +2683,40 @@
                   </small>
                 </div>
               </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="LienGoogleMapMpme">Voulez-vous récupérer la géolocalisation automatiquement ?</label>
+                  <MazSelect
+                  label="Sélectionner un choix"
+                    v-model="step3.geolocalisation"
+                    color="secondary"
+                    :options="choix"
+                    v-slot="{ option }"
+                    search
+                   
+
+                  >
+                    <div
+                      class="flex items-center"
+                      style="
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        width: 100%;
+                        gap: 1rem;
+                      "
+                      @click="handleOptionGeolocalisation(option)"
+                    >
+                      {{ option.label }}
+                    </div>
+                  </MazSelect>
+                 
+                </div>
+              </div>
+
+             
+            </div>
+            <div class="row mb-3 mt-3 content-group">
+              
 
               <div class="col">
                 <div class="input-groupe">
@@ -2695,6 +2729,7 @@
                     placeholder="11.3333"
                     :class="{ 'error-border': resultError['LatitudeMpme'] }"
                     @input="resultError['LatitudeMpme'] = false"
+                     :disabled="geolocalisationActive"
                   />
                   <small v-if="v$.step3.latitudeMpme.$error">{{
                     v$.step3.latitudeMpme.$errors[0].$message
@@ -2716,6 +2751,7 @@
                     placeholder="-12.333"
                     :class="{ 'error-border': resultError['LongitudeMpme'] }"
                     @input="resultError['LongitudeMpme'] = false"
+                     :disabled="geolocalisationActive"
                   />
                   <small v-if="v$.step3.longitudeMpme.$error">{{
                     v$.step3.longitudeMpme.$errors[0].$message
@@ -2818,7 +2854,7 @@
         </template>
       </MazDialog>
 
-      <MazDialog v-if="PostLogo" v-model="PostLogo" title="Ajoutez votre logo">
+      <MazDialog v-if="PostLogo" v-model="PostLogo" title="Ajoutez une image pour le chef d'entreprise">
         <div>
           <div id="uploadArea" class="upload-area">
             <!-- Header -->
@@ -2866,6 +2902,14 @@
           <div class="supp" @click="close" style="background-color: blue">Ok</div>
         </template>
       </MazDialog>
+
+      <MazDialog v-model="erreurmise" title="Erreur de mise à jour ">
+        <p>Nous avons rencontré un problème lors de la tentative de mise à jour. Veuillez essayer à nouveau plus tard. Si le problème persiste, contactez notre support technique pour obtenir de l'aide.!!! </p>
+        <template #footer="{ close }">
+          <div class="supp" @click="close" style="background-color: blue">Ok</div>
+        </template>
+      </MazDialog>
+
       <MazDialog v-model="DemandeAide" noClose title="Demande d'aide">
         <p>
           Besoin d'aide ? <br />
@@ -2930,6 +2974,7 @@ export default {
       PostLogo: false,
       msgsuccess: false,
       DemandeAide: false,
+      erreurmise:false,
       msg: false,
       imagesTypes: ["jpeg", "png", "svg", "gif"],
       currentStep: 1,
@@ -2959,6 +3004,7 @@ export default {
       code: "",
       localite: "",
       localites: [],
+      geolocalisationActive: false,
       userData: "",
       sexes: [
         { label: "Masculin", value: "M" },
@@ -3097,6 +3143,7 @@ export default {
         telephoneWhatsAppRepondant: "",
         contacter: "",
         lienGoogleMapMpme: "",
+        geolocalisation:"",
         latitudeMpme: "",
         longitudeMpme: "",
         altitudeMpme: "",
@@ -3497,13 +3544,12 @@ export default {
         if (this.v$.$errors.length == 0) {
           const mpmeData = this.createMpmeData();
           // const mpmeLocal = this.createMpmeFormData()
-          console.log("mpmeData1", mpmeData);
-          // console.log("mpmeData1", mpmeLocal);
+
           localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
           localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
 
            const success = await this.enregistrerMpmeDonnees(mpmeData);
-          console.log("success", success);
+
           if (success) {
          
             this.currentStep++;
@@ -3520,7 +3566,7 @@ export default {
             this.loading = false;
           }
         } else {
-          console.log("errroor1", this.v$.$errors);
+
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -3533,7 +3579,7 @@ export default {
         if (this.v$.$errors.length == 0) {
           const mpmeData = this.createMpmeData();
          
-          console.log("mpmeData1", mpmeData);
+
          
          
           const vide = "";
@@ -3551,7 +3597,7 @@ export default {
           localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
           localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
-          console.log("success", success);
+
           if (success) {
             this.currentStep++;
             window.scrollTo({
@@ -3564,7 +3610,7 @@ export default {
               top: 0,
               behavior: "smooth",
             });
-            console.error("Erreur lors de l'enregistrement ", error);
+
             this.loading = false;
           }
         } else {
@@ -3572,7 +3618,7 @@ export default {
             top: 0,
             behavior: "smooth",
           });
-          console.log("errroor222", this.v$.$errors);
+
           this.loading = false;
         }
       } else if (this.currentStep === 3) {
@@ -3581,7 +3627,7 @@ export default {
         if (this.v$.$errors.length === 0) {
           this.loading = true;
           const mpmeData = this.createMpmeData();
-          console.log("mpmeData1", mpmeData);
+
           
           const vide = "";
           if (this.step3.partenariatAutre !== "Oui") {
@@ -3593,17 +3639,17 @@ export default {
           localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
           localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
-          console.log("success", success);
+
           if (success) {
             this.isOpen = true;
             this.loading = false;
           } else {
-            console.error("Erreur lors de l'enregistrement des données pour le MPME");
+
             window.scrollTo({ top: 0, behavior: "smooth" });
             this.loading = false;
           }
         } else {
-          console.log("errroor222", this.v$.$errors);
+
           window.scrollTo({ top: 0, behavior: "smooth" });
           this.loading = false;
         }
@@ -3625,7 +3671,7 @@ export default {
           this.loading = true;
           const mpmeData = this.createMpmeData();
          
-          console.log("mpmeData1", mpmeData);
+   
           
           
           const vide = "";
@@ -3638,17 +3684,17 @@ export default {
           localStorage.setItem('tempMpmeData', JSON.stringify(mpmeData));
           localStorage.setItem('CodeIdentifiant', this.loggedInUser.id);
           const success = await this.enregistrerMpmeDonnees(mpmeData);
-          console.log("success", success);
+
           if (success) {
             this.isOpen = true;
             this.loading = false;
           } else {
-            console.error("Erreur lors de l'enregistrement des données pour le MPME");
+ 
             window.scrollTo({ top: 0, behavior: "smooth" });
             this.loading = false;
           }
         } else {
-          console.log("errroor222", this.v$.$errors);
+
           window.scrollTo({ top: 0, behavior: "smooth" });
           this.loading = false;
         }
@@ -3665,15 +3711,15 @@ export default {
           if (CodeIdentifiant === this.loggedInUser.id) {
             const userDataString = JSON.parse(localStorageUserData)
             this.storeUserDataLocal(userDataString);
-           console.log("UserData:",userDataString );
+
           } else {
             this.storeUserData(this.userData);
-           console.log("UserData:", this.userData);
+
           }
         
-        // console.log('UserData:', this.userData.ListeSousSecteurActivite);
+
       } catch (error) {
-        console.error("Erreur lors de la récupération des options des USER :", error);
+
         if (error.response.status === 500) {
           this.$router.push("/connexion-mpme");  //a revoir
         }
@@ -3704,22 +3750,23 @@ export default {
           },
         });
 
-        console.log("response", response);
+
         if (response.status === 200) {
-          console.log("Données MPME mises à jour avec succès !");
+ 
           return true;
         } else {
-          console.error("Erreur lors de la mise à ", response.data);
-          this.error = response.data.message;
+   
+         this.erreurmise = true
+
           return false;
         }
       } catch (error) {
-        console.log("Erreur lors de la mise à jour des données MPME guinee :", error);
+
         if (
           (error && error.response.data === "Unauthorized") ||
           error.response.data.status === "error"
         ) {
-          console.log("aut", error.response.data.status === "error");
+
           await this.$store.dispatch("user/clearLoggedInUser");
           this.$router.push("/connexion-mpme");
         } else {
@@ -3740,13 +3787,10 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getCountryOptions"])
         ); // Accéder aux options des pays via le getter
-        console.log("Options des pays:", options);
+
         this.sortedCountryOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des pays :",
-          error.message
-        );
+        
       }
     },
     async fetchRegionOptions() {
@@ -3758,10 +3802,7 @@ export default {
         ); // Accéder aux options des pays via le getter
         this.regionOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des pays :",
-          error.message
-        );
+       
       }
     },
     async fetchPrefectureOptions() {
@@ -3776,10 +3817,7 @@ export default {
 
       
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des prefecture :",
-          error.message
-        );
+       
       }
     },
 
@@ -3788,34 +3826,29 @@ export default {
     await this.$store.dispatch("fetchSous_PrefectureOptions");
     const options = JSON.parse(JSON.stringify(this.$store.getters["getSousprefectureOptions"]));
     this.sous_prefectureOptions = options;
-     console.log('Sous-préfecture :', options);
+
     const sousPrefectureValue = this.userData.Commune;
     const selectedSousPrefecture = this.sous_prefectureOptions.find(option => option.value === sousPrefectureValue);
-    console.log('Sous-préfecture111 :', sousPrefectureValue);
-    console.log('Sous-préfecture2222 :', selectedSousPrefecture);
+
 
     
     if (selectedSousPrefecture) {
       const selectedPrefecture = this.prefectureOptions.find(option => option.value === selectedSousPrefecture.code);
       if (selectedPrefecture) {
         
-        console.log('Préfecture sélectionnée :',selectedPrefecture);
-        console.log('Code de la préfecture :', selectedPrefecture.code);
+ 
         this.prefectureOptions1.push(selectedPrefecture);
         this.step1.prefecture = selectedPrefecture.value
-         console.log('Code de la préfecture :', this.prefectureOptions1 );
+  
         
       } else {
-        console.log('Préfecture non trouvée pour la valeur de la sous-préfecture :', sousPrefectureValue);
+       
       }
     } else {
-      console.log('Sous-préfecture non trouvée pour la valeur :', sousPrefectureValue);
+  
     }
   } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des options des sous-préfectures :",
-      error.message
-    );
+    
   }
 },
 
@@ -3829,10 +3862,7 @@ export default {
         ); // Accéder aux options des pays via le getter
         this.QuartierOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des prefecture :",
-          error.message
-        );
+        
       }
     },
     async fetchSecteurActiviteOptions() {
@@ -3843,10 +3873,7 @@ export default {
         );
         this.SecteurActiviteOptions = options;
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des secteurs d'activité:",
-          error.message
-        );
+        
       }
     },
     async fetchSousSecteurActiviteOptions() {
@@ -3861,10 +3888,7 @@ export default {
           };
         });
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des secteurs d'activité:",
-          error.message
-        );
+        
       }
     },
     async fetchStatutJuridiqueOptions() {
@@ -3873,16 +3897,13 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getStatutJuridiqueOptions"])
         );
-        console.log('Code de la préfecture :', options);
+  
 
         this.StatutJuridiqueOptions = options;
-        console.log('Code de la préfecture :', this.StatutJuridiqueOptions );
+   
 
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des statuts juridiques:",
-          error.message
-        );
+        
       }
     },
     async fetchBourseOptions() {
@@ -3891,14 +3912,11 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getBourseOptions"])
         );
-        console.log("Options bourse:", options);
+      
         this.BourseOptions = options;
         
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des bourses:",
-          error.message
-        );
+       
       }
     },
     async fetchCarteAndComptabiliteOptions() {
@@ -3916,10 +3934,7 @@ export default {
         this.Comptabilite = option;
         this.loading = false;
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des bourses:",
-          error.message
-        );
+       
       }
     },
     async fetchTypesGestionsOptions() {
@@ -3928,16 +3943,13 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getTypesGestions"])
         );
-        console.log("Options types gestions:", options);
+   
         this.TypesGestionsOptions = options.map((gestion) => ({
           label: gestion.NomTypeGestion,
           value: gestion.CodeTypeGestion,
         }));
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des types de gestions:",
-          error.message
-        );
+       
       }
     },
 
@@ -3947,32 +3959,26 @@ export default {
         const options = JSON.parse(
           JSON.stringify(this.$store.getters["getTypesContribuables"])
         );
-        console.log("Options types contribuables:", options);
+     
         this.TypesContribuablesOptions = options.map((contribuable) => ({
           label: contribuable.NomTypeContribuable,
           value: contribuable.CodeTypeContribuable,
         }));
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des types de contribuables:",
-          error.message
-        );
+        
       }
     },
     async fetchRegimesOptions() {
       try {
         await this.$store.dispatch("fetchRegimes");
         const options = JSON.parse(JSON.stringify(this.$store.getters["getRegimes"]));
-        console.log("Options regimes:", options);
+
         this.RegimesOptions = options.map((regime) => ({
           label: regime.NomRegime,
           value: regime.CodeRegime,
         }));
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des régimes:",
-          error.message
-        );
+        
       }
     },
 
@@ -3983,7 +3989,7 @@ export default {
         });
         return response.data.data;
       } catch (error) {
-        console.error("Erreur lors de la récupération des options des response :", error);
+   
       }
     },
 
@@ -3992,18 +3998,18 @@ export default {
 
       try {
         const localiteData = await this.fetchLocalite(option.value, "REGION");
-        console.log("Données de localité :", localiteData.prefectures);
+  
         const options = localiteData.prefectures.map((prefecture) => ({
           label: prefecture.NomPrefecture,
           value: prefecture.CodePrefecture,
           code: prefecture.CodeRegion,
         }));
-        console.log("Données de localitézzz :",options );
+
 
         this.prefectureOptions1 = options;
         this.loading = false;
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de localité :", error);
+
       }
     },
 
@@ -4015,8 +4021,7 @@ export default {
         const userId = this.loggedInUser.id;
         option.identifiant = userId
         this.option = option
-        console.log('prefecture',this.option);
-        console.log("Données de localité :", localiteData.sous_prefectures);
+
         const options = localiteData.sous_prefectures.map((sous_prefecture) => ({
           label: sous_prefecture.NomSousPrefecture,
           value: sous_prefecture.CodeSousPrefecture,
@@ -4025,7 +4030,7 @@ export default {
          this.sous_prefectureOptions = options;
         this.loading = false;
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de localité :", error);
+
       }
     },
 
@@ -4034,7 +4039,7 @@ export default {
 
       try {
         const localiteData = await this.fetchLocalite(option.value, "COMMUNE");
-        console.log("Données de localité :", localiteData.quartiers);
+     
         const options = localiteData.quartiers.map((quartier) => ({
           label: quartier.NomQuartier,
           value: quartier.CodeQuartier,
@@ -4043,12 +4048,12 @@ export default {
          this.QuartierOptions = options;
         this.loading = false;
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de localité :", error);
+     
       }
     },
 
      handleDirigeantProprietaireChange(option) {
-      console.log("Données de localité :", option);
+
       if (option.value === 'Oui') {
         // Copiez les données du dirigeant dans les données du propriétaire
         this.step2.titreProprietaire = this.step2.titreDirigeant;
@@ -4059,27 +4064,47 @@ export default {
         this.step2.anneeNaissanceProprietaire = this.step2.anneeNaissanceDirigeant;
       }
     },
+
+    async handleOptionGeolocalisation(option){
+
+
+      if (option.value === 'Oui') {
+        this.geolocalisationActive = true;
+
+        // Utilisation de l'API de géolocalisation du navigateur
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(position => {
+            this.step3.latitudeMpme = position.coords.latitude.toString();
+            this.step3.longitudeMpme = position.coords.longitude.toString();
+          });
+        }
+      } else {
+        this.geolocalisationActive = false;
+        this.step3.latitudeMpme = '';
+        this.step3.longitudeMpme = '';
+      }
+
+
+    },
     async formatValidationErrors(errors) {
       const formattedErrors = {};
 
       for (const field in errors) {
         const errorMessages = errors[field]; // Liste complète des messages d'erreur
-        console.log(" errorMessages", errorMessages, typeof errorMessages);
+   
 
         const concatenatedError = errorMessages.join(", "); // Concaténer les messages d'erreur
-        console.log(" concatenatedError", concatenatedError, typeof concatenatedError);
+  
 
         formattedErrors[field] = concatenatedError; // Utilisez le nom du champ comme clé
       }
 
       this.resultError = formattedErrors; // Stockez les erreurs dans un objet
 
-      // Maintenant, this.resultError est un objet où les clés sont les noms des champs
-      console.log("resultError", this.resultError);
+     
     },
     getTempMpmeData(key) {
-      // Votre logique pour récupérer les données du local storage
-      // Assurez-vous de retourner les données ou une valeur par défaut appropriée
+   
       return localStorage.getItem(key) || null;
     },
     storeUserData(userData) {
@@ -4323,8 +4348,8 @@ export default {
       this.step3.telephoneWhatsAppRepondant = userData.TelephoneWhatsAppRepondant;
       this.step3.contacter = userData.Contacter;
       this.step3.lienGoogleMapMpme = userData.LienGoogleMapMpme;
-      this.step3.latitudeMpme = userData.LatitudeMpme;
-      this.step3.longitudeMpme = userData.LongitudeMpme;
+      this.step3.latitudeMpme = userData.LatitudeMpme ?? " ";
+      this.step3.longitudeMpme = userData.LongitudeMpme ?? " ";
       this.step3.altitudeMpme = userData.AltitudeMpme;
       this.step3.precisionGPSMpme = userData.PrecisionGPSMpme;
       this.step3.origineDonnees = userData.OrigineDonnees;
@@ -4356,7 +4381,7 @@ export default {
               "Content-Type": "application/json",
             },
           });
-        console.log("response.sousprefecture", response);
+
         if (response.data.status === "success") {
           this.loading = false;
           this.msg = true;
@@ -4366,7 +4391,7 @@ export default {
 
         }
       } catch (error) {
-        console.error("Erreur post:", error);
+
         this.loading = false;
          this.$router.push({ name: 'NotFound' }); 
       }
@@ -4391,7 +4416,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("response", response);
+
 
         if (response.data.status === "success") {
           this.fetchgetOneMpme();
@@ -4399,16 +4424,16 @@ export default {
           this.loading = false;
           this.PostLogo = false;
         } else {
-          console.log("errorrr", response.data);
+
           this.error = "L'enregistrement a échoué !!!";
         }
       } catch (error) {
-        console.error("Erreur lors de la mise à jour des données MPME guinee :", error);
+
         if (
           (error && error.response.data === "Unauthorized") ||
           error.response.data.status === "error"
         ) {
-          console.log("aut", error.response.data.status === "error");
+
           await this.$store.dispatch("user/clearLoggedInUser");
           this.$router.push("/connexion-mpme");
         } else {
@@ -4422,36 +4447,33 @@ export default {
       this.DemandeAide = true;
     },
      handleFileUploadRccm(event) {
-      console.log("File input change");
+
       const file = event.target.files[0];
-      console.log("handleFileUploadRccm Selected file:", file);
+
       this.step1.FichierRccm = file
     },
      handleFileUploadNif(event) {
-      console.log("File input change");
+
       const file = event.target.files[0];
-      console.log("handleFileUploadNif Selected file:", file);
+ 
       this.step1.FichierNif = file
     },
 
        calculerNombreAnnees() {
-          console.error('La date n\'est pas valide',);
+
 
       if (this.step2.activite === 'Non') {
         // Assurez-vous que step2.DateDepotBilan est une chaîne au format YYYY-MM-DD
         const dateDepotBilan = new Date(this.step2.DateDepotBilan);
-          console.error('La date n\'est pas valide',this.step2.DateDepotBilan);
-        
+      
         // Vérifiez si la date est valide
         if (!isNaN(dateDepotBilan.getTime())) {
           const dateActuelle = new Date();
           const differenceAnnees = dateActuelle.getFullYear() - dateDepotBilan.getFullYear();
 
-          // Utilisez differenceAnnees selon vos besoins
-          console.log(`Nombre d'années : ${differenceAnnees}`);
+     
         } else {
-          // Gérez le cas où la date n'est pas valide
-          console.error('La date n\'est pas valide');
+          
         }
       }
   },
@@ -4463,7 +4485,7 @@ export default {
         behavior: "smooth",
       });
       await this.fetchgetOneMpme()
-      console.log("data", this.loggedInUser);
+
       await Promise.all([
         this.fetchCountryOptions(),
         this.fetchRegionOptions(),
@@ -4486,7 +4508,7 @@ export default {
         }, 5000);
       }
     } catch (error) {
-      console.error("Erreur lors du chargement des données:", error);
+  
     }
   },
 };

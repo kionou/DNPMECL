@@ -407,7 +407,7 @@ export default {
         async fetchData() {
             const response = await axios.get(`/mpme/${this.id}`)
             const data = response.data.data
-            console.log('eeee', data);
+
             this.data = data
             this.loading =   false
             // this.items = JSON.parse(this.data.ListeSousSecteurActivite)
@@ -419,7 +419,7 @@ export default {
             const response = await axios.get('/documents-mpme/published')
             const data = response.data.data.data
             this.datadoc = data
-            console.log('doc', data);
+
             this.datadoc = this.datadoc.filter((doc) => {
             return doc.CodeMpme === this.id; // Remplacez "userId" par la propriété qui contient l'ID de l'utilisateur dans vos données de documents.
             });
@@ -429,11 +429,11 @@ export default {
             const response = await axios.get('/mpme/photos/publication-de-photo-mpme')
             const data = response.data.data.data
             this.dataimage = data
-            console.log('image', data);
+   
             this.dataimage = this.dataimage.filter((img) => {
             return img.CodeMpme === this.id; // Remplacez "userId" par la propriété qui contient l'ID de l'utilisateur dans vos données de documents.
             });
-            console.log('this.dataimage',this.dataimage);
+     
         },
     },
 };

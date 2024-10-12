@@ -217,12 +217,9 @@ export default {
           JSON.stringify(this.$store.getters["getRegionOptions"])
         ); // Accéder aux options des pays via le getter
         this.regionOptions = options; // Affecter les options à votre propriété sortedCountryOptions
-        console.log( this.regionOptions);
+
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des pays :",
-          error.message
-        );
+      
       }
     },
   

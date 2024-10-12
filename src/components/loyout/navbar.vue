@@ -20,7 +20,7 @@
 
                     <p class="info-box-title">Téléphone</p>
 
-                    <p class="info-box-subtitle">+(224) 622 33 63 43 </p>
+                    <p class="info-box-subtitle">+(224) 622 95 96 72 </p>
 
                 </div>
 
@@ -195,7 +195,7 @@ export default {
  
 
   mounted() {
- console.log("navbarrrr",this.loggedInUser);
+//  console.log("navbarrrr",this.loggedInUser);
 
     document.querySelectorAll('.dropdown-toggle').forEach(item => {
   item.addEventListener('click', event => {
@@ -322,7 +322,7 @@ export default {
                 // }
 
     } catch (error) {
-      console.error('Erreur lors de la déconnexion :', error);
+     
     }
   }
   },

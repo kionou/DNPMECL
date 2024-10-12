@@ -64,13 +64,13 @@ paginatedItems() {
   try {
     const response = await axios.get('/mpme/statistics/par-statut-juridiques');
     if (response.data.status === 'success') {
-      console.log('Données de la réponse 3:', response.data.data);
+
        this.fetchDataJuridique = response.data.data
     } else {
   
     }
   } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
+   
   }
 },
 updateCurrentPage(pageNumber) {

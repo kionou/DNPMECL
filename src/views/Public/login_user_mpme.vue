@@ -170,12 +170,12 @@ export default {
         email:this.step1.email,
         password:this.step1.password
       }
-      console.log("eeeee",DataUser);
+
       try {
       const response = await axios.post('/login' , DataUser);
-      console.log('response.login', response.data); 
+     
       if (response.data.statut === "error") {
-            console.log("error");
+       
             this.loading = false
           } else {
             const userData = response.data.data;
@@ -228,11 +228,11 @@ export default {
             value:this.step2.email
           
           }
-          console.log("eee",CodeUserEmail);
+     
           try {
          const response = await axios.post('/mpme/send-otp', CodeUserEmail);
          
-         console.log('response.Code', response); 
+       
          if (response.data.status === 'success') {
          this.loading = false
          this.responseEmail = true
@@ -241,11 +241,11 @@ export default {
          }
     
     } catch (error) {
-        console.log('error',error);
+    
     }
           }else{
           
-        console.log('error',this.v$.$errors);
+   
           
           
           }
@@ -264,7 +264,7 @@ async HandleCode(){
            value: this.step2.email,
            code: this.step3.code
         }
-        console.log('data user :', DataUser);
+       
           try {
             const response = await axios.post('/mpme/verification-otp', DataUser);
             if (response.data.status === 'error') {
@@ -274,7 +274,7 @@ async HandleCode(){
               return this.errordialog = response.data.message
 
             } else {
-              console.log('response.Code', response.data);
+        
               localStorage.setItem('resetPasswordInfo', JSON.stringify({
           email: this.step2.email,
           code: this.step3.code// Assurez-vous de récupérer le code correctement
@@ -286,7 +286,7 @@ async HandleCode(){
 
           } catch (error) {
             this.loading = false
-            console.error('Erreur postlogin:', error);
+         
           }
 
           }else{

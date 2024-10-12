@@ -144,11 +144,11 @@ paginatedItems() {
       try {
         await this.$store.dispatch('fetchCategoriesData');
         const categoriesData = JSON.parse(JSON.stringify(this.$store.getters.getCategoriesData));
-        console.log('Données des catégories:', categoriesData);
+    
         this.categoriesData = categoriesData.data.data;
         this.loading = false
       } catch (error) {
-        console.error('Erreur lors de la récupération des données des catégories :', error.message);
+      
       }
     },
     async fetchSousCategoriesData(page) {
@@ -156,11 +156,11 @@ paginatedItems() {
 
     await this.$store.dispatch('fetchSousCategoriesData',page);
     const sousCategoriesData = JSON.parse(JSON.stringify(this.$store.getters.getSousCategoriesData));
-    console.log('Données des sous-catégories:', sousCategoriesData);
+  
 
        
     this.totalPageArray = this.totalPageArray.concat(sousCategoriesData.data.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+       
        
 
 
@@ -178,12 +178,12 @@ paginatedItems() {
     this.subDocumentsByCategoryMap[category.CodeCategorie] = this.subDocuments.filter(subDoc => subDoc.CodeCategorie === category.CodeCategorie);
         });
   } catch (error) {
-    console.error('Erreur lors de la récupération des données des sous-catégories :', error.message);
+    
   }
 },
 
     toggleCategory(categoryIndex, selectedCategory) {
-  console.log('categoryIndex', selectedCategory);
+
   this.categoriesData.forEach((category, index) => {
     if (index === categoryIndex) {
       category.show = !category.show;
@@ -200,7 +200,7 @@ compterJusqua(nombre) {
 },
 
     showSubDocument(subDocument) {
-      console.log('subDocument', subDocument);
+   
       this.selectedSubDocument = subDocument.CodeSousCategorie;
       this.filteredDocuments = this.Documents.filter(doc => doc.SousCategorieDocument === subDocument.CodeSousCategorie);
 
@@ -218,10 +218,10 @@ compterJusqua(nombre) {
   try {
     await this.$store.dispatch('fetchPubliqueData');
     this.Documents = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueData']));
-    console.log('Données du statut publique:',  this.Documents);
+ 
     // Faites ce que vous devez faire avec les données ici
   } catch (error) {
-    console.error('Erreur lors de la récupération des données du statut publique :', error.message);
+
   }
 },
   

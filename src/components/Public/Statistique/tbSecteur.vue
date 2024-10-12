@@ -61,13 +61,13 @@ paginatedItems() {
   try {
     const response = await axios.get('/secteurs-activites', {params: { with_relation: true}});
     if (response.data.status === 'success') {
-      console.log('Données de la réponse 1:', response.data.data.data);
+     
       this.SecteurActiviteOptions = response.data.data.data
     } else {
   
     }
   } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
+   
   }
 },
 updateCurrentPage(pageNumber) {

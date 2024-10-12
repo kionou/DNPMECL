@@ -2,10 +2,22 @@
     <div>
         <div class="page-header">
             <div class="container">
-                <div class="page-header__inner">
+                <div class="row align-items-center">
+                    <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-12">
+                        <div class="page-header__inner">
                     <h1 class="display-2">Bienvenue {{ loggedInUser.prenom }} {{ loggedInUser.nom }}</h1>
                     <p>Votre espace personnel vous permet d’effectuer et de faire le suivi de votre entreprise</p>
                 </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-12">
+                        <div class="imageChef">
+                            <img  v-if="data.profile === null" src="@/assets/img/flags.png " alt=""  class="d-block  ms-0 rounded user-profile-img">
+                            <img v-else :src="data.profile" alt=""  class="d-block h-auto ms-0 rounded user-profile-img">
+
+                        </div>
+                    </div>
+                </div>
+               
             </div>
         </div>
         <section class="section discover-section">
@@ -76,6 +88,7 @@
 </template>
 
 <script>
+import axios from '@/lib/axiosConfig.js'
  
 export default {
     name: 'DNPMECLEspace',
@@ -92,13 +105,16 @@ export default {
 
     data() {
         return {
+            data:"",
             
 
         };
     },
 
-    mounted() {
-        console.log("dataespace", this.loggedInUser);
+  async  mounted() {
+        await  this.fetchOneMpme()
+     
+ 
         window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
@@ -107,6 +123,32 @@ export default {
     },
 
     methods: {
+        async fetchOneMpme() {
+            try {
+            const response = await axios.get(`/mpme/${this.loggedInUser.id}`);
+           
+            if (response.data.data ) {
+               this.data = response.data.data
+          
+               
+
+            //    this.item = JSON.parse(this.data.ListeSousSecteurActivite)
+            //     this.item.forEach(items => {
+            //    return this.items = items
+            //  });
+             this.loading = false
+
+
+            } else {
+             
+            }
+
+          } catch (error) {
+
+         
+          }
+           
+        },
 
     },
     
@@ -197,6 +239,18 @@ export default {
 }
 }
 
+.imageChef{
+    border: 3px solid rgb(255, 255, 255);
+    width: 150px ;
+    height: 150px;
+    position: relative;
+    z-index: 1;
 
+}
+
+.imageChef img{
+    width: 100%;
+    height: 100%;
+}
 
 </style>

@@ -146,10 +146,10 @@ async   mounted() {
               await this.$store.dispatch('fetchPubliqueVisiblePhotos' , page);
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
                 this.totalPageArray = this.totalPageArray.concat(options.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+    
         this.PhotosOptions = this.totalPageArray
 
-        console.log('Photos récupérées :', options);
+   
 
           if (page === 1) {
             this.PhotosOptions = this.totalPageArray;
@@ -165,7 +165,7 @@ async   mounted() {
 
         // Continuez avec le reste de votre code pour afficher les photos
       } catch (error) {
-        console.error('Erreur lors de la récupération des photos :', error.message);
+        
       }
     },
 

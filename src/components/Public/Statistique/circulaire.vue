@@ -18,7 +18,7 @@ export default {
       const secteurActiviteData = await fetchDataActivite();
 
       if (secteurActiviteData.length === 0) {
-        console.error("Aucune donnée disponible.");
+       
         return;
       }
 
@@ -77,11 +77,11 @@ async function fetchDataActivite() {
 
       return filteredData;
     } else {
-      console.error("Erreur de l'API :", response.data.message);
+     
       return [];
     }
   } catch (error) {
-    console.error("Erreur lors de la requête GET :", error);
+   
     return [];
   }
 }

@@ -582,9 +582,7 @@ export default {
   data() {
     return {
       ActualitesOptions:[],
-      items: [ // { //   src: slide111,// }, 
-
-    ],
+      items: [],
     Words:'',
       videoSource: videoSource,
       totalMpme:0,
@@ -599,7 +597,7 @@ export default {
     statutJuridiqueOptions: [], // Pour stocker les options des statuts juridiques
     statutJuridiqueMpmeCounts: {}, // Pour stocker les compteurs de PME par statut juridique
     totalEmplois:0,
-    show1:false, show2:false, show3:false,
+    show1:true, show2:true, show3:true,
     
 
 
@@ -613,7 +611,10 @@ export default {
 
 },
 async  mounted() {
-  // await  this.fetchActualites(1)
+             window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
   await  this.fetchPartenaires()
   await  this.fetchgetOffreMpme(1)
  
@@ -686,11 +687,11 @@ truncateTitle(title, maxLength) {
   try {
     await this.$store.dispatch('fetchPartenairesData');
      this.partenairesOptions = JSON.parse(JSON.stringify(this.$store.getters['getPartenaires']));
-    console.log('Partenaires récupérés :', this.partenairesOptions);
+  
 
     // Continuez avec le reste de votre code pour traiter les partenaires
   } catch (error) {
-    console.error('Erreur lors de la récupération des partenaires :', error.message);
+
   }
 },
     async fetchTotalEmploisAndMpmeData() {
@@ -698,10 +699,10 @@ truncateTitle(title, maxLength) {
     await this.$store.dispatch('fetchTotalEmploisFemmeAndTotalMpme');
     this.totalEmplois = this.$store.getters['getTotalEmploisFemme'];
     this.totalMpme = this.$store.getters['getTotalMpme'].total;
-    console.log('Données de la réponse:', this.totalEmplois , this.totalMpme);
+
 
   } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error.message);
+
   }
 },
 
@@ -715,15 +716,15 @@ async fetchRegionOptions() {
     
     await this.$store.dispatch('fetchSecteurActiviteOptions'); // Action spécifique aux secteurs d'activité
     this.SecteurActiviteOptions = JSON.parse(JSON.stringify(this.$store.getters['getsecteurActiviteOptions']));
-    console.log('eeee',this.SecteurActiviteOptions );
+  
 
     await this.$store.dispatch('fetchRegionOptions');
       this.regionOptions = this.$store.getters['getRegionOptions2'];
-      console.log('Options des mpme:', this.regionOptions);
+     
 
       await this.$store.dispatch('fetchStatutJuridiqueOptions');
     this.statutJuridiqueOptions = JSON.parse(JSON.stringify(this.$store.getters['getStatutJuridiqueOptions']));
-    console.log('Options des mpmestaurt:', this.statutJuridiqueOptions);
+ 
 
     this.secteurMpmeCounts = {};
     this.statutJuridiqueMpmeCounts = {};
@@ -739,19 +740,9 @@ async fetchRegionOptions() {
         }
       }});
 
-     console.log('Compteurs de MPME par secteur d\'activité :', this.secteurMpmeCounts);
+   
 
 
-      // this.mpmeData.forEach(pme => {
-      //   const region = pme.Region; // Assurez-vous que la propriété qui contient la région est correcte
-      //   if (region) {
-      //     if (!this.regionMpmeCounts[region]) {
-      //       this.regionMpmeCounts[region] = 1; // Initialisez le compteur à 1 si la région n'existe pas encore
-      //     } else {
-      //       this.regionMpmeCounts[region]++; // Incrémente le compteur si la région existe déjà
-      //     }
-      //   }});
-      //   console.log('Compteurs de MPME par région :', this.regionMpmeCounts);
 
         this.mpmeData.forEach(pme => {
       const statutJuridique = pme.CodeStatutJuridique; // Assurez-vous que la propriété qui contient le statut juridique est correcte
@@ -764,9 +755,8 @@ async fetchRegionOptions() {
       }
     });
 
-    console.log('Compteurs de PME par statut juridique :', this.statutJuridiqueMpmeCounts);
     } catch (error) {
-      console.error('Erreur lors de la récupération des données :', error.message);
+
     }
   },
 
@@ -796,17 +786,17 @@ async fetchRegionOptions() {
 
       const offresPubliees = this.totalPageArray.filter(offre => offre.publish === 1);
 
-      // Trier les offres par date de création
+   
       offresPubliees.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-      // Prendre les trois dernières offres
+     
       
       this.filterOffres = offresPubliees.slice(0, 3);
-      console.log(this.filterOffres); // Vous pouvez ajuster cela en fonction de vos besoins
+   
       this.loading = false;
     }  
   } catch (error) {
-    console.error('Erreur lors de la récupération des offres publiques :', error);
+
   }
 },
 async fetchActualites(page) {
@@ -816,7 +806,7 @@ async fetchActualites(page) {
              
 
                     this.totalPageArray1 = this.totalPageArray1.concat(actualites.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray1);
+       
         this.ActualitesOptions  = this.totalPageArray1.filter(partenaire => partenaire.publish === 1);       
         
 
@@ -830,30 +820,18 @@ async fetchActualites(page) {
       }
 
       
-                     console.log('Actualités récupérées :', this.ActualitesOptions);
+   
                      this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                     this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
-                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
-                    if( this.ActualitesOptions.length === 0){
-                    console.log('Les 3 dernières actualités :', );
-                    let data =   {
-                                  id: 0,
-                                  titre: "Premiere actu",
-                                  content: "Talking about fantasies.. I have fantasies that he’s hurting, crying, and all these sad things that should happen to him because he’s not with me anymore.. it does make me feel a little more confident. I think my confidence has been shot down to the lowest level three months ago when my boyfriend of 5 years broke up with me telling me, “it’s just not going to work out, i can’t give you what you want, i dont want to be in a relationship with you.” This was my first and only bf… i’m turning 27 in 1 day!\n\nI’m doing a lot better in this past month focusing more on myself and nothing about the future or the past.\n\nBack to this article, texts… ha, i doubt i’ll even get one, but if i did.. it would definitely be a ego boost for me? one way or another? But obviously i’m not replying back as i am trying really hard on the NCR. Like i said, it’s all fantasy of what i think, wish and want him to do during this time… *sad, but it makes me feel better. — maybe i’m just weird…\n\nI wish there was an article to let me know how different guys deal with a relationship that they dumped.",
-                                  images: slide111,
-                                  publish: 1,
-                               
-                            }
-                            this.items.push(data)    
-
-                    }else{
-                    this.items = this.ActualitesOptions 
-                    console.log('Les 3 dernières actualités :', );
-
-
-                    }
+       
+                  
+                    this.ActualitesOptions.forEach(actualite => {
+                      this.items.push(actualite);
+                    });
+           
+                    
             } catch (error) {
-                console.error('Erreur lors de la récupération des actualités :', error.message);
+       
             }
         },
 
@@ -876,10 +854,10 @@ updatePicture(picture){
                     },
 
                 );
-                console.log('classifications/annuel:', response);
+          
 
                 if (response.data.data !== undefined) {
-                console.log('classifications/annuel:', response.data.data);
+   
                    this.Words =  response.data.data
                      this.loading = false
 
@@ -892,9 +870,7 @@ updatePicture(picture){
 
 
             } catch (error) {
-                console.log('eee',error);
-                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+             
                
             }
         },
@@ -985,6 +961,9 @@ margin-top: 50px;
 
   align-items: center;
 }
+.corps-video {
+ margin-top: 19px !important;
+}
 }
 
 @media (max-width: 1400px) {
@@ -1000,6 +979,9 @@ margin-top: 50px;
 
 
 margin-top: 77px;
+}
+.corps-video {
+ margin-top: 88px !important;
 }
 }
 
@@ -1219,7 +1201,7 @@ p {
   /* max-width: 1180px;
   margin: 47px auto; */
   height: 640px;
- margin-top: 88px;
+
   border-radius: 20px;
 
 }

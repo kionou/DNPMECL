@@ -80,7 +80,7 @@ loggedInUser() {
 },
 
     async mounted() {
-        console.log("datadossiers", this.loggedInUser);
+       
        await this. fetchMot()
     },
 
@@ -95,10 +95,10 @@ loggedInUser() {
                     },
 
                 );
-                console.log('classifications/annuel:', response);
+             
 
                 if (response.data.data !== undefined) {
-                console.log('classifications/annuel:', response.data.data);
+             
                    this.Words =  response.data.data
                      this.loading = false
 
@@ -110,9 +110,7 @@ loggedInUser() {
                 }
 
             } catch (error) {
-                console.log('eee',error);
-                console.error('Erreur lors de la récupération des options des sous prefecture :', error);
-                console.error('Erreur lors de la mise à jour des données MPME guinee :', error);
+               
           
             }
         },

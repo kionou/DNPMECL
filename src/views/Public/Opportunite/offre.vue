@@ -199,7 +199,7 @@ showFs() {
     await    this.fetchSousSecteurActiviteOptions()
     await    this.fetchData() 
     await    this.fetchgetOffreMpme()
-     console.log("datadossiers", this.loggedInUser);
+ 
     },
   
 
@@ -226,7 +226,7 @@ showFs() {
         await this.$store.dispatch('fetchSousSecteurOptions'); 
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+      
       }
     },
         async fetchData() {
@@ -253,13 +253,8 @@ showFs() {
     if (response.data.status === 'success') {
       this.loading = false;
       this.offres = response.data.data;
-      console.log('jjjjjjjjjj',response);
-
-      console.log('this.offres',this.offres);
       this.offres = this.offres.filter((offre) => {
        const sousSecteurActiviteOffre = offre.liste_sous_secteurs;
-       console.log('sousSecteurActiviteOffrej',sousSecteurActiviteOffre);
-
         if (sousSecteurActiviteOffre !== null && sousSecteurActiviteOffre.includes('|')) {
           const sousSecteurs = sousSecteurActiviteOffre.split('|');
             return sousSecteurs.some((sousSecteur) => this.data.includes(sousSecteur)) && offre.publish === 1;
@@ -269,12 +264,11 @@ showFs() {
       });
 
       this.filterOffres = this.offres;
-      console.log('this.filterOffres',this.offres);
     }
   } catch (error) {
-    console.error('Erreur lors de la récupération des options des sous-prefecture :', error);
+
     if (error && error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                    console.log('aut', error.response.data.status === 'error');
+               
                     await this.$store.dispatch('user/clearLoggedInUser');
                     this.$router.push('/connexion-mpme');
 

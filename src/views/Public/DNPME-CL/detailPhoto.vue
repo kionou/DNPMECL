@@ -141,7 +141,7 @@ export default {
               selector: ".glightbox"
              }); 
 
-             console.log('iddd',this.id);
+          
              await this.fetchPhotos()
     },
 
@@ -152,10 +152,8 @@ export default {
                 const options = JSON.parse(JSON.stringify(this.$store.getters['getPubliqueVisiblePhotos']));
 
                 this.totalPageArray = this.totalPageArray.concat(options.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
-        // this.PhotosOptions = this.totalPageArray
-
-        console.log('Photos récupérées :', options);
+       
+      
 
           if (page === 1) {
             // this.PhotosOptions = this.totalPageArray;
@@ -166,14 +164,11 @@ export default {
 
 
       }
-                // this.PhotosOptions = options
-              console.log('Photos récupérées detail222 :', options);
               this.filteredDataAlbum = this.totalPageArray.find(offre => offre.CodeAlbum === this.id);
               this.images = this.filteredDataAlbum.active_photos.map((image) => image.Photo);
 
       
-             console.log('Images récupérées :', this.images);
-              console.log('Photos récupérées detail :', this.filteredDataAlbum);
+         
              
 
 
@@ -181,7 +176,7 @@ export default {
 
         // Continuez avec le reste de votre code pour afficher les photos
       } catch (error) {
-        console.error('Erreur lors de la récupération des photos :', error.message);
+      
       }
     },
     compterJusqua(nombre) {

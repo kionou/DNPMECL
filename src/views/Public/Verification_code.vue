@@ -76,8 +76,8 @@ export default {
   },
 
   mounted() {
-    // console.log("data", this.loggedInUser);
-    console.log('verification',  this.getVerificationCode);
+
+   
 
   },
 
@@ -97,17 +97,16 @@ export default {
            value: this.getVerificationCode.user.email ,
           code: this.code
         }
-        console.log('data user :', DataUser);
+      
           try {
             const response = await axios.post('/mpme/verification-otp', DataUser);
-            console.log('response.Code', response);
+        
             if (response.data.status === 'error') {
               this.loading = false
               return this.error = response.data.message
 
             } else {
-              console.log('response.CodeEmail;;;;;;;;;;', response.data);
-              console.log('response.CodeEmail;;;;;;;;;;', response.data.data.FirstConnexion);
+            
               if (response.data.data.FirstConnexion <= 1) {
                 localStorage.setItem('resetPasswordInfo', JSON.stringify({
                   email: this.getVerificationCode.user.email,
@@ -127,7 +126,7 @@ export default {
 
           } catch (error) {
             this.loading = false
-            console.error('Erreur postlogin:', error);
+           
           }
 
         } else {
@@ -137,16 +136,16 @@ export default {
           value: this.getVerificationCode.user.Whatsapp,
           code: this.code
         }
-        console.log('data user :', DataUser);
+      
           try {
             const response = await axios.post('/mpme/verification-otp', DataUser);
-            console.log('response.Code', response);
+       
             if (response.data.status === 'error') {
               this.loading = false
               return this.error = response.data.message
 
             } else {
-              console.log('response.Code', response.data);
+            
               if (response.data.data.FirstConnexion <= 1) {
                 localStorage.setItem('resetPasswordInfo', JSON.stringify({
                   email: this.getVerificationCode.user.email,
@@ -164,7 +163,7 @@ export default {
 
           } catch (error) {
             this.loading = false
-            console.error('Erreur postlogin:', error);
+           
           }
         }
 
@@ -174,7 +173,7 @@ export default {
 
 
     async renew() {
-      console.log('okk' , this.selectedChannel);
+
       if (this.selectedChannel === 'E-mail') {
         const requestData = {
           email: 1,
@@ -192,7 +191,7 @@ export default {
             alert('Une erreur s\'est produite lors de l\'envoi du nouveau code.');
           }
         } catch (error) {
-          console.error('Erreur lors de la demande de renvoi du code par e-mail :', error);
+         
         }
       } else if (this.selectedChannel === 'WhatsApp') {
         const requestData = {
@@ -203,7 +202,7 @@ export default {
         try {
           // Effectuez une demande pour renvoyer un nouveau code par WhatsApp
           const response = await axios.post('/mpme/send-otp', requestData);
-          console.log('response',response);
+        
           if (response.data.status === 'success') {
             // Succès, informez l'utilisateur que le nouveau code a été envoyé
             alert('Un nouveau code a été envoyé à votre numéro WhatsApp.');
@@ -212,24 +211,19 @@ export default {
             alert('Une erreur s\'est produite lors de l\'envoi du nouveau code.');
           }
         } catch (error) {
-          console.error('Erreur lors de la demande de renvoi du code par WhatsApp :', error);
+          
         }
       }
     },
     formatPhoneNumber(number) {
-      // Assurez-vous que le numéro a au moins 10 caractères
       if (number.length >= 10) {
-        // Extraire les deux premiers chiffres
+
         const firstDigits = number.substr(0, 2);
-        // Extraire les 4 derniers chiffres
         const lastDigits = number.substr(-4);
-        // Répéter le caractère * pour les chiffres du milieu
         const middleDigits = '*'.repeat(number.length - 6);
-        // Concaténer les parties du numéro
         const formattedNumber = `${firstDigits} ${middleDigits} ${lastDigits}`;
         return formattedNumber;
       }
-      // Si le numéro est trop court, retourner tel quel
       return number;
     },
   },

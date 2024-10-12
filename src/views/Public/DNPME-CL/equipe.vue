@@ -117,12 +117,12 @@ paginatedItems() {
   try {
     await this.$store.dispatch('fetchPersonnel' , page);
     const Personnels = JSON.parse(JSON.stringify(this.$store.getters['getPersonnelData']));
-    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchPersonnel ~ actualites:", Personnels)
+
    
     this.totalPageArray = this.totalPageArray.concat(Personnels.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+      
         this.EquipesOptions  = this.totalPageArray.filter(partenaire => partenaire.Publish === 1);  
-        console.log('rrrrrrrrrrr',this.EquipesOptions);     
+        
         
 
 
@@ -140,7 +140,7 @@ paginatedItems() {
 
     // Continuez avec le reste de votre code pour traiter les actualités
   } catch (error) {
-    console.error('Erreur lors de la récupération des actualités :', error.message);
+    
   }
 },
 

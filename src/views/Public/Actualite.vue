@@ -1,5 +1,6 @@
 <template>
-     <Loading v-if="loading"></Loading>
+  <div>
+    <Loading v-if="loading"></Loading>
      <div id="banner-area" class="banner-area" >
     <div class="banner-text">
       <div class="container">
@@ -56,6 +57,8 @@
 </div>
     </div>
     </div>
+  </div>
+   
 </template>
 
 <script>
@@ -135,10 +138,10 @@ paginatedItems() {
   try {
     await this.$store.dispatch('fetchActualites' , page);
     const actualites = JSON.parse(JSON.stringify(this.$store.getters['getActualites']));
-    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchActualites ~ actualites:", actualites)
+ 
    
     this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+
         this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
         
 
@@ -157,7 +160,7 @@ paginatedItems() {
 
     // Continuez avec le reste de votre code pour traiter les actualités
   } catch (error) {
-    console.error('Erreur lors de la récupération des actualités :', error.message);
+
   }
 },
 

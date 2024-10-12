@@ -22,7 +22,7 @@
   
           if (response.data.status === 'success') {
             const secteurActiviteData = response.data.data.data;
-            console.log(secteurActiviteData);
+         
             const filteredData = secteurActiviteData.filter(item => item.secteur_activite !== null);
   
             // Utilisez secteurActiviteData pour créer vos données de graphique ici
@@ -70,10 +70,10 @@
               options: options,
             });
           } else {
-            console.error('Erreur de l\'API :', response.data.message);
+            
           }
         } catch (error) {
-          console.error('Erreur lors de la requête GET :', error);
+         
         }
       }
   

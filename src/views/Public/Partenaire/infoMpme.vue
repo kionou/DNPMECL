@@ -1,174 +1,179 @@
 <template>
-    <div id="banner-area" class="banner-area" >
+  <div id="banner-area" class="banner-area">
     <div class="banner-text">
       <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-                <div class="banner-heading">
-                  <h1 class="banner-title">demande de liste mpme</h1>
-                  <nav aria-label="breadcrumb">
-                     
-                    <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="/">accueil</a></li>
-                    <li class="breadcrumb-item"><a href="/partenaires/info-mpme">Dnpmecl</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">demande de liste mpme</li>
-                    </ol>
-                  </nav>
-                </div>
-            </div><!-- Col end -->
-          </div><!-- Row end -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-heading">
+              <h1 class="banner-title">demande de liste mpme</h1>
+              <nav aria-label="breadcrumb">
+  
+                <ol class="breadcrumb justify-content-center">
+                  <li class="breadcrumb-item"><a href="/">accueil</a></li>
+                  <li class="breadcrumb-item"><a href="/partenaires/info-mpme">Dnpmecl</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">demande de liste mpme</li>
+                </ol>
+              </nav>
+            </div>
+          </div><!-- Col end -->
+        </div><!-- Row end -->
       </div><!-- Container end -->
     </div><!-- Banner text end -->
-       </div>
-   <Loading v-if="loading"></Loading>
-    <div>
-        <div>
-    <div class="container-fluid  d-flex justify-content-center align-items-center general" data-aos="zoom-out"
-      data-aos-delay="100">
-      <div class="form-container">
-        <p class="title">Demande de la liste des MPME</p>
-        <p class="text-center">
-          Prêt à commencer votre démarche pour obtenir votre liste MPME ? Remplissez le formulaire ci-dessous 
-          pour démarrer le processus avec nous !
-        </p>
-        <small class="text-center">{{error}}</small>
-        <form class="form">
-          <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="email">Adresse Email<span class="text-danger">*</span></label>
-                <input type="email" name="email" id="email" placeholder="" v-model="email">
-              </div>
-              <small v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</small>
-
-            </div>
-            <div class="col">
-              <div class="input-groupe">
-                <label for="tel">Numéro Téléphonique <span class="text-danger">*</span></label>
-                <MazPhoneNumberInput v-model="phoneNumber" show-code-on-list color="secondary" defaultCountryCode="GN"
-                  :ignored-countries="['AC']" @update="results = $event" :success="results?.isValid" />
-
-              </div>
-              <small v-if="v$.phoneNumber.$error">{{ v$.phoneNumber.$errors[0].$message }}</small>
-
-            </div>
-          </div>
-          <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="structure">Nom de la Structure<span class="text-danger">*</span></label>
-                <input type="text" name="structure" id="structure" placeholder="" v-model="structure">
-              </div>
-              <small v-if="v$.structure.$error">{{ v$.structure.$errors[0].$message }}</small>
-
-            </div>
-            <div class="col">
-              <div class="input-groupe">
-                <label for="Libelle">Libelle <span class="text-danger">*</span></label>
-                <input type="text" name="libelle" id="libelle" placeholder="" v-model="libelle">
-              </div>
-              <small v-if="v$.libelle.$error">{{ v$.libelle.$errors[0].$message }}</small>
-             
-             
-
-            </div>
-          </div>
-          <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="typedemande">Region <span class="text-danger">*</span></label>
-                <MazSelect v-model="typedemande" color="secondary" :options="regionOptions"/>
-              </div>
-              <small v-if="v$.typedemande.$error">{{ v$.typedemande.$errors[0].$message }}</small>
-           
-           
-
-            </div>
-            <div class="col">
-              <div class="input-groupe">
-                <label for="prenom">Liste des Secteurs Activités <span class="text-danger">*</span></label>
-                <v-select v-model="selectedSecteurs" :items=SecteurActiviteOptions multiple persistent-hint  item-title="state"
-                  item-value="abbr" ></v-select>
-              </div>
-              <small v-if="v$.selectedSecteurs.$error">{{ v$.selectedSecteurs.$errors[0].$message }}</small>
-            </div>
-          </div>
-
-          <div class="row mb-3 mt-3 content-group">
-            <div class="col">
-              <div class="input-groupe">
-                <label for="Description">Description<span class="text-danger">*</span></label>
-                <MazTextarea v-model="description" name="comment" id="comment" color="secondary" />
-              </div>
-              <small v-if="v$.description.$error">{{ v$.description.$errors[0].$message }}</small>
-            </div>       
-          </div>
-          <div class="btn">
-            <button class="sign" @click.prevent="submit">Soumettre</button>
-           
-          </div>
-        </form>
-      </div>
-    </div>
-
   </div>
+  <Loading v-if="loading"></Loading>
+  <div>
+    <div>
+      <div class="container-fluid  d-flex justify-content-center align-items-center general" data-aos="zoom-out"
+        data-aos-delay="100">
+        <div class="form-container">
+          <p class="title">Demande de la liste des MPME</p>
+          <p class="text-center">
+            Prêt à commencer votre démarche pour obtenir votre liste MPME ? Remplissez le formulaire ci-dessous
+            pour démarrer le processus avec nous !
+          </p>
+          <small class="text-center">{{error}}</small>
+          <form class="form">
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="email">Adresse Email<span class="text-danger">*</span></label>
+                  <input type="email" name="email" id="email" placeholder="" v-model="email">
+                </div>
+                <small v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</small>
+  
+              </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="tel">Numéro Téléphonique <span class="text-danger">*</span></label>
+                  <MazPhoneNumberInput v-model="phoneNumber" show-code-on-list color="secondary" defaultCountryCode="GN"
+                    :ignored-countries="['AC']" @update="results = $event" :success="results?.isValid" />
+  
+                </div>
+                <small v-if="v$.phoneNumber.$error">{{ v$.phoneNumber.$errors[0].$message }}</small>
+  
+              </div>
+            </div>
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="structure">Nom de la Structure<span class="text-danger">*</span></label>
+                  <input type="text" name="structure" id="structure" placeholder="" v-model="structure">
+                </div>
+                <small v-if="v$.structure.$error">{{ v$.structure.$errors[0].$message }}</small>
+  
+              </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="Libelle">Libelle <span class="text-danger">*</span></label>
+                  <input type="text" name="libelle" id="libelle" placeholder="" v-model="libelle">
+                </div>
+                <small v-if="v$.libelle.$error">{{ v$.libelle.$errors[0].$message }}</small>
+  
+  
+  
+              </div>
+            </div>
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="typedemande">Région <span class="text-danger">*</span></label>
+                  <MazSelect v-model="typedemande" color="secondary" :options="regionOptions" />
+                </div>
+                <small v-if="v$.typedemande.$error">{{ v$.typedemande.$errors[0].$message }}</small>
+  
+  
+  
+              </div>
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="prenom">Liste des Secteurs Activités <span class="text-danger">*</span></label>
+                  <v-select v-model="selectedSecteurs" :items=SecteurActiviteOptions multiple persistent-hint
+                    item-title="state" item-value="abbr"></v-select>
+                </div>
+                <small v-if="v$.selectedSecteurs.$error">{{ v$.selectedSecteurs.$errors[0].$message }}</small>
+              </div>
+            </div>
+  
+            <div class="row mb-3 mt-3 content-group">
+              <div class="col">
+                <div class="input-groupe">
+                  <label for="Description">Description<span class="text-danger">*</span></label>
+                  <MazTextarea v-model="description" name="comment" id="comment" color="secondary" />
+                </div>
+                <small v-if="v$.description.$error">{{ v$.description.$errors[0].$message }}</small>
+              </div>
+            </div>
+            <div class="btn">
+              <button class="sign" @click.prevent="submit">Soumettre</button>
+  
+            </div>
+            <p class="text-center">
+             <b style="color:red ; text-decoration: underline;">CONDITION :</b>  L’obtention de la liste des MPME selon le secteur d’activité est assujettie au paiement d'un
+              montant qui vous sera communiqué après validation de votre demande, en retour vous recevrez un reçu
+              d'acquittement du paiement validé par la Direction.
+            </p>
+          </form>
+        </div>
+      </div>
+  
     </div>
-    <MazDialog v-model="isOpen" noClose>
-                <p>
-                  Votre demande de  liste  MPME a été enregistrée avec succès. Vous allez bientôt
-                   recevoir un e-mail contenant les étapes à suivre.
-                </p>
-                <template #footer="{ close }">
-
-                    <div class="supp" @click="close" style="background-color: blue; "> OK</div>
-                </template>
-            </MazDialog>
+  </div>
+  <MazDialog v-model="isOpen" noClose>
+    <p>
+      Votre demande de liste MPME a été enregistrée avec succès. Vous allez bientôt
+      recevoir un e-mail contenant les étapes à suivre.
+    </p>
+    <template #footer="{ close }">
+  
+      <div class="supp" @click="close" style="background-color: blue; "> OK</div>
+    </template>
+  </MazDialog>
 </template>
 
 <script>
 import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput';
-import useVuelidate from '@vuelidate/core';     
-import { require, lgmin,  ValidEmail,   } from '@/functions/rules';
+import useVuelidate from '@vuelidate/core';
+import { require, lgmin, ValidEmail, } from '@/functions/rules';
 import axios from '@/lib/axiosConfig.js'
 import MazDialog from 'maz-ui/components/MazDialog'
 import Loading from '../../../components/Public/other/preloader.vue';
 
 export default {
-    name: 'DNPMECLInfoMpme',
+  name: 'DNPMECLInfoMpme',
   components: {
-     MazPhoneNumberInput , MazDialog , Loading
-  }, 
+    MazPhoneNumberInput, MazDialog, Loading
+  },
 
   data() {
     return {
-      isOpen:false,
-      loading:false,
+      isOpen: false,
+      loading: false,
       email: '',
       phoneNumber: '',
-      structure:'',
-      libelle:'',
-      typedemande:'',
-      description:'',
-      error:'',
-      regionOptions:[],
+      structure: '',
+      libelle: '',
+      typedemande: '',
+      description: '',
+      error: '',
+      regionOptions: [],
       selectedSecteurs: [], // Pour stocker les sous-secteurs sélectionnés
       SecteurActiviteOptions: [],
-     v$:useVuelidate(), 
+      v$: useVuelidate(),
     };
-    
+
   },
- 
+
   validations: {
     email: {
-      require,  
-      ValidEmail, 
+      require,
+      ValidEmail,
     },
     phoneNumber: {
       require,
     },
     structure: {
       require,
-      lgmin: lgmin(2), 
+      lgmin: lgmin(2),
     },
     libelle: {
       require,
@@ -184,15 +189,15 @@ export default {
       require,
       lgmin: lgmin(2),
     },
-   
- 
+
+
   },
 
   async mounted() {
     await this.fetchRegionOptions()
     await this.fetchSecteurActiviteOptions()
-    
- 
+
+
   },
 
   methods: {
@@ -201,7 +206,7 @@ export default {
     },
     validateDemandeMatch() {
 
-     return this.typedemande !== 'Demande de liste mpme' &&  this.typedemande !== ""
+      return this.typedemande !== 'Demande de liste mpme' && this.typedemande !== ""
     },
     async fetchRegionOptions() {
       // Renommez la méthode pour refléter qu'elle récupère les options de pays
@@ -211,81 +216,78 @@ export default {
           JSON.stringify(this.$store.getters["getRegionOptions"])
         ); // Accéder aux options des pays via le getter
         this.regionOptions = options; // Affecter les options à votre propriété sortedCountryOptions
-        console.log( this.regionOptions);
+
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des options des pays :",
-          error.message
-        );
+
       }
     },
     async fetchSecteurActiviteOptions() {
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
         this.SecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
-          return  { 
+          return {
             state: option.label,
             abbr: option.value
 
-                     }
+          }
         });
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+
       }
     },
-  
+
 
     async submit() {
-       
-        this.v$.$touch()
-        this.error = ''
-        if (this.v$.$errors.length == 0 ) {
-          this.loading = true
 
-            let DataMpme = {
-            NomStructure: this.structure,
-            Libelle: this.libelle,
-            Description: this.description,
-            AdresseEmail: this.email,
-            Telephone: this.phoneNumber,
-            TypeDemande: "Demande de liste mpme",
-            SecteurActivite: JSON.parse(JSON.stringify(this.selectedSecteurs)).join('|'),
-            Region:this.typedemande
+      this.v$.$touch()
+      this.error = ''
+      if (this.v$.$errors.length == 0) {
+        this.loading = true
+
+        let DataMpme = {
+          NomStructure: this.structure,
+          Libelle: this.libelle,
+          Description: this.description,
+          AdresseEmail: this.email,
+          Telephone: this.phoneNumber,
+          TypeDemande: "Demande de liste mpme",
+          SecteurActivite: JSON.parse(JSON.stringify(this.selectedSecteurs)).join('|'),
+          Region: this.typedemande
         }
-        console.log('eeedata', DataMpme);
-          try {
-          const response = await axios.post('/gestion-des-demandes',  DataMpme);
-          console.log('response.sousprefecture', response);
+
+        try {
+          const response = await axios.post('/gestion-des-demandes', DataMpme);
+
           if (response.data.status === 'success') {
             this.loading = false
             this.isOpen = true
-            
+
           } else {
             this.loading = false
-         
+
           }
-          
+
         } catch (error) {
-          console.error('Erreur post:', error);
+
         }
-          
-          
-          
-}else{
-  console.log('pas bon' , this.v$.$errors );
 
 
 
-}
+      } else {
+
+
+
+
+      }
     },
 
-    
-  
-   
+
+
+
 
   },
   created() {
-  
+
   },
 };
 </script>
@@ -293,96 +295,105 @@ export default {
 <style lang="css" scoped>
 /* debut banier */
 .banner-area {
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #266486;
-    min-height: 250px;
-    background-image: url('@/assets/img/banner/part1.jpg'); 
-    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
- 
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #266486;
+  min-height: 250px;
+  background-image: url('@/assets/img/banner/part1.jpg');
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+
 }
+
 .banner-area:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: rgba(0, 0, 0, .45);
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .45);
 }
-.breadcrumb-item , .breadcrumb-item a{
-    color: #fff !important;
+
+.breadcrumb-item,
+.breadcrumb-item a {
+  color: #fff !important;
 }
+
 .banner-text {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    max-width: 1170px;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 1;
-    /* -webkit-transform: translateY(-50%); */
-    transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 1;
+  /* -webkit-transform: translateY(-50%); */
+  transform: translateY(-50%);
 }
+
 .banner-heading {
-    text-align: center;
+  text-align: center;
 }
+
 .banner-title {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 58px;
-    font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 58px;
+  font-weight: 900;
 }
+
 .breadcrumb {
-    padding: 0;
-    background: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: #fff !important;
+  padding: 0;
+  background: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #fff !important;
 }
 
 @media (max-width: 992px) {
-    .banner-title {
-    
+  .banner-title {
+
     font-size: 40px;
-    
+
+  }
 }
-}
+
 @media (max-width: 768px) {
 
-  .container{
+  .container {
 
     margin-top: 20px;
   }
-    .banner-title {
-    
+
+  .banner-title {
+
     font-size: 20px !important;
-    
-}
+
+  }
 }
 
 
 
 /* fin banier */
 .supp {
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
-    border: none;
-    border-radius: 45px;
-    z-index: 3;
-    cursor: pointer;
-    outline: none;
-    width: 100px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 45px;
+  z-index: 3;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
 }
 
 small {
@@ -465,12 +476,14 @@ textarea {
 .input-groupe textarea:focus {
   border-color: var(--color-primary);
 }
+
 .btn {
   display: flex;
   flex-direction: column;
   align-items: center;
 
 }
+
 .sign {
   display: block;
   width: 300px;
@@ -488,7 +501,8 @@ textarea {
   overflow: hidden;
 
 }
-.scroll{
+
+.scroll {
   overflow: auto;
 }
 
@@ -505,12 +519,12 @@ textarea {
     flex-direction: column;
   }
 
-  .title{
-   
+  .title {
+
     font-size: 22px;
     /* line-height: 2rem; */
-    
-}
+
+  }
 
 }
 
@@ -535,5 +549,4 @@ textarea {
   background-color: white;
 
 }
-
 </style>

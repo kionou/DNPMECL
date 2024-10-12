@@ -30,9 +30,7 @@ export default {
       this.documents.splice(index, 1);
     },
     submitForm() {
-      // Vous pouvez accéder à this.documents pour envoyer les données au serveur
-      // Assurez-vous de gérer correctement les fichiers et les noms de documents
-      console.log(this.documents);
+  
     },
   },
 };

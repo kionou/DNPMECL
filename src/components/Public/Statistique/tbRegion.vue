@@ -62,13 +62,13 @@ paginatedItems() {
   try {
     const response = await axios.get('/regions', {params: { with_relation: true}});
     if (response.data.status === 'success') {
-      console.log('Données de la réponse2 :', response.data.data.data);
+ ;
       this.regionOptions = response.data.data.data
     } else {
   
     }
   } catch (error) {
-    console.error('Erreur lors de la requête GET :', error);
+   
   }
 },
         

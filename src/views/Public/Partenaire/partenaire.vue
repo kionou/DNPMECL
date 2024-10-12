@@ -118,11 +118,10 @@ try {
   await this.$store.dispatch('fetchPartenairesData');
    this.partenairesOptions = JSON.parse(JSON.stringify(this.$store.getters['getPartenaires']));
    this.loading = false
-  console.log('Partenaires récupérés :', this.partenairesOptions);
 
-  // Continuez avec le reste de votre code pour traiter les partenaires
+
 } catch (error) {
-  console.error('Erreur lors de la récupération des partenaires :', error.message);
+  
 }
 },
 

@@ -134,12 +134,12 @@ paginatedItems() {
   try {
     await this.$store.dispatch('fetchAccompagnement' , page);
     const accompagnement = JSON.parse(JSON.stringify(this.$store.getters['getAccompagnementData']));
-    console.log("🚀 ~ file: Actualite.vue:138 ~ fetchAccompagnement ~ actualites:", accompagnement)
+   
    
     this.totalPageArray = this.totalPageArray.concat(accompagnement.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+     
         this.AccompagnementsOptions  = this.totalPageArray.filter(partenaire => partenaire.Valid === 1);  
-        console.log('rrrrrrrrrrr',this.AccompagnementsOptions);     
+    
         
 
 
@@ -157,7 +157,7 @@ paginatedItems() {
 
     // Continuez avec le reste de votre code pour traiter les actualités
   } catch (error) {
-    console.error('Erreur lors de la récupération des actualités :', error.message);
+  
   }
 },
 

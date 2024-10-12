@@ -1,6 +1,7 @@
 <template>
-      <Loading v-if="loading"></Loading>
     <div>
+      <Loading v-if="loading"></Loading>
+
  <div id="banner-area" class="banner-area" >
     <div class="banner-text">
       <div class="container">
@@ -172,7 +173,7 @@ Loading
 
    async mounted() {
       await  this.fetchOnePartenaire()
-        console.log('iddd',this.id);
+  
       await  this.fetchActualites(1)
     },
 
@@ -198,7 +199,7 @@ Loading
         async fetchOnePartenaire() {
             try {
                 const response = await axios.get(`/partenaires/${this.id}`)
-             console.log('response.sousprefecture', response);
+      
           if (response.data.status === 'success') {
             this.partenaire = response.data.data
             this.loading = false
@@ -209,7 +210,7 @@ Loading
           }
           
         } catch (error) {
-           console.error('Erreur post:', error);
+         
          }
             
         },
@@ -221,7 +222,7 @@ Loading
              
 
                     this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+     
         this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
         
 
@@ -235,12 +236,12 @@ Loading
       }
 
       
-                     console.log('Actualités récupérées :', this.ActualitesOptions);
+                   
                      this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                     this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
-                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+                  
             } catch (error) {
-                console.error('Erreur lors de la récupération des actualités :', error.message);
+         
             }
         },
 

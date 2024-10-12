@@ -251,6 +251,21 @@
     </template>
 
   </MazDialog>
+
+  <MazDialog v-model="EmailExite" title="Adresse Email">
+    <p>
+      L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse.
+
+    </p>
+    <template #footer="{ close }">
+
+      <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
+
+
+
+    </template>
+
+  </MazDialog>
 </template>
 
 <script>
@@ -287,6 +302,7 @@ computed:{
       noentreprise: false,
       yesentreprise: false,
       yesentreprise1: false,
+      EmailExite:false,
       loading: false,
       email: '',
       phoneNumber: '',
@@ -382,14 +398,14 @@ computed:{
       try {
         await this.$store.dispatch('fetchSousSecteurOptions'); // Remplacez par l'action de votre store
         this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions'].map(option => {
-          // console.log('option',option);
+   
           return {
             state: option.label,
             abbr: option.value
           }
         });
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+      
       }
     },
 
@@ -416,18 +432,13 @@ computed:{
 
 
        }
-       console.log('eeedata222', DataMpme2);
+   
           try {
           
             const response = await axios.post('/register/system-user', DataMpme2 
-        //     , {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //     "Content-Type": "application/json",
-        //   },
-        // }
+       
         );
-            console.log('response.sousprefecture33', response);
+          
             if (response.data.status === "success") {
               this.loading = false
 
@@ -445,7 +456,7 @@ computed:{
 
           } catch (error) {
             this.loading = false
-            console.error('Erreur post:', error);
+         
             this.$router.push({ name: 'NotFound' }); 
           }
 
@@ -468,10 +479,10 @@ computed:{
           
          
         }
-        console.log('eeedata', DataMpme);
+   
           try {
             const response = await axios.post('/register/mpme', DataMpme);
-            console.log('response.sousprefecture', response);
+        
             if (response.data.status === 'success') {
                 this.loading = false
               this.revele = !this.revele;
@@ -482,9 +493,11 @@ computed:{
               }
             } else if(response.data.message.email) {
 
-              console.log('response', response.data.message.email);
+          
               this.loading = false
-              return this.error = "L'adresse e-mail existe déjà dans notre système. Veuillez vous connecter avec cette adresse."
+              this.EmailExite = true
+         
+             
             
             }else{
 
@@ -492,7 +505,7 @@ computed:{
             }
 
           } catch (error) {
-            console.error('Erreur post:', error);
+         
             this.loading = false
             this.$router.push({ name: 'NotFound' }); 
           }
@@ -500,7 +513,7 @@ computed:{
         }
 
       } else {
-        console.log('pas bon', this.v$.$errors);
+    
         this.loading = false
 
 
@@ -524,10 +537,10 @@ let DataMpme = {
   rccm: this.rccm,
 
 }
-console.log('eeedata', DataMpme);
+
 try {
   const response = await axios.get('/check-mpme/bd-mpme-exist', { params: DataMpme });
-  console.log('response.sousprefecture', response);
+
   if (response.data.data.user_exist === true) {
 
     this.isOpen = false
@@ -536,13 +549,13 @@ try {
 
   } else if ((response.data.data.user_exist === false)) {
     this.identifiant = response.data.data.CodeMpme
-    console.log('azzerr', this.identifiant);
+
     this.isOpen = false
     this.loading = false
     this.yesentreprise1 = true
   }
 } catch (error) {
-  console.error('Erreur post:', error);
+
   error.response.data
   this.loading = false
   this.isOpen = false
@@ -569,32 +582,31 @@ try {
       try {
         await this.$store.dispatch('fetchCountries');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getCountryOptions'])); // Accéder aux options des pays via le getter
-         console.log('Options des pays:', options);
+    
         this.sortedCountryOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des pays :', error);
+    
       }
     },
     async fetchRegionOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
         await this.$store.dispatch('fetchRegionOptions');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getRegionOptions'])); // Accéder aux options des pays via le getter
-        console.log('Options desregions:', options);
+     
         this.regionOptions = options;
         // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des pays :', error);
+        
       }
     },
     async fetchPrefectureOptions() { // Renommez la méthode pour refléter qu'elle récupère les options de pays
       try {
         await this.$store.dispatch('fetchPrefectureOptions');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getprefectureOptions'])); // Accéder aux options des pays via le getter
-        console.log('Options des Prefecture:', options);
-        // this.prefectureOptions = options; 
-        // Affecter les options à votre propriété sortedCountryOptions
+       
+       
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des prefecture :', error);
+       
       }
     },
 
@@ -603,10 +615,10 @@ try {
       try {
         await this.$store.dispatch('fetchSous_PrefectureOptions');
         const options = JSON.parse(JSON.stringify(this.$store.getters['getSousprefectureOptions'])); // Accéder aux options des pays via le getter
-        console.log('Options des sous Prefecture:', options);
+       
         this.sous_prefectureOptions = options; // Affecter les options à votre propriété sortedCountryOptions
       } catch (error) {
-        console.error('Erreur lors de la récupération des options des sous prefecture :', error);
+       
       }
     },
 
@@ -617,7 +629,7 @@ try {
         });
         return response.data.data;
       } catch (error) {
-        console.error("Erreur lors de la récupération des options des response :", error);
+    
       }
     },
 
@@ -626,7 +638,7 @@ try {
 
       try {
         const localiteData = await this.fetchLocalite(option.value, "REGION");
-        console.log("Données de localité :", localiteData.prefectures);
+     
         const options = localiteData.prefectures.map((prefecture) => ({
           label: prefecture.NomPrefecture,
           value: prefecture.CodePrefecture,
@@ -635,7 +647,7 @@ try {
         this.prefectureOptions = options;
         this.loading = false;
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de localité :", error);
+        
       }
     },
 
@@ -645,8 +657,7 @@ try {
       try {
         const localiteData = await this.fetchLocalite(option.value, "PREFECTURE");
       
-        console.log('prefecture',this.option);
-        console.log("Données de localité :", localiteData.sous_prefectures);
+       
         const options = localiteData.sous_prefectures.map((sous_prefecture) => ({
           label: sous_prefecture.NomSousPrefecture,
           value: sous_prefecture.CodeSousPrefecture,
@@ -655,7 +666,7 @@ try {
          this.sous_prefectureOptions = options;
         this.loading = false;
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de localité :", error);
+       
       }
     },
 

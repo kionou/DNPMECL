@@ -199,11 +199,11 @@ convertirHtmlEnTexte(chaineHtml) {
 
             try {
                 const response = await axios.get(`/details/actualites/${this.id}`);
-                console.log('response.sousprefecture', response);
+             
                 if (response.data.status === 'success') {
                     this.actualite = response.data.data
 
-                    console.log('response.sousprefecture', response.data.data);
+                  
 
                     this.loading = false
 
@@ -214,7 +214,7 @@ convertirHtmlEnTexte(chaineHtml) {
                 }
 
             } catch (error) {
-                console.error('Erreur post:', error);
+               
             }
 
 
@@ -228,7 +228,7 @@ convertirHtmlEnTexte(chaineHtml) {
              
 
                     this.totalPageArray = this.totalPageArray.concat(actualites.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
+      
         this.ActualitesOptions  = this.totalPageArray.filter(partenaire => partenaire.publish === 1);       
         
 
@@ -242,12 +242,12 @@ convertirHtmlEnTexte(chaineHtml) {
       }
 
       
-                     console.log('Actualités récupérées :', this.ActualitesOptions);
+                  
                      this.ActualitesOptions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                     this.ActualitesOptions = this.ActualitesOptions.slice(0, 3);
-                    console.log('Les 3 dernières actualités :', this.ActualitesOptions);
+             
             } catch (error) {
-                console.error('Erreur lors de la récupération des actualités :', error.message);
+              
             }
         },
 

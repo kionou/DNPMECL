@@ -327,18 +327,17 @@ export default {
 
   methods: {
     handleFileChange(event) {
-      console.log("File input change");
+   
       const file = event.target.files[0];
-      console.log("Selected file:", file);
+
       this.selectedFile = file;
     },
 
     async submit() {
       this.v$.$touch();
-      console.log("bonjour");
-
+ 
       if (this.v$.$errors.length == 0) {
-        console.log("bonjour");
+
         this.loading = true;
         const formData = new FormData();
         formData.append("nom", this.nom);
@@ -346,14 +345,7 @@ export default {
         formData.append("sujet", this.object);
         formData.append("contenu", this.description);
         formData.append("fichier", this.selectedFile);
-        console.log(formData);
-        console.log(
-          this.email,
-          this.nom,
-          this.object,
-          this.description,
-          this.selectedFile
-        );
+    ;
 
         try {
           const response = await axios.post("/send-message", formData, {
@@ -361,7 +353,7 @@ export default {
               "Content-Type": "multipart/form-data",
             },
           });
-          console.log("Réponse du téléversement :", response);
+ 
           if (response.data.status === "success") {
             this.msgsuccess = true;
             this.nom = "";
@@ -373,10 +365,10 @@ export default {
           } else {
           }
         } catch (error) {
-          console.error("Erreur lors du téléversement :", error);
+      
         }
       } else {
-        console.log("cest pas bon ", this.v$.$errors);
+      
       }
     },
   },

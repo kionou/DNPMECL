@@ -101,11 +101,11 @@ if (resetPasswordInfo) {
                     password:this.password,
                     password_confirmation:this.confirmer_password
                 }
-                console.log('data user :',DataUser);
+             
            
           try {
             const response = await axios.post('/mpme-password/password/reset', DataUser);
-            console.log('response.Code', response);
+         
             if (response.data.status === 'success') {
               localStorage.removeItem('resetPasswordInfo');
               this.loading = false
@@ -115,7 +115,7 @@ if (resetPasswordInfo) {
 
           } catch (error) {
             this.loading = false
-            console.error('Erreur postlogin:', error);
+         
             return this.error = error.response.data.message
 
 

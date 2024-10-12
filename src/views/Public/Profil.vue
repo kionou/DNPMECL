@@ -129,7 +129,7 @@ loggedInUser() {
                             top: 0,
                             behavior: 'smooth',
                         });
-        console.log("profil", this.loggedInUser);
+
 
     
     },
@@ -139,7 +139,7 @@ loggedInUser() {
         async fetchOneMpme() {
             try {
             const response = await axios.get(`/mpme/${this.loggedInUser.id}`);
-            console.log('response.Code', response);
+    
             if (response.data.data ) {
                this.data = response.data.data
 
@@ -156,7 +156,7 @@ loggedInUser() {
 
           } catch (error) {
 
-            console.error('Erreur postlogin:', error);
+          
           }
            
         },

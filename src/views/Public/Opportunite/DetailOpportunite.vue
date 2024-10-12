@@ -167,8 +167,7 @@ async   mounted() {
 
 await this.fetchgetOffreMpme(1)
 await this.fetchSousSecteurActiviteOptions()
- console.log(this.id);
-console.log("datadossiers", this.loggedInUser);
+
 
 },
 
@@ -195,24 +194,17 @@ try {
  await this.$store.dispatch('fetchSousSecteurOptions'); 
  this.SousSecteurActiviteOptions = this.$store.getters['getSousSecteurOptions']
 } catch (error) {
- console.error('Erreur lors de la récupération des options des secteurs d\'activité:', error.message);
+
 }
 },
 async fetchgetOffreMpme(page) {
 try {
 //   const userId = this.loggedInUser.id;
  const response = await axios.get(`/offres/publique?page=${page}`);
-   console.log('UserData:', response);
 
  if (response.data.status === 'success') {
     
-     console.log('UserData:', response.data.data.data);
-
      this.totalPageArray = this.totalPageArray.concat(response.data.data.data); // Fusion des tableaux des différentes pages
-        console.log('jjjjjjjjjj',this.totalPageArray);
-      
-
-
           if (page === 1) {
             this.totalPageArray = this.totalPageArray;
         const totalPages = response.data.data.last_page;
@@ -221,9 +213,7 @@ try {
       }
 
      this.offre = this.totalPageArray.find(offre => offre.CodeOffre === this.id);
-    //  const valeur = this.offre.liste_sous_secteurs;
-    //    const option =  this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
-    //    this.sousSecteursLabel =  option ? option.label : valeur;
+  
        
        const Offres = this.totalPageArray;
       
@@ -235,14 +225,12 @@ try {
       // Obtenir les 3 dernières offres publiées
       this.OppOptions = offresPubliees.slice(0, 3);
 
-      console.log('Les 3 dernières actualités publiées :', this.OppOptions);
 
        this.loading = false
    
  }  
 } catch (error) {
- console.error('Erreur lors de la récupération des options des sous prefecture :', error);
- console.log('aut',error);
+
 
    
 }
@@ -257,28 +245,27 @@ compterJusqua(nombre) {
 
 hamdleSubmit(id){
 this.idOffre = id
-console.log(id);
+
 this.isOpen = true
 
 
 },
 handleFileUpload() {
 this.selectedFile = this.$refs.fileInput.files[0];
-console.log( this.selectedFile);
+
 },
 async  submit(){
 this.v$.$touch()
 if (this.v$.$errors.length == 0 ) {
 this.isOpen = false
 this.loading = true
-console.log('bonjour');
+
 const formData = new FormData();
 formData.append('document', this.selectedFile);
 formData.append('intitule', this.nom);
 formData.append('CodeOffre', this.idOffre);
 formData.append('CodeMpme', this.loggedInUser.id);
-console.log( formData);
-console.log( this.selectedFile ,this.nom ,this.idOffre , this.loggedInUser.id );
+
 
 
 try {
@@ -288,7 +275,7 @@ const response = await axios.post('/candidatures', formData, {
    'Content-Type': 'multipart/form-data'
  }
 });
-console.log('Réponse du téléversement :', response);
+
 if (response.data.status === 'success') {
   this.msgsuccess = true
  this.isOpen = false
@@ -300,7 +287,7 @@ if (response.data.status === 'success') {
  this.error = response.data.message
 }
 } catch (error) {
-console.error('Erreur lors du téléversement :', error);
+
 this.loading = false
 
 }    
