@@ -86,21 +86,7 @@
       <span> Vous n'avez pas encore d'offre vous concernant </span>
     </div>
 
-            <!-- <v-card class="mx-auto my-3 p-2" max-width="250" height="250">
-                <v-img class="align-end text-white" height="150"
-                    src="https://mpme-guinee.com/bd/public/MPME_IMAGES_DOCUMENTS/KIONOU-SARL_1692812920.png" cover>
-
-                </v-img>
-
-                <v-card-text height="100" class="  text-h6">
-                    Appel à manifestation d’intérêt à Chemonics International
-                </v-card-text>
-            </v-card> -->
-           
-
-
-
-
+        
           
             <div class="task" v-else v-for="offre in paginatedItems" :key="offre.id">
                 <div class="tag">
@@ -204,22 +190,45 @@ showFs() {
   
 
     methods: {
-    obtenirValeursPourCles(sousSecteurs) {
+
+    obtenirValeursPourCless(sousSecteurs) {
   if (sousSecteurs && sousSecteurs.includes('|')) {
     const sousSecteursArray = sousSecteurs.split('|');
     const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
     const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
       return option ? option.label : valeur;
     });
-
-    // Reassemblez les noms triés en une seule chaîne avec '|'
     return nomsSousSecteurs.sort().join(' , ');
   } else {
-    // Si sousSecteurs ne contient pas '|', recherchez et retournez le nom correspondant
+  
     const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
     return option ? option.label : sousSecteurs;
   }
 },
+obtenirValeursPourCles(sousSecteurs) {
+
+  if (sousSecteurs && sousSecteurs.includes('|')) {
+    const sousSecteursArray = sousSecteurs.split('|');
+    const nomsSousSecteurs = sousSecteursArray.map((valeur) => {
+      const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === valeur);
+      return option ? option.label : valeur;
+    });
+
+    const nomsConcat = nomsSousSecteurs.sort().join(' , ');
+
+    const maxLength = 150;
+    if (nomsConcat.length > maxLength) {
+      return nomsConcat.substring(0, maxLength) + '...';
+    }
+
+    return nomsConcat; 
+  } else {
+   
+    const option = this.SousSecteurActiviteOptions.find((opt) => opt.value === sousSecteurs);
+    return option ? option.label : sousSecteurs;
+  }
+},
+
 
          async fetchSousSecteurActiviteOptions() {
       try {

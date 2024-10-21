@@ -12,60 +12,68 @@
         style="margin-top: 40px ; position: relative;">
         <div class="bar_search">
             <div class="liste-searcher">
-              <!-- <div class="nsl">
-                <i class="bi bi-search"></i>
-                <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name"
-                  @input="filterByName" />
-              </div> -->
-              <div class="nsl">
-                <i class="bi bi-funnel-fill"></i>
-                <select name="speciality" v-model="control.spec" @change="updateFilterSpec">
-                  <option value="" selected="true">Filtre</option>
-                  <option value="annee">Année</option>
-                 
-      
-                  
-                </select>
-              </div>
-              <div class="nsl" style="border-right: none" v-if="control.spec === 'annee' || control.spec === 'chiffreaffaire' ">
-                <i class="bi bi-filter"></i>
-                <select name="speciality" v-if="control.spec === 'annee'" v-model="control.speciality" @change="filterData">
-                  <option value="" selected="true">Choisir une année</option>
-                  <option v-for="year in yearOptions" :value="year.label" :key="year.value">{{ year.label }}</option>
-                </select>
-                <select name="speciality" v-else-if="control.spec === 'chiffreaffaire'" v-model="control.speciality" @change="filterData">
-                  <option value="" selected="true">Choisir un chiffre d'affaire</option>
-                  <option v-for="chiffreaffaire in classificationAffaireOptions" :value="chiffreaffaire.label" :key="chiffreaffaire.value">{{ chiffreaffaire.label }}</option>
-                </select>
-                <select name="speciality" v-else-if="control.spec === 'capitalsocial'" v-model="control.speciality" @change="filterData">
-                  <option value="" selected="true">Choisir un capital social</option>
-                  <option v-for="capitalsocial in classificationSocialOptions" :value="capitalsocial.label" :key="capitalsocial.value">{{ capitalsocial.label }}</option>
-                </select>
-                <select name="speciality" v-else-if="control.spec === 'typecomptabilite'" v-model="control.speciality" @change="filterData">
-                  <option value="" selected="true">Choisir un chiffre d'affaire</option>
-                  <option v-for="typecomptabilite in Comptabilite" :value="typecomptabilite.label" :key="typecomptabilite.value">{{ typecomptabilite.label }}</option>
-                </select>
-                
-              </div>
-              <div class="nsl" style="border-right: none" v-else>
-                <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
-                <input type="text" placeholder="Aucun filtre sélectionné" disabled />
-              </div>
+                <!-- <div class="nsl">
+                    <i class="bi bi-search"></i>
+                    <input type="text" role="search" placeholder="Rechercher un nom..." v-model="control.name"
+                      @input="filterByName" />
+                  </div> -->
+                <div class="nsl">
+                    <i class="bi bi-funnel-fill"></i>
+                    <select name="speciality" v-model="control.spec" @change="updateFilterSpec">
+                        <option value="" selected="true">Filtre</option>
+                        <option value="annee">Année</option>
+    
+    
+    
+                    </select>
+                </div>
+                <div class="nsl" style="border-right: none"
+                    v-if="control.spec === 'annee' || control.spec === 'chiffreaffaire' ">
+                    <i class="bi bi-filter"></i>
+                    <select name="speciality" v-if="control.spec === 'annee'" v-model="control.speciality"
+                        @change="filterData">
+                        <option value="" selected="true">Choisir une année</option>
+                        <option v-for="year in yearOptions" :value="year.label" :key="year.value">{{ year.label }}</option>
+                    </select>
+                    <select name="speciality" v-else-if="control.spec === 'chiffreaffaire'" v-model="control.speciality"
+                        @change="filterData">
+                        <option value="" selected="true">Choisir un chiffre d'affaire</option>
+                        <option v-for="chiffreaffaire in classificationAffaireOptions" :value="chiffreaffaire.label"
+                            :key="chiffreaffaire.value">{{ chiffreaffaire.label }}</option>
+                    </select>
+                    <select name="speciality" v-else-if="control.spec === 'capitalsocial'" v-model="control.speciality"
+                        @change="filterData">
+                        <option value="" selected="true">Choisir un capital social</option>
+                        <option v-for="capitalsocial in classificationSocialOptions" :value="capitalsocial.label"
+                            :key="capitalsocial.value">{{ capitalsocial.label }}</option>
+                    </select>
+                    <select name="speciality" v-else-if="control.spec === 'typecomptabilite'" v-model="control.speciality"
+                        @change="filterData">
+                        <option value="" selected="true">Choisir un chiffre d'affaire</option>
+                        <option v-for="typecomptabilite in Comptabilite" :value="typecomptabilite.label"
+                            :key="typecomptabilite.value">{{ typecomptabilite.label }}</option>
+                    </select>
+    
+                </div>
+                <div class="nsl" style="border-right: none" v-else>
+                    <i class="bi bi-x-square-fill" @click="clearFilters" style="cursor: pointer"></i>
+                    <input type="text" placeholder="Aucun filtre sélectionné" disabled />
+                </div>
             </div>
-          </div>
+        </div>
         <div class="btnLogin" @click="this.isOpen = true"> <i class="bi bi-plus-lg"></i> Ajouter</div>
         <div v-if="filteredClassifications.length === 0" class="noresul">
             <span>Vous n'avez pas encore d'Appui à la valorisation, vous pouvez également en ajouter aussi !!</span>
         </div>
-        <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else >
-
+        <div class="contenu d-flex justify-content-center align-items-center flex-wrap  w-100" v-else>
+    
             <div class="two-section">
-
-
+    
+    
                 <div class="table__body">
                     <table>
                         <thead>
-
+    
                             <tr>
                                 <th> # </th>
                                 <th> Annee</th>
@@ -74,12 +82,12 @@
                                 <th>Marché Produit Service</th>
                                 <th> Quantité du Produit </th>
                                 <th>Actions</th>
-
+    
                             </tr>
-
+    
                         </thead>
                         <tbody>
-
+    
                             <tr v-for="(item, index ) in paginatedItems" :key="item.id">
                                 <td>{{ getSequentialNumber(index) }} </td>
                                 <td>{{ item.Annee }} </td>
@@ -88,44 +96,44 @@
                                 <td v-if="item.MarcheProduitService === 1"> Oui</td>
                                 <td v-else> Non</td>
                                 <td> {{ item.QuantiteProduit || 0}} </td>
-                                
+    
                                 <td v-if="item.Annee !== new Date().getFullYear()">
                                     <div class="sci">
                                         <span style="--i:1" class="updateclose">
-                                            <i class="bi bi-pen" ></i>
-
+                                            <i class="bi bi-pen"></i>
+    
                                         </span>
-                                        <span style="--i:2"  class="deleteclose">
+                                        <span style="--i:2" class="deleteclose">
                                             <i class="bi bi-trash"></i>
                                         </span>
-
+    
                                     </div>
                                 </td>
                                 <td v-else>
                                     <div class="sci">
                                         <span style="--i:1" class="update">
                                             <i class="bi bi-pen" @click="updatedoc(item.id)"></i>
-
+    
                                         </span>
                                         <span style="--i:2" @click="hamdledelete(item.id)" class="delete">
                                             <i class="bi bi-trash"></i>
                                         </span>
-
+    
                                     </div>
                                 </td>
-
+    
                             </tr>
-
-
+    
+    
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
+    
         <MazDialog v-if="isOpen" v-model="isOpen" width="710px" max-height="revert" padding="0 1.5rem 1.5rem">
             <div>
-
+    
                 <div id="uploadArea" class="upload-area">
                     <!-- Header -->
                     <div class="upload-area__header">
@@ -133,80 +141,88 @@
                         <small v-if="error">{{ error }}</small>
                     </div>
                     <!-- End Header -->
-
+    
                     <!-- Drop Zoon -->
                     <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                     
-                                <div class="input-group">
-                                    <label for="username">Année <span class="text-danger">*</span></label>
-                                    <Day @selectedYear="handleSelectedYear"></Day>
-                                    <!-- <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  /> -->
-                                </div>
-                                <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
-                                <div class="input-group" style="margin-top: 10px !important;">
-                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span class="text-danger">*</span> </label>
-                            <MazSelect v-model="step1.MarcheProduitService" color="secondary" :options="Choix"  />
-                           
+    
+                        <div class="input-group">
+                            <label for="username">Année <span class="text-danger">*</span></label>
+                            <Day @selectedYear="handleSelectedYear"></Day>
+                            <!-- <MazSelect v-model="step1.annee" color="secondary" :options="yearOptions"  search  option-value-key="value" option-label-key="label" option-input-value-key="value"  /> -->
                         </div>
-                        <small v-if="v$.step1.MarcheProduitService.$error">{{ v$.step1.MarcheProduitService.$errors[0].$message }}</small>
-                        
-                            <div class="input-group" v-if="step1.MarcheProduitService === true" style="margin-top: 10px !important;">
+                        <small v-if="v$.step1.annee.$error">{{ v$.step1.annee.$errors[0].$message }}</small>
+                        <div class="input-group" style="margin-top: 10px !important;">
+                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span
+                                    class="text-danger">*</span> </label>
+                            <MazSelect v-model="step1.MarcheProduitService" color="secondary" :options="Choix" />
+    
+                        </div>
+                        <small v-if="v$.step1.MarcheProduitService.$error">{{
+                            v$.step1.MarcheProduitService.$errors[0].$message }}</small>
+    
+                        <div class="input-group" v-if="step1.MarcheProduitService === true"
+                            style="margin-top: 10px !important;">
                             <label for="ProduitService">Veuillez décrire les services et/ou produits</label>
-                            <input v-model="step1.ProduitService" name="ProduitService"   id="ProduitService"  />
+                            <input v-model="step1.ProduitService" name="ProduitService" id="ProduitService" />
                         </div>
-                        <small v-if="v$.step1.ProduitService.$error">{{ v$.step1.ProduitService.$errors[0].$message }}</small>
-                        <div class="row mb-3 mt-3 content-group" >
+                        <small v-if="v$.step1.ProduitService.$error">{{ v$.step1.ProduitService.$errors[0].$message
+                            }}</small>
+                        <div class="row mb-3 mt-3 content-group">
                             <div class="col" v-if="step1.MarcheProduitService === true">
                                 <div class="input-group">
-                            <label for="NombreCommande">Nombre Commande</label>
-                            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step1.NombreCommande">
-                          
-                        </div>
-                        <small v-if="v$.step1.NombreCommande.$error">{{ v$.step1.NombreCommande.$errors[0].$message }}</small>
+                                    <label for="NombreCommande">Nombre Commande</label>
+                                    <input type="text" name="NombreCommande" id="NombreCommande" placeholder=""
+                                        v-model="step1.NombreCommande">
+    
+                                </div>
+                                <small v-if="v$.step1.NombreCommande.$error">{{ v$.step1.NombreCommande.$errors[0].$message
+                                    }}</small>
                             </div>
-                            <div class="col" v-if="step1.MarcheProduitService === true" >
-                                <div class="input-group" >
+                            <div class="col" v-if="step1.MarcheProduitService === true">
+                                <div class="input-group">
                                     <label for="QuantiteProduit">Quantité de produits vendus </label>
-                            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step1.QuantiteProduit">
-                          
-                        </div>
-                        <small v-if="v$.step1.QuantiteProduit.$error">{{ v$.step1.QuantiteProduit.$errors[0].$message }}</small>
+                                    <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder=""
+                                        v-model="step1.QuantiteProduit">
+    
+                                </div>
+                                <small v-if="v$.step1.QuantiteProduit.$error">{{
+                                    v$.step1.QuantiteProduit.$errors[0].$message }}</small>
                             </div>
-
+    
                         </div>
-
-                      
-                                               
+    
+    
+    
                         <button class="sign" @click.prevent="submit">Enregistrer</button>
                     </div>
                     <!-- End Drop Zoon -->
-
-
+    
+    
                 </div>
             </div>
-
+    
         </MazDialog>
-
-        <MazDialog v-model="msgsuccess"  title="Enregistrement du contenu local" >
+    
+        <MazDialog v-model="msgsuccess" title="Enregistrement du contenu local">
             <p>
                 Valorisation enregistrée avec succès !!
             </p>
             <template #footer="{ close }">
-
+    
                 <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
-
+    
             </template>
         </MazDialog>
         <MazDialog v-model="isdelete" title="Suppression de la clasification">
             <p>
-               Êtes-vous sûr de vouloir supprimer cette valorisation ?
+                Êtes-vous sûr de vouloir supprimer cette valorisation ?
             </p>
             <template #footer="{ close }">
-
+    
                 <div class="supp" @click="close" style="background-color: red; "> Non</div>
-
+    
                 <div class="supp" @click="confirmDelete" style="background-color: var(--color-primary);"> Oui</div>
-
+    
             </template>
         </MazDialog>
         <MazDialog v-model="confirmdelete" title="Suppression de la clasification">
@@ -214,91 +230,100 @@
                 Valorisation supprimée avec succès !!
             </p>
             <template #footer="{ close }">
-
+    
                 <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
-
-
-
+    
+    
+    
             </template>
         </MazDialog>
-
-
+    
+    
         <MazDialog v-if="updated" v-model="updated" width="710px" max-height="revert" padding="0 1.5rem 1.5rem">
             <div>
-
-<div id="uploadArea" class="upload-area">
-    <!-- Header -->
-    <div class="upload-area__header">
-        <h1 class="upload-area__title">Modifier l'appui à la valorisation</h1>
-        <small v-if="error">{{ error }}</small>
-    </div>
-    <!-- End Header -->
-
-    <!-- Drop Zoon -->
-    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-        <!-- <div class="row mb-3 mt-3 content-group">
-            <div class="col"> -->
-                <div class="input-group">
-                    <label for="username">Année <span class="text-danger">*</span></label>
-               <MazInput v-model="step2.annee" type="text" color="secondary"  style="width: 100%;" disabled  search option-value-key="value" option-label-key="label" option-input-value-key="value"/>
-                   
-                </div>
-               
-                <div class="input-group" style="margin-top: 10px !important;">
-                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span class="text-danger">*</span> </label>
-                            <MazSelect v-model="step2.MarcheProduitService" color="secondary" :options="Choix"  />
-                           
-                        </div>
-                        <small v-if="v$.step2.MarcheProduitService.$error">{{ v$.step2.MarcheProduitService.$errors[0].$message }}</small>
-                        
-                            <div class="input-group" v-if="step2.MarcheProduitService === true" style="margin-top: 10px !important;">
-                            <label for="ProduitService">Veuillez décrire les services et/ou produits</label>
-                            <input v-model="step2.ProduitService" name="ProduitService"   id="ProduitService"  />
-                        </div>
-                        <small v-if="v$.step2.ProduitService.$error">{{ v$.step2.ProduitService.$errors[0].$message }}</small>
-                        <div class="row mb-3 mt-3 content-group" >
-                            <div class="col" v-if="step2.MarcheProduitService === true">
-                                <div class="input-group">
-                            <label for="NombreCommande">Nombre Commande</label>
-                            <input type="text" name="NombreCommande" id="NombreCommande" placeholder="" v-model="step2.NombreCommande">
-                          
-                        </div>
-                        <small v-if="v$.step2.NombreCommande.$error">{{ v$.step2.NombreCommande.$errors[0].$message }}</small>
-                            </div>
-                            <div class="col" v-if="step2.MarcheProduitService === true" >
-                                <div class="input-group" >
-                                    <label for="QuantiteProduit">Quantité de produits vendus </label>
-                            <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder="" v-model="step2.QuantiteProduit">
-                          
-                        </div>
-                        <small v-if="v$.step2.QuantiteProduit.$error">{{ v$.step2.QuantiteProduit.$errors[0].$message }}</small>
-                            </div>
-
+    
+                <div id="uploadArea" class="upload-area">
+                    <!-- Header -->
+                    <div class="upload-area__header">
+                        <h1 class="upload-area__title">Modifier l'appui à la valorisation</h1>
+                        <small v-if="error">{{ error }}</small>
+                    </div>
+                    <!-- End Header -->
+    
+                    <!-- Drop Zoon -->
+                    <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+                        <!-- <div class="row mb-3 mt-3 content-group">
+                <div class="col"> -->
+                        <div class="input-group">
+                            <label for="username">Année <span class="text-danger">*</span></label>
+                            <MazInput v-model="step2.annee" type="text" color="secondary" style="width: 100%;" disabled
+                                search option-value-key="value" option-label-key="label" option-input-value-key="value" />
+    
                         </div>
     
-                               
-        <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
-    </div>
-    <!-- End Drop Zoon -->
-
-
-</div>
-</div>
-
+                        <div class="input-group" style="margin-top: 10px !important;">
+                            <label for="MarcheProduitService">Proposez-vous des produits ou des services? <span
+                                    class="text-danger">*</span> </label>
+                            <MazSelect v-model="step2.MarcheProduitService" color="secondary" :options="Choix" />
+    
+                        </div>
+                        <small v-if="v$.step2.MarcheProduitService.$error">{{
+                            v$.step2.MarcheProduitService.$errors[0].$message }}</small>
+    
+                        <div class="input-group" v-if="step2.MarcheProduitService === true"
+                            style="margin-top: 10px !important;">
+                            <label for="ProduitService">Veuillez décrire les services et/ou produits</label>
+                            <input v-model="step2.ProduitService" name="ProduitService" id="ProduitService" />
+                        </div>
+                        <small v-if="v$.step2.ProduitService.$error">{{ v$.step2.ProduitService.$errors[0].$message
+                            }}</small>
+                        <div class="row mb-3 mt-3 content-group">
+                            <div class="col" v-if="step2.MarcheProduitService === true">
+                                <div class="input-group">
+                                    <label for="NombreCommande">Nombre Commande</label>
+                                    <input type="text" name="NombreCommande" id="NombreCommande" placeholder=""
+                                        v-model="step2.NombreCommande">
+    
+                                </div>
+                                <small v-if="v$.step2.NombreCommande.$error">{{ v$.step2.NombreCommande.$errors[0].$message
+                                    }}</small>
+                            </div>
+                            <div class="col" v-if="step2.MarcheProduitService === true">
+                                <div class="input-group">
+                                    <label for="QuantiteProduit">Quantité de produits vendus </label>
+                                    <input type="text" name="QuantiteProduit" id="QuantiteProduit" placeholder=""
+                                        v-model="step2.QuantiteProduit">
+    
+                                </div>
+                                <small v-if="v$.step2.QuantiteProduit.$error">{{
+                                    v$.step2.QuantiteProduit.$errors[0].$message }}</small>
+                            </div>
+    
+                        </div>
+    
+    
+                        <button class="sign" @click.prevent="hamdleUpdated">Modifier</button>
+                    </div>
+                    <!-- End Drop Zoon -->
+    
+    
+                </div>
+            </div>
+    
         </MazDialog>
-
-
+    
+    
         <MazDialog v-model="updatemsg" title="Modification de la valorisation">
             <p>
                 Valorisation modifiée avec succèss !!
-
+    
             </p>
             <template #footer="{ close }">
-
+    
                 <div class="supp" @click="close" style="background-color: blue; "> Ok</div>
-
-
-
+    
+    
+    
             </template>
         </MazDialog>
     </div>
@@ -316,506 +341,512 @@ import Pag from './other/pag.vue';
 import Loading from './other/preloader.vue';
 import Day from './other/componentDay.vue';
 export default {
-    name: 'DNPMECLImage',
-    components: {
-        MazDialog, Pag, Loading ,Day
+  name: 'DNPMECLImage',
+  components: {
+    MazDialog, Pag, Loading, Day
 
+  },
+  computed: {
+
+    loggedInUser() {
+      return this.$store.getters['user/loggedInUser'];
     },
-    computed: {
-
-        loggedInUser() {
-            return this.$store.getters['user/loggedInUser'];
-        },
-        totalPages() {
-            // return Math.ceil(this.items.length / this.itemsPerPage);
-            return Math.ceil(this.filteredClassifications.length / this.itemsPerPage);
-        },
-        paginatedItems() {
-            const startIndex = (this.currentPage - 1)*this.itemsPerPage;
-            const endIndex = startIndex + this.itemsPerPage;
-            return this.filteredClassifications.slice(startIndex, endIndex);
-        },
+    totalPages() {
+      // return Math.ceil(this.items.length / this.itemsPerPage);
+      return Math.ceil(this.filteredClassifications.length / this.itemsPerPage);
     },
+    paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.filteredClassifications.slice(startIndex, endIndex);
+    },
+  },
 
-    data() {
-        return {
-            control: {
+  data() {
+    return {
+      control: {
         name: '',
         spec: '',
         speciality: '',
 
       },
 
-            isOpen: false,
-            loading: true,
-            publishDoc: false,
-            msgsuccess: false,
-            isdelete: false,
-            confirmdelete: false,
-            updated: false,
-            v$: useVuelidate(),
+      isOpen: false,
+      loading: true,
+      publishDoc: false,
+      msgsuccess: false,
+      isdelete: false,
+      confirmdelete: false,
+      updated: false,
+      v$: useVuelidate(),
 
-            years: [],
-            yearOptions: [],
-            Comptabilite:[],
-            classificationAffaireOptions:[],
-            classificationSocialOptions:[],
-            classificationOptions:[],
-            filteredClassifications:[],
+      years: [],
+      yearOptions: [],
+      Comptabilite: [],
+      classificationAffaireOptions: [],
+      classificationSocialOptions: [],
+      classificationOptions: [],
+      filteredClassifications: [],
 
-            error: '',
-            origine: '',
-            nom: '',
-            startIndex: 0,
-            currentPage: 1,
-            itemsPerPage: 10,
+      error: '',
+      origine: '',
+      nom: '',
+      startIndex: 0,
+      currentPage: 1,
+      itemsPerPage: 10,
 
 
-          
-            resultnone: '',
-            ToDeleteId: null,
-            updateImageId: null,
-            updateClassId: null,
-            anneeEnCours:'',
-            step1: {
-                annee: '',
-                ProduitService: '',
-                MarcheProduitService: '',
-                NombreCommande: '',
-                QuantiteProduit:'',
-            },
-            step2: {
-                annee:'',
-                ProduitService: '',
-                MarcheProduitService: '',
-                NombreCommande: '',
-                QuantiteProduit:'',
-            },
-            Choix: [
+
+      resultnone: '',
+      ToDeleteId: null,
+      updateImageId: null,
+      updateClassId: null,
+      anneeEnCours: '',
+      step1: {
+        annee: '',
+        ProduitService: '',
+        MarcheProduitService: '',
+        NombreCommande: '',
+        QuantiteProduit: '',
+      },
+      step2: {
+        annee: '',
+        ProduitService: '',
+        MarcheProduitService: '',
+        NombreCommande: '',
+        QuantiteProduit: '',
+      },
+      Choix: [
         { label: "Oui", value: true },
         { label: "Non", value: false },
       ],
 
-        };
+    };
+  },
+  validations: {
+    step1: {
+      annee: {
+        require,
+      },
+      ProduitService: {},
+      MarcheProduitService: {
+        require,
+      },
+      NombreCommande: { ValidNumeri },
+      QuantiteProduit: { ValidNumeri },
     },
-    validations: {
-        step1: {
-            annee: {
-                require,
-            },
-            ProduitService: {},
-            MarcheProduitService: {
-                require,
-            },
-            NombreCommande: {ValidNumeri},
-            QuantiteProduit: {ValidNumeri},
-        },
-        step2: {
-            
-            ProduitService: {
-                require,
+    step2: {
 
-            },
-            MarcheProduitService: {
-                require,
-            },
-            NombreCommande: {
-                ValidNumeri
-            },
-            QuantiteProduit: {ValidNumeri},
-        },
+      ProduitService: {
+        require,
 
-    },
-    async created() {
-        
+      },
+      MarcheProduitService: {
+        require,
+      },
+      NombreCommande: {
+        ValidNumeri
+      },
+      QuantiteProduit: { ValidNumeri },
     },
 
-  async  mounted() {
- 
-   
-     await this.fetchgetClassificationAllMpme()
-     this.filteredClassifications = await this.classificationOptions;
-     await this.fetchgetClassificationCritereMpme()
-     await  this.initializeYears()
-   
-     
-       
-        
+  },
+  async created() {
+
+  },
+
+  async mounted() {
+
+
+    await this.fetchgetClassificationAllMpme()
+    this.filteredClassifications = await this.classificationOptions;
+    await this.fetchgetClassificationCritereMpme()
+    await this.initializeYears()
+
+
+
+
+  },
+  methods: {
+
+    // delete picture
+    hamdledeletedoc(itemId) {
+
+      this.ToDeleteId = itemId;
+      this.isdeletedoc = true
+
     },
-    methods: {
-
-        // delete picture
-        hamdledeletedoc(itemId) {
-         
-            this.ToDeleteId = itemId;
-            this.isdeletedoc = true
-
-        },
-        initializeYears() {
-            const currentYear = new Date().getFullYear();
-            for (let year = 1900; year <= currentYear; year++) {
-                this.years.push(year);
-            }
-            this.yearOptions = this.years.map(year => ({
-                label: String(year),
-                value: String(year)
-            }));
-        },
-       
-      
-        async submit() {
-            this.v$.step1.$touch()
-            if (this.v$.$errors.length == 0) {
-            this.loading = true
-
-               let DataContenu = {
-            
-                Annee:parseInt(this.step1.annee) ,
-                CodeMpme:this.loggedInUser.id,
-                ProduitService:this.step1.ProduitService,
-                MarcheProduitService:this.step1.MarcheProduitService,
-                NombreCommande: this.step1.NombreCommande,
-                QuantiteProduit:this.step1.QuantiteProduit,
-                
-            }
-          
-
-                try {
-                    const response = await axios.post('/appui-contenu-locals', DataContenu, {
-                        headers: {
-                            Authorization: `Bearer ${this.loggedInUser.token}`,
-                            'Content-Type': 'application/json'
-                        }});
-                 
-                    if (response.data.status === 'success') {
-                        this.msgsuccess = true
-                        await this.fetchgetClassificationAllMpme()
-                        this.isOpen = false
-                        this.loading = false
+    initializeYears() {
+      const currentYear = new Date().getFullYear();
+      for (let year = 1900; year <= currentYear; year++) {
+        this.years.push(year);
+      }
+      this.yearOptions = this.years.map(year => ({
+        label: String(year),
+        value: String(year)
+      }));
+    },
 
 
-                    } else {
+    async submit() {
+      this.v$.step1.$touch()
+      if (this.v$.$errors.length == 0) {
+        this.loading = true
 
-                    }
-                } catch (error) {
-                  
-                    if (error && error.response.data === 'Unauthorized' || error.response.status === 401 ) {
-                       
-                        await this.$store.dispatch('user/clearLoggedInUser');
-                        this.$router.push('/connexion-mpme');
+        let DataContenu = {
 
-                    } else {
-                      
-                        this.error = error.response.data.message
+          Annee: parseInt(this.step1.annee),
+          CodeMpme: this.loggedInUser.id,
+          ProduitService: this.step1.ProduitService,
+          MarcheProduitService: this.step1.MarcheProduitService,
+          NombreCommande: this.step1.NombreCommande,
+          QuantiteProduit: this.step1.QuantiteProduit,
 
-                        this.loading = false
-                        return false;
-                    }
-
-                }
-            } else {
-
-
-            }
-
-        },
-        getSequentialNumber(index) {
-            return this.startIndex + index + 1;
-        },
-
-        // delete picture
-        hamdledelete(itemId) {
-         
-            this.ToDeleteId = itemId;
-            this.isdelete = true
-
-        },
-        async confirmDelete() {
-            this.loading = true
-
-
-            try {
-                // Faites une requête pour supprimer l'élément avec l'ID itemId
-                const response = await axios.delete(`/appui-contenu-locals/${this.ToDeleteId}`, {
-                    headers: {
-                        Authorization: `Bearer ${this.loggedInUser.token}`,
-                       
-
-                    },
-
-                });
-               
-                if (response.data.status === 'success') {
-                    await this.fetchgetClassificationAllMpme()
-                    this.confirmdelete = true
-                    this.isdelete = false
-                    this.loading = false
-
-
-                } else {
-                  
-                    this.loading = false
-
-                }
-            } catch (error) {
-              
-                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                   
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-                    this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-
-            }
-        },
-
-
-        // get allpicture
-        async fetchgetClassificationCritereMpme() {
-            try {
-              
-                const response = await axios.get('/mpme/criteres-classifications/annuel', {
-                    headers: {
-                        Authorization: `Bearer ${this.loggedInUser.token}`,
-                        'Content-Type': 'multipart/form-data',
-                    },
-
-                });
-                
-
-                if (response.data.status === 'success') {
-                    const filteredDataAffaire = response.data.data.data.filter(item => item.ChiffreCapital === 1);
-                    const mappedDataAffaire = filteredDataAffaire.map(item => ({
-                          label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
-                          value: item.CodeCritere, // Ou toute autre propriété que vous préférez
-                     }));
-                     this.classificationAffaireOptions = mappedDataAffaire;
-
-                     const filteredDataSocial = response.data.data.data.filter(item => item.ChiffreCapital === 0);
-                    const mappedDataSocial = filteredDataSocial.map(item => ({
-                          label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
-                          value: item.CodeCritere, // Ou toute autre propriété que vous préférez
-                     }));
-                     this.classificationSocialOptions = mappedDataSocial;
-                     this.loading = false
-
-                }
-                else {
-
-                }
-
-            } catch (error) {
-               
-                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                   
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-                    this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-            }
-        },
-        async fetchgetClassificationAllMpme() {
-            try {
-              
-                const response = await axios.get(`/appui-contenu-locals/detail/par-mpme/${this.loggedInUser.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${this.loggedInUser.token}`,
-                        
-                    },
-
-                });
-                
-
-                if (response.data.status === 'success') {
-                    const filteredDataMpme = response.data.data.appuis
-                    this.classificationOptions = filteredDataMpme
-                    this.GetUpdateClass = filteredDataMpme
-                    this.filteredClassifications = filteredDataMpme;
-                     this.loading = false
-
-                }
-                else {
-
-                }
-
-            } catch (error) {
-              
-                if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
-                   
-                    await this.$store.dispatch('user/clearLoggedInUser');
-                    this.$router.push('/connexion-mpme');
-
-                } else {
-                    this.formatValidationErrors(error.response.data.errors)
-                    this.loading = false
-                    return false;
-                }
-            }
-        },
-
-        // upload document
-        updatedoc(id) {
-            this.updateClassId = id
-            this.updated = true
-            const classificationToUpdate = this.GetUpdateClass.find(doc => doc.id === id);
-
-            // Attribuer les valeurs aux champs d'
-            this.step2.annee = classificationToUpdate.Annee;
-            this.step2.ProduitService = classificationToUpdate.ProduitService;
-            this.step2.NombreCommande = classificationToUpdate.NombreCommande;
-            this.step2.QuantiteProduit = classificationToUpdate.QuantiteProduit;
-
-            if (classificationToUpdate.MarcheProduitService === 1) {
-                return  this.step2.MarcheProduitService = true;
-            } else {
-                return  this.step2.MarcheProduitService = false;
-                
-            }
-           
-
-        },
-        async hamdleUpdated() {
-          
-          
-            this.v$.step2.$touch()
-            if (this.v$.$errors.length == 0) {
-                this.loading = true
-                let DataClassification = {
-            
-                Annee:parseInt(this.step2.annee) ,
-                CodeMpme:this.loggedInUser.id,
-                ProduitService:this.step2.ProduitService,
-                MarcheProduitService:this.step2.MarcheProduitService,
-                NombreCommande: this.step2.NombreCommande,
-                QuantiteProduit:this.step2.QuantiteProduit,
         }
-      
-                try {
-                    const response = await axios.put(`/appui-contenu-locals/${this.updateClassId}`, DataClassification, {
-                        headers: {
-                            Authorization: `Bearer ${this.loggedInUser.token}`,
-                            'Content-Type': 'application/json',
-                        }
-                    });
-               
-                    if (response.data.status === 'success') {
-                        await this.fetchgetClassificationAllMpme()
-                        this.updated = false
-                        this.loading = false
-                        this.updatemsg = true
-                    } else {
 
-                    }
-                } catch (error) {
-                  
-                    if (error.response.data === 'Unauthorized' ) {
-                      
-                        await this.$store.dispatch('user/clearLoggedInUser');
-                        this.$router.push('/connexion-mpme');
 
-                    } else {
-                       
-                        this.loading = false
-                        return false;
-                    }
+        try {
+          const response = await axios.post('/appui-contenu-locals', DataContenu, {
+            headers: {
+              Authorization: `Bearer ${this.loggedInUser.token}`,
+              'Content-Type': 'application/json'
+            }
+          });
 
-                }
+          if (response.data.status === 'success') {
+            this.msgsuccess = true
+            await this.fetchgetClassificationAllMpme()
+            this.isOpen = false
+            this.loading = false
 
-            } else {
-               
+
+          } else {
+
+          }
+        } catch (error) {
+
+          if (error && error.response.data === 'Unauthorized' || error.response.status === 401) {
+
+            await this.$store.dispatch('user/clearLoggedInUser');
+            this.$router.push('/connexion-mpme');
+
+          } else {
+
+            this.error = error.response.data.message
+
+            this.loading = false
+            return false;
+          }
+
+        }
+      } else {
+
+
+      }
+
+    },
+    getSequentialNumber(index) {
+      return this.startIndex + index + 1;
+    },
+
+    // delete picture
+    hamdledelete(itemId) {
+
+      this.ToDeleteId = itemId;
+      this.isdelete = true
+
+    },
+    async confirmDelete() {
+      this.loading = true
+
+
+      try {
+        // Faites une requête pour supprimer l'élément avec l'ID itemId
+        const response = await axios.delete(`/appui-contenu-locals/${this.ToDeleteId}`, {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+
+
+          },
+
+        });
+
+        if (response.data.status === 'success') {
+          await this.fetchgetClassificationAllMpme()
+          this.confirmdelete = true
+          this.isdelete = false
+          this.loading = false
+
+
+        } else {
+
+          this.loading = false
+
+        }
+      } catch (error) {
+
+        if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+
+          await this.$store.dispatch('user/clearLoggedInUser');
+          this.$router.push('/connexion-mpme');
+
+        } else {
+          this.formatValidationErrors(error.response.data.errors)
+          this.loading = false
+          return false;
+        }
+
+      }
+    },
+
+
+    // get allpicture
+    async fetchgetClassificationCritereMpme() {
+      try {
+
+        const response = await axios.get('/mpme/criteres-classifications/annuel', {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+
+        });
+
+
+        if (response.data.status === 'success') {
+          const filteredDataAffaire = response.data.data.data.filter(item => item.ChiffreCapital === 1);
+          const mappedDataAffaire = filteredDataAffaire.map(item => ({
+            label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
+            value: item.CodeCritere, // Ou toute autre propriété que vous préférez
+          }));
+          this.classificationAffaireOptions = mappedDataAffaire;
+
+          const filteredDataSocial = response.data.data.data.filter(item => item.ChiffreCapital === 0);
+          const mappedDataSocial = filteredDataSocial.map(item => ({
+            label: item.CodeCritere, // Vous pouvez utiliser la propriété que vous préférez ici
+            value: item.CodeCritere, // Ou toute autre propriété que vous préférez
+          }));
+          this.classificationSocialOptions = mappedDataSocial;
+          this.loading = false
+
+        }
+        else {
+
+        }
+
+      } catch (error) {
+
+        if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+
+          await this.$store.dispatch('user/clearLoggedInUser');
+          this.$router.push('/connexion-mpme');
+
+        } else {
+          this.formatValidationErrors(error.response.data.errors)
+          this.loading = false
+          return false;
+        }
+      }
+    },
+    async fetchgetClassificationAllMpme() {
+      try {
+
+        const response = await axios.get(`/appui-contenu-locals/detail/par-mpme/${this.loggedInUser.id}`, {
+          headers: {
+            Authorization: `Bearer ${this.loggedInUser.token}`,
+
+          },
+
+        });
+
+
+        if (response.data.status === 'success') {
+            if( response.data.data === undefined){
                 this.loading = false
-
+            }else{
+                const filteredDataMpme = response.data.data.appuis
+          this.classificationOptions = filteredDataMpme
+          this.GetUpdateClass = filteredDataMpme
+          this.filteredClassifications = filteredDataMpme;
+          this.loading = false
             }
+         
 
-        },
+        }
+        else {
 
-        // search and filter
-        filterByName() {
-            this.currentPage = 1;
-            if (this.control.name !== null) {
-                const tt = this.control.name;
-                const searchValue = tt.toLowerCase()
-                this.filteredDocuments = [...this.originalDocuments].filter(item => {
-                    const pmeName = item.NomDocument || '';
-                    return pmeName.toLowerCase().includes(searchValue);
-                });
+        }
 
-            } else {
-                this.filteredDocuments = [...this.originalDocuments];
+      } catch (error) {
 
+        if (error.response.data === 'Unauthorized' || error.response.data.status === 'error') {
+
+          await this.$store.dispatch('user/clearLoggedInUser');
+          this.$router.push('/connexion-mpme');
+
+        } else {
+          this.formatValidationErrors(error.response.data.errors)
+          this.loading = false
+          return false;
+        }
+      }
+    },
+
+    // upload document
+    updatedoc(id) {
+      this.updateClassId = id
+      this.updated = true
+      const classificationToUpdate = this.GetUpdateClass.find(doc => doc.id === id);
+
+      // Attribuer les valeurs aux champs d'
+      this.step2.annee = classificationToUpdate.Annee;
+      this.step2.ProduitService = classificationToUpdate.ProduitService;
+      this.step2.NombreCommande = classificationToUpdate.NombreCommande;
+      this.step2.QuantiteProduit = classificationToUpdate.QuantiteProduit;
+
+      if (classificationToUpdate.MarcheProduitService === 1) {
+        return this.step2.MarcheProduitService = true;
+      } else {
+        return this.step2.MarcheProduitService = false;
+
+      }
+
+
+    },
+    async hamdleUpdated() {
+
+
+      this.v$.step2.$touch()
+      if (this.v$.$errors.length == 0) {
+        this.loading = true
+        let DataClassification = {
+
+          Annee: parseInt(this.step2.annee),
+          CodeMpme: this.loggedInUser.id,
+          ProduitService: this.step2.ProduitService,
+          MarcheProduitService: this.step2.MarcheProduitService,
+          NombreCommande: this.step2.NombreCommande,
+          QuantiteProduit: this.step2.QuantiteProduit,
+        }
+
+        try {
+          const response = await axios.put(`/appui-contenu-locals/${this.updateClassId}`, DataClassification, {
+            headers: {
+              Authorization: `Bearer ${this.loggedInUser.token}`,
+              'Content-Type': 'application/json',
             }
+          });
 
-        },
+          if (response.data.status === 'success') {
+            await this.fetchgetClassificationAllMpme()
+            this.updated = false
+            this.loading = false
+            this.updatemsg = true
+          } else {
 
-        updateCurrentPage(pageNumber) {
-            this.currentPage = pageNumber;
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
-            });
-        },
-        updatePaginatedItems() {
+          }
+        } catch (error) {
+
+          if (error.response.data === 'Unauthorized') {
+
+            await this.$store.dispatch('user/clearLoggedInUser');
+            this.$router.push('/connexion-mpme');
+
+          } else {
+
+            this.loading = false
+            return false;
+          }
+
+        }
+
+      } else {
+
+        this.loading = false
+
+      }
+
+    },
+
+    // search and filter
+    filterByName() {
+      this.currentPage = 1;
+      if (this.control.name !== null) {
+        const tt = this.control.name;
+        const searchValue = tt.toLowerCase()
+        this.filteredDocuments = [...this.originalDocuments].filter(item => {
+          const pmeName = item.NomDocument || '';
+          return pmeName.toLowerCase().includes(searchValue);
+        });
+
+      } else {
+        this.filteredDocuments = [...this.originalDocuments];
+
+      }
+
+    },
+
+    updateCurrentPage(pageNumber) {
+      this.currentPage = pageNumber;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Utilisez 'auto' pour un défilement instantané
+      });
+    },
+    updatePaginatedItems() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
       return this.filteredPmes.slice(startIndex, endIndex);
     },
-filterData() {
+    filterData() {
 
 
-  if (
-    this.control.spec === 'annee' ||
-    this.control.spec === 'chiffreaffaire' ||
-    this.control.spec === 'capitalsocial'  ||
-    this.control.spec === 'typecomptabilite'
-  ) {
-    if (this.control.speciality === '') {
-      // Réinitialiser la liste si aucune région, sous-préfecture ou secteur d'activité n'est sélectionné
-      this.filteredClassifications = [...this.classificationOptions];
-    } else {
-      // Filtrer par région, sous-préfecture ou secteur d'activité
-      let filterKey;
-      let selectedOption;
+      if (
+        this.control.spec === 'annee' ||
+        this.control.spec === 'chiffreaffaire' ||
+        this.control.spec === 'capitalsocial' ||
+        this.control.spec === 'typecomptabilite'
+      ) {
+        if (this.control.speciality === '') {
+          // Réinitialiser la liste si aucune région, sous-préfecture ou secteur d'activité n'est sélectionné
+          this.filteredClassifications = [...this.classificationOptions];
+        } else {
+          // Filtrer par région, sous-préfecture ou secteur d'activité
+          let filterKey;
+          let selectedOption;
 
-      if (this.control.spec === 'annee') {
-        filterKey = 'Annee';
-        const specialityAsNumber = parseInt(this.control.speciality, 10);
-        selectedOption =  this.yearOptions.find(option => option.label ===  this.control.speciality);
-      } else if (this.control.spec === 'chiffreaffaire') {
-        filterKey = 'CodeCritereChiffreAffaire';
-        selectedOption = this.classificationAffaireOptions.find(option => option.label === this.control.speciality);
-       
+          if (this.control.spec === 'annee') {
+            filterKey = 'Annee';
+            const specialityAsNumber = parseInt(this.control.speciality, 10);
+            selectedOption = this.yearOptions.find(option => option.label === this.control.speciality);
+          } else if (this.control.spec === 'chiffreaffaire') {
+            filterKey = 'CodeCritereChiffreAffaire';
+            selectedOption = this.classificationAffaireOptions.find(option => option.label === this.control.speciality);
 
-      } else if (this.control.spec === 'capitalsocial') {
-        filterKey = 'CodeCritereCapitalSocial'; // Utilisez la clé correcte pour le champ de secteur d'activité
-        selectedOption = this.classificationSocialOptions.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
 
-      } else if (this.control.spec === 'typecomptabilite') {
-        filterKey = 'TypeComptabilite'; // Utilisez la clé correcte pour le champ de secteur d'activité
-        selectedOption = this.Comptabilite.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
-      }
-    
-      if (selectedOption) {
-        this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey].toString() === selectedOption.value );
-  
+          } else if (this.control.spec === 'capitalsocial') {
+            filterKey = 'CodeCritereCapitalSocial'; // Utilisez la clé correcte pour le champ de secteur d'activité
+            selectedOption = this.classificationSocialOptions.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
 
+          } else if (this.control.spec === 'typecomptabilite') {
+            filterKey = 'TypeComptabilite'; // Utilisez la clé correcte pour le champ de secteur d'activité
+            selectedOption = this.Comptabilite.find(option => option.label === this.control.speciality); // Utilisez le champ secteurActivite
+          }
+
+          if (selectedOption) {
+            this.filteredClassifications = this.classificationOptions.filter(pme => pme[filterKey].toString() === selectedOption.value);
+
+
+          } else {
+            this.filteredClassifications = [];
+          }
+        }
       } else {
-        this.filteredClassifications = [];
+        this.filteredClassifications = [...this.classificationOptions];
       }
-    }
-  } else {
-    this.filteredClassifications = [...this.classificationOptions];
-  }
-},
+    },
 
-updateFilterSpec() {
+    updateFilterSpec() {
       this.control.speciality = ''; // Réinitialiser la valeur de spécialité lorsque la spécification change
       this.filteredClassifications = [...this.classificationOptions];
     },
@@ -835,18 +866,17 @@ updateFilterSpec() {
     },
 
     handleSelectedYear(selectedYear) {
-     
+
       this.step1.annee = selectedYear
     },
-      
 
-    },
+
+  },
 
 };
 </script>
     
 <style lang="css" scoped>
-
 /* debut banier */
 .page-header {
     position: relative;
@@ -855,10 +885,11 @@ updateFilterSpec() {
     background-size: cover;
     background-color: #266486;
     padding: 50px 0;
-    background-image: url('@/assets/img/img1.webp'); 
-    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 10%);
+    background-image: url('@/assets/img/img1.webp');
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 10%);
 
 }
+
 .page-header:before {
     content: "";
     position: absolute;
@@ -868,6 +899,7 @@ updateFilterSpec() {
     left: 0;
     background: rgba(0, 0, 0, .45);
 }
+
 .page-header__inner {
     position: relative;
 }
@@ -881,6 +913,7 @@ updateFilterSpec() {
     margin-bottom: 1rem;
     text-transform: inherit;
 }
+
 .page-header p {
     max-width: 530px;
     font-size: 1.2rem;
@@ -891,27 +924,30 @@ updateFilterSpec() {
 
 @media (max-width: 992px) {
     .banner-title {
-    
-    font-size: 40px;
-    
-}
-}
-@media (max-width: 768px){
 
-section {
-padding: 20px !important;
-}
-.page-header h1 {
+        font-size: 40px;
 
-font-size: 2.5rem;
-text-align: center;   
+    }
 }
 
-.page-header p {
+@media (max-width: 768px) {
 
-text-align: justify;
+    section {
+        padding: 20px !important;
+    }
+
+    .page-header h1 {
+
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .page-header p {
+
+        text-align: justify;
+    }
 }
-}
+
 /* fin banier */
 
 .container_pagination {
@@ -1067,15 +1103,18 @@ text-align: justify;
     border: 1px solid red;
 }
 
-.updateclose{
+.updateclose {
     background-color: rgb(183, 239, 243);
-   
+
 
 }
-.updateclose i , .deleteclose i  {
+
+.updateclose i,
+.deleteclose i {
     cursor: not-allowed;
 }
-.deleteclose{
+
+.deleteclose {
     background-color: rgb(245, 108, 108);
 }
 
@@ -1346,7 +1385,7 @@ td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding:40px 10px;
+    padding: 40px 10px;
 }
 
 .liste-searcher {
@@ -1391,15 +1430,16 @@ td {
 
 @media screen and (max-width: 768px) {
 
-    .contenu{
+    .contenu {
 
         padding: 10px;
     }
 
-    .bar_search{
+    .bar_search {
 
-        width:100% !important;
+        width: 100% !important;
     }
+
     .liste-searcher {
         flex-direction: column;
         height: auto;
@@ -1420,34 +1460,33 @@ td {
 }
 
 @media screen and (max-width: 768px) {
-  .form-container {
-    width: 700px;
-    max-width: 100%;
-  }
+    .form-container {
+        width: 700px;
+        max-width: 100%;
+    }
 
-  .content-group {
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
-  }
-  .row > * {
-   
-    padding-right:0 !important;
-    padding-left:0 !important;
-    
+    .content-group {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+    }
+
+    .row>* {
+
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+
+    }
+
+    .profil1 {
+
+        top: -26px;
+    }
+
+    .upload-area__title {
+
+        font-size: 1.6rem;
+    }
 }
-
-  .profil1{
-
-    top:-26px;
-  }
-
-  .upload-area__title{
-
-    font-size:1.6rem;
-  }
-}
-
-
 </style >
    

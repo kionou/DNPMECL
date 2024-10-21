@@ -36,7 +36,7 @@
 
                     <p class="info-box-title">Email</p>
 
-                    <p class="info-box-subtitle">infodnpmecl@gmail.com </p>
+                    <!-- <p class="info-box-subtitle">infodnpmecl@gmail.com </p> -->
                     <p class="info-box-subtitle">dnpmecl@mcipme.gov.gn </p>
 
                 </div>

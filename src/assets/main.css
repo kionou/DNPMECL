@@ -38,6 +38,19 @@ h6 {
 }
 
 
+.noresul {
+  border: 1px solid #F9D310;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 6px;
+  font-size: 20px;
+
+}
+
 
 
 
